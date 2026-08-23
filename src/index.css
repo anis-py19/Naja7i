@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    border-color: #FFE5BF;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    background-color: #FFFAF3;
+    color: #1c1917;
+  }
+}
+
+/* Custom Palette Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFFAF3;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFE5BF;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F62440;
+}
+
+/* Custom Warm Academic Card */
+.ency-card {
+  background-color: #FFFFFF;
+  border: 1px solid #FFE5BF;
+  box-shadow: 0 1px 3px 0 rgba(28, 25, 23, 0.04);
+  transition: all 0.2s ease-in-out;
+}
+
+.ency-card:hover {
+  border-color: #F62440;
+  box-shadow: 0 4px 14px -2px rgba(246, 36, 64, 0.12);
+}
+
+.ency-card-subtle {
+  background-color: #FFF2DB;
+  border: 1px solid #FFE5BF;
+  transition: all 0.2s ease-in-out;
+}
+
+.ency-card-subtle:hover {
+  border-color: #F62440;
+}
