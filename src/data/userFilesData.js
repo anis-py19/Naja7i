@@ -165,7 +165,7 @@ export const USER_STUDY_FILES = [
     ],
     "author": "نخبة الأساتذة والمفتشين",
     "category": "سلاسل تمارين ومواضيع تدريبية",
-    "fileUrl": "/files/Anglais/%D8%A8%D8%A7%D9%82%D8%A907_%D9%85%D9%88%D8%A7%D8%B6%D9%8A%D8%B9_+_%D8%A7%D9%84%D8%AD%D9%84_%D9%84%D8%BA%D8%A9_%D8%A5%D9%86%D8%AC%D9%84%D9%8A%D8%B2%D9%8A%D8%A9_%D8%A7%D9%84%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1_%D9%84%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1_%D8%A7%D9%84%D9%81%D8%B5%D9%84_1_%D8%B4%D8%B9%D8%A8_%D8%B9%D9%84%D9%85%D9%8A%D8%A9.pdf",
+    "fileUrl": "/files/Anglais/%D8%A8%D8%A7%D9%82%D8%A907_%D9%85%D9%88%D8%A7%D8%B6%D9%8A%D8%B9_%2B_%D8%A7%D9%84%D8%AD%D9%84_%D9%84%D8%BA%D8%A9_%D8%A5%D9%86%D8%AC%D9%84%D9%8A%D8%B2%D9%8A%D8%A9_%D8%A7%D9%84%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1_%D9%84%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1_%D8%A7%D9%84%D9%81%D8%B5%D9%84_1_%D8%B4%D8%B9%D8%A8_%D8%B9%D9%84%D9%85%D9%8A%D8%A9.pdf",
     "sizeBytes": 11521254,
     "sizeReadable": "10.99 MB",
     "ext": ".pdf"
@@ -210,27 +210,6 @@ export const USER_STUDY_FILES = [
     "fileUrl": "/files/Anglais/%D9%82%D9%88%D8%A7%D8%B9%D8%AF%20%D8%A7%D9%84%D9%84%D8%BA%20%D8%A7%D9%84%D8%A7%D9%86%D8%AC%D9%84%D9%8A%D8%B2%D9%8A%D8%A9%20%D9%84%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB%20%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%88%D9%8A%20%D9%81%D9%8A%2015%20%D9%88%D8%B1%D9%82%D8%A9%20%D9%85%D8%B1%D8%A7%D8%AC%D8%B9%D8%A9%20%D8%A7%D9%84%D9%81%D8%B1%D8%B5%20%D8%A7%D9%84%D8%A7%D8%AE%D9%8A%D8%B1%D8%A9%20%D8%A8%D8%B7%D8%B1%D9%8A%D9%82%20%D8%B1%D8%A7%D8%A6%D8%B9%D8%A9%20%D9%85%D8%B9%20%D9%85%D8%B3%D8%AA%D8%B1%20%D8%A7%D8%AD.pdf",
     "sizeBytes": 3814394,
     "sizeReadable": "3.64 MB",
-    "ext": ".pdf"
-  },
-  {
-    "id": "pdf-11",
-    "rawFileName": "كتاب_مقترحات_الانجلزية_لاستاذ_ناصر_منصوري_ج_ح_م_لــwww_msila_info.pdf",
-    "title": "كتاب المقترحات النموذجية للبكالوريا في الإنجليزية — الأستاذ ناصر منصوري",
-    "subjectId": "english",
-    "subjectName": "اللغة الإنجليزية",
-    "streams": [
-      "sciences",
-      "math",
-      "technique",
-      "gestion",
-      "lettres",
-      "langues"
-    ],
-    "author": "الأستاذ ناصر منصوري",
-    "category": "ملخصات ودروس شاملة",
-    "fileUrl": "/files/Anglais/%D9%83%D8%AA%D8%A7%D8%A8_%D9%85%D9%82%D8%AA%D8%B1%D8%AD%D8%A7%D8%AA_%D8%A7%D9%84%D8%A7%D9%86%D8%AC%D9%84%D8%B2%D9%8A%D8%A9_%D9%84%D8%A7%D8%B3%D8%AA%D8%A7%D8%B0_%D9%86%D8%A7%D8%B5%D8%B1_%D9%85%D9%86%D8%B5%D9%88%D8%B1%D9%8A_%D8%AC_%D8%AD_%D9%85_%D9%84%D9%80%D9%80www_msila_info.pdf",
-    "sizeBytes": 202151410,
-    "sizeReadable": "192.79 MB",
     "ext": ".pdf"
   },
   {
@@ -1390,22 +1369,6 @@ export const USER_STUDY_FILES = [
     "ext": ".pdf"
   },
   {
-    "id": "pdf-73",
-    "rawFileName": "genie_electrique3as-resumes_boukadoum.rar",
-    "title": "ملخصات شاملة وموسعة في الهندسة الكهربائية — الأستاذ بوكادوم",
-    "subjectId": "genie_elec",
-    "subjectName": "الهندسة الكهربائية",
-    "streams": [
-      "technique"
-    ],
-    "author": "نخبة الأساتذة والمفتشين",
-    "category": "ملخصات ودروس شاملة",
-    "fileUrl": "/files/Genie%20Electrique/genie_electrique3as-resumes_boukadoum.rar",
-    "sizeBytes": 7206334,
-    "sizeReadable": "6.87 MB",
-    "ext": ".rar"
-  },
-  {
     "id": "pdf-74",
     "rawFileName": "حوليات_استعد_للبكالوريا_من_إعداد_الأستاذة_بن_التاج_فتيحة_المنطق.pdf",
     "title": "حوليات استعد للبكالوريا في المنطق التوافقي والتعاقبي — الأستاذة فتيحة بن التاج",
@@ -2301,7 +2264,7 @@ export const USER_STUDY_FILES = [
     ],
     "author": "نخبة الأساتذة والمفتشين",
     "category": "مصطلحات وتواريخ وخرائط",
-    "fileUrl": "/files/HistoireGeo/%D9%85%D9%84%D8%AE%D8%B5_%D9%85%D9%85%D8%AA%D8%A7%D8%B2_%D9%88%D8%B1%D8%A7%D8%A6%D8%B9_%D9%84%D9%84%D9%88%D8%AD%D8%AF%D8%A9_%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89_%D8%A7%D9%84%D8%AD%D8%B1%D8%A8_%D8%A7%D9%84%D8%A8%D8%A7%D8%B1%D8%AF%D8%A9+%D8%B4%D8%AE%D8%B5%D9%8A%D8%A7%D8%AA.pdf",
+    "fileUrl": "/files/HistoireGeo/%D9%85%D9%84%D8%AE%D8%B5_%D9%85%D9%85%D8%AA%D8%A7%D8%B2_%D9%88%D8%B1%D8%A7%D8%A6%D8%B9_%D9%84%D9%84%D9%88%D8%AD%D8%AF%D8%A9_%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89_%D8%A7%D9%84%D8%AD%D8%B1%D8%A8_%D8%A7%D9%84%D8%A8%D8%A7%D8%B1%D8%AF%D8%A9%2B%D8%B4%D8%AE%D8%B5%D9%8A%D8%A7%D8%AA.pdf",
     "sizeBytes": 326410,
     "sizeReadable": "319 KB",
     "ext": ".pdf"
@@ -2805,7 +2768,7 @@ export const USER_STUDY_FILES = [
     ],
     "author": "نخبة الأساتذة والمفتشين",
     "category": "سلاسل تمارين ومواضيع تدريبية",
-    "fileUrl": "/files/Islamiya/%D8%A8%D8%A7%D9%82%D8%A9_8_%D9%85%D9%88%D8%A7%D8%B6%D9%8A%D8%B9_%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9_+%D8%A7%D9%84%D8%AD%D9%84_%D8%B9%D9%84%D9%88%D9%85_%D8%A5%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9_%D9%86%D8%AD%D9%88_%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1_%D8%A7%D9%84%D9%81%D8%B5%D9%84_1_%D8%AC%D9%85%D9%8A%D8%B9.pdf",
+    "fileUrl": "/files/Islamiya/%D8%A8%D8%A7%D9%82%D8%A9_8_%D9%85%D9%88%D8%A7%D8%B6%D9%8A%D8%B9_%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9_%2B%D8%A7%D9%84%D8%AD%D9%84_%D8%B9%D9%84%D9%88%D9%85_%D8%A5%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9_%D9%86%D8%AD%D9%88_%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1_%D8%A7%D9%84%D9%81%D8%B5%D9%84_1_%D8%AC%D9%85%D9%8A%D8%B9.pdf",
     "sizeBytes": 5637491,
     "sizeReadable": "5.38 MB",
     "ext": ".pdf"
@@ -3099,7 +3062,7 @@ export const USER_STUDY_FILES = [
     ],
     "author": "نخبة الأساتذة والمفتشين",
     "category": "سلاسل تمارين ومواضيع تدريبية",
-    "fileUrl": "/files/Islamiya/%D9%85%D9%88%D8%A7%D8%B6%D9%8A%D8%B9_%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9_+%D8%A7%D9%84%D8%AD%D9%84_%D9%86%D8%AD%D9%88_%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1_%D8%A7%D9%84%D9%81%D8%B5%D9%84_1_%D8%B9%D9%84%D9%88%D9%85_%D8%A5%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9_%D8%AC%D9%85%D9%8A%D8%B9_%D8%A7%D9%84%D8%B4%D8%B9%D8%A8.pdf",
+    "fileUrl": "/files/Islamiya/%D9%85%D9%88%D8%A7%D8%B6%D9%8A%D8%B9_%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9_%2B%D8%A7%D9%84%D8%AD%D9%84_%D9%86%D8%AD%D9%88_%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1_%D8%A7%D9%84%D9%81%D8%B5%D9%84_1_%D8%B9%D9%84%D9%88%D9%85_%D8%A5%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9_%D8%AC%D9%85%D9%8A%D8%B9_%D8%A7%D9%84%D8%B4%D8%B9%D8%A8.pdf",
     "sizeBytes": 3381152,
     "sizeReadable": "3.22 MB",
     "ext": ".pdf"
@@ -3231,22 +3194,6 @@ export const USER_STUDY_FILES = [
     "sizeBytes": 73940,
     "sizeReadable": "72 KB",
     "ext": ".pdf"
-  },
-  {
-    "id": "pdf-166",
-    "rawFileName": "spanish3as_rules.rar",
-    "title": "ملخص شامل لجميع قواعد اللغة الإسبانية للسنة الثالثة ثانوي",
-    "subjectId": "spanish",
-    "subjectName": "اللغة الإسبانية (لغة ثالثة)",
-    "streams": [
-      "langues"
-    ],
-    "author": "نخبة الأساتذة والمفتشين",
-    "category": "قوانين وقواعد وملخصات مركزة",
-    "fileUrl": "/files/Langue/Espanol/spanish3as_rules.rar",
-    "sizeBytes": 8014114,
-    "sizeReadable": "7.64 MB",
-    "ext": ".rar"
   },
   {
     "id": "pdf-167",
@@ -4022,7 +3969,7 @@ export const USER_STUDY_FILES = [
     ],
     "author": "نخبة الأساتذة والمفتشين",
     "category": "سلاسل تمارين ومواضيع تدريبية",
-    "fileUrl": "/files/Math/%D8%A7%D9%84%D8%B9%D8%A8%D9%82%D8%B1%D9%8A_%D9%81%D9%8A_%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA_%D8%A7%D9%84%D8%AF%D9%91%D9%88%D8%A7%D9%84_%D8%A7%D9%84%D8%B9%D8%AF%D8%AF%D9%8A%D8%A9_%D9%85%D9%84%D8%AE%D8%B5+%D8%AA%D9%85%D8%A7%D8%B1%D9%8A%D9%86+%D8%AD%D9%84%D9%88%D9%84_%D8%AA%D8%B3%D9%8A%D9%8A%D8%B1_%D9%88%D8%A5_Copie.pdf",
+    "fileUrl": "/files/Math/%D8%A7%D9%84%D8%B9%D8%A8%D9%82%D8%B1%D9%8A_%D9%81%D9%8A_%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA_%D8%A7%D9%84%D8%AF%D9%91%D9%88%D8%A7%D9%84_%D8%A7%D9%84%D8%B9%D8%AF%D8%AF%D9%8A%D8%A9_%D9%85%D9%84%D8%AE%D8%B5%2B%D8%AA%D9%85%D8%A7%D8%B1%D9%8A%D9%86%2B%D8%AD%D9%84%D9%88%D9%84_%D8%AA%D8%B3%D9%8A%D9%8A%D8%B1_%D9%88%D8%A5_Copie.pdf",
     "sizeBytes": 4038502,
     "sizeReadable": "3.85 MB",
     "ext": ".pdf"
@@ -5183,22 +5130,6 @@ export const USER_STUDY_FILES = [
     "ext": ".pdf"
   },
   {
-    "id": "pdf-261",
-    "rawFileName": "genie_mecanique3as-lessons_kehili.rar",
-    "title": "ملخصات دروس ومفاهيم الهندسة الميكانيكية 3 ثانوي — الأستاذ كحيلي",
-    "subjectId": "genie_meca",
-    "subjectName": "الهندسة الميكانيكية",
-    "streams": [
-      "technique"
-    ],
-    "author": "نخبة الأساتذة والمفتشين",
-    "category": "ملخصات ودروس شاملة",
-    "fileUrl": "/files/Mecanique/genie_mecanique3as-lessons_kehili.rar",
-    "sizeBytes": 16379843,
-    "sizeReadable": "15.62 MB",
-    "ext": ".rar"
-  },
-  {
     "id": "pdf-262",
     "rawFileName": "ملخصات_الهندسة_الميكانيكية_للسنة_3_ثانوي.pdf",
     "title": "ملخص شامل لدروس الهندسة الميكانيكية والرسم الصناعي 3 ثانوي",
@@ -5267,7 +5198,7 @@ export const USER_STUDY_FILES = [
     ],
     "author": "الأستاذ حمداش عبد الحق",
     "category": "مقالات ومنهجية ووضعيات",
-    "fileUrl": "/files/Philo/_%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%A7%D8%B0%20%D8%AD%D9%85%D8%AF%D8%A7%D8%B4%20%D8%B9%D8%A8%D8%AF%20%D8%A7%D9%84%D8%AD%D9%82%20(%D8%AA%D8%B3%D9%8A%D9%8A%D8%B1+%D8%AA%D8%B1).pdf",
+    "fileUrl": "/files/Philo/_%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%A7%D8%B0%20%D8%AD%D9%85%D8%AF%D8%A7%D8%B4%20%D8%B9%D8%A8%D8%AF%20%D8%A7%D9%84%D8%AD%D9%82%20(%D8%AA%D8%B3%D9%8A%D9%8A%D8%B1%2B%D8%AA%D8%B1).pdf",
     "sizeBytes": 781358,
     "sizeReadable": "763 KB",
     "ext": ".pdf"
@@ -5309,7 +5240,7 @@ export const USER_STUDY_FILES = [
     ],
     "author": "الأستاذ حمداش عبد الحق",
     "category": "مقالات ومنهجية ووضعيات",
-    "fileUrl": "/files/Philo/%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%A7%D8%B0%20%D8%AD%D9%85%D8%AF%D8%A7%D8%B4%20%D8%B9%D8%A8%D8%AF%20%D8%A7%D9%84%D8%AD%D9%82%20(%D8%B1+%D8%B9%D8%AA).pdf",
+    "fileUrl": "/files/Philo/%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%A7%D8%B0%20%D8%AD%D9%85%D8%AF%D8%A7%D8%B4%20%D8%B9%D8%A8%D8%AF%20%D8%A7%D9%84%D8%AD%D9%82%20(%D8%B1%2B%D8%B9%D8%AA).pdf",
     "sizeBytes": 1758085,
     "sizeReadable": "1.68 MB",
     "ext": ".pdf"
@@ -5438,27 +5369,6 @@ export const USER_STUDY_FILES = [
     "fileUrl": "/files/Philo/%D9%83%D8%AA%D8%A7%D8%A8_%D8%AE%D9%84%D9%8A%D9%84_%D8%B3%D8%B9%D9%8A%D8%AF%D8%A7%D9%86%D9%8A_%D8%B7%D8%A8%D8%B9%D8%A9_2021_%D9%84%D9%84%D8%B4%D8%B9%D8%A8_%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A%D8%A9_%D9%88%D8%A7%D9%84%D8%AA%D9%82%D9%86%D9%8A%D8%A9_%D9%88%D9%84%D8%BA%D8%A7%D8%AA_%D9%88%D8%AA%D8%B3%D9%8A%D9%8A%D8%B1.pdf",
     "sizeBytes": 70845549,
     "sizeReadable": "67.56 MB",
-    "ext": ".pdf"
-  },
-  {
-    "id": "pdf-274",
-    "rawFileName": "مقالات_كتاب_الهدى_في_الفلسفة_بكالوريا_2020.pdf",
-    "title": "مقالات كتاب الهدى النموذجية في الفلسفة للبكالوريا",
-    "subjectId": "philosophy",
-    "subjectName": "الفلسفة",
-    "streams": [
-      "sciences",
-      "math",
-      "technique",
-      "gestion",
-      "lettres",
-      "langues"
-    ],
-    "author": "نخبة الأساتذة والمفتشين",
-    "category": "ملخصات ودروس شاملة",
-    "fileUrl": "/files/Philo/%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA_%D9%83%D8%AA%D8%A7%D8%A8_%D8%A7%D9%84%D9%87%D8%AF%D9%89_%D9%81%D9%8A_%D8%A7%D9%84%D9%81%D9%84%D8%B3%D9%81%D8%A9_%D8%A8%D9%83%D8%A7%D9%84%D9%88%D8%B1%D9%8A%D8%A7_2020.pdf",
-    "sizeBytes": 135113600,
-    "sizeReadable": "128.85 MB",
     "ext": ".pdf"
   },
   {
@@ -6334,6 +6244,7 @@ export const USER_STUDY_FILES = [
   }
 ];
 
+// Helper functions for easy filtering across components
 export const getFilesBySubject = (subjectId) => {
   return USER_STUDY_FILES.filter(f => f.subjectId === subjectId);
 };
@@ -6343,8 +6254,8 @@ export const getFilesByStream = (streamId) => {
 };
 
 export const searchUserFiles = (query) => {
-  if (!query || query.trim().length < 2) return [];
-  const q = query.trim().toLowerCase();
+  const q = query.toLowerCase().trim();
+  if (!q) return [];
   return USER_STUDY_FILES.filter(f => 
     f.title.toLowerCase().includes(q) ||
     f.subjectName.toLowerCase().includes(q) ||

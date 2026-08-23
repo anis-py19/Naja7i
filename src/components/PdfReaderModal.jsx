@@ -6,26 +6,23 @@ import {
   HiEye, 
   HiArrowsExpand,
   HiDocumentText,
-  HiSparkles,
-  HiRefresh,
-  HiInformationCircle,
-  HiCheckCircle
+  HiCheckCircle,
+  HiRefresh
 } from 'react-icons/hi';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { downloadPdfFile } from '../utils/downloadHelper';
 
 export default function PdfReaderModal({ file, isOpen, onClose }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadSuccess, setDownloadSuccess] = useState(false);
-  const [viewerKey, setViewerKey] = useState(Date.now());
-  const [viewerMode, setViewerMode] = useState('native'); // 'native' | 'google'
+  const [iframeLoaded, setIframeLoaded] = useState(false);
 
   useEffect(() => {
     if (file) {
-      setViewerKey(Date.now());
       setDownloadSuccess(false);
       setIsDownloading(false);
+      setIframeLoaded(false);
     }
   }, [file]);
 
@@ -44,13 +41,6 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
       setDownloadSuccess(false);
     }, 3000);
   };
-
-  // Resolve absolute or relative URL
-  const resolvedPdfUrl = file.fileUrl.startsWith('http') 
-    ? file.fileUrl 
-    : window.location.origin + file.fileUrl;
-
-  const googleViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(resolvedPdfUrl)}&embedded=true`;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/75 backdrop-blur-xs font-['Cairo']">
@@ -78,7 +68,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                   {file.subjectName || 'ملخص دراسي'}
                 </span>
                 {file.sizeReadable && (
-                  <span className="text-[11px] text-[#78716c] font-mono">
+                  <span className="text-[11px] text-[#78716c] font-mono font-bold">
                     {file.sizeReadable}
                   </span>
                 )}
@@ -126,10 +116,11 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
               href={file.fileUrl}
               target="_blank"
               rel="noreferrer"
-              className="p-2 rounded-xl bg-white hover:bg-[#FFF2DB] text-[#57534e] hover:text-[#1c1917] border border-[#FFE5BF] transition-colors cursor-pointer shadow-2xs"
+              className="p-2 rounded-xl bg-white hover:bg-[#FFF2DB] text-[#57534e] hover:text-[#1c1917] border border-[#FFE5BF] transition-colors cursor-pointer shadow-2xs flex items-center gap-1 text-xs font-bold"
               title="فتح في تبويب مستقل"
             >
               <HiExternalLink className="w-4 h-4" />
+              <span className="hidden sm:inline">تبويب جديد</span>
             </a>
 
             {/* Fullscreen Toggle */}
@@ -155,37 +146,64 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
         </div>
 
         {/* Embedded PDF Viewer Container */}
-        <div className="flex-1 w-full h-full bg-[#334155] relative flex flex-col">
+        <div className="flex-1 w-full h-full bg-[#525659] relative flex flex-col overflow-hidden">
           
-          <iframe
-            key={viewerKey}
-            src={viewerMode === 'native' 
-              ? `${file.fileUrl}#toolbar=1&navpanes=0&scrollbar=1&view=FitH`
-              : googleViewerUrl
-            }
-            className="w-full h-full border-none flex-1"
-            title={file.title}
-          />
+          <object
+            data={file.fileUrl}
+            type="application/pdf"
+            className="w-full h-full flex-1"
+          >
+            <iframe
+              src={file.fileUrl}
+              className="w-full h-full border-none flex-1"
+              title={file.title}
+            >
+              <div className="p-8 text-center bg-white text-[#1c1917] h-full flex flex-col items-center justify-center space-y-4">
+                <div className="w-16 h-16 rounded-2xl bg-[#FFF2DB] text-[#F62440] flex items-center justify-center text-3xl mx-auto">
+                  📄
+                </div>
+                <h4 className="text-base font-bold">
+                  متصفحك يحتاج لفتح الملف في نافذة مستقلة أو تحميله
+                </h4>
+                <div className="flex items-center gap-3">
+                  <a
+                    href={file.fileUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-4 py-2 rounded-xl bg-[#FFF2DB] border border-[#FFE5BF] font-bold text-xs"
+                  >
+                    فتح في تبويب مستقل ↗️
+                  </a>
+                  <button
+                    onClick={handleDownload}
+                    className="px-4 py-2 rounded-xl bg-[#F62440] text-white font-bold text-xs"
+                  >
+                    تحميل الملف مباشرة 📥
+                  </button>
+                </div>
+              </div>
+            </iframe>
+          </object>
 
-          {/* Mobile Direct Download Fallback Reminder */}
-          <div className="sm:hidden bg-[#FFFAF3] border-t border-[#FFE5BF] px-3 py-2 flex items-center justify-between text-xs">
-            <span className="text-[11px] text-[#78716c] truncate">
-              لا يظهر الملف على هاتفك؟
+          {/* Mobile Fast Action Bottom Strip */}
+          <div className="sm:hidden bg-[#FFFAF3] border-t border-[#FFE5BF] px-3 py-2 flex items-center justify-between text-xs shrink-0">
+            <span className="text-[11px] text-[#78716c]">
+              حجم الملف: <strong>{file.sizeReadable}</strong>
             </span>
             <div className="flex items-center gap-2">
               <a
                 href={file.fileUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="px-2 py-1 rounded bg-white text-[#1c1917] border border-[#FFE5BF] font-bold text-[10px]"
+                className="px-2.5 py-1 rounded-lg bg-white text-[#1c1917] border border-[#FFE5BF] font-bold text-[11px]"
               >
-                فتح بملء الشاشة
+                ملء الشاشة ↗️
               </a>
               <button
                 onClick={handleDownload}
-                className="px-2 py-1 rounded bg-[#F62440] text-white font-bold text-[10px]"
+                className="px-2.5 py-1 rounded-lg bg-[#F62440] text-white font-bold text-[11px]"
               >
-                تحميل
+                تحميل PDF 📥
               </button>
             </div>
           </div>
@@ -199,17 +217,8 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
             <strong className="text-[#1c1917]">{file.author || 'نخبة أساتذة الجزائر'}</strong>
           </div>
 
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setViewerMode(viewerMode === 'native' ? 'google' : 'native')}
-              className="text-[11px] text-[#F62440] hover:underline cursor-pointer font-bold"
-            >
-              {viewerMode === 'native' ? '🔄 التبديل إلى عارض السحابة' : '🔄 التبديل إلى القارئ المباشر'}
-            </button>
-            <span className="hidden md:inline">•</span>
-            <span className="hidden md:inline text-[11px]">
-              استخدم أزرار القارئ المدمجة للتدوير، التكبير، والبحث في الصفحات
-            </span>
+          <div className="flex items-center gap-3 text-[11px]">
+            <span>💡 نصيحة: يمكنك استخدام أدوات المتصفح للتكبير والطباعة والبحث</span>
           </div>
         </div>
 
