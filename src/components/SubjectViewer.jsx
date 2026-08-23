@@ -16,6 +16,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { SUBJECT_RESOURCES } from '../data/bacData';
 import { getFilesBySubject } from '../data/userFilesData';
+import { downloadPdfFile } from '../utils/downloadHelper';
 
 export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPdf }) {
   const [activeTab, setActiveTab] = useState('files'); // 'files', 'units', 'videos', 'bacs'
@@ -242,14 +243,13 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                         <span>قراءة</span>
                       </button>
 
-                      <a
-                        href={file.fileUrl}
-                        download={file.rawFileName || file.title}
-                        className="py-1.5 rounded-lg bg-[#F62440] hover:bg-[#d81b34] text-white font-bold text-xs flex items-center justify-center gap-1 transition-colors shadow-2xs"
+                      <button
+                        onClick={() => downloadPdfFile(file.fileUrl, file.rawFileName || file.title)}
+                        className="py-1.5 rounded-lg bg-[#F62440] hover:bg-[#d81b34] text-white font-bold text-xs flex items-center justify-center gap-1 transition-colors shadow-2xs cursor-pointer"
                       >
                         <HiDownload className="w-3.5 h-3.5" />
                         <span>تحميل PDF</span>
-                      </a>
+                      </button>
                     </div>
                   </div>
                 ))

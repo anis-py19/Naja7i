@@ -14,6 +14,7 @@ import {
 import { Link } from 'react-router-dom';
 import { USER_STUDY_FILES } from '../data/userFilesData';
 import { STREAMS } from '../data/streamsData';
+import { downloadPdfFile } from '../utils/downloadHelper';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -349,14 +350,13 @@ export default function LibraryPage({ onOpenPdf }) {
                     <span>قراءة الملف</span>
                   </button>
 
-                  <a
-                    href={file.fileUrl}
-                    download={file.rawFileName || file.title}
-                    className="py-1.5 px-2 rounded-lg bg-[#F62440] hover:bg-[#d81b34] text-white text-xs font-bold flex items-center justify-center gap-1 transition-colors shadow-2xs"
+                  <button
+                    onClick={() => downloadPdfFile(file.fileUrl, file.rawFileName || file.title)}
+                    className="py-1.5 px-2 rounded-lg bg-[#F62440] hover:bg-[#d81b34] text-white text-xs font-bold flex items-center justify-center gap-1 transition-colors shadow-2xs cursor-pointer"
                   >
                     <HiDownload className="w-3.5 h-3.5" />
                     <span>تحميل PDF</span>
-                  </a>
+                  </button>
                 </div>
               </div>
             ))}
