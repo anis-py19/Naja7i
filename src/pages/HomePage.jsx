@@ -61,6 +61,13 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       path: '/study-planner',
       icon: '📅',
       badge: 'جداول جاهزة للطباعة'
+    },
+    {
+      title: 'بنك الأسئلة والاختبارات التفاعلية',
+      desc: 'اختبارات سريعة وتحديات موقوتة QCM لجميع المواد وفق المنهاج الوزاري مع التصحيح الفوري.',
+      path: '/quiz',
+      icon: '⏱️',
+      badge: 'تصحيح وشرح فوري'
     }
   ];
 

@@ -15,6 +15,7 @@ import LibraryPage from './pages/LibraryPage';
 import BacArchivePage from './pages/BacArchivePage';
 import YouTubeTeachersPage from './pages/YouTubeTeachersPage';
 import StudyPlannerPage from './pages/StudyPlannerPage';
+import QuizBankPage from './pages/QuizBankPage';
 import CalculatorPage from './pages/CalculatorPage';
 import CountdownPage from './pages/CountdownPage';
 import AboutPage from './pages/AboutPage';
@@ -167,6 +168,14 @@ function App() {
             }
           />
 
+          {/* 6.5 بنك الأسئلة والاختبارات التفاعلية السريعة (Quiz & QCM) */}
+          <Route
+            path="/quiz"
+            element={
+              <QuizBankPage />
+            }
+          />
+
           {/* 7. حاسبة معدل البكالوريا بالمعاملات الرسمية */}
           <Route
             path="/calculator"
@@ -287,6 +296,8 @@ function App() {
             <Link to="/bac-archive" className="hover:text-[#E11D48] transition-colors">أرشيف البكالوريا</Link>
             <span>•</span>
             <Link to="/youtube-teachers" className="hover:text-[#E11D48] transition-colors">أساتذة اليوتيوب</Link>
+            <span>•</span>
+            <Link to="/quiz" className="hover:text-[#E11D48] transition-colors font-bold text-[#E11D48]">بنك الأسئلة (Quiz) ⏱️</Link>
             <span>•</span>
             <Link to="/study-planner" className="hover:text-[#E11D48] transition-colors">مخطط المراجعة</Link>
             <span>•</span>

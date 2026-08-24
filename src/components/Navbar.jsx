@@ -227,6 +227,24 @@ export default function Navbar({ onSelectStream, onOpenCalculator, onOpenSearch,
                   </Link>
 
                   <Link
+                    to="/quiz"
+                    onClick={() => setToolsDropdown(false)}
+                    className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
+                  >
+                    <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-[#E11D48] font-bold">
+                      ⏱️
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
+                        بنك الأسئلة والاختبارات
+                      </span>
+                      <span className="text-[10px] text-[#64748B]">
+                        اختبارات سريعة QCM وتصحيح فوري
+                      </span>
+                    </div>
+                  </Link>
+
+                  <Link
                     to="/calculator"
                     onClick={() => setToolsDropdown(false)}
                     className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
@@ -378,6 +396,13 @@ export default function Navbar({ onSelectStream, onOpenCalculator, onOpenSearch,
               className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800"
             >
               قنوات وأساتذة اليوتيوب
+            </Link>
+            <Link
+              to="/quiz"
+              onClick={() => setIsOpen(false)}
+              className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800"
+            >
+              بنك الأسئلة والاختبارات (Quiz & QCM) ⏱️
             </Link>
             <Link
               to="/study-planner"
