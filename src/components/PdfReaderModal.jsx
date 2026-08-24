@@ -11,26 +11,29 @@ import { motion } from 'framer-motion';
 
 export default function PdfReaderModal({ file, isOpen, onClose }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [embedKey, setEmbedKey] = useState(0);
+  const [iframeKey, setIframeKey] = useState(0);
 
   if (!isOpen || !file) return null;
 
-  // Use rawPath or fileUrl (prefer rawPath for standard clean UTF-8 paths in browser)
-  const pdfUrl = file.rawPath || file.fileUrl || file.url || '';
-  const encodedPdfUrl = file.fileUrl || encodeURI(pdfUrl);
+  const pdfUrl = file.fileUrl || file.url || file.rawPath || '';
   const fileName = file.rawFileName || `${file.title || 'document'}.pdf`;
   const fileSize = file.sizeReadable || file.size || '';
 
   const handleDownload = (e) => {
     e.stopPropagation();
     const link = document.createElement('a');
-    link.href = encodedPdfUrl;
+    link.href = pdfUrl;
     link.download = fileName;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const handleReloadFrame = (e) => {
+    e.stopPropagation();
+    setIframeKey(prev => prev + 1);
   };
 
   return (
@@ -42,25 +45,30 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
         className={`relative w-full bg-white border border-[#E2E8F0] rounded-2xl shadow-2xl flex flex-col transition-all overflow-hidden ${
           isFullscreen 
             ? 'fixed inset-2 z-50 h-[calc(100vh-16px)] max-w-none' 
-            : 'max-w-5xl h-[92vh]'
+            : 'max-w-5xl h-[90vh]'
         }`}
       >
-        {/* Reader Top Action Bar */}
-        <div className="px-4 py-2.5 bg-[#F8FAFC] border-b border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2 min-w-0">
-            <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-white text-[#E11D48] border border-[#E2E8F0]">
-              {file.subjectName || 'ملخص دراسي'}
-            </span>
-            {fileSize && (
-              <span className="text-xs text-[#64748B] font-mono">
-                {fileSize}
-              </span>
-            )}
-            {file.author && (
-              <span className="text-xs text-[#475569] hidden sm:inline font-semibold">
-                • إعداد: {file.author}
-              </span>
-            )}
+        {/* Reader Header */}
+        <div className="px-4 py-3 sm:px-6 sm:py-3.5 bg-[#F8FAFC] border-b border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3 shrink-0">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-10 h-10 rounded-xl bg-white border border-[#E2E8F0] text-[#E11D48] flex items-center justify-center text-lg shrink-0 shadow-2xs">
+              <HiDocumentText className="w-5 h-5" />
+            </div>
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-white text-[#E11D48] border border-[#E2E8F0]">
+                  {file.subjectName || 'ملخص دراسي'}
+                </span>
+                {fileSize && (
+                  <span className="text-[11px] text-[#64748B] font-mono">
+                    {fileSize}
+                  </span>
+                )}
+              </div>
+              <h3 className="text-sm sm:text-base font-bold text-[#0F172A] truncate mt-0.5" title={file.title}>
+                {file.title}
+              </h3>
+            </div>
           </div>
 
           {/* Action Tools */}
@@ -77,15 +85,24 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
 
             {/* Open in new tab */}
             <a
-              href={encodedPdfUrl}
+              href={pdfUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="px-3 py-1.5 rounded-xl bg-white hover:bg-[#F1F5F9] text-[#0F172A] border border-[#CBD5E1] text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs"
-              title="فتح في نافذة مستقلة"
+              title="فتح في لسان جديد"
             >
               <HiExternalLink className="w-4 h-4 text-[#64748B]" />
               <span className="hidden sm:inline">نافذة مستقلة</span>
             </a>
+
+            {/* Reload Frame */}
+            <button
+              onClick={handleReloadFrame}
+              className="p-2 rounded-xl bg-white hover:bg-[#F1F5F9] text-[#475569] hover:text-[#0F172A] border border-[#CBD5E1] transition-colors cursor-pointer shadow-2xs"
+              title="إعادة تحميل المستند"
+            >
+              <HiRefresh className="w-4 h-4" />
+            </button>
 
             {/* Toggle Fullscreen */}
             <button
@@ -99,7 +116,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
             {/* Close */}
             <button
               onClick={onClose}
-              className="p-2 rounded-xl bg-white hover:bg-[#F1F5F9] text-[#475569] hover:text-[#0F172A] border border-[#CBD5E1] transition-colors cursor-pointer shadow-2xs"
+              className="p-2 rounded-xl bg-white hover:bg-rose-50 text-[#475569] hover:text-[#E11D48] border border-[#CBD5E1] hover:border-rose-200 transition-colors cursor-pointer shadow-2xs"
               title="إغلاق القارئ"
             >
               <HiX className="w-4 h-4" />
@@ -107,58 +124,29 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
           </div>
         </div>
 
-        {/* Highlighted Document Title Box (Exact match with Ency-Education style) */}
-        <div className="px-4 py-2 bg-white border-b border-[#E2E8F0]">
-          <div className="rounded-xl border border-sky-200 bg-sky-50 text-[#E11D48] text-center font-black py-2 px-3 text-xs sm:text-sm md:text-base shadow-2xs">
-            {file.title}
-          </div>
+        {/* Reader Frame Body using pure <iframe> */}
+        <div className="flex-1 bg-[#F1F5F9] relative overflow-hidden w-full h-full flex flex-col">
+          <iframe
+            key={iframeKey}
+            src={`${pdfUrl}#toolbar=1&navpanes=0&scrollbar=1`}
+            title={file.title || 'PDF Viewer'}
+            className="w-full h-full border-0 bg-white flex-1"
+            loading="lazy"
+            allow="fullscreen"
+          />
         </div>
 
-        {/* Multi-Engine Reliable PDF Reader Frame Body */}
-        <div className="flex-1 bg-[#F1F5F9] relative overflow-hidden flex flex-col items-center justify-center p-0">
-          <object
-            key={embedKey}
-            data={encodedPdfUrl}
-            type="application/pdf"
-            className="w-full h-full border-0 bg-white"
-          >
-            <embed
-              src={encodedPdfUrl}
-              type="application/pdf"
-              className="w-full h-full border-0 bg-white"
-            />
-            
-            {/* Fallback if browser plugin does not render */}
-            <div className="p-8 text-center space-y-4 max-w-md bg-white rounded-2xl border border-[#E2E8F0] shadow-sm m-4">
-              <div className="w-14 h-14 rounded-2xl bg-rose-50 text-[#E11D48] flex items-center justify-center text-2xl mx-auto">
-                <HiDocumentText className="w-7 h-7" />
-              </div>
-              <h4 className="text-base font-bold text-[#0F172A]">
-                {file.title}
-              </h4>
-              <p className="text-xs text-[#64748B] leading-relaxed">
-                ملف PDF جاهز للقراءة والتحميل مباشرة على هاتفك أو حاسوبك.
-              </p>
-              <div className="flex flex-col gap-2 pt-2">
-                <a
-                  href={encodedPdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-2.5 px-4 rounded-xl bg-[#E11D48] text-white font-bold text-xs flex items-center justify-center gap-2"
-                >
-                  <HiExternalLink className="w-4 h-4" />
-                  <span>فتح الملف في نافذة مستقلة</span>
-                </a>
-                <button
-                  onClick={handleDownload}
-                  className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] font-bold text-xs border border-[#CBD5E1] flex items-center justify-center gap-2"
-                >
-                  <HiDownload className="w-4 h-4 text-[#E11D48]" />
-                  <span>تحميل الملف إلى جهازك</span>
-                </button>
-              </div>
-            </div>
-          </object>
+        {/* Reader Footer Info */}
+        <div className="px-4 py-2 bg-[#F8FAFC] border-t border-[#E2E8F0] flex items-center justify-between text-xs text-[#64748B] shrink-0">
+          <div className="flex items-center gap-2">
+            <span>إعداد: <strong className="text-[#0F172A]">{file.author || 'نخبة الأساتذة'}</strong></span>
+            <span>•</span>
+            <span className="text-[#E11D48] font-medium">{file.category || 'ملخص دراسي'}</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="text-[11px]">منصة نجاحي — فضاء البكالوريا الجزائرية 🇩🇿</span>
+          </div>
         </div>
 
       </motion.div>
