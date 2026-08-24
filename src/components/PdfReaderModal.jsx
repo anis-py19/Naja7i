@@ -1,173 +1,32 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { 
   HiX, 
   HiDownload, 
   HiExternalLink, 
   HiArrowsExpand,
   HiDocumentText,
-  HiChevronRight,
-  HiChevronLeft,
-  HiPlus,
-  HiMinus,
-  HiRefresh,
-  HiFolderDownload,
-  HiViewGrid
+  HiFolderDownload
 } from 'react-icons/hi';
 import { motion, AnimatePresence } from 'framer-motion';
-import * as pdfjsLib from 'pdfjs-dist';
-import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
-
-// Configure local worker bundled by Vite
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 export default function PdfReaderModal({ file, isOpen, onClose }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [activeTab, setActiveTab] = useState('canvas'); // 'canvas' | 'iframe'
-
-  // PDF.js State
-  const [pdfDoc, setPdfDoc] = useState(null);
-  const [pageNum, setPageNum] = useState(1);
-  const [numPages, setNumPages] = useState(0);
-  const [scale, setScale] = useState(1.15);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // Blob URL for native mode / download
-  const [blobUrl, setBlobUrl] = useState(null);
-
-  const canvasRef = useRef(null);
-  const renderTaskRef = useRef(null);
 
   if (!isOpen || !file) return null;
 
   const rawUrl = file.fileUrl || file.rawPath || file.url || '';
+  const safeEncodedUrl = rawUrl.startsWith('http') || rawUrl.startsWith('/')
+    ? encodeURI(decodeURI(rawUrl))
+    : rawUrl;
+
   const fileName = file.rawFileName || `${file.title || 'document'}.${file.extension || 'pdf'}`;
   const fileSize = file.sizeReadable || file.size || '';
   const isPdf = !file.extension || file.extension.toLowerCase() === 'pdf' || rawUrl.toLowerCase().endsWith('.pdf');
 
-  // Load PDF with PDF.js and Fetch Blob
-  useEffect(() => {
-    if (!isOpen || !file || !isPdf) return;
-
-    let isMounted = true;
-    let createdBlobUrl = null;
-
-    async function loadDocument() {
-      setLoading(true);
-      setError(null);
-      setPageNum(1);
-
-      try {
-        // Fetch file directly into arrayBuffer / Blob to prevent IDM interception
-        const response = await fetch(rawUrl);
-        if (!response.ok) {
-          throw new Error(`خطأ في الوصول إلى الملف (${response.status})`);
-        }
-        const arrayBuffer = await response.arrayBuffer();
-        
-        // Create Blob for iframe / download
-        const blob = new Blob([arrayBuffer], { type: 'application/pdf' });
-        createdBlobUrl = URL.createObjectURL(blob);
-        if (isMounted) {
-          setBlobUrl(createdBlobUrl);
-        }
-
-        // Load into PDF.js
-        const loadingTask = pdfjsLib.getDocument({ 
-          data: arrayBuffer,
-          cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@legacy/cmaps/',
-          cMapPacked: true,
-          standardFontDataUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@legacy/standard_fonts/'
-        });
-
-        const loadedPdf = await loadingTask.promise;
-
-        if (isMounted) {
-          setPdfDoc(loadedPdf);
-          setNumPages(loadedPdf.numPages);
-          setLoading(false);
-        }
-      } catch (err) {
-        console.warn('Canvas PDF loading issue:', err);
-        if (isMounted) {
-          if (createdBlobUrl) {
-            // Auto switch to Blob iframe if canvas fails
-            setActiveTab('iframe');
-            setLoading(false);
-          } else {
-            setError('تعذر تحميل وقراءة ملف الـ PDF');
-            setLoading(false);
-          }
-        }
-      }
-    }
-
-    loadDocument();
-
-    return () => {
-      isMounted = false;
-      if (renderTaskRef.current) {
-        try {
-          renderTaskRef.current.cancel();
-        } catch {}
-      }
-      if (createdBlobUrl) {
-        URL.revokeObjectURL(createdBlobUrl);
-      }
-    };
-  }, [file, isOpen, rawUrl, isPdf]);
-
-  // Render Current Page on Canvas
-  useEffect(() => {
-    if (!pdfDoc || !canvasRef.current || loading || error || activeTab !== 'canvas') return;
-
-    let isCancelled = false;
-
-    async function renderPage() {
-      try {
-        if (renderTaskRef.current) {
-          try {
-            renderTaskRef.current.cancel();
-          } catch {}
-        }
-
-        const page = await pdfDoc.getPage(pageNum);
-        if (isCancelled) return;
-
-        const viewport = page.getViewport({ scale });
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-
-        const context = canvas.getContext('2d');
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-
-        const renderContext = {
-          canvasContext: context,
-          viewport: viewport
-        };
-
-        renderTaskRef.current = page.render(renderContext);
-        await renderTaskRef.current.promise;
-      } catch (err) {
-        if (err?.name !== 'RenderingCancelledException') {
-          console.error('Page render error:', err);
-        }
-      }
-    }
-
-    renderPage();
-
-    return () => {
-      isCancelled = true;
-    };
-  }, [pdfDoc, pageNum, scale, loading, error, activeTab]);
-
   const handleDownload = (e) => {
-    e?.stopPropagation?.();
-    const targetUrl = blobUrl || rawUrl;
+    e.stopPropagation();
     const link = document.createElement('a');
-    link.href = targetUrl;
+    link.href = safeEncodedUrl;
     link.download = fileName;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
@@ -176,16 +35,9 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
     document.body.removeChild(link);
   };
 
-  const changePage = (offset) => {
-    setPageNum(prev => Math.min(Math.max(prev + offset, 1), numPages));
-  };
-
-  const zoomIn = () => setScale(prev => Math.min(prev + 0.2, 2.5));
-  const zoomOut = () => setScale(prev => Math.max(prev - 0.2, 0.6));
-
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-1 sm:p-4 bg-slate-950/85 backdrop-blur-xs font-['Cairo']">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-1 sm:p-4 bg-slate-950/80 backdrop-blur-xs font-['Cairo']">
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -198,7 +50,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
           }`}
         >
           
-          {/* 1. Top Header Bar */}
+          {/* Header Toolbar */}
           <div className="px-3 py-2.5 sm:px-6 sm:py-3 bg-[#0F172A] text-white flex flex-wrap items-center justify-between gap-2 shrink-0 border-b border-slate-800">
             
             {/* File Info */}
@@ -211,95 +63,16 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                   {file.title}
                 </h3>
                 <div className="flex items-center gap-2 text-[10px] text-slate-400">
-                  <span className="text-rose-300 font-bold">{file.subjectName}</span>
+                  <span className="text-rose-300 font-bold">{file.subjectName || 'ملف دراسي'}</span>
                   {fileSize && <span>• {fileSize}</span>}
                   {file.author && <span className="hidden sm:inline">• {file.author}</span>}
                 </div>
               </div>
             </div>
 
-            {/* Viewer Navigation & Zoom Controls (Only for Canvas mode) */}
-            {isPdf && !loading && !error && activeTab === 'canvas' && numPages > 0 && (
-              <div className="flex items-center gap-1 bg-slate-800/90 border border-slate-700 rounded-xl px-2 py-1">
-                {/* Previous Page */}
-                <button
-                  onClick={() => changePage(-1)}
-                  disabled={pageNum <= 1}
-                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 disabled:opacity-40 disabled:hover:bg-transparent cursor-pointer transition-colors"
-                  title="الصفحة السابقة"
-                >
-                  <HiChevronRight className="w-4 h-4" />
-                </button>
-
-                {/* Page Counter */}
-                <div className="text-xs font-mono font-bold px-1.5 text-white flex items-center gap-1">
-                  <span>{pageNum}</span>
-                  <span className="text-slate-400">/</span>
-                  <span className="text-slate-400">{numPages}</span>
-                </div>
-
-                {/* Next Page */}
-                <button
-                  onClick={() => changePage(1)}
-                  disabled={pageNum >= numPages}
-                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 disabled:opacity-40 disabled:hover:bg-transparent cursor-pointer transition-colors"
-                  title="الصفحة التالية"
-                >
-                  <HiChevronLeft className="w-4 h-4" />
-                </button>
-
-                <div className="w-px h-4 bg-slate-700 mx-1" />
-
-                {/* Zoom Out */}
-                <button
-                  onClick={zoomOut}
-                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 cursor-pointer transition-colors"
-                  title="تصغير"
-                >
-                  <HiMinus className="w-3.5 h-3.5" />
-                </button>
-
-                {/* Zoom Level */}
-                <span className="text-[11px] font-mono font-bold px-1 text-slate-300">
-                  {Math.round(scale * 100)}%
-                </span>
-
-                {/* Zoom In */}
-                <button
-                  onClick={zoomIn}
-                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 cursor-pointer transition-colors"
-                  title="تكبير"
-                >
-                  <HiPlus className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            )}
-
             {/* Action Tools */}
             <div className="flex items-center gap-1.5 shrink-0">
               
-              {/* Tab Switcher (Canvas vs Browser iFrame) */}
-              {isPdf && blobUrl && !loading && (
-                <div className="hidden sm:flex items-center bg-slate-800 border border-slate-700 rounded-xl p-0.5 text-xs">
-                  <button
-                    onClick={() => setActiveTab('canvas')}
-                    className={`px-2.5 py-1 rounded-lg font-bold transition-colors cursor-pointer ${
-                      activeTab === 'canvas' ? 'bg-[#E11D48] text-white shadow-2xs' : 'text-slate-300 hover:text-white'
-                    }`}
-                  >
-                    مستعرض ذكي
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('iframe')}
-                    className={`px-2.5 py-1 rounded-lg font-bold transition-colors cursor-pointer ${
-                      activeTab === 'iframe' ? 'bg-[#E11D48] text-white shadow-2xs' : 'text-slate-300 hover:text-white'
-                    }`}
-                  >
-                    مستعرض المتصفح
-                  </button>
-                </div>
-              )}
-
               {/* Direct Download Button */}
               <button
                 onClick={handleDownload}
@@ -310,13 +83,13 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                 <span className="hidden sm:inline">تحميل PDF</span>
               </button>
 
-              {/* Open in new tab (Blob URL prevents IDM) */}
+              {/* Open in new tab (مثل Ency-Education تماماً) */}
               <a
-                href={blobUrl || rawUrl}
+                href={safeEncodedUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1"
-                title="فتح في لسان مستقل"
+                className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1 shadow-2xs"
+                title="فتح في لسان مستقل كامل"
               >
                 <HiExternalLink className="w-4 h-4 text-slate-400" />
                 <span className="hidden md:inline">نافذة جديدة</span>
@@ -344,50 +117,17 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
 
           </div>
 
-          {/* 2. Reader Body Area */}
-          <div className="flex-1 bg-[#1E293B] relative overflow-auto flex flex-col items-center justify-start p-2 sm:p-4 select-none">
-            
-            {loading && (
-              <div className="flex-1 flex flex-col items-center justify-center p-12 text-center text-white space-y-3">
-                <div className="w-10 h-10 border-3 border-rose-500 border-t-transparent rounded-full animate-spin mx-auto" />
-                <h4 className="text-sm font-bold">جاري فتح وتجهيز المستعرض...</h4>
-                <p className="text-xs text-slate-400 max-w-xs">
-                  يتم تحميل صفحات الـ PDF مباشرة وتجهيز القراءة السريعة.
-                </p>
-              </div>
-            )}
-
-            {error && (
-              <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-white rounded-2xl border border-slate-700 m-4 max-w-md space-y-3">
-                <div className="text-3xl">⚠️</div>
-                <h4 className="text-sm font-bold text-[#0F172A]">{error}</h4>
-                <p className="text-xs text-[#64748B]">
-                  يمكنك تحميل الملف مباشرة أو فتحه في علامة تبويب جديدة.
-                </p>
-                <div className="flex items-center gap-2 pt-2">
-                  <button
-                    onClick={handleDownload}
-                    className="px-4 py-2 rounded-xl bg-[#E11D48] text-white text-xs font-bold flex items-center gap-1.5 cursor-pointer"
-                  >
-                    <HiDownload className="w-4 h-4" />
-                    <span>تحميل الملف الآن</span>
-                  </button>
-                  <a
-                    href={blobUrl || rawUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 rounded-xl bg-slate-100 text-[#0F172A] text-xs font-bold flex items-center gap-1.5"
-                  >
-                    <HiExternalLink className="w-4 h-4" />
-                    <span>فتح الرابط</span>
-                  </a>
-                </div>
-              </div>
-            )}
-
-            {/* Non-PDF Files (e.g. DOCX / RAR) */}
-            {!isPdf && !loading && (
-              <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-white rounded-2xl border border-slate-700 m-4 max-w-md space-y-4">
+          {/* Reader Body Area */}
+          <div className="flex-1 bg-white relative overflow-hidden flex flex-col items-center justify-center w-full h-full">
+            {isPdf ? (
+              <iframe
+                src={`${safeEncodedUrl}#toolbar=1&navpanes=0&scrollbar=1`}
+                className="w-full h-full border-0 bg-white"
+                title={file.title || 'PDF Document'}
+              />
+            ) : (
+              /* Non-PDF Files (e.g. DOCX / RAR) */
+              <div className="p-8 text-center space-y-4 max-w-md bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0] shadow-sm m-4">
                 <div className="w-16 h-16 rounded-2xl bg-rose-50 text-[#E11D48] flex items-center justify-center text-3xl mx-auto shadow-2xs">
                   <HiFolderDownload />
                 </div>
@@ -403,34 +143,21 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                     <HiDownload className="w-4 h-4" />
                     <span>تحميل الملف الآن</span>
                   </button>
+                  <a
+                    href={safeEncodedUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2.5 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#CBD5E1] text-xs font-bold flex items-center gap-1.5"
+                  >
+                    <HiExternalLink className="w-4 h-4" />
+                    <span>فتح في لسان جديد</span>
+                  </a>
                 </div>
               </div>
             )}
-
-            {/* Mode 1: Pure In-App Canvas PDF Renderer (Default - 100% immune to IDM) */}
-            {isPdf && !loading && !error && activeTab === 'canvas' && (
-              <div className="flex flex-col items-center justify-center max-w-full">
-                <div className="bg-white rounded-lg shadow-2xl overflow-hidden border border-slate-700 max-w-full">
-                  <canvas 
-                    ref={canvasRef} 
-                    className="max-w-full h-auto block"
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* Mode 2: Browser iFrame with Blob URL */}
-            {isPdf && !loading && !error && activeTab === 'iframe' && blobUrl && (
-              <iframe
-                src={`${blobUrl}#toolbar=1&navpanes=0&scrollbar=1`}
-                className="w-full h-full border-0 bg-white"
-                title={file.title || 'PDF Viewer'}
-              />
-            )}
-
           </div>
 
-          {/* 3. Footer Bar */}
+          {/* Footer Bar */}
           <div className="px-4 py-2 bg-[#0F172A] border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
             <div className="flex items-center gap-2 truncate">
               <span>إعداد: <strong className="text-slate-200">{file.author || 'نخبة الأساتذة'}</strong></span>
@@ -439,7 +166,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
             </div>
 
             <div className="flex items-center gap-2 shrink-0">
-              <span className="text-[10px] text-slate-500">منصة نجاحي — مستعرض مدمج 🇩🇿</span>
+              <span className="text-[10px] text-slate-500">منصة نجاحي — مستعرض الملفات المحلي 🇩🇿</span>
             </div>
           </div>
 
