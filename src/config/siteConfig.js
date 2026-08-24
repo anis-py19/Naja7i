@@ -8,7 +8,7 @@ export const SITE_CONFIG = {
    * - ضع `true` لتفعيل وضع الصيانة (يظهر للزوار أن الموقع قيد التحديث).
    * - ضع `false` لإيقاف الصيانة وتشغيل الموقع للجميع بشكل عادي وطبيعي.
    */
-  isMaintenanceMode: false,
+  isMaintenanceMode: true,
 
   // عنوان صفحة الصيانة
   maintenanceTitle: 'المنصة قيد الصيانة والتحديثات الدورية 🛠️',
