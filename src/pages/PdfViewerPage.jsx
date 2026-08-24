@@ -28,17 +28,19 @@ export default function PdfViewerPage() {
     id: fileId || 'doc',
     title: fileTitleParam || 'ملف دراسي لشهادة البكالوريا',
     fileUrl: fileUrlParam || (fileId ? `/FileFromMe/${fileId}` : ''),
+    rawPath: fileUrlParam || (fileId ? `/FileFromMe/${fileId}` : ''),
     subjectName: 'ملخصات البكالوريا',
     author: 'أساتذة متميزون',
     size: ''
   };
 
-  const pdfUrl = file.fileUrl;
+  const pdfUrl = file.rawPath || file.fileUrl;
+  const encodedPdfUrl = file.fileUrl || encodeURI(pdfUrl);
   const fileName = file.rawFileName || `${file.title || 'document'}.pdf`;
 
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = pdfUrl;
+    link.href = encodedPdfUrl;
     link.download = fileName;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
@@ -122,7 +124,7 @@ export default function PdfViewerPage() {
 
                 {/* Open in new tab */}
                 <a
-                  href={pdfUrl}
+                  href={encodedPdfUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-3 py-1.5 rounded-lg bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#CBD5E1] flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
@@ -179,17 +181,51 @@ export default function PdfViewerPage() {
         </div>
       )}
 
-      {/* 3. Main Embedded PDF View Frame (مستعرض الـ PDF المدمج بالكامل) */}
+      {/* 3. Main Embedded Multi-Engine PDF View Frame */}
       <main className={`flex-1 w-full flex flex-col items-center justify-center ${isFullscreen ? 'p-0' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4'}`}>
         <div className={`w-full bg-white rounded-2xl border-2 border-[#CBD5E1] shadow-md overflow-hidden flex flex-col ${
           isFullscreen ? 'h-[calc(100vh-40px)] rounded-none border-0' : 'h-[80vh] sm:h-[84vh]'
         }`}>
-          <iframe
-            src={`${pdfUrl}#toolbar=1&navpanes=0&scrollbar=1`}
+          <object
+            data={encodedPdfUrl}
             type="application/pdf"
             className="w-full h-full border-0 bg-white"
-            title={file.title}
-          />
+          >
+            <embed
+              src={encodedPdfUrl}
+              type="application/pdf"
+              className="w-full h-full border-0 bg-white"
+            />
+            <div className="p-8 text-center space-y-4 max-w-md bg-white rounded-2xl border border-[#E2E8F0] shadow-sm m-auto">
+              <div className="w-14 h-14 rounded-2xl bg-rose-50 text-[#E11D48] flex items-center justify-center text-2xl mx-auto">
+                <HiDocumentText className="w-7 h-7" />
+              </div>
+              <h4 className="text-base font-bold text-[#0F172A]">
+                {file.title}
+              </h4>
+              <p className="text-xs text-[#64748B] leading-relaxed">
+                اضغط على الزر أدناه لفتح الملف مباشرة في المتصفح أو تحميله:
+              </p>
+              <div className="flex flex-col gap-2 pt-2">
+                <a
+                  href={encodedPdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 px-4 rounded-xl bg-[#E11D48] text-white font-bold text-xs flex items-center justify-center gap-2"
+                >
+                  <HiExternalLink className="w-4 h-4" />
+                  <span>فتح الملف في نافذة مستقلة</span>
+                </a>
+                <button
+                  onClick={handleDownload}
+                  className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] font-bold text-xs border border-[#CBD5E1] flex items-center justify-center gap-2"
+                >
+                  <HiDownload className="w-4 h-4 text-[#E11D48]" />
+                  <span>تحميل الملف إلى جهازك</span>
+                </button>
+              </div>
+            </div>
+          </object>
         </div>
       </main>
 
