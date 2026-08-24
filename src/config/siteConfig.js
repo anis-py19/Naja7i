@@ -1,5 +1,5 @@
 // ============================================================================
-// ⚙️ إعدادات المنصة والروابط السحابية (Site Config & Cloud Drive)
+// ⚙️ إعدادات المنصة والتحكم في وضع الصيانة (Maintenance Mode Settings)
 // ============================================================================
 
 export const SITE_CONFIG = {
@@ -22,9 +22,9 @@ export const SITE_CONFIG = {
   // البريد الإلكتروني للتواصل العاجل أثناء الصيانة
   adminEmail: 'anisrayaneizri@gmail.com',
 
-  // 📂 مجلد Google Drive الرسمي الشامل لمنصة نجاحي
-  googleDriveMainFolder: 'https://drive.google.com/drive/folders/1bHHkMnURu_3OVBKI2oNMlM_kHltW2nG1',
-  googleDriveFolderId: '1bHHkMnURu_3OVBKI2oNMlM_kHltW2nG1'
+  // ☁️ رابط مجلد Google Drive الرسمي لملفات المنصة (FileFromMe)
+  googleDriveFolderUrl: 'https://drive.google.com/drive/folders/1UpO-4A5XCujpsmLT3LLnhwRtP8Cl37Wx',
+  googleDriveFolderId: '1UpO-4A5XCujpsmLT3LLnhwRtP8Cl37Wx'
 };
 
 export default SITE_CONFIG;

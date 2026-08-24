@@ -15,6 +15,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import * as pdfjsLib from 'pdfjs-dist';
 import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
+import { SITE_CONFIG } from '../config/siteConfig';
 
 // Configure local worker bundled by Vite
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
@@ -312,7 +313,19 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
             {/* Action Tools */}
             <div className="flex items-center gap-1.5 shrink-0">
               
-              {/* Direct Download / Open Button */}
+              {/* Open in Google Drive */}
+              <a
+                href={file.driveUrl || SITE_CONFIG.googleDriveFolderUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600/30 hover:bg-blue-600/50 text-blue-300 border border-blue-500/40 text-xs font-bold transition-colors cursor-pointer"
+                title="فتح المجلد في Google Drive"
+              >
+                <span>☁️ Google Drive</span>
+                <HiExternalLink className="w-3.5 h-3.5" />
+              </a>
+
+              {/* Direct Download Button */}
               <button
                 onClick={handleDownload}
                 className="px-3 py-1.5 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
