@@ -20,11 +20,7 @@ export const SITE_CONFIG = {
   estimatedReturn: 'سنعود قريباً جداً بإذن الله ⏱️',
 
   // البريد الإلكتروني للتواصل العاجل أثناء الصيانة
-  adminEmail: 'anisrayaneizri@gmail.com',
-
-  // ☁️ رابط مجلد Google Drive الرسمي لملفات المنصة (FileFromMe)
-  googleDriveFolderUrl: 'https://drive.google.com/drive/folders/1UpO-4A5XCujpsmLT3LLnhwRtP8Cl37Wx',
-  googleDriveFolderId: '1UpO-4A5XCujpsmLT3LLnhwRtP8Cl37Wx'
+  adminEmail: 'anisrayaneizri@gmail.com'
 };
 
 export default SITE_CONFIG;

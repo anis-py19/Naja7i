@@ -150,26 +150,13 @@ export default function LibraryPage({ onOpenPdf }) {
               </p>
             </div>
 
-            <div className="flex items-center gap-2 self-start md:self-auto">
-              <a
-                href="https://drive.google.com/drive/folders/1UpO-4A5XCujpsmLT3LLnhwRtP8Cl37Wx"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-bold border border-blue-200 transition-colors flex items-center gap-1.5 shadow-2xs"
-                title="فتح مجلد Google Drive الكامل"
-              >
-                <span>☁️ مجلد Google Drive (FileFromMe)</span>
-                <HiExternalLink className="w-4 h-4" />
-              </a>
-
-              <Link
-                to="/"
-                className="px-4 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] transition-colors flex items-center gap-1.5 shadow-2xs"
-              >
-                <span>الرئيسية</span>
-                <HiChevronLeft className="w-4 h-4" />
-              </Link>
-            </div>
+            <Link
+              to="/"
+              className="self-start md:self-auto px-4 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] transition-colors flex items-center gap-1.5 shadow-2xs"
+            >
+              <span>العودة للرئيسية</span>
+              <HiChevronLeft className="w-4 h-4" />
+            </Link>
           </div>
 
         </div>
