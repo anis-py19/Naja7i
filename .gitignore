@@ -59,19 +59,8 @@ ehthumbs.db
 Thumbs.db
 Desktop.ini
 
-# 📚 Large Archives, Scraped PDFs & Local Downloads
-/public/FileFromMe/
-/downloaded_pdfs/
-/release_assets/
-/BAC_ARCHIVE_DOWNLOADS/
-*.zip
-*.rar
-*.7z
-*.tar.gz
-*.iso
-
 # 🧪 Temporary & Scratch Files
-scratch_*.html
-scratch_*
+scratch/
+scripts/analysis_output.json
 *.tmp
 *.temp
