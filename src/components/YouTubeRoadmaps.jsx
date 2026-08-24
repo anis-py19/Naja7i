@@ -8,17 +8,17 @@ import { TOP_CHANNELS } from '../data/bacData';
 
 export default function YouTubeRoadmaps() {
   return (
-    <section id="youtube-roadmaps" className="py-14 bg-[#FFFAF3] border-b border-[#FFE5BF]">
+    <section id="youtube-roadmaps" className="py-14 bg-[#F8FAFC] border-b border-[#E2E8F0] font-['Cairo']">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 border-b border-[#FFE5BF] pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 border-b border-[#E2E8F0] pb-4">
           <div>
-            <h2 className="text-xl sm:text-2xl font-black text-[#1c1917] font-['Cairo'] flex items-center gap-2">
-              <HiVideoCamera className="w-6 h-6 text-[#F62440]" />
+            <h2 className="text-xl sm:text-2xl font-black text-[#0F172A] flex items-center gap-2">
+              <HiVideoCamera className="w-6 h-6 text-[#E11D48]" />
               <span>أبرز قنوات يوتيوب التعليمية لشهادة البكالوريا 🇩🇿</span>
             </h2>
-            <p className="text-xs text-[#78716c] mt-1">
+            <p className="text-xs text-[#64748B] mt-1">
               قائمة مرتبة لأفضل قنوات وأساتذة البكالوريا في الجزائر لتسهيل الوصول إلى الشروحات وحل المسائل.
             </p>
           </div>
@@ -29,40 +29,40 @@ export default function YouTubeRoadmaps() {
           {TOP_CHANNELS.map((channel, idx) => (
             <div
               key={idx}
-              className="bg-white border border-[#FFE5BF] hover:border-[#F62440] rounded-xl p-5 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between"
+              className="bg-white border border-[#E2E8F0] hover:border-[#E11D48] rounded-2xl p-5 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-[#FFF2DB] border border-[#FFE5BF] text-[#F62440] flex items-center justify-center text-xl">
+                    <div className="w-10 h-10 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-[#E11D48] flex items-center justify-center text-xl shadow-2xs">
                       {channel.icon}
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-[#1c1917]">
+                      <h4 className="text-sm font-bold text-[#0F172A]">
                         {channel.name}
                       </h4>
-                      <span className="text-xs text-[#F62440] font-semibold">
+                      <span className="text-xs text-[#E11D48] font-bold">
                         مادة {channel.subject}
                       </span>
                     </div>
                   </div>
 
-                  <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#FFF2DB] text-[#57534e] border border-[#FFE5BF]">
+                  <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-[#F1F5F9] text-[#0F172A] border border-[#E2E8F0]">
                     {channel.subscribers}
                   </span>
                 </div>
 
-                <p className="text-xs text-[#57534e] leading-relaxed mb-4">
+                <p className="text-xs text-[#475569] leading-relaxed mb-4">
                   {channel.description}
                 </p>
               </div>
 
-              <div className="pt-3 border-t border-[#FFE5BF]">
+              <div className="pt-3 border-t border-[#E2E8F0]">
                 <a
                   href={channel.youtubeQuery}
                   target="_blank"
                   rel="noreferrer"
-                  className="w-full py-2 rounded-lg bg-[#F62440] hover:bg-[#d81b34] text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors"
+                  className="w-full py-2 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-2xs"
                 >
                   <HiPlay className="w-4 h-4" />
                   <span>فتح دروس الأستاذ على يوتيوب</span>

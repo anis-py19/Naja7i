@@ -56,18 +56,18 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FFFAF3] text-[#1c1917] selection:bg-[#F62440] selection:text-white font-['Cairo'] antialiased flex flex-col justify-between">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] selection:bg-[#E11D48] selection:text-white font-['Cairo'] antialiased flex flex-col justify-between">
       
       {/* Admin Notice if Maintenance Mode is active for public but bypassed by admin */}
       {SITE_CONFIG.isMaintenanceMode && adminBypass && (
-        <div className="bg-[#F62440] text-white text-xs py-1.5 px-4 text-center font-bold flex items-center justify-center gap-3 sticky top-0 z-50">
+        <div className="bg-[#E11D48] text-white text-xs py-1.5 px-4 text-center font-bold flex items-center justify-center gap-3 sticky top-0 z-50 shadow-xs">
           <span>⚠️ وضع الصيانة مفعل حالياً للزوار العاديين — أنت تتصفح كمسؤول (Admin Preview)</span>
           <button 
             onClick={() => {
               localStorage.removeItem('naja7i_admin_bypass');
               setAdminBypass(false);
             }}
-            className="underline text-[11px] hover:text-[#FFF2DB] cursor-pointer"
+            className="underline text-[11px] hover:text-white/80 cursor-pointer"
           >
             إغلاق المعاينة والعودة لصفحة الصيانة
           </button>
@@ -210,39 +210,39 @@ function App() {
       />
 
       {/* Clean Academic Footer */}
-      <footer className="border-t border-[#FFE5BF] bg-[#FFFAF3] py-10 text-xs text-[#78716c] mt-16">
+      <footer className="border-t border-[#E2E8F0] bg-white py-10 text-xs text-[#64748B] mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-[#F62440] text-white flex items-center justify-center text-lg font-bold">
+            <div className="w-9 h-9 rounded-xl bg-[#E11D48] text-white flex items-center justify-center text-lg font-bold shadow-2xs">
               🎓
             </div>
             <div>
-              <span className="font-bold text-sm text-[#1c1917] block">منصة نجاحي — Naja7i BAC 3AS</span>
-              <span className="text-[#78716c]">مبادرة الطالب أنيس إيزري (Anis Izri) • صدقة جارية لدعم طلبة البكالوريا 🇩🇿</span>
+              <span className="font-bold text-sm text-[#0F172A] block">منصة نجاحي — Naja7i BAC 3AS</span>
+              <span className="text-[#64748B]">مبادرة الطالب أنيس إيزري (Anis Izri) • صدقة جارية لدعم طلبة البكالوريا 🇩🇿</span>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 text-[#57534e] font-medium">
-            <Link to="/" className="hover:text-[#F62440] transition-colors">الرئيسية</Link>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-[#475569] font-medium">
+            <Link to="/" className="hover:text-[#E11D48] transition-colors">الرئيسية</Link>
             <span>•</span>
-            <Link to="/streams" className="hover:text-[#F62440] transition-colors">الشعب والمواد</Link>
+            <Link to="/streams" className="hover:text-[#E11D48] transition-colors">الشعب والمواد</Link>
             <span>•</span>
-            <Link to="/library" className="hover:text-[#F62440] transition-colors">مكتبة الملخصات</Link>
+            <Link to="/library" className="hover:text-[#E11D48] transition-colors">مكتبة الملخصات</Link>
             <span>•</span>
-            <Link to="/bac-archive" className="hover:text-[#F62440] transition-colors">أرشيف البكالوريا</Link>
+            <Link to="/bac-archive" className="hover:text-[#E11D48] transition-colors">أرشيف البكالوريا</Link>
             <span>•</span>
-            <Link to="/youtube-teachers" className="hover:text-[#F62440] transition-colors">أساتذة اليوتيوب</Link>
+            <Link to="/youtube-teachers" className="hover:text-[#E11D48] transition-colors">أساتذة اليوتيوب</Link>
             <span>•</span>
-            <Link to="/countdown" className="hover:text-[#F62440] transition-colors">العداد</Link>
+            <Link to="/countdown" className="hover:text-[#E11D48] transition-colors">العداد</Link>
             <span>•</span>
-            <Link to="/calculator" className="hover:text-[#F62440] transition-colors">حاسبة المعدل</Link>
+            <Link to="/calculator" className="hover:text-[#E11D48] transition-colors">حاسبة المعدل</Link>
             <span>•</span>
-            <Link to="/about" className="hover:text-[#F62440] transition-colors">قصة المنصة</Link>
+            <Link to="/about" className="hover:text-[#E11D48] transition-colors">قصة المنصة</Link>
             <span>•</span>
-            <Link to="/contact" className="hover:text-[#F62440] transition-colors text-[#F62440] font-bold">تواصل ومساهمة 📥</Link>
+            <Link to="/contact" className="hover:text-[#E11D48] transition-colors text-[#E11D48] font-bold">تواصل ومساهمة 📥</Link>
           </div>
 
-          <div className="text-[#a8a29e] text-[11px]">
+          <div className="text-[#94A3B8] text-[11px]">
             جميع الحقوق محفوظة © {new Date().getFullYear()} لمنصة نجاحي التعليمية • نسألكم الدعاء بالتوفيق والبركة
           </div>
         </div>

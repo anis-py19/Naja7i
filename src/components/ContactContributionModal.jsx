@@ -155,7 +155,7 @@ ${formData.message}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
+          className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity"
         />
 
         {/* Modal Dialog */}
@@ -163,19 +163,19 @@ ${formData.message}
           initial={{ opacity: 0, scale: 0.95, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
-          className="relative bg-white rounded-3xl border border-[#FFE5BF] shadow-2xl max-w-2xl w-full overflow-hidden z-10 my-8 text-right"
+          className="relative bg-white rounded-3xl border border-[#E2E8F0] shadow-2xl max-w-2xl w-full overflow-hidden z-10 my-8 text-right"
         >
           {/* Header */}
-          <div className="bg-[#FFF2DB] border-b border-[#FFE5BF] p-6 flex items-center justify-between">
+          <div className="bg-[#F8FAFC] border-b border-[#E2E8F0] p-6 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-white border border-[#FFE5BF] text-[#F62440] flex items-center justify-center text-2xl shadow-2xs">
+              <div className="w-12 h-12 rounded-2xl bg-white border border-[#E2E8F0] text-[#E11D48] flex items-center justify-center text-2xl shadow-2xs">
                 📧
               </div>
               <div>
-                <h3 className="text-lg font-black text-[#1c1917]">
+                <h3 className="text-lg font-black text-[#0F172A]">
                   تواصل معنا • إرسال مباشر إلى Gmail 🇩🇿
                 </h3>
-                <p className="text-xs text-[#78716c]">
+                <p className="text-xs text-[#64748B]">
                   أرسل ملخصاتك، استفساراتك، ومقترحاتك لتصل فوراً إلى بريد إدارة المنصة
                 </p>
               </div>
@@ -183,7 +183,7 @@ ${formData.message}
 
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-[#78716c] hover:text-[#1c1917] hover:bg-[#FFE5BF] transition-colors cursor-pointer"
+              className="p-2 rounded-xl text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9] transition-colors cursor-pointer border border-[#CBD5E1] shadow-2xs"
             >
               <HiX className="w-5 h-5" />
             </button>
@@ -197,15 +197,15 @@ ${formData.message}
                 animate={{ opacity: 1, scale: 1 }}
                 className="py-10 text-center space-y-4"
               >
-                <div className="w-20 h-20 rounded-full bg-[#FFF2DB] text-[#F62440] border-2 border-[#FFE5BF] flex items-center justify-center text-4xl mx-auto shadow-xs">
+                <div className="w-20 h-20 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center text-4xl mx-auto shadow-xs">
                   <HiCheckCircle className="w-12 h-12 text-emerald-600" />
                 </div>
                 
-                <h4 className="text-xl font-black text-[#1c1917]">
+                <h4 className="text-xl font-black text-[#0F172A]">
                   تم إرسال رسالتك بنجاح! 📨
                 </h4>
                 
-                <p className="text-xs sm:text-sm text-[#57534e] max-w-md mx-auto leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#475569] max-w-md mx-auto leading-relaxed">
                   شكراً لمساهمتك القيمة. وصلت رسالتك إلى بريد المنصة (Gmail) وسيتم مراجعة الملفات ورفعها للموقع قريباً بإذن الله.
                 </p>
 
@@ -215,7 +215,7 @@ ${formData.message}
                     href={generateGmailUrl()}
                     target="_blank"
                     rel="noreferrer"
-                    className="px-5 py-2.5 rounded-xl bg-[#FFF2DB] hover:bg-[#FFE5BF] text-[#1c1917] font-bold text-xs flex items-center gap-2 border border-[#FFE5BF] transition-colors shadow-2xs"
+                    className="px-5 py-2.5 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] font-bold text-xs flex items-center gap-2 border border-[#E2E8F0] transition-colors shadow-2xs"
                   >
                     <FaGoogle className="w-4 h-4 text-[#EA4335]" />
                     <span>فتح وتأكيد الإرسال عبر تطبيق Gmail</span>
@@ -224,7 +224,7 @@ ${formData.message}
 
                   <button
                     onClick={handleReset}
-                    className="px-6 py-2.5 rounded-xl bg-[#F62440] hover:bg-[#d81b34] text-white font-bold text-xs shadow-xs transition-colors cursor-pointer"
+                    className="px-6 py-2.5 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs shadow-2xs transition-colors cursor-pointer"
                   >
                     إغلاق والعودة للمنصة
                   </button>
@@ -235,7 +235,7 @@ ${formData.message}
                 
                 {/* 1. Purpose Selector Pills */}
                 <div>
-                  <label className="block text-xs font-bold text-[#1c1917] mb-2">
+                  <label className="block text-xs font-bold text-[#0F172A] mb-2">
                     نوع الرسالة أو المساهمة:
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -244,8 +244,8 @@ ${formData.message}
                       onClick={() => setFormData({ ...formData, category: 'share_files' })}
                       className={`p-2.5 rounded-xl text-xs font-bold border transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
                         formData.category === 'share_files'
-                          ? 'bg-[#F62440] text-white border-[#F62440] shadow-xs'
-                          : 'bg-[#FFFAF3] text-[#1c1917] border-[#FFE5BF] hover:bg-[#FFF2DB]'
+                          ? 'bg-[#E11D48] text-white border-[#E11D48] shadow-2xs'
+                          : 'bg-[#F8FAFC] text-[#0F172A] border-[#E2E8F0] hover:bg-[#F1F5F9]'
                       }`}
                     >
                       <HiUpload className="w-4 h-4" />
@@ -257,8 +257,8 @@ ${formData.message}
                       onClick={() => setFormData({ ...formData, category: 'inquiry' })}
                       className={`p-2.5 rounded-xl text-xs font-bold border transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
                         formData.category === 'inquiry'
-                          ? 'bg-[#F62440] text-white border-[#F62440] shadow-xs'
-                          : 'bg-[#FFFAF3] text-[#1c1917] border-[#FFE5BF] hover:bg-[#FFF2DB]'
+                          ? 'bg-[#E11D48] text-white border-[#E11D48] shadow-2xs'
+                          : 'bg-[#F8FAFC] text-[#0F172A] border-[#E2E8F0] hover:bg-[#F1F5F9]'
                       }`}
                     >
                       <HiChatAlt2 className="w-4 h-4" />
@@ -270,8 +270,8 @@ ${formData.message}
                       onClick={() => setFormData({ ...formData, category: 'suggestion' })}
                       className={`p-2.5 rounded-xl text-xs font-bold border transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
                         formData.category === 'suggestion'
-                          ? 'bg-[#F62440] text-white border-[#F62440] shadow-xs'
-                          : 'bg-[#FFFAF3] text-[#1c1917] border-[#FFE5BF] hover:bg-[#FFF2DB]'
+                          ? 'bg-[#E11D48] text-white border-[#E11D48] shadow-2xs'
+                          : 'bg-[#F8FAFC] text-[#0F172A] border-[#E2E8F0] hover:bg-[#F1F5F9]'
                       }`}
                     >
                       <HiLightBulb className="w-4 h-4" />
@@ -283,8 +283,8 @@ ${formData.message}
                       onClick={() => setFormData({ ...formData, category: 'bug' })}
                       className={`p-2.5 rounded-xl text-xs font-bold border transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
                         formData.category === 'bug'
-                          ? 'bg-[#F62440] text-white border-[#F62440] shadow-xs'
-                          : 'bg-[#FFFAF3] text-[#1c1917] border-[#FFE5BF] hover:bg-[#FFF2DB]'
+                          ? 'bg-[#E11D48] text-white border-[#E11D48] shadow-2xs'
+                          : 'bg-[#F8FAFC] text-[#0F172A] border-[#E2E8F0] hover:bg-[#F1F5F9]'
                       }`}
                     >
                       <HiExclamationCircle className="w-4 h-4" />
@@ -296,7 +296,7 @@ ${formData.message}
                 {/* 2. Personal Info (Name, Role, Wilaya) */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-[#1c1917] mb-1">
+                    <label className="block text-xs font-bold text-[#0F172A] mb-1">
                       الاسم الكامل / اللقب:
                     </label>
                     <input
@@ -305,18 +305,18 @@ ${formData.message}
                       placeholder="أدخل اسمك الكريم"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-[#FFFAF3] border border-[#FFE5BF] rounded-xl px-3 py-2 text-xs text-[#1c1917] focus:outline-none focus:border-[#F62440] placeholder-[#a8a29e]"
+                      className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl px-3 py-2 text-xs text-[#0F172A] focus:outline-none focus:border-[#E11D48] placeholder-[#94A3B8]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#1c1917] mb-1">
+                    <label className="block text-xs font-bold text-[#0F172A] mb-1">
                       الصفة:
                     </label>
                     <select
                       value={formData.role}
                       onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                      className="w-full bg-[#FFFAF3] border border-[#FFE5BF] rounded-xl px-3 py-2 text-xs text-[#1c1917] focus:outline-none focus:border-[#F62440] cursor-pointer"
+                      className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl px-3 py-2 text-xs text-[#0F172A] focus:outline-none focus:border-[#E11D48] cursor-pointer"
                     >
                       <option value="student">تلميذ بكالوريا (3AS)</option>
                       <option value="teacher">أستاذ / أستاذة</option>
@@ -326,7 +326,7 @@ ${formData.message}
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#1c1917] mb-1">
+                    <label className="block text-xs font-bold text-[#0F172A] mb-1">
                       الولاية:
                     </label>
                     <input
@@ -334,14 +334,14 @@ ${formData.message}
                       placeholder="مثال: الجزائر، سطيف، وهران..."
                       value={formData.wilaya}
                       onChange={(e) => setFormData({ ...formData, wilaya: e.target.value })}
-                      className="w-full bg-[#FFFAF3] border border-[#FFE5BF] rounded-xl px-3 py-2 text-xs text-[#1c1917] focus:outline-none focus:border-[#F62440] placeholder-[#a8a29e]"
+                      className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl px-3 py-2 text-xs text-[#0F172A] focus:outline-none focus:border-[#E11D48] placeholder-[#94A3B8]"
                     />
                   </div>
                 </div>
 
                 {/* 3. Contact Info (Email or Phone) */}
                 <div>
-                  <label className="block text-xs font-bold text-[#1c1917] mb-1">
+                  <label className="block text-xs font-bold text-[#0F172A] mb-1">
                     وسيلة التواصل (بريدك الإلكتروني، رقم الهاتف، أو حسابك):
                   </label>
                   <input
@@ -350,21 +350,21 @@ ${formData.message}
                     placeholder="مثال: yourname@gmail.com أو رقم هاتفك للتواصل معك"
                     value={formData.contactInfo}
                     onChange={(e) => setFormData({ ...formData, contactInfo: e.target.value })}
-                    className="w-full bg-[#FFFAF3] border border-[#FFE5BF] rounded-xl px-3 py-2 text-xs text-[#1c1917] focus:outline-none focus:border-[#F62440] placeholder-[#a8a29e]"
+                    className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl px-3 py-2 text-xs text-[#0F172A] focus:outline-none focus:border-[#E11D48] placeholder-[#94A3B8]"
                   />
                 </div>
 
                 {/* 4. Stream & File Link (if sharing files) */}
                 {formData.category === 'share_files' && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 bg-[#FFF2DB]/60 border border-[#FFE5BF] rounded-2xl">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl">
                     <div>
-                      <label className="block text-xs font-bold text-[#1c1917] mb-1">
+                      <label className="block text-xs font-bold text-[#0F172A] mb-1">
                         الشعبة المعنية بالملف:
                       </label>
                       <select
                         value={formData.stream}
                         onChange={(e) => setFormData({ ...formData, stream: e.target.value })}
-                        className="w-full bg-white border border-[#FFE5BF] rounded-xl px-3 py-2 text-xs text-[#1c1917] focus:outline-none focus:border-[#F62440] cursor-pointer"
+                        className="w-full bg-white border border-[#CBD5E1] rounded-xl px-3 py-2 text-xs text-[#0F172A] focus:outline-none focus:border-[#E11D48] cursor-pointer"
                       >
                         <option value="all">جميع الشعب المشتركة</option>
                         <option value="sciences">شعبة علوم تجريبية</option>
@@ -377,8 +377,8 @@ ${formData.message}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#1c1917] mb-1 flex items-center gap-1">
-                        <HiLink className="w-3.5 h-3.5 text-[#F62440]" />
+                      <label className="block text-xs font-bold text-[#0F172A] mb-1 flex items-center gap-1">
+                        <HiLink className="w-3.5 h-3.5 text-[#E11D48]" />
                         <span>رابط الملف (Google Drive / Telegram / Mega):</span>
                       </label>
                       <input
@@ -386,7 +386,7 @@ ${formData.message}
                         placeholder="https://drive.google.com/..."
                         value={formData.fileLink}
                         onChange={(e) => setFormData({ ...formData, fileLink: e.target.value })}
-                        className="w-full bg-white border border-[#FFE5BF] rounded-xl px-3 py-2 text-xs text-[#1c1917] focus:outline-none focus:border-[#F62440] placeholder-[#a8a29e] ltr text-left"
+                        className="w-full bg-white border border-[#CBD5E1] rounded-xl px-3 py-2 text-xs text-[#0F172A] focus:outline-none focus:border-[#E11D48] placeholder-[#94A3B8] ltr text-left"
                       />
                     </div>
                   </div>
@@ -394,7 +394,7 @@ ${formData.message}
 
                 {/* 5. Message Content */}
                 <div>
-                  <label className="block text-xs font-bold text-[#1c1917] mb-1">
+                  <label className="block text-xs font-bold text-[#0F172A] mb-1">
                     {formData.category === 'share_files' 
                       ? 'وصف الملف أو الملاحظات (اسم الأستاذ، المحتوى، إلخ):' 
                       : 'نص رسالتك أو استفسارك:'}
@@ -409,7 +409,7 @@ ${formData.message}
                     }
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full bg-[#FFFAF3] border border-[#FFE5BF] rounded-xl p-3 text-xs text-[#1c1917] focus:outline-none focus:border-[#F62440] placeholder-[#a8a29e] resize-none"
+                    className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl p-3 text-xs text-[#0F172A] focus:outline-none focus:border-[#E11D48] placeholder-[#94A3B8] resize-none"
                   ></textarea>
                 </div>
 
@@ -421,7 +421,7 @@ ${formData.message}
                     href={generateGmailUrl()}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-xs text-[#57534e] hover:text-[#F62440] flex items-center gap-1.5 font-bold transition-colors"
+                    className="text-xs text-[#64748B] hover:text-[#E11D48] flex items-center gap-1.5 font-bold transition-colors"
                   >
                     <FaGoogle className="w-3.5 h-3.5 text-[#EA4335]" />
                     <span>أو افتح مسودة جاهزة في Gmail</span>
@@ -431,7 +431,7 @@ ${formData.message}
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#F62440] hover:bg-[#d81b34] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer disabled:opacity-50"
+                    className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer disabled:opacity-50"
                   >
                     <HiPaperAirplane className="w-4 h-4 rotate-180" />
                     <span>{isSubmitting ? 'جاري الإرسال إلى Gmail...' : 'إرسال مباشر إلى Gmail'}</span>

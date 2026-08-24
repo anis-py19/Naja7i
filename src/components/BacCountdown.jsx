@@ -98,66 +98,66 @@ export default function BacCountdown() {
   ];
 
   return (
-    <section id="bac-countdown" className="py-14 bg-white border-b border-[#FFE5BF]">
+    <section id="bac-countdown" className="py-14 bg-white border-b border-[#E2E8F0] font-['Cairo']">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 border-b border-[#FFE5BF] pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 border-b border-[#E2E8F0] pb-4">
           <div>
-            <h2 className="text-xl sm:text-2xl font-black text-[#1c1917] font-['Cairo'] flex items-center gap-2">
-              <HiClock className="w-6 h-6 text-[#F62440]" />
+            <h2 className="text-xl sm:text-2xl font-black text-[#0F172A] flex items-center gap-2">
+              <HiClock className="w-6 h-6 text-[#E11D48]" />
               <span>العداد التنازلي لبكالوريا {targetYear} ⏳</span>
             </h2>
-            <p className="text-xs text-[#78716c] mt-1">
+            <p className="text-xs text-[#64748B] mt-1">
               حساب دقيق للوقت المتبقي حتى موعد انطلاق امتحان شهادة البكالوريا (دورة جوان {targetYear}).
             </p>
           </div>
         </div>
 
         {/* Countdown Box */}
-        <div className="max-w-3xl mx-auto bg-[#FFFAF3] border border-[#FFE5BF] rounded-2xl p-6 sm:p-8 mb-8 shadow-xs">
+        <div className="max-w-3xl mx-auto bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 mb-8 shadow-xs">
           
           <div className="grid grid-cols-4 gap-3 sm:gap-4 text-center mb-6">
             
-            <div className="bg-white border border-[#FFE5BF] rounded-xl p-3 sm:p-5">
-              <div className="text-2xl sm:text-4xl font-black text-[#1c1917] font-mono">
+            <div className="bg-white border border-[#E2E8F0] rounded-xl p-3 sm:p-5 shadow-2xs">
+              <div className="text-2xl sm:text-4xl font-black text-[#0F172A] font-mono">
                 {timeLeft.days}
               </div>
-              <div className="text-xs font-bold text-[#57534e] mt-1">يـــوم</div>
+              <div className="text-xs font-bold text-[#475569] mt-1">يـــوم</div>
             </div>
 
-            <div className="bg-white border border-[#FFE5BF] rounded-xl p-3 sm:p-5">
-              <div className="text-2xl sm:text-4xl font-black text-[#1c1917] font-mono">
+            <div className="bg-white border border-[#E2E8F0] rounded-xl p-3 sm:p-5 shadow-2xs">
+              <div className="text-2xl sm:text-4xl font-black text-[#0F172A] font-mono">
                 {timeLeft.hours}
               </div>
-              <div className="text-xs font-bold text-[#57534e] mt-1">ســاعة</div>
+              <div className="text-xs font-bold text-[#475569] mt-1">ســاعة</div>
             </div>
 
-            <div className="bg-white border border-[#FFE5BF] rounded-xl p-3 sm:p-5">
-              <div className="text-2xl sm:text-4xl font-black text-[#1c1917] font-mono">
+            <div className="bg-white border border-[#E2E8F0] rounded-xl p-3 sm:p-5 shadow-2xs">
+              <div className="text-2xl sm:text-4xl font-black text-[#0F172A] font-mono">
                 {timeLeft.minutes}
               </div>
-              <div className="text-xs font-bold text-[#57534e] mt-1">دقيقـة</div>
+              <div className="text-xs font-bold text-[#475569] mt-1">دقيقـة</div>
             </div>
 
-            <div className="bg-white border border-[#FFE5BF] rounded-xl p-3 sm:p-5">
-              <div className="text-2xl sm:text-4xl font-black text-[#F62440] font-mono">
+            <div className="bg-white border border-[#E2E8F0] rounded-xl p-3 sm:p-5 shadow-2xs">
+              <div className="text-2xl sm:text-4xl font-black text-[#E11D48] font-mono">
                 {timeLeft.seconds}
               </div>
-              <div className="text-xs font-bold text-[#57534e] mt-1">ثانيـة</div>
+              <div className="text-xs font-bold text-[#475569] mt-1">ثانيـة</div>
             </div>
 
           </div>
 
           {/* Year Progress */}
-          <div className="bg-white p-3.5 rounded-xl border border-[#FFE5BF]">
-            <div className="flex items-center justify-between text-xs font-bold text-[#1c1917] mb-1.5">
+          <div className="bg-white p-3.5 rounded-xl border border-[#E2E8F0] shadow-2xs">
+            <div className="flex items-center justify-between text-xs font-bold text-[#0F172A] mb-1.5">
               <span>نسبة التقدم في الموسم الدراسي:</span>
-              <span className="font-mono text-[#F62440] font-bold">{timeLeft.percentage}%</span>
+              <span className="font-mono text-[#E11D48] font-bold">{timeLeft.percentage}%</span>
             </div>
-            <div className="w-full h-2 bg-[#FFF2DB] rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-[#F1F5F9] rounded-full overflow-hidden border border-[#E2E8F0]">
               <div 
-                className="h-full bg-[#F62440] rounded-full transition-all duration-300"
+                className="h-full bg-[#E11D48] rounded-full transition-all duration-300"
                 style={{ width: `${timeLeft.percentage}%` }}
               />
             </div>
@@ -167,8 +167,8 @@ export default function BacCountdown() {
 
         {/* Milestones list */}
         <div className="max-w-3xl mx-auto">
-          <h3 className="text-sm font-bold text-[#1c1917] mb-3 flex items-center gap-1.5">
-            <HiFlag className="w-4 h-4 text-[#F62440]" />
+          <h3 className="text-sm font-bold text-[#0F172A] mb-3 flex items-center gap-1.5">
+            <HiFlag className="w-4 h-4 text-[#E11D48]" />
             <span>محطات السنة الدراسية:</span>
           </h3>
 
@@ -176,13 +176,13 @@ export default function BacCountdown() {
             {milestones.map((item) => (
               <div
                 key={item.id}
-                className="bg-[#FFFAF3] border border-[#FFE5BF] rounded-xl p-3.5 text-xs shadow-2xs"
+                className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-3.5 text-xs shadow-2xs"
               >
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-[#1c1917]">{item.title}</span>
-                  <span className="text-[#78716c] font-mono">{item.date}</span>
+                  <span className="font-bold text-[#0F172A]">{item.title}</span>
+                  <span className="text-[#64748B] font-mono text-[11px]">{item.date}</span>
                 </div>
-                <p className="text-[#57534e] leading-relaxed">
+                <p className="text-[#475569] leading-relaxed">
                   {item.desc}
                 </p>
               </div>

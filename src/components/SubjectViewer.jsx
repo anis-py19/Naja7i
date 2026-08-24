@@ -67,12 +67,12 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto bg-black/50 backdrop-blur-xs">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto bg-black/40 backdrop-blur-xs font-['Cairo']">
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.98 }}
-        className="relative w-full max-w-4xl bg-white border border-[#FFE5BF] rounded-2xl shadow-xl overflow-hidden flex flex-col max-h-[90vh]"
+        className="relative w-full max-w-4xl bg-white border border-[#E2E8F0] rounded-2xl shadow-xl overflow-hidden flex flex-col max-h-[90vh]"
       >
         {/* Toast Alert */}
         <AnimatePresence>
@@ -81,7 +81,7 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
               initial={{ opacity: 0, y: -15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
-              className="absolute top-4 left-1/2 -translate-x-1/2 z-50 bg-[#1c1917] text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg border border-[#FFE5BF] flex items-center gap-2"
+              className="absolute top-4 left-1/2 -translate-x-1/2 z-50 bg-[#0F172A] text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg border border-[#E2E8F0] flex items-center gap-2"
             >
               <HiCheckCircle className="w-4 h-4 text-emerald-400" />
               <span>{toastMessage}</span>
@@ -90,53 +90,53 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
         </AnimatePresence>
 
         {/* Header */}
-        <div className="p-6 bg-[#FFFAF3] border-b border-[#FFE5BF]">
+        <div className="p-6 bg-[#F8FAFC] border-b border-[#E2E8F0]">
           <div className="flex items-start justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                <span className="text-xs font-bold px-2.5 py-0.5 rounded bg-[#FFF2DB] text-[#F62440] border border-[#FFE5BF]">
+                <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-white text-[#E11D48] border border-[#E2E8F0]">
                   {streamName || 'جميع الشعب'}
                 </span>
-                <span className="text-xs text-[#78716c] font-sans">
+                <span className="text-xs text-[#64748B] font-sans">
                   {subjectData.frenchTitle}
                 </span>
                 {userSubjectFiles.length > 0 && (
-                  <span className="text-xs font-bold px-2.5 py-0.5 rounded bg-[#FFF2DB] text-[#1c1917] border border-[#FFE5BF]">
+                  <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-white text-[#0F172A] border border-[#E2E8F0]">
                     📂 {userSubjectFiles.length} ملف PDF متاح
                   </span>
                 )}
                 {subjectData.units.length > 0 && (
-                  <span className="text-xs font-bold px-2.5 py-0.5 rounded bg-white text-[#1c1917] border border-[#FFE5BF]">
+                  <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-white text-[#0F172A] border border-[#E2E8F0]">
                     المكتمل: {completedCountInSubject} / {subjectData.units.length}
                   </span>
                 )}
               </div>
-              <h2 className="text-2xl font-black text-[#1c1917] font-['Cairo']">
+              <h2 className="text-2xl font-black text-[#0F172A]">
                 {subjectData.title}
               </h2>
-              <p className="text-xs text-[#57534e] mt-1 max-w-2xl">
+              <p className="text-xs text-[#475569] mt-1 max-w-2xl">
                 {subjectData.description}
               </p>
             </div>
 
             <button
               onClick={onClose}
-              className="p-2 rounded-lg bg-white hover:bg-[#FFF2DB] text-[#78716c] hover:text-[#1c1917] transition-colors border border-[#FFE5BF] cursor-pointer"
+              className="p-2 rounded-lg bg-white hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#0F172A] transition-colors border border-[#CBD5E1] cursor-pointer shadow-2xs"
             >
               <HiX className="w-5 h-5" />
             </button>
           </div>
 
           {/* Navigation Tabs */}
-          <div className="flex items-center justify-between gap-2 mt-5 border-t border-[#FFE5BF] pt-4 flex-wrap">
+          <div className="flex items-center justify-between gap-2 mt-5 border-t border-[#E2E8F0] pt-4 flex-wrap">
             <div className="flex items-center gap-2 overflow-x-auto">
               {userSubjectFiles.length > 0 && (
                 <button
                   onClick={() => setActiveTab('files')}
                   className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer ${
                     activeTab === 'files'
-                      ? 'bg-[#F62440] text-white shadow-xs'
-                      : 'bg-white text-[#1c1917] hover:bg-[#FFF2DB] border border-[#FFE5BF]'
+                      ? 'bg-[#E11D48] text-white shadow-2xs'
+                      : 'bg-white text-[#0F172A] hover:bg-[#F1F5F9] border border-[#CBD5E1]'
                   }`}
                 >
                   <HiFolder className="w-4 h-4" />
@@ -148,8 +148,8 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                 onClick={() => setActiveTab('units')}
                 className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer ${
                   activeTab === 'units'
-                    ? 'bg-[#F62440] text-white shadow-xs'
-                    : 'bg-white text-[#1c1917] hover:bg-[#FFF2DB] border border-[#FFE5BF]'
+                    ? 'bg-[#E11D48] text-white shadow-2xs'
+                    : 'bg-white text-[#0F172A] hover:bg-[#F1F5F9] border border-[#CBD5E1]'
                 }`}
               >
                 <HiCollection className="w-4 h-4" />
@@ -160,8 +160,8 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                 onClick={() => setActiveTab('videos')}
                 className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer ${
                   activeTab === 'videos'
-                    ? 'bg-[#F62440] text-white shadow-xs'
-                    : 'bg-white text-[#1c1917] hover:bg-[#FFF2DB] border border-[#FFE5BF]'
+                    ? 'bg-[#E11D48] text-white shadow-2xs'
+                    : 'bg-white text-[#0F172A] hover:bg-[#F1F5F9] border border-[#CBD5E1]'
                 }`}
               >
                 <HiVideoCamera className="w-4 h-4" />
@@ -172,8 +172,8 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                 onClick={() => setActiveTab('bacs')}
                 className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer ${
                   activeTab === 'bacs'
-                    ? 'bg-[#F62440] text-white shadow-xs'
-                    : 'bg-white text-[#1c1917] hover:bg-[#FFF2DB] border border-[#FFE5BF]'
+                    ? 'bg-[#E11D48] text-white shadow-2xs'
+                    : 'bg-white text-[#0F172A] hover:bg-[#F1F5F9] border border-[#CBD5E1]'
                 }`}
               >
                 <HiBookOpen className="w-4 h-4" />
@@ -188,9 +188,9 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                 placeholder="ابحث داخل المادة..."
                 value={unitSearch}
                 onChange={(e) => setUnitSearch(e.target.value)}
-                className="w-full bg-white border border-[#FFE5BF] rounded-lg pl-2 pr-7 py-1 text-xs text-[#1c1917] placeholder-[#78716c] focus:outline-none focus:border-[#F62440]"
+                className="w-full bg-white border border-[#CBD5E1] rounded-lg pl-2 pr-7 py-1 text-xs text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#E11D48]"
               />
-              <HiSearch className="w-3.5 h-3.5 text-[#78716c] absolute right-2.5 top-2" />
+              <HiSearch className="w-3.5 h-3.5 text-[#64748B] absolute right-2.5 top-2" />
             </div>
           </div>
         </div>
@@ -202,54 +202,65 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
           {activeTab === 'files' && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {filteredFiles.length === 0 ? (
-                <div className="col-span-full p-8 text-center text-[#78716c] text-sm">
+                <div className="col-span-full p-8 text-center text-[#64748B] text-sm">
                   لا توجد ملفات مطابقة لكلمة البحث.
                 </div>
               ) : (
                 filteredFiles.map((file) => (
                   <div
                     key={file.id}
-                    className="bg-[#FFFAF3] border border-[#FFE5BF] hover:border-[#F62440] rounded-xl p-4 flex flex-col justify-between shadow-2xs transition-all group"
+                    className="bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#E11D48] rounded-xl p-4 flex flex-col justify-between shadow-2xs transition-all group"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-[#FFF2DB] text-[#F62440] border border-[#FFE5BF]">
+                        <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-white text-[#E11D48] border border-[#E2E8F0]">
                           {file.category}
                         </span>
-                        <span className="text-[11px] text-[#78716c] font-mono">
+                        <span className="text-[11px] text-[#64748B] font-mono">
                           {file.sizeReadable}
                         </span>
                       </div>
 
                       <h4 
                         onClick={() => onOpenPdf && onOpenPdf(file)}
-                        className="text-xs sm:text-sm font-bold text-[#1c1917] group-hover:text-[#F62440] transition-colors mb-1 cursor-pointer leading-snug"
+                        className="text-xs sm:text-sm font-bold text-[#0F172A] group-hover:text-[#E11D48] transition-colors mb-1 cursor-pointer leading-snug"
                       >
                         {file.title}
                       </h4>
 
-                      <p className="text-[11px] text-[#78716c] mb-3">
-                        👤 {file.author}
+                      <p className="text-[11px] text-[#64748B] mb-3">
+                        ✍️ {file.author}
                       </p>
                     </div>
 
-                    <div className="pt-2 border-t border-[#FFE5BF] grid grid-cols-2 gap-2">
+                    <div className="pt-2 border-t border-[#E2E8F0] grid grid-cols-2 gap-2">
                       <button
                         onClick={() => onOpenPdf && onOpenPdf(file)}
-                        className="py-1.5 rounded-lg bg-[#FFF2DB] hover:bg-[#FFE5BF] text-[#1c1917] font-bold text-xs flex items-center justify-center gap-1 border border-[#FFE5BF] transition-colors cursor-pointer"
+                        className="py-2 rounded-lg bg-white hover:bg-[#F1F5F9] text-[#0F172A] font-bold text-xs flex items-center justify-center gap-1 border border-[#CBD5E1] transition-colors cursor-pointer"
                       >
-                        <HiEye className="w-3.5 h-3.5 text-[#F62440]" />
+                        <HiEye className="w-3.5 h-3.5 text-[#E11D48]" />
                         <span>قراءة</span>
                       </button>
 
-                      <a
-                        href={file.fileUrl}
-                        download={file.rawFileName || file.title}
-                        className="py-1.5 rounded-lg bg-[#F62440] hover:bg-[#d81b34] text-white font-bold text-xs flex items-center justify-center gap-1 transition-colors shadow-2xs"
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const pdfUrl = file.fileUrl || file.url;
+                          const fileName = file.rawFileName || `${file.title}.pdf`;
+                          const link = document.createElement('a');
+                          link.href = pdfUrl;
+                          link.download = fileName;
+                          link.target = '_blank';
+                          link.rel = 'noopener noreferrer';
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
+                        }}
+                        className="py-2 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center justify-center gap-1 transition-colors shadow-2xs cursor-pointer"
                       >
                         <HiDownload className="w-3.5 h-3.5" />
                         <span>تحميل PDF</span>
-                      </a>
+                      </button>
                     </div>
                   </div>
                 ))
@@ -261,23 +272,23 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
           {activeTab === 'units' && (
             <div className="space-y-4">
               {filteredUnits.length === 0 ? (
-                <div className="p-8 text-center text-[#78716c] text-sm">
+                <div className="p-8 text-center text-[#64748B] text-sm">
                   {unitSearch ? 'لم يتم العثور على وحدات مطابقة للبحث.' : 'جاري تحديث وحدات هذه المادة وفق المنهاج الرسمي الجديد.'}
                 </div>
               ) : (
                 filteredUnits.map((unit, idx) => (
                   <div
                     key={unit.id || idx}
-                    className="border border-[#FFE5BF] rounded-xl p-4 sm:p-5 bg-[#FFFAF3] space-y-4"
+                    className="border border-[#E2E8F0] rounded-xl p-4 sm:p-5 bg-[#F8FAFC] space-y-4 shadow-2xs"
                   >
                     {/* Unit Header */}
-                    <div className="flex items-start justify-between gap-3 border-b border-[#FFE5BF] pb-3">
+                    <div className="flex items-start justify-between gap-3 border-b border-[#E2E8F0] pb-3">
                       <div>
-                        <h4 className="text-sm sm:text-base font-bold text-[#1c1917] flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-[#F62440]"></span>
+                        <h4 className="text-sm sm:text-base font-bold text-[#0F172A] flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-[#E11D48]"></span>
                           <span>{unit.title}</span>
                         </h4>
-                        <p className="text-xs text-[#57534e] mt-0.5">
+                        <p className="text-xs text-[#475569] mt-0.5">
                           {unit.summary}
                         </p>
                       </div>
@@ -286,18 +297,18 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                         onClick={() => toggleComplete(unit.id, unit.title)}
                         className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-colors cursor-pointer shrink-0 ${
                           completedItems[unit.id]
-                            ? 'bg-[#FFF2DB] text-[#F62440] border border-[#F62440]'
-                            : 'bg-white text-[#57534e] hover:bg-[#FFF2DB] border border-[#FFE5BF]'
+                            ? 'bg-[#F1F5F9] text-[#E11D48] border border-[#E11D48]'
+                            : 'bg-white text-[#475569] hover:bg-[#F1F5F9] border border-[#CBD5E1]'
                         }`}
                       >
                         {completedItems[unit.id] ? (
                           <>
-                            <HiCheckCircle className="w-3.5 h-3.5 text-[#F62440]" />
+                            <HiCheckCircle className="w-3.5 h-3.5 text-[#E11D48]" />
                             <span>تمت المراجعة ✓</span>
                           </>
                         ) : (
                           <>
-                            <HiOutlineCheckCircle className="w-3.5 h-3.5 text-[#78716c]" />
+                            <HiOutlineCheckCircle className="w-3.5 h-3.5 text-[#64748B]" />
                             <span>تعليم كمقروء</span>
                           </>
                         )}
@@ -309,20 +320,20 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                       
                       {/* Summaries */}
                       <div className="space-y-2">
-                        <div className="text-xs font-bold text-[#1c1917] flex items-center gap-1.5">
-                          <HiDocumentText className="w-4 h-4 text-[#F62440]" />
+                        <div className="text-xs font-bold text-[#0F172A] flex items-center gap-1.5">
+                          <HiDocumentText className="w-4 h-4 text-[#E11D48]" />
                           <span>الملخصات والدروس PDF:</span>
                         </div>
                         {unit.summaries?.map((sum, sIdx) => (
                           <div
                             key={sIdx}
-                            className="bg-white border border-[#FFE5BF] rounded-lg p-3 flex items-center justify-between gap-2 shadow-2xs hover:border-[#F62440] transition-colors"
+                            className="bg-white border border-[#E2E8F0] rounded-lg p-3 flex items-center justify-between gap-2 shadow-2xs hover:border-[#E11D48] transition-colors"
                           >
                             <div>
-                              <div className="text-xs font-bold text-[#1c1917]">
+                              <div className="text-xs font-bold text-[#0F172A]">
                                 {sum.name}
                               </div>
-                              <div className="text-[11px] text-[#78716c]">
+                              <div className="text-[11px] text-[#64748B]">
                                 {sum.author} {sum.pages && `• ${sum.pages}`}
                               </div>
                             </div>
@@ -330,7 +341,7 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                               href={sum.link}
                               target="_blank"
                               rel="noreferrer"
-                              className="px-2.5 py-1 rounded bg-[#FFF2DB] hover:bg-[#F62440] text-[#F62440] hover:text-white font-bold text-xs flex items-center gap-1 transition-colors border border-[#FFE5BF] hover:border-[#F62440] shrink-0"
+                              className="px-2.5 py-1 rounded bg-[#F8FAFC] hover:bg-[#E11D48] text-[#E11D48] hover:text-white font-bold text-xs flex items-center gap-1 transition-colors border border-[#CBD5E1] hover:border-[#E11D48] shrink-0"
                             >
                               <HiDownload className="w-3.5 h-3.5" />
                               <span>تحميل</span>
@@ -341,20 +352,20 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
 
                       {/* Exercises */}
                       <div className="space-y-2">
-                        <div className="text-xs font-bold text-[#1c1917] flex items-center gap-1.5">
-                          <HiBookOpen className="w-4 h-4 text-[#F62440]" />
+                        <div className="text-xs font-bold text-[#0F172A] flex items-center gap-1.5">
+                          <HiBookOpen className="w-4 h-4 text-[#E11D48]" />
                           <span>سلاسل التمارين بالحل:</span>
                         </div>
                         {unit.exercises?.map((ex, eIdx) => (
                           <div
                             key={eIdx}
-                            className="bg-white border border-[#FFE5BF] rounded-lg p-3 flex items-center justify-between gap-2 shadow-2xs hover:border-[#F62440] transition-colors"
+                            className="bg-white border border-[#E2E8F0] rounded-lg p-3 flex items-center justify-between gap-2 shadow-2xs hover:border-[#E11D48] transition-colors"
                           >
                             <div>
-                              <div className="text-xs font-bold text-[#1c1917]">
+                              <div className="text-xs font-bold text-[#0F172A]">
                                 {ex.name}
                               </div>
-                              <div className="text-[11px] text-[#78716c]">
+                              <div className="text-[11px] text-[#64748B]">
                                 {ex.author} • {ex.type}
                               </div>
                             </div>
@@ -362,7 +373,7 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                               href={ex.link}
                               target="_blank"
                               rel="noreferrer"
-                              className="px-2.5 py-1 rounded bg-[#FFF2DB] hover:bg-[#F62440] text-[#1c1917] hover:text-white font-bold text-xs flex items-center gap-1 transition-colors border border-[#FFE5BF] hover:border-[#F62440] shrink-0"
+                              className="px-2.5 py-1 rounded bg-[#F8FAFC] hover:bg-[#E11D48] text-[#0F172A] hover:text-white font-bold text-xs flex items-center gap-1 transition-colors border border-[#CBD5E1] hover:border-[#E11D48] shrink-0"
                             >
                               <HiDownload className="w-3.5 h-3.5" />
                               <span>تحميل</span>
@@ -385,31 +396,31 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
               {subjectData.units.flatMap(u => u.videos || []).map((vid, vIdx) => (
                 <div
                   key={vIdx}
-                  className="bg-[#FFFAF3] border border-[#FFE5BF] rounded-xl p-4 flex flex-col justify-between"
+                  className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-4 flex flex-col justify-between shadow-2xs"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-[11px] font-bold text-[#F62440] bg-[#FFF2DB] px-2 py-0.5 rounded border border-[#FFE5BF]">
+                      <span className="text-[11px] font-bold text-[#E11D48] bg-white px-2 py-0.5 rounded border border-[#E2E8F0]">
                         {vid.teacher}
                       </span>
-                      <span className="text-[11px] text-[#78716c] font-mono">
+                      <span className="text-[11px] text-[#64748B] font-mono">
                         ⏱️ {vid.duration}
                       </span>
                     </div>
-                    <h5 className="text-xs sm:text-sm font-bold text-[#1c1917] leading-snug">
+                    <h5 className="text-xs sm:text-sm font-bold text-[#0F172A] leading-snug">
                       {vid.title}
                     </h5>
                   </div>
 
-                  <div className="mt-3 pt-3 border-t border-[#FFE5BF] flex items-center justify-between">
-                    <span className="text-[11px] text-[#78716c]">
+                  <div className="mt-3 pt-3 border-t border-[#E2E8F0] flex items-center justify-between">
+                    <span className="text-[11px] text-[#64748B]">
                       👁️ {vid.views} مشاهدة
                     </span>
                     <a
                       href={vid.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="px-2.5 py-1 rounded-lg bg-[#F62440] hover:bg-[#d81b34] text-white font-bold text-xs flex items-center gap-1 transition-colors"
+                      className="px-2.5 py-1 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center gap-1 transition-colors shadow-2xs"
                     >
                       <HiExternalLink className="w-3.5 h-3.5" />
                       <span>مشاهدة</span>
@@ -426,19 +437,19 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
               {[2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015].map((year) => (
                 <div
                   key={year}
-                  className="bg-[#FFFAF3] border border-[#FFE5BF] rounded-xl p-3 text-center shadow-2xs hover:border-[#F62440] transition-colors"
+                  className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-3 text-center shadow-2xs hover:border-[#E11D48] transition-colors"
                 >
-                  <div className="text-xs font-bold text-[#1c1917] mb-0.5">
+                  <div className="text-xs font-bold text-[#0F172A] mb-0.5 font-mono">
                     بكالوريا {year}
                   </div>
-                  <div className="text-[10px] text-[#78716c] mb-2">
+                  <div className="text-[10px] text-[#64748B] mb-2">
                     الموضوع 1 + 2 والحل
                   </div>
                   <a
                     href={`https://www.ency-education.com/bac${year}.html`}
                     target="_blank"
                     rel="noreferrer"
-                    className="block w-full py-1 rounded bg-[#FFF2DB] hover:bg-[#F62440] hover:text-white text-[#1c1917] text-xs font-bold border border-[#FFE5BF] transition-colors"
+                    className="block w-full py-1 rounded bg-white hover:bg-[#E11D48] hover:text-white text-[#0F172A] text-xs font-bold border border-[#CBD5E1] transition-colors"
                   >
                     تحميل PDF
                   </a>

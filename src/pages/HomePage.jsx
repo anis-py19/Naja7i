@@ -58,40 +58,40 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
   ];
 
   return (
-    <div className="min-h-screen bg-[#FFFAF3] text-[#1c1917] font-['Cairo']">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] font-['Cairo']">
       
       {/* 1. Hero Section: Clean, Academic & Focused */}
-      <section className="pt-10 pb-12 px-4 sm:px-6 lg:px-8 border-b border-[#FFE5BF] bg-[#FFF2DB]/50">
+      <section className="pt-12 pb-14 px-4 sm:px-6 lg:px-8 border-b border-[#E2E8F0] bg-white">
         <div className="max-w-4xl mx-auto text-center space-y-4">
           
-          <div className="inline-block px-3 py-1 rounded-md bg-white border border-[#FFE5BF] text-xs font-bold text-[#1c1917]">
+          <div className="inline-block px-3.5 py-1 rounded-full bg-[#F1F5F9] border border-[#E2E8F0] text-xs font-bold text-[#0F172A]">
             الموقع التعليمي الشامل لبكالوريا الجزائر 🇩🇿
           </div>
 
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#1c1917] tracking-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] tracking-tight">
             منصة نجاحي لتحضير شهادة البكالوريا
           </h1>
 
-          <p className="text-xs sm:text-sm text-[#57534e] max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#475569] max-w-2xl mx-auto leading-relaxed">
             مكتبة منظمة تجمع أفضل ملخصات وسلاسل أساتذة الجزائر، مواضيع وحلول البكالوريا الرسمية، وأدوات المراجعة بدون إعلانات أو روابط خارجية.
           </p>
 
           {/* Actions */}
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
+          <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
             <button
               onClick={onOpenSearch}
-              className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white hover:bg-[#FFF2DB] text-[#1c1917] font-bold text-xs border border-[#FFE5BF] flex items-center justify-center gap-2 cursor-pointer transition-colors"
+              className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] font-bold text-xs border border-[#CBD5E1] flex items-center justify-center gap-2 cursor-pointer transition-colors shadow-2xs"
             >
-              <HiSearch className="w-4 h-4 text-[#F62440]" />
+              <HiSearch className="w-4 h-4 text-[#E11D48]" />
               <span>بحث سريع في الدروس والملخصات</span>
-              <kbd className="px-1.5 py-0.5 rounded bg-[#FFFAF3] text-[10px] text-[#78716c] font-mono border border-[#FFE5BF]">
+              <kbd className="px-1.5 py-0.5 rounded bg-[#F1F5F9] text-[10px] text-[#64748B] font-mono border border-[#E2E8F0]">
                 Ctrl K
               </kbd>
             </button>
 
             <Link
               to="/library"
-              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#F62440] hover:bg-[#d81b34] text-white font-bold text-xs flex items-center justify-center gap-2 transition-colors"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center justify-center gap-2 transition-colors shadow-2xs"
             >
               <HiBookOpen className="w-4 h-4" />
               <span>تصفح مكتبة الملخصات</span>
@@ -101,18 +101,20 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
         </div>
       </section>
 
-      {/* 2. Quick Stream Selector Strip */}
-      <section className="py-5 bg-white border-b border-[#FFE5BF]">
+      {/* 2. Streams Bar: Direct Access */}
+      <section className="py-6 bg-[#F8FAFC] border-b border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-3 mb-3">
-            <span className="text-xs font-bold text-[#1c1917]">اختر الشعبة:</span>
-            <Link to="/streams" className="text-xs text-[#F62440] hover:underline font-bold flex items-center gap-1">
-              <span>جميع الشعب</span>
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-bold text-[#0F172A] flex items-center gap-1.5">
+              <span>🏛️ اختر شعبتك للوصول السريع:</span>
+            </span>
+            <Link to="/streams" className="text-xs font-bold text-[#E11D48] hover:underline flex items-center gap-1">
+              <span>عرض كل الشعب</span>
               <HiChevronLeft className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
             {STREAMS.map((s) => (
               <button
                 key={s.id}
@@ -120,14 +122,14 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
                   if (onSelectStream) onSelectStream(s.id);
                   navigate('/streams');
                 }}
-                className="p-2.5 rounded-xl bg-[#FFFAF3] hover:bg-[#FFF2DB] border border-[#FFE5BF] hover:border-[#F62440] transition-colors text-right flex items-center gap-2 cursor-pointer"
+                className="p-3 rounded-xl bg-white hover:bg-[#F1F5F9] border border-[#E2E8F0] hover:border-[#CBD5E1] transition-colors text-right flex items-center gap-2.5 cursor-pointer shadow-2xs group"
               >
-                <span className="text-base">{s.icon}</span>
+                <span className="text-xl shrink-0">{s.icon}</span>
                 <div className="min-w-0">
-                  <span className="text-xs font-bold text-[#1c1917] block truncate">
+                  <span className="block text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] truncate">
                     {s.name}
                   </span>
-                  <span className="text-[10px] text-[#78716c]">
+                  <span className="text-[10px] text-[#64748B] block">
                     {s.subjectsCount} مواد
                   </span>
                 </div>
@@ -137,62 +139,56 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
         </div>
       </section>
 
-      {/* 3. Core Portals Grid */}
-      <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="mb-8 border-b border-[#FFE5BF] pb-4">
-          <h2 className="text-lg sm:text-xl font-bold text-[#1c1917]">
-            أقسام المنصة الرئيسية
+      {/* 3. Main Portal Hub Grid */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="text-xl sm:text-2xl font-black text-[#0F172A]">
+            أقسام وأدوات المنصة التعليمية
           </h2>
-          <p className="text-xs text-[#78716c] mt-0.5">
-            اختر القسم الذي ترغب في مراجعته للوصول المباشر إلى الملفات والأدوات
+          <p className="text-xs text-[#64748B] mt-1">
+            كل ما تحتاجه للتحضير للبكالوريا مقسم في مساحات مستقلة وسريعة
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {portals.map((portal, idx) => (
-            <div
+          {portals.map((item, idx) => (
+            <Link
               key={idx}
-              className="bg-white border border-[#FFE5BF] hover:border-[#F62440] rounded-2xl p-5 transition-colors flex flex-col justify-between"
+              to={item.path}
+              className="bg-white border border-[#E2E8F0] hover:border-[#E11D48] rounded-2xl p-6 transition-all hover:shadow-sm flex flex-col justify-between group"
             >
               <div>
-                <div className="flex items-start justify-between mb-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#FFF2DB] border border-[#FFE5BF] flex items-center justify-center text-xl">
-                    {portal.icon}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-center text-2xl group-hover:bg-[#F1F5F9] transition-colors">
+                    {item.icon}
                   </div>
-                  <span className="px-2 py-0.5 rounded bg-[#FFFAF3] text-[#F62440] text-[11px] font-bold border border-[#FFE5BF]">
-                    {portal.badge}
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#F1F5F9] text-[#475569] text-[11px] font-bold border border-[#E2E8F0]">
+                    {item.badge}
                   </span>
                 </div>
 
-                <h3 className="text-sm sm:text-base font-bold text-[#1c1917] mb-1.5">
-                  {portal.title}
+                <h3 className="text-base font-bold text-[#0F172A] group-hover:text-[#E11D48] transition-colors mb-2">
+                  {item.title}
                 </h3>
 
-                <p className="text-xs text-[#57534e] leading-relaxed mb-4">
-                  {portal.desc}
+                <p className="text-xs text-[#475569] leading-relaxed">
+                  {item.desc}
                 </p>
               </div>
 
-              <div className="pt-3 border-t border-[#FFE5BF]">
-                <Link
-                  to={portal.path}
-                  className="w-full py-2 rounded-lg bg-[#FFFAF3] hover:bg-[#FFF2DB] text-[#1c1917] hover:text-[#F62440] font-bold text-xs flex items-center justify-center gap-1 border border-[#FFE5BF] transition-colors"
-                >
-                  <span>دخول القسم</span>
-                  <HiChevronLeft className="w-4 h-4" />
-                </Link>
+              <div className="pt-5 mt-4 border-t border-[#F1F5F9] flex items-center justify-between text-xs font-bold text-[#E11D48]">
+                <span>دخول الفضاء</span>
+                <HiChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
               </div>
-            </div>
+            </Link>
           ))}
         </div>
-
       </section>
 
       {/* 4. Founder Story Section */}
       <FounderStorySection />
 
-      {/* 5. Contact & Contribution Banner */}
+      {/* 5. Contact & Contribution Section */}
       <ContactContributionSection onOpenContact={onOpenContact} />
 
     </div>

@@ -41,41 +41,41 @@ export default function BacArchivePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFFAF3] text-[#1c1917] pb-16 font-['Cairo']">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-16 font-['Cairo']">
       
       {/* Top Banner & Breadcrumb */}
-      <div className="bg-[#FFF2DB] border-b border-[#FFE5BF] py-8">
+      <div className="bg-white border-b border-[#E2E8F0] py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-xs text-[#78716c] mb-3">
-            <Link to="/" className="hover:text-[#F62440] flex items-center gap-1 transition-colors">
+          <div className="flex items-center gap-2 text-xs text-[#64748B] mb-3">
+            <Link to="/" className="hover:text-[#E11D48] flex items-center gap-1 transition-colors">
               <HiHome className="w-4 h-4" />
               <span>الرئيسية</span>
             </Link>
             <span>/</span>
-            <span className="text-[#1c1917] font-bold">أرشيف مواضيع البكالوريا الرسمية</span>
+            <span className="text-[#0F172A] font-bold">أرشيف مواضيع البكالوريا الرسمية</span>
           </div>
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <span className="px-2.5 py-0.5 rounded bg-[#F62440] text-white font-bold text-xs">
-                  دليل البكالوريا (2008 — 2025)
+                <span className="px-2.5 py-0.5 rounded-full bg-[#F1F5F9] text-[#E11D48] font-bold text-xs font-mono border border-[#E2E8F0]">
+                  2008 — 2025
                 </span>
-                <span className="text-xs text-[#78716c]">مواضيع رسمية وحلول وزارية نموذجية</span>
+                <span className="text-xs text-[#64748B]">مواضيع وحلول نموذجية معتمدة من وزارة التربية الوطنية</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-black text-[#1c1917]">
-                مواضيع وحلول شهادة البكالوريا
+              <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A]">
+                أرشيف شهادة البكالوريا الجزائرية 📄
               </h1>
-              <p className="text-xs text-[#57534e] mt-1 max-w-xl">
-                أرشيف منظم لجميع دورات البكالوريا السابقة مع سلم التنقيط المعتمد لجميع الشعب.
+              <p className="text-xs text-[#475569] mt-1 max-w-xl">
+                تصفح وحمل جميع مواضيع وحلول البكالوريا الرسمية لجميع الشعب مع سلم التنقيط الوزاري المفصل.
               </p>
             </div>
 
             <Link
               to="/"
-              className="self-start md:self-auto px-4 py-2 rounded-xl bg-white hover:bg-[#FFE5BF] text-[#1c1917] text-xs font-bold border border-[#FFE5BF] transition-colors flex items-center gap-1.5"
+              className="self-start md:self-auto px-4 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] transition-colors flex items-center gap-1.5 shadow-2xs"
             >
               <span>العودة للرئيسية</span>
               <HiChevronLeft className="w-4 h-4" />
@@ -86,23 +86,24 @@ export default function BacArchivePage() {
       </div>
 
       {/* Main Content Area */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-6">
         
-        {/* Filter Box */}
-        <div className="bg-white border border-[#FFE5BF] rounded-2xl p-4 mb-6 space-y-3">
+        {/* Filters */}
+        <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 shadow-xs space-y-4">
           
-          {/* Stream Selector Bar */}
+          {/* Stream Selector */}
           <div>
-            <span className="block text-xs font-bold text-[#1c1917] mb-2">
-              تصفية حسب الشعبة:
+            <span className="block text-xs font-bold text-[#0F172A] mb-2 flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#E11D48]"></span>
+              <span>1. اختر الشعبة:</span>
             </span>
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
               <button
                 onClick={() => handleStreamChange('all')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer ${
                   selectedStream === 'all'
-                    ? 'bg-[#F62440] text-white'
-                    : 'bg-[#FFFAF3] text-[#1c1917] hover:bg-[#FFF2DB] border border-[#FFE5BF]'
+                    ? 'bg-[#E11D48] text-white shadow-2xs'
+                    : 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#F1F5F9] border border-[#E2E8F0]'
                 }`}
               >
                 جميع الشعب
@@ -111,114 +112,99 @@ export default function BacArchivePage() {
                 <button
                   key={s.id}
                   onClick={() => handleStreamChange(s.id)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
                     selectedStream === s.id
-                      ? 'bg-[#F62440] text-white'
-                      : 'bg-[#FFFAF3] text-[#1c1917] hover:bg-[#FFF2DB] border border-[#FFE5BF]'
+                      ? 'bg-[#E11D48] text-white shadow-2xs'
+                      : 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#F1F5F9] border border-[#E2E8F0]'
                   }`}
                 >
-                  <span>{s.icon} {s.name}</span>
+                  <span>{s.icon}</span>
+                  <span>{s.name}</span>
                 </button>
               ))}
             </div>
           </div>
 
           {/* Year Selector */}
-          <div className="pt-2 border-t border-[#FFE5BF] grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-bold text-[#1c1917] mb-1">
-                تصفية حسب السنة:
-              </label>
-              <select
-                value={selectedYear}
-                onChange={(e) => handleYearChange(e.target.value)}
-                className="w-full bg-[#FFFAF3] border border-[#FFE5BF] rounded-lg px-3 py-2 text-xs text-[#1c1917] focus:outline-none focus:border-[#F62440] cursor-pointer"
+          <div className="pt-2 border-t border-[#E2E8F0]">
+            <span className="block text-xs font-bold text-[#0F172A] mb-2 flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#475569]"></span>
+              <span>2. اختر السنة (دورة الامتحان):</span>
+            </span>
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
+              <button
+                onClick={() => handleYearChange('all')}
+                className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer ${
+                  selectedYear === 'all'
+                    ? 'bg-[#0F172A] text-white'
+                    : 'bg-[#F8FAFC] text-[#475569] hover:bg-[#F1F5F9] border border-[#E2E8F0]'
+                }`}
               >
-                <option value="all">جميع دورات البكالوريا (2008 — 2025)</option>
-                {BAC_YEARS.map(year => (
-                  <option key={year} value={year}>بكالوريا دورة {year}</option>
-                ))}
-              </select>
-            </div>
-
-            <div className="flex items-end">
-              <span className="text-xs text-[#78716c]">
-                ملاحظة: ننصح بالبدء بحل دورات السنوات الأخيرة لمواكبة المنهجيات المحدثة.
-              </span>
+                جميع الدورات (2008—2025)
+              </button>
+              {BAC_YEARS.map(y => (
+                <button
+                  key={y}
+                  onClick={() => handleYearChange(y.toString())}
+                  className={`px-3 py-1 rounded-lg text-xs font-bold font-mono transition-colors whitespace-nowrap cursor-pointer ${
+                    selectedYear === y.toString()
+                      ? 'bg-[#0F172A] text-white'
+                      : 'bg-[#F8FAFC] text-[#475569] hover:bg-[#F1F5F9] border border-[#E2E8F0]'
+                  }`}
+                >
+                  {y}
+                </button>
+              ))}
             </div>
           </div>
 
         </div>
 
-        {/* Years & Streams Archive List */}
-        <div className="space-y-5">
-          {displayedYears.map(year => (
-            <div
-              key={year}
-              className="bg-white border border-[#FFE5BF] rounded-2xl p-5"
-            >
-              {/* Year Header */}
-              <div className="flex items-center justify-between border-b border-[#FFE5BF] pb-3 mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-[#FFF2DB] border border-[#FFE5BF] text-[#F62440] flex items-center justify-center font-bold text-sm font-mono">
-                    {year}
-                  </div>
-                  <div>
-                    <h3 className="text-sm sm:text-base font-bold text-[#1c1917]">
-                      مواضيع وحلول بكالوريا دورة جوان {year}
-                    </h3>
-                    <span className="text-[11px] text-[#78716c]">
-                      كافة المواد والشعب المقررة
-                    </span>
-                  </div>
+        {/* Years Grid */}
+        <div className="space-y-6">
+          {displayedYears.map((year) => (
+            <div key={year} className="bg-white border border-[#E2E8F0] rounded-2xl p-6 shadow-xs space-y-4">
+              
+              <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-base">📅</span>
+                  <h3 className="text-base font-bold text-[#0F172A] font-mono">
+                    بكالوريا دورة جوان {year}
+                  </h3>
                 </div>
-
-                <span className="px-2 py-0.5 rounded bg-[#FFFAF3] text-[#F62440] text-[11px] font-bold border border-[#FFE5BF]">
-                  دورة جوان
+                <span className="text-xs text-[#64748B] font-mono">
+                  {streamsToShow.length} شعب معتمدة
                 </span>
               </div>
 
-              {/* Streams Grid */}
+              {/* Streams Box for this year */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                {streamsToShow.map(s => (
-                  <div
-                    key={s.id}
-                    className="p-3 rounded-xl bg-[#FFFAF3] border border-[#FFE5BF] flex flex-col justify-between"
+                {streamsToShow.map((stream) => (
+                  <div 
+                    key={stream.id}
+                    className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#E11D48] transition-colors flex items-center justify-between group"
                   >
-                    <div className="mb-2.5">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-xs font-bold text-[#1c1917]">
-                          {s.icon} {s.name}
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-lg">{stream.icon}</span>
+                      <div>
+                        <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] transition-colors block">
+                          {stream.name}
                         </span>
-                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-white text-[#78716c] border border-[#FFE5BF]">
-                          {s.subjectsCount} مواد
+                        <span className="text-[10px] text-[#64748B]">
+                          مواضيع + حلول نموذجية
                         </span>
                       </div>
-                      <p className="text-[11px] text-[#78716c]">
-                        المواضيع مع الحل النموذجي الوزاري.
-                      </p>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[#FFE5BF]">
-                      <a
-                        href={`https://www.ency-education.net/bac${year}.html`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="py-1.5 rounded-lg bg-white hover:bg-[#FFF2DB] text-[#1c1917] text-xs font-bold border border-[#FFE5BF] flex items-center justify-center gap-1 transition-colors"
-                      >
-                        <HiBookOpen className="w-3.5 h-3.5 text-[#F62440]" />
-                        <span>الموضوع</span>
-                      </a>
-                      <a
-                        href={`https://www.ency-education.net/bac${year}.html`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="py-1.5 rounded-lg bg-[#F62440] hover:bg-[#d81b34] text-white text-xs font-bold flex items-center justify-center gap-1 transition-colors"
-                      >
-                        <HiDownload className="w-3.5 h-3.5" />
-                        <span>التصحيح</span>
-                      </a>
-                    </div>
+                    <a
+                      href={`https://www.ency-education.net/bac-${stream.id}.html`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-2.5 py-1 rounded-lg bg-white group-hover:bg-[#E11D48] group-hover:text-white text-[#0F172A] text-[11px] font-bold border border-[#E2E8F0] flex items-center gap-1 transition-colors"
+                    >
+                      <HiDownload className="w-3 h-3" />
+                      <span>تحميل</span>
+                    </a>
                   </div>
                 ))}
               </div>
@@ -229,36 +215,20 @@ export default function BacArchivePage() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-8 flex items-center justify-center gap-2">
-            <button
-              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-              disabled={currentPage === 1}
-              className="px-3.5 py-1.5 rounded-lg bg-white border border-[#FFE5BF] text-xs font-bold text-[#1c1917] hover:bg-[#FFF2DB] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
-            >
-              السابق
-            </button>
-
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+          <div className="flex items-center justify-center gap-1.5 pt-4">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pg) => (
               <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
+                key={pg}
+                onClick={() => setCurrentPage(pg)}
                 className={`w-8 h-8 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
-                  currentPage === page
-                    ? 'bg-[#F62440] text-white'
-                    : 'bg-white border border-[#FFE5BF] text-[#1c1917] hover:bg-[#FFF2DB]'
+                  currentPage === pg
+                    ? 'bg-[#E11D48] text-white shadow-2xs'
+                    : 'bg-white text-[#0F172A] hover:bg-[#F1F5F9] border border-[#E2E8F0]'
                 }`}
               >
-                {page}
+                {pg}
               </button>
             ))}
-
-            <button
-              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-              disabled={currentPage === totalPages}
-              className="px-3.5 py-1.5 rounded-lg bg-white border border-[#FFE5BF] text-xs font-bold text-[#1c1917] hover:bg-[#FFF2DB] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
-            >
-              التالي
-            </button>
           </div>
         )}
 

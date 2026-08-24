@@ -9,7 +9,8 @@ import {
   HiChevronRight,
   HiX,
   HiCollection,
-  HiHome
+  HiHome,
+  HiExternalLink
 } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { USER_STUDY_FILES } from '../data/userFilesData';
@@ -96,6 +97,20 @@ export default function LibraryPage({ onOpenPdf }) {
     setCurrentPage(1);
   };
 
+  const handleDirectDownload = (file, e) => {
+    e.stopPropagation();
+    const pdfUrl = file.fileUrl || file.url;
+    const fileName = file.rawFileName || `${file.title}.pdf`;
+    const link = document.createElement('a');
+    link.href = pdfUrl;
+    link.download = fileName;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   // Pagination calculation
   const totalPages = Math.ceil(filteredFiles.length / ITEMS_PER_PAGE) || 1;
   const safeCurrentPage = Math.min(currentPage, totalPages);
@@ -103,41 +118,41 @@ export default function LibraryPage({ onOpenPdf }) {
   const paginatedFiles = filteredFiles.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   return (
-    <div className="min-h-screen bg-[#FFFAF3] text-[#1c1917] pb-16 font-['Cairo']">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-16 font-['Cairo']">
       
       {/* Top Breadcrumb & Page Banner */}
-      <div className="bg-[#FFF2DB] border-b border-[#FFE5BF] py-8">
+      <div className="bg-white border-b border-[#E2E8F0] py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-xs text-[#78716c] mb-3">
-            <Link to="/" className="hover:text-[#F62440] flex items-center gap-1 transition-colors">
+          <div className="flex items-center gap-2 text-xs text-[#64748B] mb-3">
+            <Link to="/" className="hover:text-[#E11D48] flex items-center gap-1 transition-colors">
               <HiHome className="w-4 h-4" />
               <span>الرئيسية</span>
             </Link>
             <span>/</span>
-            <span className="text-[#1c1917] font-bold">مكتبة الملخصات والمستندات</span>
+            <span className="text-[#0F172A] font-bold">مكتبة الملخصات والمستندات</span>
           </div>
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1.5">
-                <span className="px-2.5 py-0.5 rounded-md bg-[#F62440] text-white font-bold text-xs font-mono shadow-2xs">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#F1F5F9] text-[#E11D48] font-bold text-xs font-mono border border-[#E2E8F0]">
                   مكتبة شاملة
                 </span>
-                <span className="text-xs text-[#78716c]">تحميل مباشر + قراءة فورية داخل الموقع</span>
+                <span className="text-xs text-[#64748B]">تحميل مباشر وقراءة فورية داخل الموقع</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-black text-[#1c1917]">
-                بنك الملخصات وسلاسل التمارين 📚
+              <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A]">
+                بنك الملخصات وسلاسل التمارين
               </h1>
-              <p className="text-xs text-[#57534e] mt-1 max-w-xl">
+              <p className="text-xs text-[#475569] mt-1 max-w-xl">
                 مكتبة منظمة ومصنفة حسب الشعب والمواد لجميع ملفات البكالوريا وفق المنهاج الوزاري المعتمد.
               </p>
             </div>
 
             <Link
               to="/"
-              className="self-start md:self-auto px-4 py-2 rounded-xl bg-white hover:bg-[#FFE5BF] text-[#1c1917] text-xs font-bold border border-[#FFE5BF] transition-colors flex items-center gap-1.5 shadow-2xs"
+              className="self-start md:self-auto px-4 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] transition-colors flex items-center gap-1.5 shadow-2xs"
             >
               <span>العودة للرئيسية</span>
               <HiChevronLeft className="w-4 h-4" />
@@ -151,12 +166,12 @@ export default function LibraryPage({ onOpenPdf }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         
         {/* Filter Control Box */}
-        <div className="bg-white border border-[#FFE5BF] rounded-2xl p-5 mb-6 shadow-xs space-y-4">
+        <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 mb-6 shadow-xs space-y-4">
           
           {/* 1. Stream Selector Bar */}
           <div>
-            <label className="block text-xs font-bold text-[#1c1917] mb-2 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#F62440]"></span>
+            <label className="block text-xs font-bold text-[#0F172A] mb-2 flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#E11D48]"></span>
               <span>1. تصفية حسب الشعبة الدراسية:</span>
             </label>
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
@@ -164,8 +179,8 @@ export default function LibraryPage({ onOpenPdf }) {
                 onClick={() => handleStreamChange('all')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer ${
                   selectedStream === 'all'
-                    ? 'bg-[#F62440] text-white shadow-xs'
-                    : 'bg-[#FFFAF3] text-[#1c1917] hover:bg-[#FFF2DB] border border-[#FFE5BF]'
+                    ? 'bg-[#E11D48] text-white shadow-2xs'
+                    : 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#F1F5F9] border border-[#E2E8F0]'
                 }`}
               >
                 جميع الشعب
@@ -175,13 +190,14 @@ export default function LibraryPage({ onOpenPdf }) {
                   <button
                     key={s.id}
                     onClick={() => handleStreamChange(s.id)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
                       selectedStream === s.id
-                        ? 'bg-[#F62440] text-white shadow-xs'
-                        : 'bg-[#FFFAF3] text-[#1c1917] hover:bg-[#FFF2DB] border border-[#FFE5BF]'
+                        ? 'bg-[#E11D48] text-white shadow-2xs'
+                        : 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#F1F5F9] border border-[#E2E8F0]'
                     }`}
                   >
-                    <span>{s.icon} {s.name}</span>
+                    <span>{s.icon}</span>
+                    <span>{s.name}</span>
                   </button>
                 );
               })}
@@ -189,11 +205,11 @@ export default function LibraryPage({ onOpenPdf }) {
           </div>
 
           {/* 2. Secondary Dropdowns & Search */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-[#FFE5BF]">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-[#E2E8F0]">
             
             {/* Search Input */}
             <div>
-              <label className="block text-[11px] font-bold text-[#78716c] mb-1">
+              <label className="block text-[11px] font-bold text-[#64748B] mb-1">
                 بحث بالكلمة أو الأستاذ:
               </label>
               <div className="relative">
@@ -202,13 +218,13 @@ export default function LibraryPage({ onOpenPdf }) {
                   placeholder="ابحث (مثال: متتاليات، نور الدين، سمراني...)"
                   value={searchQuery}
                   onChange={(e) => handleSearchChange(e.target.value)}
-                  className="w-full bg-[#FFFAF3] border border-[#FFE5BF] rounded-lg pl-3 pr-8 py-2 text-xs text-[#1c1917] placeholder-[#78716c] focus:outline-none focus:border-[#F62440]"
+                  className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg pl-3 pr-8 py-2 text-xs text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#E11D48]"
                 />
-                <HiSearch className="w-4 h-4 text-[#78716c] absolute right-2.5 top-2.5" />
+                <HiSearch className="w-4 h-4 text-[#64748B] absolute right-2.5 top-2.5" />
                 {searchQuery && (
                   <button
                     onClick={() => handleSearchChange('')}
-                    className="absolute left-2.5 top-2.5 text-[#78716c] hover:text-[#1c1917]"
+                    className="absolute left-2.5 top-2.5 text-[#64748B] hover:text-[#0F172A]"
                   >
                     <HiX className="w-4 h-4" />
                   </button>
@@ -218,15 +234,15 @@ export default function LibraryPage({ onOpenPdf }) {
 
             {/* Subject Filter */}
             <div>
-              <label className="block text-[11px] font-bold text-[#78716c] mb-1">
-                المادة الدراسية:
+              <label className="block text-[11px] font-bold text-[#64748B] mb-1">
+                المادة التعليمية:
               </label>
               <select
                 value={selectedSubject}
                 onChange={(e) => handleSubjectChange(e.target.value)}
-                className="w-full bg-[#FFFAF3] border border-[#FFE5BF] rounded-lg px-3 py-2 text-xs text-[#1c1917] focus:outline-none focus:border-[#F62440] cursor-pointer"
+                className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg px-3 py-2 text-xs text-[#0F172A] focus:outline-none focus:border-[#E11D48] cursor-pointer"
               >
-                <option value="all">جميع المواد الدراسية</option>
+                <option value="all">جميع المواد</option>
                 {availableSubjects.map((sub, i) => (
                   <option key={i} value={sub}>{sub}</option>
                 ))}
@@ -235,15 +251,15 @@ export default function LibraryPage({ onOpenPdf }) {
 
             {/* Category Filter */}
             <div>
-              <label className="block text-[11px] font-bold text-[#78716c] mb-1">
-                نوع المحتوى:
+              <label className="block text-[11px] font-bold text-[#64748B] mb-1">
+                نوع الملف (ملخص / تمارين / بكالوريا):
               </label>
               <select
                 value={selectedCategory}
                 onChange={(e) => handleCategoryChange(e.target.value)}
-                className="w-full bg-[#FFFAF3] border border-[#FFE5BF] rounded-lg px-3 py-2 text-xs text-[#1c1917] focus:outline-none focus:border-[#F62440] cursor-pointer"
+                className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg px-3 py-2 text-xs text-[#0F172A] focus:outline-none focus:border-[#E11D48] cursor-pointer"
               >
-                <option value="all">جميع الأنواع</option>
+                <option value="all">جميع التصنيفات</option>
                 {availableCategories.map((cat, i) => (
                   <option key={i} value={cat}>{cat}</option>
                 ))}
@@ -252,153 +268,152 @@ export default function LibraryPage({ onOpenPdf }) {
 
           </div>
 
-        </div>
-
-        {/* Results Header & Active Filters Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 text-xs">
-          <div className="text-[#57534e]">
-            عرض <strong className="text-[#1c1917]">{startIndex + 1} - {Math.min(startIndex + ITEMS_PER_PAGE, filteredFiles.length)}</strong> من أصل <strong className="text-[#F62440] font-mono">{filteredFiles.length}</strong> ملف مطابق
-          </div>
-
+          {/* Active Filter Chips & Reset */}
           {(selectedStream !== 'all' || selectedSubject !== 'all' || selectedCategory !== 'all' || searchQuery) && (
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[#78716c]">الفلاتر النشطة:</span>
-              {selectedStream !== 'all' && (
-                <span className="px-2 py-0.5 rounded bg-[#FFF2DB] border border-[#FFE5BF] text-[#1c1917] font-bold">
-                  {STREAMS.find(s => s.id === selectedStream)?.name}
-                </span>
-              )}
-              {selectedSubject !== 'all' && (
-                <span className="px-2 py-0.5 rounded bg-[#FFF2DB] border border-[#FFE5BF] text-[#1c1917] font-bold">
-                  {selectedSubject}
-                </span>
-              )}
-              {selectedCategory !== 'all' && (
-                <span className="px-2 py-0.5 rounded bg-[#FFF2DB] border border-[#FFE5BF] text-[#1c1917] font-bold">
-                  {selectedCategory}
-                </span>
-              )}
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-[#E2E8F0] text-xs">
+              <div className="flex flex-wrap items-center gap-1.5">
+                <span className="text-[#64748B] font-bold">الفلاتر المطبقة:</span>
+                {selectedStream !== 'all' && (
+                  <span className="px-2 py-0.5 rounded bg-[#F1F5F9] border border-[#E2E8F0] text-[#0F172A] flex items-center gap-1">
+                    الشعبة: {STREAMS.find(s => s.id === selectedStream)?.name}
+                    <button onClick={() => handleStreamChange('all')} className="hover:text-[#E11D48]"><HiX className="w-3 h-3" /></button>
+                  </span>
+                )}
+                {selectedSubject !== 'all' && (
+                  <span className="px-2 py-0.5 rounded bg-[#F1F5F9] border border-[#E2E8F0] text-[#0F172A] flex items-center gap-1">
+                    المادة: {selectedSubject}
+                    <button onClick={() => handleSubjectChange('all')} className="hover:text-[#E11D48]"><HiX className="w-3 h-3" /></button>
+                  </span>
+                )}
+                {selectedCategory !== 'all' && (
+                  <span className="px-2 py-0.5 rounded bg-[#F1F5F9] border border-[#E2E8F0] text-[#0F172A] flex items-center gap-1">
+                    النوع: {selectedCategory}
+                    <button onClick={() => handleCategoryChange('all')} className="hover:text-[#E11D48]"><HiX className="w-3 h-3" /></button>
+                  </span>
+                )}
+              </div>
+
               <button
                 onClick={handleResetFilters}
-                className="text-[#F62440] hover:underline font-bold cursor-pointer"
+                className="text-[#E11D48] hover:underline font-bold text-xs cursor-pointer"
               >
-                إلغاء جميع الفلاتر ✕
+                إلغاء جميع الفلاتر ↺
               </button>
             </div>
           )}
+
         </div>
 
-        {/* Files Grid (Controlled 12 items per page) */}
+        {/* Results Counter Header */}
+        <div className="flex items-center justify-between text-xs text-[#64748B] mb-4 px-1">
+          <div>
+            عرض <strong className="text-[#0F172A]">{paginatedFiles.length}</strong> من إجمالي <strong className="text-[#E11D48] font-bold">{filteredFiles.length}</strong> ملف متاح
+          </div>
+          <div>
+            صفحة <strong className="text-[#0F172A]">{safeCurrentPage}</strong> من <strong className="text-[#0F172A]">{totalPages}</strong>
+          </div>
+        </div>
+
+        {/* File Cards Grid */}
         {paginatedFiles.length === 0 ? (
-          <div className="bg-white border border-[#FFE5BF] rounded-2xl p-12 text-center text-[#78716c] space-y-3">
-            <div className="text-3xl">🔍</div>
-            <h3 className="text-base font-bold text-[#1c1917]">لم يتم العثور على ملفات مطابقة للبحث</h3>
-            <p className="text-xs max-w-md mx-auto">
-              جرب تغيير كلمات البحث أو اختيار مادة أخرى، أو اضغط على إلغاء الفلاتر لعرض جميع المستندات.
+          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-12 text-center space-y-3">
+            <div className="text-4xl">🔍</div>
+            <h3 className="text-base font-bold text-[#0F172A]">لم نتمكن من العثور على أي ملف يطابق بحثك</h3>
+            <p className="text-xs text-[#64748B] max-w-sm mx-auto">
+              جرب تغيير كلمات البحث أو اختيار شعبة أخرى أو إلغاء بعض الفلاتر.
             </p>
             <button
               onClick={handleResetFilters}
-              className="px-4 py-1.5 rounded-lg bg-[#F62440] text-white text-xs font-bold hover:bg-[#d81b34] transition-colors"
+              className="mt-2 px-4 py-2 rounded-xl bg-[#E11D48] text-white font-bold text-xs cursor-pointer"
             >
-              إلغاء الفلاتر
+              عرض جميع الملفات
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {paginatedFiles.map((file) => (
               <div
                 key={file.id}
-                className="ency-card p-4 rounded-xl flex flex-col justify-between group transition-all"
+                className="ency-card p-4 rounded-xl flex flex-col justify-between group shadow-2xs hover:shadow-xs"
               >
                 <div>
-                  {/* Badges */}
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-[#FFF2DB] text-[#F62440] border border-[#FFE5BF]">
+                  
+                  {/* File Meta Header */}
+                  <div className="flex items-start justify-between gap-2 mb-2.5">
+                    <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-[#F1F5F9] text-[#0F172A] border border-[#E2E8F0] truncate">
                       {file.subjectName}
                     </span>
-                    <span className="text-[10px] text-[#78716c] font-mono">
-                      {file.sizeReadable}
+                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#F8FAFC] text-[#64748B] border border-[#E2E8F0] shrink-0">
+                      {file.sizeReadable || file.size || ''}
                     </span>
                   </div>
 
-                  {/* Title */}
-                  <h3 
-                    onClick={() => onOpenPdf && onOpenPdf(file)}
-                    className="text-sm font-bold text-[#1c1917] group-hover:text-[#F62440] transition-colors line-clamp-2 cursor-pointer mb-1.5 leading-snug"
-                    title={file.title}
+                  {/* File Title */}
+                  <h4 
+                    onClick={() => onOpenPdf(file)}
+                    className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] transition-colors line-clamp-2 leading-relaxed mb-2 cursor-pointer"
                   >
                     {file.title}
-                  </h3>
+                  </h4>
 
-                  {/* Author / Category */}
-                  <div className="text-[11px] text-[#78716c] flex items-center justify-between mb-4">
-                    <span className="truncate">👤 {file.author}</span>
-                    <span className="px-1.5 py-0.2 rounded bg-[#FFFAF3] text-[10px] border border-[#FFE5BF] shrink-0 font-medium">
-                      {file.category}
-                    </span>
+                  {/* Author & Category Tags */}
+                  <div className="flex items-center gap-1.5 flex-wrap text-[11px] text-[#64748B] mb-3">
+                    <span className="truncate">إعداد: {file.author}</span>
+                    <span>•</span>
+                    <span className="text-[#E11D48] font-medium">{file.category}</span>
                   </div>
+
                 </div>
 
-                {/* Action Buttons: Read inside site + Direct Download */}
-                <div className="pt-3 border-t border-[#FFE5BF] grid grid-cols-2 gap-2">
+                {/* Actions: View Online & Download Direct */}
+                <div className="pt-3 border-t border-[#E2E8F0] flex items-center gap-2">
                   <button
-                    onClick={() => onOpenPdf && onOpenPdf(file)}
-                    className="py-1.5 px-2 rounded-lg bg-[#FFF2DB] hover:bg-[#FFE5BF] text-[#1c1917] text-xs font-bold flex items-center justify-center gap-1 border border-[#FFE5BF] transition-colors cursor-pointer"
+                    onClick={() => onOpenPdf(file)}
+                    className="flex-1 py-2 px-2 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                   >
-                    <HiEye className="w-3.5 h-3.5 text-[#F62440]" />
-                    <span>قراءة الملف</span>
+                    <HiEye className="w-3.5 h-3.5 text-[#E11D48]" />
+                    <span>قراءة</span>
                   </button>
 
-                  <a
-                    href={file.fileUrl}
-                    download={file.rawFileName || file.title}
-                    className="py-1.5 px-2 rounded-lg bg-[#F62440] hover:bg-[#d81b34] text-white text-xs font-bold flex items-center justify-center gap-1 transition-colors shadow-2xs"
+                  <button
+                    onClick={(e) => handleDirectDownload(file, e)}
+                    className="flex-1 py-2 px-2 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
                   >
                     <HiDownload className="w-3.5 h-3.5" />
-                    <span>تحميل PDF</span>
-                  </a>
+                    <span>تحميل</span>
+                  </button>
                 </div>
+
               </div>
             ))}
           </div>
         )}
 
-        {/* Clean Pagination Bar (1, 2, 3...) */}
+        {/* Pagination Bar */}
         {totalPages > 1 && (
           <div className="mt-8 flex items-center justify-center gap-2">
             <button
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
               disabled={safeCurrentPage === 1}
-              className="p-2 rounded-lg bg-white border border-[#FFE5BF] text-xs font-bold text-[#1c1917] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#FFF2DB] transition-colors"
+              className="p-2 rounded-lg bg-white border border-[#E2E8F0] text-[#0F172A] hover:bg-[#F1F5F9] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors shadow-2xs"
               title="الصفحة السابقة"
             >
               <HiChevronRight className="w-4 h-4" />
             </button>
 
             {Array.from({ length: totalPages }, (_, i) => i + 1)
-              .filter(pageNum => {
-                // Show first, last, and pages around current page
-                return (
-                  pageNum === 1 ||
-                  pageNum === totalPages ||
-                  Math.abs(pageNum - safeCurrentPage) <= 1
-                );
-              })
-              .map((pageNum, idx, arr) => {
-                const prevNum = arr[idx - 1];
-                const showEllipsis = prevNum && pageNum - prevNum > 1;
-
+              .filter(p => p === 1 || p === totalPages || Math.abs(p - safeCurrentPage) <= 2)
+              .map((pageNum, idx, array) => {
+                const isGap = idx > 0 && pageNum - array[idx - 1] > 1;
                 return (
                   <React.Fragment key={pageNum}>
-                    {showEllipsis && (
-                      <span className="px-1 text-xs text-[#78716c]">...</span>
-                    )}
+                    {isGap && <span className="px-1 text-xs text-[#64748B]">...</span>}
                     <button
                       onClick={() => setCurrentPage(pageNum)}
                       className={`w-8 h-8 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
                         safeCurrentPage === pageNum
-                          ? 'bg-[#F62440] text-white shadow-xs'
-                          : 'bg-white text-[#1c1917] hover:bg-[#FFF2DB] border border-[#FFE5BF]'
+                          ? 'bg-[#E11D48] text-white shadow-2xs'
+                          : 'bg-white text-[#0F172A] hover:bg-[#F1F5F9] border border-[#E2E8F0]'
                       }`}
                     >
                       {pageNum}
@@ -410,7 +425,7 @@ export default function LibraryPage({ onOpenPdf }) {
             <button
               onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
               disabled={safeCurrentPage === totalPages}
-              className="p-2 rounded-lg bg-white border border-[#FFE5BF] text-xs font-bold text-[#1c1917] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#FFF2DB] transition-colors"
+              className="p-2 rounded-lg bg-white border border-[#E2E8F0] text-[#0F172A] hover:bg-[#F1F5F9] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors shadow-2xs"
               title="الصفحة التالية"
             >
               <HiChevronLeft className="w-4 h-4" />
