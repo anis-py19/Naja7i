@@ -4,19 +4,14 @@ import {
   HiHome, 
   HiChevronLeft, 
   HiBookOpen, 
-  HiDownload, 
-  HiSparkles,
-  HiSearch,
-  HiFilter
+  HiDownload
 } from 'react-icons/hi';
 import { STREAMS } from '../data/streamsData';
 import { BAC_YEARS } from '../data/bacData';
-import { motion } from 'framer-motion';
 
 export default function BacArchivePage() {
   const [selectedYear, setSelectedYear] = useState('all');
   const [selectedStream, setSelectedStream] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
@@ -26,14 +21,12 @@ export default function BacArchivePage() {
       : BAC_YEARS.filter(y => y.toString() === selectedYear);
   }, [selectedYear]);
 
-  // Filter streams to show
   const streamsToShow = useMemo(() => {
     return selectedStream === 'all'
       ? STREAMS
       : STREAMS.filter(s => s.id === selectedStream);
   }, [selectedStream]);
 
-  // Paginated years
   const totalPages = Math.ceil(filteredYears.length / itemsPerPage);
   const displayedYears = filteredYears.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
@@ -66,23 +59,23 @@ export default function BacArchivePage() {
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="px-2.5 py-0.5 rounded-md bg-[#F62440] text-white font-bold text-xs shadow-2xs">
-                  دليل البكالوريات (2008 — 2025)
+              <div className="flex items-center gap-2 mb-1">
+                <span className="px-2.5 py-0.5 rounded bg-[#F62440] text-white font-bold text-xs">
+                  دليل البكالوريا (2008 — 2025)
                 </span>
-                <span className="text-xs text-[#78716c]">مواضيع رسمية + حلول وزارية نموذجية</span>
+                <span className="text-xs text-[#78716c]">مواضيع رسمية وحلول وزارية نموذجية</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-black text-[#1c1917]">
-                أرشيف مواضيع وحلول البكالوريا 🏛️
+                مواضيع وحلول شهادة البكالوريا
               </h1>
               <p className="text-xs text-[#57534e] mt-1 max-w-xl">
-                بنك شامل لجميع مواضيع شهادة البكالوريا مع سلم التنقيط المعتمد من وزارة التربية الوطنية لجميع الشعب.
+                أرشيف منظم لجميع دورات البكالوريا السابقة مع سلم التنقيط المعتمد لجميع الشعب.
               </p>
             </div>
 
             <Link
               to="/"
-              className="self-start md:self-auto px-4 py-2 rounded-xl bg-white hover:bg-[#FFE5BF] text-[#1c1917] text-xs font-bold border border-[#FFE5BF] transition-colors flex items-center gap-1.5 shadow-2xs"
+              className="self-start md:self-auto px-4 py-2 rounded-xl bg-white hover:bg-[#FFE5BF] text-[#1c1917] text-xs font-bold border border-[#FFE5BF] transition-colors flex items-center gap-1.5"
             >
               <span>العودة للرئيسية</span>
               <HiChevronLeft className="w-4 h-4" />
@@ -96,20 +89,19 @@ export default function BacArchivePage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         
         {/* Filter Box */}
-        <div className="bg-white border border-[#FFE5BF] rounded-2xl p-5 mb-8 shadow-xs space-y-4">
+        <div className="bg-white border border-[#FFE5BF] rounded-2xl p-4 mb-6 space-y-3">
           
           {/* Stream Selector Bar */}
           <div>
-            <label className="block text-xs font-bold text-[#1c1917] mb-2 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#F62440]"></span>
-              <span>1. اختر الشعبة الدراسية:</span>
-            </label>
+            <span className="block text-xs font-bold text-[#1c1917] mb-2">
+              تصفية حسب الشعبة:
+            </span>
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
               <button
                 onClick={() => handleStreamChange('all')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer ${
                   selectedStream === 'all'
-                    ? 'bg-[#F62440] text-white shadow-xs'
+                    ? 'bg-[#F62440] text-white'
                     : 'bg-[#FFFAF3] text-[#1c1917] hover:bg-[#FFF2DB] border border-[#FFE5BF]'
                 }`}
               >
@@ -121,7 +113,7 @@ export default function BacArchivePage() {
                   onClick={() => handleStreamChange(s.id)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer ${
                     selectedStream === s.id
-                      ? 'bg-[#F62440] text-white shadow-xs'
+                      ? 'bg-[#F62440] text-white'
                       : 'bg-[#FFFAF3] text-[#1c1917] hover:bg-[#FFF2DB] border border-[#FFE5BF]'
                   }`}
                 >
@@ -134,8 +126,8 @@ export default function BacArchivePage() {
           {/* Year Selector */}
           <div className="pt-2 border-t border-[#FFE5BF] grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-bold text-[#1c1917] mb-1.5">
-                2. تصفية حسب سنة الدورة:
+              <label className="block text-xs font-bold text-[#1c1917] mb-1">
+                تصفية حسب السنة:
               </label>
               <select
                 value={selectedYear}
@@ -150,63 +142,60 @@ export default function BacArchivePage() {
             </div>
 
             <div className="flex items-end">
-              <span className="text-xs text-[#78716c] leading-relaxed">
-                💡 ننصح بالبدء بحل دورات (2020 — 2024) أولاً لمواكبة أحدث منهجيات بناء مواضيع البكالوريا.
+              <span className="text-xs text-[#78716c]">
+                ملاحظة: ننصح بالبدء بحل دورات السنوات الأخيرة لمواكبة المنهجيات المحدثة.
               </span>
             </div>
           </div>
 
         </div>
 
-        {/* Years & Streams Archive Grid */}
-        <div className="space-y-6">
+        {/* Years & Streams Archive List */}
+        <div className="space-y-5">
           {displayedYears.map(year => (
-            <motion.div
+            <div
               key={year}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="bg-white border border-[#FFE5BF] rounded-2xl p-6 shadow-xs"
+              className="bg-white border border-[#FFE5BF] rounded-2xl p-5"
             >
               {/* Year Header */}
-              <div className="flex items-center justify-between border-b border-[#FFE5BF] pb-4 mb-5">
+              <div className="flex items-center justify-between border-b border-[#FFE5BF] pb-3 mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#FFF2DB] border border-[#FFE5BF] text-[#F62440] flex items-center justify-center font-black text-sm font-mono">
+                  <div className="w-9 h-9 rounded-lg bg-[#FFF2DB] border border-[#FFE5BF] text-[#F62440] flex items-center justify-center font-bold text-sm font-mono">
                     {year}
                   </div>
                   <div>
-                    <h3 className="text-base font-black text-[#1c1917]">
-                      مواضيع وحلول بكالوريا دورة جوان {year} 🇩🇿
+                    <h3 className="text-sm sm:text-base font-bold text-[#1c1917]">
+                      مواضيع وحلول بكالوريا دورة جوان {year}
                     </h3>
-                    <span className="text-xs text-[#78716c]">
-                      دورة رسمية نظامية • كافة المواد الأساسية والثانوية
+                    <span className="text-[11px] text-[#78716c]">
+                      كافة المواد والشعب المقررة
                     </span>
                   </div>
                 </div>
 
-                <span className="px-2.5 py-1 rounded-md bg-[#FFFAF3] text-[#F62440] text-[11px] font-bold border border-[#FFE5BF]">
+                <span className="px-2 py-0.5 rounded bg-[#FFFAF3] text-[#F62440] text-[11px] font-bold border border-[#FFE5BF]">
                   دورة جوان
                 </span>
               </div>
 
-              {/* Streams Box for this Year */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* Streams Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {streamsToShow.map(s => (
                   <div
                     key={s.id}
-                    className="p-4 rounded-xl bg-[#FFFAF3] border border-[#FFE5BF] hover:border-[#F62440] transition-colors flex flex-col justify-between"
+                    className="p-3 rounded-xl bg-[#FFFAF3] border border-[#FFE5BF] flex flex-col justify-between"
                   >
-                    <div className="mb-3">
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-xs font-bold text-[#1c1917] flex items-center gap-1.5">
-                          <span>{s.icon}</span>
-                          <span>{s.name}</span>
+                    <div className="mb-2.5">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-xs font-bold text-[#1c1917]">
+                          {s.icon} {s.name}
                         </span>
                         <span className="text-[10px] px-1.5 py-0.5 rounded bg-white text-[#78716c] border border-[#FFE5BF]">
                           {s.subjectsCount} مواد
                         </span>
                       </div>
                       <p className="text-[11px] text-[#78716c]">
-                        الموضوع الأول والثاني مع الحل النموذجي المعتمد.
+                        المواضيع مع الحل النموذجي الوزاري.
                       </p>
                     </div>
 
@@ -215,16 +204,16 @@ export default function BacArchivePage() {
                         href={`https://www.ency-education.net/bac${year}.html`}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-2.5 py-1.5 rounded-lg bg-white hover:bg-[#FFF2DB] text-[#1c1917] text-xs font-bold border border-[#FFE5BF] flex items-center justify-center gap-1 transition-colors shadow-2xs"
+                        className="py-1.5 rounded-lg bg-white hover:bg-[#FFF2DB] text-[#1c1917] text-xs font-bold border border-[#FFE5BF] flex items-center justify-center gap-1 transition-colors"
                       >
                         <HiBookOpen className="w-3.5 h-3.5 text-[#F62440]" />
-                        <span>المواضيع</span>
+                        <span>الموضوع</span>
                       </a>
                       <a
                         href={`https://www.ency-education.net/bac${year}.html`}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-2.5 py-1.5 rounded-lg bg-[#F62440] hover:bg-[#d81b34] text-white text-xs font-bold flex items-center justify-center gap-1 transition-colors shadow-2xs"
+                        className="py-1.5 rounded-lg bg-[#F62440] hover:bg-[#d81b34] text-white text-xs font-bold flex items-center justify-center gap-1 transition-colors"
                       >
                         <HiDownload className="w-3.5 h-3.5" />
                         <span>التصحيح</span>
@@ -234,17 +223,17 @@ export default function BacArchivePage() {
                 ))}
               </div>
 
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-10 flex items-center justify-center gap-2">
+          <div className="mt-8 flex items-center justify-center gap-2">
             <button
               onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="px-3.5 py-2 rounded-xl bg-white border border-[#FFE5BF] text-xs font-bold text-[#1c1917] hover:bg-[#FFF2DB] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+              className="px-3.5 py-1.5 rounded-lg bg-white border border-[#FFE5BF] text-xs font-bold text-[#1c1917] hover:bg-[#FFF2DB] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
             >
               السابق
             </button>
@@ -253,9 +242,9 @@ export default function BacArchivePage() {
               <button
                 key={page}
                 onClick={() => setCurrentPage(page)}
-                className={`w-9 h-9 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
+                className={`w-8 h-8 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
                   currentPage === page
-                    ? 'bg-[#F62440] text-white shadow-xs'
+                    ? 'bg-[#F62440] text-white'
                     : 'bg-white border border-[#FFE5BF] text-[#1c1917] hover:bg-[#FFF2DB]'
                 }`}
               >
@@ -266,7 +255,7 @@ export default function BacArchivePage() {
             <button
               onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="px-3.5 py-2 rounded-xl bg-white border border-[#FFE5BF] text-xs font-bold text-[#1c1917] hover:bg-[#FFF2DB] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+              className="px-3.5 py-1.5 rounded-lg bg-white border border-[#FFE5BF] text-xs font-bold text-[#1c1917] hover:bg-[#FFF2DB] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
             >
               التالي
             </button>

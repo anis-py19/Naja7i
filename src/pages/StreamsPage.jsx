@@ -1,19 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
   HiHome, 
-  HiChevronLeft, 
-  HiAcademicCap, 
-  HiBookOpen,
-  HiSearch
+  HiChevronLeft
 } from 'react-icons/hi';
 import StreamHub from '../components/StreamHub';
-import SubjectViewer from '../components/SubjectViewer';
-import PdfReaderModal from '../components/PdfReaderModal';
 
-export default function StreamsPage({ onOpenSubject, onOpenPdf }) {
-  const [selectedStreamId, setSelectedStreamId] = useState('sciences');
-
+export default function StreamsPage({ selectedStreamId, onSelectStream, onOpenSubject, onOpenPdf }) {
   return (
     <div className="min-h-screen bg-[#FFFAF3] text-[#1c1917] pb-16 font-['Cairo']">
       
@@ -33,14 +26,14 @@ export default function StreamsPage({ onOpenSubject, onOpenPdf }) {
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="px-2.5 py-0.5 rounded-md bg-[#F62440] text-white font-bold text-xs shadow-2xs">
-                  البرنامج الوزاري المعتمد 🇩🇿
+              <div className="flex items-center gap-2 mb-1">
+                <span className="px-2.5 py-0.5 rounded bg-[#F62440] text-white font-bold text-xs">
+                  البرنامج الوزاري 🇩🇿
                 </span>
-                <span className="text-xs text-[#78716c]">جميع الشعب الستة مع المعاملات والوحدات التعليمية</span>
+                <span className="text-xs text-[#78716c]">جميع الشعب مع المعاملات والوحدات التعليمية</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-black text-[#1c1917]">
-                فضاء الشعب والمواد التعليمية 🏛️
+                فضاء الشعب والمواد التعليمية
               </h1>
               <p className="text-xs text-[#57534e] mt-1 max-w-xl">
                 تصفح مقررات ومواد شعبتك بالتفصيل، وتابع نسبة إنجازك للوحدات الدراسية وافتح الدروس والملخصات المقررة.
@@ -49,7 +42,7 @@ export default function StreamsPage({ onOpenSubject, onOpenPdf }) {
 
             <Link
               to="/"
-              className="self-start md:self-auto px-4 py-2 rounded-xl bg-white hover:bg-[#FFE5BF] text-[#1c1917] text-xs font-bold border border-[#FFE5BF] transition-colors flex items-center gap-1.5 shadow-2xs"
+              className="self-start md:self-auto px-4 py-2 rounded-xl bg-white hover:bg-[#FFE5BF] text-[#1c1917] text-xs font-bold border border-[#FFE5BF] transition-colors flex items-center gap-1.5"
             >
               <span>العودة للرئيسية</span>
               <HiChevronLeft className="w-4 h-4" />
@@ -62,7 +55,7 @@ export default function StreamsPage({ onOpenSubject, onOpenPdf }) {
       {/* Stream Hub Interactive Explorer */}
       <StreamHub 
         selectedStreamId={selectedStreamId}
-        onSelectStream={(sId) => setSelectedStreamId(sId)}
+        onSelectStream={onSelectStream}
         onOpenSubject={onOpenSubject}
       />
 

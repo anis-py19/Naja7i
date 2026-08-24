@@ -16,6 +16,13 @@ export default function StreamHub({ selectedStreamId, onSelectStream, onOpenSubj
   const [completedCount, setCompletedCount] = useState(0);
   const [totalUnitsCount, setTotalUnitsCount] = useState(0);
 
+  // Sync with prop when parent updates selectedStreamId
+  useEffect(() => {
+    if (selectedStreamId && selectedStreamId !== activeStreamId) {
+      setActiveStreamId(selectedStreamId);
+    }
+  }, [selectedStreamId]);
+
   const streamInfo = STREAMS.find(s => s.id === activeStreamId) || STREAMS[0];
   const streamData = BAC_COEFFICIENTS[activeStreamId] || BAC_COEFFICIENTS['sciences'];
 

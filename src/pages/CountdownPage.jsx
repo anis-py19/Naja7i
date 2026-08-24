@@ -4,13 +4,8 @@ import {
   HiHome, 
   HiChevronLeft, 
   HiClock, 
-  HiCalendar, 
-  HiSparkles,
-  HiFlag,
-  HiCheckCircle,
-  HiAcademicCap
+  HiCalendar
 } from 'react-icons/hi';
-import { motion } from 'framer-motion';
 
 export default function CountdownPage() {
   const getNextBacDate = () => {
@@ -72,12 +67,12 @@ export default function CountdownPage() {
   }, [targetDate, targetYear]);
 
   const milestones = [
-    { title: 'انطلاق السنة الدراسية', date: 'سبتمبر', passed: true, icon: '🎒' },
-    { title: 'امتحانات الفصل الأول', date: 'ديسمبر', passed: true, icon: '📝' },
-    { title: 'امتحانات الفصل الثاني', date: 'مارس', passed: true, icon: '📊' },
-    { title: 'البكالوريا التجريبية (الامتحان الأبيض)', date: 'ماي', passed: false, icon: '🎯' },
-    { title: 'شهادة البكالوريا الرسمية (دورة جوان)', date: `07 جوان ${targetYear}`, passed: false, icon: '🏆', current: true },
-    { title: 'إعلان النتائج الرسمية وفرحة النجاح', date: 'جويلية', passed: false, icon: '🎉' }
+    { title: 'انطلاق الموسم الدراسي', date: 'سبتمبر', passed: true },
+    { title: 'امتحانات الفصل الأول', date: 'ديسمبر', passed: true },
+    { title: 'امتحانات الفصل الثاني', date: 'مارس', passed: true },
+    { title: 'امتحانات البكالوريا التجريبية', date: 'ماي', passed: false },
+    { title: 'امتحان شهادة البكالوريا الرسمي', date: `07 جوان ${targetYear}`, current: true },
+    { title: 'إعلان النتائج الرسمية', date: 'جويلية', passed: false }
   ];
 
   return (
@@ -94,28 +89,28 @@ export default function CountdownPage() {
               <span>الرئيسية</span>
             </Link>
             <span>/</span>
-            <span className="text-[#1c1917] font-bold">العداد التنازلي ومخطط البكالوريا</span>
+            <span className="text-[#1c1917] font-bold">العداد التنازلي للبكالوريا</span>
           </div>
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="px-2.5 py-0.5 rounded-md bg-[#F62440] text-white font-bold text-xs shadow-2xs font-mono">
-                  BAC {targetYear} 🇩🇿
+              <div className="flex items-center gap-2 mb-1">
+                <span className="px-2.5 py-0.5 rounded bg-[#F62440] text-white font-bold text-xs font-mono">
+                  BAC {targetYear}
                 </span>
                 <span className="text-xs text-[#78716c]">الموعد الرسمي: 07 جوان {targetYear}</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-black text-[#1c1917]">
-                العداد التنازلي لشهادة البكالوريا ⏳
+                العداد التنازلي لشهادة البكالوريا
               </h1>
               <p className="text-xs text-[#57534e] mt-1 max-w-xl">
-                كل ثانية تمر تقربك من حلمك. نظم وقتك، واجعل كل ساعة مراجعة خطوة ثابتة نحو معدل الامتياز.
+                متابعة دقيقة للأيام والساعات المتبقية لمساعدتك على تنظيم برنامج المراجعة.
               </p>
             </div>
 
             <Link
               to="/"
-              className="self-start md:self-auto px-4 py-2 rounded-xl bg-white hover:bg-[#FFE5BF] text-[#1c1917] text-xs font-bold border border-[#FFE5BF] transition-colors flex items-center gap-1.5 shadow-2xs"
+              className="self-start md:self-auto px-4 py-2 rounded-xl bg-white hover:bg-[#FFE5BF] text-[#1c1917] text-xs font-bold border border-[#FFE5BF] transition-colors flex items-center gap-1.5"
             >
               <span>العودة للرئيسية</span>
               <HiChevronLeft className="w-4 h-4" />
@@ -126,150 +121,106 @@ export default function CountdownPage() {
       </div>
 
       {/* Main Content Area */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-6">
         
-        {/* Main Countdown Big Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-white border-2 border-[#FFE5BF] rounded-3xl p-6 sm:p-10 shadow-xs text-center space-y-8"
-        >
+        {/* Main Countdown Box */}
+        <div className="bg-white border border-[#FFE5BF] rounded-2xl p-6 sm:p-8 text-center space-y-6">
           
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FFF2DB] border border-[#FFE5BF] text-xs font-bold text-[#F62440]">
-            <HiClock className="w-4 h-4" />
-            <span>الوقت المتبقي حتى انطلاق امتحان البكالوريا رسميًا</span>
+          <div className="text-xs font-bold text-[#78716c]">
+            الوقت المتبقي حتى انطلاق امتحان شهادة البكالوريا
           </div>
 
-          {/* Big Number Digits Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
+          {/* Digits Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
             
-            {/* Days */}
-            <div className="bg-[#FFFAF3] border border-[#FFE5BF] rounded-2xl p-5 sm:p-6 shadow-2xs">
-              <span className="text-4xl sm:text-6xl font-black text-[#F62440] font-mono block mb-1">
+            <div className="bg-[#FFFAF3] border border-[#FFE5BF] rounded-xl p-4">
+              <span className="text-3xl sm:text-5xl font-black text-[#F62440] font-mono block">
                 {timeLeft.days}
               </span>
-              <span className="text-xs sm:text-sm font-bold text-[#57534e]">
-                يـــوم (Jour)
+              <span className="text-xs font-bold text-[#57534e]">
+                يوم
               </span>
             </div>
 
-            {/* Hours */}
-            <div className="bg-[#FFFAF3] border border-[#FFE5BF] rounded-2xl p-5 sm:p-6 shadow-2xs">
-              <span className="text-4xl sm:text-6xl font-black text-[#1c1917] font-mono block mb-1">
+            <div className="bg-[#FFFAF3] border border-[#FFE5BF] rounded-xl p-4">
+              <span className="text-3xl sm:text-5xl font-black text-[#1c1917] font-mono block">
                 {String(timeLeft.hours).padStart(2, '0')}
               </span>
-              <span className="text-xs sm:text-sm font-bold text-[#57534e]">
-                ساعة (Heure)
+              <span className="text-xs font-bold text-[#57534e]">
+                ساعة
               </span>
             </div>
 
-            {/* Minutes */}
-            <div className="bg-[#FFFAF3] border border-[#FFE5BF] rounded-2xl p-5 sm:p-6 shadow-2xs">
-              <span className="text-4xl sm:text-6xl font-black text-[#1c1917] font-mono block mb-1">
+            <div className="bg-[#FFFAF3] border border-[#FFE5BF] rounded-xl p-4">
+              <span className="text-3xl sm:text-5xl font-black text-[#1c1917] font-mono block">
                 {String(timeLeft.minutes).padStart(2, '0')}
               </span>
-              <span className="text-xs sm:text-sm font-bold text-[#57534e]">
-                دقيقة (Minute)
+              <span className="text-xs font-bold text-[#57534e]">
+                دقيقة
               </span>
             </div>
 
-            {/* Seconds */}
-            <div className="bg-[#FFFAF3] border border-[#FFE5BF] rounded-2xl p-5 sm:p-6 shadow-2xs">
-              <span className="text-4xl sm:text-6xl font-black text-[#F62440] font-mono block mb-1 animate-pulse">
+            <div className="bg-[#FFFAF3] border border-[#FFE5BF] rounded-xl p-4">
+              <span className="text-3xl sm:text-5xl font-black text-[#F62440] font-mono block">
                 {String(timeLeft.seconds).padStart(2, '0')}
               </span>
-              <span className="text-xs sm:text-sm font-bold text-[#57534e]">
-                ثانية (Seconde)
+              <span className="text-xs font-bold text-[#57534e]">
+                ثانية
               </span>
             </div>
 
           </div>
 
-          {/* Progress Bar for the School Year */}
-          <div className="max-w-2xl mx-auto space-y-2">
+          {/* School Year Progress Bar */}
+          <div className="max-w-xl mx-auto space-y-1.5 pt-2">
             <div className="flex justify-between items-center text-xs font-bold text-[#57534e]">
-              <span>تقدم السنة الدراسية حتى البكالوريا</span>
+              <span>نسبة تقدم الموسم الدراسي:</span>
               <span className="font-mono text-[#F62440]">{timeLeft.percentage}%</span>
             </div>
-            <div className="w-full bg-[#FFF2DB] h-3.5 rounded-full overflow-hidden border border-[#FFE5BF] p-0.5">
+            <div className="w-full bg-[#FFF2DB] h-2.5 rounded-full overflow-hidden border border-[#FFE5BF]">
               <div
-                className="h-full bg-[#F62440] rounded-full transition-all duration-500 shadow-2xs"
+                className="h-full bg-[#F62440] rounded-full transition-all duration-300"
                 style={{ width: `${timeLeft.percentage}%` }}
               ></div>
             </div>
-            <div className="flex justify-between text-[11px] text-[#78716c]">
-              <span>بداية الموسم (سبتمبر)</span>
-              <span>امتحان البكالوريا (جوان {targetYear})</span>
-            </div>
           </div>
 
-          {/* Quick Metrics */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-xl mx-auto pt-4 border-t border-[#FFE5BF]">
-            <div className="p-3 bg-[#FFF2DB]/60 rounded-xl border border-[#FFE5BF]">
-              <span className="text-xs text-[#78716c] block">إجمالي الساعات</span>
-              <span className="text-base font-black text-[#1c1917] font-mono">{timeLeft.totalHours} ساعة</span>
-            </div>
-            <div className="p-3 bg-[#FFF2DB]/60 rounded-xl border border-[#FFE5BF]">
-              <span className="text-xs text-[#78716c] block">إجمالي الأسابيع</span>
-              <span className="text-base font-black text-[#1c1917] font-mono">{timeLeft.weeks} أسبوعاً</span>
-            </div>
-            <div className="p-3 bg-[#FFF2DB]/60 rounded-xl border border-[#FFE5BF] col-span-2 sm:col-span-1">
-              <span className="text-xs text-[#78716c] block">الهدف المنشود</span>
-              <span className="text-base font-black text-[#F62440]">+16 معدل الامتياز</span>
-            </div>
-          </div>
+        </div>
 
-        </motion.div>
-
-        {/* Academic Milestones Timeline */}
-        <div className="bg-white border border-[#FFE5BF] rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
-          <div className="flex items-center gap-2 border-b border-[#FFE5BF] pb-4">
-            <HiCalendar className="w-5 h-5 text-[#F62440]" />
-            <h3 className="text-base sm:text-lg font-black text-[#1c1917]">
-              المحطات الأساسية للموسم الدراسي (الرزنامة المعتمدة)
+        {/* Academic Milestones Table */}
+        <div className="bg-white border border-[#FFE5BF] rounded-2xl p-6 space-y-4">
+          <div className="flex items-center gap-2 border-b border-[#FFE5BF] pb-3">
+            <HiCalendar className="w-4 h-4 text-[#F62440]" />
+            <h3 className="text-sm sm:text-base font-bold text-[#1c1917]">
+              المحطات الأساسية لرزنامة الموسم الدراسي
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {milestones.map((m, i) => (
               <div
                 key={i}
-                className={`p-4 rounded-2xl border transition-colors flex items-center gap-3 ${
+                className={`p-3.5 rounded-xl border flex items-center justify-between ${
                   m.current
-                    ? 'bg-[#FFF2DB] border-[#F62440] shadow-xs'
+                    ? 'bg-[#FFF2DB] border-[#F62440]'
                     : 'bg-[#FFFAF3] border-[#FFE5BF]'
                 }`}
               >
-                <div className="w-12 h-12 rounded-xl bg-white border border-[#FFE5BF] flex items-center justify-center text-2xl shrink-0 shadow-2xs">
-                  {m.icon}
-                </div>
                 <div>
-                  <h4 className="text-xs sm:text-sm font-bold text-[#1c1917]">
+                  <h4 className="text-xs font-bold text-[#1c1917]">
                     {m.title}
                   </h4>
-                  <span className="text-xs text-[#78716c] block mt-0.5 font-medium">
+                  <span className="text-[11px] text-[#78716c]">
                     {m.date}
                   </span>
                 </div>
+                {m.current && (
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-[#F62440] text-white font-bold">
+                    الامتحان القادم
+                  </span>
+                )}
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Golden Revision Advice Box */}
-        <div className="bg-[#FFF2DB] border border-[#FFE5BF] rounded-3xl p-6 sm:p-8">
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-white border border-[#FFE5BF] text-[#F62440] flex items-center justify-center text-3xl shrink-0 shadow-2xs">
-              🧠
-            </div>
-            <div className="space-y-1.5 text-center sm:text-right">
-              <h4 className="text-base font-black text-[#1c1917]">
-                كيف تستغل الوقت المتبقي لتحقيق أعلى النتائج؟
-              </h4>
-              <p className="text-xs sm:text-sm text-[#57534e] leading-relaxed">
-                قسّم وقتك اليومي إلى فترات مركزة (تقنية Pomodoro 25 دقيقة تركيز + 5 دقائق راحة)، ولا تؤجل مراجعة المواد الثانوية (الشريعة، التاريخ والجغرافيا، واللغات) لأنها ترفع المعدل العام بأكثر من نقطتين كاملتين!
-              </p>
-            </div>
           </div>
         </div>
 

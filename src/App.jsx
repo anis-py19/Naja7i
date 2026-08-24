@@ -65,6 +65,8 @@ function App() {
               path="/streams" 
               element={
                 <StreamsPage 
+                  selectedStreamId={selectedStreamId}
+                  onSelectStream={(sId) => setSelectedStreamId(sId)}
                   onOpenSubject={handleOpenSubject}
                   onOpenPdf={(file) => setActivePdf(file)}
                 />

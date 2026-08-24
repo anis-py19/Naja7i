@@ -7,26 +7,8 @@ const __dirname = path.dirname(__filename);
 
 // الصفحات التي تريد استخراج الملفات منها
 const targetPages = [
-  "https://www.ency-education.net/3as-english/1",
-  "https://www.ency-education.net/3as-french/1",
-  "https://www.ency-education.net/3as-arabic/1",
-  "https://www.ency-education.net/3as-physics/1",
-  "https://www.ency-education.net/3as-sciences/1",
-  "https://www.ency-education.net/3as-math/1",
-  "https://www.ency-education.net/3as-procedes/1",
-  "https://www.ency-education.net/3as-hisgeo/1",
-  "https://www.ency-education.net/3as-islamic/1",
-  "https://www.ency-education.net/3as-genie-mecanique/1",
-  "https://www.ency-education.net/3as-genie-civil/1",
-  "https://www.ency-education.net/3as-genie-electrique/1",
-  "https://www.ency-education.net/3as-droit/1",
-  "https://www.ency-education.net/3as-economy/1",
-  "https://www.ency-education.net/3as-gestion/1",
-  "https://www.ency-education.net/3as-italian/1",
-  "https://www.ency-education.net/3as-spanish/1",
-  "https://www.ency-education.net/3as-german/1",
-  "https://www.ency-education.net/3as-philo/1"
-];
+  
+]
 
 // مجلد التخزين الرئيسي
 const outputDir = path.join(__dirname, '..', 'downloaded_pdfs');
