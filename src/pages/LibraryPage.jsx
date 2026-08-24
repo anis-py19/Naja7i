@@ -13,8 +13,10 @@ import {
   HiExternalLink
 } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
+import { FaGoogleDrive } from 'react-icons/fa6';
 import { USER_STUDY_FILES } from '../data/userFilesData';
 import { STREAMS } from '../data/streamsData';
+import { SITE_CONFIG } from '../config/siteConfig';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -137,7 +139,7 @@ export default function LibraryPage({ onOpenPdf }) {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1.5">
-                <span className="px-2.5 py-0.5 rounded-full bg-[#F1F5F9] text-[#E11D48] font-bold text-xs font-mono border border-[#E2E8F0]">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#F1F5F9] text-[#E11D48] font-bold text-xs border border-[#E2E8F0]">
                   مكتبة شاملة
                 </span>
                 <span className="text-xs text-[#64748B]">تحميل مباشر وقراءة فورية داخل الموقع</span>
@@ -150,13 +152,26 @@ export default function LibraryPage({ onOpenPdf }) {
               </p>
             </div>
 
-            <Link
-              to="/"
-              className="self-start md:self-auto px-4 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] transition-colors flex items-center gap-1.5 shadow-2xs"
-            >
-              <span>العودة للرئيسية</span>
-              <HiChevronLeft className="w-4 h-4" />
-            </Link>
+            <div className="flex items-center gap-2.5 self-start md:self-auto">
+              <a
+                href={SITE_CONFIG.googleDriveMainFolder}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-xl bg-[#0F172A] hover:bg-black text-white text-xs font-bold transition-all flex items-center gap-2 shadow-xs cursor-pointer"
+              >
+                <FaGoogleDrive className="w-4 h-4 text-[#34A853]" />
+                <span>مجلد Drive الكامل</span>
+                <HiExternalLink className="w-3.5 h-3.5" />
+              </a>
+
+              <Link
+                to="/"
+                className="px-4 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] transition-colors flex items-center gap-1.5 shadow-2xs"
+              >
+                <span>العودة للرئيسية</span>
+                <HiChevronLeft className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
 
         </div>
