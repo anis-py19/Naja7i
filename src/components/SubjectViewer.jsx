@@ -233,30 +233,19 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                       </p>
                     </div>
 
-                    <div className="pt-2 border-t border-[#E2E8F0] flex items-center gap-1.5">
+                    <div className="pt-2 border-t border-[#E2E8F0] grid grid-cols-2 gap-2">
                       <button
                         onClick={() => onOpenPdf && onOpenPdf(file)}
-                        className="flex-1 py-2 rounded-lg bg-white hover:bg-[#F1F5F9] text-[#0F172A] font-bold text-xs flex items-center justify-center gap-1 border border-[#CBD5E1] transition-colors cursor-pointer"
-                        title="قراءة في المستعرض"
+                        className="py-2 rounded-lg bg-white hover:bg-[#F1F5F9] text-[#0F172A] font-bold text-xs flex items-center justify-center gap-1 border border-[#CBD5E1] transition-colors cursor-pointer"
                       >
                         <HiEye className="w-3.5 h-3.5 text-[#E11D48]" />
                         <span>قراءة</span>
                       </button>
 
-                      <a
-                        href={encodeURI(file.fileUrl || file.url)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-lg bg-white hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#0F172A] border border-[#CBD5E1] transition-colors cursor-pointer shadow-2xs flex items-center justify-center"
-                        title="فتح مباشر في علامة تبويب جديدة"
-                      >
-                        <HiExternalLink className="w-3.5 h-3.5" />
-                      </a>
-
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          const pdfUrl = encodeURI(file.fileUrl || file.url);
+                          const pdfUrl = file.fileUrl || file.url;
                           const fileName = file.rawFileName || `${file.title}.pdf`;
                           const link = document.createElement('a');
                           link.href = pdfUrl;
@@ -267,11 +256,10 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                           link.click();
                           document.body.removeChild(link);
                         }}
-                        className="flex-1 py-2 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center justify-center gap-1 transition-colors shadow-2xs cursor-pointer"
-                        title="تحميل الملف إلى جهازك"
+                        className="py-2 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center justify-center gap-1 transition-colors shadow-2xs cursor-pointer"
                       >
                         <HiDownload className="w-3.5 h-3.5" />
-                        <span>تحميل</span>
+                        <span>تحميل PDF</span>
                       </button>
                     </div>
                   </div>

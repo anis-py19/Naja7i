@@ -365,31 +365,19 @@ export default function LibraryPage({ onOpenPdf }) {
 
                 </div>
 
-                {/* Actions: View Online, Open in Tab & Download Direct */}
-                <div className="pt-3 border-t border-[#E2E8F0] flex items-center gap-1.5">
+                {/* Actions: View Online & Download Direct */}
+                <div className="pt-3 border-t border-[#E2E8F0] flex items-center gap-2">
                   <button
                     onClick={() => onOpenPdf(file)}
-                    className="flex-1 py-2 px-2 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] flex items-center justify-center gap-1 transition-colors cursor-pointer"
-                    title="قراءة في المستعرض"
+                    className="flex-1 py-2 px-2 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                   >
                     <HiEye className="w-3.5 h-3.5 text-[#E11D48]" />
                     <span>قراءة</span>
                   </button>
 
-                  <a
-                    href={encodeURI(file.fileUrl)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#0F172A] border border-[#CBD5E1] transition-colors cursor-pointer shadow-2xs flex items-center justify-center"
-                    title="فتح مباشر في علامة تبويب جديدة"
-                  >
-                    <HiExternalLink className="w-3.5 h-3.5" />
-                  </a>
-
                   <button
                     onClick={(e) => handleDirectDownload(file, e)}
-                    className="flex-1 py-2 px-2 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white text-xs font-bold flex items-center justify-center gap-1 transition-colors shadow-2xs cursor-pointer"
-                    title="تحميل الملف إلى جهازك"
+                    className="flex-1 py-2 px-2 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
                   >
                     <HiDownload className="w-3.5 h-3.5" />
                     <span>تحميل</span>
