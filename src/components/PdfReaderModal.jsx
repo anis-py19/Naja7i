@@ -39,30 +39,25 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
         className={`relative w-full bg-white border border-[#E2E8F0] rounded-2xl shadow-2xl flex flex-col transition-all overflow-hidden ${
           isFullscreen 
             ? 'fixed inset-2 z-50 h-[calc(100vh-16px)] max-w-none' 
-            : 'max-w-5xl h-[90vh]'
+            : 'max-w-5xl h-[92vh]'
         }`}
       >
-        {/* Reader Header */}
-        <div className="px-4 py-3 sm:px-6 sm:py-3.5 bg-[#F8FAFC] border-b border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="w-10 h-10 rounded-xl bg-white border border-[#E2E8F0] text-[#E11D48] flex items-center justify-center text-lg shrink-0 shadow-2xs">
-              <HiDocumentText className="w-5 h-5" />
-            </div>
-            <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-white text-[#E11D48] border border-[#E2E8F0]">
-                  {file.subjectName || 'ملخص دراسي'}
-                </span>
-                {fileSize && (
-                  <span className="text-[11px] text-[#64748B] font-mono">
-                    {fileSize}
-                  </span>
-                )}
-              </div>
-              <h3 className="text-sm sm:text-base font-bold text-[#0F172A] truncate mt-0.5">
-                {file.title}
-              </h3>
-            </div>
+        {/* Reader Top Action Bar */}
+        <div className="px-4 py-2.5 bg-[#F8FAFC] border-b border-[#E2E8F0] flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-white text-[#E11D48] border border-[#E2E8F0]">
+              {file.subjectName || 'ملخص دراسي'}
+            </span>
+            {fileSize && (
+              <span className="text-xs text-[#64748B] font-mono">
+                {fileSize}
+              </span>
+            )}
+            {file.author && (
+              <span className="text-xs text-[#475569] hidden sm:inline">
+                • {file.author}
+              </span>
+            )}
           </div>
 
           {/* Action Tools */}
@@ -83,7 +78,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
               target="_blank"
               rel="noopener noreferrer"
               className="px-3 py-1.5 rounded-xl bg-white hover:bg-[#F1F5F9] text-[#0F172A] border border-[#CBD5E1] text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs"
-              title="فتح في لسان جديد"
+              title="فتح في نافذة مستقلة"
             >
               <HiExternalLink className="w-4 h-4 text-[#64748B]" />
               <span className="hidden sm:inline">نافذة مستقلة</span>
@@ -109,53 +104,21 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
           </div>
         </div>
 
-        {/* Reader Frame Body */}
-        <div className="flex-1 bg-[#F1F5F9] relative overflow-hidden flex flex-col items-center justify-center">
-          <object
-            data={`${pdfUrl}#toolbar=1&navpanes=0&scrollbar=1`}
-            type="application/pdf"
-            className="w-full h-full border-0 bg-white"
-          >
-            {/* Fallback for browsers that don't support embedded PDF */}
-            <div className="p-8 text-center space-y-4 max-w-md bg-white rounded-2xl border border-[#E2E8F0] shadow-sm m-4">
-              <div className="text-4xl">📄</div>
-              <h4 className="text-base font-bold text-[#0F172A]">معاينة المستند</h4>
-              <p className="text-xs text-[#64748B] leading-relaxed">
-                متصفحك لا يدعم عرض ملفات PDF مباشرة داخل النافذة. يمكنك فتح المستند في نافذة جديدة أو تحميله مباشرة.
-              </p>
-              <div className="flex items-center justify-center gap-3 pt-2">
-                <a
-                  href={pdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-xl bg-[#0F172A] text-white text-xs font-bold flex items-center gap-1.5"
-                >
-                  <HiExternalLink className="w-4 h-4" />
-                  <span>فتح في علامة تبويب جديدة</span>
-                </a>
-                <button
-                  onClick={handleDownload}
-                  className="px-4 py-2 rounded-xl bg-[#E11D48] text-white text-xs font-bold flex items-center gap-1.5"
-                >
-                  <HiDownload className="w-4 h-4" />
-                  <span>تحميل مباشر</span>
-                </button>
-              </div>
-            </div>
-          </object>
+        {/* Highlighted Document Title Box (Exact match with user requested design) */}
+        <div className="px-4 py-2 bg-white border-b border-[#E2E8F0]">
+          <div className="rounded-xl border border-sky-200 bg-sky-50 text-[#E11D48] text-center font-black py-2 px-3 text-xs sm:text-sm md:text-base shadow-2xs">
+            {file.title}
+          </div>
         </div>
 
-        {/* Reader Footer Info */}
-        <div className="px-4 py-2.5 bg-[#F8FAFC] border-t border-[#E2E8F0] flex items-center justify-between text-xs text-[#64748B]">
-          <div className="flex items-center gap-2">
-            <span>إعداد: <strong className="text-[#0F172A]">{file.author || 'نخبة الأساتذة'}</strong></span>
-            <span>•</span>
-            <span className="text-[#E11D48] font-medium">{file.category || 'ملخص دراسي'}</span>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <span className="text-[11px]">منصة نجاحي — فضاء البكالوريا الجزائرية 🇩🇿</span>
-          </div>
+        {/* Reader Frame Body */}
+        <div className="flex-1 bg-[#F1F5F9] relative overflow-hidden flex flex-col items-center justify-center">
+          <iframe
+            src={`${pdfUrl}#toolbar=1&navpanes=0&scrollbar=1`}
+            type="application/pdf"
+            className="w-full h-full border-0 bg-white"
+            title={file.title}
+          />
         </div>
 
       </motion.div>

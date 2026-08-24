@@ -20,6 +20,7 @@ import CalculatorPage from './pages/CalculatorPage';
 import CountdownPage from './pages/CountdownPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import PdfViewerPage from './pages/PdfViewerPage';
 import MaintenancePage from './pages/MaintenancePage';
 import NotFound from './pages/NotFound';
 
@@ -205,6 +206,20 @@ function App() {
             path="/contact"
             element={
               <ContactPage />
+            }
+          />
+
+          {/* 10.5 صفحة مستعرض الـ PDF المباشر */}
+          <Route
+            path="/read"
+            element={
+              <PdfViewerPage />
+            }
+          />
+          <Route
+            path="/viewer"
+            element={
+              <PdfViewerPage />
             }
           />
 
