@@ -349,7 +349,7 @@ export default function QuizBankPage() {
                     <span>{timeLeft} ثانية</span>
                   </span>
                 )}
-                <span className="text-xs font-bold text-[#0F172A] font-mono">
+                <span className="text-xs font-bold text-[#0F172A]">
                   السؤال {currentIndex + 1} / {currentQuestions.length}
                 </span>
               </div>
@@ -485,12 +485,12 @@ export default function QuizBankPage() {
               <div className="inline-flex items-center gap-3 px-4 py-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
                 <div>
                   <span className="text-xs text-[#64748B] block">العلامة المقدرة:</span>
-                  <strong className="text-lg font-black text-[#E11D48] font-mono">{scoreData.mark20} / 20</strong>
+                  <strong className="text-lg font-black text-[#E11D48]">{scoreData.mark20} / 20</strong>
                 </div>
                 <div className="w-px h-8 bg-[#CBD5E1]" />
                 <div>
                   <span className="text-xs text-[#64748B] block">نسبة الإجابات الصحيحة:</span>
-                  <strong className="text-lg font-black text-[#0F172A] font-mono">{scoreData.correct} من {scoreData.total} ({scoreData.percent}%)</strong>
+                  <strong className="text-lg font-black text-[#0F172A]">{scoreData.correct} من {scoreData.total} ({scoreData.percent}%)</strong>
                 </div>
               </div>
             </div>

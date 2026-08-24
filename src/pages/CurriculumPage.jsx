@@ -300,7 +300,7 @@ export default function CurriculumPage() {
                     >
                       <span className="text-base">{sub.icon}</span>
                       <span>{sub.name}</span>
-                      <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono font-bold ${
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${
                         isSelected ? 'bg-white/20 text-white' : 'bg-[#E2E8F0] text-[#475569]'
                       }`}>
                         معامل {sub.coef}
@@ -326,7 +326,7 @@ export default function CurriculumPage() {
                         <span className="text-xs font-bold text-[#E11D48] bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
                           {currentStreamData.name}
                         </span>
-                        <span className="text-xs text-[#64748B] font-mono">
+                        <span className="text-xs text-[#64748B] font-medium">
                           الحجم الساعي: {activeSubject.hours}
                         </span>
                       </div>

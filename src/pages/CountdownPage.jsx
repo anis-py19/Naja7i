@@ -93,7 +93,7 @@ export default function CountdownPage() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <span className="px-2.5 py-0.5 rounded-full bg-[#F1F5F9] text-[#E11D48] font-bold text-xs font-mono border border-[#E2E8F0]">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#F1F5F9] text-[#E11D48] font-bold text-xs border border-[#E2E8F0]">
                   BAC {targetYear} 🇩🇿
                 </span>
                 <span className="text-xs text-[#64748B]">07 جوان {targetYear} • الساعة 08:00 صباحاً</span>

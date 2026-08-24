@@ -306,7 +306,9 @@ function App() {
             <span>•</span>
             <Link to="/youtube-teachers" className="hover:text-[#E11D48] transition-colors">أساتذة اليوتيوب</Link>
             <span>•</span>
-            <Link to="/quiz" className="hover:text-[#E11D48] transition-colors font-bold text-[#E11D48]">بنك الأسئلة (Quiz) ⏱️</Link>
+            <Link to="/curriculum" className="hover:text-[#E11D48] transition-colors font-bold text-[#E11D48]">المنهاج والبرنامج الوزاري 📚</Link>
+            <span>•</span>
+            <Link to="/quiz" className="hover:text-[#E11D48] transition-colors">بنك الأسئلة (Quiz)</Link>
             <span>•</span>
             <Link to="/study-planner" className="hover:text-[#E11D48] transition-colors">مخطط المراجعة</Link>
             <span>•</span>
