@@ -6,14 +6,15 @@ import {
   HiBookOpen, 
   HiDownload,
   HiExternalLink,
-  HiFolder
+  HiFolder,
+  HiEye
 } from 'react-icons/hi';
 import { FaGoogleDrive } from 'react-icons/fa6';
 import { STREAMS } from '../data/streamsData';
 import { BAC_YEARS } from '../data/bacData';
 import { SITE_CONFIG } from '../config/siteConfig';
 
-export default function BacArchivePage() {
+export default function BacArchivePage({ onOpenPdf }) {
   const [selectedYear, setSelectedYear] = useState('all');
   const [selectedStream, setSelectedStream] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
@@ -213,15 +214,31 @@ export default function BacArchivePage() {
                       </div>
                     </div>
 
-                    <a
-                      href={`https://www.ency-education.net/bac-${stream.id}.html`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-2.5 py-1 rounded-lg bg-white group-hover:bg-[#E11D48] group-hover:text-white text-[#0F172A] text-[11px] font-bold border border-[#E2E8F0] flex items-center gap-1 transition-colors"
-                    >
-                      <HiDownload className="w-3 h-3" />
-                      <span>تحميل</span>
-                    </a>
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <button
+                        onClick={() => onOpenPdf && onOpenPdf({
+                          title: `مواضيع وحلول بكالوريا ${year} — ${stream.name}`,
+                          url: `https://www.ency-education.net/bac-${stream.id}.html`,
+                          fileUrl: `https://www.ency-education.net/bac-${stream.id}.html`,
+                          category: `بكالوريا ${year}`,
+                          subjectName: stream.name
+                        })}
+                        className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#F1F5F9] text-[#0F172A] text-[11px] font-bold border border-[#CBD5E1] flex items-center gap-1 transition-colors cursor-pointer shadow-2xs"
+                      >
+                        <HiEye className="w-3 h-3 text-[#E11D48]" />
+                        <span>معاينة</span>
+                      </button>
+
+                      <a
+                        href={`https://www.ency-education.net/bac-${stream.id}.html`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-2.5 py-1 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white text-[11px] font-bold flex items-center gap-1 transition-colors shadow-2xs"
+                      >
+                        <HiDownload className="w-3 h-3" />
+                        <span>تحميل</span>
+                      </a>
+                    </div>
                   </div>
                 ))}
               </div>

@@ -337,15 +337,30 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                                 {sum.author} {sum.pages && `• ${sum.pages}`}
                               </div>
                             </div>
-                            <a
-                              href={sum.link}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="px-2.5 py-1 rounded bg-[#F8FAFC] hover:bg-[#E11D48] text-[#E11D48] hover:text-white font-bold text-xs flex items-center gap-1 transition-colors border border-[#CBD5E1] hover:border-[#E11D48] shrink-0"
-                            >
-                              <HiDownload className="w-3.5 h-3.5" />
-                              <span>تحميل</span>
-                            </a>
+                            <div className="flex items-center gap-1.5 shrink-0">
+                              <button
+                                onClick={() => onOpenPdf && onOpenPdf({
+                                  title: sum.name,
+                                  url: sum.link,
+                                  fileUrl: sum.link,
+                                  author: sum.author,
+                                  category: 'ملخصات ودروس'
+                                })}
+                                className="px-2.5 py-1 rounded bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] font-bold text-xs flex items-center gap-1 transition-colors border border-[#CBD5E1] cursor-pointer shadow-2xs"
+                              >
+                                <HiEye className="w-3.5 h-3.5 text-[#E11D48]" />
+                                <span>قراءة</span>
+                              </button>
+                              <a
+                                href={sum.link}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="px-2.5 py-1 rounded bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center gap-1 transition-colors shadow-2xs"
+                              >
+                                <HiDownload className="w-3.5 h-3.5" />
+                                <span>تحميل</span>
+                              </a>
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -369,15 +384,30 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                                 {ex.author} • {ex.type}
                               </div>
                             </div>
-                            <a
-                              href={ex.link}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="px-2.5 py-1 rounded bg-[#F8FAFC] hover:bg-[#E11D48] text-[#0F172A] hover:text-white font-bold text-xs flex items-center gap-1 transition-colors border border-[#CBD5E1] hover:border-[#E11D48] shrink-0"
-                            >
-                              <HiDownload className="w-3.5 h-3.5" />
-                              <span>تحميل</span>
-                            </a>
+                            <div className="flex items-center gap-1.5 shrink-0">
+                              <button
+                                onClick={() => onOpenPdf && onOpenPdf({
+                                  title: ex.name,
+                                  url: ex.link,
+                                  fileUrl: ex.link,
+                                  author: ex.author,
+                                  category: 'سلاسل تمارين'
+                                })}
+                                className="px-2.5 py-1 rounded bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] font-bold text-xs flex items-center gap-1 transition-colors border border-[#CBD5E1] cursor-pointer shadow-2xs"
+                              >
+                                <HiEye className="w-3.5 h-3.5 text-[#E11D48]" />
+                                <span>قراءة</span>
+                              </button>
+                              <a
+                                href={ex.link}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="px-2.5 py-1 rounded bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center gap-1 transition-colors shadow-2xs"
+                              >
+                                <HiDownload className="w-3.5 h-3.5" />
+                                <span>تحميل</span>
+                              </a>
+                            </div>
                           </div>
                         ))}
                       </div>
