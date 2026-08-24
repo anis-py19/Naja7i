@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { 
   HiMail, 
   HiRefresh, 
-  HiClock
+  HiClock,
+  HiShieldCheck
 } from 'react-icons/hi';
 import { SITE_CONFIG } from '../config/siteConfig';
 
@@ -23,21 +24,32 @@ export default function MaintenancePage({ onBypass }) {
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col justify-between font-['Cairo'] antialiased">
       
       {/* Top Header */}
-      <header className="border-b border-[#E2E8F0] bg-white py-4 shadow-xs">
+      <header className="bg-[#0F172A] border-b border-slate-800 text-white py-3 shadow-md">
         <div className="max-w-4xl mx-auto px-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#E11D48] text-white flex items-center justify-center font-bold text-base shadow-2xs">
-              🎓
+            <div className="w-9 h-9 rounded-xl bg-white p-0.5 shadow-md flex items-center justify-center border border-white/20">
+              <img 
+                src="/logo.jpg" 
+                alt="نجاحي Naja7i" 
+                className="w-full h-full object-contain rounded-lg"
+              />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-sm text-[#0F172A]">
-                نجاحي <span className="text-[#E11D48] text-xs">Naja7i</span>
+              <div className="flex items-center gap-1.5 leading-none">
+                <span className="font-black text-sm text-white">
+                  نجاحي
+                </span>
+                <span className="text-[#E11D48] text-xs font-bold font-mono">
+                  Naja7i
+                </span>
+              </div>
+              <span className="text-[10px] text-slate-300 leading-tight mt-0.5">
+                فضاء البكالوريا لجميع الشعب
               </span>
-              <span className="text-[10px] text-[#64748B]">فضاء البكالوريا لجميع الشعب</span>
             </div>
           </div>
 
-          <span className="px-2.5 py-0.5 rounded-full bg-[#F1F5F9] text-[#E11D48] font-bold text-[11px] border border-[#E2E8F0]">
+          <span className="px-2.5 py-0.5 rounded-full bg-slate-800 text-rose-400 font-bold text-xs border border-slate-700">
             تحديث دوري 🇩🇿
           </span>
         </div>
@@ -46,11 +58,11 @@ export default function MaintenancePage({ onBypass }) {
       {/* Center Hero Card */}
       <main className="max-w-2xl mx-auto px-4 py-12 flex-1 flex flex-col justify-center items-center text-center">
         
-        <div className="w-20 h-20 rounded-2xl bg-white border border-[#E2E8F0] flex items-center justify-center text-3xl text-[#E11D48] shadow-xs mb-6">
+        <div className="w-20 h-20 rounded-2xl bg-white border border-[#E2E8F0] flex items-center justify-center text-3xl shadow-sm mb-6">
           🛠️
         </div>
 
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F1F5F9] border border-[#E2E8F0] text-xs font-bold text-[#E11D48] mb-3 shadow-2xs">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-xs font-bold text-[#E11D48] mb-3 shadow-2xs">
           <HiClock className="w-3.5 h-3.5" />
           <span>{SITE_CONFIG.estimatedReturn}</span>
         </div>
@@ -116,10 +128,11 @@ export default function MaintenancePage({ onBypass }) {
           {onBypass && (
             <button
               onClick={onBypass}
-              className="text-[10px] text-[#94A3B8] hover:text-[#E11D48] transition-colors cursor-pointer"
+              className="text-[11px] text-[#94A3B8] hover:text-[#E11D48] transition-colors cursor-pointer flex items-center gap-1 font-bold"
               title="معاينة الموقع كمسؤول"
             >
-              [دخول الإدارة للمعاينة]
+              <HiShieldCheck className="w-3.5 h-3.5" />
+              <span>[دخول الإدارة للمعاينة]</span>
             </button>
           )}
         </div>

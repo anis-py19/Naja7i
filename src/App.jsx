@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import SubjectViewer from './components/SubjectViewer';
 import PdfReaderModal from './components/PdfReaderModal';
@@ -23,6 +23,7 @@ import MaintenancePage from './pages/MaintenancePage';
 import NotFound from './pages/NotFound';
 
 import { STREAMS } from './data/streamsData';
+import { SITE_CONFIG } from './config/siteConfig';
 
 function App() {
   const [selectedStreamId, setSelectedStreamId] = useState('sciences');
@@ -31,6 +32,23 @@ function App() {
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+
+  const location = useLocation();
+
+  // Admin Bypass for Maintenance Mode
+  const [bypassMaintenance, setBypassMaintenance] = useState(() => {
+    try {
+      const saved = localStorage.getItem('naja7i_admin_bypass');
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('admin') === 'true') {
+        localStorage.setItem('naja7i_admin_bypass', 'true');
+        return true;
+      }
+      return saved === 'true';
+    } catch {
+      return false;
+    }
+  });
 
   const handleSelectStream = (streamId) => {
     setSelectedStreamId(streamId);
@@ -43,8 +61,36 @@ function App() {
     });
   };
 
+  // If maintenance mode is activated and admin has not bypassed it, display MaintenancePage
+  if (SITE_CONFIG.isMaintenanceMode && !bypassMaintenance && location.pathname !== '/maintenance') {
+    return (
+      <MaintenancePage 
+        onBypass={() => {
+          setBypassMaintenance(true);
+          localStorage.setItem('naja7i_admin_bypass', 'true');
+        }} 
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] selection:bg-[#E11D48] selection:text-white font-['Cairo'] antialiased flex flex-col justify-between">
+
+      {/* Admin Maintenance Alert Bar (يظهر فقط للمسؤول عند تفعيل وضع الصيانة وتجاوزه للمعاينة) */}
+      {SITE_CONFIG.isMaintenanceMode && bypassMaintenance && (
+        <div className="bg-amber-500 text-slate-950 px-4 py-1.5 text-xs font-bold flex items-center justify-between z-50 print:hidden shadow-xs">
+          <span>⚠️ وضع الصيانة مفعل حالياً للزوار العاديين • أنت تتصفح المنصة كمسؤول (Admin Preview Mode)</span>
+          <button
+            onClick={() => {
+              setBypassMaintenance(false);
+              localStorage.removeItem('naja7i_admin_bypass');
+            }}
+            className="px-2 py-0.5 rounded bg-slate-900 text-white text-[11px] font-bold hover:bg-black transition-colors cursor-pointer"
+          >
+            إغلاق المعاينة ورؤية صفحة الصيانة
+          </button>
+        </div>
+      )}
 
       {/* Top Navbar */}
       <Navbar
@@ -153,7 +199,7 @@ function App() {
             }
           />
 
-          {/* 11. صفحة الصيانة */}
+          {/* 11. صفحة الصيانة المباشرة */}
           <Route
             path="/maintenance"
             element={
