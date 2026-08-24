@@ -18,6 +18,8 @@ import BacCalculatorModal from './components/BacCalculatorModal';
 import SearchModal from './components/SearchModal';
 import ContactContributionModal from './components/ContactContributionModal';
 import FloatingQuickActions from './components/FloatingQuickActions';
+import MaintenancePage from './pages/MaintenancePage';
+import { SITE_CONFIG } from './config/siteConfig';
 import { STREAMS } from './data/streamsData';
 
 function App() {
@@ -27,6 +29,12 @@ function App() {
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  
+  // Admin bypass state (allows Anis to preview even if maintenance is active)
+  const [adminBypass, setAdminBypass] = useState(() => {
+    return localStorage.getItem('naja7i_admin_bypass') === 'true' || 
+           window.location.search.includes('bypass=anis');
+  });
 
   const handleOpenSubject = (subjectId, streamName) => {
     setActiveSubject({
@@ -35,9 +43,37 @@ function App() {
     });
   };
 
+  // If maintenance mode is ON and admin hasn't bypassed it, show the Maintenance Page
+  if (SITE_CONFIG.isMaintenanceMode && !adminBypass) {
+    return (
+      <MaintenancePage 
+        onBypass={() => {
+          localStorage.setItem('naja7i_admin_bypass', 'true');
+          setAdminBypass(true);
+        }} 
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#FFFAF3] text-[#1c1917] selection:bg-[#F62440] selection:text-white font-['Cairo'] antialiased flex flex-col justify-between">
       
+      {/* Admin Notice if Maintenance Mode is active for public but bypassed by admin */}
+      {SITE_CONFIG.isMaintenanceMode && adminBypass && (
+        <div className="bg-[#F62440] text-white text-xs py-1.5 px-4 text-center font-bold flex items-center justify-center gap-3 sticky top-0 z-50">
+          <span>⚠️ وضع الصيانة مفعل حالياً للزوار العاديين — أنت تتصفح كمسؤول (Admin Preview)</span>
+          <button 
+            onClick={() => {
+              localStorage.removeItem('naja7i_admin_bypass');
+              setAdminBypass(false);
+            }}
+            className="underline text-[11px] hover:text-[#FFF2DB] cursor-pointer"
+          >
+            إغلاق المعاينة والعودة لصفحة الصيانة
+          </button>
+        </div>
+      )}
+
       <div>
         {/* Navigation Bar */}
         <Navbar 
