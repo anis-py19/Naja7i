@@ -16,6 +16,7 @@ import BacArchivePage from './pages/BacArchivePage';
 import YouTubeTeachersPage from './pages/YouTubeTeachersPage';
 import StudyPlannerPage from './pages/StudyPlannerPage';
 import QuizBankPage from './pages/QuizBankPage';
+import CurriculumPage from './pages/CurriculumPage';
 import CalculatorPage from './pages/CalculatorPage';
 import CountdownPage from './pages/CountdownPage';
 import AboutPage from './pages/AboutPage';
@@ -173,6 +174,14 @@ function App() {
             path="/quiz"
             element={
               <QuizBankPage />
+            }
+          />
+
+          {/* 6.8 دليل المنهاج والبرنامج الوزاري الرسمي */}
+          <Route
+            path="/curriculum"
+            element={
+              <CurriculumPage />
             }
           />
 
