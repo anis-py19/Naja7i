@@ -166,12 +166,6 @@ export default function QuizBankPage() {
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                <span className="px-2.5 py-0.5 rounded-full bg-rose-50 text-[#E11D48] font-bold text-xs font-mono border border-rose-200">
-                  منهاج البكالوريا الوزاري 2026/2027 🇩🇿
-                </span>
-                <span className="text-xs text-[#64748B]">تصحيح فوري وشروحات نموذجية معللة</span>
-              </div>
               <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A]">
                 بنك الأسئلة والاختبارات السريعة (Quiz & QCM) ⏱️
               </h1>

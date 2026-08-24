@@ -228,12 +228,6 @@ export default function StudyPlannerPage() {
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#F1F5F9] text-[#E11D48] font-bold text-xs font-mono border border-[#E2E8F0]">
-                    ورقة A4 واحدة جاهزة للطباعة والتأشير (Cocher) 🖨️
-                  </span>
-                  <span className="text-xs text-[#64748B]">مخصص لكل شعبة حسب المعاملات الرسمية</span>
-                </div>
                 <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A]">
                   مخطط وجداول مراجعة البكالوريا (2026/2027)
                 </h1>

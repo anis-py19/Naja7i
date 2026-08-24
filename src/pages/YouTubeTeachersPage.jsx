@@ -116,12 +116,6 @@ export default function YouTubeTeachersPage() {
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="px-2.5 py-0.5 rounded-full bg-[#F1F5F9] text-[#E11D48] font-bold text-xs font-mono border border-[#E2E8F0]">
-                  BAC 2026 / 2027 — الدليل الكامل 🇩🇿
-                </span>
-                <span className="text-xs text-[#64748B]">إحصائيات DzExams وترتيب أفضل كفاءات التدريس في الجزائر</span>
-              </div>
               <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A]">
                 دليل أفضل قنوات وأساتذة البكالوريا على اليوتيوب 🎥
               </h1>
