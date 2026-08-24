@@ -1,33 +1,77 @@
-# Logs
-logs
+# ==============================================================================
+# 🚀 Naja7i (نجاحي) — .gitignore
+# ==============================================================================
+
+# 📦 Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# 🏗️ Production Builds & Output
+dist/
+dist-ssr/
+build/
+out/
+
+# 🔐 Environment Variables & Secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.local
+
+# 📋 Logs & Debug Files
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-# Large PDF archives & binary uploads
-/public/files/
-/FileFromMe/
-/downloaded_pdfs/
-/release_assets/
-*.rar
-*.zip
 
-node_modules
-dist
-dist-ssr
-*.local
+# ☁️ Vercel & Cache
+.vercel/
+.turbo/
+.eslintcache
+.stylelintcache
 
-# Editor directories and files
+# 💻 Editor & IDE Configurations
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+!.vscode/settings.json
+.idea/
+*.sublime-workspace
+*.sublime-project
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 
-.vercel
+# 🖥️ OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# 📚 Large Archives, Scraped PDFs & Local Downloads
+/public/FileFromMe/
+/downloaded_pdfs/
+/release_assets/
+/BAC_ARCHIVE_DOWNLOADS/
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.iso
+
+# 🧪 Temporary & Scratch Files
+scratch_*.html
+scratch_*
+*.tmp
+*.temp

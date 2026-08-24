@@ -1,41 +1,65 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import HomePage from './pages/HomePage';
-import StreamsPage from './pages/StreamsPage';
-import LibraryPage from './pages/LibraryPage';
-import BacArchivePage from './pages/BacArchivePage';
-import YouTubeTeachersPage from './pages/YouTubeTeachersPage';
-import CountdownPage from './pages/CountdownPage';
-import CalculatorPage from './pages/CalculatorPage';
-import StudyPlannerPage from './pages/StudyPlannerPage';
-import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
-import NotFound from './pages/NotFound';
-
+import Hero from './components/Hero';
+import StreamHub from './components/StreamHub';
+import FounderStorySection from './components/FounderStorySection';
+import BacArchiveExplorer from './components/BacArchiveExplorer';
+import YouTubeRoadmaps from './components/YouTubeRoadmaps';
+import BacCountdown from './components/BacCountdown';
 import SubjectViewer from './components/SubjectViewer';
 import PdfReaderModal from './components/PdfReaderModal';
 import BacCalculatorModal from './components/BacCalculatorModal';
 import SearchModal from './components/SearchModal';
-import ContactContributionModal from './components/ContactContributionModal';
 import FloatingQuickActions from './components/FloatingQuickActions';
-import MaintenancePage from './pages/MaintenancePage';
-import { SITE_CONFIG } from './config/siteConfig';
+import LibraryPage from './pages/LibraryPage';
+import AboutPage from './pages/AboutPage';
 import { STREAMS } from './data/streamsData';
 
+function HomePage({ selectedStreamId, setSelectedStreamId, handleOpenSubject, setIsCalculatorOpen, setActivePdf }) {
+  return (
+    <>
+      <Hero
+        onSelectStream={(sId) => {
+          setSelectedStreamId(sId);
+          const elem = document.getElementById('stream-hub');
+          if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+        }}
+        onOpenCalculator={() => setIsCalculatorOpen(true)}
+      />
+
+      <StreamHub
+        selectedStreamId={selectedStreamId}
+        onSelectStream={(sId) => setSelectedStreamId(sId)}
+        onOpenSubject={handleOpenSubject}
+      />
+
+      <FounderStorySection />
+
+      <BacArchiveExplorer />
+
+      <BacCountdown />
+
+      <YouTubeRoadmaps />
+    </>
+  );
+}
+
 function App() {
+  //hello
   const [selectedStreamId, setSelectedStreamId] = useState('sciences');
   const [activeSubject, setActiveSubject] = useState(null);
   const [activePdf, setActivePdf] = useState(null);
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isContactOpen, setIsContactOpen] = useState(false);
-  
-  // Admin bypass state (allows Anis to preview even if maintenance is active)
-  const [adminBypass, setAdminBypass] = useState(() => {
-    return localStorage.getItem('naja7i_admin_bypass') === 'true' || 
-           window.location.search.includes('bypass=anis');
-  });
+
+  const handleSelectStream = (streamId) => {
+    setSelectedStreamId(streamId);
+    const elem = document.getElementById('stream-hub');
+    if (elem) {
+      elem.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const handleOpenSubject = (subjectId, streamName) => {
     setActiveSubject({
@@ -44,136 +68,48 @@ function App() {
     });
   };
 
-  // If maintenance mode is ON and admin hasn't bypassed it, show the Maintenance Page
-  if (SITE_CONFIG.isMaintenanceMode && !adminBypass) {
-    return (
-      <MaintenancePage 
-        onBypass={() => {
-          localStorage.setItem('naja7i_admin_bypass', 'true');
-          setAdminBypass(true);
-        }} 
-      />
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] selection:bg-[#E11D48] selection:text-white font-['Cairo'] antialiased flex flex-col justify-between">
-      
-      {/* Admin Notice if Maintenance Mode is active for public but bypassed by admin */}
-      {SITE_CONFIG.isMaintenanceMode && adminBypass && (
-        <div className="bg-[#E11D48] text-white text-xs py-1.5 px-4 text-center font-bold flex items-center justify-center gap-3 sticky top-0 z-50 shadow-xs">
-          <span>⚠️ وضع الصيانة مفعل حالياً للزوار العاديين — أنت تتصفح كمسؤول (Admin Preview)</span>
-          <button 
-            onClick={() => {
-              localStorage.removeItem('naja7i_admin_bypass');
-              setAdminBypass(false);
-            }}
-            className="underline text-[11px] hover:text-white/80 cursor-pointer"
-          >
-            إغلاق المعاينة والعودة لصفحة الصيانة
-          </button>
-        </div>
-      )}
+    <div className="min-h-screen bg-[#FFFAF3] text-[#1c1917] selection:bg-[#F62440] selection:text-white font-['Cairo'] antialiased">
 
-      <div>
-        {/* Navigation Bar */}
-        <Navbar 
-          onSelectStream={(sId) => setSelectedStreamId(sId)}
-          onOpenCalculator={() => setIsCalculatorOpen(true)}
-          onOpenSearch={() => setIsSearchOpen(true)}
-          onOpenContact={() => setIsContactOpen(true)}
-        />
+      <Navbar
+        onSelectStream={handleSelectStream}
+        onOpenCalculator={() => setIsCalculatorOpen(true)}
+        onOpenSearch={() => setIsSearchOpen(true)}
+      />
 
-        {/* Main Multi-Page Routed Content */}
-        <main>
-          <Routes>
-            <Route 
-              path="/" 
-              element={
-                <HomePage 
-                  onOpenCalculator={() => setIsCalculatorOpen(true)}
-                  onOpenSearch={() => setIsSearchOpen(true)}
-                  onOpenContact={() => setIsContactOpen(true)}
-                  onSelectStream={(sId) => setSelectedStreamId(sId)}
-                />
-              } 
-            />
-            <Route 
-              path="/streams" 
-              element={
-                <StreamsPage 
-                  selectedStreamId={selectedStreamId}
-                  onSelectStream={(sId) => setSelectedStreamId(sId)}
-                  onOpenSubject={handleOpenSubject}
-                  onOpenPdf={(file) => setActivePdf(file)}
-                />
-              } 
-            />
-            <Route 
-              path="/library" 
-              element={
-                <LibraryPage 
-                  onOpenPdf={(file) => setActivePdf(file)}
-                />
-              } 
-            />
-            <Route 
-              path="/bac-archive" 
-              element={
-                <BacArchivePage />
-              } 
-            />
-            <Route 
-              path="/youtube-teachers" 
-              element={
-                <YouTubeTeachersPage />
-              } 
-            />
-            <Route 
-              path="/countdown" 
-              element={
-                <CountdownPage />
-              } 
-            />
-            <Route 
-              path="/calculator" 
-              element={
-                <CalculatorPage />
-              } 
-            />
-            <Route 
-              path="/study-planner" 
-              element={
-                <StudyPlannerPage />
-              } 
-            />
-            <Route 
-              path="/about" 
-              element={
-                <AboutPage />
-              } 
-            />
-            <Route 
-              path="/contact" 
-              element={
-                <ContactPage />
-              } 
-            />
-            <Route 
-              path="*" 
-              element={
-                <NotFound />
-              } 
-            />
-          </Routes>
-        </main>
-      </div>
+      <main>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <HomePage
+                selectedStreamId={selectedStreamId}
+                setSelectedStreamId={setSelectedStreamId}
+                handleOpenSubject={handleOpenSubject}
+                setIsCalculatorOpen={setIsCalculatorOpen}
+                setActivePdf={setActivePdf}
+              />
+            }
+          />
+          <Route
+            path="/library"
+            element={
+              <LibraryPage
+                onOpenPdf={(file) => setActivePdf(file)}
+              />
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <AboutPage />
+            }
+          />
+        </Routes>
+      </main>
 
-      {/* Global Modals */}
-
-      {/* Subject Viewer Modal */}
       {activeSubject && (
-        <SubjectViewer 
+        <SubjectViewer
           subjectId={activeSubject.id}
           streamName={activeSubject.streamName}
           onClose={() => setActiveSubject(null)}
@@ -181,77 +117,60 @@ function App() {
         />
       )}
 
-      {/* Embedded PDF Reader Modal */}
       {activePdf && (
-        <PdfReaderModal 
+        <PdfReaderModal
           file={activePdf}
           isOpen={!!activePdf}
           onClose={() => setActivePdf(null)}
         />
       )}
 
-      {/* Quick BAC Average Calculator Modal */}
-      <BacCalculatorModal 
+      <BacCalculatorModal
         isOpen={isCalculatorOpen}
         onClose={() => setIsCalculatorOpen(false)}
       />
 
-      {/* Global Search Modal */}
-      <SearchModal 
+      <SearchModal
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
         onOpenSubject={(subId) => handleOpenSubject(subId)}
         onOpenPdf={(file) => setActivePdf(file)}
       />
 
-      {/* Quick Contact & Contribution Modal */}
-      <ContactContributionModal 
-        isOpen={isContactOpen}
-        onClose={() => setIsContactOpen(false)}
-      />
-
-      {/* Floating Quick Action Buttons */}
-      <FloatingQuickActions 
+      <FloatingQuickActions
         onOpenCalculator={() => setIsCalculatorOpen(true)}
         onOpenSearch={() => setIsSearchOpen(true)}
       />
 
-      {/* Clean Academic Footer */}
-      <footer className="border-t border-[#E2E8F0] bg-white py-10 text-xs text-[#64748B] mt-16">
+      <footer className="border-t border-[#FFE5BF] bg-[#FFFAF3] py-10 text-xs text-[#78716c]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <img 
-              src="/logo.jpg" 
-              alt="منصة نجاحي" 
-              className="w-10 h-10 object-contain rounded-xl border border-[#E2E8F0] shadow-xs bg-white"
-            />
+            <div className="w-9 h-9 rounded-xl bg-[#F62440] text-white flex items-center justify-center text-lg font-bold">
+              🎓
+            </div>
             <div>
-              <span className="font-black text-sm text-[#0F172A] block">منصة نجاحي — Naja7i BAC 3AS</span>
-              <span className="text-[#64748B]">مبادرة الطالب أنيس إيزري (Anis Izri) • صدقة جارية لدعم طلبة البكالوريا 🇩🇿</span>
+              <span className="font-bold text-sm text-[#1c1917] block">موقع نجاحي — Naja7i BAC 3AS</span>
+              <span className="text-[#78716c]">مبادرة الطالب أنيس إيزري (Anis Izri) • صدقة جارية لدعم طلبة البكالوريا 🇩🇿</span>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 text-[#475569] font-medium">
-            <Link to="/" className="hover:text-[#E11D48] transition-colors">الرئيسية</Link>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-[#57534e] font-medium">
+            <Link to="/" className="hover:text-[#F62440] transition-colors">الرئيسية</Link>
             <span>•</span>
-            <Link to="/streams" className="hover:text-[#E11D48] transition-colors">الشعب والمواد</Link>
+            <Link to="/library" className="hover:text-[#F62440] transition-colors">مكتبة الملخصات (324 ملف)</Link>
             <span>•</span>
-            <Link to="/library" className="hover:text-[#E11D48] transition-colors">مكتبة الملخصات</Link>
+            <Link to="/about" className="hover:text-[#F62440] transition-colors font-bold text-[#F62440]">قصة المنصة والرسالة</Link>
             <span>•</span>
-            <Link to="/bac-archive" className="hover:text-[#E11D48] transition-colors">أرشيف البكالوريا</Link>
+            <a href="/#bac-archive" className="hover:text-[#F62440] transition-colors">أرشيف البكالوريا</a>
             <span>•</span>
-            <Link to="/youtube-teachers" className="hover:text-[#E11D48] transition-colors">أساتذة اليوتيوب</Link>
+            <a href="/#youtube-roadmaps" className="hover:text-[#F62440] transition-colors">أساتذة اليوتيوب</a>
             <span>•</span>
-            <Link to="/countdown" className="hover:text-[#E11D48] transition-colors">العداد</Link>
-            <span>•</span>
-            <Link to="/calculator" className="hover:text-[#E11D48] transition-colors">حاسبة المعدل</Link>
-            <span>•</span>
-            <Link to="/about" className="hover:text-[#E11D48] transition-colors">قصة المنصة</Link>
-            <span>•</span>
-            <Link to="/contact" className="hover:text-[#E11D48] transition-colors text-[#E11D48] font-bold">تواصل ومساهمة 📥</Link>
+            <button onClick={() => setIsCalculatorOpen(true)} className="hover:text-[#F62440] transition-colors cursor-pointer font-bold">
+              حاسبة المعدل
+            </button>
           </div>
 
-          <div className="text-[#94A3B8] text-[11px]">
+          <div className="text-[#a8a29e] text-[11px]">
             جميع الحقوق محفوظة © {new Date().getFullYear()} لمنصة نجاحي التعليمية • نسألكم الدعاء بالتوفيق والبركة
           </div>
         </div>
