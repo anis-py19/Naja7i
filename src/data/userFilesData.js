@@ -1,7 +1,7 @@
 /**
  * 📚 Naja7i (نجاحي) — Comprehensive Public Files Catalog
  * Location: public/FileFromMe
- * Total Indexed Files: 326
+ * Total Indexed Files: 324
  * Verified Academic Titles, Categories, Stream Maps, Authors, and Real File Paths.
  */
 
@@ -12459,88 +12459,6 @@ export const USER_STUDY_FILES = [
     "extension": "pdf",
     "downloadsCount": 691,
     "viewsCount": 1067,
-    "rating": 4.9,
-    "verified": true,
-    "addedAt": "2026-08-24"
-  },
-  {
-    "id": "ffm_325",
-    "title": "كتاب مواضيع ومقترحات اللغة الإنجليزية مع الحلول النموذجية — الأستاذ ناصر منصوري",
-    "rawFileName": "كتاب_مقترحات_الانجلزية_لاستاذ_ناصر_منصوري_ج_ح_م_لــwww_msila_info.pdf",
-    "subjectId": "english",
-    "subjectAliases": [
-      "english",
-      "anglais"
-    ],
-    "subjectName": "اللغة الإنجليزية",
-    "streams": [
-      "sciences",
-      "math",
-      "technique_math",
-      "gestion",
-      "lettres_philo",
-      "langues"
-    ],
-    "streamIds": [
-      "sciences",
-      "math",
-      "technique_math",
-      "gestion",
-      "lettres_philo",
-      "langues"
-    ],
-    "category": "سلاسل وتمارين محلولة",
-    "author": "الأستاذ ناصر منصوري",
-    "fileUrl": "/FileFromMe/%D9%83%D8%AA%D8%A7%D8%A8_%D9%85%D9%82%D8%AA%D8%B1%D8%AD%D8%A7%D8%AA_%D8%A7%D9%84%D8%A7%D9%86%D8%AC%D9%84%D8%B2%D9%8A%D8%A9_%D9%84%D8%A7%D8%B3%D8%AA%D8%A7%D8%B0_%D9%86%D8%A7%D8%B5%D8%B1_%D9%85%D9%86%D8%B5%D9%88%D8%B1%D9%8A_%D8%AC_%D8%AD_%D9%85_%D9%84%D9%80%D9%80www_msila_info.pdf",
-    "rawPath": "/FileFromMe/كتاب_مقترحات_الانجلزية_لاستاذ_ناصر_منصوري_ج_ح_م_لــwww_msila_info.pdf",
-    "size": "192.8 ميغابايت",
-    "sizeReadable": "192.8 ميغابايت",
-    "bytes": 202151410,
-    "type": "PDF",
-    "extension": "pdf",
-    "downloadsCount": 208,
-    "viewsCount": 1146,
-    "rating": 4.9,
-    "verified": true,
-    "addedAt": "2026-08-24"
-  },
-  {
-    "id": "ffm_326",
-    "title": "كتاب الهدى في الفلسفة — مقالات نموذجية ومنهجيات شاملة",
-    "rawFileName": "مقالات_كتاب_الهدى_في_الفلسفة_بكالوريا_2020.pdf",
-    "subjectId": "philo",
-    "subjectAliases": [
-      "philo",
-      "philosophy"
-    ],
-    "subjectName": "الفلسفة",
-    "streams": [
-      "lettres_philo",
-      "sciences",
-      "math",
-      "technique_math",
-      "gestion",
-      "langues"
-    ],
-    "streamIds": [
-      "lettres_philo",
-      "sciences",
-      "math",
-      "technique_math",
-      "gestion",
-      "langues"
-    ],
-    "category": "كتب ومجلات شاملة",
-    "author": "أساتذة متميزون",
-    "fileUrl": "/FileFromMe/%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA_%D9%83%D8%AA%D8%A7%D8%A8_%D8%A7%D9%84%D9%87%D8%AF%D9%89_%D9%81%D9%8A_%D8%A7%D9%84%D9%81%D9%84%D8%B3%D9%81%D8%A9_%D8%A8%D9%83%D8%A7%D9%84%D9%88%D8%B1%D9%8A%D8%A7_2020.pdf",
-    "rawPath": "/FileFromMe/مقالات_كتاب_الهدى_في_الفلسفة_بكالوريا_2020.pdf",
-    "size": "128.9 ميغابايت",
-    "sizeReadable": "128.9 ميغابايت",
-    "bytes": 135113600,
-    "type": "PDF",
-    "extension": "pdf",
-    "downloadsCount": 245,
-    "viewsCount": 1225,
     "rating": 4.9,
     "verified": true,
     "addedAt": "2026-08-24"
