@@ -10,7 +10,8 @@ import {
   HiPlus,
   HiMinus,
   HiRefresh,
-  HiFolderDownload
+  HiFolderDownload,
+  HiViewGrid
 } from 'react-icons/hi';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as pdfjsLib from 'pdfjs-dist';
@@ -21,17 +22,17 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 export default function PdfReaderModal({ file, isOpen, onClose }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [useIframeFallback, setUseIframeFallback] = useState(false);
+  const [activeTab, setActiveTab] = useState('canvas'); // 'canvas' | 'iframe'
 
   // PDF.js State
   const [pdfDoc, setPdfDoc] = useState(null);
   const [pageNum, setPageNum] = useState(1);
   const [numPages, setNumPages] = useState(0);
-  const [scale, setScale] = useState(1.2);
+  const [scale, setScale] = useState(1.15);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Blob URL for iframe / download
+  // Blob URL for native mode / download
   const [blobUrl, setBlobUrl] = useState(null);
 
   const canvasRef = useRef(null);
@@ -40,10 +41,6 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
   if (!isOpen || !file) return null;
 
   const rawUrl = file.fileUrl || file.rawPath || file.url || '';
-  const safeEncodedUrl = rawUrl.startsWith('http') || rawUrl.startsWith('/') 
-    ? encodeURI(decodeURI(rawUrl)) 
-    : rawUrl;
-
   const fileName = file.rawFileName || `${file.title || 'document'}.${file.extension || 'pdf'}`;
   const fileSize = file.sizeReadable || file.size || '';
   const isPdf = !file.extension || file.extension.toLowerCase() === 'pdf' || rawUrl.toLowerCase().endsWith('.pdf');
@@ -59,22 +56,23 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
       setLoading(true);
       setError(null);
       setPageNum(1);
-      setUseIframeFallback(false);
 
       try {
-        // 1. Fetch file as arrayBuffer / Blob to prevent IDM interception
-        const response = await fetch(safeEncodedUrl);
-        if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
+        // Fetch file directly into arrayBuffer / Blob to prevent IDM interception
+        const response = await fetch(rawUrl);
+        if (!response.ok) {
+          throw new Error(`خطأ في الوصول إلى الملف (${response.status})`);
+        }
         const arrayBuffer = await response.arrayBuffer();
         
-        // Create Blob for native viewer mode / download
+        // Create Blob for iframe / download
         const blob = new Blob([arrayBuffer], { type: 'application/pdf' });
         createdBlobUrl = URL.createObjectURL(blob);
         if (isMounted) {
           setBlobUrl(createdBlobUrl);
         }
 
-        // 2. Load into PDF.js
+        // Load into PDF.js
         const loadingTask = pdfjsLib.getDocument({ 
           data: arrayBuffer,
           cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@legacy/cmaps/',
@@ -90,14 +88,14 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
           setLoading(false);
         }
       } catch (err) {
-        console.warn('PDF.js canvas load error, switching to safe Blob iFrame:', err);
+        console.warn('Canvas PDF loading issue:', err);
         if (isMounted) {
-          // If canvas loading fails, switch to safe Blob iframe
           if (createdBlobUrl) {
-            setUseIframeFallback(true);
+            // Auto switch to Blob iframe if canvas fails
+            setActiveTab('iframe');
             setLoading(false);
           } else {
-            setError('تعذر تحميل وتصيير ملف الـ PDF');
+            setError('تعذر تحميل وقراءة ملف الـ PDF');
             setLoading(false);
           }
         }
@@ -117,11 +115,11 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
         URL.revokeObjectURL(createdBlobUrl);
       }
     };
-  }, [file, isOpen, safeEncodedUrl, isPdf]);
+  }, [file, isOpen, rawUrl, isPdf]);
 
   // Render Current Page on Canvas
   useEffect(() => {
-    if (!pdfDoc || !canvasRef.current || loading || error || useIframeFallback) return;
+    if (!pdfDoc || !canvasRef.current || loading || error || activeTab !== 'canvas') return;
 
     let isCancelled = false;
 
@@ -163,11 +161,11 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
     return () => {
       isCancelled = true;
     };
-  }, [pdfDoc, pageNum, scale, loading, error, useIframeFallback]);
+  }, [pdfDoc, pageNum, scale, loading, error, activeTab]);
 
   const handleDownload = (e) => {
-    e.stopPropagation();
-    const targetUrl = blobUrl || safeEncodedUrl;
+    e?.stopPropagation?.();
+    const targetUrl = blobUrl || rawUrl;
     const link = document.createElement('a');
     link.href = targetUrl;
     link.download = fileName;
@@ -200,7 +198,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
           }`}
         >
           
-          {/* 1. Header Toolbar */}
+          {/* 1. Top Header Bar */}
           <div className="px-3 py-2.5 sm:px-6 sm:py-3 bg-[#0F172A] text-white flex flex-wrap items-center justify-between gap-2 shrink-0 border-b border-slate-800">
             
             {/* File Info */}
@@ -221,7 +219,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
             </div>
 
             {/* Viewer Navigation & Zoom Controls (Only for Canvas mode) */}
-            {isPdf && !loading && !error && !useIframeFallback && numPages > 0 && (
+            {isPdf && !loading && !error && activeTab === 'canvas' && numPages > 0 && (
               <div className="flex items-center gap-1 bg-slate-800/90 border border-slate-700 rounded-xl px-2 py-1">
                 {/* Previous Page */}
                 <button
@@ -280,6 +278,28 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
             {/* Action Tools */}
             <div className="flex items-center gap-1.5 shrink-0">
               
+              {/* Tab Switcher (Canvas vs Browser iFrame) */}
+              {isPdf && blobUrl && !loading && (
+                <div className="hidden sm:flex items-center bg-slate-800 border border-slate-700 rounded-xl p-0.5 text-xs">
+                  <button
+                    onClick={() => setActiveTab('canvas')}
+                    className={`px-2.5 py-1 rounded-lg font-bold transition-colors cursor-pointer ${
+                      activeTab === 'canvas' ? 'bg-[#E11D48] text-white shadow-2xs' : 'text-slate-300 hover:text-white'
+                    }`}
+                  >
+                    مستعرض ذكي
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('iframe')}
+                    className={`px-2.5 py-1 rounded-lg font-bold transition-colors cursor-pointer ${
+                      activeTab === 'iframe' ? 'bg-[#E11D48] text-white shadow-2xs' : 'text-slate-300 hover:text-white'
+                    }`}
+                  >
+                    مستعرض المتصفح
+                  </button>
+                </div>
+              )}
+
               {/* Direct Download Button */}
               <button
                 onClick={handleDownload}
@@ -290,9 +310,9 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                 <span className="hidden sm:inline">تحميل PDF</span>
               </button>
 
-              {/* Open in new tab (using Blob to prevent IDM) */}
+              {/* Open in new tab (Blob URL prevents IDM) */}
               <a
-                href={blobUrl || safeEncodedUrl}
+                href={blobUrl || rawUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1"
@@ -332,7 +352,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                 <div className="w-10 h-10 border-3 border-rose-500 border-t-transparent rounded-full animate-spin mx-auto" />
                 <h4 className="text-sm font-bold">جاري فتح وتجهيز المستعرض...</h4>
                 <p className="text-xs text-slate-400 max-w-xs">
-                  يتم تحميل وقراءة صفحات الـ PDF مباشرة داخل المتصفح.
+                  يتم تحميل صفحات الـ PDF مباشرة وتجهيز القراءة السريعة.
                 </p>
               </div>
             )}
@@ -353,7 +373,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                     <span>تحميل الملف الآن</span>
                   </button>
                   <a
-                    href={blobUrl || safeEncodedUrl}
+                    href={blobUrl || rawUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-4 py-2 rounded-xl bg-slate-100 text-[#0F172A] text-xs font-bold flex items-center gap-1.5"
@@ -387,8 +407,8 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
               </div>
             )}
 
-            {/* In-App Canvas PDF Renderer */}
-            {isPdf && !loading && !error && !useIframeFallback && (
+            {/* Mode 1: Pure In-App Canvas PDF Renderer (Default - 100% immune to IDM) */}
+            {isPdf && !loading && !error && activeTab === 'canvas' && (
               <div className="flex flex-col items-center justify-center max-w-full">
                 <div className="bg-white rounded-lg shadow-2xl overflow-hidden border border-slate-700 max-w-full">
                   <canvas 
@@ -399,8 +419,8 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
               </div>
             )}
 
-            {/* Safe Blob iFrame Fallback (Immune to IDM) */}
-            {isPdf && !loading && !error && useIframeFallback && blobUrl && (
+            {/* Mode 2: Browser iFrame with Blob URL */}
+            {isPdf && !loading && !error && activeTab === 'iframe' && blobUrl && (
               <iframe
                 src={`${blobUrl}#toolbar=1&navpanes=0&scrollbar=1`}
                 className="w-full h-full border-0 bg-white"
