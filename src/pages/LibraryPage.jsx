@@ -121,7 +121,7 @@ export default function LibraryPage({ onOpenPdf }) {
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-16 font-['Cairo']">
       
       {/* Top Breadcrumb & Page Banner */}
-      <div className="bg-white border-b border-[#E2E8F0] py-8">
+      <div className="bg-white border-b border-[#E2E8F0] py-5 sm:py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Breadcrumb */}

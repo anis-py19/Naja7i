@@ -8,6 +8,7 @@ import BacArchivePage from './pages/BacArchivePage';
 import YouTubeTeachersPage from './pages/YouTubeTeachersPage';
 import CountdownPage from './pages/CountdownPage';
 import CalculatorPage from './pages/CalculatorPage';
+import StudyPlannerPage from './pages/StudyPlannerPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import NotFound from './pages/NotFound';
@@ -141,6 +142,12 @@ function App() {
               } 
             />
             <Route 
+              path="/study-planner" 
+              element={
+                <StudyPlannerPage />
+              } 
+            />
+            <Route 
               path="/about" 
               element={
                 <AboutPage />
@@ -213,11 +220,13 @@ function App() {
       <footer className="border-t border-[#E2E8F0] bg-white py-10 text-xs text-[#64748B] mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-[#E11D48] text-white flex items-center justify-center text-lg font-bold shadow-2xs">
-              🎓
-            </div>
+            <img 
+              src="/logo.jpg" 
+              alt="منصة نجاحي" 
+              className="w-10 h-10 object-contain rounded-xl border border-[#E2E8F0] shadow-xs bg-white"
+            />
             <div>
-              <span className="font-bold text-sm text-[#0F172A] block">منصة نجاحي — Naja7i BAC 3AS</span>
+              <span className="font-black text-sm text-[#0F172A] block">منصة نجاحي — Naja7i BAC 3AS</span>
               <span className="text-[#64748B]">مبادرة الطالب أنيس إيزري (Anis Izri) • صدقة جارية لدعم طلبة البكالوريا 🇩🇿</span>
             </div>
           </div>

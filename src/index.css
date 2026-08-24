@@ -53,3 +53,30 @@
 .ency-card-subtle:hover {
   border-color: #E11D48;
 }
+
+/* 🖨️ Strictly 1 Single A4 Page Print Rules */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 5mm 6mm 5mm 6mm;
+  }
+
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  header, footer, nav, .fixed, .print-hide {
+    display: none !important;
+  }
+
+  .print-page-single {
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}

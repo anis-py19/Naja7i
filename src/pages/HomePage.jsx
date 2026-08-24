@@ -54,6 +54,13 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       path: '/calculator',
       icon: '🧮',
       badge: 'المعاملات الرسمية'
+    },
+    {
+      title: 'مخطط وجداول المراجعة الأسبوعية',
+      desc: 'جداول تفصيلية بالساعات للمتمدرسين والأحرار مع منهجية الحفظ والتركيز العميق.',
+      path: '/study-planner',
+      icon: '📅',
+      badge: 'جداول جاهزة للطباعة'
     }
   ];
 
@@ -61,8 +68,8 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] font-['Cairo']">
       
       {/* 1. Hero Section: Clean, Academic & Focused */}
-      <section className="pt-12 pb-14 px-4 sm:px-6 lg:px-8 border-b border-[#E2E8F0] bg-white">
-        <div className="max-w-4xl mx-auto text-center space-y-4">
+      <section className="pt-8 pb-9 px-4 sm:px-6 lg:px-8 border-b border-[#E2E8F0] bg-white">
+        <div className="max-w-4xl mx-auto text-center space-y-3">
           
           <div className="inline-block px-3.5 py-1 rounded-full bg-[#F1F5F9] border border-[#E2E8F0] text-xs font-bold text-[#0F172A]">
             الموقع التعليمي الشامل لبكالوريا الجزائر 🇩🇿
