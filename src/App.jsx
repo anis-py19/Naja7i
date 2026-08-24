@@ -12,6 +12,7 @@ import FloatingQuickActions from './components/FloatingQuickActions';
 import HomePage from './pages/HomePage';
 import StreamsPage from './pages/StreamsPage';
 import LibraryPage from './pages/LibraryPage';
+import PdfViewerPage from './pages/PdfViewerPage';
 import BacArchivePage from './pages/BacArchivePage';
 import YouTubeTeachersPage from './pages/YouTubeTeachersPage';
 import StudyPlannerPage from './pages/StudyPlannerPage';
@@ -139,6 +140,14 @@ function App() {
               <LibraryPage
                 onOpenPdf={(file) => setActivePdf(file)}
               />
+            }
+          />
+
+          {/* 3.5 صفحة قارئ المستندات الشامل على طريقة Ency-Education */}
+          <Route
+            path="/view-pdf"
+            element={
+              <PdfViewerPage />
             }
           />
 
