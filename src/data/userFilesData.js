@@ -9355,7 +9355,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Mecanique/ملخصات_الهندسة_الميكانيكية_للسنة_3_ثانوي.pdf",
     "size": "1003 كيلوبايت",
     "sizeReadable": "1003 كيلوبايت",
-    "sizeBytes": 1027574
+    "sizeBytes": 1027574,
+    "driveFileId": "1gaYqKEllgF4enUTQ5dPh3e_EwJLSOxFW",
+    "driveFileUrl": "https://drive.google.com/file/d/1gaYqKEllgF4enUTQ5dPh3e_EwJLSOxFW/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1gaYqKEllgF4enUTQ5dPh3e_EwJLSOxFW/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1gaYqKEllgF4enUTQ5dPh3e_EwJLSOxFW"
   },
   {
     "id": "ffm_257",
@@ -9381,7 +9385,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Mecanique/ملخصات_دروس_الهندسة_الميكانيكية_3_ثانوي.pdf",
     "size": "1.9 ميغابايت",
     "sizeReadable": "1.9 ميغابايت",
-    "sizeBytes": 2003805
+    "sizeBytes": 2003805,
+    "driveFileId": "11A5FSWmuoNRyKDwwQeUCcc7xdv3FCDH8",
+    "driveFileUrl": "https://drive.google.com/file/d/11A5FSWmuoNRyKDwwQeUCcc7xdv3FCDH8/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/11A5FSWmuoNRyKDwwQeUCcc7xdv3FCDH8/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=11A5FSWmuoNRyKDwwQeUCcc7xdv3FCDH8"
   },
   {
     "id": "ffm_258",
