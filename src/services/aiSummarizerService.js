@@ -178,44 +178,59 @@ ${modeInstruction}
     throw new Error('يرجى تقديم نص أو رفع ملف للتلخيص.');
   }
 
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      contents: [
-        {
-          role: 'user',
-          parts: contentsParts
+  const candidateModels = [
+    'gemini-3.5-flash-lite',
+    'gemini-3.5-flash',
+    'gemini-3.1-flash-lite',
+    'gemini-2.5-flash-lite',
+    'gemini-1.5-flash'
+  ];
+
+  let lastError = null;
+
+  for (const modelName of candidateModels) {
+    try {
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${activeKey.trim()}`;
+      
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          contents: [
+            {
+              role: 'user',
+              parts: contentsParts
+            }
+          ],
+          generationConfig: {
+            temperature: 0.4,
+            topP: 0.95,
+            maxOutputTokens: 3000
+          }
+        })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        const candidate = result.candidates?.[0];
+        const summaryText = candidate?.content?.parts?.map(p => p.text).join('\n') || '';
+
+        if (summaryText) {
+          return summaryText;
         }
-      ],
-      generationConfig: {
-        temperature: 0.4,
-        topP: 0.95,
-        maxOutputTokens: 3000
+      } else {
+        const errorData = await response.json().catch(() => ({}));
+        const message = errorData?.error?.message || `فشل الاتصال بالنموذج ${modelName} (رمز الخطأ: ${response.status})`;
+        lastError = new Error(message);
       }
-    })
-  });
-
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    const message = errorData?.error?.message || `فشل الاتصال بالذكاء الاصطناعي (رمز الخطأ: ${response.status})`;
-    if (message.includes('API key')) {
-      throw new Error('مفتاح API غير صالح أو غير مفعل. يرجى التحقق من صحة المفتاح من Google AI Studio.');
+    } catch (err) {
+      lastError = err;
     }
-    throw new Error(message);
   }
 
-  const result = await response.json();
-  const candidate = result.candidates?.[0];
-  const summaryText = candidate?.content?.parts?.map(p => p.text).join('\n') || '';
-
-  if (!summaryText) {
-    throw new Error('لم يتمكن الذكاء الاصطناعي من توليد ملخص. حاول مجدداً بنص أو ملف أوضح.');
-  }
-
-  return summaryText;
+  throw lastError || new Error('تعذر توليد الملخص عبر نماذج الذكاء الاصطناعي المتاحة. يرجى التحقق من صلاحية مفتاح API.');
 }
 
 /**
