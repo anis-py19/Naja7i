@@ -14,10 +14,18 @@ import {
 } from 'react-icons/hi';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as pdfjsLib from 'pdfjs-dist';
-import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 
-// Configure local worker bundled by Vite
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+// Configure ESM module worker for Vite / Rollup
+if (typeof window !== 'undefined') {
+  try {
+    pdfjsLib.GlobalWorkerOptions.workerPort = new Worker(
+      new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url),
+      { type: 'module' }
+    );
+  } catch (e) {
+    console.warn('Fallback worker setup:', e);
+  }
+}
 
 // Helper to transform Google Drive URLs to embeddable preview URLs
 export function getDrivePreviewUrl(url) {
