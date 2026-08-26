@@ -1,6 +1,6 @@
 /**
  * 📚 Naja7i (نجاحي) — Comprehensive Public Files Catalog
- * Location: public/FileFromMe
+ * Location: public/FileFromMe & Google Drive Cloud Repositories
  * Total Indexed Files: 318
  * Verified Academic Titles, Categories, Stream Maps, Authors, and 100% Real Disk File Paths & Cloud Drive Links.
  */
@@ -639,7 +639,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/mostakbali-arabic3as2011.pdf",
     "size": "22.4 ميغابايت",
     "sizeReadable": "22.4 ميغابايت",
-    "sizeBytes": 23527208
+    "sizeBytes": 23527208,
+    "driveFileId": "14QaHohik68YrvhlrhVKiEr6S_gFJf7yp",
+    "driveFileUrl": "https://drive.google.com/file/d/14QaHohik68YrvhlrhVKiEr6S_gFJf7yp/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/14QaHohik68YrvhlrhVKiEr6S_gFJf7yp/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=14QaHohik68YrvhlrhVKiEr6S_gFJf7yp"
   },
   {
     "id": "ffm_17",
@@ -674,7 +678,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/أحسن_ملخص_في_اللغة_العربية_عمر_قوادري_الشعب_العلمية.pdf",
     "size": "1.7 ميغابايت",
     "sizeReadable": "1.7 ميغابايت",
-    "sizeBytes": 1739681
+    "sizeBytes": 1739681,
+    "driveFileId": "1cYPWuKSjAh5wEmXVOofajKofHnk-sjWO",
+    "driveFileUrl": "https://drive.google.com/file/d/1cYPWuKSjAh5wEmXVOofajKofHnk-sjWO/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1cYPWuKSjAh5wEmXVOofajKofHnk-sjWO/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1cYPWuKSjAh5wEmXVOofajKofHnk-sjWO"
   },
   {
     "id": "ffm_18",
@@ -709,7 +717,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/ادب عربي للشعب العلمية.pdf",
     "size": "787 كيلوبايت",
     "sizeReadable": "787 كيلوبايت",
-    "sizeBytes": 806394
+    "sizeBytes": 806394,
+    "driveFileId": "1Dnjx0TgjHI_-HS2rB7WwbAMwpSzIig4C",
+    "driveFileUrl": "https://drive.google.com/file/d/1Dnjx0TgjHI_-HS2rB7WwbAMwpSzIig4C/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Dnjx0TgjHI_-HS2rB7WwbAMwpSzIig4C/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Dnjx0TgjHI_-HS2rB7WwbAMwpSzIig4C"
   },
   {
     "id": "ffm_19",
@@ -744,7 +756,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/البناء الفكري.pdf",
     "size": "335 كيلوبايت",
     "sizeReadable": "335 كيلوبايت",
-    "sizeBytes": 342627
+    "sizeBytes": 342627,
+    "driveFileId": "1cr6cJhBN_kJEUIKHbb4mYckNihbjhaI4",
+    "driveFileUrl": "https://drive.google.com/file/d/1cr6cJhBN_kJEUIKHbb4mYckNihbjhaI4/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1cr6cJhBN_kJEUIKHbb4mYckNihbjhaI4/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1cr6cJhBN_kJEUIKHbb4mYckNihbjhaI4"
   },
   {
     "id": "ffm_20",
@@ -779,7 +795,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/التقويم النقدي كاملا.pdf",
     "size": "1.0 ميغابايت",
     "sizeReadable": "1.0 ميغابايت",
-    "sizeBytes": 1078872
+    "sizeBytes": 1078872,
+    "driveFileId": "18390emtjAktQxiahrrTcmLwORxk6alws",
+    "driveFileUrl": "https://drive.google.com/file/d/18390emtjAktQxiahrrTcmLwORxk6alws/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/18390emtjAktQxiahrrTcmLwORxk6alws/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=18390emtjAktQxiahrrTcmLwORxk6alws"
   },
   {
     "id": "ffm_21",
@@ -814,7 +834,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/الكافي_في_مادة_اللغة_العربية_لطلاب_البكالوريا_لجميع_الشعب.pdf",
     "size": "845 كيلوبايت",
     "sizeReadable": "845 كيلوبايت",
-    "sizeBytes": 865402
+    "sizeBytes": 865402,
+    "driveFileId": "1MQlyHoeH0wxujayoDsKSYiCouAO2xU1M",
+    "driveFileUrl": "https://drive.google.com/file/d/1MQlyHoeH0wxujayoDsKSYiCouAO2xU1M/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1MQlyHoeH0wxujayoDsKSYiCouAO2xU1M/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1MQlyHoeH0wxujayoDsKSYiCouAO2xU1M"
   },
   {
     "id": "ffm_22",
@@ -849,7 +873,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/المراجعة_الشاملة_و_النهائية_45_موضوع_مع_الحل_في_مادة_اللغة_العربية.pdf",
     "size": "37.9 ميغابايت",
     "sizeReadable": "37.9 ميغابايت",
-    "sizeBytes": 39734586
+    "sizeBytes": 39734586,
+    "driveFileId": "1ocYNaPYmPC_QhnLfifo1bjKIkg6PhTB8",
+    "driveFileUrl": "https://drive.google.com/file/d/1ocYNaPYmPC_QhnLfifo1bjKIkg6PhTB8/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1ocYNaPYmPC_QhnLfifo1bjKIkg6PhTB8/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1ocYNaPYmPC_QhnLfifo1bjKIkg6PhTB8"
   },
   {
     "id": "ffm_23",
@@ -884,7 +912,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/المراجعة_النهائية_ملخص_البناء_الفكري_للأدب_العربي_2021_جميع_الشعب.pdf",
     "size": "23.7 ميغابايت",
     "sizeReadable": "23.7 ميغابايت",
-    "sizeBytes": 24864592
+    "sizeBytes": 24864592,
+    "driveFileId": "1DlxqeA7w_5slHcF0G9o-UYtscwPlATJF",
+    "driveFileUrl": "https://drive.google.com/file/d/1DlxqeA7w_5slHcF0G9o-UYtscwPlATJF/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1DlxqeA7w_5slHcF0G9o-UYtscwPlATJF/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1DlxqeA7w_5slHcF0G9o-UYtscwPlATJF"
   },
   {
     "id": "ffm_24",
@@ -919,7 +951,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/المراجعة_النهائية_ملخص_البناء_اللغوي_للأدب_العربي_2021_جميع_الشعب.pdf",
     "size": "15.5 ميغابايت",
     "sizeReadable": "15.5 ميغابايت",
-    "sizeBytes": 16255191
+    "sizeBytes": 16255191,
+    "driveFileId": "17LwVOOgSE2AEDg2oUbMj3FDllGH-lRC-",
+    "driveFileUrl": "https://drive.google.com/file/d/17LwVOOgSE2AEDg2oUbMj3FDllGH-lRC-/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/17LwVOOgSE2AEDg2oUbMj3FDllGH-lRC-/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=17LwVOOgSE2AEDg2oUbMj3FDllGH-lRC-"
   },
   {
     "id": "ffm_25",
@@ -954,7 +990,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/النوابغ_في_اللغة_العربية_شعب_العلمية_طبعة_2022.pdf",
     "size": "14.7 ميغابايت",
     "sizeReadable": "14.7 ميغابايت",
-    "sizeBytes": 15437644
+    "sizeBytes": 15437644,
+    "driveFileId": "1q0SuE5WV-q0PyYm9Op4CmUXMhEA5RbbI",
+    "driveFileUrl": "https://drive.google.com/file/d/1q0SuE5WV-q0PyYm9Op4CmUXMhEA5RbbI/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1q0SuE5WV-q0PyYm9Op4CmUXMhEA5RbbI/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1q0SuE5WV-q0PyYm9Op4CmUXMhEA5RbbI"
   },
   {
     "id": "ffm_26",
@@ -989,7 +1029,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/النوابغ_في_اللغة_العربية_شعبة_ادب_وفلسفة_للغات_اجنبية_طبعة_2022.pdf",
     "size": "25.3 ميغابايت",
     "sizeReadable": "25.3 ميغابايت",
-    "sizeBytes": 26486960
+    "sizeBytes": 26486960,
+    "driveFileId": "1dwZMtHhop1lRvy287rpX3os_sFfieSh4",
+    "driveFileUrl": "https://drive.google.com/file/d/1dwZMtHhop1lRvy287rpX3os_sFfieSh4/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1dwZMtHhop1lRvy287rpX3os_sFfieSh4/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1dwZMtHhop1lRvy287rpX3os_sFfieSh4"
   },
   {
     "id": "ffm_27",
@@ -1024,7 +1068,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/كتاب_المراجعة_النهائية_في_الادب_للاستاذ_حيقون_اسامة.pdf",
     "size": "88.9 ميغابايت",
     "sizeReadable": "88.9 ميغابايت",
-    "sizeBytes": 93208017
+    "sizeBytes": 93208017,
+    "driveFileId": "1dq53Uhm7qwawcDPsk3DdZcL5nOxepDw4",
+    "driveFileUrl": "https://drive.google.com/file/d/1dq53Uhm7qwawcDPsk3DdZcL5nOxepDw4/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1dq53Uhm7qwawcDPsk3DdZcL5nOxepDw4/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1dq53Uhm7qwawcDPsk3DdZcL5nOxepDw4"
   },
   {
     "id": "ffm_28",
@@ -1059,7 +1107,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/كتاب_المراجعة_النهائية_في_الادب_للشعب_العلمية_حيقون_اسامة_2021.pdf",
     "size": "61.3 ميغابايت",
     "sizeReadable": "61.3 ميغابايت",
-    "sizeBytes": 64295845
+    "sizeBytes": 64295845,
+    "driveFileId": "1V5Y219CY1HkS7d84TgDzuNosTu9T6ThK",
+    "driveFileUrl": "https://drive.google.com/file/d/1V5Y219CY1HkS7d84TgDzuNosTu9T6ThK/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1V5Y219CY1HkS7d84TgDzuNosTu9T6ThK/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1V5Y219CY1HkS7d84TgDzuNosTu9T6ThK"
   },
   {
     "id": "ffm_29",
@@ -1094,7 +1146,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/كتاب_المفيد_الأفضل_و_الأنجع_في_مراجعة_اللغة_العربية_و_آدابها_للشعب.pdf",
     "size": "1.5 ميغابايت",
     "sizeReadable": "1.5 ميغابايت",
-    "sizeBytes": 1598329
+    "sizeBytes": 1598329,
+    "driveFileId": "1RY5AbrxOWr39x2IeIjL6zknYnwuyE0Oc",
+    "driveFileUrl": "https://drive.google.com/file/d/1RY5AbrxOWr39x2IeIjL6zknYnwuyE0Oc/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1RY5AbrxOWr39x2IeIjL6zknYnwuyE0Oc/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1RY5AbrxOWr39x2IeIjL6zknYnwuyE0Oc"
   },
   {
     "id": "ffm_30",
@@ -1129,7 +1185,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/محطة_تحضيرية_لاختبار_الفصل_1_لغة_عربية_و_آدابها_شعب_علمية_نافع_بكالوريا.pdf",
     "size": "11.7 ميغابايت",
     "sizeReadable": "11.7 ميغابايت",
-    "sizeBytes": 12252207
+    "sizeBytes": 12252207,
+    "driveFileId": "1cEqPoODEATQYTFPklxR3n_k5eJKcjVZR",
+    "driveFileUrl": "https://drive.google.com/file/d/1cEqPoODEATQYTFPklxR3n_k5eJKcjVZR/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1cEqPoODEATQYTFPklxR3n_k5eJKcjVZR/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1cEqPoODEATQYTFPklxR3n_k5eJKcjVZR"
   },
   {
     "id": "ffm_31",
@@ -1164,7 +1224,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/مطبوعة_التقويم_النقدي_3_ثانوي_شعب_أدبية_إعداد_الأستاذ_هجرسي_محمد.pdf",
     "size": "863 كيلوبايت",
     "sizeReadable": "863 كيلوبايت",
-    "sizeBytes": 883939
+    "sizeBytes": 883939,
+    "driveFileId": "1ZWFGi5U1VjR2OccWIUGtjf7BHJq2XFnt",
+    "driveFileUrl": "https://drive.google.com/file/d/1ZWFGi5U1VjR2OccWIUGtjf7BHJq2XFnt/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1ZWFGi5U1VjR2OccWIUGtjf7BHJq2XFnt/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1ZWFGi5U1VjR2OccWIUGtjf7BHJq2XFnt"
   },
   {
     "id": "ffm_32",
@@ -1199,7 +1263,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/ملخص بشير بلعيد.pdf",
     "size": "542 كيلوبايت",
     "sizeReadable": "542 كيلوبايت",
-    "sizeBytes": 554526
+    "sizeBytes": 554526,
+    "driveFileId": "1zzthwWtOtyPSVuhgQv_pKH9v2u7GXVnL",
+    "driveFileUrl": "https://drive.google.com/file/d/1zzthwWtOtyPSVuhgQv_pKH9v2u7GXVnL/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1zzthwWtOtyPSVuhgQv_pKH9v2u7GXVnL/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1zzthwWtOtyPSVuhgQv_pKH9v2u7GXVnL"
   },
   {
     "id": "ffm_33",
@@ -1234,7 +1302,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/ملخصات_الأدب_العربي_من_إعداد_أیمن_فراج.pdf",
     "size": "401 كيلوبايت",
     "sizeReadable": "401 كيلوبايت",
-    "sizeBytes": 410534
+    "sizeBytes": 410534,
+    "driveFileId": "1szhaw4Ne0-IkxOfuhO6tlURnreKSJ9iO",
+    "driveFileUrl": "https://drive.google.com/file/d/1szhaw4Ne0-IkxOfuhO6tlURnreKSJ9iO/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1szhaw4Ne0-IkxOfuhO6tlURnreKSJ9iO/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1szhaw4Ne0-IkxOfuhO6tlURnreKSJ9iO"
   },
   {
     "id": "ffm_34",
@@ -1269,7 +1341,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/مواضيع أدب عربي....pdf",
     "size": "1008 كيلوبايت",
     "sizeReadable": "1008 كيلوبايت",
-    "sizeBytes": 1032025
+    "sizeBytes": 1032025,
+    "driveFileId": "1xp3ZSBkjVLeiByYpozgxlvZt37Qb4e6p",
+    "driveFileUrl": "https://drive.google.com/file/d/1xp3ZSBkjVLeiByYpozgxlvZt37Qb4e6p/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1xp3ZSBkjVLeiByYpozgxlvZt37Qb4e6p/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1xp3ZSBkjVLeiByYpozgxlvZt37Qb4e6p"
   },
   {
     "id": "ffm_35",
@@ -1304,7 +1380,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Arab/مواضيع_و_حلول_بكالوريا_اللغة_العربية_و_آدابها_من_2021_إلى_2008_للشعب.pdf",
     "size": "15.5 ميغابايت",
     "sizeReadable": "15.5 ميغابايت",
-    "sizeBytes": 16250458
+    "sizeBytes": 16250458,
+    "driveFileId": "1g7A0ulUn3lZ4-ajOIraUC3KtaWVOM2nN",
+    "driveFileUrl": "https://drive.google.com/file/d/1g7A0ulUn3lZ4-ajOIraUC3KtaWVOM2nN/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1g7A0ulUn3lZ4-ajOIraUC3KtaWVOM2nN/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1g7A0ulUn3lZ4-ajOIraUC3KtaWVOM2nN"
   },
   {
     "id": "ffm_36",
