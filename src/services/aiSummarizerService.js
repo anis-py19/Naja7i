@@ -61,11 +61,12 @@ export async function generateAiSummary({
   rawText = '',
   inlineFile = null // { mimeType, data }
 }) {
-  if (!apiKey || !apiKey.trim()) {
+  const activeKey = (apiKey && apiKey.trim()) || import.meta.env.VITE_GEMINI_API_KEY;
+  if (!activeKey || !activeKey.trim()) {
     throw new Error('يرجى إدخال مفتاح Google Gemini API للمتابعة. (المفتاح مجاني بالكامل)');
   }
 
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey.trim()}`;
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${activeKey.trim()}`;
 
   let modeInstruction = '';
   switch (mode) {

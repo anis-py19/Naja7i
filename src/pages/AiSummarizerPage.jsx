@@ -32,12 +32,12 @@ export default function AiSummarizerPage() {
   const [rawText, setRawText] = useState('');
   const [summaryMode, setSummaryMode] = useState('comprehensive'); // 'comprehensive' | 'high_yield' | 'questions' | 'mindmap'
   
-  // API Key State
+  // API Key State (Default to secure environment key if provided by platform)
   const [apiKey, setApiKey] = useState(() => {
     try {
-      return localStorage.getItem('naja7i_gemini_api_key') || '';
+      return localStorage.getItem('naja7i_gemini_api_key') || import.meta.env.VITE_GEMINI_API_KEY || '';
     } catch {
-      return '';
+      return import.meta.env.VITE_GEMINI_API_KEY || '';
     }
   });
   const [showKeySettings, setShowKeySettings] = useState(false);
