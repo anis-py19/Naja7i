@@ -233,33 +233,13 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                       </p>
                     </div>
 
-                    <div className="pt-2 border-t border-[#E2E8F0] grid grid-cols-2 gap-2">
+                    <div className="pt-2 border-t border-[#E2E8F0]">
                       <button
                         onClick={() => onOpenPdf && onOpenPdf(file)}
-                        className="py-2 rounded-lg bg-white hover:bg-[#F1F5F9] text-[#0F172A] font-bold text-xs flex items-center justify-center gap-1 border border-[#CBD5E1] transition-colors cursor-pointer"
+                        className="w-full py-2 px-3 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-2xs hover:shadow-xs cursor-pointer active:scale-[0.99]"
                       >
-                        <HiEye className="w-3.5 h-3.5 text-[#E11D48]" />
-                        <span>قراءة</span>
-                      </button>
-
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          const pdfUrl = file.driveDownloadUrl || file.fileUrl || file.url;
-                          const fileName = file.rawFileName || `${file.title}.pdf`;
-                          const link = document.createElement('a');
-                          link.href = pdfUrl;
-                          link.download = fileName;
-                          link.target = '_blank';
-                          link.rel = 'noopener noreferrer';
-                          document.body.appendChild(link);
-                          link.click();
-                          document.body.removeChild(link);
-                        }}
-                        className="py-2 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center justify-center gap-1 transition-colors shadow-2xs cursor-pointer"
-                      >
-                        <HiDownload className="w-3.5 h-3.5" />
-                        <span>تحميل PDF</span>
+                        <HiBookOpen className="w-4 h-4" />
+                        <span>قراءة وتحميل</span>
                       </button>
                     </div>
                   </div>

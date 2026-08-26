@@ -365,22 +365,14 @@ export default function LibraryPage({ onOpenPdf }) {
 
                 </div>
 
-                {/* Actions: View Online & Download Direct */}
-                <div className="pt-3 border-t border-[#E2E8F0] flex items-center gap-2">
+                {/* Actions: Unified Read & Download Action */}
+                <div className="pt-3 border-t border-[#E2E8F0]">
                   <button
                     onClick={() => onOpenPdf(file)}
-                    className="flex-1 py-2 px-2 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                    className="w-full py-2 px-3 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-2xs hover:shadow-xs cursor-pointer active:scale-[0.99]"
                   >
-                    <HiEye className="w-3.5 h-3.5 text-[#E11D48]" />
-                    <span>قراءة</span>
-                  </button>
-
-                  <button
-                    onClick={(e) => handleDirectDownload(file, e)}
-                    className="flex-1 py-2 px-2 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
-                  >
-                    <HiDownload className="w-3.5 h-3.5" />
-                    <span>تحميل</span>
+                    <HiBookOpen className="w-4 h-4" />
+                    <span>قراءة وتحميل</span>
                   </button>
                 </div>
 
