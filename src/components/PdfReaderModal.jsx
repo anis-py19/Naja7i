@@ -322,6 +322,20 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                 <span className="hidden sm:inline">{isGoogleDrive ? 'فتح في Drive' : 'تحميل PDF'}</span>
               </button>
 
+              {/* Google Drive Folder link if available */}
+              {file.driveFolderUrl && !file.isFolder && (
+                <a
+                  href={file.driveFolderUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-blue-950/90 hover:bg-blue-900 text-blue-300 border border-blue-800 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1"
+                  title="فتح مجلد المادة على Google Drive"
+                >
+                  <HiFolderDownload className="w-4 h-4 text-blue-400" />
+                  <span className="hidden md:inline">مجلد Drive ↗</span>
+                </a>
+              )}
+
               {/* Open in new tab */}
               <a
                 href={rawUrl}

@@ -336,18 +336,7 @@ export default function CurriculumPage() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 self-start md:self-auto flex-wrap">
-                    {activeSubject.id === 'english' && (
-                      <a
-                        href="https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-3.5 py-2 rounded-xl bg-[#0F172A] hover:bg-black text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs"
-                      >
-                        <HiExternalLink className="w-4 h-4 text-rose-400" />
-                        <span>Google Drive 🚀</span>
-                      </a>
-                    )}
+                  <div className="flex items-center gap-2 self-start md:self-auto">
                     <Link
                       to="/library"
                       className="px-3.5 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#CBD5E1] text-xs font-bold flex items-center gap-1.5 shadow-2xs"

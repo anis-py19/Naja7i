@@ -36,6 +36,7 @@ export const USER_STUDY_FILES = [
     "category": "ملخصات ودروس",
     "author": "أساتذة متميزون",
     "fileUrl": "/FileFromMe/Anglais/305433775-Written-Expressions-3as-1-pdf.pdf",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR",
     "rawPath": "/FileFromMe/Anglais/305433775-Written-Expressions-3as-1-pdf.pdf",
     "size": "453 كيلوبايت",
     "sizeReadable": "453 كيلوبايت",
@@ -71,6 +72,7 @@ export const USER_STUDY_FILES = [
     "category": "ملخصات ودروس",
     "author": "أساتذة متميزون",
     "fileUrl": "/FileFromMe/Anglais/BAC literary stream REVISION ALL UNITS NOUARA.pdf",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR",
     "rawPath": "/FileFromMe/Anglais/BAC literary stream REVISION ALL UNITS NOUARA.pdf",
     "size": "3.8 ميغابايت",
     "sizeReadable": "3.8 ميغابايت",
@@ -106,6 +108,7 @@ export const USER_STUDY_FILES = [
     "category": "ملخصات ودروس",
     "author": "أساتذة متميزون",
     "fileUrl": "/FileFromMe/Anglais/Final BAC Revison English.pdf",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR",
     "rawPath": "/FileFromMe/Anglais/Final BAC Revison English.pdf",
     "size": "76.0 ميغابايت",
     "sizeReadable": "76.0 ميغابايت",
@@ -141,6 +144,7 @@ export const USER_STUDY_FILES = [
     "category": "ملخصات ودروس",
     "author": "أساتذة متميزون",
     "fileUrl": "/FileFromMe/Anglais/Written Expressions.pdf",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR",
     "rawPath": "/FileFromMe/Anglais/Written Expressions.pdf",
     "size": "952 كيلوبايت",
     "sizeReadable": "952 كيلوبايت",
@@ -176,6 +180,7 @@ export const USER_STUDY_FILES = [
     "category": "ملخصات ودروس",
     "author": "أساتذة متميزون",
     "fileUrl": "/FileFromMe/Anglais/الأسئلة-المعتادة-في-البكالوريا-في-اللغة-الإنجليزية-مترجمة-للغة-العربية.pdf",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR",
     "rawPath": "/FileFromMe/Anglais/الأسئلة-المعتادة-في-البكالوريا-في-اللغة-الإنجليزية-مترجمة-للغة-العربية.pdf",
     "size": "484 كيلوبايت",
     "sizeReadable": "484 كيلوبايت",
@@ -211,6 +216,7 @@ export const USER_STUDY_FILES = [
     "category": "ملخصات ودروس",
     "author": "أساتذة متميزون",
     "fileUrl": "/FileFromMe/Anglais/الأسئلة_المعتادة_في_البكالوريا_في_اللغة_الإنجليزية_مترجمة_للغة_العربية.pdf",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR",
     "rawPath": "/FileFromMe/Anglais/الأسئلة_المعتادة_في_البكالوريا_في_اللغة_الإنجليزية_مترجمة_للغة_العربية.pdf",
     "size": "484 كيلوبايت",
     "sizeReadable": "484 كيلوبايت",
@@ -246,6 +252,7 @@ export const USER_STUDY_FILES = [
     "category": "ملخصات ودروس",
     "author": "أساتذة متميزون",
     "fileUrl": "/FileFromMe/Anglais/اللغة_الإنجليزية_الفقرات_المقررة_للشعب_العلمية_المشتركة_.pdf",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR",
     "rawPath": "/FileFromMe/Anglais/اللغة_الإنجليزية_الفقرات_المقررة_للشعب_العلمية_المشتركة_.pdf",
     "size": "354 كيلوبايت",
     "sizeReadable": "354 كيلوبايت",
@@ -281,6 +288,7 @@ export const USER_STUDY_FILES = [
     "category": "كتب ومجلات شاملة",
     "author": "أساتذة متميزون",
     "fileUrl": "/FileFromMe/Anglais/باقة07_مواضيع_+_الحل_لغة_إنجليزية_التحضير_لاختبار_الفصل_1_شعب_علمية.pdf",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR",
     "rawPath": "/FileFromMe/Anglais/باقة07_مواضيع_+_الحل_لغة_إنجليزية_التحضير_لاختبار_الفصل_1_شعب_علمية.pdf",
     "size": "11.0 ميغابايت",
     "sizeReadable": "11.0 ميغابايت",
@@ -316,6 +324,7 @@ export const USER_STUDY_FILES = [
     "category": "قوانين ومخططات",
     "author": "أساتذة متميزون",
     "fileUrl": "/FileFromMe/Anglais/جميع_المصطلحات_الإنجليزية_للوحدات_الأربعة1.pdf",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR",
     "rawPath": "/FileFromMe/Anglais/جميع_المصطلحات_الإنجليزية_للوحدات_الأربعة1.pdf",
     "size": "85 كيلوبايت",
     "sizeReadable": "85 كيلوبايت",
@@ -351,6 +360,7 @@ export const USER_STUDY_FILES = [
     "category": "ملخصات ودروس",
     "author": "أساتذة متميزون",
     "fileUrl": "/FileFromMe/Anglais/قواعد اللغ الانجليزية للصف الثالث الثانوي في 15 ورقة مراجعة الفرص الاخيرة بطريق رائعة مع مستر اح.pdf",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR",
     "rawPath": "/FileFromMe/Anglais/قواعد اللغ الانجليزية للصف الثالث الثانوي في 15 ورقة مراجعة الفرص الاخيرة بطريق رائعة مع مستر اح.pdf",
     "size": "3.6 ميغابايت",
     "sizeReadable": "3.6 ميغابايت",
@@ -386,6 +396,7 @@ export const USER_STUDY_FILES = [
     "category": "سلاسل وتمارين محلولة",
     "author": "الأستاذ ناصر منصوري",
     "fileUrl": "/FileFromMe/Anglais/كتاب_مقترحات_الانجلزية_لاستاذ_ناصر_منصوري_ج_ح_م_لــwww_msila_info.pdf",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR",
     "rawPath": "/FileFromMe/Anglais/كتاب_مقترحات_الانجلزية_لاستاذ_ناصر_منصوري_ج_ح_م_لــwww_msila_info.pdf",
     "size": "192.8 ميغابايت",
     "sizeReadable": "192.8 ميغابايت",
@@ -421,6 +432,7 @@ export const USER_STUDY_FILES = [
     "category": "قوانين ومخططات",
     "author": "أساتذة متميزون",
     "fileUrl": "/FileFromMe/Anglais/مصطلحات انجليزية.pdf",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR",
     "rawPath": "/FileFromMe/Anglais/مصطلحات انجليزية.pdf",
     "size": "402 كيلوبايت",
     "sizeReadable": "402 كيلوبايت",
@@ -456,6 +468,7 @@ export const USER_STUDY_FILES = [
     "category": "ملخصات ودروس",
     "author": "أساتذة متميزون",
     "fileUrl": "/FileFromMe/Anglais/ملخص شامل للإنجليزية بكالوريا.pdf",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR",
     "rawPath": "/FileFromMe/Anglais/ملخص شامل للإنجليزية بكالوريا.pdf",
     "size": "1.7 ميغابايت",
     "sizeReadable": "1.7 ميغابايت",
@@ -491,6 +504,7 @@ export const USER_STUDY_FILES = [
     "category": "ملخصات ودروس",
     "author": "أساتذة متميزون",
     "fileUrl": "/FileFromMe/Anglais/ملخص في مادة اللغة الإنجليزية - Copy.pdf",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR",
     "rawPath": "/FileFromMe/Anglais/ملخص في مادة اللغة الإنجليزية - Copy.pdf",
     "size": "1.1 ميغابايت",
     "sizeReadable": "1.1 ميغابايت",
@@ -526,6 +540,7 @@ export const USER_STUDY_FILES = [
     "category": "ملخصات ودروس",
     "author": "أساتذة متميزون",
     "fileUrl": "/FileFromMe/Anglais/ملخص_قواعد_الانجليزية_الشعب_العلمية_المشتركة_1.pdf",
+    "driveFolderUrl": "https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR",
     "rawPath": "/FileFromMe/Anglais/ملخص_قواعد_الانجليزية_الشعب_العلمية_المشتركة_1.pdf",
     "size": "560 كيلوبايت",
     "sizeReadable": "560 كيلوبايت",
@@ -10369,6 +10384,8 @@ export function searchUserFiles(query, streamId = 'all', subjectId = 'all') {
   if (subjectId && subjectId !== 'all') {
     list = list.filter(f => f.subjectId === subjectId || (f.subjectAliases && f.subjectAliases.includes(subjectId)));
   }
+  if (!query || !query.trim()) return list;
+
   const q = query.trim().toLowerCase();
   return list.filter(f => 
     f.title.toLowerCase().includes(q) ||
@@ -10377,17 +10394,6 @@ export function searchUserFiles(query, streamId = 'all', subjectId = 'all') {
     f.subjectName.toLowerCase().includes(q) ||
     f.rawFileName.toLowerCase().includes(q)
   );
-}
-
-export const SUBJECT_DRIVE_FOLDERS = {
-  english: 'https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR',
-  anglais: 'https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR'
-};
-
-export function getSubjectDriveFolder(subjectId) {
-  if (!subjectId) return null;
-  const key = String(subjectId).toLowerCase();
-  return SUBJECT_DRIVE_FOLDERS[key] || null;
 }
 
 export default USER_STUDY_FILES;
