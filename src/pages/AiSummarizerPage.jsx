@@ -22,7 +22,8 @@ import {
   fileToBase64, 
   generateAiSummary, 
   generateLocalHeuristicSummary,
-  parseMindmapTextToJson
+  parseMindmapTextToJson,
+  getPlatformDefaultApiKey
 } from '../services/aiSummarizerService';
 import VisualMindmapViewer from '../components/VisualMindmapViewer';
 import MarkdownContentRenderer from '../components/MarkdownContentRenderer';
@@ -34,8 +35,8 @@ export default function AiSummarizerPage() {
   const [summaryMode, setSummaryMode] = useState('mindmap'); // 'comprehensive' | 'high_yield' | 'questions' | 'mindmap'
   const [activeViewTab, setActiveViewTab] = useState('mindmap'); // 'mindmap' | 'text'
   
-  // Secure Platform API Key (resolved silently from environment)
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
+  // Secure Platform API Key (resolved silently with built-in production fallback)
+  const apiKey = getPlatformDefaultApiKey();
 
   // Generation & Status
   const [isLoading, setIsLoading] = useState(false);
