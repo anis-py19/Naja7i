@@ -13,7 +13,7 @@ import {
   HiExternalLink
 } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
-import { USER_STUDY_FILES } from '../data/userFilesData';
+import { USER_STUDY_FILES, getSubjectDriveFolder } from '../data/userFilesData';
 import { STREAMS } from '../data/streamsData';
 
 const ITEMS_PER_PAGE = 12;
@@ -99,7 +99,12 @@ export default function LibraryPage({ onOpenPdf }) {
 
   const handleDirectDownload = (file, e) => {
     e.stopPropagation();
-    const pdfUrl = file.fileUrl || file.url;
+    const driveFolder = getSubjectDriveFolder(file.subjectId);
+    if (file.subjectId === 'english' && driveFolder) {
+      window.open(driveFolder, '_blank');
+      return;
+    }
+    const pdfUrl = file.driveUrl || file.fileUrl || file.url;
     const fileName = file.rawFileName || `${file.title}.pdf`;
     const link = document.createElement('a');
     link.href = pdfUrl;
@@ -303,6 +308,41 @@ export default function LibraryPage({ onOpenPdf }) {
           )}
 
         </div>
+
+        {/* Google Drive Dedicated Folder Banner for English / Mapped Subjects */}
+        {(selectedSubject === 'اللغة الإنجليزية' || (filteredFiles.length > 0 && filteredFiles.every(f => f.subjectId === 'english'))) && (
+          <div className="mb-6 p-4 sm:p-5 rounded-2xl bg-white border border-[#CBD5E1] shadow-2xs flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3.5 text-center sm:text-right">
+              <div className="w-12 h-12 rounded-xl bg-rose-50 border border-rose-100 flex items-center justify-center text-2xl shrink-0 shadow-2xs">
+                🇬🇧
+              </div>
+              <div>
+                <div className="flex items-center justify-center sm:justify-start gap-2 mb-0.5">
+                  <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200">
+                    Google Drive مباشر
+                  </span>
+                  <span className="text-xs text-[#64748B]">سريع وبدون انقطاع</span>
+                </div>
+                <h4 className="text-sm font-black text-[#0F172A]">
+                  مجلد Google Drive الرسمي لدروس وملخصات اللغة الإنجليزية
+                </h4>
+                <p className="text-xs text-[#64748B] mt-0.5">
+                  تصفح وحمل جميع سلاسل وملخصات الإنجليزية مباشرة من مجلد Google Drive.
+                </p>
+              </div>
+            </div>
+
+            <a
+              href="https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2.5 rounded-xl bg-[#0F172A] hover:bg-black text-white text-xs font-bold flex items-center gap-2 transition-all shadow-2xs whitespace-nowrap"
+            >
+              <HiExternalLink className="w-4 h-4 text-rose-400" />
+              <span>فتح وتحميل من Google Drive 🚀</span>
+            </a>
+          </div>
+        )}
 
         {/* Results Counter Header */}
         <div className="flex items-center justify-between text-xs text-[#64748B] mb-4 px-1">

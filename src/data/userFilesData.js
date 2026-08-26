@@ -10369,8 +10369,6 @@ export function searchUserFiles(query, streamId = 'all', subjectId = 'all') {
   if (subjectId && subjectId !== 'all') {
     list = list.filter(f => f.subjectId === subjectId || (f.subjectAliases && f.subjectAliases.includes(subjectId)));
   }
-  if (!query || !query.trim()) return list;
-
   const q = query.trim().toLowerCase();
   return list.filter(f => 
     f.title.toLowerCase().includes(q) ||
@@ -10379,6 +10377,17 @@ export function searchUserFiles(query, streamId = 'all', subjectId = 'all') {
     f.subjectName.toLowerCase().includes(q) ||
     f.rawFileName.toLowerCase().includes(q)
   );
+}
+
+export const SUBJECT_DRIVE_FOLDERS = {
+  english: 'https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR',
+  anglais: 'https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR'
+};
+
+export function getSubjectDriveFolder(subjectId) {
+  if (!subjectId) return null;
+  const key = String(subjectId).toLowerCase();
+  return SUBJECT_DRIVE_FOLDERS[key] || null;
 }
 
 export default USER_STUDY_FILES;

@@ -15,7 +15,7 @@ import {
 } from 'react-icons/hi';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SUBJECT_RESOURCES } from '../data/bacData';
-import { getFilesBySubject } from '../data/userFilesData';
+import { getFilesBySubject, getSubjectDriveFolder } from '../data/userFilesData';
 
 export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPdf }) {
   const [activeTab, setActiveTab] = useState('files'); // 'files', 'units', 'videos', 'bacs'
@@ -198,6 +198,35 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
         {/* Content Body */}
         <div className="p-5 sm:p-6 overflow-y-auto space-y-6 flex-1 bg-white">
           
+          {/* Google Drive Dedicated Folder Banner */}
+          {getSubjectDriveFolder(subjectId) && (
+            <div className="p-4 rounded-2xl bg-[#F8FAFC] border border-[#CBD5E1] shadow-2xs flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="flex items-center gap-3 text-center sm:text-right">
+                <div className="w-10 h-10 rounded-xl bg-rose-50 border border-rose-100 flex items-center justify-center text-xl shrink-0">
+                  📁
+                </div>
+                <div>
+                  <h4 className="text-xs sm:text-sm font-black text-[#0F172A]">
+                    مجلد Google Drive الرسمي لدروس وملخصات {subjectData.title}
+                  </h4>
+                  <p className="text-[11px] text-[#64748B] mt-0.5">
+                    فتح مباشر للمجلد الكامل على Google Drive للتحميل السريع بدون انقطاع.
+                  </p>
+                </div>
+              </div>
+
+              <a
+                href={getSubjectDriveFolder(subjectId)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-xl bg-[#0F172A] hover:bg-black text-white text-xs font-bold flex items-center gap-1.5 transition-colors whitespace-nowrap shadow-2xs"
+              >
+                <HiExternalLink className="w-4 h-4 text-rose-400" />
+                <span>فتح وتحميل عبر Google Drive 🚀</span>
+              </a>
+            </div>
+          )}
+
           {/* TAB 0: Direct User Files */}
           {activeTab === 'files' && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
