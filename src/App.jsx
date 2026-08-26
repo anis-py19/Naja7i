@@ -292,7 +292,7 @@ function App() {
             />
             <div>
               <span className="font-black text-sm text-[#0F172A] block">منصة نجاحي — Naja7i BAC 3AS</span>
-              <span className="text-[#64748B]">مبادرة الطالب أنيس إيزري (Anis Izri) • صدقة جارية لدعم طلبة البكالوريا 🇩🇿</span>
+              <span className="text-[#64748B]">مبادرة الطالب أنيس إزري (Anis Izri) • صدقة جارية لدعم طلبة البكالوريا 🇩🇿</span>
             </div>
           </div>
 
