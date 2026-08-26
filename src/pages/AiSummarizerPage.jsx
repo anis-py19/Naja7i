@@ -148,11 +148,6 @@ export default function AiSummarizerPage() {
       }
 
       setStatusMessage('3/3: اكتمل التلخيص بنجاح!');
-
-      if (finalSummary.includes('[NOT_BAC_CURRICULUM]')) {
-        throw new Error('⛔ عذراً، لا يمكن تلخيص هذا المحتوى! محرك الذكاء الاصطناعي مخصص حصرياً لدروس ومقررات شهادة البكالوريا الجزائرية (3AS). يرجى رفع ملف أو كتابة نص متعلق بإحدى مواد البكالوريا.');
-      }
-
       setSummaryResult(finalSummary);
       if (summaryMode === 'mindmap') {
         setActiveViewTab('mindmap');
