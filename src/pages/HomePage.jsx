@@ -8,7 +8,6 @@ import {
 import { STREAMS } from '../data/streamsData';
 import FounderStorySection from '../components/FounderStorySection';
 import ContactContributionSection from '../components/ContactContributionSection';
-
 import VisitorCounterBadge from '../components/VisitorCounterBadge';
 
 export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }) {
@@ -87,11 +86,8 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       <section className="pt-8 pb-9 px-4 sm:px-6 lg:px-8 border-b border-[#E2E8F0] bg-white">
         <div className="max-w-4xl mx-auto text-center space-y-3">
           
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <div className="inline-block px-3.5 py-1 rounded-full bg-[#F1F5F9] border border-[#E2E8F0] text-xs font-bold text-[#0F172A]">
-              الموقع التعليمي الشامل لبكالوريا الجزائر 🇩🇿
-            </div>
-            <VisitorCounterBadge variant="hero" />
+          <div className="inline-block px-3.5 py-1 rounded-full bg-[#F1F5F9] border border-[#E2E8F0] text-xs font-bold text-[#0F172A]">
+            الموقع التعليمي الشامل لبكالوريا الجزائر 🇩🇿
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] tracking-tight">
@@ -101,6 +97,11 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
           <p className="text-xs sm:text-sm text-[#475569] max-w-2xl mx-auto leading-relaxed">
             مكتبة منظمة تجمع أفضل ملخصات وسلاسل أساتذة الجزائر، مواضيع وحلول البكالوريا الرسمية، وأدوات المراجعة بدون إعلانات أو روابط خارجية.
           </p>
+
+          {/* Real Live Visitor Counter Badge */}
+          <div className="pt-1">
+            <VisitorCounterBadge variant="banner" />
+          </div>
 
           {/* Actions */}
           <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">

@@ -1,4 +1,4 @@
-import puppeteer from '/tmp/naja7i-test/node_modules/puppeteer-core/lib/esm/puppeteer/puppeteer-core.js';
+import puppeteer from 'file:///C:/Users/anisr/AppData/Local/Temp/naja7i-test/node_modules/puppeteer-core/lib/esm/puppeteer/puppeteer-core.js';
 
 const EDGE = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
 const BASE = 'http://127.0.0.1:5199';

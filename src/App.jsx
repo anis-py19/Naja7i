@@ -322,11 +322,11 @@ function App() {
             <Link to="/contact" className="hover:text-[#E11D48] transition-colors text-[#E11D48] font-bold">تواصل ومساهمة 📥</Link>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full pt-4 border-t border-[#F1F5F9]">
-            <div className="text-[#94A3B8] text-[11px]">
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <VisitorCounterBadge variant="footer" />
+            <div className="text-[#94A3B8] text-[11px] text-center sm:text-left">
               جميع الحقوق محفوظة © {new Date().getFullYear()} لمنصة نجاحي التعليمية • نسألكم الدعاء بالتوفيق والبركة
             </div>
-            <VisitorCounterBadge variant="footer" />
           </div>
         </div>
       </footer>
