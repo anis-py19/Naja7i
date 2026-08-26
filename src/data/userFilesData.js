@@ -1785,7 +1785,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Francais/bac35.com-فقرات لغة فرنسية بكالوريا.pdf",
     "size": "3.3 ميغابايت",
     "sizeReadable": "3.3 ميغابايت",
-    "sizeBytes": 3467317
+    "sizeBytes": 3467317,
+    "driveFileId": "1ffOQAjwpWBML5k3ggxEYNuqhOEBfx7KE",
+    "driveFileUrl": "https://drive.google.com/file/d/1ffOQAjwpWBML5k3ggxEYNuqhOEBfx7KE/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1ffOQAjwpWBML5k3ggxEYNuqhOEBfx7KE/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1ffOQAjwpWBML5k3ggxEYNuqhOEBfx7KE"
   },
   {
     "id": "ffm_50",
@@ -1820,7 +1824,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Francais/bac35.com-ملخص فرنسية بكالوريا.pdf",
     "size": "996 كيلوبايت",
     "sizeReadable": "996 كيلوبايت",
-    "sizeBytes": 1020011
+    "sizeBytes": 1020011,
+    "driveFileId": "1lGtZ31ePrHI8syWvG2LSMhm3BY1FM_j_",
+    "driveFileUrl": "https://drive.google.com/file/d/1lGtZ31ePrHI8syWvG2LSMhm3BY1FM_j_/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1lGtZ31ePrHI8syWvG2LSMhm3BY1FM_j_/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1lGtZ31ePrHI8syWvG2LSMhm3BY1FM_j_"
   },
   {
     "id": "ffm_51",
@@ -1855,7 +1863,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Francais/comment faire un compte rendu objectif ou critique .pdf",
     "size": "2.2 ميغابايت",
     "sizeReadable": "2.2 ميغابايت",
-    "sizeBytes": 2277741
+    "sizeBytes": 2277741,
+    "driveFileId": "1b2vxFakujpdgH1XycuQemqNa0ycZuyDt",
+    "driveFileUrl": "https://drive.google.com/file/d/1b2vxFakujpdgH1XycuQemqNa0ycZuyDt/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1b2vxFakujpdgH1XycuQemqNa0ycZuyDt/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1b2vxFakujpdgH1XycuQemqNa0ycZuyDt"
   },
   {
     "id": "ffm_52",
@@ -1890,7 +1902,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Francais/Final BAC Revison Francais.pdf",
     "size": "67.7 ميغابايت",
     "sizeReadable": "67.7 ميغابايت",
-    "sizeBytes": 70982034
+    "sizeBytes": 70982034,
+    "driveFileId": "1A4mazb1yshUfYAFaxT2O84QdAg0UQpai",
+    "driveFileUrl": "https://drive.google.com/file/d/1A4mazb1yshUfYAFaxT2O84QdAg0UQpai/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1A4mazb1yshUfYAFaxT2O84QdAg0UQpai/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1A4mazb1yshUfYAFaxT2O84QdAg0UQpai"
   },
   {
     "id": "ffm_53",
@@ -1925,7 +1941,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Francais/Résumé-français-BAC-de-Mr-Berkane-Nordine-converti.pdf",
     "size": "783 كيلوبايت",
     "sizeReadable": "783 كيلوبايت",
-    "sizeBytes": 802144
+    "sizeBytes": 802144,
+    "driveFileId": "1InKRKyhZ8PwmClPSYpSrRc1Z3BOvgFcN",
+    "driveFileUrl": "https://drive.google.com/file/d/1InKRKyhZ8PwmClPSYpSrRc1Z3BOvgFcN/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1InKRKyhZ8PwmClPSYpSrRc1Z3BOvgFcN/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1InKRKyhZ8PwmClPSYpSrRc1Z3BOvgFcN"
   },
   {
     "id": "ffm_54",
@@ -1960,7 +1980,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Francais/Révision BAC2020.pdf",
     "size": "659 كيلوبايت",
     "sizeReadable": "659 كيلوبايت",
-    "sizeBytes": 674851
+    "sizeBytes": 674851,
+    "driveFileId": "1oPG_3-5wDgU0akMlHrvv5kHduNbUuB4q",
+    "driveFileUrl": "https://drive.google.com/file/d/1oPG_3-5wDgU0akMlHrvv5kHduNbUuB4q/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1oPG_3-5wDgU0akMlHrvv5kHduNbUuB4q/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1oPG_3-5wDgU0akMlHrvv5kHduNbUuB4q"
   },
   {
     "id": "ffm_55",
@@ -1995,7 +2019,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Francais/كتاب_مقترحات_الفرنسية_للاستاذ_منير_شبوة_طبعة_2021.pdf",
     "size": "7.3 ميغابايت",
     "sizeReadable": "7.3 ميغابايت",
-    "sizeBytes": 7694865
+    "sizeBytes": 7694865,
+    "driveFileId": "180_EYTjFm6qpsDuWZtXri9UlthiX-Ic-",
+    "driveFileUrl": "https://drive.google.com/file/d/180_EYTjFm6qpsDuWZtXri9UlthiX-Ic-/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/180_EYTjFm6qpsDuWZtXri9UlthiX-Ic-/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=180_EYTjFm6qpsDuWZtXri9UlthiX-Ic-"
   },
   {
     "id": "ffm_56",
@@ -2030,7 +2058,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Francais/محطة_تحضيرية_لاختبار_الفصل_1_لغة_أجنبية_أولى_شعب_علمية_نافع_بكالوريا.pdf",
     "size": "8.3 ميغابايت",
     "sizeReadable": "8.3 ميغابايت",
-    "sizeBytes": 8697719
+    "sizeBytes": 8697719,
+    "driveFileId": "1cgF0B0d_HXHI1fL_1Ah7uYkkWRLzuGOn",
+    "driveFileUrl": "https://drive.google.com/file/d/1cgF0B0d_HXHI1fL_1Ah7uYkkWRLzuGOn/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1cgF0B0d_HXHI1fL_1Ah7uYkkWRLzuGOn/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1cgF0B0d_HXHI1fL_1Ah7uYkkWRLzuGOn"
   },
   {
     "id": "ffm_57",
@@ -2065,7 +2097,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Francais/ملخص اللغة الفرنسية.pdf",
     "size": "1.1 ميغابايت",
     "sizeReadable": "1.1 ميغابايت",
-    "sizeBytes": 1146774
+    "sizeBytes": 1146774,
+    "driveFileId": "1X36v7e8dPu2WiP17HQxZcloPE-f8ZVm5",
+    "driveFileUrl": "https://drive.google.com/file/d/1X36v7e8dPu2WiP17HQxZcloPE-f8ZVm5/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1X36v7e8dPu2WiP17HQxZcloPE-f8ZVm5/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1X36v7e8dPu2WiP17HQxZcloPE-f8ZVm5"
   },
   {
     "id": "ffm_58",
@@ -2100,7 +2136,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Francais/ملخص في مادة اللغة الفرنسية.pdf",
     "size": "1.5 ميغابايت",
     "sizeReadable": "1.5 ميغابايت",
-    "sizeBytes": 1555790
+    "sizeBytes": 1555790,
+    "driveFileId": "1h5Ph8q8I9NaYU4CLKx3097AP3vC4B3xP",
+    "driveFileUrl": "https://drive.google.com/file/d/1h5Ph8q8I9NaYU4CLKx3097AP3vC4B3xP/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1h5Ph8q8I9NaYU4CLKx3097AP3vC4B3xP/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1h5Ph8q8I9NaYU4CLKx3097AP3vC4B3xP"
   },
   {
     "id": "ffm_59",
@@ -2135,7 +2175,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Francais/ملخص_المراجعة_النهائية_في_اللغة_الفرنسية_باك_2023.pdf",
     "size": "3.7 ميغابايت",
     "sizeReadable": "3.7 ميغابايت",
-    "sizeBytes": 3843328
+    "sizeBytes": 3843328,
+    "driveFileId": "1IQzRuEHsFXWR7ctnauFJEmWzw8X2caIe",
+    "driveFileUrl": "https://drive.google.com/file/d/1IQzRuEHsFXWR7ctnauFJEmWzw8X2caIe/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1IQzRuEHsFXWR7ctnauFJEmWzw8X2caIe/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1IQzRuEHsFXWR7ctnauFJEmWzw8X2caIe"
   },
   {
     "id": "ffm_60",
