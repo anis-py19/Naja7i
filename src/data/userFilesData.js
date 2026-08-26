@@ -1,7 +1,7 @@
 /**
  * 📚 Naja7i (نجاحي) — Comprehensive Public Files Catalog
  * Location: public/FileFromMe & Google Drive Cloud Repositories
- * Total Indexed Files: 324
+ * Total Indexed Files: 325
  * Verified Academic Titles, Categories, Stream Maps, Authors, and 100% Real Disk File Paths & Cloud Drive Links.
  */
 
@@ -2901,7 +2901,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/-محمودي-عادل--الشخصيات copy.pdf",
     "size": "5.5 ميغابايت",
     "sizeReadable": "5.5 ميغابايت",
-    "sizeBytes": 5765969
+    "sizeBytes": 5765969,
+    "driveFileId": "17QZ-oXNu6UonNtJE6gAosP8qwqjqHW_Z",
+    "driveFileUrl": "https://drive.google.com/file/d/17QZ-oXNu6UonNtJE6gAosP8qwqjqHW_Z/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/17QZ-oXNu6UonNtJE6gAosP8qwqjqHW_Z/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=17QZ-oXNu6UonNtJE6gAosP8qwqjqHW_Z"
   },
   {
     "id": "ffm_84",
@@ -2937,7 +2941,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/-محمودي-عادل--الشخصيات.pdf",
     "size": "5.5 ميغابايت",
     "sizeReadable": "5.5 ميغابايت",
-    "sizeBytes": 5765969
+    "sizeBytes": 5765969,
+    "driveFileId": "16B9aQgeWOfQepmerCcRKQ5APnN9cZq5J",
+    "driveFileUrl": "https://drive.google.com/file/d/16B9aQgeWOfQepmerCcRKQ5APnN9cZq5J/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/16B9aQgeWOfQepmerCcRKQ5APnN9cZq5J/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=16B9aQgeWOfQepmerCcRKQ5APnN9cZq5J"
   },
   {
     "id": "ffm_85",
@@ -2973,7 +2981,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/294312084-سلسلة-الدرر-في-التاريخ-و-الجغرافيا-ثالثة-ثانوي-pdf.pdf",
     "size": "3.1 ميغابايت",
     "sizeReadable": "3.1 ميغابايت",
-    "sizeBytes": 3224045
+    "sizeBytes": 3224045,
+    "driveFileId": "1WAcbGBOAPlXKiO0NGnOihgOJQSbvFRj0",
+    "driveFileUrl": "https://drive.google.com/file/d/1WAcbGBOAPlXKiO0NGnOihgOJQSbvFRj0/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1WAcbGBOAPlXKiO0NGnOihgOJQSbvFRj0/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1WAcbGBOAPlXKiO0NGnOihgOJQSbvFRj0"
   },
   {
     "id": "ffm_86",
@@ -3009,7 +3021,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/أنجع_باقة_في_المصطلحات_و_المفاهيم_و_الشخصيات_الاجتماعيات_جميع_الشعب.pdf",
     "size": "1.9 ميغابايت",
     "sizeReadable": "1.9 ميغابايت",
-    "sizeBytes": 2007789
+    "sizeBytes": 2007789,
+    "driveFileId": "16TcGb1lY19HRdevgmg6_jeYf0Mw6wzjk",
+    "driveFileUrl": "https://drive.google.com/file/d/16TcGb1lY19HRdevgmg6_jeYf0Mw6wzjk/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/16TcGb1lY19HRdevgmg6_jeYf0Mw6wzjk/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=16TcGb1lY19HRdevgmg6_jeYf0Mw6wzjk"
   },
   {
     "id": "ffm_87",
@@ -3045,7 +3061,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/الثورة_التحريرية_الوطنية_الجزائرية.pdf",
     "size": "609 كيلوبايت",
     "sizeReadable": "609 كيلوبايت",
-    "sizeBytes": 623681
+    "sizeBytes": 623681,
+    "driveFileId": "1gac7rh9MfKbqHcQcxtSVbesUZjvWl3jl",
+    "driveFileUrl": "https://drive.google.com/file/d/1gac7rh9MfKbqHcQcxtSVbesUZjvWl3jl/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1gac7rh9MfKbqHcQcxtSVbesUZjvWl3jl/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1gac7rh9MfKbqHcQcxtSVbesUZjvWl3jl"
   },
   {
     "id": "ffm_88",
@@ -3081,7 +3101,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/الحرب الباردة(1).pdf",
     "size": "622 كيلوبايت",
     "sizeReadable": "622 كيلوبايت",
-    "sizeBytes": 637250
+    "sizeBytes": 637250,
+    "driveFileId": "1mYLCB-K60tNEUquugYbh2CKABg6DjvzC",
+    "driveFileUrl": "https://drive.google.com/file/d/1mYLCB-K60tNEUquugYbh2CKABg6DjvzC/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1mYLCB-K60tNEUquugYbh2CKABg6DjvzC/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1mYLCB-K60tNEUquugYbh2CKABg6DjvzC"
   },
   {
     "id": "ffm_89",
@@ -3117,7 +3141,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/السلسلة_الأرجوانية_في_التاريخ_و_الجغرافيا_للأستاذ_بورنان.pdf",
     "size": "40.1 ميغابايت",
     "sizeReadable": "40.1 ميغابايت",
-    "sizeBytes": 42065946
+    "sizeBytes": 42065946,
+    "driveFileId": "1J1vib7ShB-R-dKfb7Gp3QuXEs3uLARHs",
+    "driveFileUrl": "https://drive.google.com/file/d/1J1vib7ShB-R-dKfb7Gp3QuXEs3uLARHs/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1J1vib7ShB-R-dKfb7Gp3QuXEs3uLARHs/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1J1vib7ShB-R-dKfb7Gp3QuXEs3uLARHs"
   },
   {
     "id": "ffm_90",
@@ -3153,7 +3181,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/السلسلة_الارجوانية_للاستاذ_بورنان_عمار_الطبعة_الثالثة.pdf",
     "size": "13.3 ميغابايت",
     "sizeReadable": "13.3 ميغابايت",
-    "sizeBytes": 13915827
+    "sizeBytes": 13915827,
+    "driveFileId": "1cAUaodyvJuktrBUcnAfjAGoU04Eq6BEy",
+    "driveFileUrl": "https://drive.google.com/file/d/1cAUaodyvJuktrBUcnAfjAGoU04Eq6BEy/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1cAUaodyvJuktrBUcnAfjAGoU04Eq6BEy/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1cAUaodyvJuktrBUcnAfjAGoU04Eq6BEy"
   },
   {
     "id": "ffm_91",
@@ -3189,7 +3221,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/المختصر المفيد في الإجتماعيات.pdf",
     "size": "2.6 ميغابايت",
     "sizeReadable": "2.6 ميغابايت",
-    "sizeBytes": 2690637
+    "sizeBytes": 2690637,
+    "driveFileId": "1xQ7rvifDrpv6smIkUA0aD1crF2RpdIjh",
+    "driveFileUrl": "https://drive.google.com/file/d/1xQ7rvifDrpv6smIkUA0aD1crF2RpdIjh/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1xQ7rvifDrpv6smIkUA0aD1crF2RpdIjh/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1xQ7rvifDrpv6smIkUA0aD1crF2RpdIjh"
   },
   {
     "id": "ffm_92",
@@ -3225,7 +3261,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/الملخص بدون فواصل.pdf",
     "size": "6.5 ميغابايت",
     "sizeReadable": "6.5 ميغابايت",
-    "sizeBytes": 6797712
+    "sizeBytes": 6797712,
+    "driveFileId": "1NE5o-di5dvJvqslAsE6vHv-oXXy68fnb",
+    "driveFileUrl": "https://drive.google.com/file/d/1NE5o-di5dvJvqslAsE6vHv-oXXy68fnb/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1NE5o-di5dvJvqslAsE6vHv-oXXy68fnb/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1NE5o-di5dvJvqslAsE6vHv-oXXy68fnb"
   },
   {
     "id": "ffm_93",
@@ -3261,7 +3301,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/الوحدة 2 جغرافيا.pdf",
     "size": "1.5 ميغابايت",
     "sizeReadable": "1.5 ميغابايت",
-    "sizeBytes": 1549016
+    "sizeBytes": 1549016,
+    "driveFileId": "1EPQhqfkBfPGUSX2-D0-lt_S1fZ3Etmrj",
+    "driveFileUrl": "https://drive.google.com/file/d/1EPQhqfkBfPGUSX2-D0-lt_S1fZ3Etmrj/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1EPQhqfkBfPGUSX2-D0-lt_S1fZ3Etmrj/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1EPQhqfkBfPGUSX2-D0-lt_S1fZ3Etmrj"
   },
   {
     "id": "ffm_94",
@@ -3297,7 +3341,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/تحفيظ الاجتماعيات في يومين.pdf",
     "size": "6.4 ميغابايت",
     "sizeReadable": "6.4 ميغابايت",
-    "sizeBytes": 6715874
+    "sizeBytes": 6715874,
+    "driveFileId": "17iBAf76n4FzRKDm1v2184KqFbwApRmKR",
+    "driveFileUrl": "https://drive.google.com/file/d/17iBAf76n4FzRKDm1v2184KqFbwApRmKR/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/17iBAf76n4FzRKDm1v2184KqFbwApRmKR/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=17iBAf76n4FzRKDm1v2184KqFbwApRmKR"
   },
   {
     "id": "ffm_95",
@@ -3333,7 +3381,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/تواريخ By اسلام مهدي.pdf",
     "size": "826 كيلوبايت",
     "sizeReadable": "826 كيلوبايت",
-    "sizeBytes": 845888
+    "sizeBytes": 845888,
+    "driveFileId": "1UQx-7r9AANRqEyQmNxCuKwMqUwjqUI9V",
+    "driveFileUrl": "https://drive.google.com/file/d/1UQx-7r9AANRqEyQmNxCuKwMqUwjqUI9V/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1UQx-7r9AANRqEyQmNxCuKwMqUwjqUI9V/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1UQx-7r9AANRqEyQmNxCuKwMqUwjqUI9V"
   },
   {
     "id": "ffm_96",
@@ -3369,7 +3421,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/جميع خرائط جغرافيا.pdf",
     "size": "3.3 ميغابايت",
     "sizeReadable": "3.3 ميغابايت",
-    "sizeBytes": 3411105
+    "sizeBytes": 3411105,
+    "driveFileId": "1iOT-6jQuqwK5IPhDmmyFVFtksnKaEVxj",
+    "driveFileUrl": "https://drive.google.com/file/d/1iOT-6jQuqwK5IPhDmmyFVFtksnKaEVxj/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1iOT-6jQuqwK5IPhDmmyFVFtksnKaEVxj/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1iOT-6jQuqwK5IPhDmmyFVFtksnKaEVxj"
   },
   {
     "id": "ffm_97",
@@ -3405,7 +3461,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/خرائط تاريخ.pdf",
     "size": "1.9 ميغابايت",
     "sizeReadable": "1.9 ميغابايت",
-    "sizeBytes": 1988420
+    "sizeBytes": 1988420,
+    "driveFileId": "1mRbtuy3koeG3eYvYW-MQqd9bzfussowT",
+    "driveFileUrl": "https://drive.google.com/file/d/1mRbtuy3koeG3eYvYW-MQqd9bzfussowT/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1mRbtuy3koeG3eYvYW-MQqd9bzfussowT/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1mRbtuy3koeG3eYvYW-MQqd9bzfussowT"
   },
   {
     "id": "ffm_98",
@@ -3441,7 +3501,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/خرائط_ذهنية_في_التاريخ_و_الجغرافيا_3_ثانوي_جميع_الشعب_.pdf",
     "size": "17.9 ميغابايت",
     "sizeReadable": "17.9 ميغابايت",
-    "sizeBytes": 18814773
+    "sizeBytes": 18814773,
+    "driveFileId": "16otgu9UyRWwfsS7kh3il3PYmMNwiSdZq",
+    "driveFileUrl": "https://drive.google.com/file/d/16otgu9UyRWwfsS7kh3il3PYmMNwiSdZq/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/16otgu9UyRWwfsS7kh3il3PYmMNwiSdZq/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=16otgu9UyRWwfsS7kh3il3PYmMNwiSdZq"
   },
   {
     "id": "ffm_99",
@@ -3477,7 +3541,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/دروس الجغرافيا_compressed.pdf",
     "size": "25.0 ميغابايت",
     "sizeReadable": "25.0 ميغابايت",
-    "sizeBytes": 26165552
+    "sizeBytes": 26165552,
+    "driveFileId": "1zrLlGSeWnfGfpmoDZa3hMVBnmXZ0b9iP",
+    "driveFileUrl": "https://drive.google.com/file/d/1zrLlGSeWnfGfpmoDZa3hMVBnmXZ0b9iP/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1zrLlGSeWnfGfpmoDZa3hMVBnmXZ0b9iP/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1zrLlGSeWnfGfpmoDZa3hMVBnmXZ0b9iP"
   },
   {
     "id": "ffm_100",
@@ -3513,7 +3581,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/كتاب ملخص الاجتماعيات قنشوبة 2021.pdf",
     "size": "2.3 ميغابايت",
     "sizeReadable": "2.3 ميغابايت",
-    "sizeBytes": 2390040
+    "sizeBytes": 2390040,
+    "driveFileId": "1qNSevnqsjsXYYpms5NqmhOCQOLY6ZcKF",
+    "driveFileUrl": "https://drive.google.com/file/d/1qNSevnqsjsXYYpms5NqmhOCQOLY6ZcKF/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1qNSevnqsjsXYYpms5NqmhOCQOLY6ZcKF/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1qNSevnqsjsXYYpms5NqmhOCQOLY6ZcKF"
   },
   {
     "id": "ffm_101",
@@ -3549,7 +3621,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/كتاب_الأستاذ_عبدوش_مختار_التاريخ_والجغرافيا_جميع_الشعب_mokhfi_chouaib.pdf",
     "size": "92.0 ميغابايت",
     "sizeReadable": "92.0 ميغابايت",
-    "sizeBytes": 96512976
+    "sizeBytes": 96512976,
+    "driveFileId": "1N5d8bPn0LF3tSTH4wK7x0D3fJd1xfwYY",
+    "driveFileUrl": "https://drive.google.com/file/d/1N5d8bPn0LF3tSTH4wK7x0D3fJd1xfwYY/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1N5d8bPn0LF3tSTH4wK7x0D3fJd1xfwYY/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1N5d8bPn0LF3tSTH4wK7x0D3fJd1xfwYY"
   },
   {
     "id": "ffm_102",
@@ -3585,7 +3661,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/كتاب_المقترحات_في_الاجتماعيات_للاستاذ_بورنان_2021_الشعب_العلمية.pdf",
     "size": "3.3 ميغابايت",
     "sizeReadable": "3.3 ميغابايت",
-    "sizeBytes": 3477427
+    "sizeBytes": 3477427,
+    "driveFileId": "1Ch4nDj-R-D6YXv-h7VhgzfLcTOZapWjb",
+    "driveFileUrl": "https://drive.google.com/file/d/1Ch4nDj-R-D6YXv-h7VhgzfLcTOZapWjb/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Ch4nDj-R-D6YXv-h7VhgzfLcTOZapWjb/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Ch4nDj-R-D6YXv-h7VhgzfLcTOZapWjb"
   },
   {
     "id": "ffm_103",
@@ -3620,7 +3700,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/كتاب_مقترحات_الاجتماعيات_للشعب_الادبية_وتسيير_واقتصاد_بورنان_2021.pdf",
     "size": "5.2 ميغابايت",
     "sizeReadable": "5.2 ميغابايت",
-    "sizeBytes": 5470518
+    "sizeBytes": 5470518,
+    "driveFileId": "1PhRP2BTwJy0Qo_c0gUPJCMfKaq_AMDhS",
+    "driveFileUrl": "https://drive.google.com/file/d/1PhRP2BTwJy0Qo_c0gUPJCMfKaq_AMDhS/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1PhRP2BTwJy0Qo_c0gUPJCMfKaq_AMDhS/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1PhRP2BTwJy0Qo_c0gUPJCMfKaq_AMDhS"
   },
   {
     "id": "ffm_104",
@@ -3656,7 +3740,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/مصطلحات_و_شخصيات_في_التاريخ_و_الجغرافيا_للسنة_الثالثة_ثانوي_جميع.pdf",
     "size": "17.6 ميغابايت",
     "sizeReadable": "17.6 ميغابايت",
-    "sizeBytes": 18407965
+    "sizeBytes": 18407965,
+    "driveFileId": "19Nvhm3DGA0uTpXNcxONuD1KG7fCSZwuX",
+    "driveFileUrl": "https://drive.google.com/file/d/19Nvhm3DGA0uTpXNcxONuD1KG7fCSZwuX/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/19Nvhm3DGA0uTpXNcxONuD1KG7fCSZwuX/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=19Nvhm3DGA0uTpXNcxONuD1KG7fCSZwuX"
   },
   {
     "id": "ffm_105",
@@ -3692,7 +3780,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/مطويات_الأستاذ_الطاهر_حفوظة_مصطلحات،_شخصيات،_أحداث_تاريخ_وجغرافيا.pdf",
     "size": "832 كيلوبايت",
     "sizeReadable": "832 كيلوبايت",
-    "sizeBytes": 852334
+    "sizeBytes": 852334,
+    "driveFileId": "1LNYh_6URYNdVH83TB5Qn1N3nGi1efbDV",
+    "driveFileUrl": "https://drive.google.com/file/d/1LNYh_6URYNdVH83TB5Qn1N3nGi1efbDV/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1LNYh_6URYNdVH83TB5Qn1N3nGi1efbDV/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1LNYh_6URYNdVH83TB5Qn1N3nGi1efbDV"
   },
   {
     "id": "ffm_106",
@@ -3728,7 +3820,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/مقالات جاهزة في الاجتماعيات باك.pdf",
     "size": "2.0 ميغابايت",
     "sizeReadable": "2.0 ميغابايت",
-    "sizeBytes": 2070863
+    "sizeBytes": 2070863,
+    "driveFileId": "1xPIcSyaqe8BdzxxPVmCxAXshuebyl_aP",
+    "driveFileUrl": "https://drive.google.com/file/d/1xPIcSyaqe8BdzxxPVmCxAXshuebyl_aP/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1xPIcSyaqe8BdzxxPVmCxAXshuebyl_aP/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1xPIcSyaqe8BdzxxPVmCxAXshuebyl_aP"
   },
   {
     "id": "ffm_107",
@@ -3764,7 +3860,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/ملخص الاستاذ محمودي عادل By اسلام مهدي.pdf",
     "size": "8.0 ميغابايت",
     "sizeReadable": "8.0 ميغابايت",
-    "sizeBytes": 8372952
+    "sizeBytes": 8372952,
+    "driveFileId": "1USy1-0EEyvS9D5XjVoIfDxxmvkk5I-Z7",
+    "driveFileUrl": "https://drive.google.com/file/d/1USy1-0EEyvS9D5XjVoIfDxxmvkk5I-Z7/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1USy1-0EEyvS9D5XjVoIfDxxmvkk5I-Z7/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1USy1-0EEyvS9D5XjVoIfDxxmvkk5I-Z7"
   },
   {
     "id": "ffm_108",
@@ -3800,7 +3900,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/ملخص-التاريخ-و-الجغرافيا2022.pdf",
     "size": "601 كيلوبايت",
     "sizeReadable": "601 كيلوبايت",
-    "sizeBytes": 615402
+    "sizeBytes": 615402,
+    "driveFileId": "1s5cD7vB3Qa3hCvIyYpEWMnkPGigyW-OF",
+    "driveFileUrl": "https://drive.google.com/file/d/1s5cD7vB3Qa3hCvIyYpEWMnkPGigyW-OF/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1s5cD7vB3Qa3hCvIyYpEWMnkPGigyW-OF/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1s5cD7vB3Qa3hCvIyYpEWMnkPGigyW-OF"
   },
   {
     "id": "ffm_109",
@@ -3872,7 +3976,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/ملخص_التاريخ_و_الجغرافيا_لأستاذ_محمد_جميع_ش_ع_أ_سيلة_الجزائري_www.pdf",
     "size": "4.6 ميغابايت",
     "sizeReadable": "4.6 ميغابايت",
-    "sizeBytes": 4822996
+    "sizeBytes": 4822996,
+    "driveFileId": "1rA0UinFr-ApTL88NLqAj4RvXJQV38Sbs",
+    "driveFileUrl": "https://drive.google.com/file/d/1rA0UinFr-ApTL88NLqAj4RvXJQV38Sbs/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1rA0UinFr-ApTL88NLqAj4RvXJQV38Sbs/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1rA0UinFr-ApTL88NLqAj4RvXJQV38Sbs"
   },
   {
     "id": "ffm_111",
@@ -3908,7 +4016,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/ملخص_الوحدة_الاولى_تاريخ_الحرب_الباردة.pdf",
     "size": "12.1 ميغابايت",
     "sizeReadable": "12.1 ميغابايت",
-    "sizeBytes": 12704243
+    "sizeBytes": 12704243,
+    "driveFileId": "1Z2jOX3YINFkasMgRr6du5j27vI8ZW06r",
+    "driveFileUrl": "https://drive.google.com/file/d/1Z2jOX3YINFkasMgRr6du5j27vI8ZW06r/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Z2jOX3YINFkasMgRr6du5j27vI8ZW06r/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Z2jOX3YINFkasMgRr6du5j27vI8ZW06r"
   },
   {
     "id": "ffm_112",
@@ -3944,7 +4056,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/ملخص_رائع_في_مادة_الجغرافيا_الفصل_الأول2022_1.pdf",
     "size": "244 كيلوبايت",
     "sizeReadable": "244 كيلوبايت",
-    "sizeBytes": 249679
+    "sizeBytes": 249679,
+    "driveFileId": "1qbl-G9T97XYMjwe_I7B3FzWAGnaAcL2i",
+    "driveFileUrl": "https://drive.google.com/file/d/1qbl-G9T97XYMjwe_I7B3FzWAGnaAcL2i/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1qbl-G9T97XYMjwe_I7B3FzWAGnaAcL2i/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1qbl-G9T97XYMjwe_I7B3FzWAGnaAcL2i"
   },
   {
     "id": "ffm_113",
@@ -3980,7 +4096,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/ملخص_رائع_للوحدة_الثانية_الثورة_الجزائرية.pdf",
     "size": "277 كيلوبايت",
     "sizeReadable": "277 كيلوبايت",
-    "sizeBytes": 283351
+    "sizeBytes": 283351,
+    "driveFileId": "1qMQs752vV55ftoAKSlKh_K1ulrXh_Pwx",
+    "driveFileUrl": "https://drive.google.com/file/d/1qMQs752vV55ftoAKSlKh_K1ulrXh_Pwx/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1qMQs752vV55ftoAKSlKh_K1ulrXh_Pwx/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1qMQs752vV55ftoAKSlKh_K1ulrXh_Pwx"
   },
   {
     "id": "ffm_114",
@@ -4016,7 +4136,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/ملخص_رائع_للوحدة_الثانية_في_مادة_الجغرافيا.pdf",
     "size": "214 كيلوبايت",
     "sizeReadable": "214 كيلوبايت",
-    "sizeBytes": 219611
+    "sizeBytes": 219611,
+    "driveFileId": "1E0fOmTCSZ8H9SAQVogGln6Ah3wrjt3PG",
+    "driveFileUrl": "https://drive.google.com/file/d/1E0fOmTCSZ8H9SAQVogGln6Ah3wrjt3PG/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1E0fOmTCSZ8H9SAQVogGln6Ah3wrjt3PG/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1E0fOmTCSZ8H9SAQVogGln6Ah3wrjt3PG"
   },
   {
     "id": "ffm_115",
@@ -4052,7 +4176,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/ملخص_ممتاز_ورائع_للوحدة_الأولى_الحرب_الباردة+شخصيات.pdf",
     "size": "319 كيلوبايت",
     "sizeReadable": "319 كيلوبايت",
-    "sizeBytes": 326410
+    "sizeBytes": 326410,
+    "driveFileId": "1606vh0scCpraLIQ1tPgNyESAyh3GkwgT",
+    "driveFileUrl": "https://drive.google.com/file/d/1606vh0scCpraLIQ1tPgNyESAyh3GkwgT/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1606vh0scCpraLIQ1tPgNyESAyh3GkwgT/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1606vh0scCpraLIQ1tPgNyESAyh3GkwgT"
   },
   {
     "id": "ffm_116",
@@ -4088,7 +4216,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/ملخصات دروس التاريخ و الجغرافيا .pdf",
     "size": "1.2 ميغابايت",
     "sizeReadable": "1.2 ميغابايت",
-    "sizeBytes": 1255352
+    "sizeBytes": 1255352,
+    "driveFileId": "1txAiOF0IfZ4dTRclJYQmNz4KEyIuYqtn",
+    "driveFileUrl": "https://drive.google.com/file/d/1txAiOF0IfZ4dTRclJYQmNz4KEyIuYqtn/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1txAiOF0IfZ4dTRclJYQmNz4KEyIuYqtn/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1txAiOF0IfZ4dTRclJYQmNz4KEyIuYqtn"
   },
   {
     "id": "ffm_117",
@@ -4124,7 +4256,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/مواضيع_و_حلول_بكالوريا_التاريخ_و_الجغرافيا_من_2021_إلى_2008_للشعب.pdf",
     "size": "24.2 ميغابايت",
     "sizeReadable": "24.2 ميغابايت",
-    "sizeBytes": 25377193
+    "sizeBytes": 25377193,
+    "driveFileId": "1c-XpLgV3hgm1hbxnTh55BapjpPLXnype",
+    "driveFileUrl": "https://drive.google.com/file/d/1c-XpLgV3hgm1hbxnTh55BapjpPLXnype/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1c-XpLgV3hgm1hbxnTh55BapjpPLXnype/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1c-XpLgV3hgm1hbxnTh55BapjpPLXnype"
   },
   {
     "id": "ffm_118",
@@ -4150,7 +4286,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/واقع الاقتصاد العالمي.pdf",
     "size": "17.8 ميغابايت",
     "sizeReadable": "17.8 ميغابايت",
-    "sizeBytes": 18677214
+    "sizeBytes": 18677214,
+    "driveFileId": "1_RlV9clZJjAtryX9_c6MAwDW1heqtQ9U",
+    "driveFileUrl": "https://drive.google.com/file/d/1_RlV9clZJjAtryX9_c6MAwDW1heqtQ9U/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1_RlV9clZJjAtryX9_c6MAwDW1heqtQ9U/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1_RlV9clZJjAtryX9_c6MAwDW1heqtQ9U"
   },
   {
     "id": "ffm_119",
@@ -4186,7 +4326,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/وحدة 1 جغرافيا.pdf",
     "size": "1.4 ميغابايت",
     "sizeReadable": "1.4 ميغابايت",
-    "sizeBytes": 1442654
+    "sizeBytes": 1442654,
+    "driveFileId": "12UYqMgie64_pIoxlyWuOxvtH54zFzLmZ",
+    "driveFileUrl": "https://drive.google.com/file/d/12UYqMgie64_pIoxlyWuOxvtH54zFzLmZ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/12UYqMgie64_pIoxlyWuOxvtH54zFzLmZ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=12UYqMgie64_pIoxlyWuOxvtH54zFzLmZ"
   },
   {
     "id": "ffm_120",
@@ -4222,7 +4366,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/HistoireGeo/وحدة-2-جغرافيا.pdf",
     "size": "508 كيلوبايت",
     "sizeReadable": "508 كيلوبايت",
-    "sizeBytes": 520318
+    "sizeBytes": 520318,
+    "driveFileId": "1j7iRldr_Ob3uFUTwNiNMOXUZ8HcwLAwF",
+    "driveFileUrl": "https://drive.google.com/file/d/1j7iRldr_Ob3uFUTwNiNMOXUZ8HcwLAwF/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1j7iRldr_Ob3uFUTwNiNMOXUZ8HcwLAwF/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1j7iRldr_Ob3uFUTwNiNMOXUZ8HcwLAwF"
   },
   {
     "id": "ffm_121",
@@ -10840,6 +10988,47 @@ export const USER_STUDY_FILES = [
     "drivePreviewUrl": "https://drive.google.com/file/d/1b-ylGKiKyQgRwhc0rosKpbwSZKDnk44p/preview",
     "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1b-ylGKiKyQgRwhc0rosKpbwSZKDnk44p",
     "rawPath": "https://drive.google.com/file/d/1b-ylGKiKyQgRwhc0rosKpbwSZKDnk44p/preview",
+    "size": "ملف سحابي PDF",
+    "sizeReadable": "ملف سحابي PDF"
+  },
+  {
+    "id": "ffm_histgeo_1787772708373_26",
+    "title": "ملخص ��لإجتماعيات للأستاذ بورنان 2021",
+    "rawFileName": "ملخص_��لإجتماعيات_للأستاذ_بورنان_2021.pdf",
+    "extension": "pdf",
+    "subjectId": "histoire_geo",
+    "subjectAliases": [
+      "histoire_geo",
+      "histoire",
+      "geographie",
+      "ijtima3iyat",
+      "tarikh_joghrapiya"
+    ],
+    "subjectName": "التاريخ والجغرافيا",
+    "streams": [
+      "sciences",
+      "math",
+      "technique_math",
+      "gestion",
+      "lettres_philo",
+      "langues"
+    ],
+    "streamIds": [
+      "sciences",
+      "math",
+      "technique_math",
+      "gestion",
+      "lettres_philo",
+      "langues"
+    ],
+    "category": "ملخصات ودروس",
+    "author": "الأستاذ بورنان عمار",
+    "fileUrl": "https://drive.google.com/file/d/1-qdVIhoM827Xd2fpUpb_QhpRZk10R-Cz/preview",
+    "driveFileId": "1-qdVIhoM827Xd2fpUpb_QhpRZk10R-Cz",
+    "driveFileUrl": "https://drive.google.com/file/d/1-qdVIhoM827Xd2fpUpb_QhpRZk10R-Cz/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1-qdVIhoM827Xd2fpUpb_QhpRZk10R-Cz/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1-qdVIhoM827Xd2fpUpb_QhpRZk10R-Cz",
+    "rawPath": "https://drive.google.com/file/d/1-qdVIhoM827Xd2fpUpb_QhpRZk10R-Cz/preview",
     "size": "ملف سحابي PDF",
     "sizeReadable": "ملف سحابي PDF"
   }
