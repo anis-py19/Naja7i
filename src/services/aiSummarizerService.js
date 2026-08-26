@@ -81,15 +81,7 @@ export async function generateAiSummary({
     throw new Error('يرجى إدخال مفتاح Google Gemini API للمتابعة. (المفتاح مجاني بالكامل)');
   }
 
-  // Optional smart keyword enrichment (never blocks generation)
-  let validationResult = null;
-  if (rawText && rawText.trim().length > 30 && !inlineFile) {
-    try {
-      validationResult = analyzeBacContent(rawText);
-    } catch {
-      // Ignore
-    }
-  }
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${activeKey.trim()}`;
 
   let modeInstruction = '';
   switch (mode) {
@@ -158,16 +150,15 @@ export async function generateAiSummary({
   }
 
   const systemPrompt = `
-أنت "المستشار الأكاديمي والملخص الذكي لمنصة نجاحي (Naja7i.com)"، خبير بيداغوجي متخصص في مساعدة طلبة البكالوريا والتعليم الثانوي في الجزائر بجميع الشعب والمواد.
-
-مهمتك: تحليل وتلخيص أي وثيقة، درس، أو نص يقدمه الطالب بدقة منهجية فائقة وفق القواعد والمراحل الأربع الذهبية التالية:
+أنت "المستشار الأكاديمي والتعليمي الذكي لمنصة نجاحي (Naja7i.com)"، خبير ومساعد أول لطلبة البكالوريا والتعليم الثانوي في تلخيص وفهم الدروس والوثائق والملفات المرفقة.
+مهمتك تلخيص أي ملف أو نص يقدمه الطالب بأعلى درجات الدقة والاحترافية وفق القواعد الأربع الذهبية التالية:
 
 ---
 ### 🌟 القواعد المنهجية الأربع الإلزامية في التلخيص:
 
 1. 🛡️ **الحفاظ التام على المحتوى العلمي والأكاديمي (Zero Loss of Academic Content):**
    - لا تحذف أو تتجاهل أي قانون، قاعدة، شرط، معادلة، أو مصطلح علمي ورد في الوثيقة أو الدرس.
-   - انقل المفاهيم بدقة علمية مطابقة للمنهاج الجزائري الرسمي وسلم التنقيط الوزاري.
+   - انقل المفاهيم بدقة ووضوح.
 
 2. 🗺️ **الاعتماد على المخططات والهياكل والجداول (Diagrams, Mindmaps & Tables):**
    - حول العمليات المعقدة والمقارنات إلى **جداول Markdown منظمة** ومقارنات واضحة.
@@ -180,8 +171,8 @@ export async function generateAiSummary({
 
 4. 📑 **تنظيم وتستيف بصري فائق الراحة للقراءة (Effortless Visual Scanning & Layout):**
    - نسّق النص بعناوين واضحة، أرقام مميزة (1️⃣، 2️⃣، 3️⃣)، نقاط محددة، وتظليل للكلمات المفتاحية الأساسية (**Bold**).
-   - أضف صناديق تنبيه للملاحظات والفخاخ المنهجية (> 💡 ملاحظة هامة: / > ⚠️ فخ شائع في البكالوريا:).
-   - اجعل الملخص ممتعاً وسهل المراجعة والحفظ ليلة الامتحان.
+   - أضف صناديق تنبيه للملاحظات والفخاخ المنهجية (> 💡 ملاحظة هامة: / > ⚠️ فخ شائع:).
+   - اجعل الملخص ممتعاً وسهل المراجعة والحفظ.
 ---
 
 ${modeInstruction}
@@ -202,12 +193,8 @@ ${modeInstruction}
       text: `يرجى تحليل هذا الملف المرفق وتلخيصه وفق النمط والتعليمات المحددة.`
     });
   } else if (rawText && rawText.trim()) {
-    let extraContext = '';
-    if (validationResult && validationResult.matchedSubject) {
-      extraContext = `\n[ملاحظة تحليلية]: تم رصد مصطلحات تنتمي لمادة (${validationResult.matchedSubject}) مثل: ${validationResult.matchedKeywords.join('، ')}.\n`;
-    }
     contentsParts.push({
-      text: `إليك نص الدرس / الوثيقة المراد تلخيصها:${extraContext}\n\n${rawText}`
+      text: `إليك نص الدرس / الوثيقة المراد تلخيصها:\n\n${rawText}`
     });
   } else {
     throw new Error('يرجى تقديم نص أو رفع ملف للتلخيص.');

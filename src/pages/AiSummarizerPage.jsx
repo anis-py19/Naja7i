@@ -148,6 +148,7 @@ export default function AiSummarizerPage() {
       }
 
       setStatusMessage('3/3: اكتمل التلخيص بنجاح!');
+
       setSummaryResult(finalSummary);
       if (summaryMode === 'mindmap') {
         setActiveViewTab('mindmap');
