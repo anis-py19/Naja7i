@@ -2501,7 +2501,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Electrique/DzExams_com_D3AS_حوليات_الهندسة_الكهربائية.pdf",
     "size": "4.4 ميغابايت",
     "sizeReadable": "4.4 ميغابايت",
-    "sizeBytes": 4572708
+    "sizeBytes": 4572708,
+    "driveFileId": "1gCWcZyPd6cxnP2msEvaAvyEr3TQP4W5q",
+    "driveFileUrl": "https://drive.google.com/file/d/1gCWcZyPd6cxnP2msEvaAvyEr3TQP4W5q/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1gCWcZyPd6cxnP2msEvaAvyEr3TQP4W5q/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1gCWcZyPd6cxnP2msEvaAvyEr3TQP4W5q"
   },
   {
     "id": "ffm_71",
@@ -2527,7 +2531,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Electrique/genie_electrique3as-resumes.pdf",
     "size": "972 كيلوبايت",
     "sizeReadable": "972 كيلوبايت",
-    "sizeBytes": 995156
+    "sizeBytes": 995156,
+    "driveFileId": "1YFliaHdV0U3B4hMOclT6GE5cccn-5QTp",
+    "driveFileUrl": "https://drive.google.com/file/d/1YFliaHdV0U3B4hMOclT6GE5cccn-5QTp/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1YFliaHdV0U3B4hMOclT6GE5cccn-5QTp/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1YFliaHdV0U3B4hMOclT6GE5cccn-5QTp"
   },
   {
     "id": "ffm_72",
@@ -2553,7 +2561,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Electrique/حوليات_استعد_للبكالوريا_من_إعداد_الأستاذة_بن_التاج_فتيحة_المنطق.pdf",
     "size": "4.6 ميغابايت",
     "sizeReadable": "4.6 ميغابايت",
-    "sizeBytes": 4862851
+    "sizeBytes": 4862851,
+    "driveFileId": "1c2VXggfWKK50I23AHeLTPjXoOIe6K6HM",
+    "driveFileUrl": "https://drive.google.com/file/d/1c2VXggfWKK50I23AHeLTPjXoOIe6K6HM/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1c2VXggfWKK50I23AHeLTPjXoOIe6K6HM/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1c2VXggfWKK50I23AHeLTPjXoOIe6K6HM"
   },
   {
     "id": "ffm_73",
@@ -2579,7 +2591,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Electrique/حوليات_استعد_للبكالوريا_من_إعداد_الأستاذة_بن_التاج_فتيحة_وظيفة_الاستطاعة.pdf",
     "size": "4.1 ميغابايت",
     "sizeReadable": "4.1 ميغابايت",
-    "sizeBytes": 4301639
+    "sizeBytes": 4301639,
+    "driveFileId": "1Zp1Pno48WUWXPbOeVF4MGzPTJmzTKlaO",
+    "driveFileUrl": "https://drive.google.com/file/d/1Zp1Pno48WUWXPbOeVF4MGzPTJmzTKlaO/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Zp1Pno48WUWXPbOeVF4MGzPTJmzTKlaO/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Zp1Pno48WUWXPbOeVF4MGzPTJmzTKlaO"
   },
   {
     "id": "ffm_74",
@@ -2605,7 +2621,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Electrique/حوليات_استعد_للبكالوريا_من_إعداد_الأستاذة_بن_التاج_فتيحة_وظيفة_التحكم.pdf",
     "size": "3.0 ميغابايت",
     "sizeReadable": "3.0 ميغابايت",
-    "sizeBytes": 3098079
+    "sizeBytes": 3098079,
+    "driveFileId": "1a5MOxmQS8j0fOWyLg1Lin6yA1cMp9_KE",
+    "driveFileUrl": "https://drive.google.com/file/d/1a5MOxmQS8j0fOWyLg1Lin6yA1cMp9_KE/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1a5MOxmQS8j0fOWyLg1Lin6yA1cMp9_KE/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1a5MOxmQS8j0fOWyLg1Lin6yA1cMp9_KE"
   },
   {
     "id": "ffm_75",
@@ -2631,7 +2651,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Electrique/ملخصات_دروس_الهندسة_الكهربائية_3_ثانوي.pdf",
     "size": "972 كيلوبايت",
     "sizeReadable": "972 كيلوبايت",
-    "sizeBytes": 995156
+    "sizeBytes": 995156,
+    "driveFileId": "10IP15aNE-IiRp_M1BJMeg3t3sV4pw8Xf",
+    "driveFileUrl": "https://drive.google.com/file/d/10IP15aNE-IiRp_M1BJMeg3t3sV4pw8Xf/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/10IP15aNE-IiRp_M1BJMeg3t3sV4pw8Xf/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=10IP15aNE-IiRp_M1BJMeg3t3sV4pw8Xf"
   },
   {
     "id": "ffm_76",
