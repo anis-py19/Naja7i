@@ -304,51 +304,6 @@ export default function LibraryPage({ onOpenPdf }) {
 
         </div>
 
-        {/* Google Drive Integration Banner for English / Cloud-connected subjects */}
-        {(selectedSubject === 'اللغة الإنجليزية' || filteredFiles.some(f => f.subjectId === 'english' && selectedSubject !== 'all')) && (
-          <div className="mb-6 p-4.5 rounded-2xl bg-white border border-blue-200/80 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center text-2xl shrink-0 shadow-2xs">
-                📁
-              </div>
-              <div>
-                <div className="flex items-center gap-2 mb-0.5">
-                  <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 font-bold text-[10px] border border-blue-200">
-                    Google Drive Cloud ☁️
-                  </span>
-                  <span className="text-[11px] text-[#64748B]">سحابة مادة اللغة الإنجليزية الرسمية</span>
-                </div>
-                <h4 className="text-xs sm:text-sm font-black text-[#0F172A]">
-                  مجلد Google Drive الكامل لملخصات ومذكرات اللغة الإنجليزية
-                </h4>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 self-start sm:self-auto">
-              <button
-                onClick={() => onOpenPdf({
-                  title: 'مجلد ملفات اللغة الإنجليزية (Google Drive)',
-                  driveUrl: 'https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR',
-                  isFolder: true
-                })}
-                className="px-3.5 py-2 rounded-xl bg-[#0F172A] hover:bg-black text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
-              >
-                <HiEye className="w-4 h-4 text-rose-400" />
-                <span>معاينة المجلد في الموقع</span>
-              </button>
-              <a
-                href="https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR"
-                target="_blank"
-                rel="noreferrer"
-                className="px-3.5 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] border border-[#CBD5E1] text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-colors"
-              >
-                <HiExternalLink className="w-4 h-4 text-blue-600" />
-                <span>فتح على Google Drive ↗</span>
-              </a>
-            </div>
-          </div>
-        )}
-
         {/* Results Counter Header */}
         <div className="flex items-center justify-between text-xs text-[#64748B] mb-4 px-1">
           <div>

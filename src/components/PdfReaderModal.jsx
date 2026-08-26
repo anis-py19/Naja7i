@@ -64,8 +64,8 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
 
   if (!isOpen || !file) return null;
 
-  const rawUrl = file.driveUrl || file.fileUrl || file.rawPath || file.url || '';
-  const drivePreviewUrl = getDrivePreviewUrl(rawUrl);
+  const rawUrl = file.drivePreviewUrl || file.driveUrl || file.fileUrl || file.rawPath || file.url || '';
+  const drivePreviewUrl = file.drivePreviewUrl || getDrivePreviewUrl(rawUrl);
   const isGoogleDrive = Boolean(drivePreviewUrl);
 
   const safeEncodedUrl = rawUrl.startsWith('http') || rawUrl.startsWith('/') 
@@ -321,20 +321,6 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                 <HiDownload className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">{isGoogleDrive ? 'فتح في Drive' : 'تحميل PDF'}</span>
               </button>
-
-              {/* Google Drive Folder link if available */}
-              {file.driveFolderUrl && !file.isFolder && (
-                <a
-                  href={file.driveFolderUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-blue-950/90 hover:bg-blue-900 text-blue-300 border border-blue-800 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1"
-                  title="فتح مجلد المادة على Google Drive"
-                >
-                  <HiFolderDownload className="w-4 h-4 text-blue-400" />
-                  <span className="hidden md:inline">مجلد Drive ↗</span>
-                </a>
-              )}
 
               {/* Open in new tab */}
               <a

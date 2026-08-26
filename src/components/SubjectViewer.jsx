@@ -179,18 +179,6 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                 <HiBookOpen className="w-4 h-4" />
                 <span>بكالوريات سابقة للمادة</span>
               </button>
-
-              {subjectId === 'english' && (
-                <a
-                  href="https://drive.google.com/drive/folders/1t3HZtqpQA8F5qmI6nhoW35T5EN3h0SxR"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors whitespace-nowrap cursor-pointer"
-                >
-                  <HiExternalLink className="w-4 h-4 text-blue-600" />
-                  <span>مجلد Google Drive للمادة ↗</span>
-                </a>
-              )}
             </div>
 
             {/* In-modal filter */}

@@ -2,7 +2,7 @@
  * 📚 Naja7i (نجاحي) — Comprehensive Public Files Catalog
  * Location: public/FileFromMe
  * Total Indexed Files: 318
- * Verified Academic Titles, Categories, Stream Maps, Authors, and 100% Real Disk File Paths.
+ * Verified Academic Titles, Categories, Stream Maps, Authors, and 100% Real Disk File Paths & Cloud Drive Links.
  */
 
 export const USER_STUDY_FILES = [
@@ -40,7 +40,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Anglais/305433775-Written-Expressions-3as-1-pdf.pdf",
     "size": "453 كيلوبايت",
     "sizeReadable": "453 كيلوبايت",
-    "sizeBytes": 463960
+    "sizeBytes": 463960,
+    "driveFileId": "1nPWE5wk_1RKbQIHua82Yxlw5wzp_OZ6c",
+    "driveFileUrl": "https://drive.google.com/file/d/1nPWE5wk_1RKbQIHua82Yxlw5wzp_OZ6c/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1nPWE5wk_1RKbQIHua82Yxlw5wzp_OZ6c/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1nPWE5wk_1RKbQIHua82Yxlw5wzp_OZ6c"
   },
   {
     "id": "ffm_2",
@@ -76,7 +80,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Anglais/BAC literary stream REVISION ALL UNITS NOUARA.pdf",
     "size": "3.8 ميغابايت",
     "sizeReadable": "3.8 ميغابايت",
-    "sizeBytes": 4011774
+    "sizeBytes": 4011774,
+    "driveFileId": "1PzGLRMsXNTCjJ9cSzXrW4QVTq-bE_Etv",
+    "driveFileUrl": "https://drive.google.com/file/d/1PzGLRMsXNTCjJ9cSzXrW4QVTq-bE_Etv/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1PzGLRMsXNTCjJ9cSzXrW4QVTq-bE_Etv/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1PzGLRMsXNTCjJ9cSzXrW4QVTq-bE_Etv"
   },
   {
     "id": "ffm_3",
@@ -112,7 +120,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Anglais/Final BAC Revison English.pdf",
     "size": "76.0 ميغابايت",
     "sizeReadable": "76.0 ميغابايت",
-    "sizeBytes": 79675973
+    "sizeBytes": 79675973,
+    "driveFileId": "1t4FSaxQcz7Eyz3Ic-wxMI-ZAw54onasp",
+    "driveFileUrl": "https://drive.google.com/file/d/1t4FSaxQcz7Eyz3Ic-wxMI-ZAw54onasp/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1t4FSaxQcz7Eyz3Ic-wxMI-ZAw54onasp/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1t4FSaxQcz7Eyz3Ic-wxMI-ZAw54onasp"
   },
   {
     "id": "ffm_4",
@@ -148,7 +160,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Anglais/Written Expressions.pdf",
     "size": "952 كيلوبايت",
     "sizeReadable": "952 كيلوبايت",
-    "sizeBytes": 974731
+    "sizeBytes": 974731,
+    "driveFileId": "165J1aw4p9RnFXuAG4dnEnyFr6LQBxooR",
+    "driveFileUrl": "https://drive.google.com/file/d/165J1aw4p9RnFXuAG4dnEnyFr6LQBxooR/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/165J1aw4p9RnFXuAG4dnEnyFr6LQBxooR/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=165J1aw4p9RnFXuAG4dnEnyFr6LQBxooR"
   },
   {
     "id": "ffm_5",
@@ -184,7 +200,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Anglais/الأسئلة-المعتادة-في-البكالوريا-في-اللغة-الإنجليزية-مترجمة-للغة-العربية.pdf",
     "size": "484 كيلوبايت",
     "sizeReadable": "484 كيلوبايت",
-    "sizeBytes": 495566
+    "sizeBytes": 495566,
+    "driveFileId": "1XxfU80pnFUz-r-DcDQzEwAgJis69m-tS",
+    "driveFileUrl": "https://drive.google.com/file/d/1XxfU80pnFUz-r-DcDQzEwAgJis69m-tS/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1XxfU80pnFUz-r-DcDQzEwAgJis69m-tS/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1XxfU80pnFUz-r-DcDQzEwAgJis69m-tS"
   },
   {
     "id": "ffm_6",
@@ -220,7 +240,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Anglais/الأسئلة_المعتادة_في_البكالوريا_في_اللغة_الإنجليزية_مترجمة_للغة_العربية.pdf",
     "size": "484 كيلوبايت",
     "sizeReadable": "484 كيلوبايت",
-    "sizeBytes": 495566
+    "sizeBytes": 495566,
+    "driveFileId": "16dyWVlY5B4AqdpKqC9ruwbyP1UOTIAi_",
+    "driveFileUrl": "https://drive.google.com/file/d/16dyWVlY5B4AqdpKqC9ruwbyP1UOTIAi_/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/16dyWVlY5B4AqdpKqC9ruwbyP1UOTIAi_/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=16dyWVlY5B4AqdpKqC9ruwbyP1UOTIAi_"
   },
   {
     "id": "ffm_7",
@@ -256,7 +280,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Anglais/اللغة_الإنجليزية_الفقرات_المقررة_للشعب_العلمية_المشتركة_.pdf",
     "size": "354 كيلوبايت",
     "sizeReadable": "354 كيلوبايت",
-    "sizeBytes": 362795
+    "sizeBytes": 362795,
+    "driveFileId": "1EtcShDeBBE1OQQRcVF0cQ5zVdsAOnsOB",
+    "driveFileUrl": "https://drive.google.com/file/d/1EtcShDeBBE1OQQRcVF0cQ5zVdsAOnsOB/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1EtcShDeBBE1OQQRcVF0cQ5zVdsAOnsOB/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1EtcShDeBBE1OQQRcVF0cQ5zVdsAOnsOB"
   },
   {
     "id": "ffm_8",
@@ -292,7 +320,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Anglais/باقة07_مواضيع_+_الحل_لغة_إنجليزية_التحضير_لاختبار_الفصل_1_شعب_علمية.pdf",
     "size": "11.0 ميغابايت",
     "sizeReadable": "11.0 ميغابايت",
-    "sizeBytes": 11521254
+    "sizeBytes": 11521254,
+    "driveFileId": "1vyWlzkCUP4F_v3Us-M57PbbDsCLy-E9k",
+    "driveFileUrl": "https://drive.google.com/file/d/1vyWlzkCUP4F_v3Us-M57PbbDsCLy-E9k/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1vyWlzkCUP4F_v3Us-M57PbbDsCLy-E9k/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1vyWlzkCUP4F_v3Us-M57PbbDsCLy-E9k"
   },
   {
     "id": "ffm_9",
@@ -328,7 +360,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Anglais/جميع_المصطلحات_الإنجليزية_للوحدات_الأربعة1.pdf",
     "size": "85 كيلوبايت",
     "sizeReadable": "85 كيلوبايت",
-    "sizeBytes": 87424
+    "sizeBytes": 87424,
+    "driveFileId": "1IUzjJjO8ZL8WW8pp1XwmAp9kKVbcL78J",
+    "driveFileUrl": "https://drive.google.com/file/d/1IUzjJjO8ZL8WW8pp1XwmAp9kKVbcL78J/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1IUzjJjO8ZL8WW8pp1XwmAp9kKVbcL78J/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1IUzjJjO8ZL8WW8pp1XwmAp9kKVbcL78J"
   },
   {
     "id": "ffm_10",
@@ -364,7 +400,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Anglais/قواعد اللغ الانجليزية للصف الثالث الثانوي في 15 ورقة مراجعة الفرص الاخيرة بطريق رائعة مع مستر اح.pdf",
     "size": "3.6 ميغابايت",
     "sizeReadable": "3.6 ميغابايت",
-    "sizeBytes": 3814394
+    "sizeBytes": 3814394,
+    "driveFileId": "1zbSEpkO_QIYjPGn7IhRKEG2kBl9wNJQw",
+    "driveFileUrl": "https://drive.google.com/file/d/1zbSEpkO_QIYjPGn7IhRKEG2kBl9wNJQw/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1zbSEpkO_QIYjPGn7IhRKEG2kBl9wNJQw/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1zbSEpkO_QIYjPGn7IhRKEG2kBl9wNJQw"
   },
   {
     "id": "ffm_11",
@@ -400,7 +440,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Anglais/كتاب_مقترحات_الانجلزية_لاستاذ_ناصر_منصوري_ج_ح_م_لــwww_msila_info.pdf",
     "size": "192.8 ميغابايت",
     "sizeReadable": "192.8 ميغابايت",
-    "sizeBytes": 202151410
+    "sizeBytes": 202151410,
+    "driveFileId": "1AsWPkagx5y8wT0wXRc9yBIXcco-HeuU5",
+    "driveFileUrl": "https://drive.google.com/file/d/1AsWPkagx5y8wT0wXRc9yBIXcco-HeuU5/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1AsWPkagx5y8wT0wXRc9yBIXcco-HeuU5/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1AsWPkagx5y8wT0wXRc9yBIXcco-HeuU5"
   },
   {
     "id": "ffm_12",
@@ -436,7 +480,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Anglais/مصطلحات انجليزية.pdf",
     "size": "402 كيلوبايت",
     "sizeReadable": "402 كيلوبايت",
-    "sizeBytes": 412061
+    "sizeBytes": 412061,
+    "driveFileId": "1Eeqj1rT3gYmh4ccWpe9cTA_Og3wYQQJQ",
+    "driveFileUrl": "https://drive.google.com/file/d/1Eeqj1rT3gYmh4ccWpe9cTA_Og3wYQQJQ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Eeqj1rT3gYmh4ccWpe9cTA_Og3wYQQJQ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Eeqj1rT3gYmh4ccWpe9cTA_Og3wYQQJQ"
   },
   {
     "id": "ffm_13",
@@ -472,7 +520,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Anglais/ملخص شامل للإنجليزية بكالوريا.pdf",
     "size": "1.7 ميغابايت",
     "sizeReadable": "1.7 ميغابايت",
-    "sizeBytes": 1739764
+    "sizeBytes": 1739764,
+    "driveFileId": "1YU8-_N6kh5y77cdaNcOedtvBMEcqHd7s",
+    "driveFileUrl": "https://drive.google.com/file/d/1YU8-_N6kh5y77cdaNcOedtvBMEcqHd7s/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1YU8-_N6kh5y77cdaNcOedtvBMEcqHd7s/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1YU8-_N6kh5y77cdaNcOedtvBMEcqHd7s"
   },
   {
     "id": "ffm_14",
@@ -508,7 +560,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Anglais/ملخص في مادة اللغة الإنجليزية - Copy.pdf",
     "size": "1.1 ميغابايت",
     "sizeReadable": "1.1 ميغابايت",
-    "sizeBytes": 1140404
+    "sizeBytes": 1140404,
+    "driveFileId": "1dcycNWpNEA3J9t9H2pC8xim_RjSphrSC",
+    "driveFileUrl": "https://drive.google.com/file/d/1dcycNWpNEA3J9t9H2pC8xim_RjSphrSC/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1dcycNWpNEA3J9t9H2pC8xim_RjSphrSC/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1dcycNWpNEA3J9t9H2pC8xim_RjSphrSC"
   },
   {
     "id": "ffm_15",
@@ -544,7 +600,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Anglais/ملخص_قواعد_الانجليزية_الشعب_العلمية_المشتركة_1.pdf",
     "size": "560 كيلوبايت",
     "sizeReadable": "560 كيلوبايت",
-    "sizeBytes": 573164
+    "sizeBytes": 573164,
+    "driveFileId": "1NEQT-iIqq9_g8Oi5-Ctt9G1E8zO4ogkR",
+    "driveFileUrl": "https://drive.google.com/file/d/1NEQT-iIqq9_g8Oi5-Ctt9G1E8zO4ogkR/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1NEQT-iIqq9_g8Oi5-Ctt9G1E8zO4ogkR/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1NEQT-iIqq9_g8Oi5-Ctt9G1E8zO4ogkR"
   },
   {
     "id": "ffm_16",
@@ -10363,36 +10423,21 @@ export const USER_STUDY_FILES = [
 ];
 
 export function getFilesBySubject(subjectId) {
-  if (!subjectId || subjectId === 'all') return USER_STUDY_FILES;
-  return USER_STUDY_FILES.filter(f => 
-    f.subjectId === subjectId || (f.subjectAliases && f.subjectAliases.includes(subjectId))
-  );
+  return USER_STUDY_FILES.filter(f => f.subjectId === subjectId || (f.subjectAliases && f.subjectAliases.includes(subjectId)));
 }
 
 export function getFilesByStream(streamId) {
-  if (!streamId || streamId === 'all') return USER_STUDY_FILES;
-  return USER_STUDY_FILES.filter(f => 
-    (f.streamIds && f.streamIds.includes(streamId)) || (f.streams && f.streams.includes(streamId))
-  );
+  return USER_STUDY_FILES.filter(f => f.streams && f.streams.includes(streamId));
 }
 
-export function searchUserFiles(query, streamId = 'all', subjectId = 'all') {
-  let list = USER_STUDY_FILES;
-  if (streamId && streamId !== 'all') {
-    list = list.filter(f => (f.streamIds && f.streamIds.includes(streamId)) || (f.streams && f.streams.includes(streamId)));
-  }
-  if (subjectId && subjectId !== 'all') {
-    list = list.filter(f => f.subjectId === subjectId || (f.subjectAliases && f.subjectAliases.includes(subjectId)));
-  }
-  if (!query || !query.trim()) return list;
-
+export function searchUserFiles(query) {
+  if (!query || !query.trim()) return [];
   const q = query.trim().toLowerCase();
-  return list.filter(f => 
+  return USER_STUDY_FILES.filter(f => 
     f.title.toLowerCase().includes(q) ||
-    f.author.toLowerCase().includes(q) ||
-    f.category.toLowerCase().includes(q) ||
     f.subjectName.toLowerCase().includes(q) ||
-    f.rawFileName.toLowerCase().includes(q)
+    (f.author && f.author.toLowerCase().includes(q)) ||
+    (f.category && f.category.toLowerCase().includes(q))
   );
 }
 
