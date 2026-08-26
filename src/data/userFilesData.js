@@ -1,7 +1,7 @@
 /**
  * 📚 Naja7i (نجاحي) — Comprehensive Public Files Catalog
  * Location: public/FileFromMe & Google Drive Cloud Repositories
- * Total Indexed Files: 318
+ * Total Indexed Files: 323
  * Verified Academic Titles, Categories, Stream Maps, Authors, and 100% Real Disk File Paths & Cloud Drive Links.
  */
 
@@ -10499,6 +10499,156 @@ export const USER_STUDY_FILES = [
     "size": "3.6 ميغابايت",
     "sizeReadable": "3.6 ميغابايت",
     "sizeBytes": 3795003
+  },
+  {
+    "id": "ffm_compta_1787772064996_1",
+    "title": "15موضوع في المحاسبة مع الأستاذ يوسف سفيان",
+    "rawFileName": "_15موضوع_في_المحاسبة_مع_الأستاذ_يوسف_سفيان_.pdf",
+    "extension": "pdf",
+    "subjectId": "gestion_financiere",
+    "subjectAliases": [
+      "gestion_financiere",
+      "gestion",
+      "compta",
+      "comptabilite"
+    ],
+    "subjectName": "التسيير المحاسبي والمالي",
+    "streams": [
+      "gestion"
+    ],
+    "streamIds": [
+      "gestion"
+    ],
+    "category": "سلاسل وتمارين",
+    "author": "الأستاذ يوسف سفيان",
+    "fileUrl": "https://drive.google.com/file/d/1jXFraFXEd-5ph05bklFd8hXPPZVrsGBx/preview",
+    "driveFileId": "1jXFraFXEd-5ph05bklFd8hXPPZVrsGBx",
+    "driveFileUrl": "https://drive.google.com/file/d/1jXFraFXEd-5ph05bklFd8hXPPZVrsGBx/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1jXFraFXEd-5ph05bklFd8hXPPZVrsGBx/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1jXFraFXEd-5ph05bklFd8hXPPZVrsGBx",
+    "rawPath": "https://drive.google.com/file/d/1jXFraFXEd-5ph05bklFd8hXPPZVrsGBx/preview",
+    "size": "ملف سحابي PDF",
+    "sizeReadable": "ملف سحابي PDF"
+  },
+  {
+    "id": "ffm_compta_1787772064996_2",
+    "title": "ملخص في التسويات إعداد الأستاذ يوسي قادة",
+    "rawFileName": "_ملخص_في_التسويات_إعداد_الأستاذ_يوسي_قادة.pdf",
+    "extension": "pdf",
+    "subjectId": "gestion_financiere",
+    "subjectAliases": [
+      "gestion_financiere",
+      "gestion",
+      "compta",
+      "comptabilite"
+    ],
+    "subjectName": "التسيير المحاسبي والمالي",
+    "streams": [
+      "gestion"
+    ],
+    "streamIds": [
+      "gestion"
+    ],
+    "category": "ملخصات ودروس",
+    "author": "الأستاذ يوسي قادة",
+    "fileUrl": "https://drive.google.com/file/d/1h1efyh-B43ttdBHUY_JDEwzegZ3zSFoD/preview",
+    "driveFileId": "1h1efyh-B43ttdBHUY_JDEwzegZ3zSFoD",
+    "driveFileUrl": "https://drive.google.com/file/d/1h1efyh-B43ttdBHUY_JDEwzegZ3zSFoD/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1h1efyh-B43ttdBHUY_JDEwzegZ3zSFoD/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1h1efyh-B43ttdBHUY_JDEwzegZ3zSFoD",
+    "rawPath": "https://drive.google.com/file/d/1h1efyh-B43ttdBHUY_JDEwzegZ3zSFoD/preview",
+    "size": "ملف سحابي PDF",
+    "sizeReadable": "ملف سحابي PDF"
+  },
+  {
+    "id": "ffm_compta_1787772064996_3",
+    "title": "أهم قوانين نسب تحليل مستويات النتائج إعداد الأستاذ عياشي لخضر",
+    "rawFileName": "أهم_قوانين_نسب_تحليل_مستويات_النتائج_إعداد_الأستاذ_عياشي_لخضر.pdf",
+    "extension": "pdf",
+    "subjectId": "gestion_financiere",
+    "subjectAliases": [
+      "gestion_financiere",
+      "gestion",
+      "compta",
+      "comptabilite"
+    ],
+    "subjectName": "التسيير المحاسبي والمالي",
+    "streams": [
+      "gestion"
+    ],
+    "streamIds": [
+      "gestion"
+    ],
+    "category": "ملخصات وقوانين",
+    "author": "الأستاذ عياشي لخضر",
+    "fileUrl": "https://drive.google.com/file/d/1hxslyJwaOmgB9KyBcxLTSZfStvt6K87n/preview",
+    "driveFileId": "1hxslyJwaOmgB9KyBcxLTSZfStvt6K87n",
+    "driveFileUrl": "https://drive.google.com/file/d/1hxslyJwaOmgB9KyBcxLTSZfStvt6K87n/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1hxslyJwaOmgB9KyBcxLTSZfStvt6K87n/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1hxslyJwaOmgB9KyBcxLTSZfStvt6K87n",
+    "rawPath": "https://drive.google.com/file/d/1hxslyJwaOmgB9KyBcxLTSZfStvt6K87n/preview",
+    "size": "ملف سحابي PDF",
+    "sizeReadable": "ملف سحابي PDF"
+  },
+  {
+    "id": "ffm_compta_1787772064996_4",
+    "title": "الاستاذ محمد سويدي سلسلة 50 تمرين في استهلاك القروض",
+    "rawFileName": "الاستاذ_محمد_سويدي_سلسلة_50_تمرين_في_استهلاك_القروض.pdf",
+    "extension": "pdf",
+    "subjectId": "gestion_financiere",
+    "subjectAliases": [
+      "gestion_financiere",
+      "gestion",
+      "compta",
+      "comptabilite"
+    ],
+    "subjectName": "التسيير المحاسبي والمالي",
+    "streams": [
+      "gestion"
+    ],
+    "streamIds": [
+      "gestion"
+    ],
+    "category": "سلاسل وتمارين",
+    "author": "الأستاذ محمد سويدي",
+    "fileUrl": "https://drive.google.com/file/d/1QtyLe7sCSI7H9_h6VCKoTOxPrLWU-tJ0/preview",
+    "driveFileId": "1QtyLe7sCSI7H9_h6VCKoTOxPrLWU-tJ0",
+    "driveFileUrl": "https://drive.google.com/file/d/1QtyLe7sCSI7H9_h6VCKoTOxPrLWU-tJ0/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1QtyLe7sCSI7H9_h6VCKoTOxPrLWU-tJ0/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1QtyLe7sCSI7H9_h6VCKoTOxPrLWU-tJ0",
+    "rawPath": "https://drive.google.com/file/d/1QtyLe7sCSI7H9_h6VCKoTOxPrLWU-tJ0/preview",
+    "size": "ملف سحابي PDF",
+    "sizeReadable": "ملف سحابي PDF"
+  },
+  {
+    "id": "ffm_compta_1787772064996_5",
+    "title": "ملخص في أعمال نهاية السنة إعداد الأستاذ يوسي قادة",
+    "rawFileName": "ملخص_في_أعمال_نهاية_السنة_إعداد_الأستاذ_يوسي_قادة.pdf",
+    "extension": "pdf",
+    "subjectId": "gestion_financiere",
+    "subjectAliases": [
+      "gestion_financiere",
+      "gestion",
+      "compta",
+      "comptabilite"
+    ],
+    "subjectName": "التسيير المحاسبي والمالي",
+    "streams": [
+      "gestion"
+    ],
+    "streamIds": [
+      "gestion"
+    ],
+    "category": "ملخصات ودروس",
+    "author": "الأستاذ يوسي قادة",
+    "fileUrl": "https://drive.google.com/file/d/1EVkoYqZoAfQ6lX8JLJaE_B8tAtqc5COC/preview",
+    "driveFileId": "1EVkoYqZoAfQ6lX8JLJaE_B8tAtqc5COC",
+    "driveFileUrl": "https://drive.google.com/file/d/1EVkoYqZoAfQ6lX8JLJaE_B8tAtqc5COC/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1EVkoYqZoAfQ6lX8JLJaE_B8tAtqc5COC/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1EVkoYqZoAfQ6lX8JLJaE_B8tAtqc5COC",
+    "rawPath": "https://drive.google.com/file/d/1EVkoYqZoAfQ6lX8JLJaE_B8tAtqc5COC/preview",
+    "size": "ملف سحابي PDF",
+    "sizeReadable": "ملف سحابي PDF"
   }
 ];
 
