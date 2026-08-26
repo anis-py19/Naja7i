@@ -25,6 +25,7 @@ import {
   parseMindmapTextToJson
 } from '../services/aiSummarizerService';
 import VisualMindmapViewer from '../components/VisualMindmapViewer';
+import MarkdownContentRenderer from '../components/MarkdownContentRenderer';
 
 export default function AiSummarizerPage() {
   const [inputTab, setInputTab] = useState('file'); // 'file' | 'text'
@@ -591,125 +592,7 @@ export default function AiSummarizerPage() {
                     title={selectedFile?.name || 'مخطط الدرس المفاهيمي'} 
                   />
                 ) : (
-                <div className="prose prose-sm max-w-none text-[#0F172A] leading-relaxed space-y-3 font-['Cairo']">
-                  {summaryResult.split('\n').map((paragraph, idx) => {
-                    const trimmed = paragraph.trim();
-                    if (!trimmed) return null;
-
-                    // Header 1 (# Title)
-                    if (trimmed.startsWith('# ')) {
-                      return (
-                        <h1 key={idx} className="text-lg sm:text-xl font-black text-[#0F172A] border-b border-[#E2E8F0] pb-2.5 mt-5 text-[#E11D48] flex items-center gap-2">
-                          <span>{trimmed.replace('# ', '')}</span>
-                        </h1>
-                      );
-                    }
-
-                    // Header 2 (## Section)
-                    if (trimmed.startsWith('## ')) {
-                      return (
-                        <h2 key={idx} className="text-sm sm:text-base font-black text-[#0F172A] mt-5 mb-2 pb-1 border-b border-slate-100 flex items-center gap-2">
-                          <span className="w-2 h-4 bg-[#E11D48] rounded-xs"></span>
-                          <span>{trimmed.replace('## ', '')}</span>
-                        </h2>
-                      );
-                    }
-
-                    // Header 3 (### Sub-section)
-                    if (trimmed.startsWith('### ')) {
-                      return (
-                        <h3 key={idx} className="text-xs sm:text-sm font-bold text-[#0F172A] mt-3 mb-1 text-slate-800">
-                          {trimmed.replace('### ', '')}
-                        </h3>
-                      );
-                    }
-
-                    // Tree Mindmap Line (├── └──)
-                    if (trimmed.includes('├──') || trimmed.includes('└──') || trimmed.includes('│')) {
-                      return (
-                        <div key={idx} className="p-1.5 px-3 rounded-lg bg-[#0F172A] text-emerald-300 font-mono text-xs my-1 font-bold overflow-x-auto whitespace-pre">
-                          {trimmed}
-                        </div>
-                      );
-                    }
-
-                    // Table Row
-                    if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
-                      if (trimmed.includes('---')) return null; // Separator row
-                      const cells = trimmed.split('|').map(c => c.trim()).filter(Boolean);
-                      return (
-                        <div key={idx} className="grid grid-flow-col auto-cols-fr gap-2 p-2 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-xs font-medium my-1">
-                          {cells.map((c, cIdx) => (
-                            <span key={cIdx} className="truncate">{c}</span>
-                          ))}
-                        </div>
-                      );
-                    }
-
-                    // Bullet points (- or • or *)
-                    if (trimmed.startsWith('- ') || trimmed.startsWith('• ') || trimmed.startsWith('* ')) {
-                      const cleanText = trimmed.replace(/^[-•*]\s*/, '');
-                      return (
-                        <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-[#334155] my-1 pr-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#E11D48] mt-2 shrink-0"></span>
-                          <span className="leading-relaxed">
-                            {cleanText.split(/(\*\*.*?\*\*)/).map((chunk, cIdx) => {
-                              if (chunk.startsWith('**') && chunk.endsWith('**')) {
-                                return <strong key={cIdx} className="font-bold text-[#0F172A]">{chunk.slice(2, -2)}</strong>;
-                              }
-                              return chunk;
-                            })}
-                          </span>
-                        </div>
-                      );
-                    }
-
-                    // Numbered List (1. 2. 3.)
-                    if (trimmed.match(/^\d+[\.\-\)]/)) {
-                      return (
-                        <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#334155] my-1.5 pr-1">
-                          <span className="px-1.5 py-0.5 rounded bg-slate-100 text-[#0F172A] font-mono font-bold text-[11px] shrink-0 border border-slate-200">
-                            {trimmed.match(/^\d+/)?.[0]}
-                          </span>
-                          <span className="leading-relaxed">
-                            {trimmed.replace(/^\d+[\.\-\)]\s*/, '').split(/(\*\*.*?\*\*)/).map((chunk, cIdx) => {
-                              if (chunk.startsWith('**') && chunk.endsWith('**')) {
-                                return <strong key={cIdx} className="font-bold text-[#0F172A]">{chunk.slice(2, -2)}</strong>;
-                              }
-                              return chunk;
-                            })}
-                          </span>
-                        </div>
-                      );
-                    }
-
-                    // Callout (> Note)
-                    if (trimmed.startsWith('> ')) {
-                      return (
-                        <div key={idx} className="p-3 rounded-xl bg-rose-50/80 border-r-4 border-r-[#E11D48] border border-rose-200 text-rose-950 text-xs leading-relaxed my-2.5 font-medium shadow-2xs">
-                          {trimmed.replace('> ', '').split(/(\*\*.*?\*\*)/).map((chunk, cIdx) => {
-                            if (chunk.startsWith('**') && chunk.endsWith('**')) {
-                              return <strong key={cIdx} className="font-bold text-rose-950">{chunk.slice(2, -2)}</strong>;
-                            }
-                            return chunk;
-                          })}
-                        </div>
-                      );
-                    }
-
-                    // Standard Paragraph
-                    return (
-                      <p key={idx} className="text-xs sm:text-sm text-[#475569] leading-relaxed my-1">
-                        {trimmed.split(/(\*\*.*?\*\*)/).map((chunk, cIdx) => {
-                          if (chunk.startsWith('**') && chunk.endsWith('**')) {
-                            return <strong key={cIdx} className="font-bold text-[#0F172A]">{chunk.slice(2, -2)}</strong>;
-                          }
-                          return chunk;
-                        })}
-                      </p>
-                    );
-                  })}
-                </div>
+                  <MarkdownContentRenderer content={summaryResult} />
                 )
               ) : errorMessage ? (
                 <div className="py-16 text-center space-y-4 max-w-md mx-auto">
