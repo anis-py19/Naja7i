@@ -1539,7 +1539,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Droit/ملخص القانون 2023.pdf",
     "size": "6.5 ميغابايت",
     "sizeReadable": "6.5 ميغابايت",
-    "sizeBytes": 6804787
+    "sizeBytes": 6804787,
+    "driveFileId": "1cGdmIYUSQ5qobdveDwoAls4hFAFvffCU",
+    "driveFileUrl": "https://drive.google.com/file/d/1cGdmIYUSQ5qobdveDwoAls4hFAFvffCU/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1cGdmIYUSQ5qobdveDwoAls4hFAFvffCU/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1cGdmIYUSQ5qobdveDwoAls4hFAFvffCU"
   },
   {
     "id": "ffm_42",
@@ -1564,7 +1568,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Droit/ملخص دروس مادة القانون 3 ثانوي.pdf",
     "size": "280 كيلوبايت",
     "sizeReadable": "280 كيلوبايت",
-    "sizeBytes": 286632
+    "sizeBytes": 286632,
+    "driveFileId": "1IRCcd5S4TaltB_6DTIdBXP98KT34aXu1",
+    "driveFileUrl": "https://drive.google.com/file/d/1IRCcd5S4TaltB_6DTIdBXP98KT34aXu1/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1IRCcd5S4TaltB_6DTIdBXP98KT34aXu1/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1IRCcd5S4TaltB_6DTIdBXP98KT34aXu1"
   },
   {
     "id": "ffm_43",
@@ -1589,7 +1597,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Droit/ملخص_دروس_القانون_3_ثانوي_للأستاذ_يوسي_قادة.pdf",
     "size": "709 كيلوبايت",
     "sizeReadable": "709 كيلوبايت",
-    "sizeBytes": 725754
+    "sizeBytes": 725754,
+    "driveFileId": "1o0E_Hry9gSw8Su5N1qNj6QurTmRq7WpE",
+    "driveFileUrl": "https://drive.google.com/file/d/1o0E_Hry9gSw8Su5N1qNj6QurTmRq7WpE/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1o0E_Hry9gSw8Su5N1qNj6QurTmRq7WpE/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1o0E_Hry9gSw8Su5N1qNj6QurTmRq7WpE"
   },
   {
     "id": "ffm_44",
@@ -1614,7 +1626,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Droit/ملخص_دروس_القانون_للسنة_الثالثة_ثانوي_من_إعداد_الأستاذ_عبدالخالق.pdf",
     "size": "2.2 ميغابايت",
     "sizeReadable": "2.2 ميغابايت",
-    "sizeBytes": 2319683
+    "sizeBytes": 2319683,
+    "driveFileId": "1Xaut9YHHAIrnqaxT06N4IR1Fk9mB8o_V",
+    "driveFileUrl": "https://drive.google.com/file/d/1Xaut9YHHAIrnqaxT06N4IR1Fk9mB8o_V/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Xaut9YHHAIrnqaxT06N4IR1Fk9mB8o_V/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Xaut9YHHAIrnqaxT06N4IR1Fk9mB8o_V"
   },
   {
     "id": "ffm_45",
