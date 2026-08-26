@@ -23,7 +23,7 @@ export default function FounderStorySection() {
               </div>
 
               <h3 className="text-base sm:text-lg font-black text-[#0F172A]">
-                منصة «نجاحي».. مبادرة الطالب أنيس إيزري (Anis Izri) لدعم طلبة البكالوريا
+                منصة «نجاحي».. مبادرة الطالب أنيس ازري (Anis Izri) لدعم طلبة البكالوريا
               </h3>
 
               <p className="text-xs text-[#475569] leading-relaxed">
