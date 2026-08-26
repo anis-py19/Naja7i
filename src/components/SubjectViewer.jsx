@@ -245,7 +245,7 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          const pdfUrl = file.fileUrl || file.url;
+                          const pdfUrl = file.driveDownloadUrl || file.fileUrl || file.url;
                           const fileName = file.rawFileName || `${file.title}.pdf`;
                           const link = document.createElement('a');
                           link.href = pdfUrl;

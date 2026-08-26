@@ -99,7 +99,7 @@ export default function LibraryPage({ onOpenPdf }) {
 
   const handleDirectDownload = (file, e) => {
     e.stopPropagation();
-    const pdfUrl = file.fileUrl || file.url;
+    const pdfUrl = file.driveDownloadUrl || file.fileUrl || file.url;
     const fileName = file.rawFileName || `${file.title}.pdf`;
     const link = document.createElement('a');
     link.href = pdfUrl;
