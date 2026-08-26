@@ -1,7 +1,7 @@
 /**
  * 📚 Naja7i (نجاحي) — Comprehensive Public Files Catalog
  * Location: public/FileFromMe & Google Drive Cloud Repositories
- * Total Indexed Files: 329
+ * Total Indexed Files: 330
  * Verified Academic Titles, Categories, Stream Maps, Authors, and 100% Real Disk File Paths & Cloud Drive Links.
  */
 
@@ -6787,7 +6787,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الاستاذ نور الدين/السلسة الفضية في المتتاليات جزء أول- للأستاذ نور الدين 2019.pdf",
     "size": "13.3 ميغابايت",
     "sizeReadable": "13.3 ميغابايت",
-    "sizeBytes": 13950639
+    "sizeBytes": 13950639,
+    "driveFileId": "1gejUbxNJ-UnpheiWsNTq-1LiHxWrelbd",
+    "driveFileUrl": "https://drive.google.com/file/d/1gejUbxNJ-UnpheiWsNTq-1LiHxWrelbd/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1gejUbxNJ-UnpheiWsNTq-1LiHxWrelbd/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1gejUbxNJ-UnpheiWsNTq-1LiHxWrelbd"
   },
   {
     "id": "ffm_187",
@@ -6817,12 +6821,16 @@ export const USER_STUDY_FILES = [
       "langues"
     ],
     "category": "سلاسل وتمارين محلولة",
-    "author": "أساتذة متميزون",
+    "author": "الأستاذ نور الدين",
     "fileUrl": "/FileFromMe/Math/الاستاذ نور الدين/كتاب السلسلة الفضية في الاحتمالات للاستاذ نورالدين الطبعة الثالثة طبعة 2022.pdf",
     "rawPath": "/FileFromMe/Math/الاستاذ نور الدين/كتاب السلسلة الفضية في الاحتمالات للاستاذ نورالدين الطبعة الثالثة طبعة 2022.pdf",
     "size": "6.4 ميغابايت",
     "sizeReadable": "6.4 ميغابايت",
-    "sizeBytes": 6742869
+    "sizeBytes": 6742869,
+    "driveFileId": "1er0GoS4F8S_Go1G4PTew4dduhLxxW261",
+    "driveFileUrl": "https://drive.google.com/file/d/1er0GoS4F8S_Go1G4PTew4dduhLxxW261/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1er0GoS4F8S_Go1G4PTew4dduhLxxW261/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1er0GoS4F8S_Go1G4PTew4dduhLxxW261"
   },
   {
     "id": "ffm_188",
@@ -6892,7 +6900,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الاستاذ نور الدين/كتاب السلسلة الفضية في الدوال طبعة 2022 للاستاذ نور الدين.pdf",
     "size": "21.7 ميغابايت",
     "sizeReadable": "21.7 ميغابايت",
-    "sizeBytes": 22733508
+    "sizeBytes": 22733508,
+    "driveFileId": "1KUVD-z9Q5W5KejZo3o6Sqvrl3zyIUclm",
+    "driveFileUrl": "https://drive.google.com/file/d/1KUVD-z9Q5W5KejZo3o6Sqvrl3zyIUclm/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1KUVD-z9Q5W5KejZo3o6Sqvrl3zyIUclm/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1KUVD-z9Q5W5KejZo3o6Sqvrl3zyIUclm"
   },
   {
     "id": "ffm_190",
@@ -11699,6 +11711,43 @@ export const USER_STUDY_FILES = [
     "rawPath": "https://drive.google.com/file/d/1z3g_vjs2jtydSnlBDLe_fi1U7mFNw08T/preview",
     "size": "ملف سحابي",
     "sizeReadable": "ملف سحابي"
+  },
+  {
+    "id": "ffm_noureddine_1787773430984_3",
+    "title": "كتاب السلسلة الفضية في ال��عداد المركبة طبعة 2021",
+    "rawFileName": "كتاب السلسلة الفضية في ال��عداد المركبة طبعة 2021.pdf",
+    "extension": "pdf",
+    "subjectId": "math",
+    "subjectAliases": [
+      "math",
+      "mathematics",
+      "maths",
+      "riyadiyat",
+      "noureddine"
+    ],
+    "subjectName": "الرياضيات",
+    "streams": [
+      "sciences",
+      "math",
+      "technique_math",
+      "gestion"
+    ],
+    "streamIds": [
+      "sciences",
+      "math",
+      "technique_math",
+      "gestion"
+    ],
+    "category": "كتب ومذكرات شاملة",
+    "author": "الأستاذ نور الدين",
+    "fileUrl": "https://drive.google.com/file/d/1wOVoukpKwys4IxU21mUxyXgmoVHFJgzs/preview",
+    "driveFileId": "1wOVoukpKwys4IxU21mUxyXgmoVHFJgzs",
+    "driveFileUrl": "https://drive.google.com/file/d/1wOVoukpKwys4IxU21mUxyXgmoVHFJgzs/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1wOVoukpKwys4IxU21mUxyXgmoVHFJgzs/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1wOVoukpKwys4IxU21mUxyXgmoVHFJgzs",
+    "rawPath": "https://drive.google.com/file/d/1wOVoukpKwys4IxU21mUxyXgmoVHFJgzs/preview",
+    "size": "كتاب سحابي PDF",
+    "sizeReadable": "كتاب سحابي PDF"
   }
 ];
 
