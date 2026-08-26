@@ -1,7 +1,7 @@
 /**
  * 📚 Naja7i (نجاحي) — Comprehensive Public Files Catalog
  * Location: public/FileFromMe & Google Drive Cloud Repositories
- * Total Indexed Files: 327
+ * Total Indexed Files: 329
  * Verified Academic Titles, Categories, Stream Maps, Authors, and 100% Real Disk File Paths & Cloud Drive Links.
  */
 
@@ -5707,7 +5707,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Langue/Allman/تصريف جميع افعال اللغة الالمانية.pdf",
     "size": "193 كيلوبايت",
     "sizeReadable": "193 كيلوبايت",
-    "sizeBytes": 198120
+    "sizeBytes": 198120,
+    "driveFileId": "1Ht9YrGYgpZYUKARGNrnTxzo4ADBQpbd-",
+    "driveFileUrl": "https://drive.google.com/file/d/1Ht9YrGYgpZYUKARGNrnTxzo4ADBQpbd-/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Ht9YrGYgpZYUKARGNrnTxzo4ADBQpbd-/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Ht9YrGYgpZYUKARGNrnTxzo4ADBQpbd-"
   },
   {
     "id": "ffm_155",
@@ -5732,7 +5736,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Langue/Allman/سلسة_السبيل_في_اللغة_الألمانية_مواضيع_مقترحة_مع_الحل.pdf",
     "size": "1.4 ميغابايت",
     "sizeReadable": "1.4 ميغابايت",
-    "sizeBytes": 1453235
+    "sizeBytes": 1453235,
+    "driveFileId": "19fqUPNzqU8a2i6CjVLZZpBg9uQqiSFY7",
+    "driveFileUrl": "https://drive.google.com/file/d/19fqUPNzqU8a2i6CjVLZZpBg9uQqiSFY7/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/19fqUPNzqU8a2i6CjVLZZpBg9uQqiSFY7/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=19fqUPNzqU8a2i6CjVLZZpBg9uQqiSFY7"
   },
   {
     "id": "ffm_156",
@@ -5757,7 +5765,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Langue/Allman/فقرات في اللغة الالمانية.pdf",
     "size": "388 كيلوبايت",
     "sizeReadable": "388 كيلوبايت",
-    "sizeBytes": 396929
+    "sizeBytes": 396929,
+    "driveFileId": "1_aOI1UKyN-3TT916_UcRPnYd6GR3P5QU",
+    "driveFileUrl": "https://drive.google.com/file/d/1_aOI1UKyN-3TT916_UcRPnYd6GR3P5QU/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1_aOI1UKyN-3TT916_UcRPnYd6GR3P5QU/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1_aOI1UKyN-3TT916_UcRPnYd6GR3P5QU"
   },
   {
     "id": "ffm_157",
@@ -5782,7 +5794,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Langue/Allman/قواعد هامة في اللغة الالمانية.pdf",
     "size": "598 كيلوبايت",
     "sizeReadable": "598 كيلوبايت",
-    "sizeBytes": 612284
+    "sizeBytes": 612284,
+    "driveFileId": "1huMfoRmzB2HcQ4kfvaQ32dPO3uibYTvE",
+    "driveFileUrl": "https://drive.google.com/file/d/1huMfoRmzB2HcQ4kfvaQ32dPO3uibYTvE/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1huMfoRmzB2HcQ4kfvaQ32dPO3uibYTvE/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1huMfoRmzB2HcQ4kfvaQ32dPO3uibYTvE"
   },
   {
     "id": "ffm_158",
@@ -5807,7 +5823,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Langue/Allman/ملخص_البكالوريا_الألمانية_من_الألف_الى_الياء.pdf",
     "size": "14.4 ميغابايت",
     "sizeReadable": "14.4 ميغابايت",
-    "sizeBytes": 15132956
+    "sizeBytes": 15132956,
+    "driveFileId": "1Y25LpX8wIycObIwHZwZZERwXGRxLt3jm",
+    "driveFileUrl": "https://drive.google.com/file/d/1Y25LpX8wIycObIwHZwZZERwXGRxLt3jm/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Y25LpX8wIycObIwHZwZZERwXGRxLt3jm/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Y25LpX8wIycObIwHZwZZERwXGRxLt3jm"
   },
   {
     "id": "ffm_159",
@@ -5832,7 +5852,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Langue/Allman/ملخصات_اللغة_الألمانية_إعداد_الأستاذة_حليمة_بوناب.pdf",
     "size": "663 كيلوبايت",
     "sizeReadable": "663 كيلوبايت",
-    "sizeBytes": 679017
+    "sizeBytes": 679017,
+    "driveFileId": "1kosGS3EQBzJxUKyOkyE9ZcVbKrvIprwB",
+    "driveFileUrl": "https://drive.google.com/file/d/1kosGS3EQBzJxUKyOkyE9ZcVbKrvIprwB/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1kosGS3EQBzJxUKyOkyE9ZcVbKrvIprwB/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1kosGS3EQBzJxUKyOkyE9ZcVbKrvIprwB"
   },
   {
     "id": "ffm_160",
@@ -5857,7 +5881,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Langue/Espanol/enplus_l_spanish_1.pdf",
     "size": "346 كيلوبايت",
     "sizeReadable": "346 كيلوبايت",
-    "sizeBytes": 354339
+    "sizeBytes": 354339,
+    "driveFileId": "1NXvE0EHHEG_vMkHh4QNzafSZNJtfFJ3f",
+    "driveFileUrl": "https://drive.google.com/file/d/1NXvE0EHHEG_vMkHh4QNzafSZNJtfFJ3f/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1NXvE0EHHEG_vMkHh4QNzafSZNJtfFJ3f/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1NXvE0EHHEG_vMkHh4QNzafSZNJtfFJ3f"
   },
   {
     "id": "ffm_161",
@@ -5882,7 +5910,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Langue/Espanol/enplus_l_spanish_2.pdf",
     "size": "72 كيلوبايت",
     "sizeReadable": "72 كيلوبايت",
-    "sizeBytes": 73940
+    "sizeBytes": 73940,
+    "driveFileId": "1gD_xgL28gE33cb-hffQMRizP8-ZAQZwz",
+    "driveFileUrl": "https://drive.google.com/file/d/1gD_xgL28gE33cb-hffQMRizP8-ZAQZwz/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1gD_xgL28gE33cb-hffQMRizP8-ZAQZwz/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1gD_xgL28gE33cb-hffQMRizP8-ZAQZwz"
   },
   {
     "id": "ffm_162",
@@ -5932,7 +5964,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Langue/Espanol/سلسة_السبيل_في_اللغة_الإسبانية_مواضيع_مقترحة_مع_الح.pdf",
     "size": "1.6 ميغابايت",
     "sizeReadable": "1.6 ميغابايت",
-    "sizeBytes": 1697250
+    "sizeBytes": 1697250,
+    "driveFileId": "1vm3nMqIkgkRO6DsZdYjoFKmPXYawxqRJ",
+    "driveFileUrl": "https://drive.google.com/file/d/1vm3nMqIkgkRO6DsZdYjoFKmPXYawxqRJ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1vm3nMqIkgkRO6DsZdYjoFKmPXYawxqRJ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1vm3nMqIkgkRO6DsZdYjoFKmPXYawxqRJ"
   },
   {
     "id": "ffm_164",
@@ -5957,7 +5993,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Langue/Espanol/كتاب_مقترحات_الاسبانية_ريمة_ادادحين_2021.pdf",
     "size": "3.8 ميغابايت",
     "sizeReadable": "3.8 ميغابايت",
-    "sizeBytes": 3995898
+    "sizeBytes": 3995898,
+    "driveFileId": "1s7p54wG9WI48Fvj8d89xalW7yOWwmUuf",
+    "driveFileUrl": "https://drive.google.com/file/d/1s7p54wG9WI48Fvj8d89xalW7yOWwmUuf/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1s7p54wG9WI48Fvj8d89xalW7yOWwmUuf/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1s7p54wG9WI48Fvj8d89xalW7yOWwmUuf"
   },
   {
     "id": "ffm_165",
@@ -5982,7 +6022,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Langue/Espanol/كل_ما_تحتاجه_في_اللغة_الإسبانية_3_ثانوي_من_دروس_و_تمارين.pdf",
     "size": "8.7 ميغابايت",
     "sizeReadable": "8.7 ميغابايت",
-    "sizeBytes": 9093028
+    "sizeBytes": 9093028,
+    "driveFileId": "1-ZCL-4ZdQs18voGQ4OTULN59JHgBtHjU",
+    "driveFileUrl": "https://drive.google.com/file/d/1-ZCL-4ZdQs18voGQ4OTULN59JHgBtHjU/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1-ZCL-4ZdQs18voGQ4OTULN59JHgBtHjU/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1-ZCL-4ZdQs18voGQ4OTULN59JHgBtHjU"
   },
   {
     "id": "ffm_166",
@@ -6007,7 +6051,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Langue/Espanol/ملخص شامل في اللغة الاسبانية.pdf",
     "size": "199 كيلوبايت",
     "sizeReadable": "199 كيلوبايت",
-    "sizeBytes": 204203
+    "sizeBytes": 204203,
+    "driveFileId": "1ygjvRQYCveRfQ3Ct1d1Zb3cy3wdPr_5x",
+    "driveFileUrl": "https://drive.google.com/file/d/1ygjvRQYCveRfQ3Ct1d1Zb3cy3wdPr_5x/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1ygjvRQYCveRfQ3Ct1d1Zb3cy3wdPr_5x/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1ygjvRQYCveRfQ3Ct1d1Zb3cy3wdPr_5x"
   },
   {
     "id": "ffm_167",
@@ -6057,7 +6105,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Langue/Italiene/Learn Italian the fast and fun way.pdf",
     "size": "16.1 ميغابايت",
     "sizeReadable": "16.1 ميغابايت",
-    "sizeBytes": 16912124
+    "sizeBytes": 16912124,
+    "driveFileId": "1dCbjq98fVfQxmPBw5DMLK_rk8Rv2n6Wq",
+    "driveFileUrl": "https://drive.google.com/file/d/1dCbjq98fVfQxmPBw5DMLK_rk8Rv2n6Wq/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1dCbjq98fVfQxmPBw5DMLK_rk8Rv2n6Wq/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1dCbjq98fVfQxmPBw5DMLK_rk8Rv2n6Wq"
   },
   {
     "id": "ffm_169",
@@ -6082,7 +6134,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Langue/Italiene/Sinonimi e Contrari Italiano - 3AS.pdf",
     "size": "2.0 ميغابايت",
     "sizeReadable": "2.0 ميغابايت",
-    "sizeBytes": 2148744
+    "sizeBytes": 2148744,
+    "driveFileId": "1eUkHl3yTUwfyqwtLniCugxC-9n8jRM1x",
+    "driveFileUrl": "https://drive.google.com/file/d/1eUkHl3yTUwfyqwtLniCugxC-9n8jRM1x/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1eUkHl3yTUwfyqwtLniCugxC-9n8jRM1x/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1eUkHl3yTUwfyqwtLniCugxC-9n8jRM1x"
   },
   {
     "id": "ffm_170",
@@ -6107,7 +6163,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Langue/Italiene/قواعد_اللغة_الإيطالية_إعداد_الأستاذة_سهام_إحميد.pdf",
     "size": "1.1 ميغابايت",
     "sizeReadable": "1.1 ميغابايت",
-    "sizeBytes": 1174653
+    "sizeBytes": 1174653,
+    "driveFileId": "15aB_293GzQCd2Rl27y2f3qd7wDGoJ_7M",
+    "driveFileUrl": "https://drive.google.com/file/d/15aB_293GzQCd2Rl27y2f3qd7wDGoJ_7M/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/15aB_293GzQCd2Rl27y2f3qd7wDGoJ_7M/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=15aB_293GzQCd2Rl27y2f3qd7wDGoJ_7M"
   },
   {
     "id": "ffm_171",
@@ -11237,6 +11297,64 @@ export const USER_STUDY_FILES = [
     "rawPath": "https://drive.google.com/file/d/1IDb9EjLmJymSjuQftpN2o0nh4LZJbmBv/preview",
     "size": "ملف سحابي PDF",
     "sizeReadable": "ملف سحابي PDF"
+  },
+  {
+    "id": "ffm_espagnol_1787772891857_3",
+    "title": "spanish3as rules.rar Compressed archive",
+    "rawFileName": "spanish3as_rules.rar Compressed archive",
+    "extension": "rar",
+    "subjectId": "espagnol",
+    "subjectAliases": [
+      "espagnol",
+      "espagnol",
+      "espagnol (الإسبانية)"
+    ],
+    "subjectName": "اللغة الإسبانية",
+    "streams": [
+      "langues"
+    ],
+    "streamIds": [
+      "langues"
+    ],
+    "category": "ملخصات ودروس",
+    "author": "أساتذة متميزون",
+    "fileUrl": "https://drive.google.com/file/d/1Ipmgv_gK8Y1sLOSQ66uOCms8iLtI83tH/preview",
+    "driveFileId": "1Ipmgv_gK8Y1sLOSQ66uOCms8iLtI83tH",
+    "driveFileUrl": "https://drive.google.com/file/d/1Ipmgv_gK8Y1sLOSQ66uOCms8iLtI83tH/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Ipmgv_gK8Y1sLOSQ66uOCms8iLtI83tH/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Ipmgv_gK8Y1sLOSQ66uOCms8iLtI83tH",
+    "rawPath": "https://drive.google.com/file/d/1Ipmgv_gK8Y1sLOSQ66uOCms8iLtI83tH/preview",
+    "size": "ملف سحابي",
+    "sizeReadable": "ملف سحابي"
+  },
+  {
+    "id": "ffm_espagnol_1787772891857_8",
+    "title": "ملخص قواعد اللغة الإسبانية 3 ثانوي.doc Microsoft",
+    "rawFileName": "ملخص_قواعد_اللغة_الإسبانية_3_ثانوي.doc Microsoft",
+    "extension": "doc",
+    "subjectId": "espagnol",
+    "subjectAliases": [
+      "espagnol",
+      "espagnol",
+      "espagnol (الإسبانية)"
+    ],
+    "subjectName": "اللغة الإسبانية",
+    "streams": [
+      "langues"
+    ],
+    "streamIds": [
+      "langues"
+    ],
+    "category": "ملخصات ودروس",
+    "author": "أساتذة متميزون",
+    "fileUrl": "https://drive.google.com/file/d/1z3g_vjs2jtydSnlBDLe_fi1U7mFNw08T/preview",
+    "driveFileId": "1z3g_vjs2jtydSnlBDLe_fi1U7mFNw08T",
+    "driveFileUrl": "https://drive.google.com/file/d/1z3g_vjs2jtydSnlBDLe_fi1U7mFNw08T/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1z3g_vjs2jtydSnlBDLe_fi1U7mFNw08T/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1z3g_vjs2jtydSnlBDLe_fi1U7mFNw08T",
+    "rawPath": "https://drive.google.com/file/d/1z3g_vjs2jtydSnlBDLe_fi1U7mFNw08T/preview",
+    "size": "ملف سحابي",
+    "sizeReadable": "ملف سحابي"
   }
 ];
 
