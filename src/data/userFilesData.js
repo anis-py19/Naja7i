@@ -1,7 +1,7 @@
 /**
  * 📚 Naja7i (نجاحي) — Comprehensive Public Files Catalog
  * Location: public/FileFromMe & Google Drive Cloud Repositories
- * Total Indexed Files: 325
+ * Total Indexed Files: 327
  * Verified Academic Titles, Categories, Stream Maps, Authors, and 100% Real Disk File Paths & Cloud Drive Links.
  */
 
@@ -4406,7 +4406,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/4_كل_دروس_مادة_العلوم_الشرعية_للسنة_الثالثة_ثانوي_من_الاستاذ_سايب.pdf",
     "size": "1.4 ميغابايت",
     "sizeReadable": "1.4 ميغابايت",
-    "sizeBytes": 1452590
+    "sizeBytes": 1452590,
+    "driveFileId": "1NmhPtYIuoc12ARw-BcPwLqtOtbBGQQDS",
+    "driveFileUrl": "https://drive.google.com/file/d/1NmhPtYIuoc12ARw-BcPwLqtOtbBGQQDS/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1NmhPtYIuoc12ARw-BcPwLqtOtbBGQQDS/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1NmhPtYIuoc12ARw-BcPwLqtOtbBGQQDS"
   },
   {
     "id": "ffm_122",
@@ -4442,7 +4446,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/Partager 4_5816611893292306242.pdf",
     "size": "70 كيلوبايت",
     "sizeReadable": "70 كيلوبايت",
-    "sizeBytes": 71871
+    "sizeBytes": 71871,
+    "driveFileId": "1Bammdasz3NzDlxKPu0SMAGpMaXjGVd2Q",
+    "driveFileUrl": "https://drive.google.com/file/d/1Bammdasz3NzDlxKPu0SMAGpMaXjGVd2Q/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Bammdasz3NzDlxKPu0SMAGpMaXjGVd2Q/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Bammdasz3NzDlxKPu0SMAGpMaXjGVd2Q"
   },
   {
     "id": "ffm_123",
@@ -4478,7 +4486,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/Partager 4_مقاصد.pdf",
     "size": "69 كيلوبايت",
     "sizeReadable": "69 كيلوبايت",
-    "sizeBytes": 70603
+    "sizeBytes": 70603,
+    "driveFileId": "1EfIV1UNpTHpqkcltNVIh3DvJidCPn9SL",
+    "driveFileUrl": "https://drive.google.com/file/d/1EfIV1UNpTHpqkcltNVIh3DvJidCPn9SL/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1EfIV1UNpTHpqkcltNVIh3DvJidCPn9SL/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1EfIV1UNpTHpqkcltNVIh3DvJidCPn9SL"
   },
   {
     "id": "ffm_124",
@@ -4514,7 +4526,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/Partager الحرية الشخصية.pdf",
     "size": "58 كيلوبايت",
     "sizeReadable": "58 كيلوبايت",
-    "sizeBytes": 59819
+    "sizeBytes": 59819,
+    "driveFileId": "1S_YjVq1KhE8KAr-FuGC76-D6131VbYY6",
+    "driveFileUrl": "https://drive.google.com/file/d/1S_YjVq1KhE8KAr-FuGC76-D6131VbYY6/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1S_YjVq1KhE8KAr-FuGC76-D6131VbYY6/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1S_YjVq1KhE8KAr-FuGC76-D6131VbYY6"
   },
   {
     "id": "ffm_125",
@@ -4550,7 +4566,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/Partager الربا وأحكامه.pdf",
     "size": "90 كيلوبايت",
     "sizeReadable": "90 كيلوبايت",
-    "sizeBytes": 92501
+    "sizeBytes": 92501,
+    "driveFileId": "1rR3QGLi-3M796m1KnLlniD-1H9bsaLcU",
+    "driveFileUrl": "https://drive.google.com/file/d/1rR3QGLi-3M796m1KnLlniD-1H9bsaLcU/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1rR3QGLi-3M796m1KnLlniD-1H9bsaLcU/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1rR3QGLi-3M796m1KnLlniD-1H9bsaLcU"
   },
   {
     "id": "ffm_126",
@@ -4586,7 +4606,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/Partager العقل في القرآن الكريم.pdf",
     "size": "50 كيلوبايت",
     "sizeReadable": "50 كيلوبايت",
-    "sizeBytes": 51520
+    "sizeBytes": 51520,
+    "driveFileId": "1LVeBSG9A9CqVxUgtm2elNThrmgJlsgfv",
+    "driveFileUrl": "https://drive.google.com/file/d/1LVeBSG9A9CqVxUgtm2elNThrmgJlsgfv/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1LVeBSG9A9CqVxUgtm2elNThrmgJlsgfv/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1LVeBSG9A9CqVxUgtm2elNThrmgJlsgfv"
   },
   {
     "id": "ffm_127",
@@ -4622,7 +4646,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/Partager العقيدة_الإسلامية_وأثرها_على_الفرد_والمجتمع.pdf",
     "size": "81 كيلوبايت",
     "sizeReadable": "81 كيلوبايت",
-    "sizeBytes": 82558
+    "sizeBytes": 82558,
+    "driveFileId": "1FchVN6mzY8RqBog2TnRriC2vTyhnI-WJ",
+    "driveFileUrl": "https://drive.google.com/file/d/1FchVN6mzY8RqBog2TnRriC2vTyhnI-WJ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1FchVN6mzY8RqBog2TnRriC2vTyhnI-WJ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1FchVN6mzY8RqBog2TnRriC2vTyhnI-WJ"
   },
   {
     "id": "ffm_128",
@@ -4658,7 +4686,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/Partager العلاقات_الاجتماعية_بين_المسلمين_وغيرهم.pdf",
     "size": "43 كيلوبايت",
     "sizeReadable": "43 كيلوبايت",
-    "sizeBytes": 44348
+    "sizeBytes": 44348,
+    "driveFileId": "1pPRN8qP2wHE3aC9XFsvoINv7u1n_21P7",
+    "driveFileUrl": "https://drive.google.com/file/d/1pPRN8qP2wHE3aC9XFsvoINv7u1n_21P7/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1pPRN8qP2wHE3aC9XFsvoINv7u1n_21P7/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1pPRN8qP2wHE3aC9XFsvoINv7u1n_21P7"
   },
   {
     "id": "ffm_129",
@@ -4694,7 +4726,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/Partager الوحدة_لإسلام_والرسالات_السماوية_السابقة.pdf",
     "size": "151 كيلوبايت",
     "sizeReadable": "151 كيلوبايت",
-    "sizeBytes": 154675
+    "sizeBytes": 154675,
+    "driveFileId": "1xBuudjbzKOunnWxxQHL7FT2iaCz5ygaM",
+    "driveFileUrl": "https://drive.google.com/file/d/1xBuudjbzKOunnWxxQHL7FT2iaCz5ygaM/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1xBuudjbzKOunnWxxQHL7FT2iaCz5ygaM/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1xBuudjbzKOunnWxxQHL7FT2iaCz5ygaM"
   },
   {
     "id": "ffm_130",
@@ -4730,7 +4766,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/Partager خطبة_الرسول_صلى_الله_عليه_وسلم_في_حجة_الوداع.pdf",
     "size": "41 كيلوبايت",
     "sizeReadable": "41 كيلوبايت",
-    "sizeBytes": 41820
+    "sizeBytes": 41820,
+    "driveFileId": "1-dCjrAOouTvc1oOpkesxE95zZIWW73DA",
+    "driveFileUrl": "https://drive.google.com/file/d/1-dCjrAOouTvc1oOpkesxE95zZIWW73DA/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1-dCjrAOouTvc1oOpkesxE95zZIWW73DA/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1-dCjrAOouTvc1oOpkesxE95zZIWW73DA"
   },
   {
     "id": "ffm_131",
@@ -4766,7 +4806,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/Partager مشروعية-الوقف.pdf",
     "size": "81 كيلوبايت",
     "sizeReadable": "81 كيلوبايت",
-    "sizeBytes": 82972
+    "sizeBytes": 82972,
+    "driveFileId": "1OPpqzQOSliWuWhnSSZ-xFUwsuPmxCUiV",
+    "driveFileUrl": "https://drive.google.com/file/d/1OPpqzQOSliWuWhnSSZ-xFUwsuPmxCUiV/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1OPpqzQOSliWuWhnSSZ-xFUwsuPmxCUiV/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1OPpqzQOSliWuWhnSSZ-xFUwsuPmxCUiV"
   },
   {
     "id": "ffm_132",
@@ -4802,7 +4846,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/Partager من-أحكام-الأسرة-في-الإسلام-مدخل-إلى-علم-الميراث.pdf",
     "size": "100 كيلوبايت",
     "sizeReadable": "100 كيلوبايت",
-    "sizeBytes": 102302
+    "sizeBytes": 102302,
+    "driveFileId": "1bTh0hlIGrpeKsKIyBM3KN8WUiu3YQHWY",
+    "driveFileUrl": "https://drive.google.com/file/d/1bTh0hlIGrpeKsKIyBM3KN8WUiu3YQHWY/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1bTh0hlIGrpeKsKIyBM3KN8WUiu3YQHWY/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1bTh0hlIGrpeKsKIyBM3KN8WUiu3YQHWY"
   },
   {
     "id": "ffm_133",
@@ -4838,7 +4886,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/Partager من_أحكام_الأسرة_النسب،_الكفالة،_التبني.pdf",
     "size": "44 كيلوبايت",
     "sizeReadable": "44 كيلوبايت",
-    "sizeBytes": 45089
+    "sizeBytes": 45089,
+    "driveFileId": "1Cjbs0fRix_teykPFzLKCGuI8LMqrmSBj",
+    "driveFileUrl": "https://drive.google.com/file/d/1Cjbs0fRix_teykPFzLKCGuI8LMqrmSBj/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Cjbs0fRix_teykPFzLKCGuI8LMqrmSBj/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Cjbs0fRix_teykPFzLKCGuI8LMqrmSBj"
   },
   {
     "id": "ffm_134",
@@ -4874,7 +4926,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/Partager من_المعاملات_المالية_الجائزة_الصرف،_المرابحة،_بيع_التقسيط.pdf",
     "size": "79 كيلوبايت",
     "sizeReadable": "79 كيلوبايت",
-    "sizeBytes": 81252
+    "sizeBytes": 81252,
+    "driveFileId": "1iXnPpDd982XCowx7p89dUUGUlqASYuLM",
+    "driveFileUrl": "https://drive.google.com/file/d/1iXnPpDd982XCowx7p89dUUGUlqASYuLM/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1iXnPpDd982XCowx7p89dUUGUlqASYuLM/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1iXnPpDd982XCowx7p89dUUGUlqASYuLM"
   },
   {
     "id": "ffm_135",
@@ -4910,7 +4966,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/الخلاصة في العلوم الإسلامية، أ. موسلي .pdf",
     "size": "4.1 ميغابايت",
     "sizeReadable": "4.1 ميغابايت",
-    "sizeBytes": 4304557
+    "sizeBytes": 4304557,
+    "driveFileId": "1yX8GZa5nckgnxn-RU1Qr4Fi4MvY395xQ",
+    "driveFileUrl": "https://drive.google.com/file/d/1yX8GZa5nckgnxn-RU1Qr4Fi4MvY395xQ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1yX8GZa5nckgnxn-RU1Qr4Fi4MvY395xQ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1yX8GZa5nckgnxn-RU1Qr4Fi4MvY395xQ"
   },
   {
     "id": "ffm_136",
@@ -4946,7 +5006,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/العلوم_الإسلامية_أسئلة_و_حلول_البكالوريات_حسب_الوحدات_2021.pdf",
     "size": "9.7 ميغابايت",
     "sizeReadable": "9.7 ميغابايت",
-    "sizeBytes": 10161207
+    "sizeBytes": 10161207,
+    "driveFileId": "1cEJDYfhRqnUsjSnOuQuEI48STnyNDYMG",
+    "driveFileUrl": "https://drive.google.com/file/d/1cEJDYfhRqnUsjSnOuQuEI48STnyNDYMG/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1cEJDYfhRqnUsjSnOuQuEI48STnyNDYMG/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1cEJDYfhRqnUsjSnOuQuEI48STnyNDYMG"
   },
   {
     "id": "ffm_137",
@@ -4982,7 +5046,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/القيم .pdf",
     "size": "58 كيلوبايت",
     "sizeReadable": "58 كيلوبايت",
-    "sizeBytes": 59858
+    "sizeBytes": 59858,
+    "driveFileId": "1_WukTW3utPjkDgdi_1BC_LZNUi4WJNyD",
+    "driveFileUrl": "https://drive.google.com/file/d/1_WukTW3utPjkDgdi_1BC_LZNUi4WJNyD/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1_WukTW3utPjkDgdi_1BC_LZNUi4WJNyD/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1_WukTW3utPjkDgdi_1BC_LZNUi4WJNyD"
   },
   {
     "id": "ffm_138",
@@ -5018,7 +5086,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/المساواة.pdf",
     "size": "136 كيلوبايت",
     "sizeReadable": "136 كيلوبايت",
-    "sizeBytes": 138965
+    "sizeBytes": 138965,
+    "driveFileId": "1XjhN2H--QJAIUUjGFW63AiTDdtypAnTe",
+    "driveFileUrl": "https://drive.google.com/file/d/1XjhN2H--QJAIUUjGFW63AiTDdtypAnTe/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1XjhN2H--QJAIUUjGFW63AiTDdtypAnTe/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1XjhN2H--QJAIUUjGFW63AiTDdtypAnTe"
   },
   {
     "id": "ffm_139",
@@ -5054,7 +5126,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/باقة_8_مواضيع_تدريبية_+الحل_علوم_إسلامية_نحو_اختبار_الفصل_1_جميع.pdf",
     "size": "5.4 ميغابايت",
     "sizeReadable": "5.4 ميغابايت",
-    "sizeBytes": 5637491
+    "sizeBytes": 5637491,
+    "driveFileId": "1NVl0ItJqfzXuNPD0NZ637gm5GgGXy-sn",
+    "driveFileUrl": "https://drive.google.com/file/d/1NVl0ItJqfzXuNPD0NZ637gm5GgGXy-sn/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1NVl0ItJqfzXuNPD0NZ637gm5GgGXy-sn/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1NVl0ItJqfzXuNPD0NZ637gm5GgGXy-sn"
   },
   {
     "id": "ffm_140",
@@ -5090,7 +5166,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/بوقفطان -شريعة 2021.pdf",
     "size": "1.6 ميغابايت",
     "sizeReadable": "1.6 ميغابايت",
-    "sizeBytes": 1637059
+    "sizeBytes": 1637059,
+    "driveFileId": "1OsVoPL3zutk86Ojy-cSIhNeUpmgz_7gJ",
+    "driveFileUrl": "https://drive.google.com/file/d/1OsVoPL3zutk86Ojy-cSIhNeUpmgz_7gJ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1OsVoPL3zutk86Ojy-cSIhNeUpmgz_7gJ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1OsVoPL3zutk86Ojy-cSIhNeUpmgz_7gJ"
   },
   {
     "id": "ffm_141",
@@ -5162,7 +5242,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/كتاب_السلسلة_الارجوانية_في_الشريعة_طبعة_2023.pdf",
     "size": "3.3 ميغابايت",
     "sizeReadable": "3.3 ميغابايت",
-    "sizeBytes": 3475924
+    "sizeBytes": 3475924,
+    "driveFileId": "1Gow6IonxQ4r__uzZyNd_8E8nm6g7c-tJ",
+    "driveFileUrl": "https://drive.google.com/file/d/1Gow6IonxQ4r__uzZyNd_8E8nm6g7c-tJ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Gow6IonxQ4r__uzZyNd_8E8nm6g7c-tJ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Gow6IonxQ4r__uzZyNd_8E8nm6g7c-tJ"
   },
   {
     "id": "ffm_143",
@@ -5198,7 +5282,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/كتاب_السلسلة_الخضراء_في_الشريعة_طبعة_2021.pdf",
     "size": "54.8 ميغابايت",
     "sizeReadable": "54.8 ميغابايت",
-    "sizeBytes": 57499348
+    "sizeBytes": 57499348,
+    "driveFileId": "1Qe240erW5SNCz-bp3Jvm5I0ZjORpbgYt",
+    "driveFileUrl": "https://drive.google.com/file/d/1Qe240erW5SNCz-bp3Jvm5I0ZjORpbgYt/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Qe240erW5SNCz-bp3Jvm5I0ZjORpbgYt/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Qe240erW5SNCz-bp3Jvm5I0ZjORpbgYt"
   },
   {
     "id": "ffm_144",
@@ -5234,7 +5322,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/كتاب_المراجعة_الشاملة_في_الشريعة_شمس_الدين_2021_pdf.pdf",
     "size": "17.3 ميغابايت",
     "sizeReadable": "17.3 ميغابايت",
-    "sizeBytes": 18121360
+    "sizeBytes": 18121360,
+    "driveFileId": "1p52KiGH9RDIV8OLAUXogypO-UivUtmeJ",
+    "driveFileUrl": "https://drive.google.com/file/d/1p52KiGH9RDIV8OLAUXogypO-UivUtmeJ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1p52KiGH9RDIV8OLAUXogypO-UivUtmeJ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1p52KiGH9RDIV8OLAUXogypO-UivUtmeJ"
   },
   {
     "id": "ffm_145",
@@ -5270,7 +5362,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/كتاب_النوابغ_في_الشريعة_للاستاذ_سعدون_شعيب_طبعة_2022.pdf",
     "size": "4.1 ميغابايت",
     "sizeReadable": "4.1 ميغابايت",
-    "sizeBytes": 4322410
+    "sizeBytes": 4322410,
+    "driveFileId": "1eBR_aesYR9wTQnS7lHWZ3YKj0mq8R1q6",
+    "driveFileUrl": "https://drive.google.com/file/d/1eBR_aesYR9wTQnS7lHWZ3YKj0mq8R1q6/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1eBR_aesYR9wTQnS7lHWZ3YKj0mq8R1q6/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1eBR_aesYR9wTQnS7lHWZ3YKj0mq8R1q6"
   },
   {
     "id": "ffm_146",
@@ -5306,7 +5402,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/كتاب_مقترحات_الشريعة_للاستاذ_حماش_شمس_الدين_طبعة_2021.pdf",
     "size": "3.1 ميغابايت",
     "sizeReadable": "3.1 ميغابايت",
-    "sizeBytes": 3287165
+    "sizeBytes": 3287165,
+    "driveFileId": "1RtbsTmy7Ie1PnQCczU500k7Ge-xAQaWK",
+    "driveFileUrl": "https://drive.google.com/file/d/1RtbsTmy7Ie1PnQCczU500k7Ge-xAQaWK/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1RtbsTmy7Ie1PnQCczU500k7Ge-xAQaWK/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1RtbsTmy7Ie1PnQCczU500k7Ge-xAQaWK"
   },
   {
     "id": "ffm_147",
@@ -5342,7 +5442,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/مصادر التشريع.pdf",
     "size": "85 كيلوبايت",
     "sizeReadable": "85 كيلوبايت",
-    "sizeBytes": 87322
+    "sizeBytes": 87322,
+    "driveFileId": "1PCmkTg3d3kSRmxk4L9blInYYEVR9Jnxo",
+    "driveFileUrl": "https://drive.google.com/file/d/1PCmkTg3d3kSRmxk4L9blInYYEVR9Jnxo/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1PCmkTg3d3kSRmxk4L9blInYYEVR9Jnxo/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1PCmkTg3d3kSRmxk4L9blInYYEVR9Jnxo"
   },
   {
     "id": "ffm_148",
@@ -5378,7 +5482,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/ملخص الشريعة (2).pdf",
     "size": "600 كيلوبايت",
     "sizeReadable": "600 كيلوبايت",
-    "sizeBytes": 614596
+    "sizeBytes": 614596,
+    "driveFileId": "1CbQKOw-Eubflob85bQfpLUdMXK-MVG6Z",
+    "driveFileUrl": "https://drive.google.com/file/d/1CbQKOw-Eubflob85bQfpLUdMXK-MVG6Z/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1CbQKOw-Eubflob85bQfpLUdMXK-MVG6Z/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1CbQKOw-Eubflob85bQfpLUdMXK-MVG6Z"
   },
   {
     "id": "ffm_149",
@@ -5450,7 +5558,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/ملخص_العلوم_الإسلامية_أستاذ_شمس_الدين_جميع_الشعب_mokhfi_chouaib2.pdf",
     "size": "12.4 ميغابايت",
     "sizeReadable": "12.4 ميغابايت",
-    "sizeBytes": 13054736
+    "sizeBytes": 13054736,
+    "driveFileId": "1Y7SnxD_4PNhkE1zVAEjDlc4PRVcZn3Sm",
+    "driveFileUrl": "https://drive.google.com/file/d/1Y7SnxD_4PNhkE1zVAEjDlc4PRVcZn3Sm/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Y7SnxD_4PNhkE1zVAEjDlc4PRVcZn3Sm/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Y7SnxD_4PNhkE1zVAEjDlc4PRVcZn3Sm"
   },
   {
     "id": "ffm_151",
@@ -5486,7 +5598,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/ملخص_في_الشريعة_الإسلامية_للاستاذ_محمد_بوقفطان_2022.pdf",
     "size": "2.1 ميغابايت",
     "sizeReadable": "2.1 ميغابايت",
-    "sizeBytes": 2228819
+    "sizeBytes": 2228819,
+    "driveFileId": "1U3C9xuE1XRloK0Iy2rLoE7KaMby-uZTO",
+    "driveFileUrl": "https://drive.google.com/file/d/1U3C9xuE1XRloK0Iy2rLoE7KaMby-uZTO/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1U3C9xuE1XRloK0Iy2rLoE7KaMby-uZTO/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1U3C9xuE1XRloK0Iy2rLoE7KaMby-uZTO"
   },
   {
     "id": "ffm_152",
@@ -5522,7 +5638,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/منهج الإسلام.pdf",
     "size": "76 كيلوبايت",
     "sizeReadable": "76 كيلوبايت",
-    "sizeBytes": 78261
+    "sizeBytes": 78261,
+    "driveFileId": "19LIfb5I4-mVwlbvdd4_Zv1QedCaHC_S6",
+    "driveFileUrl": "https://drive.google.com/file/d/19LIfb5I4-mVwlbvdd4_Zv1QedCaHC_S6/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/19LIfb5I4-mVwlbvdd4_Zv1QedCaHC_S6/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=19LIfb5I4-mVwlbvdd4_Zv1QedCaHC_S6"
   },
   {
     "id": "ffm_153",
@@ -5558,7 +5678,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Islamiya/مواضيع_تدريبية_+الحل_نحو_اختبار_الفصل_1_علوم_إسلامية_جميع_الشعب.pdf",
     "size": "3.2 ميغابايت",
     "sizeReadable": "3.2 ميغابايت",
-    "sizeBytes": 3381152
+    "sizeBytes": 3381152,
+    "driveFileId": "1ZvN0wBvLMZiQKyflcPd1wZeB4JR3DYq7",
+    "driveFileUrl": "https://drive.google.com/file/d/1ZvN0wBvLMZiQKyflcPd1wZeB4JR3DYq7/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1ZvN0wBvLMZiQKyflcPd1wZeB4JR3DYq7/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1ZvN0wBvLMZiQKyflcPd1wZeB4JR3DYq7"
   },
   {
     "id": "ffm_154",
@@ -11029,6 +11153,88 @@ export const USER_STUDY_FILES = [
     "drivePreviewUrl": "https://drive.google.com/file/d/1-qdVIhoM827Xd2fpUpb_QhpRZk10R-Cz/preview",
     "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1-qdVIhoM827Xd2fpUpb_QhpRZk10R-Cz",
     "rawPath": "https://drive.google.com/file/d/1-qdVIhoM827Xd2fpUpb_QhpRZk10R-Cz/preview",
+    "size": "ملف سحابي PDF",
+    "sizeReadable": "ملف سحابي PDF"
+  },
+  {
+    "id": "ffm_isl_1787772798708_21",
+    "title": "كتاب الأستاذة بو��عادي الإصدار الثالث الطبعة الجديدة 2",
+    "rawFileName": "كتاب_الأستاذة_بو��عادي_الإصدار_الثالث_الطبعة_الجديدة_2.pdf",
+    "extension": "pdf",
+    "subjectId": "islamic_studies",
+    "subjectAliases": [
+      "islamic_studies",
+      "islamiya",
+      "sharia",
+      "charia",
+      "tarbiya_islamiya"
+    ],
+    "subjectName": "العلوم الإسلامية",
+    "streams": [
+      "sciences",
+      "math",
+      "technique_math",
+      "gestion",
+      "lettres_philo",
+      "langues"
+    ],
+    "streamIds": [
+      "sciences",
+      "math",
+      "technique_math",
+      "gestion",
+      "lettres_philo",
+      "langues"
+    ],
+    "category": "كتب ومذكرات شاملة",
+    "author": "أساتذة متميزون",
+    "fileUrl": "https://drive.google.com/file/d/1XvlEoJP0g85rbdZ23Z_Ne4v0p1nDBwL8/preview",
+    "driveFileId": "1XvlEoJP0g85rbdZ23Z_Ne4v0p1nDBwL8",
+    "driveFileUrl": "https://drive.google.com/file/d/1XvlEoJP0g85rbdZ23Z_Ne4v0p1nDBwL8/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1XvlEoJP0g85rbdZ23Z_Ne4v0p1nDBwL8/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1XvlEoJP0g85rbdZ23Z_Ne4v0p1nDBwL8",
+    "rawPath": "https://drive.google.com/file/d/1XvlEoJP0g85rbdZ23Z_Ne4v0p1nDBwL8/preview",
+    "size": "ملف سحابي PDF",
+    "sizeReadable": "ملف سحابي PDF"
+  },
+  {
+    "id": "ffm_isl_1787772798708_28",
+    "title": "ملخص الشريعة (1)",
+    "rawFileName": "ملخص الشريعة (1).pdf",
+    "extension": "pdf",
+    "subjectId": "islamic_studies",
+    "subjectAliases": [
+      "islamic_studies",
+      "islamiya",
+      "sharia",
+      "charia",
+      "tarbiya_islamiya"
+    ],
+    "subjectName": "العلوم الإسلامية",
+    "streams": [
+      "sciences",
+      "math",
+      "technique_math",
+      "gestion",
+      "lettres_philo",
+      "langues"
+    ],
+    "streamIds": [
+      "sciences",
+      "math",
+      "technique_math",
+      "gestion",
+      "lettres_philo",
+      "langues"
+    ],
+    "category": "ملخصات ودروس",
+    "author": "أساتذة متميزون",
+    "fileUrl": "https://drive.google.com/file/d/1IDb9EjLmJymSjuQftpN2o0nh4LZJbmBv/preview",
+    "driveFileId": "1IDb9EjLmJymSjuQftpN2o0nh4LZJbmBv",
+    "driveFileUrl": "https://drive.google.com/file/d/1IDb9EjLmJymSjuQftpN2o0nh4LZJbmBv/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1IDb9EjLmJymSjuQftpN2o0nh4LZJbmBv/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1IDb9EjLmJymSjuQftpN2o0nh4LZJbmBv",
+    "rawPath": "https://drive.google.com/file/d/1IDb9EjLmJymSjuQftpN2o0nh4LZJbmBv/preview",
     "size": "ملف سحابي PDF",
     "sizeReadable": "ملف سحابي PDF"
   }
