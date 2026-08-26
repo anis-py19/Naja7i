@@ -60,16 +60,28 @@ export default function AboutPage() {
 
         {/* Founder Story Highlight Box */}
         <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-10 shadow-xs relative overflow-hidden space-y-6">
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
-            <div className="w-16 h-16 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] text-[#E11D48] flex items-center justify-center text-3xl shrink-0 shadow-2xs">
-              👨‍🎓
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+            <div className="relative shrink-0 group">
+              <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-[#E11D48] shadow-md bg-slate-100 p-0.5">
+                <img
+                  src="/anis_izri.jpg"
+                  alt="أنيس ازري — Anis Izri"
+                  className="w-full h-full object-cover object-top rounded-[14px] group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <span className="absolute -bottom-2 -right-2 px-2.5 py-0.5 rounded-full bg-[#0F172A] text-white text-[10px] font-bold border border-white shadow-xs">
+                مؤسس نجاحي 🇩🇿
+              </span>
             </div>
 
-            <div className="space-y-2 text-center sm:text-right">
-              <span className="px-2.5 py-0.5 rounded-full bg-[#F1F5F9] text-[#E11D48] text-[11px] font-bold border border-[#E2E8F0]">
-                المؤسس والمطور
-              </span>
-              <h2 className="text-lg sm:text-xl font-bold text-[#0F172A]">
+            <div className="space-y-2 text-center sm:text-right flex-1">
+              <div className="flex items-center justify-center sm:justify-start gap-2">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#F1F5F9] text-[#E11D48] text-[11px] font-bold border border-[#E2E8F0]">
+                  المؤسس والمطور
+                </span>
+                <span className="text-xs text-[#64748B]">طالب جامعي ومطور المنصة</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-black text-[#0F172A]">
                 أنيس ازري (Anis Izri) — طالب في إدارة الأعمال
               </h2>
               <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
