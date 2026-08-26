@@ -10,14 +10,12 @@ export default function FounderStorySection() {
         <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6">
           
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-right">
-            <div className="relative shrink-0">
-              <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-[#E11D48] shadow-xs bg-slate-100 p-0.5">
-                <img 
-                  src="/anis_izri.jpg" 
-                  alt="أنيس ازري — Anis Izri" 
-                  className="w-full h-full object-cover object-top rounded-[14px]"
-                />
-              </div>
+            <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl overflow-hidden border-2 border-[#E11D48] shadow-md shrink-0 bg-slate-100">
+              <img 
+                src="/anis-izri.jpg" 
+                alt="أنيس ازري — Anis Izri" 
+                className="w-full h-full object-cover object-center"
+              />
             </div>
 
             <div className="space-y-1 max-w-2xl">
