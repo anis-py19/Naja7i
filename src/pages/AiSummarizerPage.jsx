@@ -19,7 +19,6 @@ import {
   HiTrash,
   HiExternalLink
 } from 'react-icons/hi';
-import { STREAMS } from '../data/streamsData';
 import { 
   extractTextFromPdf, 
   fileToBase64, 
@@ -31,8 +30,6 @@ export default function AiSummarizerPage() {
   const [inputTab, setInputTab] = useState('file'); // 'file' | 'text'
   const [selectedFile, setSelectedFile] = useState(null);
   const [rawText, setRawText] = useState('');
-  const [selectedStreamId, setSelectedStreamId] = useState('sciences');
-  const [subjectName, setSubjectName] = useState('علوم الطبيعة والحياة');
   const [summaryMode, setSummaryMode] = useState('comprehensive'); // 'comprehensive' | 'high_yield' | 'questions' | 'mindmap'
   
   // API Key State
@@ -62,8 +59,6 @@ export default function AiSummarizerPage() {
       return [];
     }
   });
-
-  const selectedStream = STREAMS.find(s => s.id === selectedStreamId) || STREAMS[0];
 
   const handleSaveApiKey = () => {
     const trimmed = tempKey.trim();
@@ -142,8 +137,6 @@ export default function AiSummarizerPage() {
       if (apiKey && apiKey.trim()) {
         finalSummary = await generateAiSummary({
           apiKey,
-          streamName: selectedStream.name,
-          subjectName,
           mode: summaryMode,
           rawText: extractedContentText,
           inlineFile
@@ -152,9 +145,7 @@ export default function AiSummarizerPage() {
         // Fallback: If no API Key, use local heuristic summarizer
         if (extractedContentText) {
           finalSummary = generateLocalHeuristicSummary({
-            text: extractedContentText,
-            subjectName,
-            streamName: selectedStream.name
+            text: extractedContentText
           });
         } else {
           throw new Error('يرجى إدخال مفتاح Google Gemini المجاني لمعالجة الملفات المصورة عبر الذكاء الاصطناعي.');
@@ -168,9 +159,7 @@ export default function AiSummarizerPage() {
       const newEntry = {
         id: 'sum_' + Date.now(),
         date: new Date().toLocaleDateString('ar-DZ', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        title: selectedFile ? selectedFile.name : `نص درس ${subjectName}`,
-        subjectName,
-        streamName: selectedStream.name,
+        title: selectedFile ? selectedFile.name : 'نص دراسي ملخص',
         mode: summaryMode,
         content: finalSummary
       };
@@ -208,7 +197,7 @@ export default function AiSummarizerPage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `ملخص_${subjectName.replace(/\s+/g, '_')}_نجاحي.md`;
+    a.download = `ملخص_الدرس_نجاحي_AI.md`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -421,41 +410,10 @@ export default function AiSummarizerPage() {
               </div>
             )}
 
-            {/* Stream and Subject Options */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-[#E2E8F0]">
-              <div>
-                <label className="block text-[11px] font-bold text-[#64748B] mb-1">
-                  الشعبة الدراسية:
-                </label>
-                <select
-                  value={selectedStreamId}
-                  onChange={(e) => setSelectedStreamId(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg px-2.5 py-1.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#E11D48] cursor-pointer"
-                >
-                  {STREAMS.map(s => (
-                    <option key={s.id} value={s.id}>{s.name}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-[11px] font-bold text-[#64748B] mb-1">
-                  المادة التعليمية:
-                </label>
-                <input
-                  type="text"
-                  placeholder="اسم المادة (علوم، فيزياء، فلسفة...)"
-                  value={subjectName}
-                  onChange={(e) => setSubjectName(e.target.value)}
-                  className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg px-2.5 py-1.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#E11D48]"
-                />
-              </div>
-            </div>
-
             {/* Summary Mode Selector */}
             <div className="space-y-1.5 pt-2 border-t border-[#E2E8F0]">
               <label className="block text-[11px] font-bold text-[#64748B]">
-                نمط التلخيص المفضل:
+                اختر نمط التلخيص المطلوب:
               </label>
 
               <div className="grid grid-cols-2 gap-1.5">
@@ -597,7 +555,7 @@ export default function AiSummarizerPage() {
                       الملخص المنهجي المنظم
                     </h3>
                     <span className="text-[11px] text-[#64748B]">
-                      {subjectName} • {selectedStream.name}
+                      تم التوليد والتعرف التلقائي على المادة والشعبة بواسطة الذكاء الاصطناعي 🤖
                     </span>
                   </div>
                 </div>
