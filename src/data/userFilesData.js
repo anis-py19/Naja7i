@@ -2681,7 +2681,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Pocede/تمارين_مجال_الكمياء_العضوية_في_البكالوريا_جمع_الأستاذ_لبتر_بوعلام.pdf",
     "size": "1.5 ميغابايت",
     "sizeReadable": "1.5 ميغابايت",
-    "sizeBytes": 1610659
+    "sizeBytes": 1610659,
+    "driveFileId": "1NKB6tdbX0Jl71XzHQoj6YXBTPZlAwiWC",
+    "driveFileUrl": "https://drive.google.com/file/d/1NKB6tdbX0Jl71XzHQoj6YXBTPZlAwiWC/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1NKB6tdbX0Jl71XzHQoj6YXBTPZlAwiWC/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1NKB6tdbX0Jl71XzHQoj6YXBTPZlAwiWC"
   },
   {
     "id": "ffm_77",
@@ -2707,7 +2711,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Pocede/حلول_تمارين_الكتاب_المدرسي_مجالي_الكيمياء_العضوية_والكيمياء_الحيوية.pdf",
     "size": "8.4 ميغابايت",
     "sizeReadable": "8.4 ميغابايت",
-    "sizeBytes": 8765561
+    "sizeBytes": 8765561,
+    "driveFileId": "1WKxMSUBCwTc0yHmGh20ny-87ycN1T-Y1",
+    "driveFileUrl": "https://drive.google.com/file/d/1WKxMSUBCwTc0yHmGh20ny-87ycN1T-Y1/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1WKxMSUBCwTc0yHmGh20ny-87ycN1T-Y1/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1WKxMSUBCwTc0yHmGh20ny-87ycN1T-Y1"
   },
   {
     "id": "ffm_78",
@@ -2733,7 +2741,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Pocede/ملخص الحركية.pdf",
     "size": "211 كيلوبايت",
     "sizeReadable": "211 كيلوبايت",
-    "sizeBytes": 216516
+    "sizeBytes": 216516,
+    "driveFileId": "1gssLJYYkTTa7Ci6dzNSx58y_8BNWuI2m",
+    "driveFileUrl": "https://drive.google.com/file/d/1gssLJYYkTTa7Ci6dzNSx58y_8BNWuI2m/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1gssLJYYkTTa7Ci6dzNSx58y_8BNWuI2m/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1gssLJYYkTTa7Ci6dzNSx58y_8BNWuI2m"
   },
   {
     "id": "ffm_79",
@@ -2759,7 +2771,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Pocede/ملخص الكيمياء الحرارية.pdf",
     "size": "1.1 ميغابايت",
     "sizeReadable": "1.1 ميغابايت",
-    "sizeBytes": 1178548
+    "sizeBytes": 1178548,
+    "driveFileId": "1mZay4ZPdV17hbEthNQLh8293yEP7_p8J",
+    "driveFileUrl": "https://drive.google.com/file/d/1mZay4ZPdV17hbEthNQLh8293yEP7_p8J/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1mZay4ZPdV17hbEthNQLh8293yEP7_p8J/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1mZay4ZPdV17hbEthNQLh8293yEP7_p8J"
   },
   {
     "id": "ffm_80",
@@ -2785,7 +2801,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Pocede/ملخص اللبيدات.pdf",
     "size": "864 كيلوبايت",
     "sizeReadable": "864 كيلوبايت",
-    "sizeBytes": 884982
+    "sizeBytes": 884982,
+    "driveFileId": "1hbbU168BXajrB-PerpZ58GwQWWaRPmAB",
+    "driveFileUrl": "https://drive.google.com/file/d/1hbbU168BXajrB-PerpZ58GwQWWaRPmAB/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1hbbU168BXajrB-PerpZ58GwQWWaRPmAB/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1hbbU168BXajrB-PerpZ58GwQWWaRPmAB"
   },
   {
     "id": "ffm_81",
@@ -2811,7 +2831,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Pocede/ملخص كيمياء عضوية.pdf",
     "size": "1.8 ميغابايت",
     "sizeReadable": "1.8 ميغابايت",
-    "sizeBytes": 1871565
+    "sizeBytes": 1871565,
+    "driveFileId": "1CNUUfPPjqwQK30JGNRO9MPPrB2Bddx8i",
+    "driveFileUrl": "https://drive.google.com/file/d/1CNUUfPPjqwQK30JGNRO9MPPrB2Bddx8i/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1CNUUfPPjqwQK30JGNRO9MPPrB2Bddx8i/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1CNUUfPPjqwQK30JGNRO9MPPrB2Bddx8i"
   },
   {
     "id": "ffm_82",
@@ -2837,7 +2861,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Pocede/موازنة معادلة كيميائية.pdf",
     "size": "188 كيلوبايت",
     "sizeReadable": "188 كيلوبايت",
-    "sizeBytes": 192570
+    "sizeBytes": 192570,
+    "driveFileId": "1u7Vn-NZOUYeAvz9_tl3D_6wMoUCPWjtG",
+    "driveFileUrl": "https://drive.google.com/file/d/1u7Vn-NZOUYeAvz9_tl3D_6wMoUCPWjtG/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1u7Vn-NZOUYeAvz9_tl3D_6wMoUCPWjtG/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1u7Vn-NZOUYeAvz9_tl3D_6wMoUCPWjtG"
   },
   {
     "id": "ffm_83",
