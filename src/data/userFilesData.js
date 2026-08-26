@@ -9424,7 +9424,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Philo/AKWAL_Phylo_SC_3AS.pdf.pdf",
     "size": "1.6 ميغابايت",
     "sizeReadable": "1.6 ميغابايت",
-    "sizeBytes": 1698819
+    "sizeBytes": 1698819,
+    "driveFileId": "1DJW2xOA-wYpETlmn6F9BWFdGdefvhOSa",
+    "driveFileUrl": "https://drive.google.com/file/d/1DJW2xOA-wYpETlmn6F9BWFdGdefvhOSa/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1DJW2xOA-wYpETlmn6F9BWFdGdefvhOSa/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1DJW2xOA-wYpETlmn6F9BWFdGdefvhOSa"
   },
   {
     "id": "ffm_259",
@@ -9459,7 +9463,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Philo/_الاستاذ حمداش عبد الحق (تسيير+تر).pdf",
     "size": "763 كيلوبايت",
     "sizeReadable": "763 كيلوبايت",
-    "sizeBytes": 781358
+    "sizeBytes": 781358,
+    "driveFileId": "1nqWxa5aTYjvvRV_x2ux5uFETYhg37rfP",
+    "driveFileUrl": "https://drive.google.com/file/d/1nqWxa5aTYjvvRV_x2ux5uFETYhg37rfP/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1nqWxa5aTYjvvRV_x2ux5uFETYhg37rfP/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1nqWxa5aTYjvvRV_x2ux5uFETYhg37rfP"
   },
   {
     "id": "ffm_260",
@@ -9494,7 +9502,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Philo/أهم الأقوال في الفلسفة.pdf",
     "size": "514 كيلوبايت",
     "sizeReadable": "514 كيلوبايت",
-    "sizeBytes": 526029
+    "sizeBytes": 526029,
+    "driveFileId": "1_naCTxc3x3bdQ1gSXhqs2-dks8PJhoh8",
+    "driveFileUrl": "https://drive.google.com/file/d/1_naCTxc3x3bdQ1gSXhqs2-dks8PJhoh8/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1_naCTxc3x3bdQ1gSXhqs2-dks8PJhoh8/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1_naCTxc3x3bdQ1gSXhqs2-dks8PJhoh8"
   },
   {
     "id": "ffm_261",
@@ -9529,7 +9541,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Philo/الاستاذ حمداش عبد الحق (ر+عت).pdf",
     "size": "1.7 ميغابايت",
     "sizeReadable": "1.7 ميغابايت",
-    "sizeBytes": 1758085
+    "sizeBytes": 1758085,
+    "driveFileId": "1THd7PdCEraDqgM-CrD6V4ixk-aPjRLyn",
+    "driveFileUrl": "https://drive.google.com/file/d/1THd7PdCEraDqgM-CrD6V4ixk-aPjRLyn/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1THd7PdCEraDqgM-CrD6V4ixk-aPjRLyn/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1THd7PdCEraDqgM-CrD6V4ixk-aPjRLyn"
   },
   {
     "id": "ffm_262",
@@ -9564,7 +9580,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Philo/الباقة_التوجيهية_و_المنهجية_نحو_مادة_الفلسفة_نـــافع_بكالوريا_2021.pdf",
     "size": "8.8 ميغابايت",
     "sizeReadable": "8.8 ميغابايت",
-    "sizeBytes": 9244196
+    "sizeBytes": 9244196,
+    "driveFileId": "1IP4U2Aq6v-yrgU3X29B1GK5dVxUlJ1qk",
+    "driveFileUrl": "https://drive.google.com/file/d/1IP4U2Aq6v-yrgU3X29B1GK5dVxUlJ1qk/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1IP4U2Aq6v-yrgU3X29B1GK5dVxUlJ1qk/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1IP4U2Aq6v-yrgU3X29B1GK5dVxUlJ1qk"
   },
   {
     "id": "ffm_263",
@@ -9634,7 +9654,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Philo/كتاب الأنوار في-الفلسفة 3 ثانوي.pdf",
     "size": "1.5 ميغابايت",
     "sizeReadable": "1.5 ميغابايت",
-    "sizeBytes": 1603408
+    "sizeBytes": 1603408,
+    "driveFileId": "1JMF0AGisLl3Uv8y9gIfEVmDcODlZHna8",
+    "driveFileUrl": "https://drive.google.com/file/d/1JMF0AGisLl3Uv8y9gIfEVmDcODlZHna8/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1JMF0AGisLl3Uv8y9gIfEVmDcODlZHna8/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1JMF0AGisLl3Uv8y9gIfEVmDcODlZHna8"
   },
   {
     "id": "ffm_265",
@@ -9669,7 +9693,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Philo/كتاب_السلسلة_الفضية_في_الفلسفة_من_الالف_الى_الياء_شعبة_اداب_وفلسفة.pdf",
     "size": "44.0 ميغابايت",
     "sizeReadable": "44.0 ميغابايت",
-    "sizeBytes": 46085442
+    "sizeBytes": 46085442,
+    "driveFileId": "1PQyLcKQ_wiQFweral8RRoBWPl-zLnsMf",
+    "driveFileUrl": "https://drive.google.com/file/d/1PQyLcKQ_wiQFweral8RRoBWPl-zLnsMf/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1PQyLcKQ_wiQFweral8RRoBWPl-zLnsMf/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1PQyLcKQ_wiQFweral8RRoBWPl-zLnsMf"
   },
   {
     "id": "ffm_266",
@@ -9704,7 +9732,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Philo/كتاب_المراجعة_الشاملة_في_الفلسفة_شعبة_اداب_وفلسفة_للاستاذ_خليل_سعيداني.pdf",
     "size": "87.5 ميغابايت",
     "sizeReadable": "87.5 ميغابايت",
-    "sizeBytes": 91762209
+    "sizeBytes": 91762209,
+    "driveFileId": "1RvFmM5c0WqCqBEoiPVANOzuoe16sNqIG",
+    "driveFileUrl": "https://drive.google.com/file/d/1RvFmM5c0WqCqBEoiPVANOzuoe16sNqIG/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1RvFmM5c0WqCqBEoiPVANOzuoe16sNqIG/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1RvFmM5c0WqCqBEoiPVANOzuoe16sNqIG"
   },
   {
     "id": "ffm_267",
@@ -9739,7 +9771,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Philo/كتاب_خليل_سعيداني_طبعة_2021_للشعب_العلمية_والتقنية_ولغات_وتسيير.pdf",
     "size": "67.6 ميغابايت",
     "sizeReadable": "67.6 ميغابايت",
-    "sizeBytes": 70845549
+    "sizeBytes": 70845549,
+    "driveFileId": "1kO43xaH92JnC0vBG8X4elpDDX7yXjsED",
+    "driveFileUrl": "https://drive.google.com/file/d/1kO43xaH92JnC0vBG8X4elpDDX7yXjsED/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1kO43xaH92JnC0vBG8X4elpDDX7yXjsED/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1kO43xaH92JnC0vBG8X4elpDDX7yXjsED"
   },
   {
     "id": "ffm_268",
@@ -9774,7 +9810,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Philo/مقالات_كتاب_الهدى_في_الفلسفة_بكالوريا_2020.pdf",
     "size": "128.9 ميغابايت",
     "sizeReadable": "128.9 ميغابايت",
-    "sizeBytes": 135113600
+    "sizeBytes": 135113600,
+    "driveFileId": "1XcjikjoM7DxM_WmZCu0D47bW7kfW3fhs",
+    "driveFileUrl": "https://drive.google.com/file/d/1XcjikjoM7DxM_WmZCu0D47bW7kfW3fhs/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1XcjikjoM7DxM_WmZCu0D47bW7kfW3fhs/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1XcjikjoM7DxM_WmZCu0D47bW7kfW3fhs"
   },
   {
     "id": "ffm_269",
@@ -9809,7 +9849,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Philo/منهجيات الفلسفة.pdf",
     "size": "10.8 ميغابايت",
     "sizeReadable": "10.8 ميغابايت",
-    "sizeBytes": 11371384
+    "sizeBytes": 11371384,
+    "driveFileId": "1Km-iEUqmnNdkxhy5A8MosdPjNiq6UxTE",
+    "driveFileUrl": "https://drive.google.com/file/d/1Km-iEUqmnNdkxhy5A8MosdPjNiq6UxTE/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Km-iEUqmnNdkxhy5A8MosdPjNiq6UxTE/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Km-iEUqmnNdkxhy5A8MosdPjNiq6UxTE"
   },
   {
     "id": "ffm_270",
