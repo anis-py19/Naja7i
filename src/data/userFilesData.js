@@ -10442,7 +10442,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/_تمارين_محلولة_في_علوم_الطبيعة_و_الحياة_الجزء_1.pdf",
     "size": "37.8 ميغابايت",
     "sizeReadable": "37.8 ميغابايت",
-    "sizeBytes": 39633042
+    "sizeBytes": 39633042,
+    "driveFileId": "1O38DUjRkz-xi7-X4Hg3nb-5lA-lryGgi",
+    "driveFileUrl": "https://drive.google.com/file/d/1O38DUjRkz-xi7-X4Hg3nb-5lA-lryGgi/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1O38DUjRkz-xi7-X4Hg3nb-5lA-lryGgi/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1O38DUjRkz-xi7-X4Hg3nb-5lA-lryGgi"
   },
   {
     "id": "ffm_288",
@@ -10470,7 +10474,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/النصوص العلمية خاصة بالمجال 1 .pdf",
     "size": "602 كيلوبايت",
     "sizeReadable": "602 كيلوبايت",
-    "sizeBytes": 616259
+    "sizeBytes": 616259,
+    "driveFileId": "1uzSKGhdI8z9Id5J4AjhTqcEbfLGtTW_Q",
+    "driveFileUrl": "https://drive.google.com/file/d/1uzSKGhdI8z9Id5J4AjhTqcEbfLGtTW_Q/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1uzSKGhdI8z9Id5J4AjhTqcEbfLGtTW_Q/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1uzSKGhdI8z9Id5J4AjhTqcEbfLGtTW_Q"
   },
   {
     "id": "ffm_289",
@@ -11030,7 +11038,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/كتاب_السلسلة_الخضراء_2020لاستاذ_بن_خريفwww_msila_info_ahlamontada.pdf",
     "size": "6.3 ميغابايت",
     "sizeReadable": "6.3 ميغابايت",
-    "sizeBytes": 6654936
+    "sizeBytes": 6654936,
+    "driveFileId": "1v35cijZizxwo-oNHgCAEqWgFNwyL0VOb",
+    "driveFileUrl": "https://drive.google.com/file/d/1v35cijZizxwo-oNHgCAEqWgFNwyL0VOb/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1v35cijZizxwo-oNHgCAEqWgFNwyL0VOb/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1v35cijZizxwo-oNHgCAEqWgFNwyL0VOb"
   },
   {
     "id": "ffm_309",
@@ -11058,7 +11070,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/كتاب_السلسلة_الخضراء_لاستاذ_بن_خريف2020_https_www_msila_info_ahlamontada.pdf",
     "size": "12.6 ميغابايت",
     "sizeReadable": "12.6 ميغابايت",
-    "sizeBytes": 13208608
+    "sizeBytes": 13208608,
+    "driveFileId": "1UAiIxR8rZoWUYqHWRn9RpF6ipuO8Sia_",
+    "driveFileUrl": "https://drive.google.com/file/d/1UAiIxR8rZoWUYqHWRn9RpF6ipuO8Sia_/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1UAiIxR8rZoWUYqHWRn9RpF6ipuO8Sia_/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1UAiIxR8rZoWUYqHWRn9RpF6ipuO8Sia_"
   },
   {
     "id": "ffm_310",
@@ -11254,7 +11270,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/ملخص مصطفى بن خريف_organized.pdf",
     "size": "1.2 ميغابايت",
     "sizeReadable": "1.2 ميغابايت",
-    "sizeBytes": 1252590
+    "sizeBytes": 1252590,
+    "driveFileId": "1ekxh_86ff8HelbYghHeo7Hd14T4943v2",
+    "driveFileUrl": "https://drive.google.com/file/d/1ekxh_86ff8HelbYghHeo7Hd14T4943v2/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1ekxh_86ff8HelbYghHeo7Hd14T4943v2/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1ekxh_86ff8HelbYghHeo7Hd14T4943v2"
   },
   {
     "id": "ffm_317",
@@ -11282,7 +11302,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/نصوص علمية للاستاذ فراح عيسى.pdf",
     "size": "2.1 ميغابايت",
     "sizeReadable": "2.1 ميغابايت",
-    "sizeBytes": 2240945
+    "sizeBytes": 2240945,
+    "driveFileId": "1M4rV0lE1qaTlCdzPdFXUt7GMIVxVg6pI",
+    "driveFileUrl": "https://drive.google.com/file/d/1M4rV0lE1qaTlCdzPdFXUt7GMIVxVg6pI/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1M4rV0lE1qaTlCdzPdFXUt7GMIVxVg6pI/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1M4rV0lE1qaTlCdzPdFXUt7GMIVxVg6pI"
   },
   {
     "id": "ffm_318",
@@ -11310,7 +11334,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/نصوص علمية ممتازة.pdf",
     "size": "3.6 ميغابايت",
     "sizeReadable": "3.6 ميغابايت",
-    "sizeBytes": 3795003
+    "sizeBytes": 3795003,
+    "driveFileId": "1Av81v1CeHeEik272PRHcaC11d_SDiPpN",
+    "driveFileUrl": "https://drive.google.com/file/d/1Av81v1CeHeEik272PRHcaC11d_SDiPpN/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Av81v1CeHeEik272PRHcaC11d_SDiPpN/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Av81v1CeHeEik272PRHcaC11d_SDiPpN"
   },
   {
     "id": "ffm_compta_1787772064996_1",
