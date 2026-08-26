@@ -6202,7 +6202,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/100 تمرين مقترح في الاحتمالات للتحضير الجيد لبكالوريا 2020 .pdf",
     "size": "284 كيلوبايت",
     "sizeReadable": "284 كيلوبايت",
-    "sizeBytes": 290928
+    "sizeBytes": 290928,
+    "driveFileId": "1eNJtPjpH-vzPFaK1csgaMyP35wdUMf3l",
+    "driveFileUrl": "https://drive.google.com/file/d/1eNJtPjpH-vzPFaK1csgaMyP35wdUMf3l/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1eNJtPjpH-vzPFaK1csgaMyP35wdUMf3l/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1eNJtPjpH-vzPFaK1csgaMyP35wdUMf3l"
   },
   {
     "id": "ffm_172",
@@ -6237,7 +6241,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/20_تمرين_مع_الحل_في_الاحتمالات_للسنة_3_ثانوي_الشعب_العلمية_pdf_.pdf",
     "size": "4.5 ميغابايت",
     "sizeReadable": "4.5 ميغابايت",
-    "sizeBytes": 4726108
+    "sizeBytes": 4726108,
+    "driveFileId": "11j-camXlACkegd0w9vYE1gB0kr-wsHj-",
+    "driveFileUrl": "https://drive.google.com/file/d/11j-camXlACkegd0w9vYE1gB0kr-wsHj-/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/11j-camXlACkegd0w9vYE1gB0kr-wsHj-/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=11j-camXlACkegd0w9vYE1gB0kr-wsHj-"
   },
   {
     "id": "ffm_173",
@@ -6272,7 +6280,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/Copie de مسائل شاملة مرفقة بالحل في الدوال .pdf",
     "size": "18.7 ميغابايت",
     "sizeReadable": "18.7 ميغابايت",
-    "sizeBytes": 19569717
+    "sizeBytes": 19569717,
+    "driveFileId": "1v7Pt82dQDC-YAp7X6cw2UiRcoCDeXRF6",
+    "driveFileUrl": "https://drive.google.com/file/d/1v7Pt82dQDC-YAp7X6cw2UiRcoCDeXRF6/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1v7Pt82dQDC-YAp7X6cw2UiRcoCDeXRF6/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1v7Pt82dQDC-YAp7X6cw2UiRcoCDeXRF6"
   },
   {
     "id": "ffm_174",
@@ -6307,7 +6319,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/cour_ge_math_2.pdf",
     "size": "446 كيلوبايت",
     "sizeReadable": "446 كيلوبايت",
-    "sizeBytes": 456657
+    "sizeBytes": 456657,
+    "driveFileId": "1S63_UgdVpTPkS4AqPpR2DsUtlJJ2l4lR",
+    "driveFileUrl": "https://drive.google.com/file/d/1S63_UgdVpTPkS4AqPpR2DsUtlJJ2l4lR/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1S63_UgdVpTPkS4AqPpR2DsUtlJJ2l4lR/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1S63_UgdVpTPkS4AqPpR2DsUtlJJ2l4lR"
   },
   {
     "id": "ffm_175",
@@ -6342,7 +6358,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/math3as_resume-mo3adalat_tafadolia.pdf",
     "size": "160 كيلوبايت",
     "sizeReadable": "160 كيلوبايت",
-    "sizeBytes": 163391
+    "sizeBytes": 163391,
+    "driveFileId": "17eLzpcNH86KWwxXRzvipUYff1EFyFUAG",
+    "driveFileUrl": "https://drive.google.com/file/d/17eLzpcNH86KWwxXRzvipUYff1EFyFUAG/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/17eLzpcNH86KWwxXRzvipUYff1EFyFUAG/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=17eLzpcNH86KWwxXRzvipUYff1EFyFUAG"
   },
   {
     "id": "ffm_176",
@@ -6377,7 +6397,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/_ملخصات_دروس_الرياضيات_مع_وثائق_مفيدة.pdf",
     "size": "1000 كيلوبايت",
     "sizeReadable": "1000 كيلوبايت",
-    "sizeBytes": 1023620
+    "sizeBytes": 1023620,
+    "driveFileId": "1P6q2Sch65P9tqXOOpW9EqJ_CCoQBicmD",
+    "driveFileUrl": "https://drive.google.com/file/d/1P6q2Sch65P9tqXOOpW9EqJ_CCoQBicmD/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1P6q2Sch65P9tqXOOpW9EqJ_CCoQBicmD/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1P6q2Sch65P9tqXOOpW9EqJ_CCoQBicmD"
   },
   {
     "id": "ffm_177",
@@ -6412,7 +6436,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/افضل ملخص في الرياضيات.pdf",
     "size": "4.7 ميغابايت",
     "sizeReadable": "4.7 ميغابايت",
-    "sizeBytes": 4877869
+    "sizeBytes": 4877869,
+    "driveFileId": "1GT4ISgQ0SpXsGvFl90W1YthwevXkPGxU",
+    "driveFileUrl": "https://drive.google.com/file/d/1GT4ISgQ0SpXsGvFl90W1YthwevXkPGxU/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1GT4ISgQ0SpXsGvFl90W1YthwevXkPGxU/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1GT4ISgQ0SpXsGvFl90W1YthwevXkPGxU"
   },
   {
     "id": "ffm_178",
@@ -6447,7 +6475,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الإحتمالات.pdf",
     "size": "2.1 ميغابايت",
     "sizeReadable": "2.1 ميغابايت",
-    "sizeBytes": 2242848
+    "sizeBytes": 2242848,
+    "driveFileId": "1EoTD5nbZjiwXEHdZs_hiZt83GPPHOgWT",
+    "driveFileUrl": "https://drive.google.com/file/d/1EoTD5nbZjiwXEHdZs_hiZt83GPPHOgWT/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1EoTD5nbZjiwXEHdZs_hiZt83GPPHOgWT/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1EoTD5nbZjiwXEHdZs_hiZt83GPPHOgWT"
   },
   {
     "id": "ffm_179",
@@ -6482,7 +6514,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الاحتمال و المتغير العشوائي.pdf",
     "size": "41 كيلوبايت",
     "sizeReadable": "41 كيلوبايت",
-    "sizeBytes": 41768
+    "sizeBytes": 41768,
+    "driveFileId": "12SqLDlMZlIt9onT7MoaQTgs9T_eTJKjz",
+    "driveFileUrl": "https://drive.google.com/file/d/12SqLDlMZlIt9onT7MoaQTgs9T_eTJKjz/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/12SqLDlMZlIt9onT7MoaQTgs9T_eTJKjz/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=12SqLDlMZlIt9onT7MoaQTgs9T_eTJKjz"
   },
   {
     "id": "ffm_180",
@@ -6517,7 +6553,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الاحتمالات الجزء 1.pdf",
     "size": "1021 كيلوبايت",
     "sizeReadable": "1021 كيلوبايت",
-    "sizeBytes": 1045425
+    "sizeBytes": 1045425,
+    "driveFileId": "13D5sU1Qb1VNoX6O2ney_SBA7uF7AbJrt",
+    "driveFileUrl": "https://drive.google.com/file/d/13D5sU1Qb1VNoX6O2ney_SBA7uF7AbJrt/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/13D5sU1Qb1VNoX6O2ney_SBA7uF7AbJrt/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=13D5sU1Qb1VNoX6O2ney_SBA7uF7AbJrt"
   },
   {
     "id": "ffm_181",
@@ -6552,7 +6592,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الاحتمالات الشرطية.pdf",
     "size": "355 كيلوبايت",
     "sizeReadable": "355 كيلوبايت",
-    "sizeBytes": 363407
+    "sizeBytes": 363407,
+    "driveFileId": "1eo83xHe8mAGoEvx5Km1CJHY-6Hg6rV-k",
+    "driveFileUrl": "https://drive.google.com/file/d/1eo83xHe8mAGoEvx5Km1CJHY-6Hg6rV-k/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1eo83xHe8mAGoEvx5Km1CJHY-6Hg6rV-k/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1eo83xHe8mAGoEvx5Km1CJHY-6Hg6rV-k"
   },
   {
     "id": "ffm_182",
@@ -6587,7 +6631,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الاحتمالات المستمرة.pdf",
     "size": "44 كيلوبايت",
     "sizeReadable": "44 كيلوبايت",
-    "sizeBytes": 45367
+    "sizeBytes": 45367,
+    "driveFileId": "18wQivNHRZITK8fhQGrn8tB3WRMEC1UbO",
+    "driveFileUrl": "https://drive.google.com/file/d/18wQivNHRZITK8fhQGrn8tB3WRMEC1UbO/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/18wQivNHRZITK8fhQGrn8tB3WRMEC1UbO/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=18wQivNHRZITK8fhQGrn8tB3WRMEC1UbO"
   },
   {
     "id": "ffm_183",
@@ -6622,7 +6670,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الاحتمالات من الالف الى الياء.pdf",
     "size": "29.5 ميغابايت",
     "sizeReadable": "29.5 ميغابايت",
-    "sizeBytes": 30946300
+    "sizeBytes": 30946300,
+    "driveFileId": "1SrK85uWZ99uhKGYha0AP6tMoMJO_88YE",
+    "driveFileUrl": "https://drive.google.com/file/d/1SrK85uWZ99uhKGYha0AP6tMoMJO_88YE/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1SrK85uWZ99uhKGYha0AP6tMoMJO_88YE/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1SrK85uWZ99uhKGYha0AP6tMoMJO_88YE"
   },
   {
     "id": "ffm_184",
@@ -6657,7 +6709,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الاحتمالات-Copier.pdf",
     "size": "6.3 ميغابايت",
     "sizeReadable": "6.3 ميغابايت",
-    "sizeBytes": 6584927
+    "sizeBytes": 6584927,
+    "driveFileId": "1Vwr5kRy8OvusfeZ-T7_3P1hbSgCvt-Cu",
+    "driveFileUrl": "https://drive.google.com/file/d/1Vwr5kRy8OvusfeZ-T7_3P1hbSgCvt-Cu/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Vwr5kRy8OvusfeZ-T7_3P1hbSgCvt-Cu/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Vwr5kRy8OvusfeZ-T7_3P1hbSgCvt-Cu"
   },
   {
     "id": "ffm_185",
@@ -6692,7 +6748,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الاخصاء.pdf",
     "size": "7.4 ميغابايت",
     "sizeReadable": "7.4 ميغابايت",
-    "sizeBytes": 7754909
+    "sizeBytes": 7754909,
+    "driveFileId": "1ZJ8U5yIKwh2Zv8RhYwXSa9crYwP9bVdZ",
+    "driveFileUrl": "https://drive.google.com/file/d/1ZJ8U5yIKwh2Zv8RhYwXSa9crYwP9bVdZ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1ZJ8U5yIKwh2Zv8RhYwXSa9crYwP9bVdZ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1ZJ8U5yIKwh2Zv8RhYwXSa9crYwP9bVdZ"
   },
   {
     "id": "ffm_186",
@@ -6867,7 +6927,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الاستمرارية.pdf",
     "size": "248 كيلوبايت",
     "sizeReadable": "248 كيلوبايت",
-    "sizeBytes": 253675
+    "sizeBytes": 253675,
+    "driveFileId": "18J-qdu1gIk5EupbKxRzX2fyljeeFcNZc",
+    "driveFileUrl": "https://drive.google.com/file/d/18J-qdu1gIk5EupbKxRzX2fyljeeFcNZc/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/18J-qdu1gIk5EupbKxRzX2fyljeeFcNZc/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=18J-qdu1gIk5EupbKxRzX2fyljeeFcNZc"
   },
   {
     "id": "ffm_191",
@@ -6902,7 +6966,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الاشتقاقية-.pdf",
     "size": "4.5 ميغابايت",
     "sizeReadable": "4.5 ميغابايت",
-    "sizeBytes": 4668960
+    "sizeBytes": 4668960,
+    "driveFileId": "1cBIYTxONdFGxgS3YJVnuhUiN7R4m5ViK",
+    "driveFileUrl": "https://drive.google.com/file/d/1cBIYTxONdFGxgS3YJVnuhUiN7R4m5ViK/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1cBIYTxONdFGxgS3YJVnuhUiN7R4m5ViK/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1cBIYTxONdFGxgS3YJVnuhUiN7R4m5ViK"
   },
   {
     "id": "ffm_192",
@@ -6937,7 +7005,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الاعداد_و_الحساب_من_الالف_الى_الياء.pdf",
     "size": "57.0 ميغابايت",
     "sizeReadable": "57.0 ميغابايت",
-    "sizeBytes": 59779685
+    "sizeBytes": 59779685,
+    "driveFileId": "1xv9o20CPJLN35GcfcQdaEXAlcLVoPN5_",
+    "driveFileUrl": "https://drive.google.com/file/d/1xv9o20CPJLN35GcfcQdaEXAlcLVoPN5_/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1xv9o20CPJLN35GcfcQdaEXAlcLVoPN5_/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1xv9o20CPJLN35GcfcQdaEXAlcLVoPN5_"
   },
   {
     "id": "ffm_193",
@@ -6972,7 +7044,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/البرهان باتراجع.pdf",
     "size": "155 كيلوبايت",
     "sizeReadable": "155 كيلوبايت",
-    "sizeBytes": 158849
+    "sizeBytes": 158849,
+    "driveFileId": "1qBzkh1f-TsJD-R5_eXNc2cBe8e6-lKyY",
+    "driveFileUrl": "https://drive.google.com/file/d/1qBzkh1f-TsJD-R5_eXNc2cBe8e6-lKyY/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1qBzkh1f-TsJD-R5_eXNc2cBe8e6-lKyY/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1qBzkh1f-TsJD-R5_eXNc2cBe8e6-lKyY"
   },
   {
     "id": "ffm_194",
@@ -7007,7 +7083,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/التزايد المقارن.pdf",
     "size": "17.0 ميغابايت",
     "sizeReadable": "17.0 ميغابايت",
-    "sizeBytes": 17823031
+    "sizeBytes": 17823031,
+    "driveFileId": "1QETqBgQbIO68NvdK_yRP_338yW6Gd6Cl",
+    "driveFileUrl": "https://drive.google.com/file/d/1QETqBgQbIO68NvdK_yRP_338yW6Gd6Cl/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1QETqBgQbIO68NvdK_yRP_338yW6Gd6Cl/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1QETqBgQbIO68NvdK_yRP_338yW6Gd6Cl"
   },
   {
     "id": "ffm_195",
@@ -7042,7 +7122,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/التمثيل الهندسي لعدد مركب.pdf",
     "size": "54 كيلوبايت",
     "sizeReadable": "54 كيلوبايت",
-    "sizeBytes": 54952
+    "sizeBytes": 54952,
+    "driveFileId": "1rkH2sHXww7kZ-FnXcNNqTFIzfbKfFByn",
+    "driveFileUrl": "https://drive.google.com/file/d/1rkH2sHXww7kZ-FnXcNNqTFIzfbKfFByn/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1rkH2sHXww7kZ-FnXcNNqTFIzfbKfFByn/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1rkH2sHXww7kZ-FnXcNNqTFIzfbKfFByn"
   },
   {
     "id": "ffm_196",
@@ -7077,7 +7161,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الدالة العكسية.pdf",
     "size": "221 كيلوبايت",
     "sizeReadable": "221 كيلوبايت",
-    "sizeBytes": 225853
+    "sizeBytes": 225853,
+    "driveFileId": "13a5MVxe72wM6gONRu2fPAbtadfWOanHL",
+    "driveFileUrl": "https://drive.google.com/file/d/13a5MVxe72wM6gONRu2fPAbtadfWOanHL/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/13a5MVxe72wM6gONRu2fPAbtadfWOanHL/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=13a5MVxe72wM6gONRu2fPAbtadfWOanHL"
   },
   {
     "id": "ffm_197",
@@ -7112,7 +7200,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الدوال الأسية ملخص.pdf",
     "size": "343 كيلوبايت",
     "sizeReadable": "343 كيلوبايت",
-    "sizeBytes": 350851
+    "sizeBytes": 350851,
+    "driveFileId": "1Q117_NQ8gm3cfyekRTVZir_sYZWLA0zp",
+    "driveFileUrl": "https://drive.google.com/file/d/1Q117_NQ8gm3cfyekRTVZir_sYZWLA0zp/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Q117_NQ8gm3cfyekRTVZir_sYZWLA0zp/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Q117_NQ8gm3cfyekRTVZir_sYZWLA0zp"
   },
   {
     "id": "ffm_198",
@@ -7147,7 +7239,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الدوال الاصلية.pdf",
     "size": "159 كيلوبايت",
     "sizeReadable": "159 كيلوبايت",
-    "sizeBytes": 163133
+    "sizeBytes": 163133,
+    "driveFileId": "1FfqL_aVTEbQFmRMGNqEUYA59pcgx6Zv1",
+    "driveFileUrl": "https://drive.google.com/file/d/1FfqL_aVTEbQFmRMGNqEUYA59pcgx6Zv1/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1FfqL_aVTEbQFmRMGNqEUYA59pcgx6Zv1/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1FfqL_aVTEbQFmRMGNqEUYA59pcgx6Zv1"
   },
   {
     "id": "ffm_199",
@@ -7182,7 +7278,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الدوال_الاصلية_من_الالف_الى_الياء.pdf",
     "size": "22.2 ميغابايت",
     "sizeReadable": "22.2 ميغابايت",
-    "sizeBytes": 23283954
+    "sizeBytes": 23283954,
+    "driveFileId": "1dVFNgBhjj6e5IFHT5_IC3Cd1WfbP_JOJ",
+    "driveFileUrl": "https://drive.google.com/file/d/1dVFNgBhjj6e5IFHT5_IC3Cd1WfbP_JOJ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1dVFNgBhjj6e5IFHT5_IC3Cd1WfbP_JOJ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1dVFNgBhjj6e5IFHT5_IC3Cd1WfbP_JOJ"
   },
   {
     "id": "ffm_200",
@@ -7217,7 +7317,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الدوال_اللوغارتمية_من_الالف_الى_الياء.pdf",
     "size": "25.0 ميغابايت",
     "sizeReadable": "25.0 ميغابايت",
-    "sizeBytes": 26174116
+    "sizeBytes": 26174116,
+    "driveFileId": "1NF-wUaGlsvsnlZ2eoddQ--R0nSfapuuW",
+    "driveFileUrl": "https://drive.google.com/file/d/1NF-wUaGlsvsnlZ2eoddQ--R0nSfapuuW/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1NF-wUaGlsvsnlZ2eoddQ--R0nSfapuuW/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1NF-wUaGlsvsnlZ2eoddQ--R0nSfapuuW"
   },
   {
     "id": "ffm_201",
@@ -7252,7 +7356,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/العبقري_في_الرياضيات_الدّوال_العددية_ملخص+تمارين+حلول_تسيير_وإ_Copie.pdf",
     "size": "3.9 ميغابايت",
     "sizeReadable": "3.9 ميغابايت",
-    "sizeBytes": 4038502
+    "sizeBytes": 4038502,
+    "driveFileId": "16zEtHdjEmrV_Zw3fAk9qrDzVV63cO0bJ",
+    "driveFileUrl": "https://drive.google.com/file/d/16zEtHdjEmrV_Zw3fAk9qrDzVV63cO0bJ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/16zEtHdjEmrV_Zw3fAk9qrDzVV63cO0bJ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=16zEtHdjEmrV_Zw3fAk9qrDzVV63cO0bJ"
   },
   {
     "id": "ffm_202",
@@ -7287,7 +7395,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/القسمة الاقليدية في ص.pdf",
     "size": "6.3 ميغابايت",
     "sizeReadable": "6.3 ميغابايت",
-    "sizeBytes": 6655185
+    "sizeBytes": 6655185,
+    "driveFileId": "11ShptXdj2HFLbCHHNWmAKCFboRsdUQGr",
+    "driveFileUrl": "https://drive.google.com/file/d/11ShptXdj2HFLbCHHNWmAKCFboRsdUQGr/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/11ShptXdj2HFLbCHHNWmAKCFboRsdUQGr/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=11ShptXdj2HFLbCHHNWmAKCFboRsdUQGr"
   },
   {
     "id": "ffm_203",
@@ -7322,7 +7434,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/القسمة الاقليدية و الموافقات قي z.pdf",
     "size": "73 كيلوبايت",
     "sizeReadable": "73 كيلوبايت",
-    "sizeBytes": 75045
+    "sizeBytes": 75045,
+    "driveFileId": "1U9aH3C7nzzPfcVn5XWDFkZrputahm1vB",
+    "driveFileUrl": "https://drive.google.com/file/d/1U9aH3C7nzzPfcVn5XWDFkZrputahm1vB/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1U9aH3C7nzzPfcVn5XWDFkZrputahm1vB/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1U9aH3C7nzzPfcVn5XWDFkZrputahm1vB"
   },
   {
     "id": "ffm_204",
@@ -7357,7 +7473,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/القسمة في z.pdf",
     "size": "260 كيلوبايت",
     "sizeReadable": "260 كيلوبايت",
-    "sizeBytes": 265948
+    "sizeBytes": 265948,
+    "driveFileId": "1NeSbkyw51CCEjmoMRFb4ug78_2N62KNZ",
+    "driveFileUrl": "https://drive.google.com/file/d/1NeSbkyw51CCEjmoMRFb4ug78_2N62KNZ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1NeSbkyw51CCEjmoMRFb4ug78_2N62KNZ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1NeSbkyw51CCEjmoMRFb4ug78_2N62KNZ"
   },
   {
     "id": "ffm_205",
@@ -7392,7 +7512,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/المتتاليات العددية.pdf",
     "size": "15.2 ميغابايت",
     "sizeReadable": "15.2 ميغابايت",
-    "sizeBytes": 15893047
+    "sizeBytes": 15893047,
+    "driveFileId": "1Xab-5EQHk_swhw8oXhC0jPy4tpPmQr5o",
+    "driveFileUrl": "https://drive.google.com/file/d/1Xab-5EQHk_swhw8oXhC0jPy4tpPmQr5o/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Xab-5EQHk_swhw8oXhC0jPy4tpPmQr5o/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Xab-5EQHk_swhw8oXhC0jPy4tpPmQr5o"
   },
   {
     "id": "ffm_206",
@@ -7427,7 +7551,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/المتتاليات_العددية_3_تقارب_متتاليات_عددية.pdf",
     "size": "303 كيلوبايت",
     "sizeReadable": "303 كيلوبايت",
-    "sizeBytes": 309986
+    "sizeBytes": 309986,
+    "driveFileId": "1kCgu-byn9d9yhlRDkOhHbaJFLAGH9pPf",
+    "driveFileUrl": "https://drive.google.com/file/d/1kCgu-byn9d9yhlRDkOhHbaJFLAGH9pPf/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1kCgu-byn9d9yhlRDkOhHbaJFLAGH9pPf/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1kCgu-byn9d9yhlRDkOhHbaJFLAGH9pPf"
   },
   {
     "id": "ffm_207",
@@ -7462,7 +7590,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/المتتاليات_العددية_من_الالف_الى_الياء.pdf",
     "size": "32.8 ميغابايت",
     "sizeReadable": "32.8 ميغابايت",
-    "sizeBytes": 34380666
+    "sizeBytes": 34380666,
+    "driveFileId": "1YvXzUNupaDyC1x3fxPhcXAYlnlxjADN3",
+    "driveFileUrl": "https://drive.google.com/file/d/1YvXzUNupaDyC1x3fxPhcXAYlnlxjADN3/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1YvXzUNupaDyC1x3fxPhcXAYlnlxjADN3/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1YvXzUNupaDyC1x3fxPhcXAYlnlxjADN3"
   },
   {
     "id": "ffm_208",
@@ -7497,7 +7629,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/المستقيمات والمستويات في الفضاء.pdf",
     "size": "286 كيلوبايت",
     "sizeReadable": "286 كيلوبايت",
-    "sizeBytes": 292375
+    "sizeBytes": 292375,
+    "driveFileId": "1RtHAAT-hmEe-jXCq3f0pEbS45UQtOJFT",
+    "driveFileUrl": "https://drive.google.com/file/d/1RtHAAT-hmEe-jXCq3f0pEbS45UQtOJFT/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1RtHAAT-hmEe-jXCq3f0pEbS45UQtOJFT/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1RtHAAT-hmEe-jXCq3f0pEbS45UQtOJFT"
   },
   {
     "id": "ffm_209",
@@ -7532,7 +7668,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/المعادلات التفاضلية.pdf",
     "size": "141 كيلوبايت",
     "sizeReadable": "141 كيلوبايت",
-    "sizeBytes": 144633
+    "sizeBytes": 144633,
+    "driveFileId": "1WFsEoFqD8j0SALB33A6HQRjmEddopXRf",
+    "driveFileUrl": "https://drive.google.com/file/d/1WFsEoFqD8j0SALB33A6HQRjmEddopXRf/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1WFsEoFqD8j0SALB33A6HQRjmEddopXRf/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1WFsEoFqD8j0SALB33A6HQRjmEddopXRf"
   },
   {
     "id": "ffm_210",
@@ -7567,7 +7707,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الموافقات_في_Z.pdf",
     "size": "11.1 ميغابايت",
     "sizeReadable": "11.1 ميغابايت",
-    "sizeBytes": 11658343
+    "sizeBytes": 11658343,
+    "driveFileId": "1PPY-Q0Dn2eVPhmY8tTh8OJMNsApx0hCR",
+    "driveFileUrl": "https://drive.google.com/file/d/1PPY-Q0Dn2eVPhmY8tTh8OJMNsApx0hCR/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1PPY-Q0Dn2eVPhmY8tTh8OJMNsApx0hCR/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1PPY-Q0Dn2eVPhmY8tTh8OJMNsApx0hCR"
   },
   {
     "id": "ffm_211",
@@ -7602,7 +7746,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/النهاياتz (2).pdf",
     "size": "3.4 ميغابايت",
     "sizeReadable": "3.4 ميغابايت",
-    "sizeBytes": 3520009
+    "sizeBytes": 3520009,
+    "driveFileId": "14-CW7-fbrUWfXRq5eXhomrmSucd11Yx6",
+    "driveFileUrl": "https://drive.google.com/file/d/14-CW7-fbrUWfXRq5eXhomrmSucd11Yx6/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/14-CW7-fbrUWfXRq5eXhomrmSucd11Yx6/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=14-CW7-fbrUWfXRq5eXhomrmSucd11Yx6"
   },
   {
     "id": "ffm_212",
@@ -7637,7 +7785,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/النهاياتz.pdf",
     "size": "3.4 ميغابايت",
     "sizeReadable": "3.4 ميغابايت",
-    "sizeBytes": 3520009
+    "sizeBytes": 3520009,
+    "driveFileId": "1ymzhOfokRL3MePZd4ZP6XRTe1snCDIwB",
+    "driveFileUrl": "https://drive.google.com/file/d/1ymzhOfokRL3MePZd4ZP6XRTe1snCDIwB/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1ymzhOfokRL3MePZd4ZP6XRTe1snCDIwB/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1ymzhOfokRL3MePZd4ZP6XRTe1snCDIwB"
   },
   {
     "id": "ffm_213",
@@ -7672,7 +7824,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/الهندسة_في_الفضاء_من_الالف_الى_الياء.pdf",
     "size": "41.1 ميغابايت",
     "sizeReadable": "41.1 ميغابايت",
-    "sizeBytes": 43085920
+    "sizeBytes": 43085920,
+    "driveFileId": "18EkxgNTrK1qXaYZwJ7H6imr1iPHYu3bv",
+    "driveFileUrl": "https://drive.google.com/file/d/18EkxgNTrK1qXaYZwJ7H6imr1iPHYu3bv/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/18EkxgNTrK1qXaYZwJ7H6imr1iPHYu3bv/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=18EkxgNTrK1qXaYZwJ7H6imr1iPHYu3bv"
   },
   {
     "id": "ffm_214",
@@ -7707,7 +7863,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/تجميعة دوال عددية مع حلولها للنهائي شعب علمية (باك 2019).pdf",
     "size": "4.3 ميغابايت",
     "sizeReadable": "4.3 ميغابايت",
-    "sizeBytes": 4489266
+    "sizeBytes": 4489266,
+    "driveFileId": "1_gpLXaHgg18ivoBM1-bzgqxE_MH1EgtD",
+    "driveFileUrl": "https://drive.google.com/file/d/1_gpLXaHgg18ivoBM1-bzgqxE_MH1EgtD/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1_gpLXaHgg18ivoBM1-bzgqxE_MH1EgtD/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1_gpLXaHgg18ivoBM1-bzgqxE_MH1EgtD"
   },
   {
     "id": "ffm_215",
@@ -7742,7 +7902,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/تحميل_ملخص_القواعد_الاساسية_في_الرياضيات_3_ثانوي_سنة_ثالثة_ثانوي.pdf",
     "size": "4.6 ميغابايت",
     "sizeReadable": "4.6 ميغابايت",
-    "sizeBytes": 4833306
+    "sizeBytes": 4833306,
+    "driveFileId": "1nAHDT6J1x_10dWhHC9-6E4XXZbKdywnA",
+    "driveFileUrl": "https://drive.google.com/file/d/1nAHDT6J1x_10dWhHC9-6E4XXZbKdywnA/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1nAHDT6J1x_10dWhHC9-6E4XXZbKdywnA/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1nAHDT6J1x_10dWhHC9-6E4XXZbKdywnA"
   },
   {
     "id": "ffm_216",
@@ -7777,7 +7941,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/تلخيص الدرس.pdf",
     "size": "118 كيلوبايت",
     "sizeReadable": "118 كيلوبايت",
-    "sizeBytes": 121072
+    "sizeBytes": 121072,
+    "driveFileId": "10JTI_3vzFqCRKzhnqhJ-iza9UPo3ahOq",
+    "driveFileUrl": "https://drive.google.com/file/d/10JTI_3vzFqCRKzhnqhJ-iza9UPo3ahOq/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/10JTI_3vzFqCRKzhnqhJ-iza9UPo3ahOq/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=10JTI_3vzFqCRKzhnqhJ-iza9UPo3ahOq"
   },
   {
     "id": "ffm_217",
@@ -7812,7 +7980,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/تمارين_التحويلات_النقطية_في_المستوي_المركب_و_التشابه_المباشر.pdf",
     "size": "222 كيلوبايت",
     "sizeReadable": "222 كيلوبايت",
-    "sizeBytes": 227487
+    "sizeBytes": 227487,
+    "driveFileId": "1lhN4rnWWtIq3Atn4EDuLcaIPj_CsvGBz",
+    "driveFileUrl": "https://drive.google.com/file/d/1lhN4rnWWtIq3Atn4EDuLcaIPj_CsvGBz/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1lhN4rnWWtIq3Atn4EDuLcaIPj_CsvGBz/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1lhN4rnWWtIq3Atn4EDuLcaIPj_CsvGBz"
   },
   {
     "id": "ffm_218",
@@ -7847,7 +8019,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/تمارين_القسمة_والموافقات_للبكالوريا_مقترحة.pdf",
     "size": "939 كيلوبايت",
     "sizeReadable": "939 كيلوبايت",
-    "sizeBytes": 961986
+    "sizeBytes": 961986,
+    "driveFileId": "1RYHMZj2HfOnfynsOOX6P7sNnpyaZWIHZ",
+    "driveFileUrl": "https://drive.google.com/file/d/1RYHMZj2HfOnfynsOOX6P7sNnpyaZWIHZ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1RYHMZj2HfOnfynsOOX6P7sNnpyaZWIHZ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1RYHMZj2HfOnfynsOOX6P7sNnpyaZWIHZ"
   },
   {
     "id": "ffm_219",
@@ -7882,7 +8058,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/تمارين_حول_الدوال_العددية_شعبة_آداب_و_فلسفة.pdf",
     "size": "2.3 ميغابايت",
     "sizeReadable": "2.3 ميغابايت",
-    "sizeBytes": 2368229
+    "sizeBytes": 2368229,
+    "driveFileId": "1doP8Ok_M42ZjjM-pZkvKbHDTLeERkqMk",
+    "driveFileUrl": "https://drive.google.com/file/d/1doP8Ok_M42ZjjM-pZkvKbHDTLeERkqMk/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1doP8Ok_M42ZjjM-pZkvKbHDTLeERkqMk/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1doP8Ok_M42ZjjM-pZkvKbHDTLeERkqMk"
   },
   {
     "id": "ffm_220",
@@ -7917,7 +8097,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/تمارين_محلولة_في_الموافقات.pdf",
     "size": "1.5 ميغابايت",
     "sizeReadable": "1.5 ميغابايت",
-    "sizeBytes": 1551720
+    "sizeBytes": 1551720,
+    "driveFileId": "1YynMP15DDhC3U1dk1wi65DGMRhEK39MK",
+    "driveFileUrl": "https://drive.google.com/file/d/1YynMP15DDhC3U1dk1wi65DGMRhEK39MK/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1YynMP15DDhC3U1dk1wi65DGMRhEK39MK/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1YynMP15DDhC3U1dk1wi65DGMRhEK39MK"
   },
   {
     "id": "ffm_221",
@@ -7952,7 +8136,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/حساب التكاملات (2).pdf",
     "size": "103 كيلوبايت",
     "sizeReadable": "103 كيلوبايت",
-    "sizeBytes": 105021
+    "sizeBytes": 105021,
+    "driveFileId": "1gRfA09pt2l-3-e0puoUfl3Gs5JYC2aQt",
+    "driveFileUrl": "https://drive.google.com/file/d/1gRfA09pt2l-3-e0puoUfl3Gs5JYC2aQt/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1gRfA09pt2l-3-e0puoUfl3Gs5JYC2aQt/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1gRfA09pt2l-3-e0puoUfl3Gs5JYC2aQt"
   },
   {
     "id": "ffm_222",
@@ -7987,7 +8175,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/حساب التكاملات.pdf",
     "size": "103 كيلوبايت",
     "sizeReadable": "103 كيلوبايت",
-    "sizeBytes": 105021
+    "sizeBytes": 105021,
+    "driveFileId": "1p9RB6bR7hTfNiPuVdP4Ef_ygdXW2eHmZ",
+    "driveFileUrl": "https://drive.google.com/file/d/1p9RB6bR7hTfNiPuVdP4Ef_ygdXW2eHmZ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1p9RB6bR7hTfNiPuVdP4Ef_ygdXW2eHmZ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1p9RB6bR7hTfNiPuVdP4Ef_ygdXW2eHmZ"
   },
   {
     "id": "ffm_223",
@@ -8022,7 +8214,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Math/خلاصة المتتاليات.pdf",
     "size": "236 كيلوبايت",
     "sizeReadable": "236 كيلوبايت",
-    "sizeBytes": 241686
+    "sizeBytes": 241686,
+    "driveFileId": "12-wZrTx2BXs78ZJCT9vBoZO06ugbANAa",
+    "driveFileUrl": "https://drive.google.com/file/d/12-wZrTx2BXs78ZJCT9vBoZO06ugbANAa/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/12-wZrTx2BXs78ZJCT9vBoZO06ugbANAa/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=12-wZrTx2BXs78ZJCT9vBoZO06ugbANAa"
   },
   {
     "id": "ffm_224",
