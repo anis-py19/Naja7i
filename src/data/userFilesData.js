@@ -1,7 +1,7 @@
 /**
  * 📚 Naja7i (نجاحي) — Comprehensive Public Files Catalog
  * Location: public/FileFromMe & Google Drive Cloud Repositories
- * Total Indexed Files: 323
+ * Total Indexed Files: 324
  * Verified Academic Titles, Categories, Stream Maps, Authors, and 100% Real Disk File Paths & Cloud Drive Links.
  */
 
@@ -2205,7 +2205,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Civile/حلول_تمارين_الكتاب_المدرسي_للهندسة_المدنية_3_ثانوي.pdf",
     "size": "956 كيلوبايت",
     "sizeReadable": "956 كيلوبايت",
-    "sizeBytes": 979036
+    "sizeBytes": 979036,
+    "driveFileId": "1CGwXVHrxMm5bOUTgrElySN5F8jA1IZRu",
+    "driveFileUrl": "https://drive.google.com/file/d/1CGwXVHrxMm5bOUTgrElySN5F8jA1IZRu/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1CGwXVHrxMm5bOUTgrElySN5F8jA1IZRu/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1CGwXVHrxMm5bOUTgrElySN5F8jA1IZRu"
   },
   {
     "id": "ffm_61",
@@ -2231,7 +2235,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Civile/دروس الهندسة المدنية - 3 ثانوي.pdf",
     "size": "5.7 ميغابايت",
     "sizeReadable": "5.7 ميغابايت",
-    "sizeBytes": 5972400
+    "sizeBytes": 5972400,
+    "driveFileId": "1UDRe5I1xLyVQT5F1P79a4LSB4TIGIgwH",
+    "driveFileUrl": "https://drive.google.com/file/d/1UDRe5I1xLyVQT5F1P79a4LSB4TIGIgwH/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1UDRe5I1xLyVQT5F1P79a4LSB4TIGIgwH/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1UDRe5I1xLyVQT5F1P79a4LSB4TIGIgwH"
   },
   {
     "id": "ffm_62",
@@ -2257,7 +2265,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Civile/سلسلة تمارين حول الطبوغرافيا.pdf",
     "size": "1.1 ميغابايت",
     "sizeReadable": "1.1 ميغابايت",
-    "sizeBytes": 1165420
+    "sizeBytes": 1165420,
+    "driveFileId": "1_sK3o6NbLx8rO9jN_uz4vgO_9Lm14RSP",
+    "driveFileUrl": "https://drive.google.com/file/d/1_sK3o6NbLx8rO9jN_uz4vgO_9Lm14RSP/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1_sK3o6NbLx8rO9jN_uz4vgO_9Lm14RSP/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1_sK3o6NbLx8rO9jN_uz4vgO_9Lm14RSP"
   },
   {
     "id": "ffm_63",
@@ -2283,7 +2295,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Civile/سلسلة_تطبیقات_للمراجعة_في_الخرسانة_المسلحة.pdf",
     "size": "302 كيلوبايت",
     "sizeReadable": "302 كيلوبايت",
-    "sizeBytes": 309160
+    "sizeBytes": 309160,
+    "driveFileId": "1Zh3wccSed3rB94U6xgoh-4YXBOSfzWRk",
+    "driveFileUrl": "https://drive.google.com/file/d/1Zh3wccSed3rB94U6xgoh-4YXBOSfzWRk/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1Zh3wccSed3rB94U6xgoh-4YXBOSfzWRk/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1Zh3wccSed3rB94U6xgoh-4YXBOSfzWRk"
   },
   {
     "id": "ffm_64",
@@ -2309,7 +2325,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Civile/سلسلة_تمارين_حول_الأنظمة_المثلثية.pdf",
     "size": "1.0 ميغابايت",
     "sizeReadable": "1.0 ميغابايت",
-    "sizeBytes": 1058454
+    "sizeBytes": 1058454,
+    "driveFileId": "1BASqbXZ-zz3WwF3bCQL5L1fykyopKmob",
+    "driveFileUrl": "https://drive.google.com/file/d/1BASqbXZ-zz3WwF3bCQL5L1fykyopKmob/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1BASqbXZ-zz3WwF3bCQL5L1fykyopKmob/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1BASqbXZ-zz3WwF3bCQL5L1fykyopKmob"
   },
   {
     "id": "ffm_65",
@@ -2361,7 +2381,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Civile/سلسلة_تمارين_حول_القص_البسيط_ـ_إعداد_الأستاذ_مخلوفي_كمال.pdf",
     "size": "279 كيلوبايت",
     "sizeReadable": "279 كيلوبايت",
-    "sizeBytes": 286201
+    "sizeBytes": 286201,
+    "driveFileId": "13g2TARurbn6MWVNzs696E5si7wE-tMR6",
+    "driveFileUrl": "https://drive.google.com/file/d/13g2TARurbn6MWVNzs696E5si7wE-tMR6/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/13g2TARurbn6MWVNzs696E5si7wE-tMR6/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=13g2TARurbn6MWVNzs696E5si7wE-tMR6"
   },
   {
     "id": "ffm_67",
@@ -2387,7 +2411,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Civile/ملخصات_الهندسة_المدنية_للسنة_3_ثانوي_الطرقات.pdf",
     "size": "785 كيلوبايت",
     "sizeReadable": "785 كيلوبايت",
-    "sizeBytes": 804260
+    "sizeBytes": 804260,
+    "driveFileId": "1WHaZWLQRvF0xJ8wk2SR1QtpTCShO3M1x",
+    "driveFileUrl": "https://drive.google.com/file/d/1WHaZWLQRvF0xJ8wk2SR1QtpTCShO3M1x/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1WHaZWLQRvF0xJ8wk2SR1QtpTCShO3M1x/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1WHaZWLQRvF0xJ8wk2SR1QtpTCShO3M1x"
   },
   {
     "id": "ffm_68",
@@ -2413,7 +2441,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Civile/ملخصات_الهندسة_المدنية_للسنة_3_ثانوي_المساقط_الأفقية.pdf",
     "size": "252 كيلوبايت",
     "sizeReadable": "252 كيلوبايت",
-    "sizeBytes": 258541
+    "sizeBytes": 258541,
+    "driveFileId": "1DqPepxEVQqnR92hI6SmokEMt87kZrk1O",
+    "driveFileUrl": "https://drive.google.com/file/d/1DqPepxEVQqnR92hI6SmokEMt87kZrk1O/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1DqPepxEVQqnR92hI6SmokEMt87kZrk1O/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1DqPepxEVQqnR92hI6SmokEMt87kZrk1O"
   },
   {
     "id": "ffm_69",
@@ -2439,7 +2471,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Genie Civile/ملخصات_الهندسة_المدنية_للسنة_3_ثانوي_المظاهر_العرضية.pdf",
     "size": "1.1 ميغابايت",
     "sizeReadable": "1.1 ميغابايت",
-    "sizeBytes": 1188362
+    "sizeBytes": 1188362,
+    "driveFileId": "10Akdjnj-EHvrYMZiSiYhgWQmPBERnTXG",
+    "driveFileUrl": "https://drive.google.com/file/d/10Akdjnj-EHvrYMZiSiYhgWQmPBERnTXG/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/10Akdjnj-EHvrYMZiSiYhgWQmPBERnTXG/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=10Akdjnj-EHvrYMZiSiYhgWQmPBERnTXG"
   },
   {
     "id": "ffm_70",
@@ -10723,6 +10759,35 @@ export const USER_STUDY_FILES = [
     "drivePreviewUrl": "https://drive.google.com/file/d/1EVkoYqZoAfQ6lX8JLJaE_B8tAtqc5COC/preview",
     "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1EVkoYqZoAfQ6lX8JLJaE_B8tAtqc5COC",
     "rawPath": "https://drive.google.com/file/d/1EVkoYqZoAfQ6lX8JLJaE_B8tAtqc5COC/preview",
+    "size": "ملف سحابي PDF",
+    "sizeReadable": "ملف سحابي PDF"
+  },
+  {
+    "id": "ffm_civil_1787772464444_6",
+    "title": "سلسلة تمارين حول الانحناء البسيط ـ إعداد الأستاذ سعدي اسم��عيل",
+    "rawFileName": "سلسلة_تمارين_حول_الانحناء_البسيط_ـ_إعداد_الأستاذ_سعدي_اسم��عيل.pdf",
+    "extension": "pdf",
+    "subjectId": "genie_civil",
+    "subjectAliases": [
+      "genie_civil",
+      "civil",
+      "gc"
+    ],
+    "subjectName": "الهندسة المدنية",
+    "streams": [
+      "technique_math"
+    ],
+    "streamIds": [
+      "technique_math"
+    ],
+    "category": "سلاسل وتمارين",
+    "author": "الأستاذ سعدي إسماعيل",
+    "fileUrl": "https://drive.google.com/file/d/1b-ylGKiKyQgRwhc0rosKpbwSZKDnk44p/preview",
+    "driveFileId": "1b-ylGKiKyQgRwhc0rosKpbwSZKDnk44p",
+    "driveFileUrl": "https://drive.google.com/file/d/1b-ylGKiKyQgRwhc0rosKpbwSZKDnk44p/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1b-ylGKiKyQgRwhc0rosKpbwSZKDnk44p/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1b-ylGKiKyQgRwhc0rosKpbwSZKDnk44p",
+    "rawPath": "https://drive.google.com/file/d/1b-ylGKiKyQgRwhc0rosKpbwSZKDnk44p/preview",
     "size": "ملف سحابي PDF",
     "sizeReadable": "ملف سحابي PDF"
   }
