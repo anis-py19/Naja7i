@@ -54,16 +54,6 @@ function App() {
     }
   });
 
-  // Dynamic Remote Config from Telegram Bot / Public Config
-  const [platformConfig, setPlatformConfig] = useState(null);
-
-  useEffect(() => {
-    fetch('/platform-config.json?' + Date.now())
-      .then(res => res.json())
-      .then(data => setPlatformConfig(data))
-      .catch(() => {});
-  }, []);
-
   const handleSelectStream = (streamId) => {
     setSelectedStreamId(streamId);
   };
@@ -75,10 +65,8 @@ function App() {
     });
   };
 
-  const isMaintenanceActive = platformConfig?.isMaintenanceMode ?? SITE_CONFIG.isMaintenanceMode;
-
   // If maintenance mode is activated and admin has not bypassed it, display MaintenancePage
-  if (isMaintenanceActive && !bypassMaintenance && location.pathname !== '/maintenance') {
+  if (SITE_CONFIG.isMaintenanceMode && !bypassMaintenance && location.pathname !== '/maintenance') {
     return (
       <MaintenancePage 
         onBypass={() => {
@@ -105,6 +93,13 @@ function App() {
           >
             إغلاق المعاينة ورؤية صفحة الصيانة
           </button>
+        </div>
+      )}
+
+      {/* Live Broadcast Notice Bar (يتم التحكم فيه وتفعيله عبر بوت التيليغرام) */}
+      {SITE_CONFIG.broadcastNotice?.active && (
+        <div className="bg-gradient-to-r from-rose-600 to-[#E11D48] text-white px-4 py-2 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 z-50 print:hidden shadow-sm animate-fadeIn">
+          <span>{SITE_CONFIG.broadcastNotice.text}</span>
         </div>
       )}
 

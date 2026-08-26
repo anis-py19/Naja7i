@@ -20,7 +20,13 @@ export const SITE_CONFIG = {
   estimatedReturn: 'سنعود قريباً جداً بإذن الله ⏱️',
 
   // البريد الإلكتروني للتواصل العاجل أثناء الصيانة
-  adminEmail: 'anisrayaneizri@gmail.com'
+  adminEmail: 'anisrayaneizri@gmail.com',
+
+  // 📢 شريط الإعلانات والتنبيهات العاجلة للطلبة (Live Broadcast Alert)
+  broadcastNotice: {
+    active: false,
+    text: '📢 تنبيه: تم تحديث مواضيع وحلول البكالوريا التجريبية لجميع الشعب الست!'
+  }
 };
 
 export default SITE_CONFIG;
