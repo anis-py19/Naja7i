@@ -6,6 +6,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { performDeepBacResearch } from './deepResearchAgent.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,6 +24,12 @@ const startTime = Date.now();
 
 // 🤖 Active Specialized Agents State (AGENTS.md)
 const AGENTS_STATE = {
+  bac_deep_research_agent: {
+    name: '🦅 وكيل البحث والتقصي العميق',
+    desc: 'البحث في المواقع والمذكرات وقنوات الأساتذة لاستخراج أحدث مصادر 2026',
+    status: 'نشط 🟢',
+    lastTask: 'مسح منصات وقنوات البكالوريا الجزائرية'
+  },
   lessons_curriculum_agent: {
     name: '📚 وكيل المنهاج والدروس',
     desc: 'تصنيف وهيكلة ملفات الملخصات وسلاسل التمارين لجميع الشعب الست',
@@ -157,8 +164,9 @@ function getMainKeyboard() {
   return {
     keyboard: [
       [{ text: '📊 حالة النظام والوكلاء' }, { text: '🚧 وضع الصيانة' }],
-      [{ text: '📢 شريط الإعلانات للطلبة' }, { text: '🦅 صيد مصادر البكالوريا' }],
-      [{ text: '🩺 فحص صحة المنصة' }, { text: '🤖 قائمة الوكلاء الستة' }]
+      [{ text: '🔍 بحث وتقصي عميق للمصادر' }, { text: '📢 شريط الإعلانات للطلبة' }],
+      [{ text: '🦅 صيد مصادر البكالوريا' }, { text: '🩺 فحص صحة المنصة' }],
+      [{ text: '🤖 قائمة الوكلاء المتخصصين' }]
     ],
     resize_keyboard: true
   };
@@ -452,6 +460,55 @@ async function handleUpdate(update) {
     });
 
     await sendMessage(chatId, `🎉 <b>تم نشر الإعلان العاجل أعلى الموقع بنجاح!</b>\n\n📢 <b>النص الظاهر للطلبة:</b>\n"${newBroadcastText}"`, getMainKeyboard());
+    return;
+  }
+
+  // 🔍 Deep Research & Sources Hunter
+  if (text === '🔍 بحث وتقصي عميق للمصادر' || text.startsWith('/research') || text.startsWith('/search')) {
+    let queryTopic = text.replace(/^\/(research|search)\s*/, '').trim();
+    if (!queryTopic || queryTopic === '🔍 بحث وتقصي عميق للمصادر') {
+      queryTopic = 'أحدث سلاسل تمارين وملخصات مقترحة لبكالوريا 2026 مع الحلول وروابط التحميل لجميع الشعب';
+    }
+
+    await sendMessage(chatId, `🦅 <b>بدأ وكيل البحث والتقصي الأكاديمي (Deep Research Agent) بالعمل...</b>\n🔍 <b>موضوع التقصي:</b> <i>"${queryTopic}"</i>\n⏳ جاري مسح المواقع التعليمية الجزائرية ومذكرات الأساتذة وقنوات اليوتيوب...`);
+
+    try {
+      const researchResult = await performDeepBacResearch({
+        topic: queryTopic,
+        subject: 'جميع المواد',
+        stream: 'جميع الشعب'
+      });
+
+      const reportText = `
+<b>🦅 تقرير التقصي الأكاديمي العميق (Naja7i Deep Research):</b>
+🎯 <b>الموضوع:</b> ${queryTopic}
+📅 <b>التاريخ:</b> ${new Date().toLocaleDateString('ar-DZ')}
+
+${researchResult.report}
+`;
+
+      const proposalId = 'research_' + Date.now();
+      PENDING_PROPOSALS.set(proposalId, {
+        agentId: 'bac_deep_research_agent',
+        title: queryTopic,
+        summary: `تقرير بحث وتقصي عميق يحتوي على مصادر وروابط مذكرات`,
+        actionData: researchResult,
+        createdAt: new Date()
+      });
+
+      const inlineKeyboard = {
+        inline_keyboard: [
+          [
+            { text: '✅ اعتماد وإضافة الروابط للموقع', callback_data: `approve_${proposalId}` },
+            { text: '❌ تجاهل التقرير', callback_data: `reject_${proposalId}` }
+          ]
+        ]
+      };
+
+      await sendMessage(chatId, reportText, inlineKeyboard);
+    } catch (err) {
+      await sendMessage(chatId, `⚠️ تعذر إكمال البحث: ${err.message}`, getMainKeyboard());
+    }
     return;
   }
 
