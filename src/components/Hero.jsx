@@ -58,16 +58,16 @@ export default function Hero({ onSelectStream, onOpenCalculator }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Academic Countdown Notice Bar */}
-        <div className="mb-8 p-4 rounded-2xl bg-white border border-[#E2E8F0] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm shadow-xs">
-          <div className="flex items-center gap-2 text-[#0F172A] font-bold">
+        <div className="mb-8 p-3.5 sm:p-4 rounded-2xl bg-white border border-[#E2E8F0] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm shadow-xs">
+          <div className="flex items-center gap-2 text-[#0F172A] font-bold flex-wrap justify-center sm:justify-start text-center sm:text-right">
             <HiClock className="w-5 h-5 text-[#E11D48] shrink-0" />
-            <span>العد التنازلي لبكالوريا {targetYear} (دورة جوان):</span>
-            <span className="font-mono bg-[#F8FAFC] px-2.5 py-0.5 rounded-md border border-[#E2E8F0] text-[#E11D48] font-black">
-              بقي {timeLeft.days} يوم و {timeLeft.hours} ساعة و {timeLeft.minutes} دقيقة
+            <span>العد التنازلي لبكالوريا {targetYear}:</span>
+            <span className="font-mono bg-[#F8FAFC] px-2.5 py-0.5 rounded-md border border-[#E2E8F0] text-[#E11D48] font-black text-xs sm:text-sm">
+              بقي {timeLeft.days} يوم و {timeLeft.hours} س و {timeLeft.minutes} د
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap justify-center">
             <Link
               to="/library"
               className="px-3 py-1.5 bg-[#E11D48] text-white rounded-lg text-xs font-bold hover:bg-[#be123c] transition-colors flex items-center gap-1 shadow-2xs"

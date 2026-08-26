@@ -18,7 +18,7 @@ export default function FloatingQuickActions({ onOpenCalculator, onOpenSearch })
   };
 
   return (
-    <div className="fixed bottom-5 left-5 z-40 flex flex-col gap-2">
+    <div className="fixed bottom-3.5 left-3.5 sm:bottom-5 sm:left-5 z-40 flex flex-col gap-2">
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
