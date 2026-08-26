@@ -10513,12 +10513,16 @@ export const USER_STUDY_FILES = [
       "math"
     ],
     "category": "ملخصات ودروس",
-    "author": "الأستاذ حمزة سمراني",
+    "author": "الأستاذ سمراني",
     "fileUrl": "/FileFromMe/Science/سمراني/ملخصات حمزة سمراني - الوحدة 01.pdf",
     "rawPath": "/FileFromMe/Science/سمراني/ملخصات حمزة سمراني - الوحدة 01.pdf",
     "size": "912 كيلوبايت",
     "sizeReadable": "912 كيلوبايت",
-    "sizeBytes": 933378
+    "sizeBytes": 933378,
+    "driveFileId": "1UXqU-_OgB1S2WE0RITCh4uky0DzOaFAu",
+    "driveFileUrl": "https://drive.google.com/file/d/1UXqU-_OgB1S2WE0RITCh4uky0DzOaFAu/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1UXqU-_OgB1S2WE0RITCh4uky0DzOaFAu/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1UXqU-_OgB1S2WE0RITCh4uky0DzOaFAu"
   },
   {
     "id": "ffm_290",
@@ -10541,12 +10545,16 @@ export const USER_STUDY_FILES = [
       "math"
     ],
     "category": "ملخصات ودروس",
-    "author": "الأستاذ حمزة سمراني",
+    "author": "الأستاذ سمراني",
     "fileUrl": "/FileFromMe/Science/سمراني/ملخصات حمزة سمراني - الوحدة 02.pdf",
     "rawPath": "/FileFromMe/Science/سمراني/ملخصات حمزة سمراني - الوحدة 02.pdf",
     "size": "773 كيلوبايت",
     "sizeReadable": "773 كيلوبايت",
-    "sizeBytes": 791545
+    "sizeBytes": 791545,
+    "driveFileId": "12pnUTzLCXVAfJBw7zIx7N9YV6eqHqrwc",
+    "driveFileUrl": "https://drive.google.com/file/d/12pnUTzLCXVAfJBw7zIx7N9YV6eqHqrwc/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/12pnUTzLCXVAfJBw7zIx7N9YV6eqHqrwc/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=12pnUTzLCXVAfJBw7zIx7N9YV6eqHqrwc"
   },
   {
     "id": "ffm_291",
@@ -10569,12 +10577,16 @@ export const USER_STUDY_FILES = [
       "math"
     ],
     "category": "ملخصات ودروس",
-    "author": "الأستاذ حمزة سمراني",
+    "author": "الأستاذ سمراني",
     "fileUrl": "/FileFromMe/Science/سمراني/ملخصات حمزة سمراني - الوحدة 03.pdf",
     "rawPath": "/FileFromMe/Science/سمراني/ملخصات حمزة سمراني - الوحدة 03.pdf",
     "size": "824 كيلوبايت",
     "sizeReadable": "824 كيلوبايت",
-    "sizeBytes": 843310
+    "sizeBytes": 843310,
+    "driveFileId": "1liHZsK4h-eQ_FuFdfZzw6NUcCK91S981",
+    "driveFileUrl": "https://drive.google.com/file/d/1liHZsK4h-eQ_FuFdfZzw6NUcCK91S981/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1liHZsK4h-eQ_FuFdfZzw6NUcCK91S981/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1liHZsK4h-eQ_FuFdfZzw6NUcCK91S981"
   },
   {
     "id": "ffm_292",
@@ -10597,12 +10609,16 @@ export const USER_STUDY_FILES = [
       "math"
     ],
     "category": "ملخصات ودروس",
-    "author": "الأستاذ حمزة سمراني",
+    "author": "الأستاذ سمراني",
     "fileUrl": "/FileFromMe/Science/سمراني/ملخصات حمزة سمراني - الوحدة 04.pdf",
     "rawPath": "/FileFromMe/Science/سمراني/ملخصات حمزة سمراني - الوحدة 04.pdf",
     "size": "1.6 ميغابايت",
     "sizeReadable": "1.6 ميغابايت",
-    "sizeBytes": 1630439
+    "sizeBytes": 1630439,
+    "driveFileId": "1RR-Ali7QNs7FJu2gthy5pRHjLpPUZhWQ",
+    "driveFileUrl": "https://drive.google.com/file/d/1RR-Ali7QNs7FJu2gthy5pRHjLpPUZhWQ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1RR-Ali7QNs7FJu2gthy5pRHjLpPUZhWQ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1RR-Ali7QNs7FJu2gthy5pRHjLpPUZhWQ"
   },
   {
     "id": "ffm_293",
@@ -10625,12 +10641,16 @@ export const USER_STUDY_FILES = [
       "math"
     ],
     "category": "ملخصات ودروس",
-    "author": "الأستاذ حمزة سمراني",
+    "author": "الأستاذ سمراني",
     "fileUrl": "/FileFromMe/Science/سمراني/ملخصات حمزة سمراني - الوحدة 05.pdf",
     "rawPath": "/FileFromMe/Science/سمراني/ملخصات حمزة سمراني - الوحدة 05.pdf",
     "size": "790 كيلوبايت",
     "sizeReadable": "790 كيلوبايت",
-    "sizeBytes": 809089
+    "sizeBytes": 809089,
+    "driveFileId": "118T2zITwaqli2lTyCmdBbZwfOeYzICWL",
+    "driveFileUrl": "https://drive.google.com/file/d/118T2zITwaqli2lTyCmdBbZwfOeYzICWL/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/118T2zITwaqli2lTyCmdBbZwfOeYzICWL/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=118T2zITwaqli2lTyCmdBbZwfOeYzICWL"
   },
   {
     "id": "ffm_294",
@@ -10653,12 +10673,16 @@ export const USER_STUDY_FILES = [
       "math"
     ],
     "category": "ملخصات ودروس",
-    "author": "الأستاذ حمزة سمراني",
+    "author": "الأستاذ سمراني",
     "fileUrl": "/FileFromMe/Science/سمراني/ملخصات حمزة سمراني - الوحدة 06.pdf",
     "rawPath": "/FileFromMe/Science/سمراني/ملخصات حمزة سمراني - الوحدة 06.pdf",
     "size": "907 كيلوبايت",
     "sizeReadable": "907 كيلوبايت",
-    "sizeBytes": 928539
+    "sizeBytes": 928539,
+    "driveFileId": "1522lu4EkX_T7doy2o2j5vhuaIamwDwjE",
+    "driveFileUrl": "https://drive.google.com/file/d/1522lu4EkX_T7doy2o2j5vhuaIamwDwjE/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1522lu4EkX_T7doy2o2j5vhuaIamwDwjE/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1522lu4EkX_T7doy2o2j5vhuaIamwDwjE"
   },
   {
     "id": "ffm_295",
@@ -10681,12 +10705,16 @@ export const USER_STUDY_FILES = [
       "math"
     ],
     "category": "ملخصات ودروس",
-    "author": "الأستاذ حمزة سمراني",
+    "author": "الأستاذ سمراني",
     "fileUrl": "/FileFromMe/Science/سمراني/ملخصات حمزة سمراني - الوحدة 07.pdf",
     "rawPath": "/FileFromMe/Science/سمراني/ملخصات حمزة سمراني - الوحدة 07.pdf",
     "size": "896 كيلوبايت",
     "sizeReadable": "896 كيلوبايت",
-    "sizeBytes": 917999
+    "sizeBytes": 917999,
+    "driveFileId": "1ZaYJ0rwHgD6Z-ctUme9WzTi7FP6SjZYM",
+    "driveFileUrl": "https://drive.google.com/file/d/1ZaYJ0rwHgD6Z-ctUme9WzTi7FP6SjZYM/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1ZaYJ0rwHgD6Z-ctUme9WzTi7FP6SjZYM/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1ZaYJ0rwHgD6Z-ctUme9WzTi7FP6SjZYM"
   },
   {
     "id": "ffm_296",
@@ -10709,12 +10737,16 @@ export const USER_STUDY_FILES = [
       "math"
     ],
     "category": "قوانين ومخططات",
-    "author": "أساتذة متميزون",
+    "author": "طلبة متفوقون في البكالوريا",
     "fileUrl": "/FileFromMe/Science/طلبة/مخططات_شاملة_لكل_الوحدات_في_مادة_العلوم_شعبة_علوم_تجريبية.pdf",
     "rawPath": "/FileFromMe/Science/طلبة/مخططات_شاملة_لكل_الوحدات_في_مادة_العلوم_شعبة_علوم_تجريبية.pdf",
     "size": "1.5 ميغابايت",
     "sizeReadable": "1.5 ميغابايت",
-    "sizeBytes": 1571375
+    "sizeBytes": 1571375,
+    "driveFileId": "1ywjFbsA2Lb9F3Bug0kuk8r3Q-2qccDlj",
+    "driveFileUrl": "https://drive.google.com/file/d/1ywjFbsA2Lb9F3Bug0kuk8r3Q-2qccDlj/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1ywjFbsA2Lb9F3Bug0kuk8r3Q-2qccDlj/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1ywjFbsA2Lb9F3Bug0kuk8r3Q-2qccDlj"
   },
   {
     "id": "ffm_297",
@@ -10737,12 +10769,16 @@ export const USER_STUDY_FILES = [
       "math"
     ],
     "category": "ملخصات ودروس",
-    "author": "الأستاذ مصطفى بن خريف",
+    "author": "طلبة متفوقون في البكالوريا",
     "fileUrl": "/FileFromMe/Science/طلبة/ملخص مصطفى بن خريف.pdf",
     "rawPath": "/FileFromMe/Science/طلبة/ملخص مصطفى بن خريف.pdf",
     "size": "3.0 ميغابايت",
     "sizeReadable": "3.0 ميغابايت",
-    "sizeBytes": 3181250
+    "sizeBytes": 3181250,
+    "driveFileId": "1r1Dw7pLx3zR87_qzuwe032pRBm41G2_p",
+    "driveFileUrl": "https://drive.google.com/file/d/1r1Dw7pLx3zR87_qzuwe032pRBm41G2_p/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1r1Dw7pLx3zR87_qzuwe032pRBm41G2_p/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1r1Dw7pLx3zR87_qzuwe032pRBm41G2_p"
   },
   {
     "id": "ffm_298",
@@ -10765,12 +10801,16 @@ export const USER_STUDY_FILES = [
       "math"
     ],
     "category": "ملخصات ودروس",
-    "author": "أساتذة متميزون",
+    "author": "طلبة متفوقون في البكالوريا",
     "fileUrl": "/FileFromMe/Science/طلبة/ملخص نهائي للعلوم الطبيعة.pdf",
     "rawPath": "/FileFromMe/Science/طلبة/ملخص نهائي للعلوم الطبيعة.pdf",
     "size": "940 كيلوبايت",
     "sizeReadable": "940 كيلوبايت",
-    "sizeBytes": 962832
+    "sizeBytes": 962832,
+    "driveFileId": "1eyjZKgKr7VL6BjzUaEOy-np--gezvZDn",
+    "driveFileUrl": "https://drive.google.com/file/d/1eyjZKgKr7VL6BjzUaEOy-np--gezvZDn/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1eyjZKgKr7VL6BjzUaEOy-np--gezvZDn/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1eyjZKgKr7VL6BjzUaEOy-np--gezvZDn"
   },
   {
     "id": "ffm_299",
@@ -10793,12 +10833,16 @@ export const USER_STUDY_FILES = [
       "math"
     ],
     "category": "ملخصات ودروس",
-    "author": "الأستاذ باحمي حسين",
+    "author": "طلبة متفوقون في البكالوريا",
     "fileUrl": "/FileFromMe/Science/طلبة/ملخص_العلوم_الطبيعية_3_ثانوي_المجال_الأول_الأستاذ_باحمي_حسين_نـــافع.pdf",
     "rawPath": "/FileFromMe/Science/طلبة/ملخص_العلوم_الطبيعية_3_ثانوي_المجال_الأول_الأستاذ_باحمي_حسين_نـــافع.pdf",
     "size": "6.3 ميغابايت",
     "sizeReadable": "6.3 ميغابايت",
-    "sizeBytes": 6567090
+    "sizeBytes": 6567090,
+    "driveFileId": "1UeKHvqFBTOvDJsAZcdCxhoILcJzTputj",
+    "driveFileUrl": "https://drive.google.com/file/d/1UeKHvqFBTOvDJsAZcdCxhoILcJzTputj/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1UeKHvqFBTOvDJsAZcdCxhoILcJzTputj/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1UeKHvqFBTOvDJsAZcdCxhoILcJzTputj"
   },
   {
     "id": "ffm_300",
@@ -10826,7 +10870,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/فراح عيسى/فراح عيسى الوحدة 01.pdf",
     "size": "9.0 ميغابايت",
     "sizeReadable": "9.0 ميغابايت",
-    "sizeBytes": 9447677
+    "sizeBytes": 9447677,
+    "driveFileId": "1qiGpNI8TGfx3_Gt-Lex6myTcu2gHWU3d",
+    "driveFileUrl": "https://drive.google.com/file/d/1qiGpNI8TGfx3_Gt-Lex6myTcu2gHWU3d/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1qiGpNI8TGfx3_Gt-Lex6myTcu2gHWU3d/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1qiGpNI8TGfx3_Gt-Lex6myTcu2gHWU3d"
   },
   {
     "id": "ffm_301",
@@ -10854,7 +10902,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/فراح عيسى/فراح عيسى الوحدة 02.pdf",
     "size": "8.3 ميغابايت",
     "sizeReadable": "8.3 ميغابايت",
-    "sizeBytes": 8721741
+    "sizeBytes": 8721741,
+    "driveFileId": "1rxXBPtZ9AGVkcGmIScaDWJq5a3hEh1D8",
+    "driveFileUrl": "https://drive.google.com/file/d/1rxXBPtZ9AGVkcGmIScaDWJq5a3hEh1D8/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1rxXBPtZ9AGVkcGmIScaDWJq5a3hEh1D8/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1rxXBPtZ9AGVkcGmIScaDWJq5a3hEh1D8"
   },
   {
     "id": "ffm_302",
@@ -10882,7 +10934,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/فراح عيسى/فراح عيسى الوحدة 03.pdf",
     "size": "1.9 ميغابايت",
     "sizeReadable": "1.9 ميغابايت",
-    "sizeBytes": 2006566
+    "sizeBytes": 2006566,
+    "driveFileId": "1DeKb1_qA_CRcl3d8GgSe09063qLtgkdj",
+    "driveFileUrl": "https://drive.google.com/file/d/1DeKb1_qA_CRcl3d8GgSe09063qLtgkdj/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1DeKb1_qA_CRcl3d8GgSe09063qLtgkdj/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1DeKb1_qA_CRcl3d8GgSe09063qLtgkdj"
   },
   {
     "id": "ffm_303",
@@ -10910,7 +10966,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/فراح عيسى/فراح عيسى الوحدة 04.pdf",
     "size": "9.2 ميغابايت",
     "sizeReadable": "9.2 ميغابايت",
-    "sizeBytes": 9671140
+    "sizeBytes": 9671140,
+    "driveFileId": "1fa1CRZyzBexnOZp4qukckp_qq6tYNidd",
+    "driveFileUrl": "https://drive.google.com/file/d/1fa1CRZyzBexnOZp4qukckp_qq6tYNidd/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1fa1CRZyzBexnOZp4qukckp_qq6tYNidd/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1fa1CRZyzBexnOZp4qukckp_qq6tYNidd"
   },
   {
     "id": "ffm_304",
@@ -10938,7 +10998,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/فراح عيسى/فراح عيسى الوحدة 05.pdf",
     "size": "10.5 ميغابايت",
     "sizeReadable": "10.5 ميغابايت",
-    "sizeBytes": 11003498
+    "sizeBytes": 11003498,
+    "driveFileId": "1exOxvMpYlHTbtOKKc_KSWSc8rx151WXL",
+    "driveFileUrl": "https://drive.google.com/file/d/1exOxvMpYlHTbtOKKc_KSWSc8rx151WXL/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1exOxvMpYlHTbtOKKc_KSWSc8rx151WXL/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1exOxvMpYlHTbtOKKc_KSWSc8rx151WXL"
   },
   {
     "id": "ffm_305",
@@ -10966,7 +11030,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/فراح عيسى/فراح عيسى الوحدة 06.pdf",
     "size": "14.3 ميغابايت",
     "sizeReadable": "14.3 ميغابايت",
-    "sizeBytes": 14993214
+    "sizeBytes": 14993214,
+    "driveFileId": "1G2EL-lucW8I7hmdJjhJpUKJAbVP8wElN",
+    "driveFileUrl": "https://drive.google.com/file/d/1G2EL-lucW8I7hmdJjhJpUKJAbVP8wElN/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1G2EL-lucW8I7hmdJjhJpUKJAbVP8wElN/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1G2EL-lucW8I7hmdJjhJpUKJAbVP8wElN"
   },
   {
     "id": "ffm_306",
@@ -10994,7 +11062,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/فراح عيسى/فراح عيسى الوحدة 07.pdf",
     "size": "4.0 ميغابايت",
     "sizeReadable": "4.0 ميغابايت",
-    "sizeBytes": 4181417
+    "sizeBytes": 4181417,
+    "driveFileId": "1dhqAHO-l17OSL-L4ZyYyUvlFlk1rjBER",
+    "driveFileUrl": "https://drive.google.com/file/d/1dhqAHO-l17OSL-L4ZyYyUvlFlk1rjBER/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1dhqAHO-l17OSL-L4ZyYyUvlFlk1rjBER/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1dhqAHO-l17OSL-L4ZyYyUvlFlk1rjBER"
   },
   {
     "id": "ffm_307",
@@ -11022,7 +11094,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/فراح عيسى/فراح عيسى الوحدة 08.pdf",
     "size": "6.4 ميغابايت",
     "sizeReadable": "6.4 ميغابايت",
-    "sizeBytes": 6721591
+    "sizeBytes": 6721591,
+    "driveFileId": "1rVYdBueqkVcgIAHEKPsw4Mo1qKzzErOQ",
+    "driveFileUrl": "https://drive.google.com/file/d/1rVYdBueqkVcgIAHEKPsw4Mo1qKzzErOQ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1rVYdBueqkVcgIAHEKPsw4Mo1qKzzErOQ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1rVYdBueqkVcgIAHEKPsw4Mo1qKzzErOQ"
   },
   {
     "id": "ffm_308",
@@ -11114,7 +11190,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/كتفي شريف زينة/العدد_2_من_مجلة_الهيستونات_حول_بنية_البروتين_للاستاذة_كتفي_شريف.pdf",
     "size": "7.0 ميغابايت",
     "sizeReadable": "7.0 ميغابايت",
-    "sizeBytes": 7310448
+    "sizeBytes": 7310448,
+    "driveFileId": "1W1qp4c1p_aNb4H51OsEklaUbMtfmqico",
+    "driveFileUrl": "https://drive.google.com/file/d/1W1qp4c1p_aNb4H51OsEklaUbMtfmqico/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1W1qp4c1p_aNb4H51OsEklaUbMtfmqico/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1W1qp4c1p_aNb4H51OsEklaUbMtfmqico"
   },
   {
     "id": "ffm_311",
@@ -11142,7 +11222,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/كتفي شريف زينة/العدد_3_من_مجلة_الهستونات_الخاص_بالانزيمات_للاستاذة_كتفي_شريف.pdf",
     "size": "1.7 ميغابايت",
     "sizeReadable": "1.7 ميغابايت",
-    "sizeBytes": 1779196
+    "sizeBytes": 1779196,
+    "driveFileId": "1ezZcdxDpNXzFUW1A3hTyb--CLgXTk1RW",
+    "driveFileUrl": "https://drive.google.com/file/d/1ezZcdxDpNXzFUW1A3hTyb--CLgXTk1RW/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1ezZcdxDpNXzFUW1A3hTyb--CLgXTk1RW/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1ezZcdxDpNXzFUW1A3hTyb--CLgXTk1RW"
   },
   {
     "id": "ffm_312",
@@ -11170,7 +11254,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/كتفي شريف زينة/مجلة_الهستونات_العدد_1_تركيب_البروتين_للاستاذة_كتفي_شريف_زينة.pdf",
     "size": "2.9 ميغابايت",
     "sizeReadable": "2.9 ميغابايت",
-    "sizeBytes": 2998615
+    "sizeBytes": 2998615,
+    "driveFileId": "1kvBI-yQWFhCjjj1HRj57IQZ6BXl9myHg",
+    "driveFileUrl": "https://drive.google.com/file/d/1kvBI-yQWFhCjjj1HRj57IQZ6BXl9myHg/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1kvBI-yQWFhCjjj1HRj57IQZ6BXl9myHg/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1kvBI-yQWFhCjjj1HRj57IQZ6BXl9myHg"
   },
   {
     "id": "ffm_313",
@@ -11198,7 +11286,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/كتفي شريف زينة/مجلة_الهستونات_العدد_الخامس_في_الاتصال_العصبي_الاستاذة_كتفي_شريف.pdf",
     "size": "7.3 ميغابايت",
     "sizeReadable": "7.3 ميغابايت",
-    "sizeBytes": 7602821
+    "sizeBytes": 7602821,
+    "driveFileId": "12zCIYsMJ99-MGVBb9pJoy7Hc5XoXzUH-",
+    "driveFileUrl": "https://drive.google.com/file/d/12zCIYsMJ99-MGVBb9pJoy7Hc5XoXzUH-/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/12zCIYsMJ99-MGVBb9pJoy7Hc5XoXzUH-/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=12zCIYsMJ99-MGVBb9pJoy7Hc5XoXzUH-"
   },
   {
     "id": "ffm_314",
@@ -11226,7 +11318,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/كتفي شريف زينة/مجلة_الهيستونات_العدد_4_مناعة_للاستاذة_كتفي_شريف_زينة.pdf",
     "size": "9.5 ميغابايت",
     "sizeReadable": "9.5 ميغابايت",
-    "sizeBytes": 9963878
+    "sizeBytes": 9963878,
+    "driveFileId": "1jGgVS7PIL6CkSjZnSCu-4q-5wIvNgQHn",
+    "driveFileUrl": "https://drive.google.com/file/d/1jGgVS7PIL6CkSjZnSCu-4q-5wIvNgQHn/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1jGgVS7PIL6CkSjZnSCu-4q-5wIvNgQHn/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1jGgVS7PIL6CkSjZnSCu-4q-5wIvNgQHn"
   },
   {
     "id": "ffm_315",
@@ -11254,7 +11350,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Science/كتفي شريف زينة/مخطط_حو_ل_الانزيمات_الاستاذة_كتفي.pdf",
     "size": "669 كيلوبايت",
     "sizeReadable": "669 كيلوبايت",
-    "sizeBytes": 684586
+    "sizeBytes": 684586,
+    "driveFileId": "1GQfvFdK0ihj2jiuWYz-PcBr76pFdEkWX",
+    "driveFileUrl": "https://drive.google.com/file/d/1GQfvFdK0ihj2jiuWYz-PcBr76pFdEkWX/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1GQfvFdK0ihj2jiuWYz-PcBr76pFdEkWX/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1GQfvFdK0ihj2jiuWYz-PcBr76pFdEkWX"
   },
   {
     "id": "ffm_316",
