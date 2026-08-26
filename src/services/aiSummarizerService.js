@@ -1,5 +1,6 @@
 import * as pdfjsLib from 'pdfjs-dist';
 import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
+import { analyzeBacContent } from './bacCurriculumValidator';
 
 // Configure worker for in-browser PDF text extraction
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
@@ -64,6 +65,15 @@ export async function generateAiSummary({
   const activeKey = (apiKey && apiKey.trim()) || import.meta.env.VITE_GEMINI_API_KEY;
   if (!activeKey || !activeKey.trim()) {
     throw new Error('يرجى إدخال مفتاح Google Gemini API للمتابعة. (المفتاح مجاني بالكامل)');
+  }
+
+  // Pre-flight deep keyword analysis for text input
+  let validationResult = null;
+  if (rawText && rawText.trim().length > 30 && !inlineFile) {
+    validationResult = analyzeBacContent(rawText);
+    if (!validationResult.isValidBac) {
+      throw new Error('⛔ عذراً، لم يتم العثور على أي مصطلحات أو كلمات مفتاحية تنتمي لمنهاج البكالوريا الجزائرية في النص المرفق! يرجى رفع درس أو ملخص متعلق بالمنهاج الدراسي لشهادة البكالوريا (3AS).');
+    }
   }
 
   const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${activeKey.trim()}`;
@@ -176,8 +186,12 @@ ${modeInstruction}
       text: `يرجى تحليل هذا الملف المرفق وتلخيصه وفق النمط والتعليمات المحددة.`
     });
   } else if (rawText && rawText.trim()) {
+    let extraContext = '';
+    if (validationResult && validationResult.matchedSubject) {
+      extraContext = `\n[ملاحظة تحليلية]: تم رصد مصطلحات تنتمي لمادة (${validationResult.matchedSubject}) مثل: ${validationResult.matchedKeywords.join('، ')}.\n`;
+    }
     contentsParts.push({
-      text: `إليك نص الدرس / الوثيقة المراد تلخيصها:\n\n${rawText}`
+      text: `إليك نص الدرس / الوثيقة المراد تلخيصها:${extraContext}\n\n${rawText}`
     });
   } else {
     throw new Error('يرجى تقديم نص أو رفع ملف للتلخيص.');
