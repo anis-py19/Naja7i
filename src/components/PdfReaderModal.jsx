@@ -10,20 +10,16 @@ import {
   HiPlus,
   HiMinus,
   HiRefresh,
-  HiFolderDownload,
-  HiEye,
-  HiSparkles
+  HiFolderDownload
 } from 'react-icons/hi';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as pdfjsLib from 'pdfjs-dist';
 import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 
-// Configure local worker bundled by Vite for optional Canvas engine
+// Configure local worker bundled by Vite
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
-/**
- * 🔄 Helper to transform Google Drive URLs to embeddable preview URLs
- */
+// Helper to transform Google Drive URLs to embeddable preview URLs
 export function getDrivePreviewUrl(url) {
   if (!url) return null;
   
@@ -48,55 +44,20 @@ export function getDrivePreviewUrl(url) {
   return null;
 }
 
-/**
- * 🛠️ Resolve safe and properly encoded URL for local or remote files
- */
-export function resolveSafeFileUrl(rawUrl) {
-  if (!rawUrl) return '';
-
-  let cleaned = rawUrl.trim();
-
-  // If starts with FileFromMe without leading slash
-  if (cleaned.startsWith('FileFromMe/')) {
-    cleaned = '/' + cleaned;
-  } else if (cleaned.startsWith('public/FileFromMe/')) {
-    cleaned = '/' + cleaned.replace(/^public\//, '');
-  }
-
-  // Encode spaces and Arabic URI components safely
-  if (cleaned.startsWith('http://') || cleaned.startsWith('https://')) {
-    try {
-      return encodeURI(decodeURI(cleaned));
-    } catch {
-      return cleaned;
-    }
-  }
-
-  if (cleaned.startsWith('/')) {
-    try {
-      return encodeURI(decodeURI(cleaned));
-    } catch {
-      return cleaned;
-    }
-  }
-
-  return cleaned;
-}
-
 export default function PdfReaderModal({ file, isOpen, onClose }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
-  
-  // Viewer Engine Mode: 'iframe' (Default & Recommended) | 'google_docs' | 'canvas'
-  const [engineMode, setEngineMode] = useState('iframe');
-  const [iframeKey, setIframeKey] = useState(0);
+  const [useIframeFallback, setUseIframeFallback] = useState(false);
 
-  // PDF.js Canvas State (for canvas fallback mode)
+  // PDF.js State (for local files)
   const [pdfDoc, setPdfDoc] = useState(null);
   const [pageNum, setPageNum] = useState(1);
   const [numPages, setNumPages] = useState(0);
   const [scale, setScale] = useState(1.2);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Blob URL for local files
+  const [blobUrl, setBlobUrl] = useState(null);
 
   const canvasRef = useRef(null);
   const renderTaskRef = useRef(null);
@@ -107,51 +68,60 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
   const drivePreviewUrl = getDrivePreviewUrl(rawUrl);
   const isGoogleDrive = Boolean(drivePreviewUrl);
 
-  const safeFileUrl = resolveSafeFileUrl(rawUrl);
-
-  // Construct iframe source URL based on file type and engine
-  const effectiveIframeSrc = isGoogleDrive
-    ? drivePreviewUrl
-    : engineMode === 'google_docs' && safeFileUrl.startsWith('http')
-      ? `https://docs.google.com/viewer?url=${encodeURIComponent(safeFileUrl)}&embedded=true`
-      : `${safeFileUrl}#toolbar=1&navpanes=1&scrollbar=1&view=FitH`;
+  const safeEncodedUrl = rawUrl.startsWith('http') || rawUrl.startsWith('/') 
+    ? encodeURI(decodeURI(rawUrl)) 
+    : rawUrl;
 
   const fileName = file.rawFileName || `${file.title || 'document'}.${file.extension || 'pdf'}`;
   const fileSize = file.sizeReadable || file.size || '';
   const isPdf = isGoogleDrive || !file.extension || file.extension.toLowerCase() === 'pdf' || rawUrl.toLowerCase().endsWith('.pdf');
 
-  // Keyboard shortcut (Escape to close)
+  // Load PDF logic
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+    if (!isOpen || !file) return;
 
-  // Load PDF.js only if user explicitly switches to 'canvas' engine
-  useEffect(() => {
-    if (!isOpen || !file || isGoogleDrive || engineMode !== 'canvas' || !isPdf) return;
+    // If it's a Google Drive URL, it loads instantly in Google Drive iFrame
+    if (isGoogleDrive) {
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
+    if (!isPdf) {
+      setLoading(false);
+      return;
+    }
 
     let isMounted = true;
+    let createdBlobUrl = null;
 
-    async function loadCanvasDocument() {
+    async function loadDocument() {
       setLoading(true);
       setError(null);
       setPageNum(1);
+      setUseIframeFallback(false);
 
       try {
-        const response = await fetch(safeFileUrl);
-        if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
+        // Fetch file as arrayBuffer
+        let response = await fetch(safeEncodedUrl);
+        if (!response.ok) {
+          // Retry with rawUrl if encoded failed
+          response = await fetch(rawUrl);
+        }
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        
         const arrayBuffer = await response.arrayBuffer();
+        const uint8Array = new Uint8Array(arrayBuffer);
+        
+        const blob = new Blob([uint8Array], { type: 'application/pdf' });
+        createdBlobUrl = URL.createObjectURL(blob);
+        if (isMounted) {
+          setBlobUrl(createdBlobUrl);
+        }
 
-        const loadingTask = pdfjsLib.getDocument({
-          data: arrayBuffer,
-          cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@legacy/cmaps/',
-          cMapPacked: true,
-          standardFontDataUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@legacy/standard_fonts/'
+        // Initialize PDF.js directly with Uint8Array data
+        const loadingTask = pdfjsLib.getDocument({ 
+          data: uint8Array
         });
 
         const loadedPdf = await loadingTask.promise;
@@ -162,16 +132,15 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
           setLoading(false);
         }
       } catch (err) {
-        console.warn('Canvas PDF load error, reverting to iFrame:', err);
+        console.warn('PDF.js canvas load error:', err);
         if (isMounted) {
-          setError('تعذر عرض الملف في وضع Canvas، تم التحويل تلقائياً لمستعرض iFrame المباشر.');
+          setError('تعذر عرض المستند على المتصفح مباشرة. يمكنك تحميل الملف فوراً بالزر أدناه.');
           setLoading(false);
-          setEngineMode('iframe');
         }
       }
     }
 
-    loadCanvasDocument();
+    loadDocument();
 
     return () => {
       isMounted = false;
@@ -180,12 +149,15 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
           renderTaskRef.current.cancel();
         } catch {}
       }
+      if (createdBlobUrl) {
+        URL.revokeObjectURL(createdBlobUrl);
+      }
     };
-  }, [file, isOpen, safeFileUrl, engineMode, isPdf, isGoogleDrive]);
+  }, [file, isOpen, safeEncodedUrl, isPdf, isGoogleDrive]);
 
-  // Render Page on Canvas when in Canvas mode
+  // Render Current Page on Canvas for local files
   useEffect(() => {
-    if (engineMode !== 'canvas' || !pdfDoc || !canvasRef.current || loading || error) return;
+    if (isGoogleDrive || !pdfDoc || !canvasRef.current || loading || error || useIframeFallback) return;
 
     let isCancelled = false;
 
@@ -227,11 +199,11 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
     return () => {
       isCancelled = true;
     };
-  }, [pdfDoc, pageNum, scale, loading, error, engineMode]);
+  }, [pdfDoc, pageNum, scale, loading, error, useIframeFallback, isGoogleDrive]);
 
   const handleDownload = (e) => {
     e.stopPropagation();
-    const targetUrl = isGoogleDrive ? rawUrl : safeFileUrl;
+    const targetUrl = isGoogleDrive ? rawUrl : (blobUrl || safeEncodedUrl);
     const link = document.createElement('a');
     link.href = targetUrl;
     link.download = fileName;
@@ -240,10 +212,6 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  };
-
-  const handleReloadIframe = () => {
-    setIframeKey(prev => prev + 1);
   };
 
   const changePage = (offset) => {
@@ -255,20 +223,16 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
 
   return (
     <AnimatePresence>
-      <div 
-        className="fixed inset-0 z-50 flex items-center justify-center p-1 sm:p-4 bg-slate-950/85 backdrop-blur-xs font-['Cairo']"
-        onClick={onClose}
-      >
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-1 sm:p-4 bg-slate-950/85 backdrop-blur-xs font-['Cairo']">
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.98 }}
           transition={{ duration: 0.15 }}
-          onClick={(e) => e.stopPropagation()}
           className={`relative w-full bg-white border border-[#E2E8F0] rounded-2xl shadow-2xl flex flex-col transition-all overflow-hidden ${
             isFullscreen 
               ? 'fixed inset-1 sm:inset-2 z-50 h-[calc(100vh-8px)] sm:h-[calc(100vh-16px)] max-w-none' 
-              : 'max-w-6xl h-[94vh]'
+              : 'max-w-6xl h-[92vh]'
           }`}
         >
           
@@ -286,30 +250,26 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                 </h3>
                 <div className="flex items-center gap-2 text-[10px] text-slate-400">
                   <span className="text-rose-300 font-bold">{file.subjectName}</span>
-                  {isGoogleDrive ? (
-                    <span className="text-blue-400 font-bold">• Google Drive Embed</span>
-                  ) : (
-                    <span className="text-emerald-400 font-bold">• مستعرض iFrame التفاعلي</span>
-                  )}
+                  {isGoogleDrive && <span className="text-blue-400 font-bold">• Google Drive</span>}
                   {fileSize && <span>• {fileSize}</span>}
                   {file.author && <span className="hidden sm:inline">• {file.author}</span>}
                 </div>
               </div>
             </div>
 
-            {/* Viewer Navigation & Zoom (Canvas mode only) */}
-            {engineMode === 'canvas' && !isGoogleDrive && isPdf && !loading && numPages > 0 && (
+            {/* Viewer Navigation & Zoom Controls (Only for local Canvas mode) */}
+            {!isGoogleDrive && isPdf && !loading && !error && !useIframeFallback && numPages > 0 && (
               <div className="flex items-center gap-1 bg-slate-800/90 border border-slate-700 rounded-xl px-2 py-1">
                 <button
                   onClick={() => changePage(-1)}
                   disabled={pageNum <= 1}
-                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 disabled:opacity-40 cursor-pointer"
+                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 disabled:opacity-40 disabled:hover:bg-transparent cursor-pointer transition-colors"
                   title="الصفحة السابقة"
                 >
                   <HiChevronRight className="w-4 h-4" />
                 </button>
 
-                <div className="text-xs font-bold px-1.5 text-white flex items-center gap-1">
+                <div className="text-xs font-mono font-bold px-1.5 text-white flex items-center gap-1">
                   <span>{pageNum}</span>
                   <span className="text-slate-400">/</span>
                   <span className="text-slate-400">{numPages}</span>
@@ -318,7 +278,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                 <button
                   onClick={() => changePage(1)}
                   disabled={pageNum >= numPages}
-                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 disabled:opacity-40 cursor-pointer"
+                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 disabled:opacity-40 disabled:hover:bg-transparent cursor-pointer transition-colors"
                   title="الصفحة التالية"
                 >
                   <HiChevronLeft className="w-4 h-4" />
@@ -328,14 +288,19 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
 
                 <button
                   onClick={zoomOut}
-                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 cursor-pointer"
+                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 cursor-pointer transition-colors"
                   title="تصغير"
                 >
                   <HiMinus className="w-3.5 h-3.5" />
                 </button>
+
+                <span className="text-[11px] font-mono font-bold px-1 text-slate-300">
+                  {Math.round(scale * 100)}%
+                </span>
+
                 <button
                   onClick={zoomIn}
-                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 cursor-pointer"
+                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 cursor-pointer transition-colors"
                   title="تكبير"
                 >
                   <HiPlus className="w-3.5 h-3.5" />
@@ -343,37 +308,26 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
               </div>
             )}
 
-            {/* Action Tools & Engine Switcher */}
+            {/* Action Tools */}
             <div className="flex items-center gap-1.5 shrink-0">
               
-              {/* Reload iFrame Button */}
-              {engineMode === 'iframe' && (
-                <button
-                  onClick={handleReloadIframe}
-                  className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors cursor-pointer"
-                  title="إعادة تحميل المستند"
-                >
-                  <HiRefresh className="w-4 h-4" />
-                </button>
-              )}
-
-              {/* Direct Download Button */}
+              {/* Direct Download / Open Button */}
               <button
                 onClick={handleDownload}
                 className="px-3 py-1.5 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
                 title="تحميل الملف أو فتحه في Drive"
               >
                 <HiDownload className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">{isGoogleDrive ? 'فتح في Drive' : 'تحميل الملف'}</span>
+                <span className="hidden sm:inline">{isGoogleDrive ? 'فتح في Drive' : 'تحميل PDF'}</span>
               </button>
 
               {/* Open in new tab */}
               <a
-                href={isGoogleDrive ? rawUrl : safeFileUrl}
+                href={rawUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1"
-                title="فتح الملف في نافذة مستقلة"
+                title="فتح في لسان مستقل"
               >
                 <HiExternalLink className="w-4 h-4 text-slate-400" />
                 <span className="hidden md:inline">نافذة جديدة</span>
@@ -392,7 +346,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
               <button
                 onClick={onClose}
                 className="p-2 rounded-xl bg-slate-800 hover:bg-rose-600 text-slate-300 hover:text-white border border-slate-700 hover:border-rose-600 transition-colors cursor-pointer shadow-2xs"
-                title="إغلاق المستعرض (Esc)"
+                title="إغلاق المستعرض"
               >
                 <HiX className="w-4 h-4" />
               </button>
@@ -402,72 +356,99 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
           </div>
 
           {/* 2. Reader Body Area */}
-          <div className="flex-1 bg-[#1E293B] relative overflow-hidden flex flex-col items-center justify-start p-0 select-none">
+          <div className="flex-1 bg-[#1E293B] relative overflow-auto flex flex-col items-center justify-start p-0 select-none">
             
-            {/* Direct High-Performance iFrame Reader (DEFAULT & RECOMMENDED) */}
-            {engineMode === 'iframe' && (
-              <div className="w-full h-full bg-white relative">
-                <iframe
-                  key={iframeKey}
-                  src={effectiveIframeSrc}
-                  className="w-full h-full border-0 bg-white block"
-                  allow="autoplay; fullscreen"
-                  title={file.title || 'Naja7i Document Reader'}
-                />
-              </div>
-            )}
-
-            {/* Non-PDF Files Card */}
-            {!isPdf && engineMode !== 'iframe' && (
-              <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-white rounded-2xl border border-slate-700 m-4 max-w-md space-y-4">
-                <div className="w-16 h-16 rounded-2xl bg-rose-50 text-[#E11D48] flex items-center justify-center text-3xl mx-auto shadow-2xs">
-                  <HiFolderDownload />
-                </div>
-                <h4 className="text-base font-bold text-[#0F172A]">ملف مستند ({file.extension ? file.extension.toUpperCase() : 'DOC'})</h4>
-                <p className="text-xs text-[#64748B] leading-relaxed">
-                  هذا الملف بصيغة ({file.extension || 'Word'})، يمكنك تحميله مباشرة أو فتحه بواسطة تطبيق المستندات في جهازك.
-                </p>
-                <div className="flex items-center justify-center gap-3 pt-2">
-                  <button
-                    onClick={handleDownload}
-                    className="px-5 py-2.5 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer"
-                  >
-                    <HiDownload className="w-4 h-4" />
-                    <span>تحميل الملف الآن</span>
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Canvas Mode (Optional fallback) */}
-            {engineMode === 'canvas' && (
-              <div className="w-full h-full overflow-auto flex flex-col items-center justify-start p-4">
+            {/* Google Drive Direct High-Performance Embed */}
+            {isGoogleDrive ? (
+              <iframe
+                src={drivePreviewUrl}
+                className="w-full h-full border-0 bg-white"
+                allow="autoplay"
+                title={file.title || 'Google Drive Viewer'}
+              />
+            ) : (
+              <>
                 {loading && (
                   <div className="flex-1 flex flex-col items-center justify-center p-12 text-center text-white space-y-3">
                     <div className="w-10 h-10 border-3 border-rose-500 border-t-transparent rounded-full animate-spin mx-auto" />
-                    <h4 className="text-sm font-bold">جاري تجهيز صفحات المستند...</h4>
+                    <h4 className="text-sm font-bold">جاري فتح وتجهيز المستعرض...</h4>
+                    <p className="text-xs text-slate-400 max-w-xs">
+                      يتم تحميل وقراءة صفحات الـ PDF مباشرة داخل المتصفح.
+                    </p>
                   </div>
                 )}
 
                 {error && (
-                  <div className="p-6 bg-white rounded-2xl border border-slate-700 text-center space-y-3 m-4 max-w-md">
+                  <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-white rounded-2xl border border-slate-700 m-4 max-w-md space-y-3">
                     <div className="text-3xl">⚠️</div>
-                    <p className="text-xs text-[#64748B]">{error}</p>
-                    <button
-                      onClick={() => setEngineMode('iframe')}
-                      className="px-4 py-2 rounded-xl bg-[#E11D48] text-white text-xs font-bold"
-                    >
-                      العودة للمستعرض المباشر
-                    </button>
+                    <h4 className="text-sm font-bold text-[#0F172A]">{error}</h4>
+                    <p className="text-xs text-[#64748B]">
+                      يمكنك تحميل الملف مباشرة أو فتحه في علامة تبويب جديدة.
+                    </p>
+                    <div className="flex items-center gap-2 pt-2">
+                      <button
+                        onClick={handleDownload}
+                        className="px-4 py-2 rounded-xl bg-[#E11D48] text-white text-xs font-bold flex items-center gap-1.5 cursor-pointer"
+                      >
+                        <HiDownload className="w-4 h-4" />
+                        <span>تحميل الملف الآن</span>
+                      </button>
+                      <a
+                        href={rawUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 rounded-xl bg-slate-100 text-[#0F172A] text-xs font-bold flex items-center gap-1.5"
+                      >
+                        <HiExternalLink className="w-4 h-4" />
+                        <span>فتح الرابط</span>
+                      </a>
+                    </div>
                   </div>
                 )}
 
-                {!loading && !error && (
-                  <div className="bg-white rounded-lg shadow-2xl overflow-hidden border border-slate-700 max-w-full">
-                    <canvas ref={canvasRef} className="max-w-full h-auto block" />
+                {/* Non-PDF Files (e.g. DOCX / RAR) */}
+                {!isPdf && !loading && (
+                  <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-white rounded-2xl border border-slate-700 m-4 max-w-md space-y-4">
+                    <div className="w-16 h-16 rounded-2xl bg-rose-50 text-[#E11D48] flex items-center justify-center text-3xl mx-auto shadow-2xs">
+                      <HiFolderDownload />
+                    </div>
+                    <h4 className="text-base font-bold text-[#0F172A]">ملف مستند ({file.extension ? file.extension.toUpperCase() : 'DOC'})</h4>
+                    <p className="text-xs text-[#64748B] leading-relaxed">
+                      هذا الملف بصيغة ({file.extension || 'Word'})، يمكنك تحميله مباشرة أو فتحه بواسطة تطبيق المستندات في جهازك.
+                    </p>
+                    <div className="flex items-center justify-center gap-3 pt-2">
+                      <button
+                        onClick={handleDownload}
+                        className="px-5 py-2.5 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer"
+                      >
+                        <HiDownload className="w-4 h-4" />
+                        <span>تحميل الملف الآن</span>
+                      </button>
+                    </div>
                   </div>
                 )}
-              </div>
+
+                {/* In-App Canvas PDF Renderer */}
+                {isPdf && !loading && !error && !useIframeFallback && (
+                  <div className="flex flex-col items-center justify-center max-w-full p-2 sm:p-4">
+                    <div className="bg-white rounded-lg shadow-2xl overflow-hidden border border-slate-700 max-w-full">
+                      <canvas 
+                        ref={canvasRef} 
+                        className="max-w-full h-auto block"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Safe Blob iFrame Fallback */}
+                {isPdf && !loading && !error && useIframeFallback && blobUrl && (
+                  <iframe
+                    src={`${blobUrl}#toolbar=1&navpanes=0&scrollbar=1`}
+                    className="w-full h-full border-0 bg-white"
+                    title={file.title || 'PDF Viewer'}
+                  />
+                )}
+              </>
             )}
 
           </div>
@@ -480,15 +461,8 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
               <span className="text-rose-400 font-medium truncate">{file.category || 'ملخص دراسي'}</span>
             </div>
 
-            <div className="flex items-center gap-3 shrink-0">
-              {/* Quick Engine Switcher Link */}
-              <button
-                onClick={() => setEngineMode(engineMode === 'iframe' ? 'canvas' : 'iframe')}
-                className="text-[10px] text-slate-400 hover:text-rose-300 underline cursor-pointer"
-              >
-                {engineMode === 'iframe' ? 'تبديل لوضع Canvas' : 'تبديل لمستعرض iFrame المباشر'}
-              </button>
-              <span className="text-[10px] text-slate-500 hidden sm:inline">منصة نجاحي — قراءة وتصفح فوري 🇩🇿</span>
+            <div className="flex items-center gap-2 shrink-0">
+              <span className="text-[10px] text-slate-500">منصة نجاحي — مستعرض ذكي 🇩🇿</span>
             </div>
           </div>
 
