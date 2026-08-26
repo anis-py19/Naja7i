@@ -103,16 +103,24 @@ export async function generateAiSummary({
 
     case 'mindmap':
       modeInstruction = `
-النمط المطلوب: مخطط ذهني هيكلي وتسلسل مفاهيمي (Structured Mindmap).
-قم بتنظيم محتوى الدرس في هيكل شجري منطقي:
-- الفكرة العامة للوحدة
-  └── المحور 1
-      ├── المفاهيم الفرعية
-      └── التطبيقات
-  └── المحور 2
-      ├── القواعد
-      └── الاستنتاجات
-- جدول المقارنة بين العناصر الأساسية المتشابهة إن وجدت.
+النمط المطلوب: مخطط ذهني بصري وهيكلي متكامل (Visual Interactive Mindmap).
+قم بتنظيم محتوى الدرس في شكل محاور رئيسية وفروع واضحة، وفي نهاية إجابتك، أرفق كود JSON التالي بالضبط داخل \`\`\`json\`\`\` ليتمكن النظام من رسم المخطط البصري الملون:
+
+\`\`\`json
+{
+  "title": "عنوان الدرس الرئيسي",
+  "branches": [
+    {
+      "title": "اسم المحور 1",
+      "nodes": ["العنصر أو المفهوم 1", "العنصر أو المفهوم 2"]
+    },
+    {
+      "title": "اسم المحور 2",
+      "nodes": ["العنصر أو المفهوم 1", "العنصر أو المفهوم 2"]
+    }
+  ]
+}
+\`\`\`
 `;
       break;
 
@@ -282,7 +290,61 @@ ${keyPoints.length > 0 ? keyPoints.map(k => `${k}`).join('\n') : lines.slice(0, 
 ## 🎯 3. نصائح منهجية لبكالوريا الجزائر 🇩🇿:
 - احرص على حفظ المصطلحات والكلمات المفتاحية المعتمدة في التصحيح النموذجي.
 - قم بحل تمارين البكالوريا السابقة الخاصة بهذه الوحدة لتثبيت طرق طرح الأسئلة.
-
-> 💡 **ملاحظة:** هذا ملخص مستخرج محلياً. للحصول على تحليل ذكي فائق الدقة وتوليد أسئلة ونقاط حفظ تفاعلية، أضف مفتاح **Google Gemini API** المجاني من خيار الإعدادات بالأعلى.
 `;
 }
+
+/**
+ * 🗺️ Parse raw AI text or JSON block into structured Mindmap Node Tree
+ */
+export function parseMindmapTextToJson(text) {
+  if (!text) return null;
+
+  // 1. Try to extract JSON block inside ```json ... ```
+  const jsonMatch = text.match(/```json\s*([\s\S]*?)\s*```/);
+  if (jsonMatch) {
+    try {
+      const parsed = JSON.parse(jsonMatch[1]);
+      if (parsed.title && Array.isArray(parsed.branches) && parsed.branches.length > 0) {
+        return parsed;
+      }
+    } catch {
+      // Continue to heuristic text parser
+    }
+  }
+
+  // 2. Heuristic parser from markdown headings (## / ### / - bullets)
+  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+  let title = 'مخطط الدرس المفاهيمي';
+  const branches = [];
+  let currentBranch = null;
+
+  for (const line of lines) {
+    if (line.startsWith('# ')) {
+      title = line.replace('# ', '').trim();
+    } else if (line.startsWith('## ') || line.startsWith('### ') || line.match(/^[1-9]\.\s+/)) {
+      if (currentBranch && currentBranch.nodes.length > 0) {
+        branches.push(currentBranch);
+      }
+      currentBranch = {
+        title: line.replace(/^[#\d\.\-\s]+/, '').trim(),
+        nodes: []
+      };
+    } else if (line.startsWith('- ') || line.startsWith('• ') || line.startsWith('* ') || line.includes('├──') || line.includes('└──')) {
+      const nodeText = line.replace(/^[-•*│├└─\s]+/, '').trim();
+      if (nodeText && currentBranch) {
+        currentBranch.nodes.push(nodeText);
+      }
+    }
+  }
+
+  if (currentBranch && currentBranch.nodes.length > 0) {
+    branches.push(currentBranch);
+  }
+
+  if (branches.length > 0) {
+    return { title, branches };
+  }
+
+  return null;
+}
+

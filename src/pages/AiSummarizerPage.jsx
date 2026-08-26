@@ -21,14 +21,17 @@ import {
   extractTextFromPdf, 
   fileToBase64, 
   generateAiSummary, 
-  generateLocalHeuristicSummary 
+  generateLocalHeuristicSummary,
+  parseMindmapTextToJson
 } from '../services/aiSummarizerService';
+import VisualMindmapViewer from '../components/VisualMindmapViewer';
 
 export default function AiSummarizerPage() {
   const [inputTab, setInputTab] = useState('file'); // 'file' | 'text'
   const [selectedFile, setSelectedFile] = useState(null);
   const [rawText, setRawText] = useState('');
-  const [summaryMode, setSummaryMode] = useState('comprehensive'); // 'comprehensive' | 'high_yield' | 'questions' | 'mindmap'
+  const [summaryMode, setSummaryMode] = useState('mindmap'); // 'comprehensive' | 'high_yield' | 'questions' | 'mindmap'
+  const [activeViewTab, setActiveViewTab] = useState('mindmap'); // 'mindmap' | 'text'
   
   // Secure Platform API Key (resolved silently from environment)
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
@@ -149,6 +152,11 @@ export default function AiSummarizerPage() {
       }
 
       setSummaryResult(finalSummary);
+      if (summaryMode === 'mindmap') {
+        setActiveViewTab('mindmap');
+      } else {
+        setActiveViewTab('text');
+      }
 
       // Save to history
       const newEntry = {
@@ -503,33 +511,60 @@ export default function AiSummarizerPage() {
                 </div>
 
                 {summaryResult && (
-                  <div className="flex items-center gap-1.5 print:hidden">
-                    <button
-                      onClick={handleCopy}
-                      className="px-2.5 py-1.5 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] flex items-center gap-1 transition-colors cursor-pointer"
-                      title="نسخ النص"
-                    >
-                      <HiClipboardCopy className="w-3.5 h-3.5 text-[#E11D48]" />
-                      <span>{copiedToast ? 'تم النسخ ✓' : 'نسخ'}</span>
-                    </button>
+                  <div className="flex items-center gap-2 print:hidden flex-wrap">
+                    {parseMindmapTextToJson(summaryResult) && (
+                      <div className="flex items-center p-1 bg-[#F1F5F9] rounded-xl border border-[#E2E8F0] gap-1">
+                        <button
+                          onClick={() => setActiveViewTab('mindmap')}
+                          className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
+                            activeViewTab === 'mindmap'
+                              ? 'bg-[#E11D48] text-white shadow-2xs'
+                              : 'text-[#475569] hover:text-[#0F172A]'
+                          }`}
+                        >
+                          <span>🗺️ مخطط بصري ملون</span>
+                        </button>
+                        <button
+                          onClick={() => setActiveViewTab('text')}
+                          className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
+                            activeViewTab === 'text'
+                              ? 'bg-[#E11D48] text-white shadow-2xs'
+                              : 'text-[#475569] hover:text-[#0F172A]'
+                          }`}
+                        >
+                          <span>📑 نص تفصيلي</span>
+                        </button>
+                      </div>
+                    )}
 
-                    <button
-                      onClick={handlePrint}
-                      className="px-2.5 py-1.5 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] flex items-center gap-1 transition-colors cursor-pointer"
-                      title="طباعة"
-                    >
-                      <HiPrinter className="w-3.5 h-3.5" />
-                      <span>طباعة</span>
-                    </button>
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        onClick={handleCopy}
+                        className="px-2.5 py-1.5 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] flex items-center gap-1 transition-colors cursor-pointer"
+                        title="نسخ النص"
+                      >
+                        <HiClipboardCopy className="w-3.5 h-3.5 text-[#E11D48]" />
+                        <span>{copiedToast ? 'تم النسخ ✓' : 'نسخ'}</span>
+                      </button>
 
-                    <button
-                      onClick={handleDownloadTxt}
-                      className="px-2.5 py-1.5 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer shadow-2xs"
-                      title="تحميل كملف Markdown"
-                    >
-                      <HiDownload className="w-3.5 h-3.5" />
-                      <span>تحميل</span>
-                    </button>
+                      <button
+                        onClick={handlePrint}
+                        className="px-2.5 py-1.5 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] flex items-center gap-1 transition-colors cursor-pointer"
+                        title="طباعة"
+                      >
+                        <HiPrinter className="w-3.5 h-3.5" />
+                        <span>طباعة</span>
+                      </button>
+
+                      <button
+                        onClick={handleDownloadTxt}
+                        className="px-2.5 py-1.5 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer shadow-2xs"
+                        title="تحميل كملف Markdown"
+                      >
+                        <HiDownload className="w-3.5 h-3.5" />
+                        <span>تحميل</span>
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
@@ -550,6 +585,12 @@ export default function AiSummarizerPage() {
                   </div>
                 </div>
               ) : summaryResult ? (
+                activeViewTab === 'mindmap' && parseMindmapTextToJson(summaryResult) ? (
+                  <VisualMindmapViewer 
+                    mindmapData={parseMindmapTextToJson(summaryResult)} 
+                    title={selectedFile?.name || 'مخطط الدرس المفاهيمي'} 
+                  />
+                ) : (
                 <div className="prose prose-sm max-w-none text-[#0F172A] leading-relaxed space-y-3 font-['Cairo']">
                   {summaryResult.split('\n').map((paragraph, idx) => {
                     const trimmed = paragraph.trim();
@@ -669,6 +710,7 @@ export default function AiSummarizerPage() {
                     );
                   })}
                 </div>
+                )
               ) : errorMessage ? (
                 <div className="py-16 text-center space-y-4 max-w-md mx-auto">
                   <div className="w-16 h-16 rounded-2xl bg-rose-50 border border-rose-200 text-3xl flex items-center justify-center mx-auto shadow-2xs">
