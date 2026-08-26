@@ -69,6 +69,12 @@ export default function Hero({ onSelectStream, onOpenCalculator }) {
 
           <div className="flex items-center gap-2 flex-wrap justify-center">
             <Link
+              to="/ai-summarizer"
+              className="px-3 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-rose-300 hover:text-white rounded-lg text-xs font-bold transition-colors flex items-center gap-1 shadow-2xs"
+            >
+              <span>الملخص الذكي (AI) 🤖</span>
+            </Link>
+            <Link
               to="/library"
               className="px-3 py-1.5 bg-[#E11D48] text-white rounded-lg text-xs font-bold hover:bg-[#be123c] transition-colors flex items-center gap-1 shadow-2xs"
             >

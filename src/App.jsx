@@ -17,6 +17,7 @@ import BacArchivePage from './pages/BacArchivePage';
 import YouTubeTeachersPage from './pages/YouTubeTeachersPage';
 import StudyPlannerPage from './pages/StudyPlannerPage';
 import QuizBankPage from './pages/QuizBankPage';
+import AiSummarizerPage from './pages/AiSummarizerPage';
 import CurriculumPage from './pages/CurriculumPage';
 import CalculatorPage from './pages/CalculatorPage';
 import CountdownPage from './pages/CountdownPage';
@@ -178,6 +179,14 @@ function App() {
             }
           />
 
+          {/* 6.6 الملخص الذكي بالذكاء الاصطناعي (AI Summarizer) */}
+          <Route
+            path="/ai-summarizer"
+            element={
+              <AiSummarizerPage />
+            }
+          />
+
           {/* 6.8 دليل المنهاج والبرنامج الوزاري الرسمي */}
           <Route
             path="/curriculum"
@@ -308,6 +317,8 @@ function App() {
             <Link to="/youtube-teachers" className="hover:text-[#E11D48] transition-colors">أساتذة اليوتيوب</Link>
             <span>•</span>
             <Link to="/curriculum" className="hover:text-[#E11D48] transition-colors font-bold text-[#E11D48]">المنهاج والبرنامج الوزاري 📚</Link>
+            <span>•</span>
+            <Link to="/ai-summarizer" className="hover:text-[#E11D48] transition-colors font-bold text-[#E11D48]">الملخص الذكي (AI) 🤖</Link>
             <span>•</span>
             <Link to="/quiz" className="hover:text-[#E11D48] transition-colors">بنك الأسئلة (Quiz)</Link>
             <span>•</span>

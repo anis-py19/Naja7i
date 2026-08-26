@@ -209,6 +209,24 @@ export default function Navbar({ onSelectStream, onOpenCalculator, onOpenSearch,
               {toolsDropdown && (
                 <div className="absolute top-full right-0 mt-1.5 w-60 p-2 bg-white text-[#0F172A] rounded-xl border border-[#E2E8F0] shadow-2xl z-50 text-right space-y-1">
                   <Link
+                    to="/ai-summarizer"
+                    onClick={() => setToolsDropdown(false)}
+                    className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
+                  >
+                    <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-[#E11D48] font-bold">
+                      🤖
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
+                        الملخص الذكي (AI)
+                      </span>
+                      <span className="text-[10px] text-[#64748B]">
+                        تلخيص PDF وصور الدروس بالذكاء
+                      </span>
+                    </div>
+                  </Link>
+
+                  <Link
                     to="/curriculum"
                     onClick={() => setToolsDropdown(false)}
                     className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
@@ -421,6 +439,14 @@ export default function Navbar({ onSelectStream, onOpenCalculator, onOpenSearch,
               className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800"
             >
               دليل المنهاج والبرنامج الوزاري 📚
+            </Link>
+            <Link
+              to="/ai-summarizer"
+              onClick={() => setIsOpen(false)}
+              className="px-3 py-2 rounded-lg text-rose-300 hover:text-white hover:bg-slate-800 font-bold flex items-center justify-between"
+            >
+              <span>الملخص الذكي (AI) 🤖</span>
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#E11D48] text-white">جديد</span>
             </Link>
             <Link
               to="/quiz"
