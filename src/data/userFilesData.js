@@ -9882,7 +9882,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/Almondjid - 3-01.pdf",
     "size": "5.5 ميغابايت",
     "sizeReadable": "5.5 ميغابايت",
-    "sizeBytes": 5727900
+    "sizeBytes": 5727900,
+    "driveFileId": "1etWU9-M89a-_1UGdXE3fHo-Y8hShlCqo",
+    "driveFileUrl": "https://drive.google.com/file/d/1etWU9-M89a-_1UGdXE3fHo-Y8hShlCqo/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1etWU9-M89a-_1UGdXE3fHo-Y8hShlCqo/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1etWU9-M89a-_1UGdXE3fHo-Y8hShlCqo"
   },
   {
     "id": "ffm_271",
@@ -9911,7 +9915,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/Almondjid - 3-02.pdf",
     "size": "5.9 ميغابايت",
     "sizeReadable": "5.9 ميغابايت",
-    "sizeBytes": 6157061
+    "sizeBytes": 6157061,
+    "driveFileId": "1xt0xlF035tQAmNMInaKJbcC_T2i81O2A",
+    "driveFileUrl": "https://drive.google.com/file/d/1xt0xlF035tQAmNMInaKJbcC_T2i81O2A/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1xt0xlF035tQAmNMInaKJbcC_T2i81O2A/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1xt0xlF035tQAmNMInaKJbcC_T2i81O2A"
   },
   {
     "id": "ffm_272",
@@ -9940,7 +9948,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/Almondjid - 3-03.pdf",
     "size": "11.4 ميغابايت",
     "sizeReadable": "11.4 ميغابايت",
-    "sizeBytes": 11904304
+    "sizeBytes": 11904304,
+    "driveFileId": "1s5WHtUm3amf2veLmLyuerTmUZaKCt0rk",
+    "driveFileUrl": "https://drive.google.com/file/d/1s5WHtUm3amf2veLmLyuerTmUZaKCt0rk/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1s5WHtUm3amf2veLmLyuerTmUZaKCt0rk/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1s5WHtUm3amf2veLmLyuerTmUZaKCt0rk"
   },
   {
     "id": "ffm_273",
@@ -9969,7 +9981,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/Almondjid - 3-04.pdf",
     "size": "7.6 ميغابايت",
     "sizeReadable": "7.6 ميغابايت",
-    "sizeBytes": 7983147
+    "sizeBytes": 7983147,
+    "driveFileId": "1thmbG--sScdow3CZlIXfHCyi_IvGQRWj",
+    "driveFileUrl": "https://drive.google.com/file/d/1thmbG--sScdow3CZlIXfHCyi_IvGQRWj/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1thmbG--sScdow3CZlIXfHCyi_IvGQRWj/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1thmbG--sScdow3CZlIXfHCyi_IvGQRWj"
   },
   {
     "id": "ffm_274",
@@ -9998,7 +10014,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/bac35.com-التحويلات في الفيزياء.pdf",
     "size": "483 كيلوبايت",
     "sizeReadable": "483 كيلوبايت",
-    "sizeBytes": 494749
+    "sizeBytes": 494749,
+    "driveFileId": "1YJrII0cljhq6LyB2QlprwX3c7t0Yc0FD",
+    "driveFileUrl": "https://drive.google.com/file/d/1YJrII0cljhq6LyB2QlprwX3c7t0Yc0FD/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1YJrII0cljhq6LyB2QlprwX3c7t0Yc0FD/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1YJrII0cljhq6LyB2QlprwX3c7t0Yc0FD"
   },
   {
     "id": "ffm_275",
@@ -10027,7 +10047,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/التحليل البعدي.pdf",
     "size": "1.4 ميغابايت",
     "sizeReadable": "1.4 ميغابايت",
-    "sizeBytes": 1498240
+    "sizeBytes": 1498240,
+    "driveFileId": "1neHqLfzMJ_EwYCAnxrQItdDFYOt3gdD2",
+    "driveFileUrl": "https://drive.google.com/file/d/1neHqLfzMJ_EwYCAnxrQItdDFYOt3gdD2/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1neHqLfzMJ_EwYCAnxrQItdDFYOt3gdD2/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1neHqLfzMJ_EwYCAnxrQItdDFYOt3gdD2"
   },
   {
     "id": "ffm_276",
@@ -10056,7 +10080,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/باقة_الأستاذ_قزوري_في_الفيزياء_بكالوريا_2020_تجميع_و_رفع_عقبة_بن.pdf",
     "size": "36.7 ميغابايت",
     "sizeReadable": "36.7 ميغابايت",
-    "sizeBytes": 38502073
+    "sizeBytes": 38502073,
+    "driveFileId": "1cPp5rtBVl5QB4-SoSP2cInE0mpyomUJ-",
+    "driveFileUrl": "https://drive.google.com/file/d/1cPp5rtBVl5QB4-SoSP2cInE0mpyomUJ-/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1cPp5rtBVl5QB4-SoSP2cInE0mpyomUJ-/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1cPp5rtBVl5QB4-SoSP2cInE0mpyomUJ-"
   },
   {
     "id": "ffm_277",
@@ -10085,7 +10113,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/باقة_الفروض_و_الاختبارات_من_كتاب_المراجعة_النهائية_فيزياء_جزء_2.pdf",
     "size": "21.1 ميغابايت",
     "sizeReadable": "21.1 ميغابايت",
-    "sizeBytes": 22138134
+    "sizeBytes": 22138134,
+    "driveFileId": "1ySX66rQkO49kjpaB-bmvGQGL2hKYCMVZ",
+    "driveFileUrl": "https://drive.google.com/file/d/1ySX66rQkO49kjpaB-bmvGQGL2hKYCMVZ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1ySX66rQkO49kjpaB-bmvGQGL2hKYCMVZ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1ySX66rQkO49kjpaB-bmvGQGL2hKYCMVZ"
   },
   {
     "id": "ffm_278",
@@ -10114,7 +10146,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/بلعمري.pdf",
     "size": "19.8 ميغابايت",
     "sizeReadable": "19.8 ميغابايت",
-    "sizeBytes": 20805006
+    "sizeBytes": 20805006,
+    "driveFileId": "10mmSd4QUtAFIusElLEONuvwtiEzM-JLg",
+    "driveFileUrl": "https://drive.google.com/file/d/10mmSd4QUtAFIusElLEONuvwtiEzM-JLg/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/10mmSd4QUtAFIusElLEONuvwtiEzM-JLg/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=10mmSd4QUtAFIusElLEONuvwtiEzM-JLg"
   },
   {
     "id": "ffm_279",
@@ -10143,7 +10179,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/حلول_جميع_تمارين_الكتاب_المدرسي_في_الفيزياء_للأستاذ_قزوري_نافع_بكالوريا.pdf",
     "size": "6.3 ميغابايت",
     "sizeReadable": "6.3 ميغابايت",
-    "sizeBytes": 6583085
+    "sizeBytes": 6583085,
+    "driveFileId": "1pNticrWDsp5CdUiZDp94K7-T6W5b4BCX",
+    "driveFileUrl": "https://drive.google.com/file/d/1pNticrWDsp5CdUiZDp94K7-T6W5b4BCX/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1pNticrWDsp5CdUiZDp94K7-T6W5b4BCX/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1pNticrWDsp5CdUiZDp94K7-T6W5b4BCX"
   },
   {
     "id": "ffm_280",
@@ -10172,7 +10212,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/سلسلة_تمارين_بالحل_المفصل_في_6_وحدات.pdf",
     "size": "19.8 ميغابايت",
     "sizeReadable": "19.8 ميغابايت",
-    "sizeBytes": 20805006
+    "sizeBytes": 20805006,
+    "driveFileId": "1SNMCtmgRrBaCDiMNESvMUHEUFTs5FqJq",
+    "driveFileUrl": "https://drive.google.com/file/d/1SNMCtmgRrBaCDiMNESvMUHEUFTs5FqJq/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1SNMCtmgRrBaCDiMNESvMUHEUFTs5FqJq/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1SNMCtmgRrBaCDiMNESvMUHEUFTs5FqJq"
   },
   {
     "id": "ffm_281",
@@ -10201,7 +10245,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/كل قوانين  الفيزياء في ملخص شامل.pdf",
     "size": "6.6 ميغابايت",
     "sizeReadable": "6.6 ميغابايت",
-    "sizeBytes": 6899011
+    "sizeBytes": 6899011,
+    "driveFileId": "12qa525aB7TVRK2BxdlhTExTI83LVifOi",
+    "driveFileUrl": "https://drive.google.com/file/d/12qa525aB7TVRK2BxdlhTExTI83LVifOi/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/12qa525aB7TVRK2BxdlhTExTI83LVifOi/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=12qa525aB7TVRK2BxdlhTExTI83LVifOi"
   },
   {
     "id": "ffm_282",
@@ -10230,7 +10278,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/معضم_تعاريف_مادة_العلوم_الفيزيائية_من_الوحدة_1الى_6_1_1.pdf",
     "size": "3.7 ميغابايت",
     "sizeReadable": "3.7 ميغابايت",
-    "sizeBytes": 3852834
+    "sizeBytes": 3852834,
+    "driveFileId": "12hrbMZJuBkQnG3tjARW24bdJj-LOGxrF",
+    "driveFileUrl": "https://drive.google.com/file/d/12hrbMZJuBkQnG3tjARW24bdJj-LOGxrF/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/12hrbMZJuBkQnG3tjARW24bdJj-LOGxrF/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=12hrbMZJuBkQnG3tjARW24bdJj-LOGxrF"
   },
   {
     "id": "ffm_283",
@@ -10259,7 +10311,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/ملحق_كتابة_البروتكلات_التجريبية_و_منهجيتها.pdf",
     "size": "1.9 ميغابايت",
     "sizeReadable": "1.9 ميغابايت",
-    "sizeBytes": 1988170
+    "sizeBytes": 1988170,
+    "driveFileId": "1rDk_1bTbNh2oO-ljVTOPnh4s8tJ9J9CN",
+    "driveFileUrl": "https://drive.google.com/file/d/1rDk_1bTbNh2oO-ljVTOPnh4s8tJ9J9CN/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1rDk_1bTbNh2oO-ljVTOPnh4s8tJ9J9CN/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1rDk_1bTbNh2oO-ljVTOPnh4s8tJ9J9CN"
   },
   {
     "id": "ffm_284",
@@ -10288,7 +10344,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/ملخص شامل لدروس الفيزياء-1.pdf",
     "size": "5.5 ميغابايت",
     "sizeReadable": "5.5 ميغابايت",
-    "sizeBytes": 5751611
+    "sizeBytes": 5751611,
+    "driveFileId": "1hnI7B6Y8_IawpyevMgUUnOel_74jnstm",
+    "driveFileUrl": "https://drive.google.com/file/d/1hnI7B6Y8_IawpyevMgUUnOel_74jnstm/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1hnI7B6Y8_IawpyevMgUUnOel_74jnstm/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1hnI7B6Y8_IawpyevMgUUnOel_74jnstm"
   },
   {
     "id": "ffm_285",
@@ -10317,7 +10377,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/ملخص_الدروس_لكل_الوحدات_{1_7}_في_الفيزياء_للأستاذ_مبخوت_بقة_بكالوريا.pdf",
     "size": "4.4 ميغابايت",
     "sizeReadable": "4.4 ميغابايت",
-    "sizeBytes": 4601385
+    "sizeBytes": 4601385,
+    "driveFileId": "1LNilkmSRZBJOcZu3hZ3fpHbay1wluUbX",
+    "driveFileUrl": "https://drive.google.com/file/d/1LNilkmSRZBJOcZu3hZ3fpHbay1wluUbX/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1LNilkmSRZBJOcZu3hZ3fpHbay1wluUbX/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1LNilkmSRZBJOcZu3hZ3fpHbay1wluUbX"
   },
   {
     "id": "ffm_286",
@@ -10346,7 +10410,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Physique/ملخصات_الفيزياء_للأستاذ_عايب_كمال_من_الوحدة_1_إلى_6.pdf",
     "size": "1.8 ميغابايت",
     "sizeReadable": "1.8 ميغابايت",
-    "sizeBytes": 1875535
+    "sizeBytes": 1875535,
+    "driveFileId": "1LPRYjV_h2Btv7VDYXyxxCjTZW9rCBViI",
+    "driveFileUrl": "https://drive.google.com/file/d/1LPRYjV_h2Btv7VDYXyxxCjTZW9rCBViI/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1LPRYjV_h2Btv7VDYXyxxCjTZW9rCBViI/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1LPRYjV_h2Btv7VDYXyxxCjTZW9rCBViI"
   },
   {
     "id": "ffm_287",
