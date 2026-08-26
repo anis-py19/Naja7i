@@ -1,6 +1,5 @@
 import * as pdfjsLib from 'pdfjs-dist';
 import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
-import { analyzeBacContent } from './bacCurriculumValidator';
 
 // Configure worker for in-browser PDF text extraction
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
