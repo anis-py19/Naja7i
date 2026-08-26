@@ -153,6 +153,11 @@ export default function AiSummarizerPage() {
       }
 
       setStatusMessage('3/3: اكتمل التلخيص بنجاح!');
+
+      if (finalSummary.includes('[NOT_BAC_CURRICULUM]')) {
+        throw new Error('⛔ عذراً، لا يمكن تلخيص هذا المحتوى! محرك الذكاء الاصطناعي مخصص حصرياً لدروس ومقررات شهادة البكالوريا الجزائرية (3AS). يرجى رفع ملف أو كتابة نص متعلق بإحدى مواد البكالوريا.');
+      }
+
       setSummaryResult(finalSummary);
 
       // Save to history
@@ -726,6 +731,30 @@ export default function AiSummarizerPage() {
                       </p>
                     );
                   })}
+                </div>
+              ) : errorMessage ? (
+                <div className="py-16 text-center space-y-4 max-w-md mx-auto">
+                  <div className="w-16 h-16 rounded-2xl bg-rose-50 border border-rose-200 text-3xl flex items-center justify-center mx-auto shadow-2xs">
+                    ⛔
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="text-sm sm:text-base font-black text-[#0F172A]">
+                      تنبيه التحقق من المنهاج الوزاري 🇩🇿
+                    </h4>
+                    <p className="text-xs text-[#475569] leading-relaxed">
+                      {errorMessage}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setErrorMessage(null);
+                      setSelectedFile(null);
+                      setRawText('');
+                    }}
+                    className="px-4 py-2 rounded-xl bg-[#0F172A] hover:bg-black text-white text-xs font-bold transition-colors cursor-pointer"
+                  >
+                    اختيار ملف درس بكالوريا آخر ↺
+                  </button>
                 </div>
               ) : (
                 <div className="py-24 text-center space-y-3">
