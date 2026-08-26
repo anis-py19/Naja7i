@@ -1656,7 +1656,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Economie/ملخص_دروس_الإقتصاد_3_ثانوي_من_إعداد_الأستاذ_عودة_عبدالخالق.pdf",
     "size": "2.3 ميغابايت",
     "sizeReadable": "2.3 ميغابايت",
-    "sizeBytes": 2454226
+    "sizeBytes": 2454226,
+    "driveFileId": "1XyfxWiWFdoEc1ivL72zpdedqtG8tPTwQ",
+    "driveFileUrl": "https://drive.google.com/file/d/1XyfxWiWFdoEc1ivL72zpdedqtG8tPTwQ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1XyfxWiWFdoEc1ivL72zpdedqtG8tPTwQ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1XyfxWiWFdoEc1ivL72zpdedqtG8tPTwQ"
   },
   {
     "id": "ffm_46",
@@ -1682,7 +1686,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Economie/ملخصات_دروس_الاقتصاد_و_الماناجمنت_من_إعداد_الأستاذ_خيري_3_ثانوي_.pdf",
     "size": "2.3 ميغابايت",
     "sizeReadable": "2.3 ميغابايت",
-    "sizeBytes": 2390719
+    "sizeBytes": 2390719,
+    "driveFileId": "15vsSAUxJagAJSedEVT1f8EZpW-0wNohJ",
+    "driveFileUrl": "https://drive.google.com/file/d/15vsSAUxJagAJSedEVT1f8EZpW-0wNohJ/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/15vsSAUxJagAJSedEVT1f8EZpW-0wNohJ/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=15vsSAUxJagAJSedEVT1f8EZpW-0wNohJ"
   },
   {
     "id": "ffm_47",
@@ -1708,7 +1716,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Economie/ملخصات_دروس_الاقتصاد_و_المناجمنت_إعداد_الأستاذ_يوسي_قادة_3_ثانوي.pdf",
     "size": "1.0 ميغابايت",
     "sizeReadable": "1.0 ميغابايت",
-    "sizeBytes": 1090165
+    "sizeBytes": 1090165,
+    "driveFileId": "1ww3Zmo_gTrL0SmZM6HSWMcLfee90oKBi",
+    "driveFileUrl": "https://drive.google.com/file/d/1ww3Zmo_gTrL0SmZM6HSWMcLfee90oKBi/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1ww3Zmo_gTrL0SmZM6HSWMcLfee90oKBi/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1ww3Zmo_gTrL0SmZM6HSWMcLfee90oKBi"
   },
   {
     "id": "ffm_48",
@@ -1734,7 +1746,11 @@ export const USER_STUDY_FILES = [
     "rawPath": "/FileFromMe/Economie/ملخصات_مادة_الاقتصاد_3_ثانوي_للأستاذ_يوسي_قادة.pdf",
     "size": "1021 كيلوبايت",
     "sizeReadable": "1021 كيلوبايت",
-    "sizeBytes": 1045774
+    "sizeBytes": 1045774,
+    "driveFileId": "1bX2W4P_lDlauEskseAeSPnF_lKysC1bX",
+    "driveFileUrl": "https://drive.google.com/file/d/1bX2W4P_lDlauEskseAeSPnF_lKysC1bX/view?usp=drivesdk",
+    "drivePreviewUrl": "https://drive.google.com/file/d/1bX2W4P_lDlauEskseAeSPnF_lKysC1bX/preview",
+    "driveDownloadUrl": "https://drive.google.com/uc?export=download&id=1bX2W4P_lDlauEskseAeSPnF_lKysC1bX"
   },
   {
     "id": "ffm_49",
