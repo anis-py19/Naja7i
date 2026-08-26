@@ -11,13 +11,11 @@ import {
   HiDownload, 
   HiRefresh, 
   HiCheckCircle, 
-  HiKey, 
   HiInformationCircle, 
   HiBookOpen,
   HiLightningBolt,
   HiLightBulb,
-  HiTrash,
-  HiExternalLink
+  HiTrash
 } from 'react-icons/hi';
 import { 
   extractTextFromPdf, 
@@ -32,16 +30,8 @@ export default function AiSummarizerPage() {
   const [rawText, setRawText] = useState('');
   const [summaryMode, setSummaryMode] = useState('comprehensive'); // 'comprehensive' | 'high_yield' | 'questions' | 'mindmap'
   
-  // API Key State (Default to secure environment key if provided by platform)
-  const [apiKey, setApiKey] = useState(() => {
-    try {
-      return localStorage.getItem('naja7i_gemini_api_key') || import.meta.env.VITE_GEMINI_API_KEY || '';
-    } catch {
-      return import.meta.env.VITE_GEMINI_API_KEY || '';
-    }
-  });
-  const [showKeySettings, setShowKeySettings] = useState(false);
-  const [tempKey, setTempKey] = useState('');
+  // Secure Platform API Key (resolved silently from environment)
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
 
   // Generation & Status
   const [isLoading, setIsLoading] = useState(false);
@@ -252,65 +242,12 @@ export default function AiSummarizerPage() {
               </p>
             </div>
 
-            {/* API Key Status / Toggle Button */}
             <div className="flex items-center gap-2">
-              <button
-                onClick={() => {
-                  setTempKey(apiKey);
-                  setShowKeySettings(!showKeySettings);
-                }}
-                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 border cursor-pointer shadow-2xs ${
-                  apiKey 
-                    ? 'bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100' 
-                    : 'bg-amber-50 text-amber-900 border-amber-300 hover:bg-amber-100'
-                }`}
-              >
-                <HiKey className="w-4 h-4" />
-                <span>{apiKey ? '🟢 مفتاح Gemini الذكي مفعل' : '⚙️ ضبط مفتاح الذكاء الاصطناعي'}</span>
-              </button>
+              <span className="px-3 py-1.5 rounded-xl bg-[#F1F5F9] text-[#0F172A] border border-[#E2E8F0] text-xs font-bold shadow-2xs flex items-center gap-1.5">
+                <span>🇩🇿 المنهاج الوزاري المعتمد</span>
+              </span>
             </div>
           </div>
-
-          {/* Expandable API Key Settings Bar */}
-          {showKeySettings && (
-            <div className="mt-5 p-4 rounded-2xl bg-[#F8FAFC] border border-[#CBD5E1] space-y-3 animate-fadeIn">
-              <div className="flex items-start justify-between gap-2">
-                <div className="space-y-1">
-                  <h4 className="text-xs font-bold text-[#0F172A] flex items-center gap-1.5">
-                    <span>إعدادات مفتاح Google Gemini API المجاني:</span>
-                  </h4>
-                  <p className="text-[11px] text-[#64748B]">
-                    احصل على مفتاح مجاني 100% وبدون بطاقة بنكية من موقع Google AI Studio للاستفادة من أقصى دقة وسرعة في التلخيص باللغة العربية.
-                  </p>
-                </div>
-                <a
-                  href="https://aistudio.google.com/app/apikey"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-xs text-[#E11D48] font-bold hover:underline flex items-center gap-1 shrink-0"
-                >
-                  <span>الحصول على مفتاح مجاني</span>
-                  <HiExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
-
-              <div className="flex flex-col sm:flex-row items-center gap-2">
-                <input
-                  type="password"
-                  placeholder="الصق مفتاحك هنا (مثال: AIzaSy...)"
-                  value={tempKey}
-                  onChange={(e) => setTempKey(e.target.value)}
-                  className="w-full sm:flex-1 bg-white border border-[#CBD5E1] rounded-xl px-3 py-2 text-xs font-mono text-[#0F172A] focus:outline-none focus:border-[#E11D48]"
-                />
-                <button
-                  onClick={handleSaveApiKey}
-                  className="w-full sm:w-auto px-5 py-2 rounded-xl bg-[#0F172A] hover:bg-slate-800 text-white font-bold text-xs transition-colors cursor-pointer"
-                >
-                  حفظ وتفعيل
-                </button>
-              </div>
-            </div>
-          )}
 
         </div>
       </div>
