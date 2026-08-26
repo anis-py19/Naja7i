@@ -9,6 +9,8 @@ import { STREAMS } from '../data/streamsData';
 import FounderStorySection from '../components/FounderStorySection';
 import ContactContributionSection from '../components/ContactContributionSection';
 
+import VisitorCounterBadge from '../components/VisitorCounterBadge';
+
 export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }) {
   const navigate = useNavigate();
 
@@ -85,8 +87,11 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       <section className="pt-8 pb-9 px-4 sm:px-6 lg:px-8 border-b border-[#E2E8F0] bg-white">
         <div className="max-w-4xl mx-auto text-center space-y-3">
           
-          <div className="inline-block px-3.5 py-1 rounded-full bg-[#F1F5F9] border border-[#E2E8F0] text-xs font-bold text-[#0F172A]">
-            الموقع التعليمي الشامل لبكالوريا الجزائر 🇩🇿
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <div className="inline-block px-3.5 py-1 rounded-full bg-[#F1F5F9] border border-[#E2E8F0] text-xs font-bold text-[#0F172A]">
+              الموقع التعليمي الشامل لبكالوريا الجزائر 🇩🇿
+            </div>
+            <VisitorCounterBadge variant="hero" />
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] tracking-tight">

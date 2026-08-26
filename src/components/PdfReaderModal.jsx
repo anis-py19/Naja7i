@@ -14,18 +14,10 @@ import {
 } from 'react-icons/hi';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as pdfjsLib from 'pdfjs-dist';
+import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 
-// Configure ESM module worker for Vite / Rollup
-if (typeof window !== 'undefined') {
-  try {
-    pdfjsLib.GlobalWorkerOptions.workerPort = new Worker(
-      new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url),
-      { type: 'module' }
-    );
-  } catch (e) {
-    console.warn('Fallback worker setup:', e);
-  }
-}
+// Configure local worker bundled by Vite
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 // Helper to transform Google Drive URLs to embeddable preview URLs
 export function getDrivePreviewUrl(url) {
@@ -110,26 +102,22 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
       setUseIframeFallback(false);
 
       try {
-        // Fetch file as arrayBuffer
-        let response = await fetch(safeEncodedUrl);
-        if (!response.ok) {
-          // Retry with rawUrl if encoded failed
-          response = await fetch(rawUrl);
-        }
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        
+        // Fetch file as arrayBuffer / Blob to prevent IDM interception
+        const response = await fetch(safeEncodedUrl);
+        if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
         const arrayBuffer = await response.arrayBuffer();
-        const uint8Array = new Uint8Array(arrayBuffer);
         
-        const blob = new Blob([uint8Array], { type: 'application/pdf' });
+        const blob = new Blob([arrayBuffer], { type: 'application/pdf' });
         createdBlobUrl = URL.createObjectURL(blob);
         if (isMounted) {
           setBlobUrl(createdBlobUrl);
         }
 
-        // Initialize PDF.js directly with Uint8Array data
         const loadingTask = pdfjsLib.getDocument({ 
-          data: uint8Array
+          data: arrayBuffer,
+          cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@legacy/cmaps/',
+          cMapPacked: true,
+          standardFontDataUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@legacy/standard_fonts/'
         });
 
         const loadedPdf = await loadingTask.promise;
@@ -140,10 +128,15 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
           setLoading(false);
         }
       } catch (err) {
-        console.warn('PDF.js canvas load error:', err);
+        console.warn('PDF.js canvas load error, switching to safe Blob iFrame:', err);
         if (isMounted) {
-          setError('تعذر عرض المستند على المتصفح مباشرة. يمكنك تحميل الملف فوراً بالزر أدناه.');
-          setLoading(false);
+          if (createdBlobUrl) {
+            setUseIframeFallback(true);
+            setLoading(false);
+          } else {
+            setError('تعذر تحميل وتصيير ملف الـ PDF');
+            setLoading(false);
+          }
         }
       }
     }

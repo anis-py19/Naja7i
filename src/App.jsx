@@ -7,6 +7,7 @@ import BacCalculatorModal from './components/BacCalculatorModal';
 import SearchModal from './components/SearchModal';
 import ContactContributionModal from './components/ContactContributionModal';
 import FloatingQuickActions from './components/FloatingQuickActions';
+import VisitorCounterBadge from './components/VisitorCounterBadge';
 
 // Page Views
 import HomePage from './pages/HomePage';
@@ -321,8 +322,11 @@ function App() {
             <Link to="/contact" className="hover:text-[#E11D48] transition-colors text-[#E11D48] font-bold">تواصل ومساهمة 📥</Link>
           </div>
 
-          <div className="text-[#94A3B8] text-[11px]">
-            جميع الحقوق محفوظة © {new Date().getFullYear()} لمنصة نجاحي التعليمية • نسألكم الدعاء بالتوفيق والبركة
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full pt-4 border-t border-[#F1F5F9]">
+            <div className="text-[#94A3B8] text-[11px]">
+              جميع الحقوق محفوظة © {new Date().getFullYear()} لمنصة نجاحي التعليمية • نسألكم الدعاء بالتوفيق والبركة
+            </div>
+            <VisitorCounterBadge variant="footer" />
           </div>
         </div>
       </footer>
