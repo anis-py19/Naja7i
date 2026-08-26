@@ -54,6 +54,16 @@ function App() {
     }
   });
 
+  // Dynamic Remote Config from Telegram Bot / Public Config
+  const [platformConfig, setPlatformConfig] = useState(null);
+
+  useEffect(() => {
+    fetch('/platform-config.json?' + Date.now())
+      .then(res => res.json())
+      .then(data => setPlatformConfig(data))
+      .catch(() => {});
+  }, []);
+
   const handleSelectStream = (streamId) => {
     setSelectedStreamId(streamId);
   };
@@ -65,8 +75,10 @@ function App() {
     });
   };
 
+  const isMaintenanceActive = platformConfig?.isMaintenanceMode ?? SITE_CONFIG.isMaintenanceMode;
+
   // If maintenance mode is activated and admin has not bypassed it, display MaintenancePage
-  if (SITE_CONFIG.isMaintenanceMode && !bypassMaintenance && location.pathname !== '/maintenance') {
+  if (isMaintenanceActive && !bypassMaintenance && location.pathname !== '/maintenance') {
     return (
       <MaintenancePage 
         onBypass={() => {

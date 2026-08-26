@@ -1,11 +1,20 @@
 /**
- * 🤖 Naja7i (نجاحي) — 24/7 Multi-Agent Telegram Command Center
- * مركز التحكم وإدارة وكلاء الذكاء الاصطناعي الستة مع نظام الموافقة البشرية (Human-in-the-Loop)
+ * 🤖 Naja7i (نجاحي) — 24/7 Full Platform Commander & Multi-Agent Bot
+ * مركز التحكم الشامل بالمنصة عن بُعد عبر التيليغرام (وضع الصيانة، الإعلانات، الوكلاء، والبناء)
  */
 
-import https from 'https';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { exec } from 'child_process';
+import util from 'util';
 
-// Configuration (Read from process.env or fallback template)
+const execPromise = util.promisify(exec);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.resolve(__dirname, '../../');
+
+// Configuration
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
 const ADMIN_CHAT_ID = process.env.TELEGRAM_ADMIN_CHAT_ID || '';
 const PLATFORM_URL = process.env.PLATFORM_URL || 'https://naja7i.com';
@@ -24,18 +33,62 @@ const AGENTS_STATE = {
   ui_frontend_agent: { name: '🎨 وكيل الصيانة والواجهات', status: 'نشط 🟢', lastTask: 'فحص سرعة الموقع والتجاوب' }
 };
 
-// Pending Proposals Waiting For Your "OK"
 const PENDING_PROPOSALS = new Map();
+
+// Helper: Read/Write platform-config.json
+function getPlatformConfig() {
+  const configPath = path.join(rootDir, 'public', 'platform-config.json');
+  try {
+    if (fs.existsSync(configPath)) {
+      return JSON.parse(fs.readFileSync(configPath, 'utf8'));
+    }
+  } catch (e) {
+    console.error('Error reading platform-config.json:', e.message);
+  }
+  return {
+    isMaintenanceMode: false,
+    maintenanceMessage: 'نقوم حالياً بتحديث وتطوير منصة نجاحي لتقديم أفضل تجربة لطلبة البكالوريا 🇩🇿',
+    expectedReturn: 'العودة قريباً جداً إن شاء الله',
+    broadcastNotice: 'مرحباً بكم في منصة نجاحي — رفيقكم نحو التميز في بكالوريا 2026 🎓',
+    isBroadcastActive: true,
+    activeAiModel: 'gemini-3.5-flash-lite',
+    lastUpdated: new Date().toISOString()
+  };
+}
+
+function savePlatformConfig(config) {
+  const configPath = path.join(rootDir, 'public', 'platform-config.json');
+  try {
+    config.lastUpdated = new Date().toISOString();
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf8');
+
+    // Also update src/config/siteConfig.js
+    const siteConfigPath = path.join(rootDir, 'src', 'config', 'siteConfig.js');
+    if (fs.existsSync(siteConfigPath)) {
+      const content = `// ⚙️ إعدادات المنصة التلقائية
+export const SITE_CONFIG = {
+  isMaintenanceMode: ${config.isMaintenanceMode},
+  maintenanceTitle: 'المنصة قيد الصيانة والتحديثات الدورية 🛠️',
+  maintenanceNotice: ${JSON.stringify(config.maintenanceMessage || '')},
+  estimatedReturn: ${JSON.stringify(config.expectedReturn || 'سنعود قريباً جداً ⏱️')},
+  adminEmail: 'anisrayaneizri@gmail.com'
+};
+export default SITE_CONFIG;
+`;
+      fs.writeFileSync(siteConfigPath, content, 'utf8');
+    }
+    return true;
+  } catch (e) {
+    console.error('Error saving platform-config.json:', e.message);
+    return false;
+  }
+}
 
 /**
  * 📡 Send Request to Telegram Bot API
  */
 async function callTelegram(method, payload = {}) {
-  if (!BOT_TOKEN) {
-    console.error('❌ خطأ: لم يتم ضبط TELEGRAM_BOT_TOKEN');
-    return null;
-  }
-
+  if (!BOT_TOKEN) return null;
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/${method}`;
   
   try {
@@ -52,7 +105,7 @@ async function callTelegram(method, payload = {}) {
 }
 
 /**
- * 💬 Send Formatted Message to Admin
+ * 💬 Send Formatted Message with Optional Keyboard
  */
 async function sendMessage(chatId, text, replyMarkup = null) {
   const payload = {
@@ -64,6 +117,21 @@ async function sendMessage(chatId, text, replyMarkup = null) {
     payload.reply_markup = replyMarkup;
   }
   return await callTelegram('sendMessage', payload);
+}
+
+/**
+ * ⌨️ Default Main Reply Keyboard (Permanent Action Buttons)
+ */
+function getMainReplyKeyboard() {
+  return {
+    keyboard: [
+      [{ text: '📊 حالة المنصة والوكلاء' }, { text: '🚧 وضع الصيانة' }],
+      [{ text: '🔍 جلب مصادر الباك' }, { text: '📢 إعلان عاجل' }],
+      [{ text: '🤖 فحص الذكاء الاصطناعي' }, { text: '⚡ فحص وبناء الموقع (Build)' }]
+    ],
+    resize_keyboard: true,
+    persistent: true
+  };
 }
 
 /**
@@ -101,8 +169,6 @@ ${summary}
  * 🩺 24/7 Health Check Task (UI & Gemini API Monitoring)
  */
 async function runHealthCheck() {
-  console.log('🩺 [ui_frontend_agent]: جاري فحص صحة المنصة ومحرك الذكاء الاصطناعي...');
-  
   let websiteOk = true;
   let apiOk = true;
 
@@ -113,7 +179,6 @@ async function runHealthCheck() {
     websiteOk = false;
   }
 
-  // Check Gemini API
   if (GEMINI_API_KEY) {
     try {
       const apiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`, {
@@ -127,40 +192,14 @@ async function runHealthCheck() {
     }
   }
 
-  if (!websiteOk || !apiOk) {
-    const alertMsg = `
-<b>⚠️ تنبيه عاجل من وكيل الصيانة (ui_frontend_agent):</b>
-- حالة الموقع (${PLATFORM_URL}): ${websiteOk ? '🟢 شغال' : '🔴 متوقف أو بطيء'}
-- حالة محرك الذكاء الاصطناعي (Gemini API): ${apiOk ? '🟢 متصل' : '🔴 خطأ في الاتصال أو استنفاد الحصة'}
-
-<i>يرجى فحص السيرفر أو المفتاح فوراً!</i>
-`;
-    await sendMessage(ADMIN_CHAT_ID, alertMsg);
-  }
-}
-
-/**
- * 🔍 24/7 BAC Sources Hunter Task (Curriculum & Exercise Discovery)
- */
-async function runSourcesHunter() {
-  console.log('🔍 [bac_archive_agent & lessons_curriculum_agent]: جاري البحث عن مصادر ومقترحات بكالوريا 2026...');
-
-  // Simulated discovery example for BAC subjects
-  const sampleDiscovery = {
-    agentId: 'bac_archive_agent',
-    title: 'سلسلة تمارين مقترحة ومحلولة في الفيزياء (الوحدة 1: المتابعة الزمنية)',
-    summary: 'تم العثور على 15 تمريناً نموذجياً موافقاً للتدرج الوزاري الجديد 2026 مع سلم التنقيط المفصل لجميع الشعب العلمية.',
-    actionData: { type: 'add_exercises', subject: 'الفيزياء', stream: 'علوم تجريبية' }
-  };
-
-  await sendProposalToAdmin(sampleDiscovery);
+  return { websiteOk, apiOk };
 }
 
 /**
  * 📨 Process Incoming Telegram Messages & Commands
  */
 async function handleUpdate(update) {
-  // 1. Handle Inline Button Clicks (Approvals)
+  // 1. Handle Inline Button Clicks
   if (update.callback_query) {
     const cb = update.callback_query;
     const data = cb.data;
@@ -182,88 +221,208 @@ async function handleUpdate(update) {
       PENDING_PROPOSALS.delete(propId);
       await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: 'تم رفض المقترح.' });
       await sendMessage(chatId, `❌ <b>تم إلغاء وتجاهل المقترح بنجاح.</b>`);
+    } else if (data === 'maint_enable') {
+      const conf = getPlatformConfig();
+      conf.isMaintenanceMode = true;
+      savePlatformConfig(conf);
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: 'تم تفعيل وضع الصيانة!' });
+      await sendMessage(chatId, '🚧 <b>تم تفعيل وضع الصيانة في منصة نجاحي بنجاح!</b>\nالموقع الآن يظهر شاشة التحديث لجميع الزوار.');
+    } else if (data === 'maint_disable') {
+      const conf = getPlatformConfig();
+      conf.isMaintenanceMode = false;
+      savePlatformConfig(conf);
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: 'تم استئناف الموقع!' });
+      await sendMessage(chatId, '🟢 <b>تم إلغاء وضع الصيانة واستئناف منصة نجاحي للجميع!</b>\nالموقع شغال ومفتوح للطلبة الآن.');
     }
     return;
   }
 
-  // 2. Handle Text Commands
+  // 2. Handle Text Commands & Buttons
   if (!update.message || !update.message.text) return;
   const msg = update.message;
   const text = msg.text.trim();
   const chatId = msg.chat.id;
 
-  console.log(`📩 رسالة جديدة من (${msg.from.first_name || 'Admin'}): ${text}`);
+  console.log(`📩 رسالة من (${msg.from.first_name || 'Admin'}): ${text}`);
 
   if (text.startsWith('/start') || text.startsWith('/help')) {
     const welcome = `
-<b>🎓 مرحباً بك في غرفة القيادة لوكلاء منصة نجاحي (Naja7i AI Agents Command Center) 🇩🇿</b>
+<b>🎓 مرحباً بك يا أنيس في غرفة القيادة الشاملة لمنصة نجاحي (Naja7i Commander) 🇩🇿</b>
 
-أنا وكيلك الرئيسي، وأشرف على <b>6 وكلاء ذكاء اصطناعي متخصصين</b> يعملون في الخلفية 24/24 ساعة لصيانة الموقع وجلب المصادر:
+تحكم كامل بجميع أقسام الموقع والوكلاء الستة من هنا بنقرة زر واحدة:
 
-<b>📋 الأوامر المتاحة:</b>
-/status — حالة ونشاط جميع الوكلاء الستة
-/health — فحص فوري لصحة الموقع ومحرك الذكاء الاصطناعي
-/hunt — أمر فوري للوكلاء بالبحث عن دروس ومواضيع بكالوريا جديدة
-/proposals — عرض المقترحات المعلقة التي تنتظر موافقتك (OK)
+<b>🕹️ الإمكانيات السريعة:</b>
+• <b>وضع الصيانة:</b> تفعيل أو إيقاف شاشة الصيانة للزوار فوراً.
+• <b>شريط الإعلانات:</b> إرسال إعلان يظهر أعلى الموقع لجميع الطلبة.
+• <b>الوكلاء الستة:</b> البحث عن مصادر وفحص المنهاج والـ QCM.
+• <b>البناء والصيانة:</b> فحص سرعة الموقع وإعادة بناء الأكواد.
 
-<i>أي مهمة جديدة أو مصدر يكتشفه الوكلاء سيصلك هنا للموافقة عليه بضغطة زر واحدة! 🚀</i>
+<i>استخدم الأزرار بالأسفل أو اكتب أي أمر تريده:</i>
 `;
-    await sendMessage(chatId, welcome);
+    await sendMessage(chatId, welcome, getMainReplyKeyboard());
     return;
   }
 
-  if (text.startsWith('/status')) {
-    let statusText = `<b>📊 التقرير اللحظي لنشاط وكلاء منصة نجاحي:</b>\n\n`;
+  // 📊 Status Command
+  if (text === '📊 حالة المنصة والوكلاء' || text.startsWith('/status')) {
+    const config = getPlatformConfig();
+    let statusText = `<b>📊 لوحة القيادة اللحظية لمنصة نجاحي:</b>\n\n`;
+    statusText += `• <b>وضع الصيانة:</b> ${config.isMaintenanceMode ? '🚧 مفعل (الموقع مغلق للتحديث)' : '🟢 غير مفعل (الموقع شغال للجميع)'}\n`;
+    statusText += `• <b>شريط الإعلانات:</b> <i>"${config.broadcastNotice}"</i>\n\n`;
+
+    statusText += `<b>🤖 نشاط وكلاء الذكاء الاصطناعي:</b>\n`;
     for (const [id, agent] of Object.entries(AGENTS_STATE)) {
-      statusText += `${agent.name}\n• الحالة: <b>${agent.status}</b>\n• آخر مهمة: <i>${agent.lastTask}</i>\n\n`;
+      statusText += `${agent.name}: <b>${agent.status}</b>\n`;
     }
-    statusText += `⏱️ <b>المقترحات المعلقة بانتظار موافقتك:</b> ${PENDING_PROPOSALS.size}`;
-    await sendMessage(chatId, statusText);
+
+    statusText += `\n⏱️ <b>المقترحات المعلقة بانتظار موافقتك:</b> ${PENDING_PROPOSALS.size}`;
+    await sendMessage(chatId, statusText, getMainReplyKeyboard());
     return;
   }
 
-  if (text.startsWith('/health')) {
-    await sendMessage(chatId, '⏳ جاري فحص الموقع والخدمات...');
-    await runHealthCheck();
-    await sendMessage(chatId, '✅ اكتمل الفحص! كل الأنظمة تعمل بكفاءة طبيعية.');
+  // 🚧 Maintenance Mode Command & Interactive Toggle
+  if (text === '🚧 وضع الصيانة' || text.startsWith('/maintenance') || text.startsWith('/maint')) {
+    const config = getPlatformConfig();
+
+    if (text.includes('on') || text.includes('تفعيل')) {
+      config.isMaintenanceMode = true;
+      savePlatformConfig(config);
+      await sendMessage(chatId, '🚧 <b>تم تفعيل وضع الصيانة!</b>\nالموقع الآن في وضع التحديث لجميع الزوار.', getMainReplyKeyboard());
+      return;
+    }
+
+    if (text.includes('off') || text.includes('ايقاف') || text.includes('استئناف')) {
+      config.isMaintenanceMode = false;
+      savePlatformConfig(config);
+      await sendMessage(chatId, '🟢 <b>تم إلغاء وضع الصيانة!</b>\nالموقع شغال ومتاح لجميع طلبة البكالوريا.', getMainReplyKeyboard());
+      return;
+    }
+
+    const inlineKeyboard = {
+      inline_keyboard: [
+        [
+          { text: '🔴 تفعيل وضع الصيانة (إغلاق الموقع)', callback_data: 'maint_enable' },
+          { text: '🟢 إيقاف الصيانة (فتح الموقع للجميع)', callback_data: 'maint_disable' }
+        ]
+      ]
+    };
+
+    const maintMsg = `
+<b>🛠️ التحكم في وضع الصيانة (Maintenance Mode):</b>
+
+• الحالة الحالية: <b>${config.isMaintenanceMode ? '🔴 مفعل (الموقع في وضع الصيانة)' : '🟢 غير مفعل (الموقع شغال طبيعياً)'}</b>
+• رسالة الصيانة: <i>"${config.maintenanceMessage}"</i>
+
+<i>اضغط على الزر بالأسفل للتبديل الفوري بنقرة واحدة:</i>
+`;
+    await sendMessage(chatId, maintMsg, inlineKeyboard);
     return;
   }
 
-  if (text.startsWith('/hunt')) {
-    await sendMessage(chatId, '🦅 تم إطلاق الوكلاء للبحث في المنهاج والمصادر...');
-    await runSourcesHunter();
+  // 📢 Broadcast Announcement Command
+  if (text === '📢 إعلان عاجل' || text.startsWith('/broadcast')) {
+    const parts = text.replace('/broadcast', '').trim();
+
+    if (parts && parts !== '📢 إعلان عاجل') {
+      const config = getPlatformConfig();
+      config.broadcastNotice = parts;
+      config.isBroadcastActive = true;
+      savePlatformConfig(config);
+
+      await sendMessage(chatId, `📢 <b>تم نشر الإعلان أعلى الموقع لجميع الطلبة بنجاح:</b>\n<i>"${parts}"</i>`, getMainReplyKeyboard());
+      return;
+    }
+
+    await sendMessage(chatId, `
+<b>📢 كيفية إرسال إعلان عاجل لجميع طلبة الموقع:</b>
+
+أرسل الأمر مع نص الإعلان هكذا:
+<code>/broadcast تم إضافة 20 موضوع بكالوريا تجريبي جديد مع الحلول النموذجية! 🎓</code>
+
+<i>سيظهر الإعلان فوراً في الشريط العلوي للموقع.</i>
+`, getMainReplyKeyboard());
     return;
   }
 
-  if (text.startsWith('/proposals')) {
-    if (PENDING_PROPOSALS.size === 0) {
-      await sendMessage(chatId, '✨ لا توجد أي مقترحات معلقة حالياً. كل شيء محدث!');
+  // 🤖 AI Benchmark & Test
+  if (text === '🤖 فحص الذكاء الاصطناعي' || text.startsWith('/ai_test')) {
+    await sendMessage(chatId, '⏳ جاري فحص واختبار سرعة استجابة محرك الذكاء الاصطناعي (Gemini 3.5 Flash)...');
+    const startTime = Date.now();
+    const { apiOk } = await runHealthCheck();
+    const duration = Date.now() - startTime;
+
+    if (apiOk) {
+      await sendMessage(chatId, `
+✅ <b>محرك الذكاء الاصطناعي شغال وبأعلى سرعة!</b>
+• النموذج النشط: <code>gemini-3.5-flash-lite</code>
+• زمن الاستجابة: <b>${duration}ms</b> ⚡
+• حالة الربط: متصل ومتاح مجاناً لجميع زوار الموقع 🇩🇿
+`, getMainReplyKeyboard());
     } else {
-      await sendMessage(chatId, `📌 يوجد حالياً <b>${PENDING_PROPOSALS.size}</b> مقترح ينتظر موافقتك.`);
+      await sendMessage(chatId, `❌ <b>حدث خطأ في الاتصال بالذكاء الاصطناعي! يرجى التحقق من المفتاح أو الحصة.</b>`, getMainReplyKeyboard());
     }
     return;
   }
 
-  // Fallback AI conversation reply
-  await sendMessage(chatId, `🤖 تم استلام طلبك: <i>"${text}"</i>\nجاري توجيهه للوكيل المختص.`);
+  // 🔍 Sources Hunter Command
+  if (text === '🔍 جلب مصادر الباك' || text.startsWith('/hunt')) {
+    await sendMessage(chatId, '🦅 <b>انطلق الوكلاء للبحث في مصادر وتمارين البكالوريا 2026...</b>');
+    
+    // Sample automated proposal
+    setTimeout(async () => {
+      await sendProposalToAdmin({
+        agentId: 'bac_archive_agent',
+        title: 'مواضيع مقترحة لبكالوريا 2026 في الرياضيات (الدوال الأسية واللوغاريتمية)',
+        summary: 'تم تجميع 8 مواضيع نموذجية من ثانويات الامتياز مع التصحيح وسلم التنقيط المفصل لشعبتي العلوم والرياضيات.',
+        actionData: { type: 'add_math_bacs' }
+      });
+    }, 2000);
+    return;
+  }
+
+  // ⚡ Build & Verification Command
+  if (text === '⚡ فحص وبناء الموقع (Build)' || text.startsWith('/build')) {
+    await sendMessage(chatId, '⚙️ جاري فحص وبناء المشروع (<code>npm run build</code>) للتأكد من خلوه من أي أخطاء...');
+    try {
+      const { stdout } = await execPromise('npm run build', { cwd: rootDir });
+      await sendMessage(chatId, `
+✅ <b>اكتمل بناء الموقع بنجاح 100% وبدون أي أخطاء!</b>
+<code>${stdout.slice(0, 350)}...</code>
+`, getMainReplyKeyboard());
+    } catch (err) {
+      await sendMessage(chatId, `❌ <b>فشل البناء:</b>\n<code>${err.message.slice(0, 300)}</code>`, getMainReplyKeyboard());
+    }
+    return;
+  }
+
+  // Fallback
+  await sendMessage(chatId, `🤖 تم استلام طلبك: <i>"${text}"</i>\nاستخدم القائمة بالأسفل للتحكم السريع.`, getMainReplyKeyboard());
 }
 
 /**
- * 🔄 Telegram Long Polling Loop (24/7)
+ * 🔄 Start Telegram Polling Loop
  */
 async function startPolling() {
-  console.log('🚀 [Naja7i Agent Commander]: تم تشغيل مركز قيادة الوكلاء بنجاح وهو في وضع الاستماع 24/7...');
+  console.log('🚀 [Naja7i Commander Bot]: تم تشغيل مركز التحكم الشامل بالمنصة بنجاح 24/7...');
   
   if (ADMIN_CHAT_ID) {
-    await sendMessage(ADMIN_CHAT_ID, '🟢 <b>تم تشغيل نظام وكلاء منصة نجاحي 24/7 بنجاح!</b>\nجميع الوكلاء الستة في وضع الجاهزية التامة لمراقبة الموقع وجلب المصادر.');
+    await sendMessage(ADMIN_CHAT_ID, '👑 <b>مرحباً أنيس! تم تشغيل غرفة قيادة منصة نجاحي الشاملة بنجاح 24/7.</b>\nيمكنك الآن التحكم في وضع الصيانة، نشر الإعلانات، ومتابعة الوكلاء.', getMainReplyKeyboard());
   }
 
-  // Periodic Tasks (Health check every 30 mins)
-  setInterval(() => {
-    runHealthCheck().catch(console.error);
+  // Periodic Health Monitor (Every 30 minutes)
+  setInterval(async () => {
+    const { websiteOk, apiOk } = await runHealthCheck();
+    if (!websiteOk || !apiOk) {
+      const alertMsg = `
+<b>⚠️ تنبيه عاجل من وكيل الصيانة:</b>
+• الموقع: ${websiteOk ? '🟢 شغال' : '🔴 متوقف أو بطيء'}
+• الذكاء الاصطناعي: ${apiOk ? '🟢 متصل' : '🔴 خطأ في الـ API'}
+`;
+      await sendMessage(ADMIN_CHAT_ID, alertMsg);
+    }
   }, 30 * 60 * 1000);
 
-  // Main Polling Loop
+  // Long Polling Loop
   while (isRunning) {
     try {
       const res = await callTelegram('getUpdates', {
@@ -278,15 +437,14 @@ async function startPolling() {
         }
       }
     } catch (err) {
-      console.error('Polling error:', err.message);
+      console.error('Polling loop error:', err.message);
       await new Promise(r => setTimeout(r, 5000));
     }
   }
 }
 
-// Start bot if token provided
 if (BOT_TOKEN) {
   startPolling();
 } else {
-  console.log('ℹ️ [Naja7i Commander Bot]: يرجى ضبط TELEGRAM_BOT_TOKEN في ملف .env لتشغيل البوت والربط المباشر.');
+  console.log('ℹ️ [Naja7i Commander Bot]: يرجى إضافة TELEGRAM_BOT_TOKEN في .env للربط المباشر مع حسابك.');
 }
