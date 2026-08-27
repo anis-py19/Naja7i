@@ -1,41 +1,45 @@
-import { webhookCallback } from 'grammy';
 import { createBot } from '../bot/index.js';
 
-let botInstance = null;
-let webhookHandler = null;
-
-function getHandler() {
-  const token = process.env.BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN;
-  if (!token) return null;
-
-  if (!botInstance) {
-    botInstance = createBot(token);
-    webhookHandler = webhookCallback(botInstance, 'node:http');
-  }
-  return webhookHandler;
-}
+let bot = null;
 
 /**
- * Serverless Webhook Handler for Vercel
- * Supports Telegram POST updates + GET health checks
+ * Serverless Webhook Handler for Vercel (24/7 Execution)
  */
 export default async function handler(req, res) {
+  // GET: Health Check
   if (req.method === 'GET') {
     return res.status(200).json({
       status: 'active',
       service: 'Naja7i BAC Telegram Bot 🇩🇿',
       mode: 'Serverless 24/7 Webhook',
+      tokenConfigured: Boolean(process.env.BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN),
       timestamp: new Date().toISOString()
     });
   }
 
+  // POST: Telegram Webhook Update
   if (req.method === 'POST') {
-    const handler = getHandler();
-    if (!handler) {
-      console.error('BOT_TOKEN is not configured in Vercel environment variables.');
-      return res.status(500).json({ error: 'BOT_TOKEN environment variable is missing.' });
+    const token = process.env.BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN;
+    if (!token) {
+      console.error('❌ [Vercel Bot Error]: BOT_TOKEN is missing in Environment Variables.');
+      return res.status(500).json({ error: 'BOT_TOKEN is missing in Vercel settings.' });
     }
-    return handler(req, res);
+
+    if (!bot) {
+      bot = createBot(token);
+    }
+
+    try {
+      const update = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+      if (update && update.update_id !== undefined) {
+        await bot.handleUpdate(update);
+      }
+      return res.status(200).json({ ok: true });
+    } catch (err) {
+      console.error('❌ Error in bot.handleUpdate:', err);
+      // Return 200 to acknowledge receipt to Telegram
+      return res.status(200).json({ ok: false, error: err.message });
+    }
   }
 
   return res.status(405).send('Method Not Allowed');
