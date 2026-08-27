@@ -11,7 +11,6 @@ import util from 'util';
 import { performDeepBacResearch } from './deepResearchAgent.mjs';
 
 const execPromise = util.promisify(exec);
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const SITE_CONFIG_PATH = path.resolve(__dirname, '../../src/config/siteConfig.js');
@@ -479,10 +478,13 @@ async function handleUpdate(update) {
   const text = msg.text.trim();
   const chatId = msg.chat.id;
 
-  console.log(`📩 [${msg.from.first_name || 'Admin'}]: ${text}`);
+  // Normalized Text (Strip emojis and extra spaces for 100% reliable matching)
+  const normText = text.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').replace(/\s+/g, ' ').trim();
+
+  console.log(`📩 [${msg.from.first_name || 'Admin'}]: ${text} (norm: "${normText}")`);
 
   // /start or /help
-  if (text === '/start' || text === '/help' || text === 'الرئيسية') {
+  if (text === '/start' || text === '/help' || normText === 'الرئيسية' || normText === 'بداية') {
     const welcome = `
 <b>🎓 مرحباً بك في غرفة القيادة لوكلاء منصة نجاحي (Naja7i AI Command Center) 🇩🇿</b>
 
@@ -498,8 +500,36 @@ async function handleUpdate(update) {
     return;
   }
 
+  // 🤖 6 Agents Submenu (قائمة الوكلاء)
+  if (normText.includes('قائمة الوكلاء') || normText.includes('الوكلاء') || text === '/agents') {
+    const agentsMsg = `
+<b>🤖 فريق وكلاء الذكاء الاصطناعي لمنصة نجاحي:</b>
+اضغط على أي وكيل لتشغيل مهمة خاصة به فوراً:
+`;
+
+    const inlineKeyboard = {
+      inline_keyboard: [
+        [
+          { text: '📚 وكيل الدروس', callback_data: 'run_agent_lessons_curriculum_agent' },
+          { text: '🏛️ وكيل الأرشيف', callback_data: 'run_agent_bac_archive_agent' }
+        ],
+        [
+          { text: '⏱️ وكيل الـ QCM', callback_data: 'run_agent_quiz_engine_agent' },
+          { text: '🧮 وكيل الأدوات', callback_data: 'run_agent_smart_tools_agent' }
+        ],
+        [
+          { text: '🎥 وكيل اليوتيوب', callback_data: 'run_agent_youtube_media_agent' },
+          { text: '🎨 وكيل الصيانة والواجهات', callback_data: 'run_agent_ui_frontend_agent' }
+        ]
+      ]
+    };
+
+    await sendMessage(chatId, agentsMsg, inlineKeyboard);
+    return;
+  }
+
   // 📊 System & Agents Status
-  if (text === '📊 حالة النظام والوكلاء' || text === '/status') {
+  if (normText.includes('حالة النظام') || normText.includes('التقرير') || text === '/status') {
     const config = readSiteConfig();
     const uptimeHours = ((Date.now() - startTime) / (1000 * 60 * 60)).toFixed(1);
 
@@ -519,7 +549,7 @@ async function handleUpdate(update) {
   }
 
   // 🚧 Maintenance Mode Menu
-  if (text === '🚧 وضع الصيانة' || text === '/maintenance') {
+  if (normText.includes('وضع الصيانة') || normText.includes('الصيانة') || text === '/maintenance') {
     const config = readSiteConfig();
     const maintMsg = `
 <b>🚧 إدارة وضع الصيانة لمنصة نجاحي:</b>
@@ -543,7 +573,7 @@ async function handleUpdate(update) {
   }
 
   // 📢 Broadcast Alert Menu
-  if (text === '📢 شريط الإعلانات للطلبة' || text === '/broadcast') {
+  if (normText.includes('شريط الإعلانات') || normText.includes('إعلان للطلبة') || text === '/broadcast') {
     const config = readSiteConfig();
     const broadcastMsg = `
 <b>📢 إدارة شريط الإعلانات والتنبيهات العاجلة للطلبة:</b>
@@ -589,10 +619,10 @@ async function handleUpdate(update) {
     return;
   }
 
-  // 🔍 Deep Research & Sources Hunter
-  if (text === '🔍 بحث وتقصي عميق للمصادر' || text.startsWith('/research') || text.startsWith('/search')) {
+  // 🔍 Deep Research & Sources Hunter (زر البحث العميق)
+  if (normText.includes('بحث وتقصي') || normText.includes('بحث عميق') || text.startsWith('/research') || text.startsWith('/search')) {
     let queryTopic = text.replace(/^\/(research|search)\s*/, '').trim();
-    if (!queryTopic || queryTopic === '🔍 بحث وتقصي عميق للمصادر') {
+    if (!queryTopic || normText.includes('بحث وتقصي') || normText.includes('بحث عميق')) {
       queryTopic = 'أحدث سلاسل تمارين وملخصات مقترحة لبكالوريا 2026 مع الحلول وروابط التحميل لجميع الشعب';
     }
 
@@ -638,8 +668,8 @@ ${researchResult.report}
     return;
   }
 
-  // 🦅 Hunt Sources
-  if (text === '🦅 صيد مصادر البكالوريا' || text === '/hunt') {
+  // 🦅 Hunt Sources (زر صيد المصادر)
+  if (normText.includes('صيد مصادر') || normText.includes('صيد') || text === '/hunt') {
     await sendMessage(chatId, '🦅 <b>تم إطلاق وكيل أرشيف البكالوريا ووكيل المنهاج للبحث...</b>\nجاري مسح المصادر وسنرسل لك مقترحات للاعتماد فوراً.');
     setTimeout(() => {
       triggerSourcesHunter().catch(console.error);
@@ -647,38 +677,10 @@ ${researchResult.report}
     return;
   }
 
-  // 🩺 Health Check
-  if (text === '🩺 فحص صحة المنصة' || text === '/health') {
+  // 🩺 Health Check (زر فحص الصحة)
+  if (normText.includes('فحص صحة') || normText.includes('صحة المنصة') || text === '/health') {
     await sendMessage(chatId, '⏳ جاري فحص الموقع والخدمات...');
     await runHealthCheck(chatId);
-    return;
-  }
-
-  // 🤖 6 Agents Submenu
-  if (text === '🤖 قائمة الوكلاء الستة' || text === '/agents') {
-    const agentsMsg = `
-<b>🤖 فريق وكلاء الذكاء الاصطناعي لمنصة نجاحي:</b>
-اضغط على أي وكيل لتشغيل مهمة خاصة به فوراً:
-`;
-
-    const inlineKeyboard = {
-      inline_keyboard: [
-        [
-          { text: '📚 وكيل الدروس', callback_data: 'run_agent_lessons_curriculum_agent' },
-          { text: '🏛️ وكيل الأرشيف', callback_data: 'run_agent_bac_archive_agent' }
-        ],
-        [
-          { text: '⏱️ وكيل الـ QCM', callback_data: 'run_agent_quiz_engine_agent' },
-          { text: '🧮 وكيل الأدوات', callback_data: 'run_agent_smart_tools_agent' }
-        ],
-        [
-          { text: '🎥 وكيل اليوتيوب', callback_data: 'run_agent_youtube_media_agent' },
-          { text: '🎨 وكيل الصيانة', callback_data: 'run_agent_ui_frontend_agent' }
-        ]
-      ]
-    };
-
-    await sendMessage(chatId, agentsMsg, inlineKeyboard);
     return;
   }
 
