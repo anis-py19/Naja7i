@@ -188,20 +188,7 @@ export default function Navbar({ onSelectStream, onOpenCalculator, onOpenSearch,
               أساتذة اليوتيوب
             </Link>
 
-            {/* 6. الملخص الذكي بالذكاء الاصطناعي (Direct Link with Badge) */}
-            <Link 
-              to="/ai-summarizer" 
-              className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 font-bold ${
-                isActive('/ai-summarizer')
-                  ? 'text-white bg-[#E11D48] shadow-sm'
-                  : 'text-rose-300 bg-rose-950/40 border border-rose-500/30 hover:bg-[#E11D48] hover:text-white'
-              }`}
-            >
-              <span>الملخص الذكي</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span>
-            </Link>
-
-            {/* 7. أدوات ومخطط المراجعة (Dropdown) */}
+            {/* 6. أدوات ومخطط المراجعة (Dropdown) */}
             <div className="relative" ref={toolsDropdownRef}>
               <button
                 type="button"
@@ -421,42 +408,42 @@ export default function Navbar({ onSelectStream, onOpenCalculator, onOpenSearch,
             <Link
               to="/"
               onClick={() => setIsOpen(false)}
-              className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800"
+              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
               الرئيسية
             </Link>
             <Link
               to="/library"
               onClick={() => setIsOpen(false)}
-              className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800"
+              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/library') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
               مكتبة الملخصات والسلاسل
             </Link>
             <Link
               to="/bac-archive"
               onClick={() => setIsOpen(false)}
-              className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800"
+              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/bac-archive') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
               أرشيف البكالوريا (2008—2025)
             </Link>
             <Link
               to="/youtube-teachers"
               onClick={() => setIsOpen(false)}
-              className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800"
+              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/youtube-teachers') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
               قنوات وأساتذة اليوتيوب
             </Link>
             <Link
               to="/curriculum"
               onClick={() => setIsOpen(false)}
-              className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800"
+              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/curriculum') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
               دليل المنهاج والبرنامج الوزاري 📚
             </Link>
             <Link
               to="/ai-summarizer"
               onClick={() => setIsOpen(false)}
-              className="px-3 py-2 rounded-lg text-rose-300 hover:text-white hover:bg-slate-800 font-bold flex items-center justify-between"
+              className={`px-3 py-2 rounded-lg transition-colors font-bold flex items-center justify-between ${isActive('/ai-summarizer') ? 'text-white bg-[#E11D48]' : 'text-rose-300 hover:text-white hover:bg-slate-800'}`}
             >
               <span>الملخص الذكي (AI) 🤖</span>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#E11D48] text-white">جديد</span>
@@ -464,35 +451,35 @@ export default function Navbar({ onSelectStream, onOpenCalculator, onOpenSearch,
             <Link
               to="/quiz"
               onClick={() => setIsOpen(false)}
-              className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800"
+              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/quiz') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
               بنك الأسئلة والاختبارات (Quiz & QCM) ⏱️
             </Link>
             <Link
               to="/study-planner"
               onClick={() => setIsOpen(false)}
-              className="px-3 py-2 rounded-lg text-white bg-[#E11D48]"
+              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/study-planner') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
               مخطط وجداول المراجعة الأسبوعية
             </Link>
             <Link
               to="/calculator"
               onClick={() => setIsOpen(false)}
-              className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800"
+              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/calculator') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
               حاسبة معدل البكالوريا
             </Link>
             <Link
               to="/countdown"
               onClick={() => setIsOpen(false)}
-              className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800"
+              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/countdown') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
               العداد التنازلي للبكالوريا
             </Link>
             <Link
               to="/about"
               onClick={() => setIsOpen(false)}
-              className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-800"
+              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/about') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
               عن المنصة ومؤسسها
             </Link>
