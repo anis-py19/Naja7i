@@ -4,6 +4,7 @@
  */
 
 import fs from 'fs';
+import http from 'http';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { performDeepBacResearch } from './deepResearchAgent.mjs';
@@ -628,7 +629,23 @@ async function startPolling() {
   }
 }
 
-// Auto-start if token provided
+// 📡 Minimal HTTP Health Server for 24/7 Cloud Hosting (Render / Railway)
+const PORT = process.env.PORT || 3000;
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify({
+    status: 'online',
+    service: 'Naja7i 24/7 Agent Commander',
+    timestamp: new Date().toISOString(),
+    uptime: `${((Date.now() - startTime) / 1000).toFixed(1)}s`
+  }));
+});
+
+server.listen(PORT, () => {
+  console.log(`📡 [HTTP Health Server]: شغال على المنفذ ${PORT} (جاهز للاستضافة السحابية على Render/Railway)`);
+});
+
+// Auto-start bot polling if token provided
 if (BOT_TOKEN) {
   startPolling();
 } else {
