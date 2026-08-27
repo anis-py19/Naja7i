@@ -16,7 +16,7 @@
 | ⏱️ **`quiz_engine_agent`** | **بنك الأسئلة والاختبارات التفاعلية السريعة**<br>أسئلة QCM، التحديات الموقوتة، والتعليلات المنهجية. | `src/data/quizData.js`<br>`src/pages/QuizBankPage.jsx` |
 | 🧮 **`smart_tools_agent`** | **الأدوات الذكية وحاسبة المعدل ومخطط A4**<br>المعاملات الرسمية، التوجيه الجامعي، وجدول المراجعة الأسبوعي. | `src/data/plannerData.js`<br>`src/pages/StudyPlannerPage.jsx`<br>`src/pages/CalculatorPage.jsx`<br>`src/pages/CountdownPage.jsx` |
 | 🎥 **`youtube_media_agent`** | **دليل قنوات وأساتذة اليوتيوب**<br>ترتيب وتصنيف أفضل الأساتذة الجزائريين وقوائم التشغيل. | `src/data/bacData.js` (قنوات اليوتيوب)<br>`src/pages/YouTubeTeachersPage.jsx` |
-| 🎨 **`ui_frontend_agent`** | **هندسة الواجهات وتجربة المستخدم والمستعرض**<br>تصميم React 19، Tailwind v4، ومستعرض PDF (Canvas/Drive). | `src/components/Navbar.jsx`<br>`src/components/PdfReaderModal.jsx`<br>`src/App.jsx`<br>`src/index.css` |
+| 🎨 **`ui_frontend_agent`** | **هندسة الواجهات وتجربة المستخدم والمستعرض**<br>تصميم React 19، Tailwind v4، ومستعرض PDF (Canvas/Drive).<br>*(معيار الشارات: جميع الـ Badges بسيطة، هادئة، وبستايل Minimalist ناعم)*. | `src/components/Navbar.jsx`<br>`src/components/PdfReaderModal.jsx`<br>`src/App.jsx`<br>`src/index.css` |
 
 ---
 
@@ -33,6 +33,7 @@
 ## 🛠️ 3. Tech Stack & Engineering Standards
 - **Framework:** React 19 + Vite (Fast HMR)
 - **Styling:** Tailwind CSS v4 + Modern Slate/Rose CSS Design Tokens
+- **Badge & Pill Design Standard:** جميع الشارات والوسوم (Badges & Pills) عبر كل صفحات ومكونات الموقع تكون **Simple & Clean** بخلفيات هادئة (`bg-slate-100` / `bg-rose-50`)، حواف `rounded-md`، وحدود ناعمة (`border-slate-200/60`) وخط متوازن (`font-medium`) بعيداً عن الألوان الفاقعة والظلال الثقيلة.
 - **Animations:** Framer Motion (page transitions, micro-interactions, modal overlays)
 - **PDF Engine:** Dual In-App Canvas PDF.js Renderer + Google Drive Embed
 - **Direction & Language:** Arabic First (`dir="rtl"`, Cairo font), French/English terms supported.
