@@ -7,11 +7,17 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "bot": "node bot/index.js",
+    "bot:dev": "node --watch bot/index.js",
+    "bot:set-webhook": "node bot/setWebhook.js",
+    "bot:delete-webhook": "node bot/deleteWebhook.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
+    "dotenv": "^17.4.2",
     "framer-motion": "^13.1.1",
+    "grammy": "^1.46.0",
     "pdfjs-dist": "^6.2.108",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
