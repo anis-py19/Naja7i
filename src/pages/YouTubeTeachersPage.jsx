@@ -90,6 +90,22 @@ export default function YouTubeTeachersPage() {
         </span>
       );
     }
+    if (rank === 4) {
+      return (
+        <span className="px-2 py-0.5 rounded-md bg-sky-50 text-sky-800 text-[11px] font-medium border border-sky-200/60 flex items-center gap-1">
+          <span>4️⃣</span>
+          <span>المركز الرابع</span>
+        </span>
+      );
+    }
+    if (rank === 5) {
+      return (
+        <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 text-[11px] font-medium border border-emerald-200/60 flex items-center gap-1">
+          <span>5️⃣</span>
+          <span>المركز الخامس</span>
+        </span>
+      );
+    }
     return (
       <span className="px-2 py-0.5 rounded-md bg-slate-50 text-slate-600 text-[11px] font-medium border border-slate-200/50">
         موصى به
