@@ -11,7 +11,7 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 export const CONFIG = {
   BOT_TOKEN: (process.env.BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN || '').trim().replace(/^["']|["']$/g, ''),
-  WEB_APP_URL: (process.env.WEB_APP_URL || 'https://naja7i.vercel.app').trim(),
+  WEB_APP_URL: (process.env.WEB_APP_URL || 'https://naja7i-platform.vercel.app').trim(),
   PLATFORM_NAME: 'منصة نجاحي (Naja7i 🇩🇿)',
   DEV_NAME: 'فريق نجاحي التعليمي',
   BAC_TARGET_DATE: '2026-06-07T08:00:00+01:00', // تقريبي لبكالوريا جوان 2026

@@ -77,7 +77,7 @@ npm run bot:dev
      ```bash
      npm run bot:set-webhook
      ```
-   - سيقوم البوت فوراً بالربط مع `https://naja7i.vercel.app/api/webhook`.
+   - سيقوم البوت فوراً بالربط مع `https://naja7i-platform.vercel.app/api/webhook`.
 
 ---
 
