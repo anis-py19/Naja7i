@@ -528,6 +528,29 @@ async function handleUpdate(update) {
     return;
   }
 
+  // 🎨 UI Frontend Agent Directly (واجهات، فرونت، صيانة والواجهات)
+  if (normText.includes('واجهات') || normText.includes('فرونت') || normText.includes('صيانة والواجهات') || text === '/ui' || text === '/frontend') {
+    const uiMenu = `
+<b>🎨 لوحة عمليات وكيل الواجهات والفرونت إند (UI Frontend Agent):</b>
+المهمة: <i>فحص الواجهات، سرعة التصفح، تجاوب الشاشات، واختبار الأكواد</i>
+
+اختر العملية التي ترغب في تنفيذها:
+`;
+    const inlineKeyboard = {
+      inline_keyboard: [
+        [
+          { text: '🔍 فحص صفحات الموقع الـ 14', callback_data: 'ui_audit_pages' },
+          { text: '📱 فحص تجاوب الموبايل', callback_data: 'ui_audit_mobile' }
+        ],
+        [
+          { text: '⚡ تشغيل فحص البناء والأكواد (Build)', callback_data: 'ui_run_build' }
+        ]
+      ]
+    };
+    await sendMessage(chatId, uiMenu, inlineKeyboard);
+    return;
+  }
+
   // 📊 System & Agents Status
   if (normText.includes('حالة النظام') || normText.includes('التقرير') || text === '/status') {
     const config = readSiteConfig();
