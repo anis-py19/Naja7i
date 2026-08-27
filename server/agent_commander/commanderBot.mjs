@@ -4,7 +4,6 @@
  */
 
 import fs from 'fs';
-import http from 'http';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { performDeepBacResearch } from './deepResearchAgent.mjs';
@@ -144,46 +143,18 @@ async function callTelegram(method, payload = {}) {
 }
 
 /**
- * 💬 Send Formatted Message (With Auto-Chunking for Long Reports)
+ * 💬 Send Formatted Message
  */
 async function sendMessage(chatId, text, replyMarkup = null) {
-  const targetChatId = chatId || ADMIN_CHAT_ID;
-  if (!targetChatId) return null;
-
-  if (text.length <= 3900) {
-    const payload = {
-      chat_id: targetChatId,
-      text,
-      parse_mode: 'HTML'
-    };
-    if (replyMarkup) {
-      payload.reply_markup = replyMarkup;
-    }
-    return await callTelegram('sendMessage', payload);
+  const payload = {
+    chat_id: chatId || ADMIN_CHAT_ID,
+    text,
+    parse_mode: 'HTML'
+  };
+  if (replyMarkup) {
+    payload.reply_markup = replyMarkup;
   }
-
-  // Split long messages to prevent Telegram 4096 character limit errors
-  const chunks = [];
-  let remaining = text;
-  while (remaining.length > 0) {
-    chunks.push(remaining.slice(0, 3800));
-    remaining = remaining.slice(3800);
-  }
-
-  let lastRes = null;
-  for (let i = 0; i < chunks.length; i++) {
-    const isLast = i === chunks.length - 1;
-    const payload = {
-      chat_id: targetChatId,
-      text: chunks[i],
-      parse_mode: 'HTML'
-    };
-    if (isLast && replyMarkup) {
-      payload.reply_markup = replyMarkup;
-    }
-    lastRes = await callTelegram('sendMessage', payload);
-  }
-  return lastRes;
+  return await callTelegram('sendMessage', payload);
 }
 
 /**
@@ -585,8 +556,49 @@ ${researchResult.report}
     return;
   }
 
-  // Fallback
-  await sendMessage(chatId, `🤖 تم استلام رسالتك: <i>"${text}"</i>\nيمكنك استخدام الأزرار بالأسفل للتحكم في المنصة.`, getMainKeyboard());
+  // 🦅 Universal Smart Deep Research (يعمل تلقائياً عند كتابة أي نص أو سؤال حتى لو كنت بعيداً)
+  await sendMessage(
+    chatId, 
+    `🦅 <b>وكيل التقصي الأكاديمي (Deep Research):</b>\n🔍 <b>جاري البحث عن:</b> <i>"${text}"</i>\n⏳ جاري فحص مصادر البكالوريا، مذكرات الأساتذة، وقنوات اليوتيوب وسنوافيك بالنتائج والروابط فوراً...`
+  );
+
+  try {
+    const researchResult = await performDeepBacResearch({
+      topic: text,
+      subject: 'جميع المواد',
+      stream: 'جميع الشعب'
+    });
+
+    const reportText = `
+<b>🦅 تقرير التقصي الأكاديمي العميق (Naja7i Deep Research):</b>
+🎯 <b>طلبك:</b> ${text}
+📅 <b>التاريخ:</b> ${new Date().toLocaleDateString('ar-DZ')}
+
+${researchResult.report}
+`;
+
+    const proposalId = 'research_' + Date.now();
+    PENDING_PROPOSALS.set(proposalId, {
+      agentId: 'bac_deep_research_agent',
+      title: text,
+      summary: `نتائج بحث عميق وروابط مذكرات حول (${text})`,
+      actionData: researchResult,
+      createdAt: new Date()
+    });
+
+    const inlineKeyboard = {
+      inline_keyboard: [
+        [
+          { text: '✅ اعتماد وإضافة الروابط للموقع', callback_data: `approve_${proposalId}` },
+          { text: '❌ تجاهل التقرير', callback_data: `reject_${proposalId}` }
+        ]
+      ]
+    };
+
+    await sendMessage(chatId, reportText, inlineKeyboard);
+  } catch (err) {
+    await sendMessage(chatId, `⚠️ تعذر إكمال البحث الأكاديمي: ${err.message}`, getMainKeyboard());
+  }
 }
 
 /**
@@ -629,23 +641,7 @@ async function startPolling() {
   }
 }
 
-// 📡 Minimal HTTP Health Server for 24/7 Cloud Hosting (Render / Railway)
-const PORT = process.env.PORT || 3000;
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-  res.end(JSON.stringify({
-    status: 'online',
-    service: 'Naja7i 24/7 Agent Commander',
-    timestamp: new Date().toISOString(),
-    uptime: `${((Date.now() - startTime) / 1000).toFixed(1)}s`
-  }));
-});
-
-server.listen(PORT, () => {
-  console.log(`📡 [HTTP Health Server]: شغال على المنفذ ${PORT} (جاهز للاستضافة السحابية على Render/Railway)`);
-});
-
-// Auto-start bot polling if token provided
+// Auto-start if token provided
 if (BOT_TOKEN) {
   startPolling();
 } else {
