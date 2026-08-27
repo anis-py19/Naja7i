@@ -8,7 +8,6 @@ import {
 import { STREAMS } from '../data/streamsData';
 import FounderStorySection from '../components/FounderStorySection';
 import ContactContributionSection from '../components/ContactContributionSection';
-import VisitorCounterBadge from '../components/VisitorCounterBadge';
 
 export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }) {
   const navigate = useNavigate();
@@ -97,11 +96,6 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
           <p className="text-xs sm:text-sm text-[#475569] max-w-2xl mx-auto leading-relaxed">
             مكتبة منظمة تجمع أفضل ملخصات وسلاسل أساتذة الجزائر، مواضيع وحلول البكالوريا الرسمية، وأدوات المراجعة بدون إعلانات أو روابط خارجية.
           </p>
-
-          {/* Real Live Visitor Counter Badge */}
-          <div className="pt-1">
-            <VisitorCounterBadge variant="banner" />
-          </div>
 
           {/* Actions */}
           <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">

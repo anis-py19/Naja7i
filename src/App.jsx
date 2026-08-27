@@ -7,7 +7,6 @@ import BacCalculatorModal from './components/BacCalculatorModal';
 import SearchModal from './components/SearchModal';
 import ContactContributionModal from './components/ContactContributionModal';
 import FloatingQuickActions from './components/FloatingQuickActions';
-import VisitorCounterBadge from './components/VisitorCounterBadge';
 
 // Page Views
 import HomePage from './pages/HomePage';
@@ -93,13 +92,6 @@ function App() {
           >
             إغلاق المعاينة ورؤية صفحة الصيانة
           </button>
-        </div>
-      )}
-
-      {/* Live Broadcast Notice Bar (يتم التحكم فيه وتفعيله عبر بوت التيليغرام) */}
-      {SITE_CONFIG.broadcastNotice?.active && (
-        <div className="bg-gradient-to-r from-rose-600 to-[#E11D48] text-white px-4 py-2 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 z-50 print:hidden shadow-sm animate-fadeIn">
-          <span>{SITE_CONFIG.broadcastNotice.text}</span>
         </div>
       )}
 
@@ -341,7 +333,6 @@ function App() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-4">
-            <VisitorCounterBadge variant="footer" />
             <div className="text-[#94A3B8] text-[11px] text-center sm:text-left">
               جميع الحقوق محفوظة © {new Date().getFullYear()} لمنصة نجاحي التعليمية • نسألكم الدعاء بالتوفيق والبركة
             </div>
