@@ -67,11 +67,11 @@ function App() {
   // If maintenance mode is activated and admin has not bypassed it, display MaintenancePage
   if (SITE_CONFIG.isMaintenanceMode && !bypassMaintenance && location.pathname !== '/maintenance') {
     return (
-      <MaintenancePage 
+      <MaintenancePage
         onBypass={() => {
           setBypassMaintenance(true);
           localStorage.setItem('naja7i_admin_bypass', 'true');
-        }} 
+        }}
       />
     );
   }
@@ -293,9 +293,9 @@ function App() {
       <footer className="border-t border-[#E2E8F0] bg-white py-8 text-xs text-[#64748B] mt-12 print:hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <img 
-              src="/logo.jpg" 
-              alt="منصة نجاحي" 
+            <img
+              src="/logo.jpg"
+              alt="منصة نجاحي"
               className="w-10 h-10 object-contain rounded-xl border border-[#E2E8F0] shadow-xs bg-white"
             />
             <div>

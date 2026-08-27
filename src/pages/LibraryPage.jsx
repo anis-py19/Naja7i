@@ -15,6 +15,7 @@ import {
 import { Link } from 'react-router-dom';
 import { USER_STUDY_FILES } from '../data/userFilesData';
 import { STREAMS } from '../data/streamsData';
+import SummarizationMethodologyGuide from '../components/SummarizationMethodologyGuide';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -165,6 +166,9 @@ export default function LibraryPage({ onOpenPdf }) {
       {/* Main Filter & Content Area */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         
+        {/* Pedagogical Methodology Guide */}
+        <SummarizationMethodologyGuide />
+
         {/* Filter Control Box */}
         <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 mb-6 shadow-xs space-y-4">
           
