@@ -138,14 +138,17 @@ export default function VisualMindmapViewer({ mindmapData, title }) {
         >
           
           {/* 1. ROOT NODE (العقدة المركزية الرئيسية) */}
-          <div className="relative group">
-            <div className="px-8 py-3.5 rounded-full bg-gradient-to-r from-rose-500 to-[#E11D48] text-white font-black text-sm sm:text-base shadow-lg border-2 border-white ring-4 ring-rose-200 text-center tracking-wide min-w-[220px]">
+          <div className="relative group flex flex-col items-center">
+            <div className="px-8 py-3.5 rounded-full bg-gradient-to-r from-rose-500 via-[#E11D48] to-rose-600 text-white font-black text-sm sm:text-base shadow-xl border-2 border-white ring-4 ring-rose-200 text-center tracking-wide min-w-[220px] transition-transform group-hover:scale-105">
               {mindmapData.title || title || 'عنوان الدرس والمحور الأساسي'}
             </div>
             
             {/* Downward Connector Stem */}
-            <div className="w-0.5 h-8 bg-rose-400 mx-auto"></div>
+            <div className="w-0.5 h-6 bg-gradient-to-b from-rose-500 to-slate-300"></div>
           </div>
+
+          {/* Horizontal Connecting Bar (Desktop) */}
+          <div className="hidden lg:block w-3/4 h-0.5 bg-slate-300 -mt-6 rounded-full"></div>
 
           {/* 2. MAIN BRANCHES (الأغصان والمحاور الفرعية) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full items-start justify-center">

@@ -14,6 +14,14 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
 
   const portals = [
     {
+      title: 'الملخص الذكي بالذكاء الاصطناعي',
+      desc: 'تلخيص ملفات PDF وصور الكراريس وتحويل الدروس إلى مخططات ذهنية بصرية تفاعلية.',
+      path: '/ai-summarizer',
+      icon: '🤖',
+      badge: 'جديد AI ✨',
+      highlight: true
+    },
+    {
       title: 'الشعب والمواد الدراسية',
       desc: 'مقررات وبرامج البكالوريا الرسمية لجميع الشعب مع الوحدات والمعاملات.',
       path: '/streams',
@@ -176,14 +184,29 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
             <Link
               key={idx}
               to={item.path}
-              className="bg-white border border-[#E2E8F0] hover:border-[#E11D48] rounded-2xl p-6 transition-all hover:shadow-sm flex flex-col justify-between group"
+              className={`rounded-2xl p-6 transition-all hover:shadow-md flex flex-col justify-between group cursor-pointer relative overflow-hidden ${
+                item.highlight
+                  ? 'bg-gradient-to-br from-white via-rose-50/30 to-white border-2 border-rose-400 shadow-xs ring-2 ring-rose-100 hover:border-[#E11D48]'
+                  : 'bg-white border border-[#E2E8F0] hover:border-[#E11D48] hover:shadow-xs'
+              }`}
             >
+              {item.highlight && (
+                <div className="absolute top-0 right-0 w-24 h-24 bg-rose-500/10 rounded-full blur-xl pointer-events-none"></div>
+              )}
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-center text-2xl group-hover:bg-[#F1F5F9] transition-colors">
+                  <div className={`w-12 h-12 rounded-xl border flex items-center justify-center text-2xl transition-transform group-hover:scale-105 shadow-2xs ${
+                    item.highlight
+                      ? 'bg-rose-50 border-rose-200'
+                      : 'bg-[#F8FAFC] border-[#E2E8F0] group-hover:bg-[#F1F5F9]'
+                  }`}>
                     {item.icon}
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#F1F5F9] text-[#475569] text-[11px] font-bold border border-[#E2E8F0]">
+                  <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${
+                    item.highlight
+                      ? 'bg-[#E11D48] text-white border-[#E11D48] shadow-2xs'
+                      : 'bg-[#F1F5F9] text-[#475569] border-[#E2E8F0]'
+                  }`}>
                     {item.badge}
                   </span>
                 </div>

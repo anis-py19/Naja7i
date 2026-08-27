@@ -188,7 +188,20 @@ export default function Navbar({ onSelectStream, onOpenCalculator, onOpenSearch,
               أساتذة اليوتيوب
             </Link>
 
-            {/* 6. أدوات ومخطط المراجعة (Dropdown) */}
+            {/* 6. الملخص الذكي بالذكاء الاصطناعي (Direct Link with Badge) */}
+            <Link 
+              to="/ai-summarizer" 
+              className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 font-bold ${
+                isActive('/ai-summarizer')
+                  ? 'text-white bg-[#E11D48] shadow-sm'
+                  : 'text-rose-300 bg-rose-950/40 border border-rose-500/30 hover:bg-[#E11D48] hover:text-white'
+              }`}
+            >
+              <span>الملخص الذكي</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span>
+            </Link>
+
+            {/* 7. أدوات ومخطط المراجعة (Dropdown) */}
             <div className="relative" ref={toolsDropdownRef}>
               <button
                 type="button"
