@@ -234,11 +234,10 @@ export default function AiSummarizerPage() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                <span className="px-2.5 py-0.5 rounded-full bg-rose-50 text-[#E11D48] font-bold text-xs border border-rose-200 flex items-center gap-1">
-                  <HiSparkles className="w-3.5 h-3.5" />
+                <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium text-xs border border-slate-200/60 flex items-center gap-1">
                   <span>محرك البكالوريا الذكي 🤖</span>
                 </span>
-                <span className="text-xs text-[#64748B]">تلخيص ملفات PDF، صور الكراريس، وتوليد أسئلة ونقاط حفظ فورية</span>
+                <span className="text-xs text-[#64748B]">تلخيص فوري للدروس، توليد أسئلة، ومخططات شجرية</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A]">
                 ملخص نجاحي الذكي بالذكاء الاصطناعي

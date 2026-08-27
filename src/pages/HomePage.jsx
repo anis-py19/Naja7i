@@ -14,14 +14,6 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
 
   const portals = [
     {
-      title: 'الملخص الذكي بالذكاء الاصطناعي',
-      desc: 'تلخيص ملفات PDF وصور الكراريس وتحويل الدروس إلى مخططات ذهنية بصرية تفاعلية.',
-      path: '/ai-summarizer',
-      icon: '🤖',
-      badge: 'جديد AI ✨',
-      highlight: true
-    },
-    {
       title: 'الشعب والمواد الدراسية',
       desc: 'مقررات وبرامج البكالوريا الرسمية لجميع الشعب مع الوحدات والمعاملات.',
       path: '/streams',
@@ -93,8 +85,8 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       <section className="pt-8 pb-9 px-4 sm:px-6 lg:px-8 border-b border-[#E2E8F0] bg-white">
         <div className="max-w-4xl mx-auto text-center space-y-3">
           
-          <div className="inline-block px-3.5 py-1 rounded-full bg-[#F1F5F9] border border-[#E2E8F0] text-xs font-bold text-[#0F172A]">
-            الموقع التعليمي الشامل لبكالوريا الجزائر 🇩🇿
+          <div className="inline-block px-3 py-1 rounded-md bg-slate-100 border border-slate-200/60 text-xs font-medium text-slate-700">
+            فضاء تحضير شهادة البكالوريا 🇩🇿
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#0F172A] tracking-tight">
@@ -106,34 +98,30 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
           </p>
 
           {/* Actions */}
-          <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
             <button
               onClick={onOpenSearch}
-              className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] font-bold text-xs border border-[#CBD5E1] flex items-center justify-center gap-2 cursor-pointer transition-colors shadow-2xs"
+              className="px-5 py-2.5 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center gap-2 cursor-pointer"
             >
-              <HiSearch className="w-4 h-4 text-[#E11D48]" />
-              <span>بحث سريع في الدروس والملخصات</span>
-              <kbd className="px-1.5 py-0.5 rounded bg-[#F1F5F9] text-[10px] text-[#64748B] font-mono border border-[#E2E8F0]">
-                Ctrl K
-              </kbd>
+              <HiSearch className="w-4 h-4" />
+              <span>ابحث في المنصة</span>
             </button>
-
             <Link
               to="/library"
-              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center justify-center gap-2 transition-colors shadow-2xs"
+              className="px-5 py-2.5 rounded-xl bg-[#0F172A] hover:bg-slate-800 text-white font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center gap-2"
             >
               <HiBookOpen className="w-4 h-4" />
-              <span>تصفح مكتبة الملخصات</span>
+              <span>تصفح بنك الملخصات</span>
             </Link>
           </div>
 
         </div>
       </section>
 
-      {/* 2. Streams Bar: Direct Access */}
-      <section className="py-6 bg-[#F8FAFC] border-b border-[#E2E8F0]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-3">
+      {/* 2. Quick Stream Selector Bar */}
+      <section className="py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-[#E2E8F0]">
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#0F172A] flex items-center gap-1.5">
               <span>🏛️ اختر شعبتك للوصول السريع:</span>
             </span>
@@ -184,29 +172,14 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
             <Link
               key={idx}
               to={item.path}
-              className={`rounded-2xl p-6 transition-all hover:shadow-md flex flex-col justify-between group cursor-pointer relative overflow-hidden ${
-                item.highlight
-                  ? 'bg-gradient-to-br from-white via-rose-50/30 to-white border-2 border-rose-400 shadow-xs ring-2 ring-rose-100 hover:border-[#E11D48]'
-                  : 'bg-white border border-[#E2E8F0] hover:border-[#E11D48] hover:shadow-xs'
-              }`}
+              className="bg-white border border-[#E2E8F0] hover:border-[#E11D48] rounded-2xl p-6 transition-all hover:shadow-sm flex flex-col justify-between group"
             >
-              {item.highlight && (
-                <div className="absolute top-0 right-0 w-24 h-24 bg-rose-500/10 rounded-full blur-xl pointer-events-none"></div>
-              )}
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className={`w-12 h-12 rounded-xl border flex items-center justify-center text-2xl transition-transform group-hover:scale-105 shadow-2xs ${
-                    item.highlight
-                      ? 'bg-rose-50 border-rose-200'
-                      : 'bg-[#F8FAFC] border-[#E2E8F0] group-hover:bg-[#F1F5F9]'
-                  }`}>
+                  <div className="w-12 h-12 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-center text-2xl group-hover:bg-[#F1F5F9] transition-colors">
                     {item.icon}
                   </div>
-                  <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${
-                    item.highlight
-                      ? 'bg-[#E11D48] text-white border-[#E11D48] shadow-2xs'
-                      : 'bg-[#F1F5F9] text-[#475569] border-[#E2E8F0]'
-                  }`}>
+                  <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[11px] font-medium border border-slate-200/60">
                     {item.badge}
                   </span>
                 </div>

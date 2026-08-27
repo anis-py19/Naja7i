@@ -142,7 +142,7 @@ export default function Navbar({ onSelectStream, onOpenCalculator, onOpenSearch,
                             {s.name}
                           </span>
                         </div>
-                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#F1F5F9] text-[#475569] border border-[#E2E8F0]">
+                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-medium">
                           {s.subjectsCount} مواد
                         </span>
                       </button>
@@ -446,7 +446,7 @@ export default function Navbar({ onSelectStream, onOpenCalculator, onOpenSearch,
               className={`px-3 py-2 rounded-lg transition-colors font-bold flex items-center justify-between ${isActive('/ai-summarizer') ? 'text-white bg-[#E11D48]' : 'text-rose-300 hover:text-white hover:bg-slate-800'}`}
             >
               <span>الملخص الذكي (AI) 🤖</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#E11D48] text-white">جديد</span>
+              <span className="text-[10px] px-1.5 py-0.2 rounded bg-rose-100 text-rose-700 font-medium">جديد</span>
             </Link>
             <Link
               to="/quiz"

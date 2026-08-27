@@ -107,8 +107,8 @@ export default function CurriculumPage() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                <span className="px-2.5 py-0.5 rounded-full bg-rose-50 text-[#E11D48] font-bold text-xs border border-rose-200">
-                  خريطة المنهاج الوزاري التفاعلية 2026 🇩🇿
+                <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium text-xs border border-slate-200/60">
+                  خريطة المنهاج الوزاري 2026 🇩🇿
                 </span>
                 <span className="text-xs text-[#64748B]">مخطط انسيابي لجميع الوحدات والدروس المقررة</span>
               </div>

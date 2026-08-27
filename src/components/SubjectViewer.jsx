@@ -94,19 +94,19 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
           <div className="flex items-start justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-white text-[#E11D48] border border-[#E2E8F0]">
+                <span className="text-xs font-medium px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200/60">
                   {streamName || 'جميع الشعب'}
                 </span>
                 <span className="text-xs text-[#64748B] font-sans">
                   {subjectData.frenchTitle}
                 </span>
                 {userSubjectFiles.length > 0 && (
-                  <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-white text-[#0F172A] border border-[#E2E8F0]">
+                  <span className="text-xs font-medium px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200/60">
                     📂 {userSubjectFiles.length} ملف PDF متاح
                   </span>
                 )}
                 {subjectData.units.length > 0 && (
-                  <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-white text-[#0F172A] border border-[#E2E8F0]">
+                  <span className="text-xs font-medium px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200/60">
                     المكتمل: {completedCountInSubject} / {subjectData.units.length}
                   </span>
                 )}
@@ -213,7 +213,7 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
                   >
                     <div>
                       <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-white text-[#E11D48] border border-[#E2E8F0]">
+                        <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200/60">
                           {file.category}
                         </span>
                         <span className="text-[11px] text-[#64748B] font-mono">

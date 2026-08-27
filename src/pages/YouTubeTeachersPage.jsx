@@ -68,7 +68,7 @@ export default function YouTubeTeachersPage() {
   const getRankBadge = (rank) => {
     if (rank === 1) {
       return (
-        <span className="px-2 py-0.5 rounded-full bg-amber-500 text-white text-[11px] font-bold flex items-center gap-1 shadow-2xs">
+        <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 text-[11px] font-medium border border-amber-200/60 flex items-center gap-1">
           <span>🥇</span>
           <span>المركز الأول</span>
         </span>
@@ -76,7 +76,7 @@ export default function YouTubeTeachersPage() {
     }
     if (rank === 2) {
       return (
-        <span className="px-2 py-0.5 rounded-full bg-slate-500 text-white text-[11px] font-bold flex items-center gap-1 shadow-2xs">
+        <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[11px] font-medium border border-slate-200/60 flex items-center gap-1">
           <span>🥈</span>
           <span>المركز الثاني</span>
         </span>
@@ -84,15 +84,15 @@ export default function YouTubeTeachersPage() {
     }
     if (rank === 3) {
       return (
-        <span className="px-2 py-0.5 rounded-full bg-amber-700 text-white text-[11px] font-bold flex items-center gap-1 shadow-2xs">
+        <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-900 text-[11px] font-medium border border-amber-200/60 flex items-center gap-1">
           <span>🥉</span>
           <span>المركز الثالث</span>
         </span>
       );
     }
     return (
-      <span className="px-2 py-0.5 rounded-full bg-[#F1F5F9] text-[#475569] text-[11px] font-bold border border-[#E2E8F0]">
-        ⭐ موصى به
+      <span className="px-2 py-0.5 rounded-md bg-slate-50 text-slate-600 text-[11px] font-medium border border-slate-200/50">
+        موصى به
       </span>
     );
   };

@@ -138,7 +138,7 @@ export default function LibraryPage({ onOpenPdf }) {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1.5">
-                <span className="px-2.5 py-0.5 rounded-full bg-[#F1F5F9] text-[#E11D48] font-bold text-xs font-mono border border-[#E2E8F0]">
+                <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium text-xs border border-slate-200/60">
                   مكتبة شاملة
                 </span>
                 <span className="text-xs text-[#64748B]">تحميل مباشر وقراءة فورية داخل الموقع</span>
@@ -344,10 +344,10 @@ export default function LibraryPage({ onOpenPdf }) {
                   
                   {/* File Meta Header */}
                   <div className="flex items-start justify-between gap-2 mb-2.5">
-                    <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-[#F1F5F9] text-[#0F172A] border border-[#E2E8F0] truncate">
+                    <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200/60 truncate">
                       {file.subjectName}
                     </span>
-                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#F8FAFC] text-[#64748B] border border-[#E2E8F0] shrink-0">
+                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-md bg-slate-50 text-slate-500 border border-slate-200/50 shrink-0">
                       {file.sizeReadable || file.size || ''}
                     </span>
                   </div>

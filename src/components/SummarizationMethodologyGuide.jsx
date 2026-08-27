@@ -34,8 +34,8 @@ export default function SummarizationMethodologyGuide() {
           </div>
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="px-2.5 py-0.5 rounded-full bg-rose-100 text-[#E11D48] font-bold text-[11px] border border-rose-300">
-                دليل المنهجية البيداغوجية 🇩🇿
+              <span className="px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 font-medium text-xs border border-rose-200/60">
+                منهجية بيداغوجية 🇩🇿
               </span>
               <span className="text-xs text-[#64748B] hidden sm:inline">أسرار التلخيص والحفظ المتين لشهادة البكالوريا</span>
             </div>
@@ -103,14 +103,14 @@ export default function SummarizationMethodologyGuide() {
                   <div className="bg-white border border-[#E2E8F0] hover:border-rose-300 rounded-2xl p-4.5 space-y-2.5 shadow-2xs transition-all flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between">
-                        <span className="w-7 h-7 rounded-lg bg-sky-50 text-sky-700 font-mono font-black text-xs flex items-center justify-center border border-sky-200">
+                        <span className="w-7 h-7 rounded-lg bg-sky-50 text-sky-700 font-mono font-bold text-xs flex items-center justify-center border border-sky-200">
                           1️⃣
                         </span>
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-50 text-sky-800">
+                        <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-sky-50 text-sky-700 border border-sky-100">
                           المشاهدة الفاهمة
                         </span>
                       </div>
-                      <h4 className="text-xs sm:text-sm font-black text-[#0F172A] mt-2">
+                      <h4 className="text-xs sm:text-sm font-bold text-[#0F172A] mt-2">
                         المشاهدة والاستيعاب الخام
                       </h4>
                       <p className="text-[11px] text-[#475569] leading-relaxed mt-1">
@@ -126,14 +126,14 @@ export default function SummarizationMethodologyGuide() {
                   <div className="bg-white border border-[#E2E8F0] hover:border-rose-300 rounded-2xl p-4.5 space-y-2.5 shadow-2xs transition-all flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between">
-                        <span className="w-7 h-7 rounded-lg bg-amber-50 text-amber-700 font-mono font-black text-xs flex items-center justify-center border border-amber-200">
+                        <span className="w-7 h-7 rounded-lg bg-amber-50 text-amber-700 font-mono font-bold text-xs flex items-center justify-center border border-amber-200">
                           2️⃣
                         </span>
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800">
+                        <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-100">
                           مسودة الأفكار
                         </span>
                       </div>
-                      <h4 className="text-xs sm:text-sm font-black text-[#0F172A] mt-2">
+                      <h4 className="text-xs sm:text-sm font-bold text-[#0F172A] mt-2">
                         المشاهدة الثانية والتدوين السريع
                       </h4>
                       <p className="text-[11px] text-[#475569] leading-relaxed mt-1">
@@ -149,14 +149,14 @@ export default function SummarizationMethodologyGuide() {
                   <div className="bg-white border border-[#E2E8F0] hover:border-rose-300 rounded-2xl p-4.5 space-y-2.5 shadow-2xs transition-all flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between">
-                        <span className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-700 font-mono font-black text-xs flex items-center justify-center border border-emerald-200">
+                        <span className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-700 font-mono font-bold text-xs flex items-center justify-center border border-emerald-200">
                           3️⃣
                         </span>
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800">
+                        <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-100">
                           الفحص الذاتي
                         </span>
                       </div>
-                      <h4 className="text-xs sm:text-sm font-black text-[#0F172A] mt-2">
+                      <h4 className="text-xs sm:text-sm font-bold text-[#0F172A] mt-2">
                         التحقق من الفهم والتطبيق
                       </h4>
                       <p className="text-[11px] text-[#475569] leading-relaxed mt-1">
@@ -169,24 +169,24 @@ export default function SummarizationMethodologyGuide() {
                   </div>
 
                   {/* Step 4 */}
-                  <div className="bg-white border-2 border-rose-300 rounded-2xl p-4.5 space-y-2.5 shadow-2xs transition-all flex flex-col justify-between bg-rose-50/30">
+                  <div className="bg-white border border-rose-200 rounded-2xl p-4.5 space-y-2.5 shadow-2xs transition-all flex flex-col justify-between bg-rose-50/20">
                     <div>
                       <div className="flex items-center justify-between">
-                        <span className="w-7 h-7 rounded-lg bg-rose-100 text-[#E11D48] font-mono font-black text-xs flex items-center justify-center border border-rose-300">
+                        <span className="w-7 h-7 rounded-lg bg-rose-50 text-rose-700 font-mono font-bold text-xs flex items-center justify-center border border-rose-200">
                           4️⃣
                         </span>
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-100 text-[#E11D48]">
+                        <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-100">
                           الملخص النهائي
                         </span>
                       </div>
-                      <h4 className="text-xs sm:text-sm font-black text-[#0F172A] mt-2">
+                      <h4 className="text-xs sm:text-sm font-bold text-[#0F172A] mt-2">
                         الصياغة في ورقة بيضاء A4
                       </h4>
                       <p className="text-[11px] text-[#475569] leading-relaxed mt-1">
                         جلب ورقة بيضاء كبيرة نظيفة؛ نظّم وستّف كل المعلومات بطريقتك وبخط يدك مع استخدام الألوان، المخططات الشجرية، وإبراز الكلمات المفتاحية.
                       </p>
                     </div>
-                    <div className="text-[10px] text-[#E11D48] bg-rose-100/80 p-2 rounded-lg font-bold">
+                    <div className="text-[10px] text-rose-700 bg-rose-50 p-2 rounded-lg font-medium">
                       ✨ هذا الملخص هو سلاحك ليلة الامتحان.
                     </div>
                   </div>
