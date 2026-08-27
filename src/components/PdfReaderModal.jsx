@@ -203,8 +203,24 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
   }, [pdfDoc, pageNum, scale, loading, error, useIframeFallback, isGoogleDrive]);
 
   const handleDownload = (e) => {
-    e.stopPropagation();
-    const targetUrl = isGoogleDrive ? rawUrl : (blobUrl || safeEncodedUrl);
+    if (e) e.stopPropagation();
+    
+    // Determine direct download URL
+    let downloadUrl = file.driveDownloadUrl;
+
+    if (!downloadUrl && isGoogleDrive) {
+      const fileId = file.driveFileId || (function() {
+        const m = rawUrl.match(/(?:file\/d\/|id=)([a-zA-Z0-9_-]+)/);
+        return m ? m[1] : null;
+      })();
+      if (fileId) {
+        downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+      }
+    }
+
+    const targetUrl = downloadUrl || blobUrl || safeEncodedUrl || rawUrl;
+    
+    // Trigger direct browser download
     const link = document.createElement('a');
     link.href = targetUrl;
     link.download = fileName;
@@ -212,7 +228,11 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
     link.rel = 'noopener noreferrer';
     document.body.appendChild(link);
     link.click();
-    document.body.removeChild(link);
+    setTimeout(() => {
+      if (document.body.contains(link)) {
+        document.body.removeChild(link);
+      }
+    }, 200);
   };
 
   const changePage = (offset) => {
@@ -251,7 +271,6 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                 </h3>
                 <div className="flex items-center gap-2 text-[10px] text-slate-400">
                   <span className="text-rose-300 font-bold">{file.subjectName}</span>
-                  {isGoogleDrive && <span className="text-blue-400 font-bold">• Google Drive</span>}
                   {fileSize && <span>• {fileSize}</span>}
                   {file.author && <span className="hidden sm:inline">• {file.author}</span>}
                 </div>
@@ -316,15 +335,15 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
             {/* Action Tools */}
             <div className="flex items-center gap-1.5 shrink-0">
               
-              {/* Direct Download / Open Button */}
+              {/* Direct Download Button */}
               <button
                 onClick={handleDownload}
-                className="px-3 py-1.5 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
-                title="تحميل الملف أو فتحه في Drive"
-                aria-label={isGoogleDrive ? 'فتح في Drive' : 'تحميل PDF'}
+                className="px-3.5 py-1.5 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
+                title="تحميل الملف مباشرة إلى جهازك"
+                aria-label="تحميل الملف"
               >
                 <HiDownload className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">{isGoogleDrive ? 'فتح في Drive' : 'تحميل PDF'}</span>
+                <span className="hidden sm:inline">تحميل الملف</span>
               </button>
 
               {/* Open in new tab */}
