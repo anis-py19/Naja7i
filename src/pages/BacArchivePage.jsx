@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { 
   HiHome, 
   HiChevronLeft, 
-  HiBookOpen, 
   HiDownload
 } from 'react-icons/hi';
 import { STREAMS } from '../data/streamsData';

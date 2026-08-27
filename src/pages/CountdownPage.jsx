@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { 
   HiHome, 
   HiChevronLeft, 
-  HiClock, 
   HiCalendar
 } from 'react-icons/hi';
 

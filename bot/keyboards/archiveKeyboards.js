@@ -1,6 +1,6 @@
 import { InlineKeyboard } from 'grammy';
 import { AVAILABLE_YEARS } from '../data/archive.js';
-import { STREAMS, getStreamById } from '../data/streams.js';
+import { STREAMS } from '../data/streams.js';
 
 /**
  * Keyboard for selecting stream for archive

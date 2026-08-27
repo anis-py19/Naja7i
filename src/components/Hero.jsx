@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { 
   HiClock, 
-  HiDownload, 
-  HiCalculator, 
   HiArrowRight,
-  HiFire,
-  HiBookOpen,
-  HiFolder
+  HiBookOpen
 } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { STREAMS } from '../data/streamsData';
-import { USER_STUDY_FILES } from '../data/userFilesData';
 
 export default function Hero({ onSelectStream, onOpenCalculator }) {
   const getNextBacDate = () => {

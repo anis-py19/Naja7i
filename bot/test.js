@@ -1,7 +1,7 @@
 import { createBot } from './index.js';
 import { STREAMS } from './data/streams.js';
 import { USER_STUDY_FILES, getFilesByStreamAndSubject, searchStudyFiles } from './data/files.js';
-import { BAC_FULL_ARCHIVE, getArchiveForStreamAndYear } from './data/archive.js';
+import { getArchiveForStreamAndYear } from './data/archive.js';
 import { QUIZ_QUESTIONS, getRandomQuestion } from './data/quizzes.js';
 import { YOUTUBE_TEACHERS } from './data/teachers.js';
 import { calculateBacAverage, getBacCountdown } from './utils/helpers.js';

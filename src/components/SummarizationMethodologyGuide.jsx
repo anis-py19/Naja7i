@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 import { 
-  HiLightBulb, 
   HiChevronDown, 
   HiChevronUp, 
   HiVideoCamera, 
   HiDocumentText, 
-  HiSparkles,
-  HiCheckCircle,
-  HiExclamationCircle,
-  HiPencilAlt,
-  HiEye,
-  HiLightningBolt,
-  HiBookOpen
+  HiSparkles
 } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';

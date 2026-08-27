@@ -6,7 +6,7 @@ import {
 } from 'react-icons/hi';
 import StreamHub from '../components/StreamHub';
 
-export default function StreamsPage({ selectedStreamId, onSelectStream, onOpenSubject, onOpenPdf }) {
+export default function StreamsPage({ selectedStreamId, onSelectStream, onOpenSubject }) {
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-16 font-['Cairo']">
       

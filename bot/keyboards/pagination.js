@@ -41,7 +41,6 @@ export function getPaginatedFilesKeyboard(items, page = 1, pageSize = 5, callbac
   });
 
   // Pagination navigation row
-  const navRow = [];
   if (currentPage > 1) {
     keyboard.text('⬅️ السابق', `${callbackPrefix}:${currentPage - 1}`);
   }

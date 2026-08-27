@@ -9,40 +9,15 @@ import {
   HiChevronLeft,
   HiPlus,
   HiMinus,
-  HiRefresh,
   HiFolderDownload
 } from 'react-icons/hi';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as pdfjsLib from 'pdfjs-dist';
 import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
+import { getDrivePreviewUrl } from '../utils/driveUtils';
 
 // Configure local worker bundled by Vite
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
-
-// Helper to transform Google Drive URLs to embeddable preview URLs
-export function getDrivePreviewUrl(url) {
-  if (!url) return null;
-  
-  // 1. Match file/d/FILE_ID
-  const fileMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
-  if (fileMatch && fileMatch[1]) {
-    return `https://drive.google.com/file/d/${fileMatch[1]}/preview`;
-  }
-
-  // 2. Match open?id=FILE_ID or uc?id=FILE_ID
-  const idMatch = url.match(/drive\.google\.com\/(?:open|uc)\?(?:.*&)?id=([a-zA-Z0-9_-]+)/);
-  if (idMatch && idMatch[1]) {
-    return `https://drive.google.com/file/d/${idMatch[1]}/preview`;
-  }
-
-  // 3. Match folder URLs: drive.google.com/drive/folders/FOLDER_ID
-  const folderMatch = url.match(/drive\.google\.com\/drive\/(?:u\/\d+\/)?folders\/([a-zA-Z0-9_-]+)/);
-  if (folderMatch && folderMatch[1]) {
-    return `https://drive.google.com/embeddedfolderview?id=${folderMatch[1]}#grid`;
-  }
-
-  return null;
-}
 
 export default function PdfReaderModal({ file, isOpen, onClose }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -53,7 +28,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
   const [pageNum, setPageNum] = useState(1);
   const [numPages, setNumPages] = useState(0);
   const [scale, setScale] = useState(1.2);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   // Blob URL for local files
@@ -62,35 +37,21 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
   const canvasRef = useRef(null);
   const renderTaskRef = useRef(null);
 
-  if (!isOpen || !file) return null;
-
-  const rawUrl = file.drivePreviewUrl || file.driveUrl || file.fileUrl || file.rawPath || file.url || '';
-  const drivePreviewUrl = file.drivePreviewUrl || getDrivePreviewUrl(rawUrl);
+  const rawUrl = file?.drivePreviewUrl || file?.driveUrl || file?.fileUrl || file?.rawPath || file?.url || '';
+  const drivePreviewUrl = file?.drivePreviewUrl || getDrivePreviewUrl(rawUrl);
   const isGoogleDrive = Boolean(drivePreviewUrl);
 
   const safeEncodedUrl = rawUrl.startsWith('http') || rawUrl.startsWith('/') 
     ? encodeURI(decodeURI(rawUrl)) 
     : rawUrl;
 
-  const fileName = file.rawFileName || `${file.title || 'document'}.${file.extension || 'pdf'}`;
-  const fileSize = file.sizeReadable || file.size || '';
-  const isPdf = isGoogleDrive || !file.extension || file.extension.toLowerCase() === 'pdf' || rawUrl.toLowerCase().endsWith('.pdf');
+  const fileName = file?.rawFileName || `${file?.title || 'document'}.${file?.extension || 'pdf'}`;
+  const fileSize = file?.sizeReadable || file?.size || '';
+  const isPdf = isGoogleDrive || !file?.extension || file?.extension?.toLowerCase() === 'pdf' || rawUrl.toLowerCase().endsWith('.pdf');
 
-  // Load PDF logic
+  // Load PDF logic for local Canvas rendering
   useEffect(() => {
-    if (!isOpen || !file) return;
-
-    // If it's a Google Drive URL, it loads instantly in Google Drive iFrame
-    if (isGoogleDrive) {
-      setLoading(false);
-      setError(null);
-      return;
-    }
-
-    if (!isPdf) {
-      setLoading(false);
-      return;
-    }
+    if (!isOpen || !file || isGoogleDrive || !isPdf) return;
 
     let isMounted = true;
     let createdBlobUrl = null;
@@ -102,7 +63,6 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
       setUseIframeFallback(false);
 
       try {
-        // Fetch file as arrayBuffer / Blob to prevent IDM interception
         const response = await fetch(safeEncodedUrl);
         if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
         const arrayBuffer = await response.arrayBuffer();
@@ -158,7 +118,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
 
   // Render Current Page on Canvas for local files
   useEffect(() => {
-    if (isGoogleDrive || !pdfDoc || !canvasRef.current || loading || error || useIframeFallback) return;
+    if (!isOpen || !file || isGoogleDrive || !pdfDoc || !canvasRef.current || loading || error || useIframeFallback) return;
 
     let isCancelled = false;
 
@@ -200,7 +160,9 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
     return () => {
       isCancelled = true;
     };
-  }, [pdfDoc, pageNum, scale, loading, error, useIframeFallback, isGoogleDrive]);
+  }, [isOpen, file, pdfDoc, pageNum, scale, loading, error, useIframeFallback, isGoogleDrive]);
+
+  if (!isOpen || !file) return null;
 
   const handleDownload = (e) => {
     if (e) e.stopPropagation();
@@ -386,13 +348,13 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
           {/* 2. Reader Body Area */}
           <div className="flex-1 bg-[#1E293B] relative overflow-auto flex flex-col items-center justify-start p-0 select-none">
             
-            {/* Google Drive Direct High-Performance Embed */}
+            {/* Direct High-Performance Embed */}
             {isGoogleDrive ? (
               <iframe
                 src={drivePreviewUrl}
                 className="w-full h-full border-0 bg-white"
                 allow="autoplay"
-                title={file.title || 'Google Drive Viewer'}
+                title={file.title || 'PDF Document Viewer'}
               />
             ) : (
               <>

@@ -93,7 +93,7 @@ function getSubjectIdAndName(topFolder, subFolder, fileName) {
   return { subjectId: 'general', subjectName: 'مواد عامة', streamIds: ['sciences', 'math', 'technique_math', 'gestion', 'lettres_philo', 'langues'] };
 }
 
-function cleanAndEnhanceTitle(rawName, folder, subfolder, subjectId) {
+function cleanAndEnhanceTitle(rawName, folder, subfolder, _subjectId) {
   let title = rawName;
 
   // Specific hardcoded mappings for known famous files

@@ -1,6 +1,5 @@
 import { getMainReplyKeyboard, getMainInlineKeyboard } from '../keyboards/mainKeyboards.js';
 import { getStreamsKeyboard } from '../keyboards/streamKeyboards.js';
-import { getBacCountdown } from '../utils/helpers.js';
 
 export const WELCOME_MESSAGE = `
 🎓 *مرحباً بك في بوت نجاحي للبكالوريا الجزائري 🇩🇿*
@@ -84,7 +83,7 @@ export function setupStartHandlers(bot) {
         parse_mode: 'Markdown',
         reply_markup: getMainInlineKeyboard()
       });
-    } catch (e) {
+    } catch {
       await ctx.reply(WELCOME_MESSAGE, {
         parse_mode: 'Markdown',
         reply_markup: getMainInlineKeyboard()

@@ -7,12 +7,10 @@ import {
   HiChatAlt2, 
   HiLightBulb, 
   HiExclamationCircle,
-  HiMail,
-  HiUser,
   HiLink,
   HiExternalLink
 } from 'react-icons/hi';
-import { FaFacebook, FaTelegram, FaGoogle } from 'react-icons/fa6';
+import { FaGoogle } from 'react-icons/fa6';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Configured recipient Gmail address
@@ -32,7 +30,6 @@ export default function ContactContributionModal({ isOpen, onClose }) {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errorMsg, setErrorMsg] = useState(null);
 
   const getRoleLabel = (role) => {
     switch (role) {

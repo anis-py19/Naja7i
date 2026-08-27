@@ -1,5 +1,4 @@
-import { YOUTUBE_TEACHERS, YOUTUBE_SUBJECTS, getTeachersBySubjectOrStream } from '../data/teachers.js';
-import { getSubjectById } from '../data/streams.js';
+import { getTeachersBySubjectOrStream } from '../data/teachers.js';
 import { InlineKeyboard } from 'grammy';
 
 export function setupTeachersHandlers(bot) {
@@ -78,7 +77,6 @@ export function setupTeachersHandlers(bot) {
   // Shortcut from subject action menu
   bot.callbackQuery(/^sub_teachers:([a-z_]+):([a-z_0-9]+)$/, async (ctx) => {
     await ctx.answerCallbackQuery();
-    const streamId = ctx.match[1];
     const subjectId = ctx.match[2];
     await renderTeachersList(ctx, subjectId);
   });

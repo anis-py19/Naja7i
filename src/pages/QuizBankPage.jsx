@@ -1,16 +1,14 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   HiHome, 
   HiChevronLeft, 
   HiRefresh, 
   HiClock, 
-  HiSparkles,
   HiCheckCircle, 
   HiXCircle, 
   HiLightBulb,
   HiArrowRight,
-  HiFilter,
   HiFire
 } from 'react-icons/hi';
 import { QUIZ_QUESTIONS } from '../data/quizData';
@@ -47,6 +45,20 @@ export default function QuizBankPage() {
     return Array.from(subs.entries()).map(([id, name]) => ({ id, name }));
   }, [availableQuestionsForStream]);
 
+  const currentQ = currentQuestions[currentIndex];
+
+  const handleSelectOption = (idx) => {
+    if (hasSubmittedCurrent) return;
+    setSelectedOption(idx);
+  };
+
+  const handleConfirmAnswer = useCallback(() => {
+    if (hasSubmittedCurrent || !currentQ) return;
+    const ans = selectedOption !== null ? selectedOption : -1;
+    setUserAnswers(prev => ({ ...prev, [currentQ.id]: ans }));
+    setHasSubmittedCurrent(true);
+  }, [hasSubmittedCurrent, currentQ, selectedOption]);
+
   // Start Quiz
   const startQuiz = () => {
     let pool = availableQuestionsForStream;
@@ -78,32 +90,19 @@ export default function QuizBankPage() {
   useEffect(() => {
     if (!quizStarted || quizFinished || !isTimed || hasSubmittedCurrent) return;
 
-    if (timeLeft <= 0) {
-      // Auto submit with no answer or current selection
-      handleConfirmAnswer();
-      return;
-    }
-
     const timer = setInterval(() => {
-      setTimeLeft(prev => prev - 1);
+      setTimeLeft(prev => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          handleConfirmAnswer();
+          return 0;
+        }
+        return prev - 1;
+      });
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [quizStarted, quizFinished, isTimed, timeLeft, hasSubmittedCurrent]);
-
-  const currentQ = currentQuestions[currentIndex];
-
-  const handleSelectOption = (idx) => {
-    if (hasSubmittedCurrent) return;
-    setSelectedOption(idx);
-  };
-
-  const handleConfirmAnswer = () => {
-    if (hasSubmittedCurrent) return;
-    const ans = selectedOption !== null ? selectedOption : -1;
-    setUserAnswers(prev => ({ ...prev, [currentQ.id]: ans }));
-    setHasSubmittedCurrent(true);
-  };
+  }, [quizStarted, quizFinished, isTimed, hasSubmittedCurrent, handleConfirmAnswer]);
 
   const handleNextQuestion = () => {
     if (currentIndex + 1 < currentQuestions.length) {

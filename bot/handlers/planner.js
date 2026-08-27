@@ -1,5 +1,5 @@
 import { getBacCountdown } from '../utils/helpers.js';
-import { STREAM_STUDY_PLANS, PLANNING_PRINCIPLES, getStudyPlan } from '../data/planner.js';
+import { PLANNING_PRINCIPLES, getStudyPlan } from '../data/planner.js';
 import { STREAMS, getStreamById } from '../data/streams.js';
 import { InlineKeyboard } from 'grammy';
 
@@ -157,7 +157,7 @@ ${randomQuote}
   });
 
   async function renderPlan(ctx, streamId, type = 'school') {
-    const { streamInfo, planData } = getStudyPlan(streamId, type);
+    const { planData } = getStudyPlan(streamId, type);
     const stream = getStreamById(streamId);
 
     const typeLabel = type === 'school' ? 'طالب متمدرس 🏫' : 'مترشح حر ☕';

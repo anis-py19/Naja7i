@@ -1,5 +1,5 @@
 import React from 'react';
-import { HiUpload, HiChatAlt2, HiChevronLeft } from 'react-icons/hi';
+import { HiUpload } from 'react-icons/hi';
 
 export default function ContactContributionSection({ onOpenContact }) {
   return (

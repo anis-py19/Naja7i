@@ -4,9 +4,7 @@ import {
   HiZoomIn, 
   HiZoomOut, 
   HiRefresh, 
-  HiSparkles,
-  HiEye,
-  HiCheckCircle
+  HiSparkles
 } from 'react-icons/hi';
 
 // Color themes matching academic mindmaps (Red, Cyan/Blue, Green, Pink, Purple, Amber)

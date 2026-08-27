@@ -1,5 +1,4 @@
 import { Keyboard, InlineKeyboard } from 'grammy';
-import { STREAMS } from '../data/streams.js';
 
 /**
  * Main Persistent Reply Keyboard (Bottom Bar)

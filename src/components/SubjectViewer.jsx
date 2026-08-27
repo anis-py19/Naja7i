@@ -10,7 +10,6 @@ import {
   HiBookOpen,
   HiCollection,
   HiSearch,
-  HiEye,
   HiFolder
 } from 'react-icons/hi';
 import { motion, AnimatePresence } from 'framer-motion';

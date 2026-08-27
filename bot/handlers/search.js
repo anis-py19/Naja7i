@@ -1,6 +1,5 @@
 import { searchStudyFiles } from '../data/files.js';
 import { searchArchive } from '../data/archive.js';
-import { getPaginatedFilesKeyboard } from '../keyboards/pagination.js';
 import { truncate } from '../utils/helpers.js';
 import { InlineKeyboard } from 'grammy';
 
@@ -81,7 +80,7 @@ export function setupSearchHandlers(bot) {
 
     if (matchedArchive.length > 0) {
       text += `🏛️ *مواضيع وحلول البكالوريا الرسمية (${matchedArchive.length}):*\n`;
-      matchedArchive.forEach((item, idx) => {
+      matchedArchive.forEach((item) => {
         text += `• *بكالوريا ${item.year}* — ${item.subjectName} (${item.streamName})\n`;
         if (item.sujetUrl) {
           keyboard.url(`📄 موضوع ${item.year} (${item.subjectName})`, item.sujetUrl);

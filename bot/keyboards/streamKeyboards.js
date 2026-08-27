@@ -1,5 +1,5 @@
 import { InlineKeyboard } from 'grammy';
-import { STREAMS, getStreamById, getSubjectById } from '../data/streams.js';
+import { STREAMS, getStreamById } from '../data/streams.js';
 
 /**
  * Keyboards for Stream Selection (6 streams)

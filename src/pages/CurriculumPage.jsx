@@ -2,19 +2,15 @@ import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   HiHome, 
-  HiChevronLeft, 
   HiSearch, 
-  HiBookOpen, 
   HiLightBulb, 
   HiCheckCircle, 
   HiDocumentText, 
   HiSparkles,
   HiArrowRight,
   HiViewGrid,
-  HiAcademicCap,
   HiOutlineCube
 } from 'react-icons/hi';
-import { motion, AnimatePresence } from 'framer-motion';
 import { OFFICIAL_CURRICULUM } from '../data/curriculumData';
 import { STREAMS } from '../data/streamsData';
 
@@ -26,13 +22,14 @@ export default function CurriculumPage() {
   const [viewMode, setViewMode] = useState('roadmap'); // 'roadmap' | 'grid'
 
   const currentStreamData = OFFICIAL_CURRICULUM[selectedStreamId] || OFFICIAL_CURRICULUM.sciences;
-  const subjectsList = currentStreamData.subjects || [];
+  const subjectsList = currentStreamData?.subjects || [];
 
   // Active subject (default to first subject if not set)
   const activeSubject = useMemo(() => {
-    if (!selectedSubjectId) return subjectsList[0] || null;
-    return subjectsList.find(s => s.id === selectedSubjectId) || subjectsList[0] || null;
-  }, [selectedSubjectId, subjectsList]);
+    const list = currentStreamData?.subjects || [];
+    if (!selectedSubjectId) return list[0] || null;
+    return list.find(s => s.id === selectedSubjectId) || list[0] || null;
+  }, [selectedSubjectId, currentStreamData]);
 
   // Flatten all units for active subject to navigate in roadmap
   const allUnitsOfSubject = useMemo(() => {

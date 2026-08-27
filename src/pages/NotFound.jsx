@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom';
 import { 
   HiHome, 
   HiBookOpen, 
-  HiSearch, 
-  HiAcademicCap, 
-  HiArrowRight,
-  HiHeart
+  HiArrowRight
 } from 'react-icons/hi';
 import { motion } from 'framer-motion';
 

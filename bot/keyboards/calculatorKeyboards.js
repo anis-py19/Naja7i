@@ -31,7 +31,7 @@ export function getCalcSubjectKeyboard(streamId, marks = {}, includeOptional = {
     .text('⚡ معدل 18 (ممتاز)', `calc_preset:${streamId}:18`).row();
 
   // Each subject with current score
-  stream.subjects.forEach((subject, idx) => {
+  stream.subjects.forEach((subject) => {
     if (subject.id === 'amazigh' && !includeOptional.amazigh) return;
     if (subject.id === 'sport' && !includeOptional.sport) return;
 

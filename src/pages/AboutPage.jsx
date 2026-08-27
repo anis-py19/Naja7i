@@ -1,11 +1,8 @@
 import React from 'react';
 import {
   HiHeart,
-  HiAcademicCap,
-  HiBookOpen,
   HiShare,
   HiHome,
-  HiCheckCircle,
   HiLightBulb
 } from 'react-icons/hi';
 import { Link } from 'react-router-dom';

@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   HiHome, 
-  HiChevronLeft, 
   HiSparkles, 
   HiDocumentText, 
   HiPhotograph, 
   HiClipboardCopy, 
   HiPrinter, 
   HiDownload, 
-  HiRefresh, 
-  HiCheckCircle, 
-  HiInformationCircle, 
-  HiBookOpen,
-  HiLightningBolt,
-  HiLightBulb,
   HiTrash
 } from 'react-icons/hi';
 import { 
@@ -54,17 +47,6 @@ export default function AiSummarizerPage() {
       return [];
     }
   });
-
-  const handleSaveApiKey = () => {
-    const trimmed = tempKey.trim();
-    setApiKey(trimmed);
-    try {
-      localStorage.setItem('naja7i_gemini_api_key', trimmed);
-    } catch (e) {
-      console.error(e);
-    }
-    setShowKeySettings(false);
-  };
 
   const handleFileDrop = (e) => {
     e.preventDefault();

@@ -1,33 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
-  HiBookOpen, 
-  HiChevronLeft, 
   HiArrowRight, 
   HiSearch, 
-  HiCheckCircle, 
   HiTrendingUp 
 } from 'react-icons/hi';
 import { STREAMS } from '../data/streamsData';
 import { BAC_COEFFICIENTS, SUBJECT_RESOURCES } from '../data/bacData';
 
 export default function StreamHub({ selectedStreamId, onSelectStream, onOpenSubject }) {
-  const [activeStreamId, setActiveStreamId] = useState(selectedStreamId || 'sciences');
+  const [internalStreamId, setInternalStreamId] = useState('sciences');
+  const activeStreamId = selectedStreamId || internalStreamId;
   const [filterQuery, setFilterQuery] = useState('');
-  const [completedCount, setCompletedCount] = useState(0);
-  const [totalUnitsCount, setTotalUnitsCount] = useState(0);
 
-  // Sync with prop when parent updates selectedStreamId
-  useEffect(() => {
-    if (selectedStreamId && selectedStreamId !== activeStreamId) {
-      setActiveStreamId(selectedStreamId);
-    }
-  }, [selectedStreamId]);
+  const handleStreamSelect = (id) => {
+    setInternalStreamId(id);
+    if (onSelectStream) onSelectStream(id);
+  };
 
   const streamInfo = STREAMS.find(s => s.id === activeStreamId) || STREAMS[0];
   const streamData = BAC_COEFFICIENTS[activeStreamId] || BAC_COEFFICIENTS['sciences'];
 
-  // Calculate user progress in this stream
-  useEffect(() => {
+  // Calculate user progress in this stream without cascading effects
+  const { completedCount, totalUnitsCount } = useMemo(() => {
     try {
       const saved = localStorage.getItem('naja7i_completed_units');
       const completed = saved ? JSON.parse(saved) : {};
@@ -44,12 +38,11 @@ export default function StreamHub({ selectedStreamId, onSelectStream, onOpenSubj
         }
       });
 
-      setCompletedCount(done);
-      setTotalUnitsCount(total || 1);
+      return { completedCount: done, totalUnitsCount: total || 1 };
     } catch {
-      setCompletedCount(0);
+      return { completedCount: 0, totalUnitsCount: 1 };
     }
-  }, [activeStreamId, streamData]);
+  }, [streamData]);
 
   const progressPercentage = Math.round((completedCount / (totalUnitsCount || 1)) * 100);
 
@@ -81,10 +74,7 @@ export default function StreamHub({ selectedStreamId, onSelectStream, onOpenSubj
             {STREAMS.map((s) => (
               <button
                 key={s.id}
-                onClick={() => {
-                  setActiveStreamId(s.id);
-                  if (onSelectStream) onSelectStream(s.id);
-                }}
+                onClick={() => handleStreamSelect(s.id)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
                   activeStreamId === s.id
                     ? 'bg-[#E11D48] text-white shadow-2xs'

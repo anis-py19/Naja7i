@@ -28,7 +28,7 @@ export function setupCurriculumHandlers(bot) {
     text += `🏫 *الشعبة:* ${stream.name}\n`;
     text += `━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
 
-    cur.trimesters.forEach((trim, idx) => {
+    cur.trimesters.forEach((trim) => {
       text += `🌟 *${trim.trimester}:*\n`;
       trim.units.forEach(u => {
         text += `  • ${u}\n`;

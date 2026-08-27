@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { 
-  HiDocumentText, 
   HiDownload, 
   HiEye, 
   HiSearch, 
-  HiFilter,
-  HiBookOpen,
-  HiCollection
+  HiBookOpen
 } from 'react-icons/hi';
 import { USER_STUDY_FILES } from '../data/userFilesData';
 import { STREAMS } from '../data/streamsData';

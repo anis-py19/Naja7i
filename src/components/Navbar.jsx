@@ -8,13 +8,11 @@ import {
   HiCalculator,
   HiCalendar,
   HiClock,
-  HiBookOpen,
-  HiAcademicCap,
   HiUpload
 } from 'react-icons/hi';
 import { STREAMS } from '../data/streamsData';
 
-export default function Navbar({ onSelectStream, onOpenCalculator, onOpenSearch, onOpenContact }) {
+export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) {
   const [isOpen, setIsOpen] = useState(false);
   const [streamDropdown, setStreamDropdown] = useState(false);
   const [toolsDropdown, setToolsDropdown] = useState(false);

@@ -3,7 +3,7 @@ import React from 'react';
 /**
  * 🎨 Formats inline text: **bold**, *bold/italic*, `code`
  */
-export function formatInlineText(text) {
+function formatInlineText(text) {
   if (!text) return '';
 
   // Regex splitting by bold (**...**), single asterisk (*...*), or code (`...`)
@@ -129,9 +129,9 @@ export default function MarkdownContentRenderer({ content }) {
       blocks.push({ type: 'bullet', text: trimmed.replace(/^[-•*]\s*/, '') });
     }
     // Numbered list (1. 2.)
-    else if (trimmed.match(/^\d+[\.\-\)]/)) {
+    else if (trimmed.match(/^\d+[.\-)]/)) {
       const num = trimmed.match(/^\d+/)?.[0] || '1';
-      blocks.push({ type: 'numbered', num, text: trimmed.replace(/^\d+[\.\-\)]\s*/, '') });
+      blocks.push({ type: 'numbered', num, text: trimmed.replace(/^\d+[.\-)]\s*/, '') });
     }
     // Standard Paragraph
     else {

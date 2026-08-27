@@ -2,15 +2,10 @@ import React, { useState, useMemo } from 'react';
 import { 
   HiBookOpen, 
   HiSearch, 
-  HiFilter, 
-  HiDownload, 
-  HiEye, 
   HiChevronLeft, 
   HiChevronRight,
   HiX,
-  HiCollection,
-  HiHome,
-  HiExternalLink
+  HiHome
 } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { USER_STUDY_FILES } from '../data/userFilesData';
@@ -96,20 +91,6 @@ export default function LibraryPage({ onOpenPdf }) {
     setSelectedCategory('all');
     setSearchQuery('');
     setCurrentPage(1);
-  };
-
-  const handleDirectDownload = (file, e) => {
-    e.stopPropagation();
-    const pdfUrl = file.driveDownloadUrl || file.fileUrl || file.url;
-    const fileName = file.rawFileName || `${file.title}.pdf`;
-    const link = document.createElement('a');
-    link.href = pdfUrl;
-    link.download = fileName;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
   };
 
   // Pagination calculation

@@ -1,6 +1,5 @@
 import * as pdfjsLib from 'pdfjs-dist';
 import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
-import { analyzeBacContent } from './bacCurriculumValidator';
 
 // Configure worker for in-browser PDF text extraction
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
@@ -80,8 +79,6 @@ export async function generateAiSummary({
   if (!activeKey || !activeKey.trim()) {
     throw new Error('يرجى إدخال مفتاح Google Gemini API للمتابعة. (المفتاح مجاني بالكامل)');
   }
-
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${activeKey.trim()}`;
 
   let modeInstruction = '';
   switch (mode) {
@@ -267,7 +264,7 @@ export function generateLocalHeuristicSummary({ text, subjectName = 'الماد�
   ).slice(0, 5);
 
   const keyPoints = lines.filter(l => 
-    l.startsWith('-') || l.startsWith('•') || l.startsWith('*') || l.match(/^\d+[\.\-\)]/)
+    l.startsWith('-') || l.startsWith('•') || l.startsWith('*') || l.match(/^\d+[.\-)]/)
   ).slice(0, 10);
 
   return `
@@ -321,7 +318,7 @@ export function parseMindmapTextToJson(text) {
         branches.push(currentBranch);
       }
       currentBranch = {
-        title: line.replace(/^[#\d\.\-\s]+/, '').trim(),
+        title: line.replace(/^[#\d.\-\s]+/, '').trim(),
         nodes: []
       };
     } else if (line.startsWith('- ') || line.startsWith('• ') || line.startsWith('* ') || line.includes('├──') || line.includes('└──')) {

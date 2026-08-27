@@ -1,6 +1,6 @@
 import { getQuizStreamsKeyboard, getQuizSubjectsKeyboard, getQuestionKeyboard } from '../keyboards/quizKeyboards.js';
-import { getRandomQuestion, getQuestionById, QUIZ_QUESTIONS } from '../data/quizzes.js';
-import { getStreamById, getSubjectById } from '../data/streams.js';
+import { getRandomQuestion, getQuestionById } from '../data/quizzes.js';
+import { getStreamById } from '../data/streams.js';
 import { InlineKeyboard } from 'grammy';
 
 export function setupQuizHandlers(bot) {
