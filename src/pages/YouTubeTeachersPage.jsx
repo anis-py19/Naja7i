@@ -4,11 +4,9 @@ import {
   HiHome, 
   HiChevronLeft, 
   HiExternalLink, 
-  HiPlay,
-  HiSearch,
-  HiStar,
-  HiCheckCircle,
-  HiTable
+  HiPlay, 
+  HiSearch, 
+  HiTable 
 } from 'react-icons/hi';
 import { 
   YOUTUBE_TEACHERS, 
@@ -51,7 +49,7 @@ export default function YouTubeTeachersPage() {
         const match = 
           teacher.name.toLowerCase().includes(q) ||
           teacher.subject.toLowerCase().includes(q) ||
-          teacher.tag.toLowerCase().includes(q) ||
+          (teacher.specialtyTag && teacher.specialtyTag.toLowerCase().includes(q)) ||
           teacher.pedagogy.toLowerCase().includes(q) ||
           teacher.bestFor.toLowerCase().includes(q);
         if (!match) return false;
@@ -63,54 +61,6 @@ export default function YouTubeTeachersPage() {
   const handleStreamChange = (streamId) => {
     setSelectedStream(streamId);
     setSelectedSubject('all');
-  };
-
-  const getRankBadge = (rank) => {
-    if (rank === 1) {
-      return (
-        <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 text-[11px] font-medium border border-amber-200/60 flex items-center gap-1">
-          <span>🥇</span>
-          <span>المركز الأول</span>
-        </span>
-      );
-    }
-    if (rank === 2) {
-      return (
-        <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[11px] font-medium border border-slate-200/60 flex items-center gap-1">
-          <span>🥈</span>
-          <span>المركز الثاني</span>
-        </span>
-      );
-    }
-    if (rank === 3) {
-      return (
-        <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-900 text-[11px] font-medium border border-amber-200/60 flex items-center gap-1">
-          <span>🥉</span>
-          <span>المركز الثالث</span>
-        </span>
-      );
-    }
-    if (rank === 4) {
-      return (
-        <span className="px-2 py-0.5 rounded-md bg-sky-50 text-sky-800 text-[11px] font-medium border border-sky-200/60 flex items-center gap-1">
-          <span>4️⃣</span>
-          <span>المركز الرابع</span>
-        </span>
-      );
-    }
-    if (rank === 5) {
-      return (
-        <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 text-[11px] font-medium border border-emerald-200/60 flex items-center gap-1">
-          <span>5️⃣</span>
-          <span>المركز الخامس</span>
-        </span>
-      );
-    }
-    return (
-      <span className="px-2 py-0.5 rounded-md bg-slate-50 text-slate-600 text-[11px] font-medium border border-slate-200/50">
-        موصى به
-      </span>
-    );
   };
 
   return (
@@ -133,10 +83,10 @@ export default function YouTubeTeachersPage() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A]">
-                دليل أفضل قنوات وأساتذة البكالوريا على اليوتيوب 🎥
+                دليل أساتذة وقنوات اليوتيوب للبكالوريا 🎥
               </h1>
               <p className="text-xs text-[#475569] mt-1 max-w-2xl leading-relaxed">
-                قائمة مفصلة ومصنفة (🥇 الأول 🥈 الثاني 🥉 الثالث) لجميع الشعب لمساعدتك على اختيار المصادر الثابتة لرحلة تفوقك.
+                دليل منظم وشامل لأبرز أساتذة وقنوات اليوتيوب المعتمدة في الجزائر لجميع الشعب والمواد، مصنفة حسب المميزات البيداغوجية وأسلوب الشرح لمساعدتك على اختيار الأنسب لك.
               </p>
             </div>
 
@@ -146,7 +96,7 @@ export default function YouTubeTeachersPage() {
                 className="px-3.5 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
               >
                 <HiTable className="w-4 h-4 text-[#E11D48]" />
-                <span>{showSummaryTable ? 'إخفاء جدول الخلاصة' : 'عرض جدول الخلاصة السريعة'}</span>
+                <span>{showSummaryTable ? 'إخفاء جدول الدليل السريع' : 'عرض الدليل السريع للأساتذة'}</span>
               </button>
 
               <Link
@@ -165,44 +115,42 @@ export default function YouTubeTeachersPage() {
       {/* Main Content Area */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-6">
         
-        {/* Core Summary Quick Comparison Table (Collapsible) */}
+        {/* Quick Reference Table (Collapsible) */}
         {showSummaryTable && (
           <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 shadow-xs">
             <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3 mb-4">
               <div className="flex items-center gap-2">
-                <span className="text-lg">🏆</span>
+                <span className="text-lg">📚</span>
                 <h3 className="text-sm sm:text-base font-bold text-[#0F172A]">
-                  الخلاصة السريعة — أفضل 3 أساتذة في كل مادة لـ BAC 2026/2027
+                  الدليل السريع — أبرز الأساتذة والقنوات المقترحة للمراجعة
                 </h3>
               </div>
-              <span className="text-[11px] text-[#64748B]">إحصائيات موثقة</span>
+              <span className="text-[11px] text-[#64748B]">مصادر تعليمية معتمدة 🇩🇿</span>
             </div>
 
             <div className="overflow-x-auto">
               <table className="w-full text-right text-xs">
                 <thead>
                   <tr className="bg-[#F8FAFC] text-[#0F172A] font-bold border-b border-[#E2E8F0]">
-                    <th className="p-2.5 rounded-r-lg">المادة</th>
-                    <th className="p-2.5">🥇 المركز الأول</th>
-                    <th className="p-2.5">🥈 المركز الثاني</th>
-                    <th className="p-2.5 rounded-l-lg">🥉 المركز الثالث</th>
+                    <th className="p-2.5 rounded-r-lg w-1/4">المادة الدراسية</th>
+                    <th className="p-2.5 rounded-l-lg">الأساتذة والقنوات المقترحة</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#E2E8F0]">
                   {CORE_SUMMARY_TABLE.map((row, i) => (
                     <tr key={i} className="hover:bg-[#F8FAFC] transition-colors">
                       <td className="p-2.5 font-bold text-[#0F172A]">{row.subject}</td>
-                      <td className="p-2.5 text-[#0F172A] font-semibold flex items-center gap-1">
-                        <span className="text-amber-500 font-bold">🥇</span>
-                        <span>{row.gold}</span>
-                      </td>
-                      <td className="p-2.5 text-[#475569]">
-                        <span className="text-slate-400 font-bold ml-1">🥈</span>
-                        <span>{row.silver}</span>
-                      </td>
-                      <td className="p-2.5 text-[#64748B]">
-                        <span className="text-amber-700 font-bold ml-1">🥉</span>
-                        <span>{row.bronze}</span>
+                      <td className="p-2.5">
+                        <div className="flex flex-wrap gap-1.5">
+                          {row.teachers.map((t, idx) => (
+                            <span 
+                              key={idx} 
+                              className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium text-xs border border-slate-200/60"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -268,7 +216,7 @@ export default function YouTubeTeachersPage() {
               <HiSearch className="w-4 h-4 text-[#64748B] absolute right-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="ابحث باسم الأستاذ، المادة، أو الوحدة (مثال: نور الدين، زدون، قزيحي، عباشي، خليفي، حيقون، Sally...)"
+                placeholder="ابحث باسم الأستاذ، المادة، أو التخصص (مثال: نور الدين، زدون، كتفي، عباشي، خليفي، حيقون، سالي...)"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl pr-9 pl-4 py-2.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#E11D48] placeholder-[#94A3B8]"
@@ -281,10 +229,10 @@ export default function YouTubeTeachersPage() {
         {/* Results Metrics Header */}
         <div className="flex items-center justify-between text-xs text-[#475569] px-1">
           <span>
-            تم العثور على <strong className="text-[#E11D48] font-bold">{filteredTeachers.length}</strong> أستاذ معتمد ومصنف
+            تم العثور على <strong className="text-[#E11D48] font-bold">{filteredTeachers.length}</strong> أستاذ وقناة تعليمية
           </span>
           <span className="text-[#64748B]">
-            💡 جميع الروابط تنقلك مباشرة إلى قوائم التشغيل الرسمية على يوتيوب
+            💡 جميع الروابط تنقلك مباشرة إلى القنوات وقوائم التشغيل الرسمية على يوتيوب
           </span>
         </div>
 
@@ -293,11 +241,11 @@ export default function YouTubeTeachersPage() {
           {filteredTeachers.map((teacher) => (
             <div
               key={teacher.id}
-              className="bg-white border border-[#E2E8F0] hover:border-[#E11D48] rounded-2xl p-6 transition-all flex flex-col justify-between shadow-xs space-y-5"
+              className="bg-white border border-[#E2E8F0] hover:border-slate-400/80 rounded-2xl p-6 transition-all flex flex-col justify-between shadow-xs space-y-5"
             >
               <div>
                 
-                {/* Header: Avatar, Name, Subject, Stats */}
+                {/* Header: Icon, Name, Subject, Specialty Badge */}
                 <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#E2E8F0]">
                   <div className="flex items-center gap-3.5">
                     <div className="w-12 h-12 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-[#E11D48] flex items-center justify-center text-2xl shrink-0 shadow-2xs">
@@ -308,32 +256,22 @@ export default function YouTubeTeachersPage() {
                         <h3 className="text-base font-bold text-[#0F172A]">
                           {teacher.name}
                         </h3>
-                        {getRankBadge(teacher.rank)}
+                        {teacher.specialtyTag && (
+                          <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[11px] font-medium border border-slate-200/60">
+                            {teacher.specialtyTag}
+                          </span>
+                        )}
                       </div>
-                      <span className="text-xs font-bold text-[#E11D48] block mt-0.5">
+                      <span className="text-xs font-bold text-[#E11D48] block mt-1">
                         مادة {teacher.subject}
                       </span>
                     </div>
                   </div>
 
-                  <div className="text-left shrink-0 space-y-1">
-                    <div className="flex items-center gap-1 text-xs font-bold text-amber-500 justify-end">
-                      <HiStar className="w-4 h-4 text-amber-500 fill-amber-500" />
-                      <span>{teacher.rating.toFixed(1)}</span>
-                    </div>
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-[#F1F5F9] text-[#0F172A] border border-[#E2E8F0] block">
-                      {teacher.subscribers}
-                    </span>
-                  </div>
+                  <span className="px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 text-[10px] font-medium border border-rose-100 shrink-0">
+                    أستاذ معتمد 🇩🇿
+                  </span>
                 </div>
-
-                {/* DzExams Metric Tag */}
-                {teacher.statsDz && (
-                  <div className="mt-3 px-3 py-1.5 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-[11px] text-[#475569] flex items-center gap-1.5 font-medium">
-                    <span className="text-[#E11D48] font-bold">📊 قاعدة DzExams:</span>
-                    <span>{teacher.statsDz}</span>
-                  </div>
-                )}
 
                 {/* Pedagogy Analysis (أسلوب الشرح وطريقة التدريس) */}
                 <div className="pt-3 space-y-3 text-xs">
@@ -410,7 +348,7 @@ export default function YouTubeTeachersPage() {
                 نصيحة ذهبية لـ BAC 2026/2027:
               </h4>
               <p className="text-xs text-[#475569] leading-relaxed">
-                لا تشتت نفسك بين عشرات القنوات في نفس المادة! اختر أستاذاً واحداً تثق في أسلوبه (مثل الأستاذ نور الدين في الرياضيات، وزدون في الفيزياء، وقزيحي في العلوم، وعباشي في التسيير، وخليفي في التاريخ)، وتابع معه البرنامج من أول درس حتى المراجعة النهائية مع حل سلاسل التمارين بالورقة والقلم.
+                لا تشتت نفسك بين عشرات القنوات في نفس المادة! اختر أستاذاً ترتاح لطريقة شرحه وأسلوبه البيداغوجي، وتابع معه البرنامج بانتظام مع حل سلاسل التمارين بالورقة والقلم، وتفادي المشاهدة السلبية للفيديوهات.
               </p>
             </div>
           </div>
