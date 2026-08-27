@@ -1,6 +1,7 @@
 import { getMainReplyKeyboard, getMainInlineKeyboard } from '../keyboards/mainKeyboards.js';
 import { getStreamsKeyboard } from '../keyboards/streamKeyboards.js';
 import { getBacCountdown } from '../utils/helpers.js';
+import { isAdmin } from '../config.js';
 
 export const WELCOME_MESSAGE = `
 🎓 *مرحباً بك في بوت نجاحي للبكالوريا الجزائري 🇩🇿*
@@ -26,6 +27,7 @@ export const WELCOME_MESSAGE = `
 export function setupStartHandlers(bot) {
   // /start command
   bot.command(['start', 'menu'], async (ctx) => {
+    const isUserAdmin = isAdmin(ctx.from?.id);
     // Send persistent keyboard first then interactive message
     await ctx.reply('👋 مرحباً بك في بوت البكالوريا! استخدم القوائم للتنقل السريع:', {
       reply_markup: getMainReplyKeyboard()
@@ -33,7 +35,7 @@ export function setupStartHandlers(bot) {
 
     await ctx.reply(WELCOME_MESSAGE, {
       parse_mode: 'Markdown',
-      reply_markup: getMainInlineKeyboard()
+      reply_markup: getMainInlineKeyboard(isUserAdmin)
     });
   });
 
@@ -79,15 +81,16 @@ export function setupStartHandlers(bot) {
   // Callback to return home
   bot.callbackQuery('menu_home', async (ctx) => {
     await ctx.answerCallbackQuery();
+    const isUserAdmin = isAdmin(ctx.from?.id);
     try {
       await ctx.editMessageText(WELCOME_MESSAGE, {
         parse_mode: 'Markdown',
-        reply_markup: getMainInlineKeyboard()
+        reply_markup: getMainInlineKeyboard(isUserAdmin)
       });
     } catch (e) {
       await ctx.reply(WELCOME_MESSAGE, {
         parse_mode: 'Markdown',
-        reply_markup: getMainInlineKeyboard()
+        reply_markup: getMainInlineKeyboard(isUserAdmin)
       });
     }
   });

@@ -2,6 +2,7 @@ import { Bot } from 'grammy';
 import { CONFIG } from './config.js';
 
 // Import Handlers
+import { setupAdminHandlers } from './handlers/admin.js';
 import { setupStartHandlers } from './handlers/start.js';
 import { setupLibraryHandlers } from './handlers/library.js';
 import { setupArchiveHandlers } from './handlers/archive.js';
@@ -40,7 +41,8 @@ export function createBot(customToken) {
     console.error(e);
   });
 
-  // Setup all feature handlers
+  // Setup all feature handlers (Admin & Maintenance middleware first)
+  setupAdminHandlers(bot);
   setupStartHandlers(bot);
   setupLibraryHandlers(bot);
   setupArchiveHandlers(bot);
