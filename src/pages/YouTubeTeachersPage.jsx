@@ -5,21 +5,20 @@ import {
   HiChevronLeft, 
   HiExternalLink, 
   HiPlay, 
-  HiSearch, 
-  HiTable 
+  HiSearch,
+  HiLightBulb,
+  HiAcademicCap
 } from 'react-icons/hi';
 import { 
   YOUTUBE_TEACHERS, 
   YOUTUBE_STREAMS, 
-  YOUTUBE_SUBJECTS,
-  CORE_SUMMARY_TABLE
+  YOUTUBE_SUBJECTS 
 } from '../data/youtubeData';
 
 export default function YouTubeTeachersPage() {
   const [selectedStream, setSelectedStream] = useState('all');
   const [selectedSubject, setSelectedSubject] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [showSummaryTable, setShowSummaryTable] = useState(false);
 
   // Dynamically compute subjects that actually belong to the selected stream
   const availableSubjects = useMemo(() => {
@@ -49,7 +48,7 @@ export default function YouTubeTeachersPage() {
         const match = 
           teacher.name.toLowerCase().includes(q) ||
           teacher.subject.toLowerCase().includes(q) ||
-          (teacher.specialtyTag && teacher.specialtyTag.toLowerCase().includes(q)) ||
+          (teacher.styleBadge && teacher.styleBadge.toLowerCase().includes(q)) ||
           teacher.pedagogy.toLowerCase().includes(q) ||
           teacher.bestFor.toLowerCase().includes(q);
         if (!match) return false;
@@ -64,10 +63,10 @@ export default function YouTubeTeachersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-20 font-['Cairo']">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-20 font-['Cairo']" dir="rtl">
       
-      {/* Top Banner & Breadcrumb */}
-      <div className="bg-white border-b border-[#E2E8F0] py-5 sm:py-6">
+      {/* Top Banner & Header */}
+      <div className="bg-white border-b border-[#E2E8F0] py-6 sm:py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Breadcrumb */}
@@ -82,29 +81,25 @@ export default function YouTubeTeachersPage() {
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-rose-50 text-[#E11D48] border border-rose-100 text-xs font-semibold mb-2">
+                <HiAcademicCap className="w-4 h-4" />
+                <span>دليل تعليمي محايد وشامل للبكالوريا الجزائرية</span>
+              </div>
               <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A]">
-                دليل أساتذة وقنوات اليوتيوب للبكالوريا 🎥
+                دليل أساتذة وقنوات اليوتيوب 🎥
               </h1>
-              <p className="text-xs text-[#475569] mt-1 max-w-2xl leading-relaxed">
-                دليل منظم وشامل لأبرز أساتذة وقنوات اليوتيوب المعتمدة في الجزائر لجميع الشعب والمواد، مصنفة حسب المميزات البيداغوجية وأسلوب الشرح لمساعدتك على اختيار الأنسب لك.
+              <p className="text-xs sm:text-sm text-[#475569] mt-1.5 max-w-3xl leading-relaxed">
+                تحليل منهجي محايد لأساليب وطرق شرح كل أستاذ في المنهاج، لمساعدتك على اختيار الشرح الأنسب لنمط استيعابك بدون تشتت أو مقارنات غير مجدية.
               </p>
             </div>
 
-            <div className="flex items-center gap-2 self-start md:self-auto">
-              <button
-                onClick={() => setShowSummaryTable(!showSummaryTable)}
-                className="px-3.5 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
-              >
-                <HiTable className="w-4 h-4 text-[#E11D48]" />
-                <span>{showSummaryTable ? 'إخفاء جدول الدليل السريع' : 'عرض الدليل السريع للأساتذة'}</span>
-              </button>
-
+            <div className="flex items-center gap-2 self-start md:self-auto shrink-0">
               <Link
                 to="/"
                 className="px-4 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] transition-colors flex items-center gap-1.5 shadow-2xs"
               >
-                <span>الرئيسية</span>
-                <HiChevronLeft className="w-4 h-4" />
+                <span>العودة للرئيسية</span>
+                <HiChevronLeft className="w-4 h-4 rotate-180" />
               </Link>
             </div>
           </div>
@@ -112,54 +107,9 @@ export default function YouTubeTeachersPage() {
         </div>
       </div>
 
-      {/* Main Content Area */}
+      {/* Main Content Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-6">
         
-        {/* Quick Reference Table (Collapsible) */}
-        {showSummaryTable && (
-          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 shadow-xs">
-            <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3 mb-4">
-              <div className="flex items-center gap-2">
-                <span className="text-lg">📚</span>
-                <h3 className="text-sm sm:text-base font-bold text-[#0F172A]">
-                  الدليل السريع — أبرز الأساتذة والقنوات المقترحة للمراجعة
-                </h3>
-              </div>
-              <span className="text-[11px] text-[#64748B]">مصادر تعليمية معتمدة 🇩🇿</span>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full text-right text-xs">
-                <thead>
-                  <tr className="bg-[#F8FAFC] text-[#0F172A] font-bold border-b border-[#E2E8F0]">
-                    <th className="p-2.5 rounded-r-lg w-1/4">المادة الدراسية</th>
-                    <th className="p-2.5 rounded-l-lg">الأساتذة والقنوات المقترحة</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#E2E8F0]">
-                  {CORE_SUMMARY_TABLE.map((row, i) => (
-                    <tr key={i} className="hover:bg-[#F8FAFC] transition-colors">
-                      <td className="p-2.5 font-bold text-[#0F172A]">{row.subject}</td>
-                      <td className="p-2.5">
-                        <div className="flex flex-wrap gap-1.5">
-                          {row.teachers.map((t, idx) => (
-                            <span 
-                              key={idx} 
-                              className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium text-xs border border-slate-200/60"
-                            >
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
-
         {/* Filter Box: Streams + Subjects + Search */}
         <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 shadow-xs space-y-4">
           
@@ -187,7 +137,7 @@ export default function YouTubeTeachersPage() {
             </div>
           </div>
 
-          {/* 2. Subject Selector Pills (Filtered strictly to the selected stream) */}
+          {/* 2. Subject Selector Pills */}
           <div className="pt-2 border-t border-[#E2E8F0]">
             <span className="block text-xs font-bold text-[#0F172A] mb-2 flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-[#475569]"></span>
@@ -216,7 +166,7 @@ export default function YouTubeTeachersPage() {
               <HiSearch className="w-4 h-4 text-[#64748B] absolute right-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="ابحث باسم الأستاذ، المادة، أو التخصص (مثال: نور الدين، زدون، كتفي، عباشي، خليفي، حيقون، سالي...)"
+                placeholder="ابحث باسم الأستاذ، المادة، أو طريقة الشرح (مثال: نورالدين، كنان، كتفي، زدون، بورنان، سالي، ناصري، عادل مقرود...)"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl pr-9 pl-4 py-2.5 text-xs text-[#0F172A] focus:outline-none focus:border-[#E11D48] placeholder-[#94A3B8]"
@@ -229,73 +179,71 @@ export default function YouTubeTeachersPage() {
         {/* Results Metrics Header */}
         <div className="flex items-center justify-between text-xs text-[#475569] px-1">
           <span>
-            تم العثور على <strong className="text-[#E11D48] font-bold">{filteredTeachers.length}</strong> أستاذ وقناة تعليمية
+            عرض <strong className="text-[#0F172A] font-bold">{filteredTeachers.length}</strong> أستاذ وقناة تعليمية موثقة
           </span>
-          <span className="text-[#64748B]">
-            💡 جميع الروابط تنقلك مباشرة إلى القنوات وقوائم التشغيل الرسمية على يوتيوب
+          <span className="text-[#64748B] hidden sm:inline">
+            💡 الروابط تنقلك مباشرة إلى قنوات وقوائم التشغيل الرسمية على يوتيوب
           </span>
         </div>
 
-        {/* Teachers Detailed Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Teachers Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {filteredTeachers.map((teacher) => (
             <div
               key={teacher.id}
-              className="bg-white border border-[#E2E8F0] hover:border-slate-400/80 rounded-2xl p-6 transition-all flex flex-col justify-between shadow-xs space-y-5"
+              className="bg-white border border-[#E2E8F0] hover:border-slate-300 rounded-2xl p-5 sm:p-6 transition-all flex flex-col justify-between shadow-xs space-y-4"
             >
-              <div>
+              <div className="space-y-4">
                 
-                {/* Header: Icon, Name, Subject, Specialty Badge */}
-                <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#E2E8F0]">
-                  <div className="flex items-center gap-3.5">
-                    <div className="w-12 h-12 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-[#E11D48] flex items-center justify-center text-2xl shrink-0 shadow-2xs">
+                {/* Header: Icon, Name, Subject, and Style Badge */}
+                <div className="flex items-start justify-between gap-3 pb-3.5 border-b border-[#E2E8F0]">
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-xl bg-slate-50 border border-slate-200/70 text-slate-700 flex items-center justify-center text-2xl shrink-0 shadow-2xs">
                       {teacher.icon}
                     </div>
                     <div>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <h3 className="text-base font-bold text-[#0F172A]">
-                          {teacher.name}
-                        </h3>
-                        {teacher.specialtyTag && (
-                          <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[11px] font-medium border border-slate-200/60">
-                            {teacher.specialtyTag}
-                          </span>
-                        )}
-                      </div>
-                      <span className="text-xs font-bold text-[#E11D48] block mt-1">
+                      <h3 className="text-base font-bold text-[#0F172A]">
+                        {teacher.name}
+                      </h3>
+                      <span className="text-xs font-semibold text-[#E11D48] block mt-0.5">
                         مادة {teacher.subject}
                       </span>
                     </div>
                   </div>
 
-                  <span className="px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 text-[10px] font-medium border border-rose-100 shrink-0">
-                    أستاذ معتمد 🇩🇿
-                  </span>
+                  {/* Clean Minimalist Style Badge */}
+                  {teacher.styleBadge && (
+                    <span className="px-2 py-1 rounded-md bg-slate-100 text-slate-700 text-[11px] font-medium border border-slate-200/60 max-w-[200px] text-center leading-snug">
+                      {teacher.styleBadge}
+                    </span>
+                  )}
                 </div>
 
                 {/* Pedagogy Analysis (أسلوب الشرح وطريقة التدريس) */}
-                <div className="pt-3 space-y-3 text-xs">
+                <div className="space-y-3 text-xs">
                   <div>
-                    <span className="font-bold text-[#0F172A] block mb-1 text-[11px]">
-                      🔍 أسلوب الشرح والمنهجية:
+                    <span className="font-bold text-[#0F172A] block mb-1 text-[11px] flex items-center gap-1">
+                      <span>🔍 أسلوب الشرح والمنهجية:</span>
                     </span>
-                    <p className="text-[#475569] leading-relaxed bg-[#F8FAFC] p-3 rounded-xl border border-[#E2E8F0]">
+                    <p className="text-[#475569] leading-relaxed bg-[#F8FAFC] p-3 rounded-xl border border-slate-200/60">
                       {teacher.pedagogy}
                     </p>
                   </div>
 
-                  {/* Best For */}
-                  <div>
-                    <span className="font-bold text-[#0F172A] block mb-1 text-[11px]">
-                      🎯 الأفضل لمراجعة:
-                    </span>
-                    <p className="text-[#0F172A] font-semibold text-[11px] bg-[#F1F5F9] px-3 py-1.5 rounded-lg border border-[#E2E8F0]">
-                      {teacher.bestFor}
-                    </p>
-                  </div>
+                  {/* Best For (الأفضل لـ) */}
+                  {teacher.bestFor && (
+                    <div>
+                      <span className="font-bold text-[#0F172A] block mb-1 text-[11px]">
+                        🎯 يبرع خصيصاً في:
+                      </span>
+                      <p className="text-[#0F172A] font-medium text-[11px] bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200/60">
+                        {teacher.bestFor}
+                      </p>
+                    </div>
+                  )}
 
-                  {/* Top Playlists */}
-                  {teacher.topPlaylists && (
+                  {/* Top Playlists (أبرز السلاسل) */}
+                  {teacher.topPlaylists && teacher.topPlaylists.length > 0 && (
                     <div>
                       <span className="font-bold text-[#0F172A] block mb-1.5 text-[11px]">
                         📚 أبرز السلاسل والقوائم الموصى بها:
@@ -303,7 +251,7 @@ export default function YouTubeTeachersPage() {
                       <ul className="space-y-1">
                         {teacher.topPlaylists.map((pl, i) => (
                           <li key={i} className="text-[11px] text-[#475569] flex items-center gap-1.5">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#E11D48] shrink-0"></span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0"></span>
                             <span className="truncate">{pl}</span>
                           </li>
                         ))}
@@ -315,21 +263,21 @@ export default function YouTubeTeachersPage() {
 
               </div>
 
-              {/* Action Button */}
-              <div className="pt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+              {/* Action Link to Official YouTube */}
+              <div className="pt-3.5 border-t border-[#E2E8F0] flex items-center justify-between">
                 <span className="text-[11px] text-[#64748B]">
-                  شروحات رسمية ومجانية 100%
+                  محتوى تعليمي مجاني ومتاح
                 </span>
 
                 <a
                   href={teacher.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-4 py-2 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white text-xs font-bold flex items-center gap-1.5 transition-colors shadow-2xs"
+                  className="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold flex items-center gap-1.5 transition-colors shadow-2xs"
                 >
-                  <HiPlay className="w-4 h-4" />
+                  <HiPlay className="w-4 h-4 text-rose-400" />
                   <span>فتح القناة على YouTube</span>
-                  <HiExternalLink className="w-3.5 h-3.5" />
+                  <HiExternalLink className="w-3.5 h-3.5 text-slate-300" />
                 </a>
               </div>
 
@@ -340,15 +288,15 @@ export default function YouTubeTeachersPage() {
         {/* Study Methodology Advice Box */}
         <div className="mt-12 bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 shadow-xs">
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-[#E11D48] flex items-center justify-center text-2xl shrink-0">
-              💡
+            <div className="w-12 h-12 rounded-xl bg-rose-50 border border-rose-100 text-[#E11D48] flex items-center justify-center text-2xl shrink-0">
+              <HiLightBulb className="w-6 h-6" />
             </div>
             <div className="space-y-1.5 text-center sm:text-right">
               <h4 className="text-sm sm:text-base font-bold text-[#0F172A]">
-                نصيحة ذهبية لـ BAC 2026/2027:
+                نصيحة ذهبية لمنهجية المتابعة على اليوتيوب:
               </h4>
-              <p className="text-xs text-[#475569] leading-relaxed">
-                لا تشتت نفسك بين عشرات القنوات في نفس المادة! اختر أستاذاً ترتاح لطريقة شرحه وأسلوبه البيداغوجي، وتابع معه البرنامج بانتظام مع حل سلاسل التمارين بالورقة والقلم، وتفادي المشاهدة السلبية للفيديوهات.
+              <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
+                كل أستاذ له طريقته وأسلوبه الخاص الذي يناسب فئة من الطلاب؛ اختر أستاذاً واحداً ترتاح لطريقة شرحه في كل مادة والتزم معه في دروس المنهاج وسلاسل التمارين حتى تحافظ على تركيزك وتتجنب التشتت بين الطرق المتعددة.
               </p>
             </div>
           </div>

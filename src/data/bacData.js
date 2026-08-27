@@ -607,66 +607,60 @@ export const BAC_ARCHIVE_DATA = [
   }
 ];
 
-// Curated Top Algerian BAC YouTube Channels
+// Curated Selected Algerian BAC YouTube Channels (Pedagogical focus)
 export const TOP_CHANNELS = [
   {
     name: 'الأستاذ نور الدين',
     subject: 'الرياضيات',
     icon: '📐',
-    subscribers: '+2.5M',
-    tag: 'ملك الرياضيات في الجزائر',
+    tag: 'شرح وتأسيس شامل من الصفر',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
-    description: 'شروحات أسطورية من الصفر لكل محاور الرياضيات، حل جميع البكالوريات السابقة بالتفصيل الممل.',
+    description: 'شروحات دقيقة من الصفر لكل محاور الرياضيات مع حل جميع البكالوريات السابقة بالتفصيل.',
     youtubeQuery: 'https://www.youtube.com/results?search_query=الأستاذ+نور+الدين+bac'
   },
   {
-    name: 'الأستاذ جوفر (Joufer)',
+    name: 'الأستاذ محمد الأمين زدون',
     subject: 'العلوم الفيزيائية',
     icon: '⚡',
-    subscribers: '+1.8M',
-    tag: 'الفيزياء في المتناول',
+    tag: 'تغطية شاملة لجميع الوحدات',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80',
-    description: 'أفضل طريقة لتبسيط المفاهيم الفيزيائية المعقدة من دارات كهربائية، ميكانيك، وكيمياء.',
-    youtubeQuery: 'https://www.youtube.com/results?search_query=الأستاذ+جوفر+فيزياء+bac'
+    description: 'تغطية شاملة لبرنامج الفيزياء مع حل سلاسل وتمارين متنوعة وتفسير التجارب خطوة بخطوة.',
+    youtubeQuery: 'https://www.youtube.com/results?search_query=محمد+الأمين+زدون+فيزياء'
   },
   {
-    name: 'الأستاذ بوالريش أحمد',
+    name: 'الأستاذة كتفي شريف زينة',
     subject: 'علوم الطبيعة والحياة',
     icon: '🧬',
-    subscribers: '+1.2M',
-    tag: 'مرجع العلوم الطبيعية',
+    tag: 'شرح آليات الظواهر الحيوية ومجلات الهيستونات',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80',
-    description: 'مؤسس منهجية المسعى العلمي والاستدلال البيولوجي والمناعة وتركيب البروتين.',
-    youtubeQuery: 'https://www.youtube.com/results?search_query=الأستاذ+بوالريش+أحمد+علوم'
+    description: 'شرح آليات تركيب البروتين والنشاط الإنزيمي والمناعة والاتصال العصبي مع مجلات الهيستونات.',
+    youtubeQuery: 'https://www.youtube.com/results?search_query=كتفي+شريف+زينة+علوم'
   },
   {
-    name: 'الأستاذ خليل سعيداني',
+    name: 'الأستاذ عادل مقرود',
     subject: 'الفلسفة',
     icon: '🤔',
-    subscribers: '+1.6M',
-    tag: 'عبقري الفلسفة والمنهجيات',
+    tag: 'فهم المقالات والمنهجيات المعتمدة',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80',
-    description: 'تبسيط المقالات الفلسفية المعقدة وتحويلها إلى أفكار واضحة وممتعة للحصول على +16.',
-    youtubeQuery: 'https://www.youtube.com/results?search_query=خليل+سعيداني+فلسفة'
+    description: 'تفكيك الإشكاليات الفلسفية بطريقة مفهومة وشرح منهجيات المقارنة والجدل والاستقصاء بالوضع.',
+    youtubeQuery: 'https://www.youtube.com/results?search_query=أستاذ+الفلسفة+عادل+مقرود'
   },
   {
-    name: 'الأستاذ بورنان',
+    name: 'الأستاذ بورنان عمار',
     subject: 'التاريخ والجغرافيا',
     icon: '🗺️',
-    subscribers: '+1.9M',
-    tag: 'الحفظ السريع والخرائط الذهنية',
+    tag: 'خرائط ذهنية وحفظ سريع',
     avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&auto=format&fit=crop&q=80',
-    description: 'حفظ جميع التواريخ، الشخصيات والمصطلحات في وقت قياسي وبدون نسيان.',
+    description: 'ربط الأحداث التاريخية والجغرافية بالخرائط الذهنية وتسهيل حفظ التواريخ والمصطلحات والشخصيات.',
     youtubeQuery: 'https://www.youtube.com/results?search_query=الأستاذ+بورنان+تاريخ+وجغرافيا'
   },
   {
     name: 'الأستاذ حيقون أسامة',
     subject: 'اللغة العربية',
     icon: '📖',
-    subscribers: '+1.4M',
-    tag: 'البناء الفكري واللغوي',
+    tag: 'البناء الفكري واللغوي والإعراب',
     avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&auto=format&fit=crop&q=80',
-    description: 'شرح مبسط للبلاغة، القواعد، الإعراب، وكيفية التعامل مع أسئلة النصوص الشعرية والنثرية.',
+    description: 'شرح مبسط للبلاغة، القواعد، الإعراب، والتعامل المنهجي مع أسئلة النصوص الشعرية والنثرية.',
     youtubeQuery: 'https://www.youtube.com/results?search_query=حيقون+أسامة+لغة+عربية'
   }
 ];

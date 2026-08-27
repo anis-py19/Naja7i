@@ -47,9 +47,11 @@ export default function YouTubeRoadmaps() {
                     </div>
                   </div>
 
-                  <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-[#F1F5F9] text-[#0F172A] border border-[#E2E8F0]">
-                    {channel.subscribers}
-                  </span>
+                  {channel.tag && (
+                    <span className="text-[11px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium border border-slate-200/60 text-center max-w-[140px] leading-tight">
+                      {channel.tag}
+                    </span>
+                  )}
                 </div>
 
                 <p className="text-xs text-[#475569] leading-relaxed mb-4">
