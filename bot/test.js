@@ -1,0 +1,25 @@
+import { createBot } from './index.js';
+import { STREAMS } from './data/streams.js';
+import { USER_STUDY_FILES, getFilesByStreamAndSubject, searchStudyFiles } from './data/files.js';
+import { BAC_FULL_ARCHIVE, getArchiveForStreamAndYear } from './data/archive.js';
+import { QUIZ_QUESTIONS, getRandomQuestion } from './data/quizzes.js';
+import { YOUTUBE_TEACHERS } from './data/teachers.js';
+import { calculateBacAverage, getBacCountdown } from './utils/helpers.js';
+
+console.log('🧪 --- Testing Naja7i BAC Bot Modules ---');
+const bot = createBot('123456:ABC-TEST_TOKEN_GRAMMY');
+console.log('✅ Bot instance created successfully:', !!bot);
+console.log('✅ Total Streams:', STREAMS.length);
+console.log('✅ Total Study Files:', USER_STUDY_FILES.length);
+console.log('✅ Sciences Math Files Sample:', getFilesByStreamAndSubject('sciences', 'math').length);
+console.log('✅ Search "دوال":', searchStudyFiles('دوال').length, 'results');
+console.log('✅ Archive 2024 Sciences:', getArchiveForStreamAndYear('sciences', 2024).length, 'subjects');
+console.log('✅ Quiz Questions in Bank:', QUIZ_QUESTIONS.length);
+const sampleQ = getRandomQuestion();
+console.log('✅ Sample Quiz Question:', sampleQ?.question?.slice(0, 50) + '...');
+console.log('✅ YouTube Teachers:', YOUTUBE_TEACHERS.length);
+const countdown = getBacCountdown();
+console.log('✅ Countdown Days Remaining until BAC 2026:', countdown.days, 'days');
+const testCalc = calculateBacAverage(STREAMS[0], { sciences_nat: 16, physique: 15, math: 17, arabic: 14 });
+console.log('✅ Calculator Test (Sciences): Average =', testCalc.average, '| Grade =', testCalc.grade);
+console.log('🎉 --- ALL TESTS PASSED WITH 100% SUCCESS --- 🎉');

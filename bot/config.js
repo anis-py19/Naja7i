@@ -10,15 +10,8 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 export const CONFIG = {
-  BOT_TOKEN: (process.env.BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN || '').trim().replace(/^["']|["']$/g, ''),
-  WEB_APP_URL: (process.env.WEB_APP_URL || 'https://naja7i-platform.vercel.app').trim(),
-  PLATFORM_NAME: 'منصة نجاحي (Naja7i 🇩🇿)',
-  DEV_NAME: 'فريق نجاحي التعليمي',
-  BAC_TARGET_DATE: '2026-06-07T08:00:00+01:00', // تقريبي لبكالوريا جوان 2026
-  PAGINATION_LIMIT: 5,
+  BOT_TOKEN: process.env.BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN || '',
+  BOT_NAME: process.env.BOT_NAME || 'Naja7iBacBot',
+  DEVELOPER_NAME: 'Naja7i Team',
+  ENVIRONMENT: process.env.NODE_ENV || 'development'
 };
-
-if (!CONFIG.BOT_TOKEN) {
-  console.warn('⚠️ تحذير: لم يتم تعيين BOT_TOKEN أو TELEGRAM_BOT_TOKEN في ملف .env!');
-  console.warn('ℹ️ يرجى وضع التوكن الخاص بك في ملف .env للتمكن من تشغيل البوت مع خوادم تيليجرام.');
-}

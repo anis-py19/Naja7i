@@ -9,9 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "bot": "node bot/index.js",
-    "bot:dev": "node --watch bot/index.js",
-    "bot:set-webhook": "node bot/setWebhook.js",
-    "bot:delete-webhook": "node bot/deleteWebhook.js"
+    "bot:webhook": "node bot/setWebhook.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
