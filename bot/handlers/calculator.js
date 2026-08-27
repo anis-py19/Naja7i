@@ -230,6 +230,7 @@ export function setupCalculatorHandlers(bot) {
 ⚖️ *مجموع المعاملات:* ${result.totalCoefficients}
 
 🏆 *المعدل العام:* \`${result.average} / 20\`
+📈 *المستوى:* \`[${result.progressBar}]\`
 🎖️ *التقدير:* ${result.gradeIcon} *${result.grade}*
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 📝 *تفصيل المواد والعلامات:*

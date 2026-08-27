@@ -12,6 +12,31 @@ export function setupQuizHandlers(bot) {
     });
   });
 
+  // Command /poll - Native Telegram Quiz Poll
+  bot.command('poll', async (ctx) => {
+    const question = getRandomQuestion();
+    if (!question) {
+      return ctx.reply('ℹ️ لا توجد أسئلة متوفرة حالياً.');
+    }
+
+    try {
+      const explanationText = question.explanation ? question.explanation.slice(0, 195) : undefined;
+      await ctx.replyWithPoll(
+        `📚 [${question.subjectName}] ${question.question}`.slice(0, 290),
+        question.options.map(opt => opt.slice(0, 95)),
+        {
+          type: 'quiz',
+          correct_option_id: question.correctIndex,
+          explanation: explanationText,
+          is_anonymous: false
+        }
+      );
+    } catch (e) {
+      console.error('Error sending native poll:', e);
+      await startQuizRound(ctx, 'all', 'all');
+    }
+  });
+
   // Reply keyboard match
   bot.hears('🎯 بنك الأسئلة والكويز', async (ctx) => {
     await ctx.reply('🎯 *بنك الأسئلة والاختبارات التفاعلية السريعة (QCM)* 🇩🇿\n\nوفق المنهاج الوزاري الرسمي؛ اختبر معلوماتك مع الشرح الفوري للإجابات:', {

@@ -2,7 +2,6 @@ import { Bot } from 'grammy';
 import { CONFIG } from './config.js';
 
 // Import Handlers
-import { setupAdminHandlers } from './handlers/admin.js';
 import { setupStartHandlers } from './handlers/start.js';
 import { setupLibraryHandlers } from './handlers/library.js';
 import { setupArchiveHandlers } from './handlers/archive.js';
@@ -41,8 +40,7 @@ export function createBot(customToken) {
     console.error(e);
   });
 
-  // Setup all feature handlers (Admin & Maintenance middleware first)
-  setupAdminHandlers(bot);
+  // Setup all feature handlers
   setupStartHandlers(bot);
   setupLibraryHandlers(bot);
   setupArchiveHandlers(bot);
@@ -55,6 +53,43 @@ export function createBot(customToken) {
   setupSearchHandlers(bot);
 
   return bot;
+}
+
+/**
+ * Automatically register official Bot Commands, Descriptions, and Menus in Telegram
+ */
+export async function registerBotCommands(bot) {
+  try {
+    await bot.api.setMyCommands([
+      { command: 'start', description: '🏠 الشاشة الرئيسية والقوائم' },
+      { command: 'streams', description: '📚 الشعب الست والمكتبة الدراسية' },
+      { command: 'archive', description: '🏛️ أرشيف البكالوريا (2008-2026)' },
+      { command: 'calc', description: '🧮 حاسبة معدل البكالوريا التفاعلية' },
+      { command: 'quiz', description: '🎯 بنك الأسئلة والكويزات QCM' },
+      { command: 'poll', description: '📊 استطلاع كويز تفاعلي سريع' },
+      { command: 'planner', description: '📅 مخطط المراجعة الأسبوعي' },
+      { command: 'countdown', description: '⏳ العداد التنازلي للبكالوريا' },
+      { command: 'teachers', description: '🎥 أفضل أساتذة وقنوات اليوتيوب' },
+      { command: 'tips', description: '💡 نصائح ومنهجيات التفوق' },
+      { command: 'search', description: '🔍 بحث فوري في الملفات' },
+      { command: 'help', description: '📖 دليل استخدام البوت والمساعدة' }
+    ]);
+
+    await bot.api.setMyDescription(
+      '🎓 بوت نجاحي للبكالوريا الجزائري (Naja7i BAC Bot 🇩🇿)\n' +
+      'رفيقك نحو الامتياز في البكالوريا لجميع الشعب الست!\n\n' +
+      '📚 +330 ملخص وسلاسل تمارين محلولة\n' +
+      '🏛️ مواضيع وحلول البكالوريا (2008-2026)\n' +
+      '🧮 حاسبة معدل البكالوريا الدقيقة\n' +
+      '🎯 بنك كويزات تفاعلية وشروحات نموذجية\n' +
+      '📅 مخططات مراجعة الأهداف وقنوات اليوتيوب'
+    );
+
+    await bot.api.setMyShortDescription('🎓 بوت البكالوريا الجزائري الشامل — نجاحي (Naja7i BAC DZ)');
+    console.log('✅ تم تسجيل قائمة الأوامر ووصف البوت الرسمي بنجاح في سيرفرات تيليجرام.');
+  } catch (err) {
+    console.warn('⚠️ فشل في تسجيل الأوامر التلقائية:', err.message);
+  }
 }
 
 // Auto start if running directly and token exists

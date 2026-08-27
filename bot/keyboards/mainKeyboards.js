@@ -15,8 +15,11 @@ export function getMainReplyKeyboard() {
     .persistent();
 }
 
-export function getMainInlineKeyboard(isAdminUser = false) {
-  const keyboard = new InlineKeyboard()
+/**
+ * Main Inline Keyboard (Home Menu)
+ */
+export function getMainInlineKeyboard() {
+  return new InlineKeyboard()
     .text('📚 الشعب والمكتبة الدراسية', 'menu_streams').row()
     .text('🏛️ أرشيف البكالوريا (2008-2026)', 'menu_archive').row()
     .text('🧮 حاسبة معدل البكالوريا', 'menu_calculator')
@@ -26,10 +29,4 @@ export function getMainInlineKeyboard(isAdminUser = false) {
     .text('🎥 أساتذة وقنوات اليوتيوب', 'menu_teachers')
     .text('💡 نصائح ومنهجية الإجابة', 'menu_tips').row()
     .text('🔍 بحث فوري في الملفات', 'menu_search');
-
-  if (isAdminUser) {
-    keyboard.row().text('👑 لوحة تحكم الإدارة (Admin)', 'adm_refresh');
-  }
-
-  return keyboard;
 }

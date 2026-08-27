@@ -101,6 +101,33 @@ export function setupSearchHandlers(bot) {
     });
   }
 
+  // Handle inline queries (@bot query in any chat)
+  bot.on('inline_query', async (ctx) => {
+    const query = (ctx.inlineQuery.query || '').trim();
+    if (!query) return;
+
+    try {
+      const files = searchStudyFiles(query, 12);
+      const results = files.map((file, idx) => {
+        const link = file.driveDownloadUrl || file.driveFileUrl || file.fileUrl || 'https://naja7i-platform.vercel.app';
+        return {
+          type: 'article',
+          id: `file_${file.id || idx}`,
+          title: `📄 ${truncate(file.title || file.rawFileName, 45)}`,
+          description: `📘 ${file.subjectName || ''} | 🏷️ ${file.category || 'ملخص'} | 📦 ${file.sizeReadable || 'PDF'}`,
+          input_message_content: {
+            message_text: `🎓 *مستند من بوت نجاحي للبكالوريا (Naja7i 🇩🇿)*\n\n📌 *العنوان:* ${file.title}\n📘 *المادة:* ${file.subjectName}\n🏷️ *التصنيف:* ${file.category || 'ملخص دراسي'}\n📦 *الحجم:* ${file.sizeReadable || file.size || 'PDF'}\n\n📥 [اضغط هنا لتحميل أو معاينة المستند عبر Google Drive](${link})`,
+            parse_mode: 'Markdown'
+          }
+        };
+      });
+
+      await ctx.answerInlineQuery(results, { cache_time: 15 });
+    } catch (err) {
+      console.error('Error in inline_query:', err);
+    }
+  });
+
   // Handle free text messages if they are not bot commands
   bot.on('message:text', async (ctx, next) => {
     const text = ctx.message.text.trim();

@@ -66,6 +66,7 @@ export function calculateBacAverage(stream, marks = {}, includeOptional = { amaz
   return {
     streamName: stream.name,
     average: formattedAverage,
+    progressBar: getScoreProgressBar(formattedAverage, 20),
     totalPoints: totalWeightedScore.toFixed(2),
     totalCoefficients,
     grade,
@@ -73,6 +74,17 @@ export function calculateBacAverage(stream, marks = {}, includeOptional = { amaz
     guidance,
     breakdown
   };
+}
+
+/**
+ * Generate a clean visual progress bar
+ */
+export function getScoreProgressBar(score, max = 20) {
+  const ratio = Math.max(0, Math.min(1, score / max));
+  const totalBlocks = 12;
+  const filled = Math.round(ratio * totalBlocks);
+  const empty = totalBlocks - filled;
+  return '█'.repeat(filled) + '░'.repeat(empty);
 }
 
 /**
