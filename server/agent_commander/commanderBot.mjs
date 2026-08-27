@@ -143,18 +143,46 @@ async function callTelegram(method, payload = {}) {
 }
 
 /**
- * 💬 Send Formatted Message
+ * 💬 Send Formatted Message (With Auto-Chunking for Long Reports)
  */
 async function sendMessage(chatId, text, replyMarkup = null) {
-  const payload = {
-    chat_id: chatId || ADMIN_CHAT_ID,
-    text,
-    parse_mode: 'HTML'
-  };
-  if (replyMarkup) {
-    payload.reply_markup = replyMarkup;
+  const targetChatId = chatId || ADMIN_CHAT_ID;
+  if (!targetChatId) return null;
+
+  if (text.length <= 3900) {
+    const payload = {
+      chat_id: targetChatId,
+      text,
+      parse_mode: 'HTML'
+    };
+    if (replyMarkup) {
+      payload.reply_markup = replyMarkup;
+    }
+    return await callTelegram('sendMessage', payload);
   }
-  return await callTelegram('sendMessage', payload);
+
+  // Split long messages to prevent Telegram 4096 character limit errors
+  const chunks = [];
+  let remaining = text;
+  while (remaining.length > 0) {
+    chunks.push(remaining.slice(0, 3800));
+    remaining = remaining.slice(3800);
+  }
+
+  let lastRes = null;
+  for (let i = 0; i < chunks.length; i++) {
+    const isLast = i === chunks.length - 1;
+    const payload = {
+      chat_id: targetChatId,
+      text: chunks[i],
+      parse_mode: 'HTML'
+    };
+    if (isLast && replyMarkup) {
+      payload.reply_markup = replyMarkup;
+    }
+    lastRes = await callTelegram('sendMessage', payload);
+  }
+  return lastRes;
 }
 
 /**
