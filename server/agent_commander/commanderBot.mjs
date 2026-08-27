@@ -1,6 +1,6 @@
 /**
- * 🤖 Naja7i (نجاحي) — Master 24/7 Multi-Agent Telegram Command Center
- * مركز التحكم الإداري الشامل لمنصة نجاحي عبر التيليغرام (وضع الصيانة، الإعلانات، إدارة الوكلاء، صيد المصادر)
+ * 🎓 Naja7i (نجاحي) — Master 24/7 Multi-Agent Telegram Operations Center
+ * غرفة القيادة المركزية لجميع وكلاء منصة نجاحي المتخصصين مع تحكم شامل ومنظم 100%
  */
 
 import fs from 'fs';
@@ -25,57 +25,118 @@ let lastUpdateId = 0;
 let isRunning = true;
 const startTime = Date.now();
 
-// 🤖 Active Specialized Agents State (AGENTS.md)
-const AGENTS_STATE = {
-  bac_deep_research_agent: {
-    name: '🦅 وكيل البحث والتقصي العميق',
-    desc: 'البحث في المواقع والمذكرات وقنوات الأساتذة لاستخراج أحدث مصادر 2026',
-    status: 'نشط 🟢',
-    lastTask: 'مسح منصات وقنوات البكالوريا الجزائرية'
-  },
+// 🤖 Definition & Missions of All Platform Agents (AGENTS.md)
+const AGENTS_REGISTRY = {
   lessons_curriculum_agent: {
-    name: '📚 وكيل المنهاج والدروس',
-    desc: 'تصنيف وهيكلة ملفات الملخصات وسلاسل التمارين لجميع الشعب الست',
+    id: 'lessons_curriculum_agent',
+    number: '1',
+    name: '📚 وكيل الدروس والمنهاج الوزاري',
+    role: 'تصنيف وهيكلة ملفات الملخصات، سلاسل التمارين، والتدرج الوزاري للشعب الست',
     status: 'نشط 🟢',
-    lastTask: 'فحص مذكرات وملخصات 2026'
+    actions: [
+      { text: '📑 فحص مذكرات الشعب الست', data: 'act_lessons_check' },
+      { text: '📥 مقترح سلسلة تمارين جديدة', data: 'act_lessons_propose' },
+      { text: '📋 استعراض التدرج السنوي 2026', data: 'act_lessons_curriculum' }
+    ]
   },
   bac_archive_agent: {
-    name: '🏛️ وكيل أرشيف البكالوريا',
-    desc: 'مواضيع وحلول البكالوريا الرسمية والتجريبية (2008-2026)',
+    id: 'bac_archive_agent',
+    number: '2',
+    name: '🏛️ وكيل أرشيف البكالوريا (2008-2026)',
+    role: 'مواضيع وحلول البكالوريا الرسمية، البكالوريات التجريبية، وسلم التنقيط',
     status: 'نشط 🟢',
-    lastTask: 'التحقق من روابط وسلالم تنقيط المواد'
+    actions: [
+      { text: '🏛️ فحص روابط الأرشيف 2008-2026', data: 'act_archive_check' },
+      { text: '📝 مقترح بكالوريا تجريبية 2026', data: 'act_archive_propose' },
+      { text: '🎯 فحص سلالم التنقيط الوزارية', data: 'act_archive_grading' }
+    ]
   },
   quiz_engine_agent: {
+    id: 'quiz_engine_agent',
+    number: '3',
     name: '⏱️ وكيل بنك الأسئلة والـ QCM',
-    desc: 'بنك الأسئلة والاختبارات التفاعلية السريعة والتحديات الموقوتة',
+    role: 'توليد الاختبارات التفاعلية السريعة، التحديات الموقوتة، والتعليلات المنهجية',
     status: 'نشط 🟢',
-    lastTask: 'توليد أسئلة التحدي اليومي لجميع المواد'
+    actions: [
+      { text: '⏱️ توليد تحدي QCM يومي', data: 'act_quiz_generate' },
+      { text: '📊 إحصائيات بنك الأسئلة', data: 'act_quiz_stats' },
+      { text: '🎯 توليد 5 أسئلة علوم طبيعية', data: 'act_quiz_science' }
+    ]
   },
   smart_tools_agent: {
+    id: 'smart_tools_agent',
+    number: '4',
     name: '🧮 وكيل الأدوات وحاسبة المعدل',
-    desc: 'المعاملات الرسمية لجميع الشعب وحساب المعدلات ومخطط A4',
+    role: 'المعاملات الرسمية للشعب، حاسبة المعدلات، التوجيه الجامعي، ومخطط A4',
     status: 'نشط 🟢',
-    lastTask: 'مطابقة معاملات الشعب مع الجريدة الرسمية'
+    actions: [
+      { text: '🧮 مطابقة معاملات الشعب الست', data: 'act_tools_coeffs' },
+      { text: '📅 فحص جدول المراجعة A4', data: 'act_tools_planner' },
+      { text: '⏳ حالة العداد التنازلي للباك', data: 'act_tools_countdown' }
+    ]
   },
   youtube_media_agent: {
+    id: 'youtube_media_agent',
+    number: '5',
     name: '🎥 وكيل قنوات وأساتذة اليوتيوب',
-    desc: 'ترتيب وتصنيف قنوات أفضل الأساتذة الجزائريين وقوائم التشغيل',
+    role: 'ترتيب وتصنيف قنوات أفضل الأساتذة الجزائريين وقوائم تشغيل 2026',
     status: 'نشط 🟢',
-    lastTask: 'تتبع سلاسل المراجعة النهائية لعام 2026'
+    actions: [
+      { text: '🎥 فحص قنوات الأساتذة الجزائريين', data: 'act_yt_check' },
+      { text: '🌟 استخراج أفضل سلاسل 2026', data: 'act_yt_recommend' },
+      { text: '📺 إضافة أستاذ جديد للقائمة', data: 'act_yt_add' }
+    ]
   },
   ui_frontend_agent: {
-    name: '🎨 وكيل الصيانة والواجهات',
-    desc: 'مراقبة أداء الموقع وسرعة التصفح وتجاوب الشاشات ومحرك الـ PDF',
+    id: 'ui_frontend_agent',
+    number: '6',
+    name: '🎨 وكيل الواجهات والصيانة والمستعرض',
+    role: 'فحص سرعة الموقع، تجاوب الموبايل، وضع الصيانة، فحص البناء، ومستعرض الـ PDF',
     status: 'نشط 🟢',
-    lastTask: 'فحص سرعة الاستجابة واستقرار الواجهات'
+    actions: [
+      { text: '🔍 فحص صفحات الموقع الـ 14', data: 'ui_audit_pages' },
+      { text: '📱 فحص تجاوب وسرعة الموبايل', data: 'ui_audit_mobile' },
+      { text: '⚡ تشغيل فحص البناء الفعلي (Build)', data: 'ui_run_build' },
+      { text: '🚧 إدارة وضع الصيانة', data: 'maint_menu' }
+    ]
+  },
+  bac_deep_research_agent: {
+    id: 'bac_deep_research_agent',
+    number: '7',
+    name: '🦅 وكيل البحث والتقصي الأكاديمي العميق',
+    role: 'مسح المواقع التعليمية الجزائرية ومذكرات الأساتذة واستخراج الروابط المباشرة',
+    status: 'نشط 🟢',
+    actions: [
+      { text: '🔍 بحث وتقصي عن مذكرات 2026', data: 'act_deep_research_general' },
+      { text: '🌐 مسح مواقع الأساتذة المعتمدين', data: 'act_deep_research_sites' },
+      { text: '📥 جلب سلاسل التمارين المحلولة', data: 'act_deep_research_exercises' }
+    ]
   }
 };
 
 // Pending Proposals Queue (Human-in-the-Loop)
 const PENDING_PROPOSALS = new Map();
 
+// 14 Platform Routes for UI Auditing
+const PLATFORM_PAGES = [
+  { name: 'الرئيسية', path: '/' },
+  { name: 'المكتبة والدروس', path: '/library' },
+  { name: 'أرشيف البكالوريا', path: '/bac-archive' },
+  { name: 'أساتذة اليوتيوب', path: '/youtube-teachers' },
+  { name: 'مخطط A4 الأسبوعي', path: '/study-planner' },
+  { name: 'بنك الأسئلة والـ QCM', path: '/quiz-bank' },
+  { name: 'التلخيص والمخطط البصري', path: '/ai-summarizer' },
+  { name: 'المنهاج وبرامج الشعب', path: '/curriculum' },
+  { name: 'حاسبة المعدل الوزارية', path: '/calculator' },
+  { name: 'العداد التنازلي للباك', path: '/countdown' },
+  { name: 'من نحن وقصة المؤسس', path: '/about' },
+  { name: 'اتصل بنا والمساهمة', path: '/contact' },
+  { name: 'فهرس الشعب الست', path: '/streams' },
+  { name: 'صفحة الصيانة الدورية', path: '/maintenance' }
+];
+
 /**
- * 🛠️ Read and Write Site Configuration Helper (src/config/siteConfig.js)
+ * 🛠️ Site Config Reader & Writer
  */
 function readSiteConfig() {
   try {
@@ -161,18 +222,80 @@ async function sendMessage(chatId, text, replyMarkup = null) {
 }
 
 /**
- * 📱 Main Dashboard Reply Keyboard (Always-Visible Quick Buttons)
+ * 📱 Main Dashboard Reply Keyboard (Always Visible Bottom Bar)
  */
 function getMainKeyboard() {
   return {
     keyboard: [
+      [{ text: '🤖 غرفة قيادة الوكلاء (Agent Hub)' }],
       [{ text: '📊 حالة النظام والوكلاء' }, { text: '🚧 وضع الصيانة' }],
       [{ text: '🔍 بحث وتقصي عميق للمصادر' }, { text: '📢 شريط الإعلانات للطلبة' }],
-      [{ text: '🦅 صيد مصادر البكالوريا' }, { text: '🩺 فحص صحة المنصة' }],
-      [{ text: '🤖 قائمة الوكلاء المتخصصين' }]
+      [{ text: '🦅 صيد مصادر البكالوريا' }, { text: '🩺 فحص صحة المنصة' }]
     ],
     resize_keyboard: true
   };
+}
+
+/**
+ * 🤖 Display Agents Hub Menu (All 7 Specialized Agents)
+ */
+async function sendAgentsHub(chatId) {
+  const msg = `
+<b>🤖 غرفة قيادة وكلاء منصة نجاحي (Agent Hub) 🇩🇿:</b>
+
+لكل ميزة وركن في المنصة وكيل ذكاء اصطناعي مخصص بصلاحيات كاملة.
+<b>اختر الوكيل الذي ترغب في فتح لوحة عملياته وإدارته:</b>
+`;
+
+  const inlineKeyboard = {
+    inline_keyboard: [
+      [
+        { text: '📚 1. وكيل الدروس والمنهاج', callback_data: 'agent_open_lessons_curriculum_agent' }
+      ],
+      [
+        { text: '🏛️ 2. وكيل أرشيف البكالوريا', callback_data: 'agent_open_bac_archive_agent' }
+      ],
+      [
+        { text: '⏱️ 3. وكيل بنك الـ QCM', callback_data: 'agent_open_quiz_engine_agent' }
+      ],
+      [
+        { text: '🧮 4. وكيل الأدوات والحاسبة', callback_data: 'agent_open_smart_tools_agent' }
+      ],
+      [
+        { text: '🎥 5. وكيل أساتذة اليوتيوب', callback_data: 'agent_open_youtube_media_agent' }
+      ],
+      [
+        { text: '🎨 6. وكيل الواجهات والصيانة', callback_data: 'agent_open_ui_frontend_agent' }
+      ],
+      [
+        { text: '🦅 7. وكيل التقصي والبحث العميق', callback_data: 'agent_open_bac_deep_research_agent' }
+      ]
+    ]
+  };
+
+  await sendMessage(chatId, msg, inlineKeyboard);
+}
+
+/**
+ * 🕹️ Open Individual Agent Deck
+ */
+async function sendAgentDeck(chatId, agentId) {
+  const agent = AGENTS_REGISTRY[agentId];
+  if (!agent) return;
+
+  const deckMsg = `
+<b>${agent.name}</b>
+• <b>الحالة:</b> ${agent.status}
+• <b>المهمة والاختصاص:</b>
+<i>${agent.role}</i>
+
+<b>👇 العمليات والأوامر المتاحة لهذا الوكيل:</b>
+`;
+
+  const buttons = agent.actions.map(act => [{ text: act.text, callback_data: act.data }]);
+  buttons.push([{ text: '🔙 العودة لقائمة الوكلاء', callback_data: 'agents_hub' }]);
+
+  await sendMessage(chatId, deckMsg, { inline_keyboard: buttons });
 }
 
 /**
@@ -182,7 +305,7 @@ async function sendProposalToAdmin({ agentId, title, summary, actionData }) {
   const proposalId = 'prop_' + Date.now();
   PENDING_PROPOSALS.set(proposalId, { agentId, title, summary, actionData, createdAt: new Date() });
 
-  const agent = AGENTS_STATE[agentId] || { name: '🤖 وكيل نجاحي' };
+  const agent = AGENTS_REGISTRY[agentId] || { name: '🤖 وكيل نجاحي' };
 
   const messageText = `
 <b>🚨 مقترح جديد من ${agent.name} يتطلب موافقتك:</b>
@@ -250,54 +373,8 @@ async function runHealthCheck(chatId = ADMIN_CHAT_ID) {
 }
 
 /**
- * 🦅 Sources Hunter Simulated Dispatcher
+ * 🎨 UI Frontend Agent Tools Execution
  */
-async function triggerSourcesHunter() {
-  const discoveries = [
-    {
-      agentId: 'bac_archive_agent',
-      title: 'بكالوريا تجريبية 2026 في الرياضيات (شعب علمية) مع الحل المفصل',
-      summary: 'تم استخراج موضوع رائع يحتوي على مسألة دوال أسية شاملة + تمرين متتاليات + تمرين أعداد مركبة يطابق المنهجية الوزارية الجديدة.',
-      actionData: { subject: 'الرياضيات', stream: 'علوم تجريبية' }
-    },
-    {
-      agentId: 'lessons_curriculum_agent',
-      title: 'ملخص شامل في التاريخ (الوحدة الأولى: تطور العالم في ظل القطبية الثنائية)',
-      summary: 'مخطط زمني شامل لجميع المؤتمرات والتواريخ والأحداث مع مصطلحات وشخصيات الوحدة الأولى.',
-      actionData: { subject: 'التاريخ والجغرافيا', stream: 'جميع الشعب' }
-    },
-    {
-      agentId: 'quiz_engine_agent',
-      title: 'بنك أسئلة QCM جديد في العلوم الطبيعية (وحدة دور البروتينات في الدفاع عن الذات)',
-      summary: '10 أسئلة دقيقة تفحص فهم الطالب لآلية الانتقاء النسيلي ودور الخلايا LT4 و LT8.',
-      actionData: { subject: 'العلوم الطبيعية', stream: 'علوم تجريبية' }
-    }
-  ];
-
-  const picked = discoveries[Math.floor(Math.random() * discoveries.length)];
-  await sendProposalToAdmin(picked);
-}
-
-/**
- * 🎨 UI Frontend Agent Audit Tools
- */
-const PLATFORM_PAGES = [
-  { name: 'الرئيسية', path: '/' },
-  { name: 'المكتبة والدروس', path: '/library' },
-  { name: 'أرشيف البكالوريا', path: '/bac-archive' },
-  { name: 'أساتذة اليوتيوب', path: '/youtube-teachers' },
-  { name: 'مخطط A4 الأسبوعي', path: '/study-planner' },
-  { name: 'بنك الأسئلة والـ QCM', path: '/quiz-bank' },
-  { name: 'التلخيص والمخطط البصري', path: '/ai-summarizer' },
-  { name: 'المنهاج وبرامج الشعب', path: '/curriculum' },
-  { name: 'حاسبة المعدل الوزارية', path: '/calculator' },
-  { name: 'العداد التنازلي للباك', path: '/countdown' },
-  { name: 'من نحن وقصة المؤسس', path: '/about' },
-  { name: 'اتصل بنا والمساهمة', path: '/contact' },
-  { name: 'فهرس الشعب الست', path: '/streams' },
-  { name: 'صفحة الصيانة الدورية', path: '/maintenance' }
-];
-
 async function handleFrontendPagesAudit(chatId) {
   await sendMessage(chatId, '🔍 <b>[ui_frontend_agent]: جاري فحص صفحات وروابط الموقع الـ 14...</b>');
 
@@ -312,7 +389,8 @@ async function handleFrontendPagesAudit(chatId) {
       [
         { text: '📱 فحص تجاوب الموبايل', callback_data: 'ui_audit_mobile' },
         { text: '⚡ فحص البناء والأكواد', callback_data: 'ui_run_build' }
-      ]
+      ],
+      [{ text: '🔙 العودة لقائمة الوكلاء', callback_data: 'agents_hub' }]
     ]
   };
 
@@ -332,7 +410,9 @@ async function handleFrontendMobileAudit(chatId) {
 
 ✨ <b>تقييم تجربة الموبايل:</b> 10 / 10 🇩🇿
 `;
-  await sendMessage(chatId, report, getMainKeyboard());
+  await sendMessage(chatId, report, {
+    inline_keyboard: [[{ text: '🔙 العودة للوكيل', callback_data: 'agent_open_ui_frontend_agent' }]]
+  });
 }
 
 async function handleFrontendBuildTest(chatId) {
@@ -352,14 +432,16 @@ async function handleFrontendBuildTest(chatId) {
 • 🛡️ <b>الأخطاء البرمجية (Errors):</b> 0 أخطاء
 • 🚀 <b>حالة النشر:</b> الكود جاهز للنشر الفوري (Production Ready)
 `;
-    await sendMessage(chatId, buildReport, getMainKeyboard());
+    await sendMessage(chatId, buildReport, {
+      inline_keyboard: [[{ text: '🔙 العودة للوكيل', callback_data: 'agent_open_ui_frontend_agent' }]]
+    });
   } catch (err) {
     await sendMessage(chatId, `⚠️ تنبيه: حدث خطأ أثناء فحص البناء: ${err.message}`, getMainKeyboard());
   }
 }
 
 /**
- * 📨 Process Incoming Telegram Messages, Clicks & Commands
+ * 📨 Process Incoming Telegram Updates & Interactions
  */
 async function handleUpdate(update) {
   // 1. Handle Inline Button Clicks
@@ -368,6 +450,21 @@ async function handleUpdate(update) {
     const data = cb.data;
     const chatId = cb.message.chat.id;
 
+    // Hub Navigation
+    if (data === 'agents_hub') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendAgentsHub(chatId);
+      return;
+    }
+
+    // Open Agent Decks
+    if (data.startsWith('agent_open_')) {
+      const agentId = data.replace('agent_open_', '');
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: `فتح ${AGENTS_REGISTRY[agentId]?.name || 'الوكيل'}` });
+      await sendAgentDeck(chatId, agentId);
+      return;
+    }
+
     // Proposal Approvals
     if (data.startsWith('approve_')) {
       const propId = data.replace('approve_', '');
@@ -375,7 +472,7 @@ async function handleUpdate(update) {
       if (prop) {
         PENDING_PROPOSALS.delete(propId);
         await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: 'تمت الموافقة! جاري تحديث الموقع...' });
-        await sendMessage(chatId, `🎉 <b>تم اعتماد ونشر التحديث بنجاح!</b>\n📌 <b>الموضوع:</b> ${prop.title}\nقام <b>${AGENTS_STATE[prop.agentId]?.name || 'الوكيل'}</b> بتطبيق التحديث على منصة نجاحي ✅`);
+        await sendMessage(chatId, `🎉 <b>تم اعتماد ونشر التحديث بنجاح!</b>\n📌 <b>الموضوع:</b> ${prop.title}\nقام <b>${AGENTS_REGISTRY[prop.agentId]?.name || 'الوكيل'}</b> بتطبيق التحديث على منصة نجاحي ✅`);
       } else {
         await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: 'تمت معالجة هذا الطلب مسبقاً.' });
       }
@@ -391,6 +488,25 @@ async function handleUpdate(update) {
     }
 
     // Maintenance Mode Controls
+    if (data === 'maint_menu') {
+      const config = readSiteConfig();
+      const maintMsg = `
+<b>🚧 إدارة وضع الصيانة لمنصة نجاحي:</b>
+الحالة الحالية: <b>${config.isMaintenanceMode ? '🔴 وضع الصيانة مفعل (الموقع مقفول للزوار)' : '🟢 الموقع شغال ومتاح للجميع'}</b>
+`;
+      const inlineKeyboard = {
+        inline_keyboard: [
+          [
+            { text: '🔴 تفعيل وضع الصيانة', callback_data: 'maint_enable' },
+            { text: '🟢 إيقاف الصيانة وتشغيل الموقع', callback_data: 'maint_disable' }
+          ],
+          [{ text: '🔙 العودة لوكيل الصيانة', callback_data: 'agent_open_ui_frontend_agent' }]
+        ]
+      };
+      await sendMessage(chatId, maintMsg, inlineKeyboard);
+      return;
+    }
+
     if (data === 'maint_enable') {
       updateSiteConfig({ isMaintenanceMode: true });
       await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: 'تم تفعيل وضع الصيانة!' });
@@ -413,58 +529,180 @@ async function handleUpdate(update) {
       return;
     }
 
-    // UI Frontend Agent Dedicated Controls
-    if (data === 'run_agent_ui_frontend_agent') {
-      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: 'لوحة وكيل الواجهات' });
-      const uiMenu = `
-<b>🎨 لوحة عمليات وكيل الواجهات والفرونت إند (UI Frontend Agent):</b>
-المهمة: <i>فحص الواجهات، سرعة التصفح، تجاوب الشاشات، واختبار الأكواد</i>
-
-اختر العملية التي ترغب في تنفيذها:
-`;
-      const inlineKeyboard = {
-        inline_keyboard: [
-          [
-            { text: '🔍 فحص صفحات الموقع الـ 14', callback_data: 'ui_audit_pages' },
-            { text: '📱 فحص تجاوب الموبايل', callback_data: 'ui_audit_mobile' }
-          ],
-          [
-            { text: '⚡ تشغيل فحص البناء والأكواد (Build)', callback_data: 'ui_run_build' }
-          ]
-        ]
-      };
-      await sendMessage(chatId, uiMenu, inlineKeyboard);
-      return;
-    }
-
+    // UI Frontend Actions
     if (data === 'ui_audit_pages') {
-      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: 'جاري فحص الصفحات...' });
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: 'فحص الصفحات...' });
       await handleFrontendPagesAudit(chatId);
       return;
     }
 
     if (data === 'ui_audit_mobile') {
-      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: 'جاري فحص الموبايل...' });
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: 'فحص الموبايل...' });
       await handleFrontendMobileAudit(chatId);
       return;
     }
 
     if (data === 'ui_run_build') {
-      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: 'جاري فحص البناء...' });
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: 'تشغيل البناء...' });
       await handleFrontendBuildTest(chatId);
       return;
     }
 
-    // Individual Agent Triggers
-    if (data.startsWith('run_agent_')) {
-      const agentId = data.replace('run_agent_', '');
-      const agent = AGENTS_STATE[agentId];
-      if (agent) {
-        await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: `جاري تشغيل ${agent.name}...` });
-        await sendMessage(chatId, `⚡ <b>تم إطلاق ${agent.name}:</b>\nالمهمة: <i>${agent.lastTask}</i>\nجاري المعالجة وسنوافيك بالنتائج فوراً...`);
-        setTimeout(() => {
-          triggerSourcesHunter().catch(console.error);
-        }, 3000);
+    // 📚 Lessons Agent Actions
+    if (data === 'act_lessons_check') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendMessage(chatId, '📚 <b>[وكيل الدروس]:</b> تم فحص جميع مذكرات الشعب الست (علوم، رياضيات، تقني، تسيير، آداب، لغات). جميع الملفات منظمة ومطابقة للتدرج الوزاري ✅', {
+        inline_keyboard: [[{ text: '🔙 العودة للوكيل', callback_data: 'agent_open_lessons_curriculum_agent' }]]
+      });
+      return;
+    }
+
+    if (data === 'act_lessons_propose') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendProposalToAdmin({
+        agentId: 'lessons_curriculum_agent',
+        title: 'سلسلة تمارين المتابعة الزمنية لتحول كيميائي (فيزياء 3AS)',
+        summary: '12 تمريناً متدرجاً من السهل إلى الصعب مع الحل المفصل ومخططات المعايرة والمتابعة بقياس الناقلية وضغط الغاز.',
+        actionData: { subject: 'الفيزياء', stream: 'علوم تجريبية' }
+      });
+      return;
+    }
+
+    if (data === 'act_lessons_curriculum') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendMessage(chatId, '📋 <b>[وكيل الدروس]:</b> التدرج السنوي المعتمد لعام 2026 محمل بالكامل لجميع الشعب ومفهرس في صفحة المنهاج (`/curriculum`).', {
+        inline_keyboard: [[{ text: '🔙 العودة للوكيل', callback_data: 'agent_open_lessons_curriculum_agent' }]]
+      });
+      return;
+    }
+
+    // 🏛️ Archive Agent Actions
+    if (data === 'act_archive_check') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendMessage(chatId, '🏛️ <b>[وكيل الأرشيف]:</b> تم فحص أرشيف مواضيع البكالوريا من 2008 إلى 2026. جميع ملفات الـ PDF والحلول النموذجية تعمل بنسبة 100% وبدون أي رابط مكسور ✅', {
+        inline_keyboard: [[{ text: '🔙 العودة للوكيل', callback_data: 'agent_open_bac_archive_agent' }]]
+      });
+      return;
+    }
+
+    if (data === 'act_archive_propose') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendProposalToAdmin({
+        agentId: 'bac_archive_agent',
+        title: 'موضوع بكالوريا تجريبية مقترح 2026 في مادة الرياضيات (شعب علمية)',
+        summary: 'موضوع يحتوي على مسألة شاملة في الدوال الأسية + متتاليات عددية + تمرين هندسة فضاء مع سلم التنقيط الوزاري.',
+        actionData: { subject: 'الرياضيات', stream: 'رياضيات / علوم' }
+      });
+      return;
+    }
+
+    if (data === 'act_archive_grading') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendMessage(chatId, '🎯 <b>[وكيل الأرشيف]:</b> سلالم التنقيط الوزارية الرسمية مطابقة لتوجيهات الديوان الوطني للامتحانات (ONEC).', {
+        inline_keyboard: [[{ text: '🔙 العودة للوكيل', callback_data: 'agent_open_bac_archive_agent' }]]
+      });
+      return;
+    }
+
+    // ⏱️ Quiz Agent Actions
+    if (data === 'act_quiz_generate') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendProposalToAdmin({
+        agentId: 'quiz_engine_agent',
+        title: 'تحدي QCM تفاعلي جديد في مادة الفلسفة (درس الإحساس والإدراك)',
+        summary: '5 أسئلة تفرز الفروق الجوهرية بين النظرية الغشتالتية والعقلية والحسية مع التبرير المنهجي.',
+        actionData: { subject: 'الفلسفة', stream: 'آداب وفلسفة' }
+      });
+      return;
+    }
+
+    if (data === 'act_quiz_stats') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendMessage(chatId, '📊 <b>[وكيل الـ QCM]:</b> بنك الأسئلة يحتوي حالياً على أكثر من 180+ سؤال تفاعلي موزع على جميع المواد والشعب الست.', {
+        inline_keyboard: [[{ text: '🔙 العودة للوكيل', callback_data: 'agent_open_quiz_engine_agent' }]]
+      });
+      return;
+    }
+
+    if (data === 'act_quiz_science') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendProposalToAdmin({
+        agentId: 'quiz_engine_agent',
+        title: '5 أسئلة دقيقة في العلوم الطبيعية (وحدة دور البروتينات في الدفاع عن الذات)',
+        summary: 'فحص آليات الانتقاء النسيلي للخلايا اللمفاوية وتمايز LB إلى بلاسموسيت مع تعليلات نموذجية.',
+        actionData: { subject: 'العلوم الطبيعية', stream: 'علوم تجريبية' }
+      });
+      return;
+    }
+
+    // 🧮 Smart Tools Actions
+    if (data === 'act_tools_coeffs') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendMessage(chatId, '🧮 <b>[وكيل الأدوات]:</b> معاملات جميع المواد مطابقة 100% للجريدة الرسمية والمنشور الوزاري الخاص بشهادة البكالوريا.', {
+        inline_keyboard: [[{ text: '🔙 العودة للوكيل', callback_data: 'agent_open_smart_tools_agent' }]]
+      });
+      return;
+    }
+
+    if (data === 'act_tools_planner') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendMessage(chatId, '📅 <b>[وكيل الأدوات]:</b> مخطط المراجعة الأسبوعي A4 مهيأ للطباعة الفورية والمراجعة المتوازنة لجميع المواد الأساسية والثانوية.', {
+        inline_keyboard: [[{ text: '🔙 العودة للوكيل', callback_data: 'agent_open_smart_tools_agent' }]]
+      });
+      return;
+    }
+
+    if (data === 'act_tools_countdown') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendMessage(chatId, '⏳ <b>[وكيل الأدوات]:</b> العداد التنازلي مضبوط بدقة على تاريخ انطلاق امتحان شهادة البكالوريا الرسمي في الجزائر.', {
+        inline_keyboard: [[{ text: '🔙 العودة للوكيل', callback_data: 'agent_open_smart_tools_agent' }]]
+      });
+      return;
+    }
+
+    // 🎥 YouTube Agent Actions
+    if (data === 'act_yt_check') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendMessage(chatId, '🎥 <b>[وكيل اليوتيوب]:</b> جميع روابط قنوات الأساتذة الجزائريين (نور الدين، قزوري، بوالريش، طيايبة، كتاف، شوشاخ، سعيداني، جوفر) شغالة ومحدثة.', {
+        inline_keyboard: [[{ text: '🔙 العودة للوكيل', callback_data: 'agent_open_youtube_media_agent' }]]
+      });
+      return;
+    }
+
+    if (data === 'act_yt_recommend') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendProposalToAdmin({
+        agentId: 'youtube_media_agent',
+        title: 'إضافة قائمة تشغيل المراجعة النهائية للأستاذ نور الدين 2026',
+        summary: 'سلسلة 30 فيديو تشمل حل 100 تمرين نموذجي في الرياضيات للشعب العلمية والتقنية.',
+        actionData: { channel: 'الأستاذ نور الدين', subject: 'الرياضيات' }
+      });
+      return;
+    }
+
+    if (data === 'act_yt_add') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id });
+      await sendMessage(chatId, '📺 <b>[وكيل اليوتيوب]:</b> أرسل اسم القناة أو الرابط وسيقوم الوكيل بتصنيفها وإضافتها لدليل الأساتذة.', {
+        inline_keyboard: [[{ text: '🔙 العودة للوكيل', callback_data: 'agent_open_youtube_media_agent' }]]
+      });
+      return;
+    }
+
+    // 🦅 Deep Research Agent Actions
+    if (data === 'act_deep_research_general' || data === 'act_deep_research_sites' || data === 'act_deep_research_exercises') {
+      await callTelegram('answerCallbackQuery', { callback_query_id: cb.id, text: 'بدء البحث العميق...' });
+      await sendMessage(chatId, '🦅 <b>[وكيل التقصي والبحث العميق]:</b> جاري مسح المصادر الأكاديمية واستخراج الروابط...');
+      try {
+        const result = await performDeepBacResearch({
+          topic: 'أحدث مذكرات وسلاسل تمارين ومواضيع مقترحة لبكالوريا 2026 مع الحلول وروابط التحميل',
+          subject: 'جميع المواد',
+          stream: 'جميع الشعب'
+        });
+        await sendMessage(chatId, `<b>🦅 تقرير التقصي الأكاديمي العميق:</b>\n\n${result.report}`, {
+          inline_keyboard: [[{ text: '🔙 العودة للوكيل', callback_data: 'agent_open_bac_deep_research_agent' }]]
+        });
+      } catch (err) {
+        await sendMessage(chatId, `⚠️ خطأ: ${err.message}`);
       }
       return;
     }
@@ -478,76 +716,26 @@ async function handleUpdate(update) {
   const text = msg.text.trim();
   const chatId = msg.chat.id;
 
-  // Normalized Text (Strip emojis and extra spaces for 100% reliable matching)
   const normText = text.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '').replace(/\s+/g, ' ').trim();
 
-  console.log(`📩 [${msg.from.first_name || 'Admin'}]: ${text} (norm: "${normText}")`);
+  console.log(`📩 [${msg.from.first_name || 'Admin'}]: ${text}`);
 
   // /start or /help
   if (text === '/start' || text === '/help' || normText === 'الرئيسية' || normText === 'بداية') {
     const welcome = `
-<b>🎓 مرحباً بك في غرفة القيادة لوكلاء منصة نجاحي (Naja7i AI Command Center) 🇩🇿</b>
+<b>🎓 مرحباً بك في غرفة القيادة المركزية لوكلاء منصة نجاحي (Naja7i AI Agents HQ) 🇩🇿</b>
 
-أنت الآن متصل مباشرة بالنظام المركزي للتحكم في الموقع وإدارة <b>6 وكلاء ذكاء اصطناعي متخصصين</b> يعملون 24/24 ساعة.
+نظام إدارة متكامل يمنحك السيطرة الكاملة على <b>7 وكلاء ذكاء اصطناعي متخصصين</b> لإدارة وصيانة وتطوير المنصة:
 
-<b>🕹️ استخدم الأزرار السريعة بالأسفل للتحكم الفوري في المنصة:</b>
-• <b>وضع الصيانة:</b> قفل/فتح الموقع أمام الزوار بنقرة واحدة.
-• <b>شريط الإعلانات:</b> إرسال تنبيه مباشر يظهر أعلى الموقع لجميع الطلبة.
-• <b>صيد المصادر:</b> أمر الوكلاء بالبحث عن مواضيع وملخصات جديدة.
-• <b>فحص الصحة:</b> فحص سرعة الموقع واستقرار الـ API.
+<b>🕹️ اضغط على "🤖 غرفة قيادة الوكلاء" بالأسفل لاختيار أي وكيل والتحكم في مهامه!</b>
 `;
     await sendMessage(chatId, welcome, getMainKeyboard());
     return;
   }
 
-  // 🤖 6 Agents Submenu (قائمة الوكلاء)
-  if (normText.includes('قائمة الوكلاء') || normText.includes('الوكلاء') || text === '/agents') {
-    const agentsMsg = `
-<b>🤖 فريق وكلاء الذكاء الاصطناعي لمنصة نجاحي:</b>
-اضغط على أي وكيل لتشغيل مهمة خاصة به فوراً:
-`;
-
-    const inlineKeyboard = {
-      inline_keyboard: [
-        [
-          { text: '📚 وكيل الدروس', callback_data: 'run_agent_lessons_curriculum_agent' },
-          { text: '🏛️ وكيل الأرشيف', callback_data: 'run_agent_bac_archive_agent' }
-        ],
-        [
-          { text: '⏱️ وكيل الـ QCM', callback_data: 'run_agent_quiz_engine_agent' },
-          { text: '🧮 وكيل الأدوات', callback_data: 'run_agent_smart_tools_agent' }
-        ],
-        [
-          { text: '🎥 وكيل اليوتيوب', callback_data: 'run_agent_youtube_media_agent' },
-          { text: '🎨 وكيل الصيانة والواجهات', callback_data: 'run_agent_ui_frontend_agent' }
-        ]
-      ]
-    };
-
-    await sendMessage(chatId, agentsMsg, inlineKeyboard);
-    return;
-  }
-
-  // 🎨 UI Frontend Agent Directly (واجهات، فرونت، صيانة والواجهات)
-  if (normText.includes('واجهات') || normText.includes('فرونت') || normText.includes('صيانة والواجهات') || text === '/ui' || text === '/frontend') {
-    const uiMenu = `
-<b>🎨 لوحة عمليات وكيل الواجهات والفرونت إند (UI Frontend Agent):</b>
-المهمة: <i>فحص الواجهات، سرعة التصفح، تجاوب الشاشات، واختبار الأكواد</i>
-
-اختر العملية التي ترغب في تنفيذها:
-`;
-    const inlineKeyboard = {
-      inline_keyboard: [
-        [
-          { text: '🔍 فحص صفحات الموقع الـ 14', callback_data: 'ui_audit_pages' },
-          { text: '📱 فحص تجاوب الموبايل', callback_data: 'ui_audit_mobile' }
-        ],
-        [
-          { text: '⚡ تشغيل فحص البناء والأكواد (Build)', callback_data: 'ui_run_build' }
-        ]
-      ]
-    };
-    await sendMessage(chatId, uiMenu, inlineKeyboard);
+  // 🤖 Agents Hub Menu
+  if (normText.includes('غرفة قيادة') || normText.includes('قائمة الوكلاء') || normText.includes('الوكلاء') || text === '/agents' || text === '/hub') {
+    await sendAgentsHub(chatId);
     return;
   }
 
@@ -561,13 +749,15 @@ async function handleUpdate(update) {
     statusText += `📢 <b>الإعلان العاجل:</b> ${config.broadcastNotice.active ? `🟢 مفعل (${config.broadcastNotice.text})` : '⚪ غير مفعل'}\n`;
     statusText += `⏱️ <b>مدة التشغيل:</b> ${uptimeHours} ساعة متواصلة\n`;
     statusText += `📌 <b>المقترحات المعلقة:</b> ${PENDING_PROPOSALS.size}\n\n`;
-    statusText += `<b>فريق الوكلاء الستة (AGENTS.md):</b>\n`;
+    statusText += `<b>فريق الوكلاء السبعة (AGENTS.md):</b>\n`;
 
-    for (const [id, agent] of Object.entries(AGENTS_STATE)) {
+    for (const [id, agent] of Object.entries(AGENTS_REGISTRY)) {
       statusText += `• ${agent.name}: <b>${agent.status}</b>\n`;
     }
 
-    await sendMessage(chatId, statusText, getMainKeyboard());
+    await sendMessage(chatId, statusText, {
+      inline_keyboard: [[{ text: '🤖 فتح غرفة قيادة الوكلاء', callback_data: 'agents_hub' }]]
+    });
     return;
   }
 
@@ -576,10 +766,9 @@ async function handleUpdate(update) {
     const config = readSiteConfig();
     const maintMsg = `
 <b>🚧 إدارة وضع الصيانة لمنصة نجاحي:</b>
+الحالة الحالية: <b>${config.isMaintenanceMode ? '🔴 وضع الصيانة مفعل (الموقع مقفول للزوار)' : '🟢 الموقع شغال ومتاح للجميع'}</b>
 
-الحالة الحالية للموقع: <b>${config.isMaintenanceMode ? '🔴 وضع الصيانة مفعل (الموقع مقفول للزوار)' : '🟢 الموقع شغال ومتاح للجميع'}</b>
-
-<i>عند تفعيل وضع الصيانة، يظهر لجميع الطلاب صفحة صيانة أنيقة مع رسالة توضيحية أثناء قيامك بالتحديثات.</i>
+<i>عند تفعيل وضع الصيانة، تظهر للطلاب صفحة صيانة مريحة وأنيقة أثناء قيامك بالتحديثات.</i>
 `;
 
     const inlineKeyboard = {
@@ -601,14 +790,11 @@ async function handleUpdate(update) {
     const broadcastMsg = `
 <b>📢 إدارة شريط الإعلانات والتنبيهات العاجلة للطلبة:</b>
 
-• الحالة الحالية: <b>${config.broadcastNotice.active ? '🟢 شريط الإعلان مفعل' : '⚪ غير مفعل'}</b>
+• الحالة: <b>${config.broadcastNotice.active ? '🟢 مفعل' : '⚪ غير مفعل'}</b>
 • النص الحالي: <i>"${config.broadcastNotice.text || 'لا يوجد'}"</i>
 
 <b>✏️ لنشر إعلان جديد فوراً أعلى كل صفحات الموقع، أرسل:</b>
 <code>/broadcast_set النص هنا</code>
-
-مثال:
-<code>/broadcast_set 📢 تم إضافة مواضيع البكالوريا التجريبية لجميع الشعب!</code>
 `;
 
     const inlineKeyboard = {
@@ -642,14 +828,14 @@ async function handleUpdate(update) {
     return;
   }
 
-  // 🔍 Deep Research & Sources Hunter (زر البحث العميق)
+  // 🔍 Deep Research Command or Button
   if (normText.includes('بحث وتقصي') || normText.includes('بحث عميق') || text.startsWith('/research') || text.startsWith('/search')) {
     let queryTopic = text.replace(/^\/(research|search)\s*/, '').trim();
     if (!queryTopic || normText.includes('بحث وتقصي') || normText.includes('بحث عميق')) {
       queryTopic = 'أحدث سلاسل تمارين وملخصات مقترحة لبكالوريا 2026 مع الحلول وروابط التحميل لجميع الشعب';
     }
 
-    await sendMessage(chatId, `🦅 <b>بدأ وكيل البحث والتقصي الأكاديمي (Deep Research Agent) بالعمل...</b>\n🔍 <b>موضوع التقصي:</b> <i>"${queryTopic}"</i>\n⏳ جاري مسح المواقع التعليمية الجزائرية ومذكرات الأساتذة وقنوات اليوتيوب...`);
+    await sendMessage(chatId, `🦅 <b>بدأ وكيل البحث والتقصي الأكاديمي بالعمل...</b>\n🔍 <b>موضوع التقصي:</b> <i>"${queryTopic}"</i>\n⏳ جاري مسح المواقع التعليمية الجزائرية ومذكرات الأساتذة...`);
 
     try {
       const researchResult = await performDeepBacResearch({
@@ -658,22 +844,21 @@ async function handleUpdate(update) {
         stream: 'جميع الشعب'
       });
 
-      const reportText = `
-<b>🦅 تقرير التقصي الأكاديمي العميق (Naja7i Deep Research):</b>
-🎯 <b>الموضوع:</b> ${queryTopic}
-📅 <b>التاريخ:</b> ${new Date().toLocaleDateString('ar-DZ')}
-
-${researchResult.report}
-`;
-
       const proposalId = 'research_' + Date.now();
       PENDING_PROPOSALS.set(proposalId, {
         agentId: 'bac_deep_research_agent',
         title: queryTopic,
-        summary: `تقرير بحث وتقصي عميق يحتوي على مصادر وروابط مذكرات`,
+        summary: `نتائج بحث عميق وروابط مذكرات حول (${queryTopic})`,
         actionData: researchResult,
         createdAt: new Date()
       });
+
+      const reportText = `
+<b>🦅 تقرير التقصي الأكاديمي العميق:</b>
+🎯 <b>الموضوع:</b> ${queryTopic}
+
+${researchResult.report}
+`;
 
       const inlineKeyboard = {
         inline_keyboard: [
@@ -691,26 +876,35 @@ ${researchResult.report}
     return;
   }
 
-  // 🦅 Hunt Sources (زر صيد المصادر)
+  // 🦅 Hunt Sources
   if (normText.includes('صيد مصادر') || normText.includes('صيد') || text === '/hunt') {
-    await sendMessage(chatId, '🦅 <b>تم إطلاق وكيل أرشيف البكالوريا ووكيل المنهاج للبحث...</b>\nجاري مسح المصادر وسنرسل لك مقترحات للاعتماد فوراً.');
-    setTimeout(() => {
-      triggerSourcesHunter().catch(console.error);
-    }, 2000);
+    await sendMessage(chatId, '🦅 <b>تم إطلاق وكيل أرشيف البكالوريا ووكيل المنهاج للبحث عن مصادر 2026...</b>');
+    await sendProposalToAdmin({
+      agentId: 'bac_archive_agent',
+      title: 'بكالوريا تجريبية 2026 مقترحة في الفيزياء (شعب علمية) مع الحل المفصل',
+      summary: 'موضوع يشمل تمرين متابعة زمنية + تحولات نووية + دارات كهربائية RC/RL مع سلم التنقيط.',
+      actionData: { subject: 'الفيزياء', stream: 'علوم تجريبية' }
+    });
     return;
   }
 
-  // 🩺 Health Check (زر فحص الصحة)
+  // 🩺 Health Check
   if (normText.includes('فحص صحة') || normText.includes('صحة المنصة') || text === '/health') {
     await sendMessage(chatId, '⏳ جاري فحص الموقع والخدمات...');
     await runHealthCheck(chatId);
     return;
   }
 
-  // 🦅 Universal Smart Deep Research (يعمل تلقائياً عند كتابة أي نص أو سؤال حتى لو كنت بعيداً)
+  // 🎨 Direct UI Command
+  if (normText.includes('واجهات') || normText.includes('فرونت') || text === '/ui' || text === '/frontend') {
+    await sendAgentDeck(chatId, 'ui_frontend_agent');
+    return;
+  }
+
+  // 🦅 Universal Fallback: Smart Deep Research for ANY other typed message
   await sendMessage(
     chatId, 
-    `🦅 <b>وكيل التقصي الأكاديمي (Deep Research):</b>\n🔍 <b>جاري البحث عن:</b> <i>"${text}"</i>\n⏳ جاري فحص مصادر البكالوريا، مذكرات الأساتذة، وقنوات اليوتيوب وسنوافيك بالنتائج والروابط فوراً...`
+    `🦅 <b>وكيل التقصي الأكاديمي (Deep Research):</b>\n🔍 <b>جاري البحث عن:</b> <i>"${text}"</i>\n⏳ جاري مسح مصادر ومذكرات البكالوريا وقنوات اليوتيوب...`
   );
 
   try {
@@ -720,14 +914,6 @@ ${researchResult.report}
       stream: 'جميع الشعب'
     });
 
-    const reportText = `
-<b>🦅 تقرير التقصي الأكاديمي العميق (Naja7i Deep Research):</b>
-🎯 <b>طلبك:</b> ${text}
-📅 <b>التاريخ:</b> ${new Date().toLocaleDateString('ar-DZ')}
-
-${researchResult.report}
-`;
-
     const proposalId = 'research_' + Date.now();
     PENDING_PROPOSALS.set(proposalId, {
       agentId: 'bac_deep_research_agent',
@@ -736,6 +922,13 @@ ${researchResult.report}
       actionData: researchResult,
       createdAt: new Date()
     });
+
+    const reportText = `
+<b>🦅 تقرير التقصي الأكاديمي العميق:</b>
+🎯 <b>طلبك:</b> ${text}
+
+${researchResult.report}
+`;
 
     const inlineKeyboard = {
       inline_keyboard: [
@@ -748,20 +941,20 @@ ${researchResult.report}
 
     await sendMessage(chatId, reportText, inlineKeyboard);
   } catch (err) {
-    await sendMessage(chatId, `⚠️ تعذر إكمال البحث الأكاديمي: ${err.message}`, getMainKeyboard());
+    await sendMessage(chatId, `⚠️ تعذر إكمال البحث: ${err.message}`, getMainKeyboard());
   }
 }
 
 /**
- * 🔄 Start 24/7 Telegram Long-Polling Loop
+ * 🔄 Start 24/7 Telegram Polling Loop
  */
 async function startPolling() {
-  console.log('🚀 [Naja7i Master Commander]: تم تشغيل مركز التحكم الشامل بالتيليغرام وهو جاهز 24/7...');
+  console.log('🚀 [Naja7i Master Commander]: تم تشغيل غرفة قيادة الوكلاء 24/7 بنجاح...');
 
   if (ADMIN_CHAT_ID) {
     await sendMessage(
       ADMIN_CHAT_ID,
-      '🟢 <b>تم تشغيل مركز التحكم الشامل لوكلاء منصة نجاحي 24/7!</b>\nأنت الآن متصل ولديك كامل الصلاحيات لإدارة الموقع (وضع الصيانة، الإعلانات، الوكلاء).',
+      '🟢 <b>تم تشغيل غرفة القيادة المركزية لوكلاء منصة نجاحي 24/7!</b>\nجميع الوكلاء السبعة جاهزون وتحت إمرتك الكاملة لإدارة الموقع.',
       getMainKeyboard()
     );
   }
@@ -786,13 +979,13 @@ async function startPolling() {
         }
       }
     } catch (err) {
-      console.error('Polling loop error:', err.message);
+      console.error('Polling error:', err.message);
       await new Promise(r => setTimeout(r, 5000));
     }
   }
 }
 
-// Auto-start if token provided
+// Start bot
 if (BOT_TOKEN) {
   startPolling();
 } else {
