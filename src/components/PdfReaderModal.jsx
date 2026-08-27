@@ -266,6 +266,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                   disabled={pageNum <= 1}
                   className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 disabled:opacity-40 disabled:hover:bg-transparent cursor-pointer transition-colors"
                   title="الصفحة السابقة"
+                  aria-label="الصفحة السابقة"
                 >
                   <HiChevronRight className="w-4 h-4" />
                 </button>
@@ -281,6 +282,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                   disabled={pageNum >= numPages}
                   className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 disabled:opacity-40 disabled:hover:bg-transparent cursor-pointer transition-colors"
                   title="الصفحة التالية"
+                  aria-label="الصفحة التالية"
                 >
                   <HiChevronLeft className="w-4 h-4" />
                 </button>
@@ -291,6 +293,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                   onClick={zoomOut}
                   className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 cursor-pointer transition-colors"
                   title="تصغير"
+                  aria-label="تصغير الصفحة"
                 >
                   <HiMinus className="w-3.5 h-3.5" />
                 </button>
@@ -303,6 +306,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                   onClick={zoomIn}
                   className="p-1 rounded-lg hover:bg-slate-700 text-slate-200 cursor-pointer transition-colors"
                   title="تكبير"
+                  aria-label="تكبير الصفحة"
                 >
                   <HiPlus className="w-3.5 h-3.5" />
                 </button>
@@ -317,6 +321,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                 onClick={handleDownload}
                 className="px-3 py-1.5 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
                 title="تحميل الملف أو فتحه في Drive"
+                aria-label={isGoogleDrive ? 'فتح في Drive' : 'تحميل PDF'}
               >
                 <HiDownload className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">{isGoogleDrive ? 'فتح في Drive' : 'تحميل PDF'}</span>
@@ -329,6 +334,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                 rel="noopener noreferrer"
                 className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1"
                 title="فتح في لسان مستقل"
+                aria-label="فتح في لسان مستقل"
               >
                 <HiExternalLink className="w-4 h-4 text-slate-400" />
                 <span className="hidden md:inline">نافذة جديدة</span>
@@ -339,6 +345,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                 onClick={() => setIsFullscreen(!isFullscreen)}
                 className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors cursor-pointer shadow-2xs"
                 title={isFullscreen ? 'تصغير النافذة' : 'ملء الشاشة'}
+                aria-label={isFullscreen ? 'تصغير النافذة' : 'ملء الشاشة'}
               >
                 <HiArrowsExpand className="w-4 h-4" />
               </button>
@@ -348,6 +355,7 @@ export default function PdfReaderModal({ file, isOpen, onClose }) {
                 onClick={onClose}
                 className="p-2 rounded-xl bg-slate-800 hover:bg-rose-600 text-slate-300 hover:text-white border border-slate-700 hover:border-rose-600 transition-colors cursor-pointer shadow-2xs"
                 title="إغلاق المستعرض"
+                aria-label="إغلاق المستعرض"
               >
                 <HiX className="w-4 h-4" />
               </button>

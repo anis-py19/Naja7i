@@ -115,6 +115,7 @@ export default function SearchModal({ isOpen, onClose, onOpenSubject, onOpenPdf 
           />
           <button
             onClick={onClose}
+            aria-label="إغلاق البحث"
             className="p-1.5 rounded-lg bg-white border border-[#CBD5E1] text-[#64748B] hover:text-[#0F172A] cursor-pointer shadow-2xs"
           >
             <HiX className="w-4 h-4" />
