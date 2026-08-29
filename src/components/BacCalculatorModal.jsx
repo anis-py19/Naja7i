@@ -50,27 +50,27 @@ export default function BacCalculatorModal({ isOpen, onClose }) {
 
   if (average >= 18) {
     mention = 'ممتاز (Très Bien)';
-    mentionColor = 'text-white bg-[#E11D48]';
+    mentionColor = 'text-rose-800 bg-rose-50 border border-rose-200/60';
     suggestions = ['الطب البشري (Médecine)', 'المدرسة العليا للذكاء الاصطناعي (ENSIA)', 'المدرسة الوطنية العليا للإعلام الآلي (ESI Alger)', 'الصيدلة وطب الأسنان', 'المدارس العليا للأساتذة (ENS)'];
   } else if (average >= 16) {
     mention = 'جيد جداً (Très Bien)';
-    mentionColor = 'text-white bg-[#0F172A]';
+    mentionColor = 'text-slate-800 bg-slate-100 border border-slate-200/60';
     suggestions = ['الصيدلة وطب الأسنان', 'المدرسة الوطنية المتعددة التقنيات (ENP Polytech)', 'إعلام آلي ورياضيات', 'علوم المادة وهندسة'];
   } else if (average >= 14) {
     mention = 'جيد (Bien)';
-    mentionColor = 'text-[#0F172A] bg-[#F1F5F9] border border-[#E2E8F0]';
+    mentionColor = 'text-slate-800 bg-slate-100 border border-slate-200/60';
     suggestions = ['علوم وتقنيات (ST)', 'علوم الطبيعة والحياة (SNV)', 'رياضيات وإعلام آلي (MI)', 'تسيير واقتصاد ومالية'];
   } else if (average >= 12) {
     mention = 'قريب من الجيد (Assez Bien)';
-    mentionColor = 'text-[#0F172A] bg-[#F1F5F9] border border-[#E2E8F0]';
+    mentionColor = 'text-slate-700 bg-slate-100 border border-slate-200/60';
     suggestions = ['علوم المادة (SM)', 'حقوق وعلوم سياسية', 'لغات أجنبية وآداب', 'علوم تجارية وتسيير'];
   } else if (average >= 10) {
     mention = 'مقبول (Passable)';
-    mentionColor = 'text-[#475569] bg-[#F1F5F9] border border-[#E2E8F0]';
+    mentionColor = 'text-slate-600 bg-slate-100 border border-slate-200/60';
     suggestions = ['مختلف التخصصات الجامعية الوطنية في نظام LMD'];
   } else {
     mention = 'تحت المعدل — واصل المراجعة وستصل لمبتغاك!';
-    mentionColor = 'text-rose-700 bg-rose-50 border border-rose-200';
+    mentionColor = 'text-rose-700 bg-rose-50 border border-rose-200/60';
     suggestions = ['كثف حل البكالوريات السابقة في المواد ذات المعاملات الكبرى'];
   }
 

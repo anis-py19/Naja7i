@@ -49,27 +49,27 @@ export default function CalculatorPage() {
 
   if (average >= 18) {
     mention = 'ممتاز (Très Bien)';
-    mentionBadge = 'bg-[#E11D48] text-white';
+    mentionBadge = 'bg-rose-50 text-rose-800 border border-rose-200/60';
     suggestions = ['الطب البشري (Médecine)', 'المدرسة العليا للذكاء الاصطناعي (ENSIA)', 'المدرسة الوطنية العليا للإعلام الآلي (ESI Alger)', 'الصيدلة وطب الأسنان', 'المدارس العليا للأساتذة (ENS)'];
   } else if (average >= 16) {
     mention = 'جيد جداً (Très Bien)';
-    mentionBadge = 'bg-[#0F172A] text-white';
+    mentionBadge = 'bg-slate-100 text-slate-800 border border-slate-200/60';
     suggestions = ['الصيدلة وطب الأسنان', 'المدرسة الوطنية المتعددة التقنيات (ENP Polytech)', 'إعلام آلي ورياضيات', 'علوم المادة وهندسة معمارية'];
   } else if (average >= 14) {
     mention = 'جيد (Bien)';
-    mentionBadge = 'bg-[#F1F5F9] text-[#0F172A] border border-[#E2E8F0]';
+    mentionBadge = 'bg-slate-100 text-slate-800 border border-slate-200/60';
     suggestions = ['علوم وتقنيات (ST)', 'علوم المادة (SM)', 'علوم الطبيعة والحياة (SNV)', 'شبه طبي (Paramédical)', 'حقوق وعلوم سياسية'];
   } else if (average >= 12) {
     mention = 'قريب من الجيد (Assez Bien)';
-    mentionBadge = 'bg-[#F1F5F9] text-[#0F172A] border border-[#E2E8F0]';
+    mentionBadge = 'bg-slate-100 text-slate-700 border border-slate-200/60';
     suggestions = ['علوم اقتصادية وتسيير', 'لغات أجنبية وآداب', 'علوم إنسانية واجتماعية', 'علوم وتقنيات'];
   } else if (average >= 10) {
     mention = 'مقبول (Passable)';
-    mentionBadge = 'bg-[#F1F5F9] text-[#475569] border border-[#E2E8F0]';
+    mentionBadge = 'bg-slate-100 text-slate-600 border border-slate-200/60';
     suggestions = ['تخصصات العلوم الإنسانية والاجتماعية', 'العلوم الاقتصادية والتجارية', 'الحقوق والعلوم القانونية'];
   } else {
     mention = 'أقل من المعدل';
-    mentionBadge = 'bg-rose-50 text-rose-700 border border-rose-200';
+    mentionBadge = 'bg-rose-50 text-rose-700 border border-rose-200/60';
     suggestions = ['ركز على رفع درجات المواد الأساسية والمواد ذات المعاملات المرتفعة لتحقيق النجاح.'];
   }
 
