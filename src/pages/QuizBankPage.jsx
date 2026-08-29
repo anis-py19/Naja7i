@@ -34,7 +34,7 @@ export default function QuizBankPage() {
 
   // Available subjects for selected stream
   const availableQuestionsForStream = useMemo(() => {
-    return QUIZ_QUESTIONS.filter(q => (q.streamIds || []).includes(selectedStreamId));
+    return QUIZ_QUESTIONS.filter(q => q.streamIds.includes(selectedStreamId));
   }, [selectedStreamId]);
 
   const availableSubjects = useMemo(() => {

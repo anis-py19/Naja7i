@@ -52,17 +52,17 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
     }
   };
 
-  const completedCountInSubject = (subjectData?.units || []).filter(u => u?.id && completedItems[u.id]).length;
+  const completedCountInSubject = subjectData.units.filter(u => completedItems[u.id]).length;
 
-  const filteredUnits = (subjectData?.units || []).filter(u =>
-    (u?.title || '').toLowerCase().includes(unitSearch.trim().toLowerCase()) ||
-    (u?.summary || '').toLowerCase().includes(unitSearch.trim().toLowerCase())
+  const filteredUnits = subjectData.units.filter(u =>
+    u.title.toLowerCase().includes(unitSearch.trim().toLowerCase()) ||
+    u.summary.toLowerCase().includes(unitSearch.trim().toLowerCase())
   );
 
-  const filteredFiles = (userSubjectFiles || []).filter(f =>
-    (f?.title || '').toLowerCase().includes(unitSearch.trim().toLowerCase()) ||
-    (f?.author || '').toLowerCase().includes(unitSearch.trim().toLowerCase()) ||
-    (f?.category || '').toLowerCase().includes(unitSearch.trim().toLowerCase())
+  const filteredFiles = userSubjectFiles.filter(f =>
+    f.title.toLowerCase().includes(unitSearch.trim().toLowerCase()) ||
+    f.author.toLowerCase().includes(unitSearch.trim().toLowerCase()) ||
+    f.category.toLowerCase().includes(unitSearch.trim().toLowerCase())
   );
 
   return (

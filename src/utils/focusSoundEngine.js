@@ -44,6 +44,27 @@ class FocusSoundEngine {
     this.currentSound = null;
   }
 
+  stop() {
+    this.stopCurrent();
+  }
+
+  playSound(soundId, volume) {
+    if (volume !== undefined) {
+      this.setVolume(volume);
+    }
+    if (soundId === 'rain') {
+      this.playRain();
+    } else if (soundId === 'brown') {
+      this.playBrownNoise();
+    } else if (soundId === 'fire') {
+      this.playFireplace();
+    } else if (soundId === 'waves') {
+      this.playOceanWaves();
+    } else {
+      this.stop();
+    }
+  }
+
   // 1. 🌧️ Rain Sound Synthesizer
   playRain() {
     this.init();
