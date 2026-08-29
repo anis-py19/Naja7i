@@ -7,6 +7,7 @@ import BacCalculatorModal from './components/BacCalculatorModal';
 import SearchModal from './components/SearchModal';
 import ContactContributionModal from './components/ContactContributionModal';
 import FloatingQuickActions from './components/FloatingQuickActions';
+import PwaInstallPrompt from './components/PwaInstallPrompt';
 
 // Page Views
 import HomePage from './pages/HomePage';
@@ -335,6 +336,9 @@ function App() {
           onOpenSearch={() => setIsSearchOpen(true)}
         />
       )}
+
+      {/* PWA Install Prompt & Live Offline/Online Status */}
+      <PwaInstallPrompt />
 
       {/* Global Academic Footer */}
       {!isFocusRoom && (

@@ -1,0 +1,58 @@
+{
+  "name": "نجاحي — فضاء البكالوريا الجزائرية (Naja7i)",
+  "short_name": "نجاحي Naja7i",
+  "description": "المنصة الشاملة للتحضير لشهادة البكالوريا في الجزائر لجميع الشعب الست — ملخصات، أرشيف 2008-2025، غرفة تركيز، وحاسبة المعدل.",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#0F172A",
+  "orientation": "any",
+  "dir": "rtl",
+  "lang": "ar-DZ",
+  "categories": ["education", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "غرفة التركيز وبومودورو",
+      "short_name": "غرفة التركيز 🎧",
+      "description": "أجواء دراسة هادئة مع مؤقت بومودورو وأصوات طبيعية",
+      "url": "/focus-room",
+      "icons": [{ "src": "/logo.jpg", "sizes": "192x192" }]
+    },
+    {
+      "name": "كراس الأخطاء الذكي",
+      "short_name": "كراس الأخطاء 📓",
+      "description": "تدوين ومراجعة الفخاخ المنهجية والقواعد الذهبية",
+      "url": "/mistakes-notebook",
+      "icons": [{ "src": "/logo.jpg", "sizes": "192x192" }]
+    },
+    {
+      "name": "مكتبة الملخصات والسلاسل",
+      "short_name": "المكتبة 📚",
+      "description": "ملخصات وسلاسل تمارين محلولة لجميع الشعب",
+      "url": "/library",
+      "icons": [{ "src": "/logo.jpg", "sizes": "192x192" }]
+    },
+    {
+      "name": "حاسبة معدل البكالوريا",
+      "short_name": "الحاسبة 🧮",
+      "description": "حساب المعدل الفوري بالمعاملات والتوجيه الجامعي",
+      "url": "/calculator",
+      "icons": [{ "src": "/logo.jpg", "sizes": "192x192" }]
+    }
+  ]
+}
