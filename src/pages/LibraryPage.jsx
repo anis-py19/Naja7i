@@ -53,10 +53,10 @@ export default function LibraryPage({ onOpenPdf }) {
       if (searchQuery.trim().length > 0) {
         const q = searchQuery.trim().toLowerCase();
         const match = 
-          file.title.toLowerCase().includes(q) ||
-          file.subjectName.toLowerCase().includes(q) ||
-          file.author.toLowerCase().includes(q) ||
-          file.category.toLowerCase().includes(q);
+          (file.title || '').toLowerCase().includes(q) ||
+          (file.subjectName || '').toLowerCase().includes(q) ||
+          (file.author || '').toLowerCase().includes(q) ||
+          (file.category || '').toLowerCase().includes(q);
         if (!match) return false;
       }
       return true;
