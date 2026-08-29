@@ -46,7 +46,7 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
   };
 
   const isActive = (path) => location.pathname === path;
-  const isToolsActive = ['/calculator', '/study-planner', '/countdown', '/focus-room', '/focus'].includes(location.pathname);
+  const isToolsActive = ['/calculator', '/study-planner', '/countdown', '/focus-room', '/focus', '/mistakes-notebook', '/carnet-erreurs'].includes(location.pathname);
 
   return (
     <header className="sticky top-0 left-0 right-0 z-50 bg-[#0F172A] border-b border-slate-800 text-white font-['Cairo'] transition-all shadow-md">
@@ -233,6 +233,24 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
                       </span>
                       <span className="text-[10px] text-[#64748B]">
                         أجواء دراسة هادئة وأصوات طبيعية
+                      </span>
+                    </div>
+                  </Link>
+
+                  <Link
+                    to="/mistakes-notebook"
+                    onClick={() => setToolsDropdown(false)}
+                    className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
+                  >
+                    <div className="w-7 h-7 rounded-lg bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 font-bold">
+                      📓
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
+                        كراس الأخطاء والفخاخ الذكي
+                      </span>
+                      <span className="text-[10px] text-[#64748B]">
+                        تدوين الفخاخ والقواعد الذهبية
                       </span>
                     </div>
                   </Link>
@@ -469,6 +487,14 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
             >
               <span>غرفة التركيز (بومودورو) 🎧</span>
               <span className="text-[10px] px-1.5 py-0.2 rounded bg-indigo-900 text-indigo-200 font-medium">جديد</span>
+            </Link>
+            <Link
+              to="/mistakes-notebook"
+              onClick={() => setIsOpen(false)}
+              className={`px-3 py-2 rounded-lg transition-colors font-bold flex items-center justify-between ${isActive('/mistakes-notebook') ? 'text-white bg-amber-600' : 'text-amber-300 hover:text-white hover:bg-slate-800'}`}
+            >
+              <span>كراس الأخطاء والفخاخ الذكي 📓</span>
+              <span className="text-[10px] px-1.5 py-0.2 rounded bg-amber-900 text-amber-200 font-medium">جديد</span>
             </Link>
             <Link
               to="/curriculum"

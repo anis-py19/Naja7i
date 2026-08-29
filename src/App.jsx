@@ -21,6 +21,7 @@ import CurriculumPage from './pages/CurriculumPage';
 import CalculatorPage from './pages/CalculatorPage';
 import CountdownPage from './pages/CountdownPage';
 import FocusRoomPage from './pages/FocusRoomPage';
+import MistakesNotebookPage from './pages/MistakesNotebookPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import MaintenancePage from './pages/MaintenancePage';
@@ -234,6 +235,26 @@ function App() {
             }
           />
 
+          {/* 8.6 كراس الأخطاء والفخاخ الذكي (Carnet d'Erreurs) */}
+          <Route
+            path="/mistakes-notebook"
+            element={
+              <MistakesNotebookPage />
+            }
+          />
+          <Route
+            path="/carnet-erreurs"
+            element={
+              <MistakesNotebookPage />
+            }
+          />
+          <Route
+            path="/mistakes"
+            element={
+              <MistakesNotebookPage />
+            }
+          />
+
           {/* 9. عن المنصة ومؤسسها */}
           <Route
             path="/about"
@@ -343,6 +364,8 @@ function App() {
               <Link to="/youtube-teachers" className="hover:text-[#E11D48] transition-colors">أساتذة اليوتيوب</Link>
               <span>•</span>
               <Link to="/focus-room" className="hover:text-[#E11D48] transition-colors font-bold text-indigo-600">غرفة التركيز (بومودورو) 🎧</Link>
+              <span>•</span>
+              <Link to="/mistakes-notebook" className="hover:text-[#E11D48] transition-colors font-bold text-amber-600">كراس الأخطاء الذكي 📓</Link>
               <span>•</span>
               <Link to="/curriculum" className="hover:text-[#E11D48] transition-colors font-bold text-[#E11D48]">المنهاج والبرنامج الوزاري 📚</Link>
               <span>•</span>

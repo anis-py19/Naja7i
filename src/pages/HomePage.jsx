@@ -82,6 +82,13 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       path: '/focus-room',
       icon: '🎧',
       badge: 'دراسة بدون تشتت'
+    },
+    {
+      title: 'كراس الأخطاء والفخاخ الذكي 📓',
+      desc: 'سجل كل فكرة تمرين أخطأت فيها مع كتابة القاعدة الذهبية، وراجع كراسك واطبعه ليلة البكالوريا.',
+      path: '/mistakes-notebook',
+      icon: '📓',
+      badge: 'سر المتفوقين'
     }
   ];
 
