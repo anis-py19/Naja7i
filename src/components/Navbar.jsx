@@ -46,7 +46,7 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
   };
 
   const isActive = (path) => location.pathname === path;
-  const isToolsActive = ['/calculator', '/study-planner', '/countdown'].includes(location.pathname);
+  const isToolsActive = ['/calculator', '/study-planner', '/countdown', '/focus-room', '/focus'].includes(location.pathname);
 
   return (
     <header className="sticky top-0 left-0 right-0 z-50 bg-[#0F172A] border-b border-slate-800 text-white font-['Cairo'] transition-all shadow-md">
@@ -186,6 +186,19 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
               أساتذة اليوتيوب
             </Link>
 
+            {/* 5.5 غرفة التركيز وبومودورو */}
+            <Link 
+              to="/focus-room" 
+              className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
+                isActive('/focus-room') || isActive('/focus')
+                  ? 'text-white bg-indigo-600 shadow-xs'
+                  : 'text-indigo-200 hover:text-white hover:bg-slate-800/80'
+              }`}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+              <span>غرفة التركيز 🎧</span>
+            </Link>
+
             {/* 6. أدوات ومخطط المراجعة (Dropdown) */}
             <div className="relative" ref={toolsDropdownRef}>
               <button
@@ -206,6 +219,24 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
 
               {toolsDropdown && (
                 <div className="absolute top-full right-0 mt-1.5 w-60 p-2 bg-white text-[#0F172A] rounded-xl border border-[#E2E8F0] shadow-2xl z-50 text-right space-y-1">
+                  <Link
+                    to="/focus-room"
+                    onClick={() => setToolsDropdown(false)}
+                    className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
+                  >
+                    <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 font-bold">
+                      🎧
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
+                        غرفة التركيز (بومودورو)
+                      </span>
+                      <span className="text-[10px] text-[#64748B]">
+                        أجواء دراسة هادئة وأصوات طبيعية
+                      </span>
+                    </div>
+                  </Link>
+
                   <Link
                     to="/ai-summarizer"
                     onClick={() => setToolsDropdown(false)}
@@ -430,6 +461,14 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
               className={`px-3 py-2 rounded-lg transition-colors ${isActive('/youtube-teachers') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
               قنوات وأساتذة اليوتيوب
+            </Link>
+            <Link
+              to="/focus-room"
+              onClick={() => setIsOpen(false)}
+              className={`px-3 py-2 rounded-lg transition-colors font-bold flex items-center justify-between ${isActive('/focus-room') ? 'text-white bg-indigo-600' : 'text-indigo-300 hover:text-white hover:bg-slate-800'}`}
+            >
+              <span>غرفة التركيز (بومودورو) 🎧</span>
+              <span className="text-[10px] px-1.5 py-0.2 rounded bg-indigo-900 text-indigo-200 font-medium">جديد</span>
             </Link>
             <Link
               to="/curriculum"

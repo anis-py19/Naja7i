@@ -75,6 +75,13 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       path: '/quiz',
       icon: '⏱️',
       badge: 'تصحيح وشرح فوري'
+    },
+    {
+      title: 'غرفة التركيز وبومودورو 🎧',
+      desc: 'أجواء دراسة هادئة مع مؤقت بومودورو ذكي، أصوات طبيعية عازلة للضوضاء، ونصائح بكالوريا متجددة.',
+      path: '/focus-room',
+      icon: '🎧',
+      badge: 'دراسة بدون تشتت'
     }
   ];
 

@@ -20,6 +20,7 @@ import AiSummarizerPage from './pages/AiSummarizerPage';
 import CurriculumPage from './pages/CurriculumPage';
 import CalculatorPage from './pages/CalculatorPage';
 import CountdownPage from './pages/CountdownPage';
+import FocusRoomPage from './pages/FocusRoomPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import MaintenancePage from './pages/MaintenancePage';
@@ -37,6 +38,7 @@ function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
 
   const location = useLocation();
+  const isFocusRoom = ['/focus-room', '/focus', '/pomodoro'].includes(location.pathname);
 
   // Admin Bypass for Maintenance Mode
   const [bypassMaintenance, setBypassMaintenance] = useState(() => {
@@ -96,12 +98,14 @@ function App() {
       )}
 
       {/* Top Navbar */}
-      <Navbar
-        onSelectStream={handleSelectStream}
-        onOpenCalculator={() => setIsCalculatorOpen(true)}
-        onOpenSearch={() => setIsSearchOpen(true)}
-        onOpenContact={() => setIsContactOpen(true)}
-      />
+      {!isFocusRoom && (
+        <Navbar
+          onSelectStream={handleSelectStream}
+          onOpenCalculator={() => setIsCalculatorOpen(true)}
+          onOpenSearch={() => setIsSearchOpen(true)}
+          onOpenContact={() => setIsContactOpen(true)}
+        />
+      )}
 
       {/* Main Routed Content */}
       <main className="flex-1">
@@ -210,6 +214,26 @@ function App() {
             }
           />
 
+          {/* 8.5 غرفة التركيز وبومودورو (Focus Room) */}
+          <Route
+            path="/focus-room"
+            element={
+              <FocusRoomPage />
+            }
+          />
+          <Route
+            path="/focus"
+            element={
+              <FocusRoomPage />
+            }
+          />
+          <Route
+            path="/pomodoro"
+            element={
+              <FocusRoomPage />
+            }
+          />
+
           {/* 9. عن المنصة ومؤسسها */}
           <Route
             path="/about"
@@ -284,61 +308,65 @@ function App() {
       />
 
       {/* Floating Action Buttons */}
-      <FloatingQuickActions
-        onOpenCalculator={() => setIsCalculatorOpen(true)}
-        onOpenSearch={() => setIsSearchOpen(true)}
-      />
+      {!isFocusRoom && (
+        <FloatingQuickActions
+          onOpenCalculator={() => setIsCalculatorOpen(true)}
+          onOpenSearch={() => setIsSearchOpen(true)}
+        />
+      )}
 
       {/* Global Academic Footer */}
-      <footer className="border-t border-[#E2E8F0] bg-white py-8 text-xs text-[#64748B] mt-12 print:hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <img
-              src="/logo.jpg"
-              alt="منصة نجاحي"
-              className="w-10 h-10 object-contain rounded-xl border border-[#E2E8F0] shadow-xs bg-white"
-            />
-            <div>
-              <span className="font-black text-sm text-[#0F172A] block">منصة نجاحي — Naja7i BAC 3AS</span>
-              <span className="text-[#64748B]">مبادرة الطالب أنيس ازري (Anis Izri) • صدقة جارية لدعم طلبة البكالوريا 🇩🇿</span>
+      {!isFocusRoom && (
+        <footer className="border-t border-[#E2E8F0] bg-white py-8 text-xs text-[#64748B] mt-12 print:hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <img
+                src="/logo.jpg"
+                alt="منصة نجاحي"
+                className="w-10 h-10 object-contain rounded-xl border border-[#E2E8F0] shadow-xs bg-white"
+              />
+              <div>
+                <span className="font-black text-sm text-[#0F172A] block">منصة نجاحي — Naja7i BAC 3AS</span>
+                <span className="text-[#64748B]">مبادرة الطالب أنيس ازري (Anis Izri) • صدقة جارية لدعم طلبة البكالوريا 🇩🇿</span>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-3.5 text-[#475569] font-medium">
+              <Link to="/" className="hover:text-[#E11D48] transition-colors">الرئيسية</Link>
+              <span>•</span>
+              <Link to="/streams" className="hover:text-[#E11D48] transition-colors">الشعب والمواد</Link>
+              <span>•</span>
+              <Link to="/library" className="hover:text-[#E11D48] transition-colors">مكتبة الملخصات</Link>
+              <span>•</span>
+              <Link to="/bac-archive" className="hover:text-[#E11D48] transition-colors">أرشيف البكالوريا</Link>
+              <span>•</span>
+              <Link to="/youtube-teachers" className="hover:text-[#E11D48] transition-colors">أساتذة اليوتيوب</Link>
+              <span>•</span>
+              <Link to="/focus-room" className="hover:text-[#E11D48] transition-colors font-bold text-indigo-600">غرفة التركيز (بومودورو) 🎧</Link>
+              <span>•</span>
+              <Link to="/curriculum" className="hover:text-[#E11D48] transition-colors font-bold text-[#E11D48]">المنهاج والبرنامج الوزاري 📚</Link>
+              <span>•</span>
+              <Link to="/ai-summarizer" className="hover:text-[#E11D48] transition-colors font-bold text-[#E11D48]">الملخص الذكي (AI) 🤖</Link>
+              <span>•</span>
+              <Link to="/quiz" className="hover:text-[#E11D48] transition-colors">بنك الأسئلة (Quiz)</Link>
+              <span>•</span>
+              <Link to="/study-planner" className="hover:text-[#E11D48] transition-colors">مخطط المراجعة</Link>
+              <span>•</span>
+              <Link to="/calculator" className="hover:text-[#E11D48] transition-colors">حاسبة المعدل</Link>
+              <span>•</span>
+              <Link to="/countdown" className="hover:text-[#E11D48] transition-colors">العداد</Link>
+              <span>•</span>
+              <Link to="/about" className="hover:text-[#E11D48] transition-colors">عن المنصة</Link>
+              <span>•</span>
+              <Link to="/contact" className="hover:text-[#E11D48] transition-colors text-[#E11D48] font-bold">تواصل ومساهمة 📥</Link>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3.5 text-[#475569] font-medium">
-            <Link to="/" className="hover:text-[#E11D48] transition-colors">الرئيسية</Link>
-            <span>•</span>
-            <Link to="/streams" className="hover:text-[#E11D48] transition-colors">الشعب والمواد</Link>
-            <span>•</span>
-            <Link to="/library" className="hover:text-[#E11D48] transition-colors">مكتبة الملخصات</Link>
-            <span>•</span>
-            <Link to="/bac-archive" className="hover:text-[#E11D48] transition-colors">أرشيف البكالوريا</Link>
-            <span>•</span>
-            <Link to="/youtube-teachers" className="hover:text-[#E11D48] transition-colors">أساتذة اليوتيوب</Link>
-            <span>•</span>
-            <Link to="/curriculum" className="hover:text-[#E11D48] transition-colors font-bold text-[#E11D48]">المنهاج والبرنامج الوزاري 📚</Link>
-            <span>•</span>
-            <Link to="/ai-summarizer" className="hover:text-[#E11D48] transition-colors font-bold text-[#E11D48]">الملخص الذكي (AI) 🤖</Link>
-            <span>•</span>
-            <Link to="/quiz" className="hover:text-[#E11D48] transition-colors">بنك الأسئلة (Quiz)</Link>
-            <span>•</span>
-            <Link to="/study-planner" className="hover:text-[#E11D48] transition-colors">مخطط المراجعة</Link>
-            <span>•</span>
-            <Link to="/calculator" className="hover:text-[#E11D48] transition-colors">حاسبة المعدل</Link>
-            <span>•</span>
-            <Link to="/countdown" className="hover:text-[#E11D48] transition-colors">العداد</Link>
-            <span>•</span>
-            <Link to="/about" className="hover:text-[#E11D48] transition-colors">عن المنصة</Link>
-            <span>•</span>
-            <Link to="/contact" className="hover:text-[#E11D48] transition-colors text-[#E11D48] font-bold">تواصل ومساهمة 📥</Link>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 pt-4 border-t border-[#F1F5F9] text-center text-[#94A3B8] text-[11px]">
+            جميع الحقوق محفوظة © {new Date().getFullYear()} لمنصة نجاحي التعليمية • نسألكم الدعاء بالتوفيق والبركة
           </div>
-
-          <div className="flex flex-col sm:flex-row items-center gap-4">
-            <div className="text-[#94A3B8] text-[11px] text-center sm:text-left">
-              جميع الحقوق محفوظة © {new Date().getFullYear()} لمنصة نجاحي التعليمية • نسألكم الدعاء بالتوفيق والبركة
-            </div>
-          </div>
-        </div>
-      </footer>
+        </footer>
+      )}
     </div>
   );
 }
