@@ -12,6 +12,9 @@ import { setupTeachersHandlers } from './handlers/teachers.js';
 import { setupTipsHandlers } from './handlers/tips.js';
 import { setupCurriculumHandlers } from './handlers/curriculum.js';
 import { setupSearchHandlers } from './handlers/search.js';
+import { setupTrapsHandlers } from './handlers/traps.js';
+import { setupOrientationHandlers } from './handlers/orientation.js';
+import { setupFocusHandlers } from './handlers/focus.js';
 
 console.log('🚀 تهيئة بوت تيليجرام نجاحي للبكالوريا (Naja7i BAC Bot)...');
 
@@ -51,6 +54,9 @@ export function createBot(customToken) {
   setupTipsHandlers(bot);
   setupCurriculumHandlers(bot);
   setupSearchHandlers(bot);
+  setupTrapsHandlers(bot);
+  setupOrientationHandlers(bot);
+  setupFocusHandlers(bot);
 
   return bot;
 }
@@ -65,11 +71,14 @@ export async function registerBotCommands(bot) {
       { command: 'streams', description: '📚 الشعب الست والمكتبة الدراسية' },
       { command: 'archive', description: '🏛️ أرشيف البكالوريا (2008-2026)' },
       { command: 'calc', description: '🧮 حاسبة معدل البكالوريا التفاعلية' },
+      { command: 'traps', description: '📓 كراس الأخطاء وفخاخ البكالوريا' },
+      { command: 'orientation', description: '🎓 التوجيه والمعدل الموزون' },
       { command: 'quiz', description: '🎯 بنك الأسئلة والكويزات QCM' },
       { command: 'poll', description: '📊 استطلاع كويز تفاعلي سريع' },
       { command: 'planner', description: '📅 مخطط المراجعة الأسبوعي' },
       { command: 'countdown', description: '⏳ العداد التنازلي للبكالوريا' },
       { command: 'teachers', description: '🎥 أفضل أساتذة وقنوات اليوتيوب' },
+      { command: 'focus', description: '⏱️ غرفة التركيز وبومودورو' },
       { command: 'tips', description: '💡 نصائح ومنهجيات التفوق' },
       { command: 'search', description: '🔍 بحث فوري في الملفات' },
       { command: 'help', description: '📖 دليل استخدام البوت والمساعدة' }
@@ -80,13 +89,15 @@ export async function registerBotCommands(bot) {
       'رفيقك نحو الامتياز في البكالوريا لجميع الشعب الست!\n\n' +
       '📚 +330 ملخص وسلاسل تمارين محلولة\n' +
       '🏛️ مواضيع وحلول البكالوريا (2008-2026)\n' +
-      '🧮 حاسبة معدل البكالوريا الدقيقة\n' +
+      '🧮 حاسبة معدل البكالوريا والمعدل الموزون\n' +
+      '📓 كراس الأخطاء وفخاخ البكالوريا الشائعة\n' +
+      '🎓 دليل التوجيه الجامعي والمدارس العليا\n' +
       '🎯 بنك كويزات تفاعلية وشروحات نموذجية\n' +
       '📅 مخططات مراجعة الأهداف وقنوات اليوتيوب'
     );
 
     await bot.api.setMyShortDescription('🎓 بوت البكالوريا الجزائري الشامل — نجاحي (Naja7i BAC DZ)');
-    console.log('✅ تم تسجيل قائمة الأوامر ووصف البوت الرسمي بنجاح في سيرفرات تيليجرام.');
+    console.log('✅ تم تسجيل قائمة الأوامر ووصف البوت المحدث بنجاح في سيرفرات تيليجرام.');
   } catch (err) {
     console.warn('⚠️ فشل في تسجيل الأوامر التلقائية:', err.message);
   }

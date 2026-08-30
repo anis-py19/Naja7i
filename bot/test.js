@@ -4,9 +4,11 @@ import { USER_STUDY_FILES, getFilesByStreamAndSubject, searchStudyFiles } from '
 import { getArchiveForStreamAndYear } from './data/archive.js';
 import { QUIZ_QUESTIONS, getRandomQuestion } from './data/quizzes.js';
 import { YOUTUBE_TEACHERS } from './data/teachers.js';
+import { COMMON_BAC_TRAPS } from './data/traps.js';
+import { UNIVERSITY_MAJORS, calculateWeightedAverage } from './data/orientation.js';
 import { calculateBacAverage, getBacCountdown } from './utils/helpers.js';
 
-console.log('🧪 --- Testing Naja7i BAC Bot Modules ---');
+console.log('🧪 --- Testing Naja7i BAC Bot (Upgraded Modules) ---');
 const bot = createBot('123456:ABC-TEST_TOKEN_GRAMMY');
 console.log('✅ Bot instance created successfully:', !!bot);
 console.log('✅ Total Streams:', STREAMS.length);
@@ -18,8 +20,12 @@ console.log('✅ Quiz Questions in Bank:', QUIZ_QUESTIONS.length);
 const sampleQ = getRandomQuestion();
 console.log('✅ Sample Quiz Question:', sampleQ?.question?.slice(0, 50) + '...');
 console.log('✅ YouTube Teachers:', YOUTUBE_TEACHERS.length);
+console.log('✅ Common BAC Traps (Mistakes Notebook):', COMMON_BAC_TRAPS.length, 'traps');
+console.log('✅ University Majors & Orientations:', UNIVERSITY_MAJORS.length, 'majors');
+const testWCalc = calculateWeightedAverage(16.50, 18.00, null, 'medicine');
+console.log('✅ Medicine Weighted Average Test (BAC 16.5, Science 18.0):', testWCalc, '/ 20');
 const countdown = getBacCountdown();
-console.log('✅ Countdown Days Remaining until BAC 2026:', countdown.days, 'days');
+console.log('✅ Countdown Days Remaining until BAC:', countdown.days, 'days');
 const testCalc = calculateBacAverage(STREAMS[0], { sciences_nat: 16, physique: 15, math: 17, arabic: 14 });
 console.log('✅ Calculator Test (Sciences): Average =', testCalc.average, '| Grade =', testCalc.grade);
 console.log('🎉 --- ALL TESTS PASSED WITH 100% SUCCESS --- 🎉');
