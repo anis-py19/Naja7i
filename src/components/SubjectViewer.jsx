@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   HiX, 
   HiDocumentText, 
@@ -145,13 +146,24 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
             </p>
           </div>
 
-          <button
-            onClick={onClose}
-            className="p-1.5 rounded-lg text-[#64748B] hover:text-[#0F172A] hover:bg-[#E2E8F0] transition-colors cursor-pointer"
-            aria-label="إغلاق النافذة"
-          >
-            <HiX className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            <Link
+              to={`/subject/${subjectId}`}
+              onClick={onClose}
+              className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#F1F5F9] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] transition-colors flex items-center gap-1 shadow-2xs"
+              title="فتح كصفحة مخصصة كاملة"
+            >
+              <HiExternalLink className="w-3.5 h-3.5 text-[#E11D48]" />
+              <span className="hidden sm:inline">فتح كصفحة كاملة</span>
+            </Link>
+            <button
+              onClick={onClose}
+              className="p-1.5 rounded-lg text-[#64748B] hover:text-[#0F172A] hover:bg-[#E2E8F0] transition-colors cursor-pointer"
+              aria-label="إغلاق النافذة"
+            >
+              <HiX className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Tabs Bar & In-Modal Search */}

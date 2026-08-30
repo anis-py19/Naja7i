@@ -29,10 +29,10 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
     },
     {
       title: 'أرشيف مواضيع البكالوريا',
-      desc: 'مواضيع وحلول شهادة البكالوريا الرسمية من 2008 إلى 2025 مع سلم التنقيط.',
+      desc: 'مواضيع وحلول شهادة البكالوريا الرسمية من 2008 إلى 2026 مع سلم التنقيط والمجلد السحابي.',
       path: '/bac-archive',
       icon: '📄',
-      badge: '2008 — 2025'
+      badge: '2008 — 2026'
     },
     {
       title: 'دليل قنوات وأساتذة اليوتيوب',

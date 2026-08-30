@@ -17,6 +17,7 @@ import BacArchivePage from './pages/BacArchivePage';
 import YouTubeTeachersPage from './pages/YouTubeTeachersPage';
 import StudyPlannerPage from './pages/StudyPlannerPage';
 import QuizBankPage from './pages/QuizBankPage';
+import SubjectPage from './pages/SubjectPage';
 import AiSummarizerPage from './pages/AiSummarizerPage';
 import CurriculumPage from './pages/CurriculumPage';
 import CalculatorPage from './pages/CalculatorPage';
@@ -136,6 +137,24 @@ function App() {
                 selectedStreamId={selectedStreamId}
                 setSelectedStreamId={setSelectedStreamId}
                 onOpenSubject={handleOpenSubject}
+              />
+            }
+          />
+
+          {/* 2.5 صفحة ومستعرض المادة المستقل (Subject Dedicated Viewer) */}
+          <Route
+            path="/subject/:subjectId"
+            element={
+              <SubjectPage
+                onOpenPdf={(file) => setActivePdf(file)}
+              />
+            }
+          />
+          <Route
+            path="/subjects/:subjectId"
+            element={
+              <SubjectPage
+                onOpenPdf={(file) => setActivePdf(file)}
               />
             }
           />
