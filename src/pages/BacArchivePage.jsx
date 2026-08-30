@@ -14,10 +14,11 @@ import {
   HiOutlineDocumentDownload,
   HiOutlineBookOpen,
   HiCloudDownload,
-  HiFolder
+  HiFolder,
+  HiViewGrid
 } from 'react-icons/hi';
 import { BAC_FULL_ARCHIVE, BAC_DRIVE_ROOT, BAC_DRIVE_YEARS } from '../data/bacArchiveFullData';
-import PdfReaderModal from '../components/PdfReaderModal';
+import BacDualViewerModal from '../components/BacDualViewerModal';
 
 const STREAMS_LIST = [
   { id: 'all', name: 'جميع الشعب', icon: '🎓' },
@@ -43,9 +44,10 @@ export default function BacArchivePage() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
 
-  // PDF Preview State
-  const [pdfModalOpen, setPdfModalOpen] = useState(false);
-  const [selectedPdf, setSelectedPdf] = useState(null);
+  // Dual PDF Viewer State
+  const [dualViewerOpen, setDualViewerOpen] = useState(false);
+  const [dualViewerItem, setDualViewerItem] = useState(null);
+  const [dualViewerMode, setDualViewerMode] = useState('dual'); // 'dual', 'sujet', 'corrige'
 
   // Filtered Archive Data
   const filteredItems = useMemo(() => {
@@ -82,24 +84,11 @@ export default function BacArchivePage() {
 
   // Statistics counters
   const totalSubjectsCount = BAC_FULL_ARCHIVE.length;
-  const totalPdfsAvailable = useMemo(() => {
-    return BAC_FULL_ARCHIVE.reduce((acc, item) => {
-      let count = 0;
-      if (item.sujetUrl) count++;
-      if (item.corrigeUrl) count++;
-      return acc + count;
-    }, 0);
-  }, []);
 
-  const handleOpenPdf = (title, url, size) => {
-    if (!url) return;
-    setSelectedPdf({
-      title,
-      url,
-      rawFileName: title.replace(/[\s—()]+/g, '_') + '.pdf',
-      sizeReadable: size ? `${(size / (1024 * 1024)).toFixed(2)} MB` : ''
-    });
-    setPdfModalOpen(true);
+  const handleOpenDualViewer = (item, mode = 'dual') => {
+    setDualViewerItem(item);
+    setDualViewerMode(mode);
+    setDualViewerOpen(true);
   };
 
   const handleStreamChange = (strId) => {
@@ -154,14 +143,14 @@ export default function BacArchivePage() {
                   تغطية شاملة للشعب الست 🇩🇿
                 </span>
                 <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 font-medium text-xs border border-emerald-200/60">
-                  معاينة مباشرة + تحميل أوفلاين
+                  عارض مزدوج (الموضوع + التصحيح معاً)
                 </span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A]">
                 أرشيف مواضيع وحلول شهادة البكالوريا 📄
               </h1>
               <p className="text-xs sm:text-sm text-[#475569] mt-1 max-w-2xl leading-relaxed">
-                بنك شامل ومنظم لمواضيع البكالوريا الرسمية والتصحيحات النموذجية وسلالم التنقيط الوزارية المعتمدة مع التحميل المباشر، المعاينة الفورية، والمزامنة السحابية عبر Google Drive.
+                بنك شامل ومنظم لمواضيع البكالوريا الرسمية والتصحيحات النموذجية مع العارض المزدوج لمطالعة الموضوع والحل في نفس الوقت ومزامنة Google Drive السحابية.
               </p>
             </div>
 
@@ -364,8 +353,18 @@ export default function BacArchivePage() {
                 </div>
 
                 {/* Card Actions */}
-                <div className="mt-4 pt-3 border-t border-[#F1F5F9] space-y-2">
+                <div className="mt-4 pt-3 border-t border-[#F1F5F9] space-y-2.5">
                   
+                  {/* Dual View Hero Button */}
+                  <button
+                    onClick={() => handleOpenDualViewer(item, 'dual')}
+                    className="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-[#E11D48] text-white font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-2xs hover:shadow-xs cursor-pointer active:scale-[0.99]"
+                    title="فتح الموضوع والتصحيح معاً في عارض مزدوج مقسم الشاشة"
+                  >
+                    <HiViewGrid className="w-4 h-4 text-rose-400" />
+                    <span>عرض الموضوع + التصحيح معاً (Dual Screen) ⚖️</span>
+                  </button>
+
                   {/* Topic Row */}
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-1.5 text-xs font-bold text-[#0F172A]">
@@ -382,9 +381,9 @@ export default function BacArchivePage() {
                       {item.sujetUrl ? (
                         <>
                           <button
-                            onClick={() => handleOpenPdf(item.sujetTitle, item.sujetUrl, item.sujetSize)}
+                            onClick={() => handleOpenDualViewer(item, 'sujet')}
                             className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#0284C7] text-[#0F172A] hover:text-white text-[11px] font-bold border border-[#E2E8F0] transition-colors flex items-center gap-1 cursor-pointer"
-                            title="معاينة الموضوع داخل التطبيق"
+                            title="معاينة الموضوع فقط"
                           >
                             <HiEye className="w-3.5 h-3.5" />
                             <span>معاينة</span>
@@ -431,9 +430,9 @@ export default function BacArchivePage() {
                       {item.corrigeUrl ? (
                         <>
                           <button
-                            onClick={() => handleOpenPdf(item.corrigeTitle, item.corrigeUrl, item.corrigeSize)}
+                            onClick={() => handleOpenDualViewer(item, 'corrige')}
                             className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#16A34A] text-[#0F172A] hover:text-white text-[11px] font-bold border border-[#E2E8F0] transition-colors flex items-center gap-1 cursor-pointer"
-                            title="معاينة التصحيح النموذجي داخل التطبيق"
+                            title="معاينة التصحيح النموذجي فقط"
                           >
                             <HiEye className="w-3.5 h-3.5" />
                             <span>معاينة</span>
@@ -556,11 +555,12 @@ export default function BacArchivePage() {
 
       </div>
 
-      {/* In-App PDF Reader Modal */}
-      <PdfReaderModal
-        isOpen={pdfModalOpen}
-        onClose={() => setPdfModalOpen(false)}
-        file={selectedPdf}
+      {/* Dual BAC Split-Screen Viewer Modal */}
+      <BacDualViewerModal
+        isOpen={dualViewerOpen}
+        onClose={() => setDualViewerOpen(false)}
+        initialItem={dualViewerItem}
+        initialMode={dualViewerMode}
       />
 
     </div>
