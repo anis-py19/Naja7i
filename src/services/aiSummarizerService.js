@@ -12,7 +12,7 @@ export async function extractTextFromPdf(file) {
     const arrayBuffer = await file.arrayBuffer();
     const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
     const pdfDoc = await loadingTask.promise;
-    
+
     let fullText = '';
     const maxPages = Math.min(pdfDoc.numPages, 30); // Up to 30 pages
 
@@ -210,7 +210,7 @@ ${modeInstruction}
   for (const modelName of candidateModels) {
     try {
       const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${activeKey.trim()}`;
-      
+
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
@@ -257,13 +257,13 @@ ${modeInstruction}
  */
 export function generateLocalHeuristicSummary({ text, subjectName = 'المادة', streamName = 'جميع الشعب' }) {
   const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
-  
+
   // Extract definitions and equations heuristics
-  const definitions = lines.filter(l => 
+  const definitions = lines.filter(l =>
     l.includes('هو') || l.includes('هي') || l.includes('تعريف') || l.includes('يقصد ب') || l.includes('مفهوم')
   ).slice(0, 5);
 
-  const keyPoints = lines.filter(l => 
+  const keyPoints = lines.filter(l =>
     l.startsWith('-') || l.startsWith('•') || l.startsWith('*') || l.match(/^\d+[.\-)]/)
   ).slice(0, 10);
 

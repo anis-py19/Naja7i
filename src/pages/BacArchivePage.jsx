@@ -6,13 +6,13 @@ import {
   HiDownload, 
   HiEye, 
   HiSearch, 
+  HiFilter, 
   HiDocumentText, 
   HiCheckCircle, 
   HiSparkles,
   HiExternalLink,
-  HiOutlineBookOpen,
-  HiClock,
-  HiAcademicCap
+  HiOutlineDocumentDownload,
+  HiOutlineBookOpen
 } from 'react-icons/hi';
 import { BAC_FULL_ARCHIVE } from '../data/bacArchiveFullData';
 import PdfReaderModal from '../components/PdfReaderModal';
@@ -78,6 +78,17 @@ export default function BacArchivePage() {
     return filteredItems.slice(start, start + itemsPerPage);
   }, [filteredItems, currentPage]);
 
+  // Statistics counters
+  const totalSubjectsCount = BAC_FULL_ARCHIVE.length;
+  const totalPdfsAvailable = useMemo(() => {
+    return BAC_FULL_ARCHIVE.reduce((acc, item) => {
+      let count = 0;
+      if (item.sujetUrl) count++;
+      if (item.corrigeUrl) count++;
+      return acc + count;
+    }, 0);
+  }, []);
+
   const handleOpenPdf = (title, url, size) => {
     if (!url) return;
     setSelectedPdf({
@@ -107,8 +118,6 @@ export default function BacArchivePage() {
     return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   };
 
-  const is2026Selected = selectedYear.toString() === '2026';
-
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-16 font-['Cairo']" dir="rtl">
       
@@ -130,7 +139,7 @@ export default function BacArchivePage() {
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-2">
                 <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium text-xs font-mono border border-slate-200/60">
-                  2008 — 2025 (منجز) + 2026 (قادم ⏳)
+                  2008 — 2026
                 </span>
                 <span className="px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 font-medium text-xs border border-rose-200/60">
                   تغطية شاملة للشعب الست 🇩🇿
@@ -164,40 +173,6 @@ export default function BacArchivePage() {
       {/* Main Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 space-y-6">
         
-        {/* Upcoming 2026 Informational Banner (when 2026 selected) */}
-        {is2026Selected && (
-          <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200/80 rounded-2xl p-5 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-600 flex items-center justify-center text-xl shrink-0">
-                ⏳
-              </div>
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-xs font-bold text-amber-900 font-mono">
-                    دورة جوان 2026 (الدورة القادمة)
-                  </span>
-                  <span className="px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 text-[10px] font-medium border border-amber-300/50">
-                    ما زالت قادمة
-                  </span>
-                </div>
-                <p className="text-xs text-amber-800 leading-relaxed max-w-2xl">
-                  امتحانات بكالوريا 2026 ما زالت لم تُجرَ بعد. تم إدراج وتجهيز كامل هيكلة المواد والشعب، وستُضاف المواضيع الرسمية والتصحيحات النموذجية فور اجتياز الدورة إن شاء الله! يمكنك الآن التدرب والتحضير عبر مواضيع السنوات السابقة (2008—2025).
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 shrink-0">
-              <Link
-                to="/library"
-                className="px-3.5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition-colors shadow-2xs flex items-center gap-1.5"
-              >
-                <HiAcademicCap className="w-4 h-4" />
-                <span>ملخصات وتمارين التحضير</span>
-              </Link>
-            </div>
-          </div>
-        )}
-
         {/* Filters Panel */}
         <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 shadow-xs space-y-4">
           
@@ -239,29 +214,24 @@ export default function BacArchivePage() {
                 <span>2. اختر السنة (دورة الامتحان):</span>
               </span>
               <span className="text-[11px] text-[#64748B]">
-                {selectedYear === 'all' ? 'جميع الدورات' : (selectedYear.toString() === '2026' ? 'دورة 2026 (القادمة ⏳)' : `دورة جوان ${selectedYear}`)}
+                {selectedYear === 'all' ? 'جميع الدورات' : `دورة جوان ${selectedYear}`}
               </span>
             </div>
 
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
-              {ALL_YEARS.map((year) => {
-                const is2026 = year === 2026;
-                const isSelected = selectedYear.toString() === year.toString();
-                return (
-                  <button
-                    key={year}
-                    onClick={() => handleYearChange(year.toString())}
-                    className={`px-3 py-1 rounded-lg text-xs font-bold font-mono transition-all whitespace-nowrap cursor-pointer flex items-center gap-1 ${
-                      isSelected
-                        ? (is2026 ? 'bg-amber-600 text-white shadow-2xs' : 'bg-[#0F172A] text-white shadow-2xs')
-                        : (is2026 ? 'bg-amber-50 text-amber-800 border border-amber-200/80 hover:bg-amber-100' : 'bg-[#F8FAFC] text-[#475569] hover:bg-[#F1F5F9] border border-[#E2E8F0]')
-                    }`}
-                  >
-                    <span>{year === 'all' ? 'جميع السنوات' : year}</span>
-                    {is2026 && <span className="text-[10px]">⏳</span>}
-                  </button>
-                );
-              })}
+              {ALL_YEARS.map((year) => (
+                <button
+                  key={year}
+                  onClick={() => handleYearChange(year.toString())}
+                  className={`px-3 py-1 rounded-lg text-xs font-bold font-mono transition-all whitespace-nowrap cursor-pointer ${
+                    selectedYear.toString() === year.toString()
+                      ? 'bg-[#0F172A] text-white shadow-2xs'
+                      : 'bg-[#F8FAFC] text-[#475569] hover:bg-[#F1F5F9] border border-[#E2E8F0]'
+                  }`}
+                >
+                  {year === 'all' ? 'جميع السنوات' : year}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -329,12 +299,8 @@ export default function BacArchivePage() {
                   {/* Badges Bar */}
                   <div className="flex items-center justify-between gap-2 flex-wrap">
                     <div className="flex items-center gap-1.5">
-                      <span className={`px-2 py-0.5 rounded-md font-medium text-[11px] border font-mono ${
-                        item.isUpcoming
-                          ? 'bg-amber-50 text-amber-800 border-amber-200/80'
-                          : 'bg-slate-100 text-slate-700 border-slate-200/60'
-                      }`}>
-                        {item.year} {item.isUpcoming && '⏳'}
+                      <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium text-[11px] border border-slate-200/60 font-mono">
+                        {item.year}
                       </span>
                       <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium text-[11px] border border-slate-200/60 flex items-center gap-1">
                         <span>{item.streamIcon}</span>
@@ -362,120 +328,103 @@ export default function BacArchivePage() {
                 {/* Card Actions */}
                 <div className="mt-4 pt-3 border-t border-[#F1F5F9] space-y-2">
                   
-                  {item.isUpcoming ? (
-                    <div className="p-2.5 rounded-xl bg-amber-50/60 border border-amber-200/50 flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-1.5 text-xs text-amber-800 font-medium">
-                        <HiClock className="w-4 h-4 text-amber-600 shrink-0" />
-                        <span>ستُنشر فور إجراء الدورة إن شاء الله</span>
-                      </div>
-                      <Link
-                        to="/library"
-                        className="px-2.5 py-1 rounded-lg bg-white text-amber-900 hover:bg-amber-600 hover:text-white text-[11px] font-bold border border-amber-200 transition-colors shrink-0"
-                      >
-                        التحضير الآن
-                      </Link>
+                  {/* Topic Row */}
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-[#0F172A]">
+                      <HiDocumentText className="w-4 h-4 text-[#0284C7]" />
+                      <span>الموضوع الرسمي:</span>
+                      {item.sujetSize && (
+                        <span className="text-[10px] text-[#64748B] font-mono font-normal">
+                          ({formatFileSize(item.sujetSize)})
+                        </span>
+                      )}
                     </div>
-                  ) : (
-                    <>
-                      {/* Topic Row */}
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-1.5 text-xs font-bold text-[#0F172A]">
-                          <HiDocumentText className="w-4 h-4 text-[#0284C7]" />
-                          <span>الموضوع الرسمي:</span>
-                          {item.sujetSize && (
-                            <span className="text-[10px] text-[#64748B] font-mono font-normal">
-                              ({formatFileSize(item.sujetSize)})
-                            </span>
-                          )}
-                        </div>
 
-                        <div className="flex items-center gap-1.5">
-                          {item.sujetUrl ? (
-                            <>
-                              <button
-                                onClick={() => handleOpenPdf(item.sujetTitle, item.sujetUrl, item.sujetSize)}
-                                className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#0284C7] text-[#0F172A] hover:text-white text-[11px] font-bold border border-[#E2E8F0] transition-colors flex items-center gap-1 cursor-pointer"
-                                title="معاينة الموضوع داخل التطبيق"
-                              >
-                                <HiEye className="w-3.5 h-3.5" />
-                                <span>معاينة</span>
-                              </button>
-                              <a
-                                href={item.sujetUrl}
-                                download
-                                className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#0F172A] text-[#0F172A] hover:text-white text-[11px] font-bold border border-[#E2E8F0] transition-colors flex items-center gap-1"
-                                title="تحميل الموضوع بصيغة PDF"
-                              >
-                                <HiDownload className="w-3.5 h-3.5" />
-                                <span>تحميل</span>
-                              </a>
-                            </>
-                          ) : item.eddirasaUrl ? (
-                            <a
-                              href={item.eddirasaUrl}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#0F172A] text-[#475569] hover:text-white text-[11px] font-medium border border-[#E2E8F0] transition-colors flex items-center gap-1"
-                            >
-                              <HiExternalLink className="w-3.5 h-3.5" />
-                              <span>المصدر</span>
-                            </a>
-                          ) : (
-                            <span className="text-[10px] text-[#94A3B8]">قريباً</span>
-                          )}
-                        </div>
-                      </div>
+                    <div className="flex items-center gap-1.5">
+                      {item.sujetUrl ? (
+                        <>
+                          <button
+                            onClick={() => handleOpenPdf(item.sujetTitle, item.sujetUrl, item.sujetSize)}
+                            className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#0284C7] text-[#0F172A] hover:text-white text-[11px] font-bold border border-[#E2E8F0] transition-colors flex items-center gap-1 cursor-pointer"
+                            title="معاينة الموضوع داخل التطبيق"
+                          >
+                            <HiEye className="w-3.5 h-3.5" />
+                            <span>معاينة</span>
+                          </button>
+                          <a
+                            href={item.sujetUrl}
+                            download
+                            className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#0F172A] text-[#0F172A] hover:text-white text-[11px] font-bold border border-[#E2E8F0] transition-colors flex items-center gap-1"
+                            title="تحميل الموضوع بصيغة PDF"
+                          >
+                            <HiDownload className="w-3.5 h-3.5" />
+                            <span>تحميل</span>
+                          </a>
+                        </>
+                      ) : item.eddirasaUrl ? (
+                        <a
+                          href={item.eddirasaUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#0F172A] text-[#475569] hover:text-white text-[11px] font-medium border border-[#E2E8F0] transition-colors flex items-center gap-1"
+                        >
+                          <HiExternalLink className="w-3.5 h-3.5" />
+                          <span>المصدر</span>
+                        </a>
+                      ) : (
+                        <span className="text-[10px] text-[#94A3B8]">قريباً</span>
+                      )}
+                    </div>
+                  </div>
 
-                      {/* Correction Row */}
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-1.5 text-xs font-bold text-[#0F172A]">
-                          <HiCheckCircle className="w-4 h-4 text-[#16A34A]" />
-                          <span>التصحيح النموذجي:</span>
-                          {item.corrigeSize && (
-                            <span className="text-[10px] text-[#64748B] font-mono font-normal">
-                              ({formatFileSize(item.corrigeSize)})
-                            </span>
-                          )}
-                        </div>
+                  {/* Correction Row */}
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-[#0F172A]">
+                      <HiCheckCircle className="w-4 h-4 text-[#16A34A]" />
+                      <span>التصحيح النموذجي:</span>
+                      {item.corrigeSize && (
+                        <span className="text-[10px] text-[#64748B] font-mono font-normal">
+                          ({formatFileSize(item.corrigeSize)})
+                        </span>
+                      )}
+                    </div>
 
-                        <div className="flex items-center gap-1.5">
-                          {item.corrigeUrl ? (
-                            <>
-                              <button
-                                onClick={() => handleOpenPdf(item.corrigeTitle, item.corrigeUrl, item.corrigeSize)}
-                                className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#16A34A] text-[#0F172A] hover:text-white text-[11px] font-bold border border-[#E2E8F0] transition-colors flex items-center gap-1 cursor-pointer"
-                                title="معاينة التصحيح النموذجي داخل التطبيق"
-                              >
-                                <HiEye className="w-3.5 h-3.5" />
-                                <span>معاينة</span>
-                              </button>
-                              <a
-                                href={item.corrigeUrl}
-                                download
-                                className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#0F172A] text-[#0F172A] hover:text-white text-[11px] font-bold border border-[#E2E8F0] transition-colors flex items-center gap-1"
-                                title="تحميل التصحيح النموذجي بصيغة PDF"
-                              >
-                                <HiDownload className="w-3.5 h-3.5" />
-                                <span>تحميل</span>
-                              </a>
-                            </>
-                          ) : item.eddirasaUrl ? (
-                            <a
-                              href={item.eddirasaUrl}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#0F172A] text-[#475569] hover:text-white text-[11px] font-medium border border-[#E2E8F0] transition-colors flex items-center gap-1"
-                            >
-                              <HiExternalLink className="w-3.5 h-3.5" />
-                              <span>المصدر</span>
-                            </a>
-                          ) : (
-                            <span className="text-[10px] text-[#94A3B8]">قريباً</span>
-                          )}
-                        </div>
-                      </div>
-                    </>
-                  )}
+                    <div className="flex items-center gap-1.5">
+                      {item.corrigeUrl ? (
+                        <>
+                          <button
+                            onClick={() => handleOpenPdf(item.corrigeTitle, item.corrigeUrl, item.corrigeSize)}
+                            className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#16A34A] text-[#0F172A] hover:text-white text-[11px] font-bold border border-[#E2E8F0] transition-colors flex items-center gap-1 cursor-pointer"
+                            title="معاينة التصحيح النموذجي داخل التطبيق"
+                          >
+                            <HiEye className="w-3.5 h-3.5" />
+                            <span>معاينة</span>
+                          </button>
+                          <a
+                            href={item.corrigeUrl}
+                            download
+                            className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#0F172A] text-[#0F172A] hover:text-white text-[11px] font-bold border border-[#E2E8F0] transition-colors flex items-center gap-1"
+                            title="تحميل التصحيح النموذجي بصيغة PDF"
+                          >
+                            <HiDownload className="w-3.5 h-3.5" />
+                            <span>تحميل</span>
+                          </a>
+                        </>
+                      ) : item.eddirasaUrl ? (
+                        <a
+                          href={item.eddirasaUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="px-2.5 py-1 rounded-lg bg-[#F8FAFC] hover:bg-[#0F172A] text-[#475569] hover:text-white text-[11px] font-medium border border-[#E2E8F0] transition-colors flex items-center gap-1"
+                        >
+                          <HiExternalLink className="w-3.5 h-3.5" />
+                          <span>المصدر</span>
+                        </a>
+                      ) : (
+                        <span className="text-[10px] text-[#94A3B8]">قريباً</span>
+                      )}
+                    </div>
+                  </div>
 
                 </div>
 

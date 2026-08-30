@@ -1,17 +1,65 @@
-# React + Vite
+# 🎓 Naja7i (نجاحي) — المنصة التعليمية الأولى لطلاب البكالوريا في الجزائر 🇩🇿
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+منصة تعليمية ويب تفاعلية حديثة، مصممة خصيصاً لمرافقة تلاميذ شهادة البكالوريا في الجزائر عبر الشعب الست بالدروس، أرشيف البكالوريا الرسمي، بنك الاختبارات، وأدوات المراجعة الذكية.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌟 الميزات والأقسام الرئيسية
 
-## React Compiler
+- 🏛️ **أرشيف البكالوريا الرسمي (2008 — 2026):**
+  - أكثر من **2,500 ملف PDF أصلي** عالي الدقة.
+  - تغطية شاملة لـ **1,190 مادة ودورة** مع المواضيع الرسمية والتصحيحات وسلالم التنقيط الوزارية.
+  - معاينة فورية داخل التطبيق (In-App PDF Viewer) وتحميل مباشر بنقرة واحدة بدون إعلانات.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 📚 **مكتبة الدروس والملخصات الوزارية:**
+  - تصنيف دقيق لجميع المواد والشعب الست.
+  - مستعرض مذكرات وتمارين وسلاسل بالحلول المفصلة.
 
-## Expanding the Oxlint configuration
+- 📓 **كراس الأخطاء الذكي وفخاخ المنهجية (Carnet d'Erreurs):**
+  - تسجيل وتصنيف أخطاء التمارين مع تحديد درجة الخطورة والمادة.
+  - قاعدة بيانات لفخاخ البكالوريا المنهجية الشائعة.
+  - تصدير ورقة المراجعة الخاصة بصيغة A4 قابلة للطباعة قبل الامتحان.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
-# Naja7i
+- 🎧 **غرفة التركيز وبومودورو (Focus Room):**
+  - مؤقت بومودورو ذكي وبسيط لتنظيم جلسات المذاكرة والراحة.
+  - محرك أصوات تركيز مدمج (Web Audio API) بدون إنترنت (مطر، مقهى، نيران هادئة، موجات ألفا).
+  - نظام نصائح تحفيزية ومنهجية يتجدد كل 20 ثانية.
+
+- 📱 **تطبيق PWA والعمل بدون إنترنت (Offline Mode):**
+  - إمكانية تثبيت المنصة كتطبيق أصلي على الهواتف (Android / iOS) والحواسيب.
+  - دعم الكاش التلقائي للعمل أوفلاين مع تنبيهات حالة الاتصال.
+
+- 🧮 **الأدوات الذكية:**
+  - حاسبة معدل البكالوريا بالمعاملات الرسمية الجديدة.
+  - دليل التوجيه والتخصصات الجامعية ومعدلات القبول السابقة.
+  - مخطط ومولد جدول المراجعة الأسبوعي A4.
+  - عداد تنازلي دقيق ليوم الامتحان.
+
+- 🎥 **دليل قنوات وأساتذة اليوتيوب الجزائريين:**
+  - تصنيف منظم لأفضل القنوات والأساتذة في الجزائر حسب المادة والشعبة.
+
+---
+
+## 🛠️ التقنيات المستخدمة (Tech Stack)
+
+- **Frontend:** React 19, Vite
+- **Styling:** Tailwind CSS v4 + Custom Slate/Rose tokens
+- **Icons & Animation:** React Icons, Lucide Icons, Framer Motion
+- **PDF Engine:** Dual PDF.js Canvas Engine + Fallback
+- **Audio Engine:** Web Audio API Native Synthesizer
+- **PWA:** Service Worker + Web App Manifest
+
+---
+
+## 🚀 التشغيل المحلي (Getting Started)
+
+```bash
+# تثبيت الحزم
+npm install
+
+# تشغيل خادم التطوير
+npm run dev
+
+# بناء المشروع للإنتاج
+npm run build
+```
