@@ -12,9 +12,11 @@ import {
   HiSparkles,
   HiExternalLink,
   HiOutlineDocumentDownload,
-  HiOutlineBookOpen
+  HiOutlineBookOpen,
+  HiCloudDownload,
+  HiFolder
 } from 'react-icons/hi';
-import { BAC_FULL_ARCHIVE } from '../data/bacArchiveFullData';
+import { BAC_FULL_ARCHIVE, BAC_DRIVE_ROOT, BAC_DRIVE_YEARS } from '../data/bacArchiveFullData';
 import PdfReaderModal from '../components/PdfReaderModal';
 
 const STREAMS_LIST = [
@@ -118,6 +120,13 @@ export default function BacArchivePage() {
     return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   };
 
+  const currentYearDriveFolder = useMemo(() => {
+    if (selectedYear !== 'all' && BAC_DRIVE_YEARS[selectedYear]) {
+      return `https://drive.google.com/drive/folders/${BAC_DRIVE_YEARS[selectedYear]}`;
+    }
+    return BAC_DRIVE_ROOT;
+  }, [selectedYear]);
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-16 font-['Cairo']" dir="rtl">
       
@@ -152,11 +161,23 @@ export default function BacArchivePage() {
                 أرشيف مواضيع وحلول شهادة البكالوريا 📄
               </h1>
               <p className="text-xs sm:text-sm text-[#475569] mt-1 max-w-2xl leading-relaxed">
-                بنك شامل ومنظم لمواضيع البكالوريا الرسمية والتصحيحات النموذجية وسلالم التنقيط الوزارية المعتمدة من وزارة التربية الوطنية مع التحميل المباشر والمعاينة الفورية.
+                بنك شامل ومنظم لمواضيع البكالوريا الرسمية والتصحيحات النموذجية وسلالم التنقيط الوزارية المعتمدة مع التحميل المباشر، المعاينة الفورية، والمزامنة السحابية عبر Google Drive.
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <a
+                href={BAC_DRIVE_ROOT}
+                target="_blank"
+                rel="noreferrer"
+                className="px-3.5 py-2 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] transition-colors flex items-center gap-1.5 shadow-2xs"
+                title="فتح المجلد السحابي الكامل للأرشيف على Google Drive"
+              >
+                <HiFolder className="w-4 h-4 text-[#E11D48]" />
+                <span>مجلد Google Drive</span>
+                <HiExternalLink className="w-3.5 h-3.5 text-[#64748B]" />
+              </a>
+
               <Link
                 to="/"
                 className="px-4 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] transition-colors flex items-center gap-1.5 shadow-2xs"
@@ -213,9 +234,22 @@ export default function BacArchivePage() {
                 <span className="w-2 h-2 rounded-full bg-[#475569]"></span>
                 <span>2. اختر السنة (دورة الامتحان):</span>
               </span>
-              <span className="text-[11px] text-[#64748B]">
-                {selectedYear === 'all' ? 'جميع الدورات' : `دورة جوان ${selectedYear}`}
-              </span>
+              <div className="flex items-center gap-3">
+                {selectedYear !== 'all' && (
+                  <a
+                    href={currentYearDriveFolder}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[11px] font-bold text-[#0284C7] hover:underline flex items-center gap-1"
+                  >
+                    <span>فتح مجلد {selectedYear} على Drive</span>
+                    <HiExternalLink className="w-3 h-3" />
+                  </a>
+                )}
+                <span className="text-[11px] text-[#64748B]">
+                  {selectedYear === 'all' ? 'جميع الدورات' : `دورة جوان ${selectedYear}`}
+                </span>
+              </div>
             </div>
 
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
@@ -248,55 +282,59 @@ export default function BacArchivePage() {
                   setSearchQuery(e.target.value);
                   setCurrentPage(1);
                 }}
-                placeholder="ابحث عن مادة (رياضيات، فيزياء، فلسفة...) أو موضوع..."
-                className="w-full pl-3 pr-9 py-2 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl text-xs text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#E11D48] transition-colors"
+                placeholder="ابحث عن مادة، سنة، أو شعبة معينة (مثال: رياضيات 2024، فيزياء علوم تجريبية...)"
+                className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl pr-9 pl-3 py-2 text-xs text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#E11D48] transition-colors"
               />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery('')}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-[10px] text-[#64748B] hover:text-[#0F172A]"
-                >
-                  مسح
-                </button>
-              )}
             </div>
 
-            {/* Filter Toggle */}
-            <div className="flex items-center gap-2">
-              <label className="flex items-center gap-2 text-xs font-medium text-[#475569] cursor-pointer select-none bg-[#F8FAFC] px-3 py-2 rounded-xl border border-[#E2E8F0] hover:bg-[#F1F5F9]">
-                <input
-                  type="checkbox"
-                  checked={onlyMainSubjects}
-                  onChange={(e) => {
-                    setOnlyMainSubjects(e.target.checked);
-                    setCurrentPage(1);
-                  }}
-                  className="w-3.5 h-3.5 accent-[#E11D48] rounded cursor-pointer"
-                />
-                <span>المواد الأساسية فقط (المعامل ≥ 5)</span>
-              </label>
-
-              <span className="text-xs text-[#64748B] font-mono px-2">
-                النتائج: <strong className="text-[#0F172A]">{filteredItems.length}</strong> موضوع
-              </span>
-            </div>
+            {/* Toggle Main Subjects Only */}
+            <label className="flex items-center gap-2 cursor-pointer select-none text-xs font-bold text-[#0F172A] bg-[#F8FAFC] border border-[#CBD5E1] px-3 py-2 rounded-xl hover:bg-[#F1F5F9] transition-colors">
+              <input
+                type="checkbox"
+                checked={onlyMainSubjects}
+                onChange={(e) => {
+                  setOnlyMainSubjects(e.target.checked);
+                  setCurrentPage(1);
+                }}
+                className="rounded text-[#E11D48] focus:ring-[#E11D48] w-4 h-4 cursor-pointer"
+              />
+              <span>المواد الأساسية فقط (معامل 5 فما فوق)</span>
+            </label>
 
           </div>
 
         </div>
 
-        {/* Results Grid */}
+        {/* Results Header & Stats */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1 text-xs text-[#64748B]">
+          <div className="flex items-center gap-2">
+            <span>النتائج المعروضة:</span>
+            <strong className="text-[#0F172A] font-bold">{filteredItems.length}</strong>
+            <span>مادة</span>
+            <span className="text-[#CBD5E1]">|</span>
+            <span>من إجمالي</span>
+            <strong className="text-[#0F172A] font-bold">{totalSubjectsCount}</strong>
+            <span>مادة في الأرشيف (2,511+ ملف PDF)</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span>الصفحة {currentPage} من {totalPages || 1}</span>
+          </div>
+        </div>
+
+        {/* Subjects Grid */}
         {paginatedItems.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {paginatedItems.map((item) => (
-              <div 
+              <div
                 key={item.id}
-                className="bg-white border border-[#E2E8F0] hover:border-[#CBD5E1] rounded-2xl p-5 shadow-xs hover:shadow-sm transition-all flex flex-col justify-between group"
+                className="bg-white border border-[#E2E8F0] hover:border-[#CBD5E1] rounded-2xl p-5 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between group"
               >
-                {/* Card Top */}
-                <div className="space-y-3">
+                
+                {/* Card Top Details */}
+                <div className="space-y-2.5">
                   
-                  {/* Badges Bar */}
+                  {/* Tags */}
                   <div className="flex items-center justify-between gap-2 flex-wrap">
                     <div className="flex items-center gap-1.5">
                       <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium text-[11px] border border-slate-200/60 font-mono">
@@ -426,6 +464,23 @@ export default function BacArchivePage() {
                     </div>
                   </div>
 
+                  {/* Drive Folder Link Footer in Card */}
+                  {item.driveFolderUrl && (
+                    <div className="pt-2 border-t border-[#F8FAFC] flex items-center justify-end">
+                      <a
+                        href={item.driveFolderUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[10px] text-[#64748B] hover:text-[#0284C7] transition-colors flex items-center gap-1"
+                        title="فتح مجلد هذه السنة على Google Drive"
+                      >
+                        <HiFolder className="w-3 h-3 text-[#94A3B8]" />
+                        <span>فتح مجلد {item.year} على Drive</span>
+                        <HiExternalLink className="w-2.5 h-2.5" />
+                      </a>
+                    </div>
+                  )}
+
                 </div>
 
               </div>
@@ -448,53 +503,51 @@ export default function BacArchivePage() {
               }}
               className="mt-4 px-4 py-2 rounded-xl bg-[#E11D48] text-white text-xs font-bold cursor-pointer hover:bg-[#BE123C] transition-colors"
             >
-              إعادة ضبط الفلاتر
+              إعادة ضبط جميع الفلاتر
             </button>
           </div>
         )}
 
         {/* Pagination Controls */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-1.5 pt-4">
+          <div className="flex items-center justify-center gap-2 pt-4">
             <button
-              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-[#0F172A] border border-[#E2E8F0] hover:bg-[#F1F5F9] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              className="px-3 py-1.5 rounded-lg bg-white border border-[#CBD5E1] text-xs font-bold text-[#0F172A] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#F8FAFC] transition-colors cursor-pointer"
             >
               السابق
             </button>
-
-            {Array.from({ length: Math.min(totalPages, 7) }, (_, i) => {
-              let pg;
-              if (totalPages <= 7) {
-                pg = i + 1;
-              } else if (currentPage <= 4) {
-                pg = i + 1;
-              } else if (currentPage >= totalPages - 3) {
-                pg = totalPages - 6 + i;
-              } else {
-                pg = currentPage - 3 + i;
-              }
-
-              return (
-                <button
-                  key={pg}
-                  onClick={() => setCurrentPage(pg)}
-                  className={`w-8 h-8 rounded-lg text-xs font-bold font-mono transition-colors cursor-pointer ${
-                    currentPage === pg
-                      ? 'bg-[#E11D48] text-white shadow-2xs'
-                      : 'bg-white text-[#0F172A] hover:bg-[#F1F5F9] border border-[#E2E8F0]'
-                  }`}
-                >
-                  {pg}
-                </button>
-              );
-            })}
+            
+            <div className="flex items-center gap-1 font-mono text-xs font-bold">
+              {Array.from({ length: totalPages }, (_, i) => i + 1)
+                .filter(p => p === 1 || p === totalPages || Math.abs(p - currentPage) <= 1)
+                .map((pageNum, idx, arr) => {
+                  const prev = arr[idx - 1];
+                  return (
+                    <React.Fragment key={pageNum}>
+                      {prev && pageNum - prev > 1 && (
+                        <span className="px-1 text-[#94A3B8]">...</span>
+                      )}
+                      <button
+                        onClick={() => setCurrentPage(pageNum)}
+                        className={`w-8 h-8 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          currentPage === pageNum
+                            ? 'bg-[#E11D48] text-white shadow-2xs'
+                            : 'bg-white text-[#0F172A] hover:bg-[#F1F5F9] border border-[#CBD5E1]'
+                        }`}
+                      >
+                        {pageNum}
+                      </button>
+                    </React.Fragment>
+                  );
+                })}
+            </div>
 
             <button
-              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-[#0F172A] border border-[#E2E8F0] hover:bg-[#F1F5F9] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              className="px-3 py-1.5 rounded-lg bg-white border border-[#CBD5E1] text-xs font-bold text-[#0F172A] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#F8FAFC] transition-colors cursor-pointer"
             >
               التالي
             </button>
@@ -503,17 +556,12 @@ export default function BacArchivePage() {
 
       </div>
 
-      {/* PDF Reader In-App Modal */}
-      {pdfModalOpen && (
-        <PdfReaderModal
-          file={selectedPdf}
-          isOpen={pdfModalOpen}
-          onClose={() => {
-            setPdfModalOpen(false);
-            setSelectedPdf(null);
-          }}
-        />
-      )}
+      {/* In-App PDF Reader Modal */}
+      <PdfReaderModal
+        isOpen={pdfModalOpen}
+        onClose={() => setPdfModalOpen(false)}
+        file={selectedPdf}
+      />
 
     </div>
   );
