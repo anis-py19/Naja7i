@@ -1,7 +1,7 @@
 {
   "name": "نجاحي — فضاء البكالوريا الجزائرية (Naja7i)",
   "short_name": "نجاحي Naja7i",
-  "description": "المنصة الشاملة للتحضير لشهادة البكالوريا في الجزائر لجميع الشعب الست — ملخصات، أرشيف 2008-2025، غرفة تركيز، وحاسبة المعدل.",
+  "description": "المنصة الشاملة للتحضير لشهادة البكالوريا في الجزائر لجميع الشعب الست — ملخصات، أرشيف البكالوريا الرسمي 2008-2026، كراس الأخطاء الذكي، غرفة تركيز بومودورو، وحاسبة المعدل.",
   "start_url": "/",
   "id": "/",
   "display": "standalone",
@@ -10,7 +10,7 @@
   "orientation": "any",
   "dir": "rtl",
   "lang": "ar-DZ",
-  "categories": ["education", "productivity", "utilities"],
+  "categories": ["education", "productivity", "utilities", "books"],
   "icons": [
     {
       "src": "/logo.jpg",
@@ -26,6 +26,13 @@
     }
   ],
   "shortcuts": [
+    {
+      "name": "أرشيف البكالوريا الرسمي (2008-2026)",
+      "short_name": "أرشيف البكالوريا 🏛️",
+      "description": "أكثر من 2500 موضوع وحل نموذجي رسمي",
+      "url": "/bac-archive",
+      "icons": [{ "src": "/logo.jpg", "sizes": "192x192" }]
+    },
     {
       "name": "غرفة التركيز وبومودورو",
       "short_name": "غرفة التركيز 🎧",
