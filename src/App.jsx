@@ -8,6 +8,7 @@ import SearchModal from './components/SearchModal';
 import ContactContributionModal from './components/ContactContributionModal';
 import FloatingQuickActions from './components/FloatingQuickActions';
 import PwaInstallPrompt from './components/PwaInstallPrompt';
+import InstagramCarouselPreview from './components/InstagramCarouselPreview';
 
 // Page Views
 import HomePage from './pages/HomePage';
@@ -38,6 +39,7 @@ function App() {
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isPromoOpen, setIsPromoOpen] = useState(false);
 
   const location = useLocation();
   const isFocusRoom = ['/focus-room', '/focus', '/pomodoro'].includes(location.pathname);
@@ -99,9 +101,10 @@ function App() {
         </div>
       )}
 
-      {/* Top Navbar */}
+      {/* Header & Global Navbar */}
       {!isFocusRoom && (
         <Navbar
+          selectedStreamId={selectedStreamId}
           onSelectStream={handleSelectStream}
           onOpenCalculator={() => setIsCalculatorOpen(true)}
           onOpenSearch={() => setIsSearchOpen(true)}
@@ -109,188 +112,140 @@ function App() {
         />
       )}
 
-      {/* Main Routed Content */}
-      <main className="flex-1">
+      {/* Page Routing */}
+      <main className="flex-grow">
         <Routes>
-          {/* 1. الرئيسية */}
           <Route
             path="/"
             element={
               <HomePage
                 selectedStreamId={selectedStreamId}
-                setSelectedStreamId={setSelectedStreamId}
-                handleOpenSubject={handleOpenSubject}
-                setIsCalculatorOpen={setIsCalculatorOpen}
-                setActivePdf={setActivePdf}
-                onOpenSearch={() => setIsSearchOpen(true)}
-                onOpenContact={() => setIsContactOpen(true)}
+                onSelectStream={handleSelectStream}
+                onOpenSubject={handleOpenSubject}
+                onOpenPdf={(file) => setActivePdf(file)}
               />
             }
           />
 
-          {/* 2. الشعب والمواد */}
           <Route
             path="/streams"
             element={
               <StreamsPage
                 selectedStreamId={selectedStreamId}
-                setSelectedStreamId={setSelectedStreamId}
+                onSelectStream={handleSelectStream}
                 onOpenSubject={handleOpenSubject}
               />
             }
           />
 
-          {/* 3. مكتبة الملخصات والسلاسل */}
           <Route
             path="/library"
             element={
               <LibraryPage
+                selectedStreamId={selectedStreamId}
                 onOpenPdf={(file) => setActivePdf(file)}
               />
             }
           />
 
-          {/* 4. أرشيف البكالوريا الرسمي (2008—2025) */}
           <Route
             path="/bac-archive"
-            element={
-              <BacArchivePage
-                onOpenPdf={(file) => setActivePdf(file)}
-              />
-            }
+            element={<BacArchivePage />}
           />
 
-          {/* 5. دليل أساتذة وقنوات اليوتيوب */}
           <Route
             path="/youtube-teachers"
-            element={
-              <YouTubeTeachersPage />
-            }
+            element={<YouTubeTeachersPage selectedStreamId={selectedStreamId} />}
           />
 
-          {/* 6. مخطط الأهداف وجداول المراجعة الأسبوعية (A4) */}
           <Route
             path="/study-planner"
-            element={
-              <StudyPlannerPage />
-            }
+            element={<StudyPlannerPage selectedStreamId={selectedStreamId} />}
           />
 
-          {/* 6.5 بنك الأسئلة والاختبارات التفاعلية السريعة (Quiz & QCM) */}
           <Route
             path="/quiz"
-            element={
-              <QuizBankPage />
-            }
+            element={<QuizBankPage selectedStreamId={selectedStreamId} />}
           />
 
-          {/* 6.6 الملخص الذكي بالذكاء الاصطناعي (AI Summarizer) */}
           <Route
             path="/ai-summarizer"
-            element={
-              <AiSummarizerPage />
-            }
+            element={<AiSummarizerPage />}
           />
 
-          {/* 6.8 دليل المنهاج والبرنامج الوزاري الرسمي */}
           <Route
             path="/curriculum"
             element={
-              <CurriculumPage />
+              <CurriculumPage
+                selectedStreamId={selectedStreamId}
+                onSelectStream={handleSelectStream}
+              />
             }
           />
 
-          {/* 7. حاسبة معدل البكالوريا بالمعاملات الرسمية */}
           <Route
             path="/calculator"
-            element={
-              <CalculatorPage />
-            }
+            element={<CalculatorPage selectedStreamId={selectedStreamId} />}
           />
 
-          {/* 8. العداد التنازلي للبكالوريا ورزنامة المحطات */}
           <Route
             path="/countdown"
-            element={
-              <CountdownPage />
-            }
+            element={<CountdownPage />}
           />
 
-          {/* 8.5 غرفة التركيز وبومودورو (Focus Room) */}
           <Route
             path="/focus-room"
-            element={
-              <FocusRoomPage />
-            }
+            element={<FocusRoomPage />}
           />
           <Route
             path="/focus"
-            element={
-              <FocusRoomPage />
-            }
+            element={<FocusRoomPage />}
           />
           <Route
             path="/pomodoro"
-            element={
-              <FocusRoomPage />
-            }
+            element={<FocusRoomPage />}
           />
 
-          {/* 8.6 كراس الأخطاء والفخاخ الذكي (Carnet d'Erreurs) */}
           <Route
             path="/mistakes-notebook"
-            element={
-              <MistakesNotebookPage />
-            }
-          />
-          <Route
-            path="/carnet-erreurs"
-            element={
-              <MistakesNotebookPage />
-            }
+            element={<MistakesNotebookPage selectedStreamId={selectedStreamId} />}
           />
           <Route
             path="/mistakes"
-            element={
-              <MistakesNotebookPage />
-            }
+            element={<MistakesNotebookPage selectedStreamId={selectedStreamId} />}
+          />
+          <Route
+            path="/carnet-erreurs"
+            element={<MistakesNotebookPage selectedStreamId={selectedStreamId} />}
           />
 
-          {/* 9. عن المنصة ومؤسسها */}
           <Route
             path="/about"
-            element={
-              <AboutPage />
-            }
+            element={<AboutPage />}
           />
 
-          {/* 10. تواصل ومساهمة */}
           <Route
             path="/contact"
-            element={
-              <ContactPage />
-            }
+            element={<ContactPage />}
           />
 
-          {/* 11. صفحة الصيانة المباشرة */}
           <Route
             path="/maintenance"
             element={
-              <MaintenancePage />
+              <MaintenancePage
+                onBypass={() => {
+                  setBypassMaintenance(true);
+                  localStorage.setItem('naja7i_admin_bypass', 'true');
+                }}
+              />
             }
           />
 
-          {/* 12. صفحة 404 */}
-          <Route
-            path="*"
-            element={
-              <NotFound />
-            }
-          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 
-      {/* Global Subject Viewer Modal */}
+      {/* Global Subject Viewer Overlay */}
       {activeSubject && (
         <SubjectViewer
           subjectId={activeSubject.id}
@@ -300,11 +255,11 @@ function App() {
         />
       )}
 
-      {/* Global PDF Viewer Modal */}
+      {/* Global PDF Reader & Viewer Modal */}
       {activePdf && (
         <PdfReaderModal
           file={activePdf}
-          isOpen={!!activePdf}
+          isOpen={Boolean(activePdf)}
           onClose={() => setActivePdf(null)}
         />
       )}
@@ -327,6 +282,12 @@ function App() {
       <ContactContributionModal
         isOpen={isContactOpen}
         onClose={() => setIsContactOpen(false)}
+      />
+
+      {/* Instagram Carousel Promotion Studio Modal */}
+      <InstagramCarouselPreview
+        isOpen={isPromoOpen}
+        onClose={() => setIsPromoOpen(false)}
       />
 
       {/* Floating Action Buttons */}
@@ -365,25 +326,20 @@ function App() {
               <span>•</span>
               <Link to="/bac-archive" className="hover:text-[#E11D48] transition-colors">أرشيف البكالوريا</Link>
               <span>•</span>
-              <Link to="/youtube-teachers" className="hover:text-[#E11D48] transition-colors">أساتذة اليوتيوب</Link>
-              <span>•</span>
               <Link to="/focus-room" className="hover:text-[#E11D48] transition-colors font-bold text-indigo-600">غرفة التركيز (بومودورو) 🎧</Link>
               <span>•</span>
               <Link to="/mistakes-notebook" className="hover:text-[#E11D48] transition-colors font-bold text-amber-600">كراس الأخطاء الذكي 📓</Link>
               <span>•</span>
-              <Link to="/curriculum" className="hover:text-[#E11D48] transition-colors font-bold text-[#E11D48]">المنهاج والبرنامج الوزاري 📚</Link>
-              <span>•</span>
-              <Link to="/ai-summarizer" className="hover:text-[#E11D48] transition-colors font-bold text-[#E11D48]">الملخص الذكي (AI) 🤖</Link>
-              <span>•</span>
               <Link to="/quiz" className="hover:text-[#E11D48] transition-colors">بنك الأسئلة (Quiz)</Link>
               <span>•</span>
-              <Link to="/study-planner" className="hover:text-[#E11D48] transition-colors">مخطط المراجعة</Link>
-              <span>•</span>
-              <Link to="/calculator" className="hover:text-[#E11D48] transition-colors">حاسبة المعدل</Link>
-              <span>•</span>
-              <Link to="/countdown" className="hover:text-[#E11D48] transition-colors">العداد</Link>
-              <span>•</span>
-              <Link to="/about" className="hover:text-[#E11D48] transition-colors">عن المنصة</Link>
+              <button
+                onClick={() => setIsPromoOpen(true)}
+                className="px-2.5 py-1 rounded-lg bg-rose-50 text-rose-700 font-bold border border-rose-200/60 hover:bg-rose-100 transition-colors flex items-center gap-1 cursor-pointer"
+                title="عرض شرائح إنستغرام الترويجية"
+              >
+                <span>منشور إنستغرام</span>
+                <span>📸</span>
+              </button>
               <span>•</span>
               <Link to="/contact" className="hover:text-[#E11D48] transition-colors text-[#E11D48] font-bold">تواصل ومساهمة 📥</Link>
             </div>
