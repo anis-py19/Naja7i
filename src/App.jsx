@@ -384,6 +384,7 @@ function App() {
               <Link to="/countdown" className="hover:text-[#E11D48] transition-colors">العداد</Link>
               <span>•</span>
               <Link to="/about" className="hover:text-[#E11D48] transition-colors">عن المنصة</Link>
+
               <span>•</span>
               <Link to="/contact" className="hover:text-[#E11D48] transition-colors text-[#E11D48] font-bold">تواصل ومساهمة 📥</Link>
             </div>
