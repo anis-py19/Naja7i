@@ -8,7 +8,6 @@ import {
 import { STREAMS } from '../data/streamsData';
 import FounderStorySection from '../components/FounderStorySection';
 import ContactContributionSection from '../components/ContactContributionSection';
-import VisualShowcaseCarousel from '../components/VisualShowcaseCarousel';
 
 export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }) {
   const navigate = useNavigate();
@@ -30,10 +29,10 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
     },
     {
       title: 'أرشيف مواضيع البكالوريا',
-      desc: 'مواضيع وحلول شهادة البكالوريا الرسمية من 2008 إلى 2026 مع سلم التنقيط.',
+      desc: 'مواضيع وحلول شهادة البكالوريا الرسمية من 2008 إلى 2025 مع سلم التنقيط.',
       path: '/bac-archive',
       icon: '📄',
-      badge: '2008 — 2026'
+      badge: '2008 — 2025'
     },
     {
       title: 'دليل قنوات وأساتذة اليوتيوب',
@@ -133,40 +132,37 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
         </div>
       </section>
 
-      {/* 2. 3D Visual Showcase Carousel */}
-      <VisualShowcaseCarousel />
-
-      {/* 3. Quick Stream Selector Bar */}
+      {/* 2. Quick Stream Selector Bar */}
       <section className="py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-[#E2E8F0]">
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-[#0F172A] flex items-center gap-1.5">
               <span>🏛️ اختر شعبتك للوصول السريع:</span>
             </span>
-            <Link to="/streams" className="text-xs text-[#E11D48] hover:underline font-bold flex items-center gap-1">
-              <span>عرض برامج الشعب الست</span>
+            <Link to="/streams" className="text-xs font-bold text-[#E11D48] hover:underline flex items-center gap-1">
+              <span>عرض كل الشعب</span>
               <HiChevronLeft className="w-3.5 h-3.5" />
             </Link>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
-            {STREAMS.map((st) => (
+            {STREAMS.map((s) => (
               <button
-                key={st.id}
+                key={s.id}
                 onClick={() => {
-                  onSelectStream(st.id);
-                  navigate('/library');
+                  if (onSelectStream) onSelectStream(s.id);
+                  navigate('/streams');
                 }}
-                className="p-3 rounded-xl bg-white border border-[#CBD5E1] hover:border-[#E11D48] transition-all text-center group cursor-pointer shadow-2xs hover:shadow-xs"
+                className="p-3 rounded-xl bg-white hover:bg-[#F1F5F9] border border-[#E2E8F0] hover:border-[#CBD5E1] transition-colors text-right flex items-center gap-2.5 cursor-pointer shadow-2xs group"
               >
-                <div className="text-2xl mb-1 group-hover:scale-110 transition-transform">
-                  {st.icon}
-                </div>
-                <div className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] transition-colors leading-tight">
-                  {st.name}
-                </div>
-                <div className="text-[10px] text-[#64748B] mt-0.5 font-sans truncate">
-                  {st.frenchName}
+                <span className="text-xl shrink-0">{s.icon}</span>
+                <div className="min-w-0">
+                  <span className="block text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] truncate">
+                    {s.name}
+                  </span>
+                  <span className="text-[10px] text-[#64748B] block">
+                    {s.subjectsCount} مواد
+                  </span>
                 </div>
               </button>
             ))}
@@ -174,55 +170,57 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
         </div>
       </section>
 
-      {/* 4. Main Platform Portals Grid */}
-      <section className="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="mb-6">
-          <h2 className="text-xl sm:text-2xl font-bold text-[#0F172A]">
-            الأقسام والأدوات الرئيسية للمراجعة 🧭
+      {/* 3. Main Portal Hub Grid */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="text-xl sm:text-2xl font-black text-[#0F172A]">
+            أقسام وأدوات المنصة التعليمية
           </h2>
           <p className="text-xs text-[#64748B] mt-1">
-            كل ما تحتاجه في مكان واحد لتنظيم دراستك، التدرب على التمارين، وضبط المنهجية.
+            كل ما تحتاجه للتحضير للبكالوريا مقسم في مساحات مستقلة وسريعة
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-          {portals.map((item, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {portals.map((item, idx) => (
             <Link
-              key={index}
+              key={idx}
               to={item.path}
-              className="bg-white border border-[#E2E8F0] hover:border-[#E11D48] rounded-2xl p-5 sm:p-6 transition-all hover:shadow-xs group flex flex-col justify-between"
+              className="bg-white border border-[#E2E8F0] hover:border-[#E11D48] rounded-2xl p-6 transition-all hover:shadow-sm flex flex-col justify-between group"
             >
               <div>
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="text-3xl p-2 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-center text-2xl group-hover:bg-[#F1F5F9] transition-colors">
                     {item.icon}
-                  </span>
-                  <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium text-[11px] border border-slate-200/60">
+                  </div>
+                  <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[11px] font-medium border border-slate-200/60">
                     {item.badge}
                   </span>
                 </div>
 
-                <h3 className="text-base font-bold text-[#0F172A] group-hover:text-[#E11D48] transition-colors mb-1.5">
+                <h3 className="text-base font-bold text-[#0F172A] group-hover:text-[#E11D48] transition-colors mb-2">
                   {item.title}
                 </h3>
-                
-                <p className="text-xs text-[#64748B] leading-relaxed line-clamp-2">
+
+                <p className="text-xs text-[#475569] leading-relaxed">
                   {item.desc}
                 </p>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-[#F1F5F9] flex items-center justify-between text-xs font-bold text-[#E11D48]">
+              <div className="pt-5 mt-4 border-t border-[#F1F5F9] flex items-center justify-between text-xs font-bold text-[#E11D48]">
                 <span>دخول الفضاء</span>
-                <HiChevronLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
+                <HiChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* 5. Contact & Founder Sections */}
-      <ContactContributionSection onOpenContact={onOpenContact} />
+      {/* 4. Founder Story Section */}
       <FounderStorySection />
+
+      {/* 5. Contact & Contribution Section */}
+      <ContactContributionSection onOpenContact={onOpenContact} />
 
     </div>
   );
