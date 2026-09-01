@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { 
   HiHome, 
   HiSparkles, 
-  HiPaperClip, 
+  HiDocumentText, 
   HiPhotograph, 
   HiClipboardCopy, 
   HiPrinter, 
@@ -16,11 +16,12 @@ import {
   HiVolumeUp,
   HiStop,
   HiClock,
-  HiPlus,
-  HiMenuAlt2,
-  HiChevronDown,
-  HiArrowRight,
-  HiRefresh
+  HiPaperClip,
+  HiArrowUp,
+  HiRefresh,
+  HiChatAlt2,
+  HiMenuAlt3,
+  HiChevronDown
 } from 'react-icons/hi';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -47,118 +48,99 @@ const STREAMS_LIST = [
 ];
 
 const MODES_LIST = [
-  { id: 'mindmap', name: 'مخطط ذهني', icon: '🗺️', desc: 'شجرة مفاهيم مركزة' },
-  { id: 'comprehensive', name: 'ملخص شامل', icon: '📑', desc: 'مفاهيم وقوانين وجداول' },
-  { id: 'high_yield', name: 'مكثف ليلة الامتحان', icon: '⚡', desc: 'أهم القوانين و5 فخاخ' },
-  { id: 'questions', name: 'أسئلة وتطبيقات', icon: '❓', desc: 'QCM وتمارين وزارية' },
-  { id: 'methodology', name: 'منهجية الإجابة', icon: '🔬', desc: 'تفكيك أفعال الأداء' }
+  { id: 'mindmap', label: '🗺️ مخطط ذهني', desc: 'عقد مركزة ومختصرة' },
+  { id: 'comprehensive', label: '📑 ملخص شامل', desc: 'شرح، جداول وبطاقات' },
+  { id: 'high_yield', label: '⚡ مكثف ليلة الامتحان', desc: 'قوانين و5 فخاخ' },
+  { id: 'questions', label: '❓ بنك أسئلة QCM', desc: 'أسئلة مع سلم التنقيط' },
+  { id: 'methodology', label: '🔬 تفكيك المنهجية', desc: 'أفعال الأداء والكلمات المفتاحية' }
 ];
 
-const PROMPT_SUGGESTIONS = [
+const QUICK_STARTER_PROMPTS = [
   {
-    title: 'علوم: الانقسام الخيطي والترجمة',
+    title: '🗺️ مخطط ذهني: الانقسام والترجمة',
     streamId: 'sciences',
     mode: 'mindmap',
-    icon: '🧬',
-    desc: 'مخطط هرمي لمراحل الترجمة والشروط الأساسية',
-    text: `درس: التعبير المورثي والترجمة عند حقيقيات النواة
-تتم عملية الترجمة على مستوى الهيولى بواسطة الريبوزومات حيث يتم تحويل الرسالة النووية المشفرة في ARNm إلى متتالية من الأحماض الأمينية المشكلة للبروتين.
-المراحل الأساسية للترجمة:
-1. مرحلة الانطلاق (Début): يتثبت الـ ARNm على تحت الوحدة الصغرى للريبوزوم، ويتوضع ARNt الحامل للحمض الأميني الميثيونين (AUG) في الموقع P.
-2. مرحلة الاستطالة (Élongation): يتوضع ARNt الثاني حاملاً حمضه الأميني في الموقع A، وتتشكل الرابطة البيبتيدية بين الحمضين بفضل إنزيم بيبتيديل ترانسفيراز.
-3. مرحلة النهاية (Terminaison): يصل الريبوزوم إلى إحدى رامزات التوقف الثلاث (UAA, UAG, UGA)، فينفصل الببتيد المتشكل وتنفصل تحت وحدتي الريبوزوم.
-شروط الترجمة الأساسية: ARNm، ريبوزومات وظيفية، أحماض أمينية منشطة، طاقة بصيغة ATP، وعوامل الإطلاق والإنزيمات النوعية.`
+    prompt: `لخص لي مراحل التعبير المورثي والترجمة (الانطلاق، الاستطالة، النهاية) مع شروط الترجمة في شكل مخطط ذهني فائق الاختصار والتركيز.`
   },
   {
-    title: 'رياضيات: الأعداد المركبة والتحويلات',
+    title: '⚡ مكثف ليلة الامتحان: الأعداد المركبة',
     streamId: 'math',
     mode: 'high_yield',
-    icon: '📐',
-    desc: 'القوانين والدوران والتحاكي ليلة الامتحان',
-    text: `الوحدة: الأعداد المركبة والتحويلات النقطية في المستوي المركب
-1. الشكل الجبري: z = x + iy حيث x الجزء الحقيقي و y الجزء التخيلي، مع i² = -1.
-2. الطويلة والعمدة: |z| = √(x² + y²)، و arg(z) = θ حيث cos(θ) = x/|z| و sin(θ) = y/|z|.
-3. الشكل المثلثي والآسي: z = |z|(cos θ + i sin θ) = |z| e^(iθ).
-4. دستور موافر (Moivre): (cos θ + i sin θ)^n = cos(nθ) + i sin(nθ).
-5. التحويلات النقطية في المستوي:
-- الانسحاب ذو الشعاع u(b): z' = z + b.
-- التحاكي ذو المركز Ω(ω) والنسبة k: z' - ω = k(z - ω).
-- الدوران ذو المركز Ω(ω) والزاوية θ: z' - ω = e^(iθ)(z - ω).
-- التشابه المباشر ذو النسبة k والزاوية θ: z' - ω = k e^(iθ)(z - ω).`
+    prompt: `قدم لي مكثف ليلة الامتحان في الأعداد المركبة والتحويلات النقطية (الشكل الجبري والمثلثي والآسي، دساتير موافر، الانسحاب، الدوران، التشابه المباشر) وأخطر 5 فخاخ في البكالوريا.`
   },
   {
-    title: 'فيزياء: المتابعة الزمنية لتحول كيميائي',
+    title: '📑 ملخص شامل: المتابعة الزمنية',
     streamId: 'sciences',
     mode: 'comprehensive',
-    icon: '⚡',
-    desc: 'سرعة التفاعل، زمن نصف التفاعل والمعايرة',
-    text: `الوحدة 1: المتابعة الزمنية لتحول كيميائي في وسط مائي
-- تصنيف التحولات الكيميائية حسب المدة المستغرقة:
-  1. تحولات سريعة (لحظية).
-  2. تحولات بطيئة (تستغرق ثوانٍ إلى دقائق).
-  3. تحولات بطيئة جداً (تستغرق أياماً أو أشهراً).
-- طرق المتابعة الزمنية المعتمدة:
-  1. قياس الناقلية (Conductimétrie) في وجود شوارد.
-  2. قياس ضغط أو حجم غاز منطلق.
-  3. المعايرة اللونية (Dosage colorimétrique).
-  4. قياس الـ pH في حالة وجود شوارد الهيدرونيوم H3O+.
-- العوامل الحركية المؤثرة في سرعة التفاعل:
-  1. درجة الحرارة (كلما زادت زادت التصادمات الفعالة).
-  2. التراكيز الابتدائية للمتفاعلات.
-  3. الوساطة ومساحة سطح التلامس.
-- زمن نصف التفاعل (t1/2): هو المدة الزمنية اللازمة لبلوغ تقدم التفاعل نصف تقدمه النهائي x(t1/2) = x_final / 2.`
+    prompt: `قم بإعداد ملخص أكاديمي شامل للوحدة 1 في الفيزياء (المتابعة الزمنية لتحول كيميائي): طرق المتابعة، العوامل الحركية، زمن نصف التفاعل t1/2 مع بطاقات مراجعة وجداول القوانين.`
   },
   {
-    title: 'فلسفة: السؤال العلمي والسؤال الفلسفي',
+    title: '🔬 تفكيك منهجية: السؤال الفلسفي',
     streamId: 'lettres_philo',
     mode: 'methodology',
-    icon: '📖',
-    desc: 'منهجية المقارنة والكلمات المفتاحية في المقال',
-    text: `المقالة والمحور الأول: السؤال العلمي والسؤال الفلسفي (مقارنة)
-- طبيعة السؤال العلمي: مجاله عالم الظواهر الفيزيائية المحسوسة والطبيعية، يعتمد على الملاحظة والفرضية والتجربة المخبرية الاستقرائية (المنهج التجريبي)، هدفه الوصول إلى قوانين دقيقة وكمية رياضية تصاغ في لغة دقيقة.
-- طبيعة السؤال الفلسفي: مجاله عالم الماورائيات (الميتافيزيقا) والقيم والمفاهيم المجردة (الحرية، الوجود، الأخلاق، المعرفة)، يعتمد على المنهج العقلي التأملي والاستدلال النقدي والشك المنهجي، ونتائجه إشكاليات مفتوحة وتعدد في المذاهب.
-- أوجه الاختلاف: في الموضوع، المنهج، والنتائج المستهدفة.
-- أوجه التداخل والتكامل: العلم يغذي الفلسفة بالمكتشفات الواقعية، والفلسفة تقوم وتوجه العلم نقدياً وإبستيمولوجياً (فلسفة العلوم).`
+    prompt: `اشرح لي منهجية المقارنة بين السؤال العلمي والسؤال الفلسفي: أوجه الاختلاف والتشابه والتداخل، والكلمات المفتاحية المطلوبة في البكالوريا لنيل العلامة الكاملة.`
   }
 ];
 
 export default function AiSummarizerPage() {
   const [selectedStreamId, setSelectedStreamId] = useState('sciences');
   const [summaryMode, setSummaryMode] = useState('mindmap');
-  const [promptInput, setPromptInput] = useState('');
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [inputText, setInputText] = useState('');
+  const [attachedFile, setAttachedFile] = useState(null);
+  const [isUploadingFile, setIsUploadingFile] = useState(false);
 
-  // Active View Mode for the Current AI Message: 'mindmap' | 'text' | 'flashcards'
-  const [activeTabByMsgId, setActiveTabByMsgId] = useState({});
-
-  // Custom API Key Management
-  const [apiKey, setApiKey] = useState(getPlatformDefaultApiKey());
-  const [isKeyModalOpen, setIsKeyModalOpen] = useState(false);
-  const [inputKeyTemp, setInputKeyTemp] = useState('');
-
-  // Audio Speech State
-  const [playingMsgId, setPlayingMsgId] = useState(null);
-
-  // Chat Messages State: Array of { id, role: 'user' | 'assistant', content, mode, streamName, timestamp, fileMeta, parsedMindmap, flashcards }
-  const [messages, setMessages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [statusMessage, setStatusMessage] = useState('');
-  const [copiedId, setCopiedId] = useState(null);
-
-  // History of conversations stored in localStorage
-  const [history, setHistory] = useState(() => {
+  // Chat conversation state
+  const [messages, setMessages] = useState(() => {
     try {
-      const saved = localStorage.getItem('naja7i_ai_chat_history');
+      const saved = localStorage.getItem('naja7i_chat_active_messages');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
     }
   });
 
-  const chatEndRef = useRef(null);
+  // History & Drawer
+  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+  const [historySessions, setHistorySessions] = useState(() => {
+    try {
+      const saved = localStorage.getItem('naja7i_chat_sessions_history');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  // Status & Audio
+  const [isLoading, setIsLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [playingMessageId, setPlayingMessageId] = useState(null);
+  const [copiedId, setCopiedId] = useState(null);
+
+  // API Key Modal
+  const [apiKey, setApiKey] = useState(getPlatformDefaultApiKey());
+  const [isKeyModalOpen, setIsKeyModalOpen] = useState(false);
+  const [inputKeyTemp, setInputKeyTemp] = useState('');
+
+  const messagesEndRef = useRef(null);
+  const fileInputRef = useRef(null);
   const textareaRef = useRef(null);
-  const selectedStreamName = STREAMS_LIST.find(s => s.id === selectedStreamId)?.name || 'علوم تجريبية';
+
+  const selectedStream = STREAMS_LIST.find(s => s.id === selectedStreamId) || STREAMS_LIST[0];
+
+  // Auto-scroll to bottom of chat
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+    try {
+      localStorage.setItem('naja7i_chat_active_messages', JSON.stringify(messages));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [messages, isLoading]);
 
   useEffect(() => {
     setApiKey(getPlatformDefaultApiKey());
@@ -169,29 +151,25 @@ export default function AiSummarizerPage() {
     };
   }, []);
 
-  // Auto-scroll on new messages
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isLoading]);
-
-  // Adjust textarea height dynamically
+  // Textarea auto-resize
   const handleTextareaChange = (e) => {
-    setPromptInput(e.target.value);
+    setInputText(e.target.value);
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = Math.min(textareaRef.current.scrollHeight, 160) + 'px';
+      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 180)}px`;
     }
   };
 
-  const toggleSpeech = (msgId, text) => {
+  // Text-To-Speech Toggle
+  const toggleSpeech = (messageId, text) => {
     if (!('speechSynthesis' in window)) {
       alert('ميزة القراءة الصوتية غير مدعومة في متصفحك.');
       return;
     }
 
-    if (playingMsgId === msgId) {
+    if (playingMessageId === messageId) {
       window.speechSynthesis.cancel();
-      setPlayingMsgId(null);
+      setPlayingMessageId(null);
       return;
     }
 
@@ -202,585 +180,498 @@ export default function AiSummarizerPage() {
       .replace(/https?:\/\/\S+/g, '')
       .trim();
 
-    const utterance = new SpeechSynthesisUtterance(cleanSpeechText.slice(0, 1500));
+    const utterance = new SpeechSynthesisUtterance(cleanSpeechText.slice(0, 1800));
     utterance.lang = 'ar-SA';
     utterance.rate = 0.95;
 
-    utterance.onend = () => setPlayingMsgId(null);
-    utterance.onerror = () => setPlayingMsgId(null);
+    utterance.onend = () => setPlayingMessageId(null);
+    utterance.onerror = () => setPlayingMessageId(null);
 
     window.speechSynthesis.speak(utterance);
-    setPlayingMsgId(msgId);
+    setPlayingMessageId(messageId);
   };
 
-  const handleFileSelect = (e) => {
+  const handleCopyMessage = (id, text) => {
+    navigator.clipboard.writeText(text);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
+  };
+
+  const handleDownloadMessage = (text, streamName) => {
+    const blob = new Blob([text], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ملخص_${streamName}_نجاحي_AI.md`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  // File Upload Handlers
+  const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     const validTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/webp', 'text/plain'];
     if (!validTypes.some(t => file.type.includes(t) || file.name.endsWith('.pdf') || file.name.endsWith('.txt'))) {
-      alert('يرجى اختيار ملف PDF أو صورة درس (JPG, PNG) أو ملف نصي.');
+      setErrorMessage('يرجى اختيار ملف PDF أو صورة درس (JPG, PNG) أو ملف نصي.');
       return;
     }
-    setSelectedFile(file);
+
+    setAttachedFile(file);
+    setErrorMessage(null);
   };
 
-  const handleStartNewChat = () => {
+  const handleRemoveAttachedFile = () => {
+    setAttachedFile(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
+  // Start New Chat Session
+  const handleNewChat = () => {
+    if (messages.length > 0) {
+      const sessionTitle = messages[0]?.text?.slice(0, 30) || 'محادثة سابقة';
+      const newSession = {
+        id: 'session_' + Date.now(),
+        title: sessionTitle,
+        date: new Date().toLocaleDateString('ar-DZ', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        streamName: selectedStream.name,
+        messages: messages
+      };
+      const updated = [newSession, ...historySessions.slice(0, 14)];
+      setHistorySessions(updated);
+      try {
+        localStorage.setItem('naja7i_chat_sessions_history', JSON.stringify(updated));
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
     setMessages([]);
-    setSelectedFile(null);
-    setPromptInput('');
-    setIsSidebarOpen(false);
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      setPlayingMsgId(null);
+    setInputText('');
+    setAttachedFile(null);
+    setErrorMessage(null);
+    if (textareaRef.current) textareaRef.current.style.height = 'auto';
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    setPlayingMessageId(null);
+  };
+
+  const handleRestoreSession = (session) => {
+    setMessages(session.messages || []);
+    setIsHistoryOpen(false);
+    setErrorMessage(null);
+  };
+
+  const handleDeleteSession = (id, e) => {
+    e.stopPropagation();
+    const updated = historySessions.filter(s => s.id !== id);
+    setHistorySessions(updated);
+    try {
+      localStorage.setItem('naja7i_chat_sessions_history', JSON.stringify(updated));
+    } catch (e) {
+      console.error(e);
     }
   };
 
-  const handleSendMessage = async (customPrompt = null, customMode = null, customStreamId = null) => {
-    const promptToSend = (customPrompt !== null ? customPrompt : promptInput).trim();
-    const fileToSend = selectedFile;
-    const modeToSend = customMode || summaryMode;
-    const streamIdToSend = customStreamId || selectedStreamId;
-    const streamName = STREAMS_LIST.find(s => s.id === streamIdToSend)?.name || 'علوم تجريبية';
+  // Submit User Message
+  const handleSendMessage = async (customPrompt = null, forceLocal = false) => {
+    const textToSend = customPrompt || inputText.trim();
+    if (!textToSend && !attachedFile) return;
 
-    if (!promptToSend && !fileToSend) return;
+    const userMessageId = 'msg_user_' + Date.now();
+    const fileSnapshot = attachedFile ? { name: attachedFile.name, size: attachedFile.size, type: attachedFile.type } : null;
 
-    // Reset input states
-    setPromptInput('');
-    setSelectedFile(null);
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-    }
-
-    const userMsgId = 'msg_user_' + Date.now();
     const userMessage = {
-      id: userMsgId,
-      role: 'user',
-      content: promptToSend || `طلب تلخيص ملف: ${fileToSend?.name}`,
-      mode: modeToSend,
-      streamName,
-      fileMeta: fileToSend ? { name: fileToSend.name, size: fileToSend.size, type: fileToSend.type } : null,
+      id: userMessageId,
+      sender: 'user',
+      text: textToSend,
+      file: fileSnapshot,
+      streamName: selectedStream.name,
+      mode: summaryMode,
       timestamp: new Date().toLocaleTimeString('ar-DZ', { hour: '2-digit', minute: '2-digit' })
     };
 
     setMessages(prev => [...prev, userMessage]);
+    setInputText('');
+    const currentFile = attachedFile;
+    setAttachedFile(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
+    if (textareaRef.current) textareaRef.current.style.height = 'auto';
+
     setIsLoading(true);
-    setStatusMessage('1/3: جاري قراءة وتحليل المستند بالذكاء الاصطناعي...');
+    setErrorMessage(null);
+    setStatusMessage('جاري تحليل المحتوى وتجهيز الملخص...');
 
     try {
-      let extractedContentText = promptToSend;
+      let extractedContentText = '';
       let inlineFile = null;
 
-      if (fileToSend) {
-        const isPdf = fileToSend.type === 'application/pdf' || fileToSend.name.endsWith('.pdf');
-        const isImage = fileToSend.type.startsWith('image/');
+      if (currentFile) {
+        const isPdf = currentFile.type === 'application/pdf' || currentFile.name.endsWith('.pdf');
+        const isImage = currentFile.type.startsWith('image/');
 
         if (isPdf) {
-          setStatusMessage('1/3: استخراج وتطهير النصوص العربية من الـ PDF...');
-          const extracted = await extractTextFromPdf(fileToSend);
-          extractedContentText = extracted.text + (promptToSend ? `\n\nتوجيه إضافي من التلميذ: ${promptToSend}` : '');
+          setStatusMessage('1/3: جاري قراءة ملف الـ PDF وتطهير النصوص العربية...');
+          const extracted = await extractTextFromPdf(currentFile);
+          extractedContentText = extracted.text;
           
-          if (!extracted.text || extracted.text.length < 50) {
-            setStatusMessage('1/3: تحويل المستند للرؤية البصرية (Vision OCR)...');
-            inlineFile = await fileToBase64(fileToSend);
+          if (!extractedContentText || extractedContentText.length < 50) {
+            setStatusMessage('1/3: تحويل المستند المصور للمعالجة البصرية...');
+            inlineFile = await fileToBase64(currentFile);
           }
         } else if (isImage) {
-          setStatusMessage('1/3: ضغط صورة الدرس والتحليل البصري...');
-          inlineFile = await fileToBase64(fileToSend);
+          setStatusMessage('1/3: ضغط صورة الدرس وتجهيزها للتحليل البصري...');
+          inlineFile = await fileToBase64(currentFile);
         } else {
-          extractedContentText = await fileToSend.text();
+          extractedContentText = await currentFile.text();
         }
       }
 
-      setStatusMessage(`2/3: صياغة المخرجات الأكاديمية لشعبة ${streamName}...`);
+      const combinedText = [textToSend, extractedContentText].filter(Boolean).join('\n\n');
 
-      let finalSummary = '';
-      try {
-        finalSummary = await generateAiSummary({
-          apiKey,
-          streamName,
-          mode: modeToSend,
-          rawText: extractedContentText,
-          inlineFile
-        });
-      } catch (aiErr) {
-        console.warn('AI primary attempt failed, fallback to local...', aiErr);
-        if (extractedContentText) {
-          finalSummary = generateLocalHeuristicSummary({
-            text: extractedContentText,
-            subjectName: fileToSend ? fileToSend.name.replace(/\.[^/.]+$/, '') : 'الدرس',
-            streamName
+      setStatusMessage(`2/3: صياغة ملخص ذكي لشعبة ${selectedStream.name}...`);
+
+      let aiResponseText = '';
+
+      if (!forceLocal) {
+        try {
+          aiResponseText = await generateAiSummary({
+            apiKey,
+            streamName: selectedStream.name,
+            mode: summaryMode,
+            rawText: combinedText,
+            inlineFile
+          });
+        } catch (aiErr) {
+          if (combinedText) {
+            console.warn('AI remote failed, falling back to local heuristic:', aiErr);
+            setErrorMessage(`${aiErr.message} (تم التلخيص بالوضع المحلي).`);
+            aiResponseText = generateLocalHeuristicSummary({
+              text: combinedText,
+              subjectName: currentFile ? currentFile.name.replace(/\.[^/.]+$/, '') : 'الدرس',
+              streamName: selectedStream.name
+            });
+          } else {
+            throw aiErr;
+          }
+        }
+      } else {
+        if (combinedText) {
+          aiResponseText = generateLocalHeuristicSummary({
+            text: combinedText,
+            subjectName: currentFile ? currentFile.name.replace(/\.[^/.]+$/, '') : 'الدرس',
+            streamName: selectedStream.name
           });
         } else {
-          throw aiErr;
+          throw new Error('يرجى كتابة نص أو إرفاق ملف للتلخيص.');
         }
       }
 
-      setStatusMessage('3/3: اكتملت الصياغة بنجاح!');
-
-      const aiMsgId = 'msg_ai_' + Date.now();
-      const parsedMindmap = parseMindmapTextToJson(finalSummary);
-      const flashcards = extractFlashcardsFromText(finalSummary);
-
-      const aiMessage = {
-        id: aiMsgId,
-        role: 'assistant',
-        content: finalSummary,
-        mode: modeToSend,
-        streamName,
-        parsedMindmap,
-        flashcards,
+      const assistantMessage = {
+        id: 'msg_ai_' + Date.now(),
+        sender: 'assistant',
+        text: aiResponseText,
+        streamName: selectedStream.name,
+        mode: summaryMode,
         timestamp: new Date().toLocaleTimeString('ar-DZ', { hour: '2-digit', minute: '2-digit' })
       };
 
-      setMessages(prev => [...prev, aiMessage]);
-      setActiveTabByMsgId(prev => ({
-        ...prev,
-        [aiMsgId]: modeToSend === 'mindmap' ? 'mindmap' : 'text'
-      }));
+      setMessages(prev => [...prev, assistantMessage]);
 
-      // Save to Chat History
-      const historyEntry = {
-        id: 'chat_' + Date.now(),
-        date: new Date().toLocaleDateString('ar-DZ', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        title: promptToSend ? promptToSend.slice(0, 40) + '...' : (fileToSend ? fileToSend.name : 'محادثة تلخيص'),
-        streamName,
-        mode: modeToSend,
-        lastAiContent: finalSummary
-      };
-      const updatedHistory = [historyEntry, ...history.slice(0, 14)];
-      setHistory(updatedHistory);
-      try {
-        localStorage.setItem('naja7i_ai_chat_history', JSON.stringify(updatedHistory));
-      } catch (e) {
-        console.error(e);
-      }
-
-    } catch (error) {
-      console.error(error);
-      const errorMsgId = 'msg_err_' + Date.now();
-      setMessages(prev => [
-        ...prev,
-        {
-          id: errorMsgId,
-          role: 'assistant',
-          isError: true,
-          content: `⚠️ ${error.message || 'حدث خطأ أثناء معالجة الطلب. يرجى المحاولة مجدداً.'}`,
-          timestamp: new Date().toLocaleTimeString('ar-DZ', { hour: '2-digit', minute: '2-digit' })
-        }
-      ]);
+    } catch (err) {
+      console.error(err);
+      setErrorMessage(err.message || 'حدث خطأ أثناء معالجة الطلب. يرجى المحاولة مجدداً.');
     } finally {
       setIsLoading(false);
       setStatusMessage('');
     }
   };
 
-  const handleCopyText = (id, text) => {
-    navigator.clipboard.writeText(text);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
-  };
-
   return (
-    <div className="flex h-[calc(100vh-60px)] bg-[#F8FAFC] text-[#0F172A] font-['Cairo'] overflow-hidden" dir="rtl">
+    <div className="flex flex-col h-[calc(100vh-3.75rem)] bg-[#F8FAFC] text-[#0F172A] font-['Cairo'] overflow-hidden" dir="rtl">
       
-      {/* 1. GEMINI-STYLE SIDEBAR / DRAWER */}
-      <aside
-        className={`fixed inset-y-0 right-0 z-40 w-72 bg-white border-l border-[#E2E8F0] shadow-xl lg:shadow-none transition-transform duration-300 lg:static lg:translate-x-0 flex flex-col justify-between ${
-          isSidebarOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        <div className="p-4 space-y-4 flex-1 overflow-y-auto">
-          
-          {/* Header & New Chat Button */}
-          <div className="flex items-center justify-between">
-            <button
-              onClick={handleStartNewChat}
-              className="flex-1 py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <HiPlus className="w-4 h-4" />
-              <span>محادثة جديدة</span>
-            </button>
+      {/* 1. Sleek Top Studio Bar */}
+      <header className="bg-white border-b border-[#E2E8F0] px-4 py-2.5 flex items-center justify-between shrink-0 z-20 shadow-2xs print:hidden">
+        
+        {/* Left / Info */}
+        <div className="flex items-center gap-3">
+          <Link 
+            to="/" 
+            className="p-1.5 rounded-xl hover:bg-slate-100 text-slate-500 hover:text-[#0F172A] transition-colors"
+            title="العودة للرئيسية"
+          >
+            <HiHome className="w-5 h-5" />
+          </Link>
 
-            <button
-              onClick={() => setIsSidebarOpen(false)}
-              className="lg:hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 mr-2 cursor-pointer"
-            >
-              <HiX className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Stream Quick Switcher */}
-          <div className="space-y-1.5 pt-2 border-t border-slate-100">
-            <span className="text-[11px] font-bold text-slate-500 block">شعبتك المفضلة:</span>
-            <div className="grid grid-cols-2 gap-1">
-              {STREAMS_LIST.map((str) => (
-                <button
-                  key={str.id}
-                  onClick={() => setSelectedStreamId(str.id)}
-                  className={`p-1.5 rounded-lg text-right text-[11px] font-bold transition-all flex items-center gap-1.5 cursor-pointer truncate ${
-                    selectedStreamId === str.id
-                      ? 'bg-rose-50 text-[#E11D48] border border-rose-200'
-                      : 'text-slate-600 hover:bg-slate-50 border border-transparent'
-                  }`}
-                >
-                  <span className="shrink-0">{str.icon}</span>
-                  <span className="truncate">{str.name}</span>
-                </button>
-              ))}
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-rose-500 to-[#E11D48] text-white flex items-center justify-center text-lg shadow-sm">
+              🤖
             </div>
-          </div>
-
-          {/* Chat History List */}
-          <div className="space-y-2 pt-3 border-t border-slate-100">
-            <div className="flex items-center justify-between text-[11px] text-slate-500 font-bold px-1">
-              <span>سجل المحادثات والملخصات</span>
-              {history.length > 0 && (
-                <button
-                  onClick={() => {
-                    setHistory([]);
-                    localStorage.removeItem('naja7i_ai_chat_history');
-                  }}
-                  className="text-rose-600 hover:underline cursor-pointer"
-                >
-                  مسح
-                </button>
-              )}
-            </div>
-
-            {history.length === 0 ? (
-              <p className="text-[11px] text-slate-400 text-center py-6">
-                لا توجد محادثات سابقة حتى الآن
-              </p>
-            ) : (
-              <div className="space-y-1 max-h-[380px] overflow-y-auto scrollbar-thin">
-                {history.map((item) => (
-                  <div
-                    key={item.id}
-                    onClick={() => {
-                      const aiMsgId = 'hist_ai_' + item.id;
-                      setMessages([
-                        {
-                          id: 'hist_user_' + item.id,
-                          role: 'user',
-                          content: item.title,
-                          streamName: item.streamName,
-                          timestamp: item.date
-                        },
-                        {
-                          id: aiMsgId,
-                          role: 'assistant',
-                          content: item.lastAiContent,
-                          mode: item.mode || 'mindmap',
-                          streamName: item.streamName,
-                          parsedMindmap: parseMindmapTextToJson(item.lastAiContent),
-                          flashcards: extractFlashcardsFromText(item.lastAiContent),
-                          timestamp: item.date
-                        }
-                      ]);
-                      setActiveTabByMsgId({ [aiMsgId]: item.mode === 'mindmap' ? 'mindmap' : 'text' });
-                      setIsSidebarOpen(false);
-                    }}
-                    className="p-2 rounded-xl hover:bg-slate-100 border border-transparent hover:border-slate-200 text-xs cursor-pointer flex items-center justify-between gap-1.5 group transition-all"
-                  >
-                    <div className="truncate min-w-0">
-                      <span className="block font-bold text-slate-800 truncate group-hover:text-[#E11D48]">
-                        {item.title}
-                      </span>
-                      <span className="text-[10px] text-slate-400">
-                        {item.date} • {item.streamName}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="font-black text-sm text-[#0F172A]">
+                  مستشار نجاحي الذكي
+                </span>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-[11px] font-mono text-emerald-700 font-bold hidden sm:inline">AI Studio</span>
               </div>
-            )}
+              <p className="text-[10px] text-[#64748B]">
+                شعبة {selectedStream.name} • NVIDIA NIM & Vision 🇩🇿
+              </p>
+            </div>
           </div>
-
         </div>
 
-        {/* Sidebar Footer Settings */}
-        <div className="p-3 border-t border-slate-200/80 bg-slate-50/70">
+        {/* Right / Quick Controls */}
+        <div className="flex items-center gap-2">
+          
+          {/* Stream Selector Dropdown Pill */}
+          <div className="relative">
+            <select
+              value={selectedStreamId}
+              onChange={(e) => setSelectedStreamId(e.target.value)}
+              className="px-2.5 py-1.5 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-xs font-bold text-[#0F172A] cursor-pointer focus:outline-none focus:border-[#E11D48] appearance-none pr-7"
+            >
+              {STREAMS_LIST.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.icon} {s.name}
+                </option>
+              ))}
+            </select>
+            <HiChevronDown className="w-3.5 h-3.5 text-[#64748B] absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          </div>
+
+          {/* New Chat Button */}
+          <button
+            onClick={handleNewChat}
+            className="px-3 py-1.5 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-xs font-bold text-[#0F172A] transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
+            title="بدء محادثة وتلخيص جديد"
+          >
+            <HiRefresh className="w-3.5 h-3.5 text-[#E11D48]" />
+            <span className="hidden sm:inline">محادثة جديدة</span>
+          </button>
+
+          {/* History Toggle */}
+          <button
+            onClick={() => setIsHistoryOpen(!isHistoryOpen)}
+            className="p-1.5 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-slate-700 transition-colors cursor-pointer relative"
+            title="سجل المحادثات"
+          >
+            <HiChatAlt2 className="w-5 h-5" />
+            {historySessions.length > 0 && (
+              <span className="w-2 h-2 rounded-full bg-[#E11D48] absolute top-1 right-1" />
+            )}
+          </button>
+
+          {/* API Key Modal Button */}
           <button
             onClick={() => {
               setInputKeyTemp(apiKey);
               setIsKeyModalOpen(true);
             }}
-            className="w-full p-2 rounded-xl text-xs font-bold bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-between transition-colors cursor-pointer shadow-2xs"
+            className="p-1.5 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-slate-700 transition-colors cursor-pointer"
+            title="إعدادات المفاتيح والذكاء"
           >
-            <div className="flex items-center gap-1.5">
-              <HiKey className={`w-4 h-4 ${apiKey ? 'text-emerald-600' : 'text-slate-400'}`} />
-              <span>إعدادات الذكاء والمفاتيح</span>
-            </div>
-            <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-mono">
-              {apiKey ? 'Gemini ✓' : 'NVIDIA ⚡'}
-            </span>
+            <HiKey className={`w-5 h-5 ${apiKey ? 'text-emerald-600' : 'text-slate-500'}`} />
           </button>
+
         </div>
-      </aside>
 
-      {/* Backdrop for Mobile Sidebar */}
-      {isSidebarOpen && (
-        <div
-          onClick={() => setIsSidebarOpen(false)}
-          className="fixed inset-0 z-30 bg-slate-950/40 backdrop-blur-xs lg:hidden"
-        />
-      )}
+      </header>
 
-      {/* 2. MAIN GEMINI CHAT WORKSPACE (CENTER & INPUT BAR) */}
-      <main className="flex-1 flex flex-col h-full overflow-hidden relative">
-        
-        {/* Top Minimal Navigation Bar */}
-        <header className="h-14 px-4 sm:px-6 bg-white border-b border-[#E2E8F0] flex items-center justify-between shrink-0 z-10">
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setIsSidebarOpen(true)}
-              className="lg:hidden p-2 rounded-lg hover:bg-slate-100 text-slate-700 cursor-pointer"
-              title="فتح القائمة الجانبية"
+      {/* 2. Chat Stream & Workspace Area */}
+      <div className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 scrollbar-thin">
+        <div className="max-w-4xl mx-auto space-y-6">
+
+          {/* Empty State / Welcome Screen */}
+          {messages.length === 0 && (
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="py-8 text-center space-y-6"
             >
-              <HiMenuAlt2 className="w-5 h-5" />
-            </button>
-
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-center text-base">
+              
+              <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-rose-500 to-[#E11D48] text-white flex items-center justify-center text-3xl mx-auto shadow-lg ring-8 ring-rose-50">
                 ✨
               </div>
-              <div>
-                <h2 className="text-xs sm:text-sm font-black text-[#0F172A] flex items-center gap-1.5 leading-none">
-                  <span>مستشار البكالوريا الذكي</span>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-rose-50 text-rose-700 font-medium border border-rose-200/60">
-                    Gemini AI Style
-                  </span>
+
+              <div className="space-y-1.5 max-w-lg mx-auto">
+                <h2 className="text-xl sm:text-2xl font-black text-[#0F172A]">
+                  كيف يمكنني مساعدتك في تحضير البكالوريا اليوم؟ 🇩🇿
                 </h2>
-                <span className="text-[10px] text-slate-500 block mt-0.5">
-                  شعبة: {selectedStreamName} • المنهاج الجزائري 🇩🇿
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Link
-              to="/"
-              className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors flex items-center gap-1"
-            >
-              <HiHome className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">الرئيسية</span>
-            </Link>
-          </div>
-        </header>
-
-        {/* Chat Scrollable Message Area */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 scrollbar-thin">
-          
-          {/* EMPTY HERO STATE (GEMINI STYLE GREETING & SUGGESTION PILLS) */}
-          {messages.length === 0 && (
-            <div className="max-w-3xl mx-auto py-8 sm:py-14 text-center space-y-8 animate-fadeIn">
-              
-              <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-200/60 text-xs font-bold text-[#E11D48] shadow-2xs">
-                  <HiSparkles className="w-4 h-4 text-[#E11D48]" />
-                  <span>محرك الذكاء الاصطناعي الأكاديمي لشهادة البكالوريا 🇩🇿</span>
-                </div>
-
-                <h1 className="text-2xl sm:text-4xl font-black text-[#0F172A] tracking-tight">
-                  مرحباً بك.. كيف يمكنني مساعدتك اليوم؟ ✨
-                </h1>
-
-                <p className="text-xs sm:text-sm text-[#64748B] max-w-xl mx-auto leading-relaxed">
-                  ارفع أي ملف درس أو كراس أو اختر أحد النماذج المقترحة أدناه لتوليد مخطط ذهني بصري، ملخص أكاديمي مكثف، أو بطاقات مراجعة تفاعلية.
+                <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">
+                  ارفع ملف PDF أو صورة درس، أو اختر نمط التلخيص واكتب موضوعك، وسيقوم المساعد الذكي بتوليد مخطط مفاهيمي، تلخيص شامل، أو بطاقات مراجعة فورية.
                 </p>
               </div>
 
-              {/* Quick Suggestion Prompt Cards Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-right max-w-2xl mx-auto">
-                {PROMPT_SUGGESTIONS.map((item, idx) => (
+              {/* Quick Starter Prompt Cards Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-right">
+                {QUICK_STARTER_PROMPTS.map((starter, idx) => (
                   <button
                     key={idx}
-                    onClick={() => handleSendMessage(item.text, item.mode, item.streamId)}
-                    className="p-4 rounded-2xl bg-white hover:bg-rose-50/40 border border-[#E2E8F0] hover:border-[#E11D48] shadow-xs hover:shadow-sm transition-all text-right cursor-pointer group space-y-1.5"
+                    onClick={() => {
+                      setSelectedStreamId(starter.streamId);
+                      setSummaryMode(starter.mode);
+                      handleSendMessage(starter.prompt);
+                    }}
+                    className="p-4 rounded-2xl bg-white hover:bg-rose-50/40 border border-[#E2E8F0] hover:border-rose-300 text-right transition-all shadow-2xs hover:shadow-xs group cursor-pointer"
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="text-lg">{item.icon}</span>
-                      <span className="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 font-medium group-hover:bg-rose-100 group-hover:text-rose-800">
-                        {MODES_LIST.find(m => m.id === item.mode)?.name}
-                      </span>
-                    </div>
-
-                    <h4 className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] transition-colors">
-                      {item.title}
-                    </h4>
-
-                    <p className="text-[11px] text-slate-500 leading-snug">
-                      {item.desc}
+                    <span className="block text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] transition-colors mb-1">
+                      {starter.title}
+                    </span>
+                    <p className="text-[11px] text-[#64748B] line-clamp-2 leading-relaxed">
+                      {starter.prompt}
                     </p>
                   </button>
                 ))}
               </div>
 
-            </div>
+            </motion.div>
           )}
 
-          {/* ACTIVE CHAT MESSAGES */}
+          {/* Messages Stream */}
           {messages.map((msg) => {
-            const isUser = msg.role === 'user';
-
-            if (isUser) {
-              return (
-                <div key={msg.id} className="flex justify-start max-w-3xl mx-auto">
-                  <div className="bg-[#0F172A] text-white rounded-2xl rounded-tr-xs px-5 py-3.5 max-w-[85%] sm:max-w-[75%] shadow-sm space-y-2">
-                    {msg.fileMeta && (
-                      <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-rose-300">
-                        <HiPaperClip className="w-4 h-4 shrink-0" />
-                        <span className="font-bold truncate">{msg.fileMeta.name}</span>
-                        <span className="text-[10px] text-slate-400 font-mono">
-                          ({(msg.fileMeta.size / 1024 / 1024).toFixed(2)} MB)
-                        </span>
-                      </div>
-                    )}
-                    <p className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap font-medium">
-                      {msg.content}
-                    </p>
-                    <div className="text-[10px] text-slate-400 text-left font-mono">
-                      {msg.timestamp}
-                    </div>
-                  </div>
-                </div>
-              );
-            }
-
-            // AI ASSISTANT RESPONSE
-            const activeTab = activeTabByMsgId[msg.id] || (msg.mode === 'mindmap' ? 'mindmap' : 'text');
-            const isPlaying = playingMsgId === msg.id;
+            const isUser = msg.sender === 'user';
+            const parsedMindmap = !isUser && msg.mode === 'mindmap' ? parseMindmapTextToJson(msg.text) : null;
+            const extractedFlashcards = !isUser ? extractFlashcardsFromText(msg.text) : [];
 
             return (
-              <div key={msg.id} className="max-w-4xl mx-auto space-y-3">
+              <div
+                key={msg.id}
+                className={`flex gap-3 ${isUser ? 'justify-end' : 'justify-start'}`}
+              >
                 
-                {/* AI Header with Avatar & Tabs */}
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/80 pb-2.5">
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-[#E11D48] to-rose-400 text-white flex items-center justify-center text-sm shadow-xs font-bold">
-                      ✨
+                {/* Assistant Avatar */}
+                {!isUser && (
+                  <div className="w-8 h-8 rounded-xl bg-[#0F172A] text-white flex items-center justify-center text-sm shrink-0 shadow-2xs mt-1">
+                    🤖
+                  </div>
+                )}
+
+                {/* Message Bubble Card */}
+                <div
+                  className={`max-w-3xl w-full rounded-2xl p-4 sm:p-5 transition-all space-y-3 ${
+                    isUser
+                      ? 'bg-rose-50/70 border border-rose-200/80 text-[#0F172A] max-w-xl'
+                      : 'bg-white border border-[#E2E8F0] text-[#0F172A] shadow-xs'
+                  }`}
+                >
+                  {/* Top Bubble Meta */}
+                  <div className="flex items-center justify-between text-[11px] text-[#64748B] border-b border-black/5 pb-2">
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-bold text-[#0F172A]">
+                        {isUser ? 'أنت' : 'مستشار نجاحي الذكي'}
+                      </span>
+                      {msg.streamName && (
+                        <span className="px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 font-medium">
+                          {msg.streamName}
+                        </span>
+                      )}
                     </div>
-                    <span className="text-xs font-black text-slate-900">
-                      مستشار نجاحي الذكي
-                    </span>
-                    <span className="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 font-medium">
-                      {msg.streamName}
-                    </span>
+                    <span className="font-mono text-[10px]">{msg.timestamp}</span>
                   </div>
 
-                  {/* Multi-Tab Output Switcher (Inside Response) */}
-                  {!msg.isError && (
-                    <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-xl text-xs font-bold">
-                      <button
-                        onClick={() => setActiveTabByMsgId(prev => ({ ...prev, [msg.id]: 'mindmap' }))}
-                        className={`px-2.5 py-1 rounded-lg transition-colors cursor-pointer flex items-center gap-1 ${
-                          activeTab === 'mindmap'
-                            ? 'bg-white text-[#E11D48] shadow-2xs'
-                            : 'text-slate-600 hover:text-slate-900'
-                        }`}
-                      >
-                        <span>🗺️</span>
-                        <span>المخطط الذهني</span>
-                      </button>
-
-                      <button
-                        onClick={() => setActiveTabByMsgId(prev => ({ ...prev, [msg.id]: 'text' }))}
-                        className={`px-2.5 py-1 rounded-lg transition-colors cursor-pointer flex items-center gap-1 ${
-                          activeTab === 'text'
-                            ? 'bg-white text-[#E11D48] shadow-2xs'
-                            : 'text-slate-600 hover:text-slate-900'
-                        }`}
-                      >
-                        <span>📑</span>
-                        <span>الملخص الكامل</span>
-                      </button>
-
-                      {msg.flashcards && msg.flashcards.length > 0 && (
-                        <button
-                          onClick={() => setActiveTabByMsgId(prev => ({ ...prev, [msg.id]: 'flashcards' }))}
-                          className={`px-2.5 py-1 rounded-lg transition-colors cursor-pointer flex items-center gap-1 ${
-                            activeTab === 'flashcards'
-                              ? 'bg-white text-[#E11D48] shadow-2xs'
-                              : 'text-slate-600 hover:text-slate-900'
-                          }`}
-                        >
-                          <span>🎴</span>
-                          <span>البطاقات ({msg.flashcards.length})</span>
-                        </button>
-                      )}
+                  {/* Attached File Badge if user uploaded file */}
+                  {isUser && msg.file && (
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-rose-200 text-xs font-bold text-slate-800 shadow-2xs">
+                      <HiDocumentText className="w-4 h-4 text-[#E11D48]" />
+                      <span className="truncate max-w-[200px]">{msg.file.name}</span>
+                      <span className="text-[10px] text-slate-500 font-mono">
+                        ({(msg.file.size / 1024 / 1024).toFixed(2)} MB)
+                      </span>
                     </div>
                   )}
-                </div>
 
-                {/* AI Body Content */}
-                <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-7 shadow-xs">
-                  {msg.isError ? (
-                    <div className="text-rose-700 text-xs font-bold">
-                      {msg.content}
-                    </div>
+                  {/* Message Content */}
+                  {isUser ? (
+                    <p className="text-xs sm:text-sm text-[#0F172A] leading-relaxed whitespace-pre-wrap">
+                      {msg.text}
+                    </p>
                   ) : (
-                    <>
-                      {/* View 1: Mindmap */}
-                      {activeTab === 'mindmap' && (
-                        <VisualMindmapViewer mindmapData={msg.parsedMindmap} />
-                      )}
-
-                      {/* View 2: Markdown Text */}
-                      {activeTab === 'text' && (
-                        <div className="prose prose-slate max-w-none text-xs sm:text-sm leading-relaxed">
-                          <MarkdownContentRenderer content={msg.content} />
+                    <div className="space-y-4">
+                      {/* Mindmap Interactive Viewer inside Chat Bubble */}
+                      {msg.mode === 'mindmap' && parsedMindmap && (
+                        <div className="pt-1">
+                          <VisualMindmapViewer mindmapData={parsedMindmap} />
                         </div>
                       )}
 
-                      {/* View 3: Flashcards */}
-                      {activeTab === 'flashcards' && (
-                        <InteractiveFlashcardsViewer flashcards={msg.flashcards} />
+                      {/* Render Markdown Content */}
+                      <div className="prose prose-slate max-w-none text-xs sm:text-sm leading-relaxed">
+                        <MarkdownContentRenderer content={msg.text} />
+                      </div>
+
+                      {/* Interactive Flashcards inside Chat Bubble */}
+                      {extractedFlashcards.length > 0 && msg.mode === 'comprehensive' && (
+                        <div className="pt-2 border-t border-[#E2E8F0]">
+                          <InteractiveFlashcardsViewer flashcards={extractedFlashcards} />
+                        </div>
                       )}
-                    </>
+
+                      {/* Assistant Message Actions Toolbar */}
+                      <div className="flex items-center justify-between pt-3 border-t border-[#E2E8F0] text-xs text-[#64748B] flex-wrap gap-2 print:hidden">
+                        <div className="flex items-center gap-1.5">
+                          {/* Audio TTS Button */}
+                          <button
+                            onClick={() => toggleSpeech(msg.id, msg.text)}
+                            className={`px-2.5 py-1.5 rounded-lg border font-bold flex items-center gap-1 transition-colors cursor-pointer ${
+                              playingMessageId === msg.id
+                                ? 'bg-rose-600 text-white border-rose-600 animate-pulse'
+                                : 'bg-[#F8FAFC] hover:bg-[#F1F5F9] border-[#CBD5E1] text-slate-700'
+                            }`}
+                            title="الاستماع للملخص صوتياً"
+                          >
+                            {playingMessageId === msg.id ? <HiStop className="w-3.5 h-3.5" /> : <HiVolumeUp className="w-3.5 h-3.5 text-rose-600" />}
+                            <span>{playingMessageId === msg.id ? 'إيقاف' : 'استماع 🔊'}</span>
+                          </button>
+
+                          {/* Copy Button */}
+                          <button
+                            onClick={() => handleCopyMessage(msg.id, msg.text)}
+                            className="p-1.5 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-slate-700 transition-colors cursor-pointer"
+                            title="نسخ النص"
+                          >
+                            <HiClipboardCopy className="w-3.5 h-3.5" />
+                          </button>
+
+                          {/* Download Button */}
+                          <button
+                            onClick={() => handleDownloadMessage(msg.text, msg.streamName)}
+                            className="p-1.5 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-slate-700 transition-colors cursor-pointer"
+                            title="تنزيل كملف Markdown"
+                          >
+                            <HiDownload className="w-3.5 h-3.5" />
+                          </button>
+
+                          {/* Print A4 Button */}
+                          <button
+                            onClick={handlePrint}
+                            className="p-1.5 rounded-lg bg-[#0F172A] hover:bg-slate-800 text-white transition-colors cursor-pointer"
+                            title="طباعة A4"
+                          >
+                            <HiPrinter className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+
+                        {copiedId === msg.id && (
+                          <span className="text-emerald-600 font-bold text-[11px]">
+                            تم النسخ بنجاح ✓
+                          </span>
+                        )}
+                      </div>
+                    </div>
                   )}
+
                 </div>
 
-                {/* AI Footer Toolbar */}
-                {!msg.isError && (
-                  <div className="flex items-center justify-between text-xs text-slate-500 pt-1 px-1 flex-wrap gap-2">
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => toggleSpeech(msg.id, msg.content)}
-                        className={`p-1.5 px-2.5 rounded-lg border text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors ${
-                          isPlaying 
-                            ? 'bg-rose-600 text-white border-rose-600 animate-pulse' 
-                            : 'bg-white hover:bg-slate-50 border-slate-200 text-slate-700'
-                        }`}
-                        title="الاستماع للملخص بالصوت"
-                      >
-                        {isPlaying ? <HiStop className="w-3.5 h-3.5" /> : <HiVolumeUp className="w-3.5 h-3.5 text-[#E11D48]" />}
-                        <span>{isPlaying ? 'إيقاف الصوت' : 'استماع 🔊'}</span>
-                      </button>
-
-                      <button
-                        onClick={() => handleCopyText(msg.id, msg.content)}
-                        className="p-1.5 px-2.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold flex items-center gap-1 cursor-pointer"
-                        title="نسخ الملخص"
-                      >
-                        <HiClipboardCopy className="w-3.5 h-3.5 text-slate-400" />
-                        <span>{copiedId === msg.id ? 'تم النسخ ✓' : 'نسخ'}</span>
-                      </button>
-
-                      <button
-                        onClick={() => window.print()}
-                        className="p-1.5 px-2.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold flex items-center gap-1 cursor-pointer"
-                        title="طباعة A4"
-                      >
-                        <HiPrinter className="w-3.5 h-3.5 text-slate-400" />
-                        <span>طباعة A4</span>
-                      </button>
-                    </div>
-
-                    <span className="text-[10px] text-slate-400 font-mono">
-                      {msg.timestamp}
-                    </span>
+                {/* User Avatar */}
+                {isUser && (
+                  <div className="w-8 h-8 rounded-xl bg-rose-600 text-white flex items-center justify-center text-sm shrink-0 shadow-2xs mt-1">
+                    👤
                   </div>
                 )}
 
@@ -788,145 +679,234 @@ export default function AiSummarizerPage() {
             );
           })}
 
-          {/* THINKING & GENERATING LOADER (GEMINI STYLE SPARKLE ANIMATION) */}
+          {/* Loading Indicator in Chat Stream */}
           {isLoading && (
-            <div className="max-w-4xl mx-auto flex items-start gap-3 p-4 bg-white border border-rose-200/80 rounded-2xl shadow-xs animate-pulse">
-              <div className="w-8 h-8 rounded-xl bg-[#E11D48] text-white flex items-center justify-center text-base shrink-0 animate-spin">
-                ✨
+            <div className="flex gap-3 justify-start">
+              <div className="w-8 h-8 rounded-xl bg-[#0F172A] text-white flex items-center justify-center text-sm shrink-0 shadow-2xs mt-1">
+                🤖
               </div>
-              <div className="space-y-1.5 flex-1">
-                <span className="text-xs font-black text-slate-900 block">
-                  جاري معالجة وتلخيص الدرس بالذكاء الاصطناعي...
-                </span>
-                <p className="text-[11px] text-slate-500 font-mono">
-                  {statusMessage || 'تحليل المصطلحات وصياغة المخطط الهرمي...'}
-                </p>
+              <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs flex items-center gap-3 text-xs text-[#0F172A]">
+                <span className="inline-block w-4 h-4 border-2 border-[#E11D48] border-t-transparent rounded-full animate-spin"></span>
+                <span className="font-bold">{statusMessage || 'جاري التفكير والتوليد بالذكاء الاصطناعي...'}</span>
               </div>
             </div>
           )}
 
-          <div ref={chatEndRef} />
-        </div>
-
-        {/* 3. GEMINI FLOATING BOTTOM PROMPT INPUT BAR */}
-        <div className="p-3 sm:p-5 bg-gradient-to-t from-slate-100 via-[#F8FAFC] to-transparent shrink-0">
-          <div className="max-w-4xl mx-auto bg-white border-2 border-slate-200/80 hover:border-[#E11D48] focus-within:border-[#E11D48] focus-within:ring-4 focus-within:ring-rose-500/10 rounded-2xl sm:rounded-3xl shadow-lg transition-all p-2.5 sm:p-3 space-y-2">
-            
-            {/* File Attachment Pill Preview (if selected) */}
-            {selectedFile && (
-              <div className="flex items-center justify-between p-2 rounded-xl bg-rose-50 border border-rose-200 text-xs">
-                <div className="flex items-center gap-2 truncate">
-                  <span className="text-base">📄</span>
-                  <span className="font-bold text-rose-900 truncate max-w-xs">{selectedFile.name}</span>
-                  <span className="text-[10px] text-rose-600 font-mono">
-                    ({(selectedFile.size / 1024 / 1024).toFixed(2)} MB)
-                  </span>
-                </div>
+          {/* Error Message */}
+          {errorMessage && (
+            <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-900 text-xs space-y-2">
+              <div className="flex items-center gap-2">
+                <span>⚠️</span>
+                <span className="font-bold">{errorMessage}</span>
+              </div>
+              <div className="flex items-center gap-2 pt-1 border-t border-rose-200">
                 <button
-                  onClick={() => setSelectedFile(null)}
-                  className="text-rose-600 hover:text-rose-800 p-1 cursor-pointer"
+                  onClick={() => handleSendMessage(null, true)}
+                  className="px-3 py-1 bg-white hover:bg-rose-100 text-rose-900 font-bold rounded-lg border border-rose-300 transition-colors text-[11px] cursor-pointer"
                 >
-                  <HiX className="w-4 h-4" />
+                  ⚡ إعادة التلخيص بالوضع المحلي
                 </button>
               </div>
-            )}
-
-            {/* Input Textarea Area */}
-            <div className="flex items-center gap-2">
-              
-              {/* File Attachment Button */}
-              <button
-                type="button"
-                onClick={() => document.getElementById('chat-file-input').click()}
-                className="p-2.5 rounded-xl hover:bg-slate-100 text-slate-500 hover:text-[#E11D48] transition-colors cursor-pointer shrink-0"
-                title="إرفاق ملف PDF أو صورة درس"
-              >
-                <HiPaperClip className="w-5 h-5" />
-              </button>
-              <input
-                id="chat-file-input"
-                type="file"
-                accept=".pdf,.png,.jpg,.jpeg,.webp,.txt"
-                className="hidden"
-                onChange={handleFileSelect}
-              />
-
-              {/* Main Input Textarea */}
-              <textarea
-                ref={textareaRef}
-                rows={1}
-                placeholder="اسأل، الصق نص الدرس، أو أرفق ملف PDF لتلخيصه بالذكاء الاصطناعي..."
-                value={promptInput}
-                onChange={handleTextareaChange}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    handleSendMessage();
-                  }
-                }}
-                className="flex-1 bg-transparent border-none text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none resize-none max-h-40 leading-relaxed font-medium"
-              />
-
-              {/* Send Button */}
-              <button
-                type="button"
-                onClick={() => handleSendMessage()}
-                disabled={isLoading || (!promptInput.trim() && !selectedFile)}
-                className="p-2.5 px-4 rounded-xl sm:rounded-2xl bg-[#E11D48] hover:bg-[#BE123C] text-white font-bold transition-all shadow-md hover:shadow-lg disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center shrink-0"
-                title="إرسال الطلب"
-              >
-                <HiSparkles className="w-4 h-4" />
-              </button>
-
             </div>
+          )}
 
-            {/* Bottom Quick Controls (Stream + Mode Pickers) */}
-            <div className="flex items-center justify-between pt-1 border-t border-slate-100 text-xs flex-wrap gap-2">
-              
-              <div className="flex items-center gap-2 flex-wrap">
-                
-                {/* Stream Pill */}
-                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg">
-                  <span className="text-[10px] text-slate-500 font-bold pr-1">الشعبة:</span>
-                  <select
-                    value={selectedStreamId}
-                    onChange={(e) => setSelectedStreamId(e.target.value)}
-                    className="bg-transparent border-none text-[11px] font-bold text-slate-800 focus:outline-none cursor-pointer"
-                  >
-                    {STREAMS_LIST.map(s => (
-                      <option key={s.id} value={s.id}>{s.icon} {s.name}</option>
-                    ))}
-                  </select>
-                </div>
+          <div ref={messagesEndRef} />
+        </div>
+      </div>
 
-                {/* Mode Pill */}
-                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg">
-                  <span className="text-[10px] text-slate-500 font-bold pr-1">النمط:</span>
-                  <select
-                    value={summaryMode}
-                    onChange={(e) => setSummaryMode(e.target.value)}
-                    className="bg-transparent border-none text-[11px] font-bold text-slate-800 focus:outline-none cursor-pointer"
-                  >
-                    {MODES_LIST.map(m => (
-                      <option key={m.id} value={m.id}>{m.icon} {m.name}</option>
-                    ))}
-                  </select>
-                </div>
+      {/* 3. Bottom Sticky Prompt Dock (ChatGPT/Claude Style) */}
+      <div className="bg-white border-t border-[#E2E8F0] p-3 sm:p-4 shrink-0 z-20 shadow-md print:hidden">
+        <div className="max-w-4xl mx-auto space-y-2.5">
+          
+          {/* Mode Selector Chips Strip */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+            <span className="text-[11px] font-bold text-[#64748B] shrink-0 ml-1">
+              النمط:
+            </span>
+            {MODES_LIST.map((mode) => (
+              <button
+                key={mode.id}
+                type="button"
+                onClick={() => setSummaryMode(mode.id)}
+                className={`px-3 py-1 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer flex items-center gap-1 ${
+                  summaryMode === mode.id
+                    ? 'bg-[#E11D48] text-white shadow-2xs'
+                    : 'bg-[#F8FAFC] text-slate-700 hover:bg-[#F1F5F9] border border-[#E2E8F0]'
+                }`}
+              >
+                <span>{mode.label}</span>
+              </button>
+            ))}
+          </div>
 
+          {/* Attached File Preview Chip */}
+          {attachedFile && (
+            <div className="flex items-center justify-between bg-rose-50 border border-rose-200 rounded-xl px-3 py-1.5 text-xs text-slate-800 animate-fadeIn">
+              <div className="flex items-center gap-2 truncate">
+                <HiDocumentText className="w-4 h-4 text-[#E11D48] shrink-0" />
+                <span className="font-bold truncate">{attachedFile.name}</span>
+                <span className="text-[10px] text-slate-500 font-mono">
+                  ({(attachedFile.size / 1024 / 1024).toFixed(2)} MB)
+                </span>
               </div>
-
-              <span className="text-[10px] text-slate-400 font-medium hidden sm:inline">
-                اضغط <kbd className="px-1 py-0.5 rounded bg-slate-100 border border-slate-200 font-mono">Enter ↵</kbd> للإرسال
-              </span>
-
+              <button
+                onClick={handleRemoveAttachedFile}
+                className="text-rose-600 hover:text-rose-800 p-1 cursor-pointer"
+                title="إلغاء الملف"
+              >
+                <HiX className="w-4 h-4" />
+              </button>
             </div>
+          )}
+
+          {/* Main Input Bar */}
+          <div className="flex items-end gap-2 bg-[#F8FAFC] border border-[#CBD5E1] focus-within:border-[#E11D48] rounded-2xl p-2 transition-all shadow-inner">
+            
+            {/* Attachment Button */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".pdf,.png,.jpg,.jpeg,.webp,.txt"
+              className="hidden"
+              onChange={handleFileChange}
+            />
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="p-2 rounded-xl text-slate-500 hover:text-[#E11D48] hover:bg-rose-50 transition-colors cursor-pointer shrink-0"
+              title="إرفاق ملف PDF أو صورة درس"
+            >
+              <HiPaperClip className="w-5 h-5" />
+            </button>
+
+            {/* Expanding Textarea */}
+            <textarea
+              ref={textareaRef}
+              rows={1}
+              value={inputText}
+              onChange={handleTextareaChange}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSendMessage();
+                }
+              }}
+              placeholder="اكتب سؤالك، الصق نص الدرس، أو أرفق ملفاً لتلخيصه فورياً... (Enter للإرسال)"
+              className="flex-1 bg-transparent border-0 text-xs sm:text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none resize-none py-1.5 px-1 max-h-44 leading-relaxed"
+            />
+
+            {/* Send Button */}
+            <button
+              type="button"
+              onClick={() => handleSendMessage()}
+              disabled={isLoading || (!inputText.trim() && !attachedFile)}
+              className="p-2.5 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] disabled:opacity-40 disabled:hover:bg-[#E11D48] text-white shadow-xs transition-all cursor-pointer shrink-0 disabled:cursor-not-allowed"
+              title="إرسال"
+            >
+              <HiArrowUp className="w-4 h-4" />
+            </button>
 
           </div>
+
+          <div className="flex items-center justify-between text-[10px] text-[#94A3B8] px-1">
+            <span>مدعوم بنماذج NVIDIA NIM و Vision السريعة 🇩🇿</span>
+            <span>اضغط Shift + Enter لسطر جديد</span>
+          </div>
+
         </div>
+      </div>
 
-      </main>
+      {/* 4. History Sessions Slide-Over Drawer */}
+      <AnimatePresence>
+        {isHistoryOpen && (
+          <div className="fixed inset-0 z-50 flex">
+            {/* Backdrop */}
+            <div 
+              className="fixed inset-0 bg-slate-950/50 backdrop-blur-xs transition-opacity"
+              onClick={() => setIsHistoryOpen(false)}
+            />
 
-      {/* API Key Modal */}
+            {/* Drawer Panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.25 }}
+              className="relative mr-auto w-full max-w-xs bg-white h-full shadow-2xl z-10 flex flex-col justify-between p-5 text-right"
+            >
+              <div className="space-y-4">
+                <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
+                  <div className="flex items-center gap-2">
+                    <HiChatAlt2 className="w-5 h-5 text-[#E11D48]" />
+                    <h3 className="text-sm font-bold text-[#0F172A]">سجل المحادثات والملخصات</h3>
+                  </div>
+                  <button 
+                    onClick={() => setIsHistoryOpen(false)}
+                    className="text-slate-400 hover:text-slate-700 p-1 cursor-pointer"
+                  >
+                    <HiX className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <button
+                  onClick={handleNewChat}
+                  className="w-full py-2.5 rounded-xl bg-[#E11D48] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-2xs hover:bg-[#BE123C] transition-colors cursor-pointer"
+                >
+                  <HiRefresh className="w-4 h-4" />
+                  <span>بدء محادثة جديدة +</span>
+                </button>
+
+                {/* Sessions List */}
+                <div className="space-y-2 overflow-y-auto max-h-[calc(100vh-220px)] scrollbar-thin">
+                  {historySessions.length === 0 ? (
+                    <p className="text-xs text-slate-400 text-center py-8">
+                      لا توجد محادثات سابقة محفوظة.
+                    </p>
+                  ) : (
+                    historySessions.map((session) => (
+                      <div
+                        key={session.id}
+                        onClick={() => handleRestoreSession(session)}
+                        className="p-3 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-xs cursor-pointer flex items-center justify-between gap-2 group transition-colors"
+                      >
+                        <div className="truncate min-w-0">
+                          <p className="font-bold text-[#0F172A] truncate group-hover:text-[#E11D48]">
+                            {session.title}
+                          </p>
+                          <p className="text-[10px] text-[#64748B]">
+                            {session.date} • {session.streamName}
+                          </p>
+                        </div>
+                        <button
+                          onClick={(e) => handleDeleteSession(session.id, e)}
+                          className="text-slate-400 hover:text-rose-600 p-1 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                          title="حذف"
+                        >
+                          <HiTrash className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+
+              {historySessions.length > 0 && (
+                <button
+                  onClick={() => {
+                    setHistorySessions([]);
+                    localStorage.removeItem('naja7i_chat_sessions_history');
+                  }}
+                  className="text-xs text-rose-600 hover:underline pt-3 border-t border-[#E2E8F0] text-center block w-full cursor-pointer"
+                >
+                  مسح كامل السجل
+                </button>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* 5. Custom API Key Modal */}
       {isKeyModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
           <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4 text-right">
