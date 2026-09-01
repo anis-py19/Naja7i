@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   HiHome, 
@@ -8,7 +8,12 @@ import {
   HiClipboardCopy, 
   HiPrinter, 
   HiDownload, 
-  HiTrash
+  HiTrash,
+  HiKey,
+  HiExternalLink,
+  HiX,
+  HiCheckCircle,
+  HiInformationCircle
 } from 'react-icons/hi';
 import { 
   extractTextFromPdf, 
@@ -16,7 +21,8 @@ import {
   generateAiSummary, 
   generateLocalHeuristicSummary,
   parseMindmapTextToJson,
-  getPlatformDefaultApiKey
+  getPlatformDefaultApiKey,
+  saveUserApiKey
 } from '../services/aiSummarizerService';
 import VisualMindmapViewer from '../components/VisualMindmapViewer';
 import MarkdownContentRenderer from '../components/MarkdownContentRenderer';
@@ -28,8 +34,10 @@ export default function AiSummarizerPage() {
   const [summaryMode, setSummaryMode] = useState('mindmap'); // 'comprehensive' | 'high_yield' | 'questions' | 'mindmap'
   const [activeViewTab, setActiveViewTab] = useState('mindmap'); // 'mindmap' | 'text'
   
-  // Secure Platform API Key (resolved silently with built-in production fallback)
-  const apiKey = getPlatformDefaultApiKey();
+  // Custom API Key Management
+  const [apiKey, setApiKey] = useState(getPlatformDefaultApiKey());
+  const [isKeyModalOpen, setIsKeyModalOpen] = useState(false);
+  const [inputKeyTemp, setInputKeyTemp] = useState('');
 
   // Generation & Status
   const [isLoading, setIsLoading] = useState(false);
@@ -48,6 +56,24 @@ export default function AiSummarizerPage() {
     }
   });
 
+  useEffect(() => {
+    setApiKey(getPlatformDefaultApiKey());
+  }, []);
+
+  const handleSaveApiKey = () => {
+    saveUserApiKey(inputKeyTemp);
+    setApiKey(inputKeyTemp.trim());
+    setIsKeyModalOpen(false);
+    setErrorMessage(null);
+  };
+
+  const handleClearApiKey = () => {
+    saveUserApiKey('');
+    setApiKey('');
+    setInputKeyTemp('');
+    setIsKeyModalOpen(false);
+  };
+
   const handleFileDrop = (e) => {
     e.preventDefault();
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
@@ -65,7 +91,7 @@ export default function AiSummarizerPage() {
     setErrorMessage(null);
   };
 
-  const handleStartSummarize = async () => {
+  const handleStartSummarize = async (forceLocal = false) => {
     if (inputTab === 'file' && !selectedFile) {
       setErrorMessage('يرجى اختيار أو سحب ملف للتلخيص أولاً.');
       return;
@@ -107,25 +133,40 @@ export default function AiSummarizerPage() {
         extractedContentText = rawText.trim();
       }
 
-      setStatusMessage('2/3: جاري صياغة الملخص الأكاديمي بواسطة الذكاء الاصطناعي...');
+      setStatusMessage('2/3: جاري صياغة الملخص الأكاديمي...');
 
       let finalSummary = '';
 
-      if (apiKey && apiKey.trim()) {
-        finalSummary = await generateAiSummary({
-          apiKey,
-          mode: summaryMode,
-          rawText: extractedContentText,
-          inlineFile
-        });
+      if (!forceLocal && apiKey && apiKey.trim()) {
+        try {
+          finalSummary = await generateAiSummary({
+            apiKey,
+            mode: summaryMode,
+            rawText: extractedContentText,
+            inlineFile
+          });
+        } catch (aiErr) {
+          // If AI fails, offer clear error and fallback
+          if (extractedContentText) {
+            console.warn('AI failed, fallback to local summarizer:', aiErr);
+            setErrorMessage(`${aiErr.message} (يمكنك التلخيص بالوضع المحلي أدناه أو تحديث مفتاح API).`);
+            finalSummary = generateLocalHeuristicSummary({
+              text: extractedContentText,
+              subjectName: selectedFile ? selectedFile.name.replace(/\.[^/.]+$/, '') : 'الدرس'
+            });
+          } else {
+            throw aiErr;
+          }
+        }
       } else {
-        // Fallback: If no API Key, use local heuristic summarizer
+        // Fallback: Use local heuristic summarizer
         if (extractedContentText) {
           finalSummary = generateLocalHeuristicSummary({
-            text: extractedContentText
+            text: extractedContentText,
+            subjectName: selectedFile ? selectedFile.name.replace(/\.[^/.]+$/, '') : 'الدرس'
           });
         } else {
-          throw new Error('يرجى إدخال مفتاح Google Gemini المجاني لمعالجة الملفات المصورة عبر الذكاء الاصطناعي.');
+          throw new Error('يرجى إدخال مفتاح Google Gemini API المجاني الخاص بك لمعالجة الصور والمستندات عبر الذكاء الاصطناعي.');
         }
       }
 
@@ -197,7 +238,7 @@ export default function AiSummarizerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-20 font-['Cairo']">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-20 font-['Cairo']" dir="rtl">
       
       {/* Top Banner */}
       <div className="bg-white border-b border-[#E2E8F0] py-6 sm:py-8 print:hidden">
@@ -230,9 +271,21 @@ export default function AiSummarizerPage() {
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="px-3 py-1.5 rounded-xl bg-[#F1F5F9] text-[#0F172A] border border-[#E2E8F0] text-xs font-bold shadow-2xs flex items-center gap-1.5">
-                <span>🇩🇿 المنهاج الوزاري المعتمد</span>
-              </span>
+              <button
+                onClick={() => {
+                  setInputKeyTemp(apiKey);
+                  setIsKeyModalOpen(true);
+                }}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-colors flex items-center gap-1.5 shadow-2xs cursor-pointer ${
+                  apiKey 
+                    ? 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100'
+                    : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
+                }`}
+                title="إعداد مفتاح Gemini API"
+              >
+                <HiKey className={`w-4 h-4 ${apiKey ? 'text-emerald-600' : 'text-slate-500'}`} />
+                <span>{apiKey ? 'مفتاح Gemini API متصل ✓' : 'إدخال مفتاح Gemini API'}</span>
+              </button>
             </div>
           </div>
 
@@ -348,15 +401,38 @@ export default function AiSummarizerPage() {
               <div className="grid grid-cols-2 gap-1.5">
                 <button
                   type="button"
+                  onClick={() => setSummaryMode('mindmap')}
+                  className={`p-2.5 rounded-xl border text-right transition-all cursor-pointer ${
+                    summaryMode === 'mindmap'
+                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48] shadow-2xs font-bold'
+                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:bg-[#F1F5F9]'
+                  }`}
+                >
+                  <div className="text-xs font-bold flex items-center gap-1">
+                    <span>🗺️</span>
+                    <span>مخطط ذهني بصري</span>
+                  </div>
+                  <div className="text-[10px] text-[#64748B] mt-0.5">
+                    شجرة مفاهيم تفاعلية ملونة
+                  </div>
+                </button>
+
+                <button
+                  type="button"
                   onClick={() => setSummaryMode('comprehensive')}
                   className={`p-2.5 rounded-xl border text-right transition-all cursor-pointer ${
                     summaryMode === 'comprehensive'
-                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48]'
-                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569]'
+                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48] shadow-2xs font-bold'
+                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:bg-[#F1F5F9]'
                   }`}
                 >
-                  <span className="text-xs font-bold block">📑 ملخص شامل ومفصل</span>
-                  <span className="text-[10px] text-[#64748B]">مفاهيم، قوانين، وبطاقات حفظ</span>
+                  <div className="text-xs font-bold flex items-center gap-1">
+                    <span>📑</span>
+                    <span>ملخص أكاديمي شامل</span>
+                  </div>
+                  <div className="text-[10px] text-[#64748B] mt-0.5">
+                    مفاهيم، قوانين وبطاقات مراجعة
+                  </div>
                 </button>
 
                 <button
@@ -364,12 +440,17 @@ export default function AiSummarizerPage() {
                   onClick={() => setSummaryMode('high_yield')}
                   className={`p-2.5 rounded-xl border text-right transition-all cursor-pointer ${
                     summaryMode === 'high_yield'
-                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48]'
-                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569]'
+                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48] shadow-2xs font-bold'
+                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:bg-[#F1F5F9]'
                   }`}
                 >
-                  <span className="text-xs font-bold block">⚡ مركز ليلة الامتحان</span>
-                  <span className="text-[10px] text-[#64748B]">قوانين وفخاخ البكالوريا</span>
+                  <div className="text-xs font-bold flex items-center gap-1">
+                    <span>⚡</span>
+                    <span>مكثف ليلة الامتحان</span>
+                  </div>
+                  <div className="text-[10px] text-[#64748B] mt-0.5">
+                    أهم القوانين و5 فخاخ منهجية
+                  </div>
                 </button>
 
                 <button
@@ -377,84 +458,109 @@ export default function AiSummarizerPage() {
                   onClick={() => setSummaryMode('questions')}
                   className={`p-2.5 rounded-xl border text-right transition-all cursor-pointer ${
                     summaryMode === 'questions'
-                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48]'
-                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569]'
+                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48] shadow-2xs font-bold'
+                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:bg-[#F1F5F9]'
                   }`}
                 >
-                  <span className="text-xs font-bold block">🧠 توليد أسئلة وتطبيقات</span>
-                  <span className="text-[10px] text-[#64748B]">QCM ومسائل مع الحل</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setSummaryMode('mindmap')}
-                  className={`p-2.5 rounded-xl border text-right transition-all cursor-pointer ${
-                    summaryMode === 'mindmap'
-                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48]'
-                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569]'
-                  }`}
-                >
-                  <span className="text-xs font-bold block">🗺️ مخطط ذهني نصي</span>
-                  <span className="text-[10px] text-[#64748B]">هيكلة وتسلسل مفاهيمي</span>
+                  <div className="text-xs font-bold flex items-center gap-1">
+                    <span>❓</span>
+                    <span>بنك أسئلة وتطبيقات</span>
+                  </div>
+                  <div className="text-[10px] text-[#64748B] mt-0.5">
+                    أسئلة QCM ومسائل وزارية
+                  </div>
                 </button>
               </div>
             </div>
 
-            {/* Error Message Alert */}
+            {/* Error Message */}
             {errorMessage && (
-              <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-start gap-2">
-                <span className="shrink-0 mt-0.5">⚠️</span>
-                <span>{errorMessage}</span>
+              <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs space-y-2">
+                <div className="flex items-start gap-1.5">
+                  <span className="shrink-0 text-sm">⚠️</span>
+                  <span>{errorMessage}</span>
+                </div>
+                <div className="flex items-center gap-2 pt-1 border-t border-rose-200/60">
+                  <button
+                    onClick={() => handleStartSummarize(true)}
+                    className="px-2.5 py-1 bg-white hover:bg-rose-100 text-rose-900 font-bold rounded-lg border border-rose-300 transition-colors text-[11px] cursor-pointer"
+                  >
+                    ⚡ تجربة التلخيص بالوضع المحلي
+                  </button>
+                  <button
+                    onClick={() => {
+                      setInputKeyTemp(apiKey);
+                      setIsKeyModalOpen(true);
+                    }}
+                    className="px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg transition-colors text-[11px] cursor-pointer"
+                  >
+                    🔑 إدخال مفتاح API جديد
+                  </button>
+                </div>
               </div>
             )}
 
-            {/* Main Action Button */}
+            {/* Action Button */}
             <button
-              onClick={handleStartSummarize}
+              onClick={() => handleStartSummarize(false)}
               disabled={isLoading}
-              className={`w-full py-3.5 rounded-xl text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer ${
-                isLoading 
-                  ? 'bg-slate-400 cursor-not-allowed' 
-                  : 'bg-[#E11D48] hover:bg-[#be123c] active:scale-98'
-              }`}
+              className="w-full py-3 px-4 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm hover:shadow-md transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <HiSparkles className="w-4 h-4" />
-              <span>{isLoading ? (statusMessage || 'جاري التلخيص بالذكاء الاصطناعي...') : 'تلخيص الدرس الآن ✨'}</span>
+              {isLoading ? (
+                <>
+                  <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  <span>{statusMessage || 'جاري التلخيص بواسطة الذكاء الاصطناعي...'}</span>
+                </>
+              ) : (
+                <>
+                  <HiSparkles className="w-4 h-4" />
+                  <span>توليد الملخص والمخطط الآن ✨</span>
+                </>
+              )}
             </button>
 
           </div>
 
-          {/* Recent History Card */}
+          {/* History Panel */}
           {history.length > 0 && (
             <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 shadow-xs space-y-3">
-              <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-2">
-                <span className="text-xs font-bold text-[#0F172A]">ملخصاتك السابقة:</span>
-                <span className="text-[10px] text-[#64748B] font-mono">{history.length} ملخص</span>
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-[#0F172A] flex items-center gap-1">
+                  <span>🕒 سجل الملخصات السابقة</span>
+                  <span className="text-[10px] text-[#64748B]">({history.length})</span>
+                </span>
+                <button
+                  onClick={() => {
+                    setHistory([]);
+                    localStorage.removeItem('naja7i_ai_summaries_history');
+                  }}
+                  className="text-[10px] text-rose-600 hover:underline cursor-pointer"
+                >
+                  مسح السجل
+                </button>
               </div>
 
-              <div className="space-y-2 max-h-48 overflow-y-auto">
-                {history.map((h) => (
+              <div className="space-y-1.5 max-h-48 overflow-y-auto scrollbar-thin">
+                {history.map((item) => (
                   <div
-                    key={h.id}
+                    key={item.id}
                     onClick={() => {
-                      setSummaryResult(h.content);
-                      setSubjectName(h.subjectName);
+                      setSummaryResult(item.content);
+                      setSummaryMode(item.mode || 'mindmap');
                     }}
-                    className="p-2.5 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] flex items-center justify-between gap-2 cursor-pointer transition-colors group"
+                    className="p-2 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-xs cursor-pointer flex items-center justify-between gap-2 group transition-colors"
                   >
-                    <div className="min-w-0">
-                      <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block truncate">
-                        {h.title}
-                      </span>
-                      <span className="text-[10px] text-[#64748B]">
-                        {h.subjectName} • {h.date}
-                      </span>
+                    <div className="truncate min-w-0">
+                      <p className="font-bold text-[#0F172A] truncate group-hover:text-[#E11D48]">
+                        {item.title}
+                      </p>
+                      <p className="text-[10px] text-[#64748B]">
+                        {item.date}
+                      </p>
                     </div>
-
                     <button
-                      onClick={(e) => handleDeleteHistoryItem(h.id, e)}
-                      title="حذف من السجل"
-                      className="text-[#94A3B8] hover:text-rose-600 p-1 cursor-pointer"
+                      onClick={(e) => handleDeleteHistoryItem(item.id, e)}
+                      className="text-slate-400 hover:text-rose-600 p-1 opacity-0 group-hover:opacity-100 transition-opacity"
                     >
                       <HiTrash className="w-3.5 h-3.5" />
                     </button>
@@ -466,164 +572,191 @@ export default function AiSummarizerPage() {
 
         </div>
 
-        {/* Right / Bottom Output View (7 cols) */}
+        {/* Right / Result Area (7 cols) */}
         <div className="lg:col-span-7 space-y-4">
           
-          {/* Summary Display Card */}
-          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 shadow-xs min-h-[500px] flex flex-col justify-between">
-            
-            {/* Header & Quick Action Buttons */}
-            <div>
-              <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-4 mb-4 flex-wrap gap-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-rose-50 text-[#E11D48] border border-rose-200 flex items-center justify-center text-sm font-bold shadow-2xs">
-                    📝
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-[#0F172A]">
-                      الملخص المنهجي المنظم
-                    </h3>
-                    <span className="text-[11px] text-[#64748B]">
-                      تم التوليد والتعرف التلقائي على المادة والشعبة بواسطة الذكاء الاصطناعي 🤖
-                    </span>
-                  </div>
-                </div>
-
-                {summaryResult && (
-                  <div className="flex items-center gap-2 print:hidden flex-wrap">
-                    {parseMindmapTextToJson(summaryResult) && (
-                      <div className="flex items-center p-1 bg-[#F1F5F9] rounded-xl border border-[#E2E8F0] gap-1">
-                        <button
-                          onClick={() => setActiveViewTab('mindmap')}
-                          className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
-                            activeViewTab === 'mindmap'
-                              ? 'bg-[#E11D48] text-white shadow-2xs'
-                              : 'text-[#475569] hover:text-[#0F172A]'
-                          }`}
-                        >
-                          <span>🗺️ مخطط بصري ملون</span>
-                        </button>
-                        <button
-                          onClick={() => setActiveViewTab('text')}
-                          className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
-                            activeViewTab === 'text'
-                              ? 'bg-[#E11D48] text-white shadow-2xs'
-                              : 'text-[#475569] hover:text-[#0F172A]'
-                          }`}
-                        >
-                          <span>📑 نص تفصيلي</span>
-                        </button>
-                      </div>
-                    )}
-
-                    <div className="flex items-center gap-1.5">
-                      <button
-                        onClick={handleCopy}
-                        className="px-2.5 py-1.5 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] flex items-center gap-1 transition-colors cursor-pointer"
-                        title="نسخ النص"
-                      >
-                        <HiClipboardCopy className="w-3.5 h-3.5 text-[#E11D48]" />
-                        <span>{copiedToast ? 'تم النسخ ✓' : 'نسخ'}</span>
-                      </button>
-
-                      <button
-                        onClick={handlePrint}
-                        className="px-2.5 py-1.5 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] flex items-center gap-1 transition-colors cursor-pointer"
-                        title="طباعة"
-                      >
-                        <HiPrinter className="w-3.5 h-3.5" />
-                        <span>طباعة</span>
-                      </button>
-
-                      <button
-                        onClick={handleDownloadTxt}
-                        className="px-2.5 py-1.5 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer shadow-2xs"
-                        title="تحميل كملف Markdown"
-                      >
-                        <HiDownload className="w-3.5 h-3.5" />
-                        <span>تحميل</span>
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Main Content Render */}
-              {isLoading ? (
-                <div className="py-20 text-center space-y-4">
-                  <div className="inline-block p-4 rounded-2xl bg-rose-50 border border-rose-200 animate-pulse">
-                    <HiSparkles className="w-10 h-10 text-[#E11D48]" />
-                  </div>
-                  <div className="space-y-1">
-                    <h4 className="text-sm font-bold text-[#0F172A]">
-                      {statusMessage || 'الذكاء الاصطناعي يحلل الدرس الآن...'}
-                    </h4>
-                    <p className="text-xs text-[#64748B] max-w-sm mx-auto">
-                      يتم استخراج القوانين والمفاهيم والأسئلة وفق المعايير الرسمية لوزارة التربية الوطنية.
-                    </p>
-                  </div>
-                </div>
-              ) : summaryResult ? (
-                activeViewTab === 'mindmap' && parseMindmapTextToJson(summaryResult) ? (
-                  <VisualMindmapViewer 
-                    mindmapData={parseMindmapTextToJson(summaryResult)} 
-                    title={selectedFile?.name || 'مخطط الدرس المفاهيمي'} 
-                  />
-                ) : (
-                  <MarkdownContentRenderer content={summaryResult} />
-                )
-              ) : errorMessage ? (
-                <div className="py-16 text-center space-y-4 max-w-md mx-auto">
-                  <div className="w-16 h-16 rounded-2xl bg-rose-50 border border-rose-200 text-3xl flex items-center justify-center mx-auto shadow-2xs">
-                    ⛔
-                  </div>
-                  <div className="space-y-2">
-                    <h4 className="text-sm sm:text-base font-black text-[#0F172A]">
-                      تنبيه التحقق من المنهاج الوزاري 🇩🇿
-                    </h4>
-                    <p className="text-xs text-[#475569] leading-relaxed">
-                      {errorMessage}
-                    </p>
-                  </div>
+          {summaryResult ? (
+            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 shadow-xs space-y-4">
+              
+              {/* Header & Tabs */}
+              <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-[#E2E8F0] print:hidden">
+                
+                {/* View Tabs */}
+                <div className="flex items-center gap-1.5 p-1 bg-[#F1F5F9] rounded-xl text-xs font-bold">
                   <button
-                    onClick={() => {
-                      setErrorMessage(null);
-                      setSelectedFile(null);
-                      setRawText('');
-                    }}
-                    className="px-4 py-2 rounded-xl bg-[#0F172A] hover:bg-black text-white text-xs font-bold transition-colors cursor-pointer"
+                    onClick={() => setActiveViewTab('mindmap')}
+                    className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1 ${
+                      activeViewTab === 'mindmap'
+                        ? 'bg-white text-[#0F172A] shadow-xs'
+                        : 'text-[#64748B] hover:text-[#0F172A]'
+                    }`}
                   >
-                    اختيار ملف درس بكالوريا آخر ↺
+                    <span>🗺️</span>
+                    <span>المخطط البصري</span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveViewTab('text')}
+                    className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1 ${
+                      activeViewTab === 'text'
+                        ? 'bg-white text-[#0F172A] shadow-xs'
+                        : 'text-[#64748B] hover:text-[#0F172A]'
+                    }`}
+                  >
+                    <span>📑</span>
+                    <span>النص الكامل والبطاقات</span>
                   </button>
                 </div>
-              ) : (
-                <div className="py-24 text-center space-y-3">
-                  <div className="w-14 h-14 rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] text-3xl flex items-center justify-center mx-auto shadow-2xs">
-                    💡
-                  </div>
-                  <h4 className="text-sm font-bold text-[#0F172A]">
-                    في انتظار رفع الملف أو كتابة نص الدرس
-                  </h4>
-                  <p className="text-xs text-[#64748B] max-w-sm mx-auto leading-relaxed">
-                    اختر ملفك من الجهة اليمنى وحدد نمط التلخيص الذي يناسبك لتحصل على ملخص أكاديمي جاهز ومعد للمراجعة.
-                  </p>
+
+                {/* Actions Toolbar */}
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={handleCopy}
+                    className="p-2 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-slate-700 text-xs font-bold flex items-center gap-1 cursor-pointer"
+                    title="نسخ النص"
+                  >
+                    <HiClipboardCopy className="w-4 h-4 text-slate-500" />
+                    <span>{copiedToast ? 'تم النسخ ✓' : 'نسخ'}</span>
+                  </button>
+
+                  <button
+                    onClick={handleDownloadTxt}
+                    className="p-2 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-slate-700 text-xs font-bold flex items-center gap-1 cursor-pointer"
+                    title="تحميل كملف Markdown"
+                  >
+                    <HiDownload className="w-4 h-4 text-slate-500" />
+                    <span>تنزيل</span>
+                  </button>
+
+                  <button
+                    onClick={handlePrint}
+                    className="p-2 rounded-xl bg-[#0F172A] hover:bg-slate-800 text-white text-xs font-bold flex items-center gap-1 cursor-pointer"
+                    title="طباعة الملخص"
+                  >
+                    <HiPrinter className="w-4 h-4" />
+                    <span>طباعة A4</span>
+                  </button>
+                </div>
+
+              </div>
+
+              {/* View 1: Mindmap */}
+              {activeViewTab === 'mindmap' && (
+                <div>
+                  <VisualMindmapViewer mindmapData={parseMindmapTextToJson(summaryResult)} />
                 </div>
               )}
+
+              {/* View 2: Full Markdown Text */}
+              {activeViewTab === 'text' && (
+                <div className="prose prose-slate max-w-none text-xs sm:text-sm leading-relaxed font-['Cairo']">
+                  <MarkdownContentRenderer content={summaryResult} />
+                </div>
+              )}
+
             </div>
-
-            {/* Footer Notice */}
-            {summaryResult && (
-              <div className="pt-6 border-t border-[#E2E8F0] flex items-center justify-between text-[11px] text-[#64748B] flex-wrap gap-2 print:hidden">
-                <span>تم التوليد وفق المنهاج الوزاري المعتمد • منصة نجاحي 🇩🇿</span>
-                <span className="font-mono text-emerald-700 font-bold">جاهز للمراجعة ✓</span>
+          ) : (
+            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-10 text-center shadow-xs space-y-4">
+              <div className="w-16 h-16 rounded-2xl bg-rose-50 text-[#E11D48] flex items-center justify-center text-3xl mx-auto shadow-2xs">
+                ✨
               </div>
-            )}
-
-          </div>
+              <div className="max-w-md mx-auto space-y-1.5">
+                <h3 className="text-base font-bold text-[#0F172A]">
+                  المستشار الأكاديمي الذكي جاهز لتلخيص دروسك
+                </h3>
+                <p className="text-xs text-[#64748B] leading-relaxed">
+                  اختر ملف PDF أو صورة درس أو الصق نصاً، ثم اضغط على «توليد الملخص والمخطط الآن» ليقوم الذكاء الاصطناعي بتحليله فورياً وصياغة مخطط تفاعلي وأسئلة وزارية.
+                </p>
+              </div>
+            </div>
+          )}
 
         </div>
 
       </div>
+
+      {/* API Key Modal */}
+      {isKeyModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
+          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4 text-right">
+            
+            <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg">
+                  <HiKey className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-[#0F172A]">مفتاح Google Gemini API</h3>
+                  <p className="text-[10px] text-[#64748B]">لتلخيص الدروس والصور عبر نماذج الذكاء الاصطناعي</p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setIsKeyModalOpen(false)}
+                className="text-slate-400 hover:text-slate-700 p-1 cursor-pointer"
+              >
+                <HiX className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-xs font-bold text-[#0F172A]">
+                الصق مفتاح API الخاص بك (Gemini API Key):
+              </label>
+              <input
+                type="password"
+                placeholder="AIzaSy..."
+                value={inputKeyTemp}
+                onChange={(e) => setInputKeyTemp(e.target.value)}
+                className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl p-2.5 text-xs text-[#0F172A] font-mono focus:outline-none focus:border-[#E11D48]"
+              />
+              <p className="text-[11px] text-[#64748B] leading-relaxed">
+                يتم حفظ المفتاح محلياً في متصفحك فقط ولا يتم مشاركته مع أي طرف خارجي.
+              </p>
+            </div>
+
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-[#475569] space-y-1.5">
+              <div className="font-bold flex items-center gap-1 text-[#0F172A]">
+                <HiInformationCircle className="w-4 h-4 text-[#0284C7]" />
+                <span>كيفية الحصول على مفتاح مجاني في 10 ثوانٍ:</span>
+              </div>
+              <p className="text-[11px]">
+                1. ادخل إلى موقع <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" className="text-[#0284C7] font-bold underline inline-flex items-center gap-0.5">Google AI Studio <HiExternalLink className="w-3 h-3" /></a>
+              </p>
+              <p className="text-[11px]">
+                2. اضغط على <strong>"Create API key"</strong> وانسخ المفتاح.
+              </p>
+            </div>
+
+            <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#E2E8F0]">
+              {apiKey && (
+                <button
+                  type="button"
+                  onClick={handleClearApiKey}
+                  className="px-3 py-1.5 text-xs font-bold text-rose-600 hover:bg-rose-50 rounded-xl transition-colors cursor-pointer"
+                >
+                  حذف المفتاح
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => setIsKeyModalOpen(false)}
+                className="px-3 py-1.5 text-xs font-bold text-[#64748B] hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
+              >
+                إلغاء
+              </button>
+              <button
+                type="button"
+                onClick={handleSaveApiKey}
+                className="px-4 py-2 text-xs font-bold bg-[#E11D48] hover:bg-[#BE123C] text-white rounded-xl transition-colors cursor-pointer shadow-xs"
+              >
+                حفظ المفتاح ✓
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
 
     </div>
   );

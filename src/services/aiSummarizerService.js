@@ -53,16 +53,31 @@ export function fileToBase64(file) {
 }
 
 /**
- * 🔐 Resolves the active platform API key with built-in production fallback
+ * 🔐 Resolves the active platform API key from env or user localStorage
  */
 export function getPlatformDefaultApiKey() {
-  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_GEMINI_API_KEY) {
-    return import.meta.env.VITE_GEMINI_API_KEY;
+  if (typeof window !== 'undefined') {
+    const userKey = localStorage.getItem('naja7i_gemini_api_key');
+    if (userKey && userKey.trim()) {
+      return userKey.trim();
+    }
   }
-  try {
-    return atob('QVEuQWI4Uk42TFA5U1NEX2VNZjNnZ0J0U0FEbkdERlJvY2FEaUJzWHVoc0FIenZNdjV1T2c=');
-  } catch {
-    return '';
+  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_GEMINI_API_KEY) {
+    return import.meta.env.VITE_GEMINI_API_KEY.trim();
+  }
+  return '';
+}
+
+/**
+ * 💾 Save custom user Gemini API Key
+ */
+export function saveUserApiKey(key) {
+  if (typeof window !== 'undefined') {
+    if (key && key.trim()) {
+      localStorage.setItem('naja7i_gemini_api_key', key.trim());
+    } else {
+      localStorage.removeItem('naja7i_gemini_api_key');
+    }
   }
 }
 
@@ -77,7 +92,7 @@ export async function generateAiSummary({
 }) {
   const activeKey = (apiKey && apiKey.trim()) || getPlatformDefaultApiKey();
   if (!activeKey || !activeKey.trim()) {
-    throw new Error('يرجى إدخال مفتاح Google Gemini API للمتابعة. (المفتاح مجاني بالكامل)');
+    throw new Error('يرجى إدخال مفتاح Google Gemini API المجاني الخاص بك للمتابعة.');
   }
 
   let modeInstruction = '';
@@ -198,10 +213,9 @@ ${modeInstruction}
   }
 
   const candidateModels = [
-    'gemini-3.5-flash-lite',
-    'gemini-3.5-flash',
-    'gemini-3.1-flash-lite',
     'gemini-2.5-flash-lite',
+    'gemini-2.5-flash',
+    'gemini-2.0-flash',
     'gemini-1.5-flash'
   ];
 
@@ -241,7 +255,12 @@ ${modeInstruction}
         }
       } else {
         const errorData = await response.json().catch(() => ({}));
-        const message = errorData?.error?.message || `فشل الاتصال بالنموذج ${modelName} (رمز الخطأ: ${response.status})`;
+        let message = errorData?.error?.message || `خطأ في الاتصال بالنموذج (رمز: ${response.status})`;
+        
+        if (message.includes('bound service account is deleted') || message.includes('API_KEY_INVALID') || message.includes('API key not valid')) {
+          message = 'مفتاح Google Gemini API المدخل غير صالح أو منتهي الصلاحية. يرجى إدخال مفتاح جديد مجاني من Google AI Studio.';
+        }
+        
         lastError = new Error(message);
       }
     } catch (err) {
@@ -249,7 +268,7 @@ ${modeInstruction}
     }
   }
 
-  throw lastError || new Error('تعذر توليد الملخص عبر نماذج الذكاء الاصطناعي المتاحة. يرجى التحقق من صلاحية مفتاح API.');
+  throw lastError || new Error('تعذر توليد الملخص. يرجى التحقق من صلاحية مفتاح Gemini API المدخل.');
 }
 
 /**
@@ -339,4 +358,3 @@ export function parseMindmapTextToJson(text) {
 
   return null;
 }
-
