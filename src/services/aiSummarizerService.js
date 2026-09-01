@@ -203,20 +203,32 @@ function buildModeInstruction(mode, streamName) {
 
     case 'mindmap':
       return `
-النمط المطلوب: 🗺️ مخطط ذهني بصري وهيكلي متكامل (Visual Interactive Mindmap) لشعبة ${streamName}.
-قم بتنظيم محتوى الدرس في شكل محاور رئيسية وفروع واضحة، وفي نهاية إجابتك، أرفق كود JSON التالي بالضبط داخل \`\`\`json\`\`\` ليتمكن النظام من رسم المخطط البصري الملون:
+النمط المطلوب: 🗺️ مخطط ذهني بصري وهيكلي فائق الوضوح والاختصار (Ultra-Clear Mindmap) لشعبة ${streamName}.
+
+⚠️ قواعد ذهبية وإلزامية للمخطط الذهني:
+1. 🚫 **ممنوع كتابة فقرات أو تعاريف طويلة داخل العقد:** اجعل كل عنصر عبارة عن كلمة مفتاحية، مصطلح دقيق، أو عبارة مركزة ومختصرة جداً (من 3 إلى 7 كلمات فقط كحد أقصى).
+2. 🎯 **التسلسل المنطقي المحكم:** قسم الدرس إلى 3 إلى 5 محاور رئيسية واضحة وشاملة لكافة عناصر الوحدة.
+3. ⚡ **التركيز على الكلمات المفتاحية الوزارية (Mots-clés):** التي يحتاجها الطالب في الإجابة بدون أي حشو إنشائي.
+4. 📊 **هيكل الـ JSON الإلزامي في النهاية:**
 
 \`\`\`json
 {
-  "title": "عنوان الدرس الرئيسي",
+  "title": "عنوان الدرس المركز",
   "branches": [
     {
-      "title": "اسم المحور 1",
-      "nodes": ["العنصر أو المفهوم 1", "العنصر أو المفهوم 2"]
+      "title": "1. اسم المحور الأول (قصير)",
+      "nodes": [
+        "نقطة أو مصطلح مفتاحي مركز (قصير)",
+        "نقطة ثانية مركزة",
+        "نقطة ثالثة مركزة"
+      ]
     },
     {
-      "title": "اسم المحور 2",
-      "nodes": ["العنصر أو المفهوم 1", "العنصر أو المفهوم 2"]
+      "title": "2. اسم المحور الثاني (قصير)",
+      "nodes": [
+        "نقطة أو قانون أو علاقة مركزة",
+        "نقطة ثانية مركزة"
+      ]
     }
   ]
 }
@@ -512,12 +524,27 @@ export function extractFlashcardsFromText(text) {
 export function parseMindmapTextToJson(text) {
   if (!text) return null;
 
+  const cleanNodeText = (str) => {
+    if (!str) return '';
+    let cleaned = str.replace(/\*\*/g, '').replace(/^[-•*│├└─\s]+/, '').trim();
+    if (cleaned.length > 90) {
+      cleaned = cleaned.slice(0, 85) + '...';
+    }
+    return cleaned;
+  };
+
   const jsonMatch = text.match(/```json\s*([\s\S]*?)\s*```/);
   if (jsonMatch) {
     try {
       const parsed = JSON.parse(jsonMatch[1]);
       if (parsed.title && Array.isArray(parsed.branches) && parsed.branches.length > 0) {
-        return parsed;
+        return {
+          title: parsed.title.replace(/\*\*/g, '').trim(),
+          branches: parsed.branches.map(b => ({
+            title: b.title.replace(/\*\*/g, '').trim(),
+            nodes: (b.nodes || []).map(cleanNodeText).filter(Boolean)
+          }))
+        };
       }
     } catch {
       // Continue to heuristic parser
@@ -531,17 +558,17 @@ export function parseMindmapTextToJson(text) {
 
   for (const line of lines) {
     if (line.startsWith('# ')) {
-      title = line.replace('# ', '').trim();
+      title = line.replace('# ', '').replace(/\*\*/g, '').trim();
     } else if (line.startsWith('## ') || line.startsWith('### ') || line.match(/^[1-9]\.\s+/)) {
       if (currentBranch && currentBranch.nodes.length > 0) {
         branches.push(currentBranch);
       }
       currentBranch = {
-        title: line.replace(/^[#\d.\-\s]+/, '').trim(),
+        title: line.replace(/^[#\d.\-\s]+/, '').replace(/\*\*/g, '').trim(),
         nodes: []
       };
     } else if (line.startsWith('- ') || line.startsWith('• ') || line.startsWith('* ') || line.includes('├──') || line.includes('└──')) {
-      const nodeText = line.replace(/^[-•*│├└─\s]+/, '').trim();
+      const nodeText = cleanNodeText(line);
       if (nodeText && currentBranch) {
         currentBranch.nodes.push(nodeText);
       }
