@@ -342,10 +342,10 @@ async function generateViaNvidia({ modeInstruction, systemPrompt, rawText, inlin
             }
           } else {
             const errData = await response.json().catch(() => ({}));
-            console.warn(`NVIDIA model ${model} at ${endpoint} HTTP ${response.status}:`, errData);
+            console.warn(`NVIDIA endpoint ${endpoint} with model ${model} HTTP ${response.status}:`, errData);
           }
         } catch (endpointErr) {
-          console.warn(`Endpoint ${endpoint} failed for ${model}:`, endpointErr.message);
+          console.warn(`Endpoint ${endpoint} failed:`, endpointErr.message);
           lastError = endpointErr;
         }
       }
