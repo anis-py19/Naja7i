@@ -4,11 +4,28 @@ import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 // Configure worker for in-browser PDF text extraction
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
-// Default Built-in High-Performance NVIDIA NIM Key (Protected & Production-Ready)
-const DEFAULT_NVIDIA_KEY = atob('bnZhcGktOV9MZlByaWJTQ0E1bmIzeFxaYzU5UnlvcnBEWmNva01fUXpidW5mREJRNF82UFZCT1ZwQ0pLQVB1Tm05LWVzQw==');
+// Default Built-in High-Performance NVIDIA NIM Key
+const DEFAULT_NVIDIA_KEY = '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';
 
 /**
- * ⚡ Compress and resize high-res images in browser before upload
+ * 🧹 Clean and normalize Arabic text extracted from PDF
+ */
+export function sanitizeArabicPdfText(text) {
+  if (!text) return '';
+
+  return text
+    // Replace multiple spaces/tabs with a single space
+    .replace(/[ \t]+/g, ' ')
+    // Fix spaces between single Arabic letters (common in PDF extraction)
+    .replace(/([\u0600-\u06FF])\s+([\u0600-\u06FF])\s+([\u0600-\u06FF])/g, '$1$2$3')
+    .replace(/([\u0600-\u06FF])\s+([\u0600-\u06FF])/g, '$1$2')
+    // Remove isolated weird artifacts
+    .replace(/\n\s*\n\s*\n+/g, '\n\n')
+    .trim();
+}
+
+/**
+ * ⚡ Compress and resize high-res images in browser before upload (<800KB)
  */
 export async function compressImage(file, maxWidth = 1280, maxHeight = 1280, quality = 0.8) {
   return new Promise((resolve) => {
@@ -75,17 +92,19 @@ export async function extractTextFromPdf(file) {
     const pdfDoc = await loadingTask.promise;
 
     let fullText = '';
-    const maxPages = Math.min(pdfDoc.numPages, 40); // Up to 40 pages
+    const maxPages = Math.min(pdfDoc.numPages, 30); // Up to 30 pages
 
     for (let pageNum = 1; pageNum <= maxPages; pageNum++) {
       const page = await pdfDoc.getPage(pageNum);
       const textContent = await page.getTextContent();
       const pageText = textContent.items.map(item => item.str).join(' ');
-      fullText += `\n--- [صفحة ${pageNum}] ---\n` + pageText;
+      fullText += `\n` + pageText;
     }
 
+    const cleaned = sanitizeArabicPdfText(fullText);
+
     return {
-      text: fullText.trim(),
+      text: cleaned,
       pagesCount: pdfDoc.numPages,
       extractedPages: maxPages
     };
@@ -156,7 +175,7 @@ function buildModeInstruction(mode, streamName) {
     case 'high_yield':
       return `
 النمط المطلوب: ⚡ ملخص مركز ليلة الامتحان (High-Yield 5-Minute Sheet) مخصص لشعبة ${streamName}.
-ركز فقط وبشكل مكثف على:
+صغ الملخص بإتقان وبأعلى معايير البكالوريا الجزائرية:
 1. 📌 **القوانين والمعادلات والعلاقات الرياضية/العلمية الأساسية** مع وحدات القياس الرسمية (SI).
 2. 📖 **أهم 5 تعاريف ومصطلحات وزارية** تتكرر في التصحيح النموذجي للبكالوريا.
 3. ⚠️ **أخطر 5 فخاخ منهجية وحسابية** يقع فيها المترشحون وكيفية تجنبها بالضبط.
@@ -210,11 +229,12 @@ function buildModeInstruction(mode, streamName) {
 النمط المطلوب: 📑 ملخص أكاديمي شامل ومفصل (Comprehensive Study Guide) لشعبة ${streamName}.
 نظم الملخص وفق الهيكل التالي بالضبط:
 
+# 📑 ملخص الدرس الأكاديمي الشامل
 ## 📌 أولاً: المدخل والمفاهيم الأساسية للوحدة
 (شرح مبسط ومباشر للأفكار الرئيسية بتسلسل منطقي)
 
 ## 📝 ثانياً: القوانين، القواعد والتعاريف المعتمدة
-(جدول Markdown منظم يوضح القانون، الرمز، وحدة القياس، وشروط التطبيق)
+(جدول Markdown منظم يوضح المفهوم/القانون، الرمز، وحدة القياس، وشروط التطبيق)
 
 ## 🎯 ثالثاً: منهجية الإجابة وأسرار البكالوريا 🇩🇿
 (كيف تطرح أسئلة هذه الوحدة في امتحانات البكالوريا الرسمية وما هي الكلمات المفتاحية المطلوبة)
@@ -233,12 +253,16 @@ function buildModeInstruction(mode, streamName) {
 }
 
 /**
- * 🤖 Primary AI Summarizer via NVIDIA NIM (Kimi K3 & Llama 3.2 Vision)
+ * 🤖 Primary AI Summarizer via NVIDIA NIM (openai/gpt-oss-120b, moonshotai/kimi-k3 & meta/llama-3.2-11b-vision-instruct)
  */
 async function generateViaNvidia({ modeInstruction, systemPrompt, rawText, inlineFile }) {
-  const models = inlineFile ? ['meta/llama-3.2-11b-vision-instruct', 'moonshotai/kimi-k3'] : ['moonshotai/kimi-k3', 'meta/llama-3.2-11b-vision-instruct'];
+  const candidateModels = inlineFile 
+    ? ['meta/llama-3.2-11b-vision-instruct', 'meta/llama-3.2-90b-vision-instruct']
+    : ['openai/gpt-oss-120b', 'moonshotai/kimi-k3', 'meta/llama-3.2-11b-vision-instruct'];
 
-  for (const model of models) {
+  let lastError = null;
+
+  for (const model of candidateModels) {
     try {
       const messages = [
         {
@@ -264,11 +288,16 @@ async function generateViaNvidia({ modeInstruction, systemPrompt, rawText, inlin
           ]
         });
       } else {
+        // Limit rawText to ~12000 chars to avoid token explosion
+        const sanitizedText = (rawText || '').slice(0, 15000);
         messages.push({
           role: 'user',
-          content: `${modeInstruction}\n\nإليك نص الدرس / الوثيقة المراد تلخيصها:\n\n${rawText}`
+          content: `${modeInstruction}\n\nإليك نص الدرس / الوثيقة المراد تلخيصها:\n\n${sanitizedText}`
         });
       }
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 28000); // 28s timeout
 
       const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
         method: 'POST',
@@ -279,22 +308,31 @@ async function generateViaNvidia({ modeInstruction, systemPrompt, rawText, inlin
         body: JSON.stringify({
           model,
           messages,
-          temperature: 0.5,
-          max_tokens: 3800
-        })
+          temperature: 0.4,
+          max_tokens: 3500
+        }),
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
 
       if (response.ok) {
         const data = await response.json();
         const output = data.choices?.[0]?.message?.content?.trim();
-        if (output) return output;
+        if (output && output.length > 30) {
+          return output;
+        }
+      } else {
+        const errData = await response.json().catch(() => ({}));
+        console.warn(`NVIDIA model ${model} HTTP ${response.status}:`, errData);
       }
     } catch (e) {
-      console.warn(`NVIDIA model ${model} attempt failed:`, e);
+      console.warn(`NVIDIA model ${model} attempt error:`, e.message);
+      lastError = e;
     }
   }
 
-  throw new Error('تعذر إتمام التلخيص عبر خوادم NVIDIA NIM.');
+  throw new Error(lastError ? `فشل الاتصال بالذكاء الاصطناعي: ${lastError.message}` : 'تعذر إتمام التلخيص عبر خوادم الذكاء الاصطناعي.');
 }
 
 /**
@@ -317,7 +355,7 @@ async function generateViaGemini({ customApiKey, modeInstruction, systemPrompt, 
     });
   } else {
     contentsParts.push({
-      text: `إليك نص الدرس / الوثيقة المراد تلخيصها:\n\n${rawText}`
+      text: `إليك نص الدرس / الوثيقة المراد تلخيصها:\n\n${rawText.slice(0, 15000)}`
     });
   }
 
@@ -395,54 +433,41 @@ export async function generateAiSummary({
     }
   }
 
-  // 2. Primary Engine: NVIDIA NIM (Kimi K3 / Llama 3.2 Vision)
-  try {
-    return await generateViaNvidia({
-      modeInstruction,
-      systemPrompt,
-      rawText,
-      inlineFile
-    });
-  } catch (nvidiaError) {
-    console.error('NVIDIA NIM failed:', nvidiaError);
-    throw nvidiaError;
-  }
+  // 2. Primary Engine: NVIDIA NIM (Kimi K3 / Llama 3.2 Vision / GPT-OSS)
+  return await generateViaNvidia({
+    modeInstruction,
+    systemPrompt,
+    rawText,
+    inlineFile
+  });
 }
 
 /**
  * ⚡ Offline Local Heuristic BAC Summarizer (يعمل محلياً بدون إنترنت)
  */
 export function generateLocalHeuristicSummary({ text, subjectName = 'المادة', streamName = 'جميع الشعب' }) {
-  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+  const cleaned = sanitizeArabicPdfText(text);
+  const paragraphs = cleaned.split('\n').map(p => p.trim()).filter(p => p.length > 20);
 
-  const definitions = lines.filter(l =>
-    l.includes('هو') || l.includes('هي') || l.includes('تعريف') || l.includes('يقصد ب') || l.includes('مفهوم')
-  ).slice(0, 6);
-
-  const keyPoints = lines.filter(l =>
-    l.startsWith('-') || l.startsWith('•') || l.startsWith('*') || l.match(/^\d+[.\-)]/)
-  ).slice(0, 12);
+  const mainPoints = paragraphs.slice(0, 8);
 
   return `
-# 📑 ملخص الدرس الأكاديمي (الوضع المحلي الذكي)
-**المادة:** ${subjectName} | **الشعبة:** ${streamName} | **المرجع:** منهاج البكالوريا الجزائري 🇩🇿
+# 📑 ملخص الدرس الأكاديمي
+**الموضوع:** ${subjectName} | **الشعبة:** ${streamName} | **المرجع:** منهاج البكالوريا الجزائري 🇩🇿
 
 ---
 
-## 📌 1. أبرز المفاهيم والتعريفات الأساسية:
-${definitions.length > 0 ? definitions.map(d => `- **مفهوم:** ${d}`).join('\n') : '- يحتوي الملف على مفاهيم أساسية تتطلب مراجعة شاملة لجميع العناصر.'}
+## 📌 1. المفاهيم والنقاط المحورية المستخلصة:
+${mainPoints.map((p, i) => `### ${i + 1}. عنصر محوري:\n${p}`).join('\n\n')}
 
-## 📝 2. النقاط والعناصر المحورية للوحدة:
-${keyPoints.length > 0 ? keyPoints.map(k => `${k}`).join('\n') : lines.slice(0, 8).map(l => `- ${l}`).join('\n')}
+## 🎯 2. توجيهات منهجية لشهادة البكالوريا 🇩🇿:
+- **التركيز على الكلمات المفتاحية:** احرص على صياغة الإجابة بالمصطلحات الرسمية المعتمدة في التصحيح الوزاري.
+- **تجنب الإسهاب غير المفيد:** الإجابة الدقيقة والمباشرة هي التي تضمن لك العلامة الكاملة.
+- **تدوين الأخطاء:** دون أي ثغرة في كراس الأخطاء بالمنصة لترسيخ المفاهيم.
 
-## 🎯 3. نصائح منهجية لبكالوريا الجزائر 🇩🇿:
-- **احفظ المصطلحات الوزارية:** ركز على الكلمات المفتاحية المعتمدة في التصحيح الرسمي.
-- **حل دورات البكالوريا السابقة:** تدرب على مواضيع 2008—2026 لتثبيت طريقة طرح الأسئلة وإدارة الوقت.
-- **دون أخطاءك:** سجل الأخطاء المتكررة في كراس الأخطاء بالمنصة لمراجعتها ليلة الامتحان.
-
-## 🎴 4. بطاقات المراجعة السريعة (Flashcards):
-- **بطاقة 1 | س:** ما هو المفهوم الجوهري للوحدة؟ ➔ **ج:** راجع التعريفات الأساسية المدونة أعلاه وتأكد من حفظ شروط التطبيق.
-- **بطاقة 2 | س:** ما هو الفخ الأكثر شيوعاً؟ ➔ **ج:** إهمال كتابة وحدات القياس (SI) أو إغفال تبرير خطوات الحساب في الإجابة.
+## 🎴 3. بطاقات المراجعة الذكية (Flashcards):
+- **بطاقة 1 | س:** ما هي الفكرة الأساسية للوحدة؟ ➔ **ج:** ${paragraphs[0] ? paragraphs[0].slice(0, 100) + '...' : 'مراجعة المفاهيم والروابط الأساسية في المنهاج.'}
+- **بطاقة 2 | س:** كيف تتجنب فقدان النقاط في هذه الوحدة؟ ➔ **ج:** التأكد من كتابة الشروط المنهجية وتبرير كل خطوة بدقة.
 `;
 }
 
@@ -472,7 +497,7 @@ export function extractFlashcardsFromText(text) {
     defLines.forEach((def, i) => {
       flashcards.push({
         id: 'fc_def_' + i,
-        question: `عرف المفهوم التالي بدقة:`,
+        question: `ما هو تعريف المفهوم التالي؟`,
         answer: def.replace(/^[-•*#\s]+/, '').trim()
       });
     });
