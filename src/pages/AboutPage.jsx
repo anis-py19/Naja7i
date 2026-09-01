@@ -12,7 +12,7 @@ export default function AboutPage() {
     if (navigator.share) {
       navigator.share({
         title: 'منصة نجاحي — Naja7i BAC 3AS',
-        text: 'بنك الدروس والملخصات ومواضيع البكالوريا الجزائرية (2008-2025) مجاناً 100%',
+        text: 'بنك الدروس والملخصات ومواضيع البكالوريا الجزائرية (2008-2026) مجاناً 100%',
         url: window.location.origin
       }).catch(() => { });
     } else {

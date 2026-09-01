@@ -20,7 +20,7 @@ export default function FounderStorySection() {
 
             <div className="space-y-1 max-w-2xl">
               <div className="flex items-center justify-center sm:justify-start gap-2">
-                <span className="px-2.5 py-0.5 rounded-full bg-white text-[#E11D48] text-[11px] font-bold border border-[#E2E8F0]">
+                <span className="px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 text-xs font-medium border border-rose-200/60">
                   مبادرة طلابية خالصة 🇩🇿
                 </span>
                 <span className="text-xs text-[#64748B]">صدقة جارية</span>

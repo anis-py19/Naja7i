@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { 
   HiBookOpen, 
   HiChevronLeft, 
-  HiSearch
+  HiSearch,
+  HiSparkles
 } from 'react-icons/hi';
 import { STREAMS } from '../data/streamsData';
 import FounderStorySection from '../components/FounderStorySection';
@@ -15,59 +16,45 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
   const portals = [
     {
       title: 'الشعب والمواد الدراسية',
-      desc: 'مقررات وبرامج البكالوريا الرسمية لجميع الشعب مع الوحدات والمعاملات.',
+      desc: 'مقررات وبرامج البكالوريا الرسمية لجميع الشعب الست مع تفصيل الوحدات والمعاملات.',
       path: '/streams',
       icon: '🏛️',
       badge: 'المنهاج الوزاري'
     },
     {
       title: 'مكتبة الملخصات والسلاسل',
-      desc: 'ملخصات شاملة وسلاسل تمارين محلولة لأفضل أساتذة الجزائر مع عارض PDF مباشر.',
+      desc: 'ملخصات شاملة وسلاسل تمارين محلولة لأفضل أساتذة الجزائر مع عارض PDF فوري.',
       path: '/library',
       icon: '📚',
       badge: 'ملخصات وتمارين'
     },
     {
       title: 'أرشيف مواضيع البكالوريا',
-      desc: 'مواضيع وحلول شهادة البكالوريا الرسمية من 2008 إلى 2025 مع سلم التنقيط.',
+      desc: 'مواضيع وحلول شهادة البكالوريا الرسمية من 2008 إلى 2026 مع سلالم التنقيط الوزارية.',
       path: '/bac-archive',
       icon: '📄',
-      badge: '2008 — 2025'
+      badge: '2008 — 2026'
     },
     {
-      title: 'دليل قنوات وأساتذة اليوتيوب',
-      desc: 'قائمة مرتبة لأفضل قنوات البكالوريا التعليمية في الجزائر مصنفة حسب كل مادة.',
-      path: '/youtube-teachers',
-      icon: '🎥',
-      badge: 'شروحات بالفيديو'
+      title: 'الملخص الذكي بالذكاء الاصطناعي ✨',
+      desc: 'تلخيص فوري لملفات PDF وصور الكراريس، رسم خرائط ذهنية تفاعلية وتوليد أسئلة وزارية.',
+      path: '/ai-summarizer',
+      icon: '🤖',
+      badge: 'مدعوم بـ AI & Vision'
     },
     {
-      title: 'العداد التنازلي والمواعيد',
-      desc: 'متابعة الأيام المتبقية حتى انطلاق امتحان البكالوريا ورزنامة المحطات الرسمية.',
-      path: '/countdown',
-      icon: '⏳',
-      badge: '07 جوان'
+      title: 'غرفة التركيز وبومودورو 🎧',
+      desc: 'أجواء دراسة هادئة مع مؤقت بومودورو ذكي، أصوات محيطية عازلة للضوضاء، ونصائح متجددة.',
+      path: '/focus-room',
+      icon: '🎧',
+      badge: 'دراسة بدون تشتت'
     },
     {
-      title: 'حاسبة معدل البكالوريا',
-      desc: 'حساب المعدل الفوري بالمعاملات الرسمية لجميع الشعب ومعرفة التخصصات المتاحة.',
-      path: '/calculator',
-      icon: '🧮',
-      badge: 'المعاملات الرسمية'
-    },
-    {
-      title: 'مخطط وجداول المراجعة الأسبوعية',
-      desc: 'جداول تفصيلية بالساعات للمتمدرسين والأحرار مع منهجية الحفظ والتركيز العميق.',
-      path: '/study-planner',
-      icon: '📅',
-      badge: 'جداول جاهزة للطباعة'
-    },
-    {
-      title: 'دليل المنهاج والبرنامج الوزاري',
-      desc: 'فهرس الدروس والمحاور الرسمية المقررة وزارياً لجميع الشعب والمواد مع الكفاءات المستهدفة.',
-      path: '/curriculum',
-      icon: '📖',
-      badge: 'المنهاج الرسمي 2026'
+      title: 'كراس الأخطاء والفخاخ الذكي 📓',
+      desc: 'سجل أخطاء التمارين مع القواعد الذهبية، وتوليد ورقة A4 ملخصة لمراجعتها ليلة الامتحان.',
+      path: '/mistakes-notebook',
+      icon: '📓',
+      badge: 'سر المتفوقين'
     },
     {
       title: 'بنك الأسئلة والاختبارات التفاعلية',
@@ -77,18 +64,39 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       badge: 'تصحيح وشرح فوري'
     },
     {
-      title: 'غرفة التركيز وبومودورو 🎧',
-      desc: 'أجواء دراسة هادئة مع مؤقت بومودورو ذكي، أصوات طبيعية عازلة للضوضاء، ونصائح بكالوريا متجددة.',
-      path: '/focus-room',
-      icon: '🎧',
-      badge: 'دراسة بدون تشتت'
+      title: 'حاسبة معدل البكالوريا',
+      desc: 'حساب المعدل الفوري بالمعاملات الرسمية لجميع الشعب مع معرفة التخصصات الجامعية المتاحة.',
+      path: '/calculator',
+      icon: '🧮',
+      badge: 'المعاملات الرسمية'
     },
     {
-      title: 'كراس الأخطاء والفخاخ الذكي 📓',
-      desc: 'سجل كل فكرة تمرين أخطأت فيها مع كتابة القاعدة الذهبية، وراجع كراسك واطبعه ليلة البكالوريا.',
-      path: '/mistakes-notebook',
-      icon: '📓',
-      badge: 'سر المتفوقين'
+      title: 'مخطط وجداول المراجعة الأسبوعية',
+      desc: 'جداول تفصيلية بالساعات للمتمدرسين والأحرار قابلة للطباعة A4 مع منهجية الحفظ الفعال.',
+      path: '/study-planner',
+      icon: '📅',
+      badge: 'جداول جاهزة للطباعة'
+    },
+    {
+      title: 'دليل قنوات وأساتذة اليوتيوب',
+      desc: 'قائمة مرتبة لأفضل قنوات البكالوريا التعليمية في الجزائر مصنفة حسب كل مادة وشعبة.',
+      path: '/youtube-teachers',
+      icon: '🎥',
+      badge: 'شروحات بالفيديو'
+    },
+    {
+      title: 'دليل المنهاج والبرنامج الوزاري',
+      desc: 'فهرس الدروس والمحاور الرسمية المقررة وزارياً لجميع الشعب والمواد مع الكفاءات المستهدفة.',
+      path: '/curriculum',
+      icon: '📖',
+      badge: 'المنهاج الرسمي'
+    },
+    {
+      title: 'العداد التنازلي والمواعيد الرسمية',
+      desc: 'متابعة الأيام المتبقية حتى انطلاق امتحان البكالوريا ورزنامة المحطات الامتحانية الرسمية.',
+      path: '/countdown',
+      icon: '⏳',
+      badge: 'مواعيد البكالوريا'
     }
   ];
 
@@ -108,7 +116,7 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
           </h1>
 
           <p className="text-xs sm:text-sm text-[#475569] max-w-2xl mx-auto leading-relaxed">
-            مكتبة منظمة تجمع أفضل ملخصات وسلاسل أساتذة الجزائر، مواضيع وحلول البكالوريا الرسمية، وأدوات المراجعة بدون إعلانات أو روابط خارجية.
+            مكتبة رقمية شاملة تجمع أفضل ملخصات وسلاسل أساتذة الجزائر، أرشيف البكالوريا الرسمي (2008—2026)، وأدوات المراجعة الذكية بدون إعلانات أو تشتيت.
           </p>
 
           {/* Actions */}
@@ -126,6 +134,13 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
             >
               <HiBookOpen className="w-4 h-4" />
               <span>تصفح بنك الملخصات</span>
+            </Link>
+            <Link
+              to="/ai-summarizer"
+              className="px-5 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-[#E11D48] border border-rose-200 font-bold text-xs sm:text-sm transition-all shadow-2xs flex items-center gap-2"
+            >
+              <HiSparkles className="w-4 h-4" />
+              <span>الملخص الذكي AI</span>
             </Link>
           </div>
 
@@ -177,7 +192,7 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
             أقسام وأدوات المنصة التعليمية
           </h2>
           <p className="text-xs text-[#64748B] mt-1">
-            كل ما تحتاجه للتحضير للبكالوريا مقسم في مساحات مستقلة وسريعة
+            كل ما يحتاجه طالب البكالوريا مقسم في مساحات ذكية، سريعة وخالية من الإعلانات
           </p>
         </div>
 

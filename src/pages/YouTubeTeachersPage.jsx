@@ -81,9 +81,9 @@ export default function YouTubeTeachersPage() {
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-rose-50 text-[#E11D48] border border-rose-100 text-xs font-semibold mb-2">
-                <HiAcademicCap className="w-4 h-4" />
-                <span>دليل تعليمي محايد وشامل للبكالوريا الجزائرية</span>
+              <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 border border-rose-200/60 text-xs font-medium mb-2">
+                <HiAcademicCap className="w-4 h-4 text-rose-600" />
+                <span>دليل تعليمي شامل لأساتذة البكالوريا 🇩🇿</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A]">
                 دليل أساتذة وقنوات اليوتيوب 🎥

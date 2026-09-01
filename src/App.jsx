@@ -191,6 +191,12 @@ function App() {
               <AiSummarizerPage />
             }
           />
+          <Route
+            path="/ai-summarize"
+            element={
+              <AiSummarizerPage />
+            }
+          />
 
           {/* 6.8 دليل المنهاج والبرنامج الوزاري الرسمي */}
           <Route
