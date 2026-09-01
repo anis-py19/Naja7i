@@ -13,7 +13,10 @@ import {
   HiExternalLink,
   HiX,
   HiCheckCircle,
-  HiInformationCircle
+  HiInformationCircle,
+  HiLightningBolt,
+  HiQuestionMarkCircle,
+  HiAcademicCap
 } from 'react-icons/hi';
 import { 
   extractTextFromPdf, 
@@ -21,18 +24,90 @@ import {
   generateAiSummary, 
   generateLocalHeuristicSummary,
   parseMindmapTextToJson,
+  extractFlashcardsFromText,
   getPlatformDefaultApiKey,
   saveUserApiKey
 } from '../services/aiSummarizerService';
 import VisualMindmapViewer from '../components/VisualMindmapViewer';
 import MarkdownContentRenderer from '../components/MarkdownContentRenderer';
+import InteractiveFlashcardsViewer from '../components/InteractiveFlashcardsViewer';
+
+const STREAMS_LIST = [
+  { id: 'sciences', name: 'علوم تجريبية', icon: '🧬' },
+  { id: 'math', name: 'رياضيات', icon: '📐' },
+  { id: 'technique_math', name: 'تقني رياضي', icon: '⚙️' },
+  { id: 'gestion', name: 'تسيير واقتصاد', icon: '📊' },
+  { id: 'lettres_philo', name: 'آداب وفلسفة', icon: '📖' },
+  { id: 'langues', name: 'لغات أجنبية', icon: '🌍' }
+];
+
+const QUICK_TEST_TEMPLATES = [
+  {
+    title: 'علوم: الانقسام الخيطي والترجمة',
+    streamId: 'sciences',
+    mode: 'mindmap',
+    text: `درس: التعبير المورثي والترجمة عند حقيقيات النواة
+تتم عملية الترجمة على مستوى الهيولى بواسطة الريبوزومات حيث يتم تحويل الرسالة النووية المشفرة في ARNm إلى متتالية من الأحماض الأمينية المشكلة للبروتين.
+المراحل الأساسية للترجمة:
+1. مرحلة الانطلاق (Début): يتثبت الـ ARNm على تحت الوحدة الصغرى للريبوزوم، ويتوضع ARNt الحامل للحمض الأميني الميثيونين (AUG) في الموقع P.
+2. مرحلة الاستطالة (Élongation): يتوضع ARNt الثاني حاملاً حمضه الأميني في الموقع A، وتتشكل الرابطة البيبتيدية بين الحمضين بفضل إنزيم بيبتيديل ترانسفيراز.
+3. مرحلة النهاية (Terminaison): يصل الريبوزوم إلى إحدى رامزات التوقف الثلاث (UAA, UAG, UGA)، فينفصل الببتيد المتشكل وتنفصل تحت وحدتي الريبوزوم.
+شروط الترجمة الأساسية: ARNm، ريبوزومات وظيفية، أحماض أمينية منشطة، طاقة بصيغة ATP، وعوامل الإطلاق والإنزيمات النوعية.`
+  },
+  {
+    title: 'رياضيات: الأعداد المركبة والتحويلات',
+    streamId: 'math',
+    mode: 'high_yield',
+    text: `الوحدة: الأعداد المركبة والتحويلات النقطية في المستوي المركب
+1. الشكل الجبري: z = x + iy حيث x الجزء الحقيقي و y الجزء التخيلي، مع i² = -1.
+2. الطويلة والعمدة: |z| = √(x² + y²)، و arg(z) = θ حيث cos(θ) = x/|z| و sin(θ) = y/|z|.
+3. الشكل المثلثي والآسي: z = |z|(cos θ + i sin θ) = |z| e^(iθ).
+4. دستور موافر (Moivre): (cos θ + i sin θ)^n = cos(nθ) + i sin(nθ).
+5. التحويلات النقطية في المستوي:
+- الانسحاب ذو الشعاع u(b): z' = z + b.
+- التحاكي ذو المركز Ω(ω) والنسبة k: z' - ω = k(z - ω).
+- الدوران ذو المركز Ω(ω) والزاوية θ: z' - ω = e^(iθ)(z - ω).
+- التشابه المباشر ذو النسبة k والزاوية θ: z' - ω = k e^(iθ)(z - ω).`
+  },
+  {
+    title: 'فيزياء: المتابعة الزمنية لتحول كيميائي',
+    streamId: 'sciences',
+    mode: 'comprehensive',
+    text: `الوحدة 1: المتابعة الزمنية لتحول كيميائي في وسط مائي
+- تصنيف التحولات الكيميائية حسب المدة المستغرقة:
+  1. تحولات سريعة (لحظية).
+  2. تحولات بطيئة (تستغرق ثوانٍ إلى دقائق).
+  3. تحولات بطيئة جداً (تستغرق أياماً أو أشهراً).
+- طرق المتابعة الزمنية المعتمدة:
+  1. قياس الناقلية (Conductimétrie) في وجود شوارد.
+  2. قياس ضغط أو حجم غاز منطلق.
+  3. المعايرة اللونية (Dosage colorimétrique).
+  4. قياس الـ pH في حالة وجود شوارد الهيدرونيوم H3O+.
+- العوامل الحركية المؤثرة في سرعة التفاعل:
+  1. درجة الحرارة (كلما زادت زادت التصادمات الفعالة).
+  2. التراكيز الابتدائية للمتفاعلات.
+  3. الوساطة ومساحة سطح التلامس.
+- زمن نصف التفاعل (t1/2): هو المدة الزمنية اللازمة لبلوغ تقدم التفاعل نصف تقدمه النهائي x(t1/2) = x_final / 2.`
+  },
+  {
+    title: 'فلسفة: السؤال العلمي والسؤال الفلسفي',
+    streamId: 'lettres_philo',
+    mode: 'methodology',
+    text: `المقالة والمحور الأول: السؤال العلمي والسؤال الفلسفي (مقارنة)
+- طبيعة السؤال العلمي: مجاله عالم الظواهر الفيزيائية المحسوسة والطبيعية، يعتمد على الملاحظة والفرضية والتجربة المخبرية الاستقرائية (المنهج التجريبي)، هدفه الوصول إلى قوانين دقيقة وكمية رياضية تصاغ في لغة دقيقة.
+- طبيعة السؤال الفلسفي: مجاله عالم الماورائيات (الميتافيزيقا) والقيم والمفاهيم المجردة (الحرية، الوجود، الأخلاق، المعرفة)، يعتمد على المنهج العقلي التأملي والاستدلال النقدي والشك المنهجي، ونتائجه إشكاليات مفتوحة وتعدد في المذاهب.
+- أوجه الاختلاف: في الموضوع، المنهج، والنتائج المستهدفة.
+- أوجه التداخل والتكامل: العلم يغذي الفلسفة بالمكتشفات الواقعية، والفلسفة تقوم وتوجه العلم نقدياً وإبستيمولوجياً (فلسفة العلوم).`
+  }
+];
 
 export default function AiSummarizerPage() {
+  const [selectedStreamId, setSelectedStreamId] = useState('sciences');
   const [inputTab, setInputTab] = useState('file'); // 'file' | 'text'
   const [selectedFile, setSelectedFile] = useState(null);
   const [rawText, setRawText] = useState('');
-  const [summaryMode, setSummaryMode] = useState('mindmap'); // 'comprehensive' | 'high_yield' | 'questions' | 'mindmap'
-  const [activeViewTab, setActiveViewTab] = useState('mindmap'); // 'mindmap' | 'text'
+  const [summaryMode, setSummaryMode] = useState('mindmap'); // 'comprehensive' | 'high_yield' | 'questions' | 'methodology' | 'mindmap'
+  const [activeViewTab, setActiveViewTab] = useState('mindmap'); // 'mindmap' | 'text' | 'flashcards'
   
   // Custom API Key Management
   const [apiKey, setApiKey] = useState(getPlatformDefaultApiKey());
@@ -55,6 +130,8 @@ export default function AiSummarizerPage() {
       return [];
     }
   });
+
+  const selectedStreamName = STREAMS_LIST.find(s => s.id === selectedStreamId)?.name || 'علوم تجريبية';
 
   useEffect(() => {
     setApiKey(getPlatformDefaultApiKey());
@@ -91,6 +168,15 @@ export default function AiSummarizerPage() {
     setErrorMessage(null);
   };
 
+  const handleLoadTemplate = (template) => {
+    setInputTab('text');
+    setSelectedFile(null);
+    setRawText(template.text);
+    setSelectedStreamId(template.streamId);
+    setSummaryMode(template.mode);
+    setErrorMessage(null);
+  };
+
   const handleStartSummarize = async (forceLocal = false) => {
     if (inputTab === 'file' && !selectedFile) {
       setErrorMessage('يرجى اختيار أو سحب ملف للتلخيص أولاً.');
@@ -118,13 +204,12 @@ export default function AiSummarizerPage() {
           const extracted = await extractTextFromPdf(selectedFile);
           extractedContentText = extracted.text;
           
-          // If text extraction was sparse (e.g. scanned image PDF), send as inline file
           if (!extractedContentText || extractedContentText.length < 50) {
             setStatusMessage('1/3: تحويل المستند المصور للمعالجة البصرية...');
             inlineFile = await fileToBase64(selectedFile);
           }
         } else if (isImage) {
-          setStatusMessage('1/3: تجهيز صورة الدرس للتحليل البصري...');
+          setStatusMessage('1/3: ضغط صورة الدرس وتجهيزها للتحليل البصري...');
           inlineFile = await fileToBase64(selectedFile);
         } else {
           extractedContentText = await selectedFile.text();
@@ -133,40 +218,41 @@ export default function AiSummarizerPage() {
         extractedContentText = rawText.trim();
       }
 
-      setStatusMessage('2/3: جاري صياغة الملخص الأكاديمي...');
+      setStatusMessage(`2/3: صياغة ملخص أكاديمي لشعبة ${selectedStreamName}...`);
 
       let finalSummary = '';
 
-      if (!forceLocal && apiKey && apiKey.trim()) {
+      if (!forceLocal) {
         try {
           finalSummary = await generateAiSummary({
             apiKey,
+            streamName: selectedStreamName,
             mode: summaryMode,
             rawText: extractedContentText,
             inlineFile
           });
         } catch (aiErr) {
-          // If AI fails, offer clear error and fallback
           if (extractedContentText) {
             console.warn('AI failed, fallback to local summarizer:', aiErr);
-            setErrorMessage(`${aiErr.message} (يمكنك التلخيص بالوضع المحلي أدناه أو تحديث مفتاح API).`);
+            setErrorMessage(`${aiErr.message} (تم الانتقال للوضع المحلي التلقائي).`);
             finalSummary = generateLocalHeuristicSummary({
               text: extractedContentText,
-              subjectName: selectedFile ? selectedFile.name.replace(/\.[^/.]+$/, '') : 'الدرس'
+              subjectName: selectedFile ? selectedFile.name.replace(/\.[^/.]+$/, '') : 'الدرس',
+              streamName: selectedStreamName
             });
           } else {
             throw aiErr;
           }
         }
       } else {
-        // Fallback: Use local heuristic summarizer
         if (extractedContentText) {
           finalSummary = generateLocalHeuristicSummary({
             text: extractedContentText,
-            subjectName: selectedFile ? selectedFile.name.replace(/\.[^/.]+$/, '') : 'الدرس'
+            subjectName: selectedFile ? selectedFile.name.replace(/\.[^/.]+$/, '') : 'الدرس',
+            streamName: selectedStreamName
           });
         } else {
-          throw new Error('يرجى إدخال مفتاح Google Gemini API المجاني الخاص بك لمعالجة الصور والمستندات عبر الذكاء الاصطناعي.');
+          throw new Error('يرجى إدخال نص أو صورة واضحة للمتابعة.');
         }
       }
 
@@ -183,7 +269,8 @@ export default function AiSummarizerPage() {
       const newEntry = {
         id: 'sum_' + Date.now(),
         date: new Date().toLocaleDateString('ar-DZ', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        title: selectedFile ? selectedFile.name : 'نص دراسي ملخص',
+        title: selectedFile ? selectedFile.name : (rawText.slice(0, 35) + '...'),
+        streamName: selectedStreamName,
         mode: summaryMode,
         content: finalSummary
       };
@@ -221,7 +308,7 @@ export default function AiSummarizerPage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `ملخص_الدرس_نجاحي_AI.md`;
+    a.download = `ملخص_${selectedStreamName}_نجاحي_AI.md`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -237,6 +324,9 @@ export default function AiSummarizerPage() {
     }
   };
 
+  const parsedMindmap = summaryResult ? parseMindmapTextToJson(summaryResult) : null;
+  const extractedFlashcards = summaryResult ? extractFlashcardsFromText(summaryResult) : [];
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-20 font-['Cairo']" dir="rtl">
       
@@ -251,22 +341,25 @@ export default function AiSummarizerPage() {
               <span>الرئيسية</span>
             </Link>
             <span>/</span>
-            <span className="text-[#0F172A] font-bold">الملخص الذكي بالذكاء الاصطناعي (AI)</span>
+            <span className="text-[#0F172A] font-bold">الملخص الذكي بالذكاء الاصطناعي (AI Studio)</span>
           </div>
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium text-xs border border-slate-200/60 flex items-center gap-1">
+                <span className="px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 font-medium text-xs border border-rose-200/60 flex items-center gap-1">
                   <span>محرك البكالوريا الذكي 🤖</span>
                 </span>
-                <span className="text-xs text-[#64748B]">تلخيص فوري للدروس، توليد أسئلة، ومخططات شجرية</span>
+                <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium text-xs border border-slate-200/60 font-mono">
+                  NVIDIA AI & Kimi K3 & Vision
+                </span>
+                <span className="text-xs text-[#64748B] hidden sm:inline">• تلخيص فوري، خرائط ذهنية، وبطاقات مراجعة</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A]">
-                ملخص نجاحي الذكي بالذكاء الاصطناعي
+                ملخص نجاحي الذكي بالذكاء الاصطناعي ✨
               </h1>
               <p className="text-xs sm:text-sm text-[#475569] mt-1 max-w-2xl leading-relaxed">
-                ارفع أي ملف درس أو كراس أو الصق النص، وسيقوم الذكاء الاصطناعي بصياغة ملخص أكاديمي منهجي يبرز القوانين، التعاريف، والأسئلة الوزارية المتوقعة.
+                ارفع أي ملف درس أو كراس أو الصق النص، وسيقوم الذكاء الاصطناعي بصياغة ملخص أكاديمي منهجي يبرز القوانين، التعاريف، الفخاخ المنهجية، والأسئلة الوزارية المتوقعة.
               </p>
             </div>
 
@@ -281,10 +374,10 @@ export default function AiSummarizerPage() {
                     ? 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100'
                     : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
                 }`}
-                title="إعداد مفتاح Gemini API"
+                title="إعدادات الذكاء الاصطناعي والمفاتيح"
               >
                 <HiKey className={`w-4 h-4 ${apiKey ? 'text-emerald-600' : 'text-slate-500'}`} />
-                <span>{apiKey ? 'مفتاح Gemini API متصل ✓' : 'إدخال مفتاح Gemini API'}</span>
+                <span>{apiKey ? 'مفتاح Gemini مخصص متصل ✓' : 'المحرك الافتراضي نشط ⚡'}</span>
               </button>
             </div>
           </div>
@@ -295,9 +388,35 @@ export default function AiSummarizerPage() {
       {/* Main Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        {/* Left / Top Controls & Upload Box (5 cols) */}
+        {/* Left Controls & Upload Box (5 cols) */}
         <div className="lg:col-span-5 space-y-5 print:hidden">
           
+          {/* Stream Selector */}
+          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs space-y-2">
+            <label className="block text-xs font-bold text-[#0F172A] flex items-center justify-between">
+              <span>1. اختر الشعبة الدراسية (لمعايرة الصياغة والمصطلحات):</span>
+              <span className="text-[#E11D48] text-[11px] font-mono">{selectedStreamName}</span>
+            </label>
+
+            <div className="grid grid-cols-3 gap-1.5">
+              {STREAMS_LIST.map((str) => (
+                <button
+                  key={str.id}
+                  type="button"
+                  onClick={() => setSelectedStreamId(str.id)}
+                  className={`p-2 rounded-xl border text-center transition-all cursor-pointer text-xs font-bold flex items-center justify-center gap-1 ${
+                    selectedStreamId === str.id
+                      ? 'bg-[#E11D48] text-white border-[#E11D48] shadow-2xs'
+                      : 'bg-[#F8FAFC] text-slate-700 border-[#E2E8F0] hover:bg-[#F1F5F9]'
+                  }`}
+                >
+                  <span>{str.icon}</span>
+                  <span className="truncate">{str.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Input Options Card */}
           <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 shadow-xs space-y-4">
             
@@ -372,7 +491,7 @@ export default function AiSummarizerPage() {
                       اضغط لاختيار ملف أو اسحبه إلى هنا
                     </p>
                     <p className="text-[11px] text-[#64748B]">
-                      يدعم ملفات PDF، صور الكراريس والمذكرات (JPG, PNG) حتى 30 صفحة
+                      يدعم ملفات PDF، صور الكراريس والمذكرات (JPG, PNG) حتى 40 صفحة
                     </p>
                   </div>
                 )}
@@ -392,10 +511,10 @@ export default function AiSummarizerPage() {
               </div>
             )}
 
-            {/* Summary Mode Selector */}
+            {/* Summary Mode Selector (5 Modes) */}
             <div className="space-y-1.5 pt-2 border-t border-[#E2E8F0]">
               <label className="block text-[11px] font-bold text-[#64748B]">
-                اختر نمط التلخيص المطلوب:
+                2. اختر نمط التلخيص المطلوب:
               </label>
 
               <div className="grid grid-cols-2 gap-1.5">
@@ -470,6 +589,44 @@ export default function AiSummarizerPage() {
                     أسئلة QCM ومسائل وزارية
                   </div>
                 </button>
+
+                <button
+                  type="button"
+                  onClick={() => setSummaryMode('methodology')}
+                  className={`p-2.5 rounded-xl border text-right transition-all cursor-pointer col-span-2 ${
+                    summaryMode === 'methodology'
+                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48] shadow-2xs font-bold'
+                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:bg-[#F1F5F9]'
+                  }`}
+                >
+                  <div className="text-xs font-bold flex items-center gap-1">
+                    <span>🔬</span>
+                    <span>تفكيك منهجية الإجابة وأفعال الأداء (Mots-clés)</span>
+                  </div>
+                  <div className="text-[10px] text-[#64748B] mt-0.5">
+                    كيف تجيب على أفعال (حلل، فسر، قارن، استنتج) لنيل العلامة الكاملة
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Quick Test Lesson Templates */}
+            <div className="space-y-1.5 pt-2 border-t border-[#E2E8F0]">
+              <label className="block text-[11px] font-bold text-[#64748B]">
+                ⚡ تجربة سريعة بنقرة واحدة (دروس جاهزة):
+              </label>
+              <div className="grid grid-cols-2 gap-1.5">
+                {QUICK_TEST_TEMPLATES.map((tmpl, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => handleLoadTemplate(tmpl)}
+                    className="p-1.5 text-right rounded-lg bg-[#F8FAFC] hover:bg-rose-50 text-[11px] text-slate-700 hover:text-[#E11D48] border border-slate-200 hover:border-rose-300 transition-colors truncate cursor-pointer"
+                    title={tmpl.title}
+                  >
+                    ✦ {tmpl.title}
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -485,7 +642,7 @@ export default function AiSummarizerPage() {
                     onClick={() => handleStartSummarize(true)}
                     className="px-2.5 py-1 bg-white hover:bg-rose-100 text-rose-900 font-bold rounded-lg border border-rose-300 transition-colors text-[11px] cursor-pointer"
                   >
-                    ⚡ تجربة التلخيص بالوضع المحلي
+                    ⚡ التلخيص بالوضع المحلي بدون إنترنت
                   </button>
                   <button
                     onClick={() => {
@@ -494,7 +651,7 @@ export default function AiSummarizerPage() {
                     }}
                     className="px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg transition-colors text-[11px] cursor-pointer"
                   >
-                    🔑 إدخال مفتاح API جديد
+                    🔑 إدخال مفتاح Gemini
                   </button>
                 </div>
               </div>
@@ -555,7 +712,7 @@ export default function AiSummarizerPage() {
                         {item.title}
                       </p>
                       <p className="text-[10px] text-[#64748B]">
-                        {item.date}
+                        {item.date} • {item.streamName || 'بكالوريا'}
                       </p>
                     </div>
                     <button
@@ -582,7 +739,7 @@ export default function AiSummarizerPage() {
               <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-[#E2E8F0] print:hidden">
                 
                 {/* View Tabs */}
-                <div className="flex items-center gap-1.5 p-1 bg-[#F1F5F9] rounded-xl text-xs font-bold">
+                <div className="flex items-center gap-1.5 p-1 bg-[#F1F5F9] rounded-xl text-xs font-bold flex-wrap">
                   <button
                     onClick={() => setActiveViewTab('mindmap')}
                     className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1 ${
@@ -604,7 +761,19 @@ export default function AiSummarizerPage() {
                     }`}
                   >
                     <span>📑</span>
-                    <span>النص الكامل والبطاقات</span>
+                    <span>الملخص الكامل</span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveViewTab('flashcards')}
+                    className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1 ${
+                      activeViewTab === 'flashcards'
+                        ? 'bg-white text-[#0F172A] shadow-xs'
+                        : 'text-[#64748B] hover:text-[#0F172A]'
+                    }`}
+                  >
+                    <span>🎴</span>
+                    <span>بطاقات المراجعة ({extractedFlashcards.length})</span>
                   </button>
                 </div>
 
@@ -643,7 +812,7 @@ export default function AiSummarizerPage() {
               {/* View 1: Mindmap */}
               {activeViewTab === 'mindmap' && (
                 <div>
-                  <VisualMindmapViewer mindmapData={parseMindmapTextToJson(summaryResult)} />
+                  <VisualMindmapViewer mindmapData={parsedMindmap} />
                 </div>
               )}
 
@@ -651,6 +820,13 @@ export default function AiSummarizerPage() {
               {activeViewTab === 'text' && (
                 <div className="prose prose-slate max-w-none text-xs sm:text-sm leading-relaxed font-['Cairo']">
                   <MarkdownContentRenderer content={summaryResult} />
+                </div>
+              )}
+
+              {/* View 3: Interactive Flashcards */}
+              {activeViewTab === 'flashcards' && (
+                <div>
+                  <InteractiveFlashcardsViewer flashcards={extractedFlashcards} />
                 </div>
               )}
 
@@ -665,7 +841,7 @@ export default function AiSummarizerPage() {
                   المستشار الأكاديمي الذكي جاهز لتلخيص دروسك
                 </h3>
                 <p className="text-xs text-[#64748B] leading-relaxed">
-                  اختر ملف PDF أو صورة درس أو الصق نصاً، ثم اضغط على «توليد الملخص والمخطط الآن» ليقوم الذكاء الاصطناعي بتحليله فورياً وصياغة مخطط تفاعلي وأسئلة وزارية.
+                  اختر ملف PDF أو صورة درس أو الصق نصاً، أو جرب أحد الدروس الجاهزة على اليمين لتوليد مخطط مفاهيمي وأسئلة وزارية وبطاقات مراجعة فورية.
                 </p>
               </div>
             </div>
@@ -686,8 +862,8 @@ export default function AiSummarizerPage() {
                   <HiKey className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-[#0F172A]">مفتاح Google Gemini API</h3>
-                  <p className="text-[10px] text-[#64748B]">لتلخيص الدروس والصور عبر نماذج الذكاء الاصطناعي</p>
+                  <h3 className="text-sm font-bold text-[#0F172A]">إعدادات محرك الذكاء الاصطناعي</h3>
+                  <p className="text-[10px] text-[#64748B]">NVIDIA NIM الافتراضي + Google Gemini الاختياري</p>
                 </div>
               </div>
 
@@ -699,9 +875,19 @@ export default function AiSummarizerPage() {
               </button>
             </div>
 
+            <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 space-y-1">
+              <div className="font-bold flex items-center gap-1 text-emerald-900">
+                <HiLightningBolt className="w-4 h-4 text-amber-500" />
+                <span>المحرك السحابي الافتراضي: NVIDIA NIM (نشط ومجاني)</span>
+              </div>
+              <p className="text-[11px] text-emerald-800 leading-relaxed">
+                المنصة تعمل تلقائياً بأحدث نماذج الذكاء الاصطناعي (Kimi K3 و Llama 3.2 Vision) مجاناً بدون الحاجة لأي إعداد.
+              </p>
+            </div>
+
             <div className="space-y-2">
               <label className="block text-xs font-bold text-[#0F172A]">
-                الصق مفتاح API الخاص بك (Gemini API Key):
+                اختياري: إدخال مفتاح Google Gemini API الخاص بك:
               </label>
               <input
                 type="password"
@@ -711,20 +897,7 @@ export default function AiSummarizerPage() {
                 className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl p-2.5 text-xs text-[#0F172A] font-mono focus:outline-none focus:border-[#E11D48]"
               />
               <p className="text-[11px] text-[#64748B] leading-relaxed">
-                يتم حفظ المفتاح محلياً في متصفحك فقط ولا يتم مشاركته مع أي طرف خارجي.
-              </p>
-            </div>
-
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-[#475569] space-y-1.5">
-              <div className="font-bold flex items-center gap-1 text-[#0F172A]">
-                <HiInformationCircle className="w-4 h-4 text-[#0284C7]" />
-                <span>كيفية الحصول على مفتاح مجاني في 10 ثوانٍ:</span>
-              </div>
-              <p className="text-[11px]">
-                1. ادخل إلى موقع <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" className="text-[#0284C7] font-bold underline inline-flex items-center gap-0.5">Google AI Studio <HiExternalLink className="w-3 h-3" /></a>
-              </p>
-              <p className="text-[11px]">
-                2. اضغط على <strong>"Create API key"</strong> وانسخ المفتاح.
+                يتم حفظ المفتاح محلياً في متصفحك فقط إذا أردت استخدام نماذج Gemini الشخصية.
               </p>
             </div>
 
@@ -750,7 +923,7 @@ export default function AiSummarizerPage() {
                 onClick={handleSaveApiKey}
                 className="px-4 py-2 text-xs font-bold bg-[#E11D48] hover:bg-[#BE123C] text-white rounded-xl transition-colors cursor-pointer shadow-xs"
               >
-                حفظ المفتاح ✓
+                حفظ الإعدادات ✓
               </button>
             </div>
 
