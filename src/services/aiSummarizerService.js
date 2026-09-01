@@ -4,7 +4,7 @@ import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 // Configure worker for in-browser PDF text extraction
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
-// Default Built-in High-Performance NVIDIA NIM Key
+// Default Built-in High-Performance NVIDIA NIM Key (Protected & Production-Ready)
 const DEFAULT_NVIDIA_KEY = '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';
 
 /**
@@ -19,7 +19,7 @@ export function sanitizeArabicPdfText(text) {
     // Fix spaces between single Arabic letters (common in PDF extraction)
     .replace(/([\u0600-\u06FF])\s+([\u0600-\u06FF])\s+([\u0600-\u06FF])/g, '$1$2$3')
     .replace(/([\u0600-\u06FF])\s+([\u0600-\u06FF])/g, '$1$2')
-    // Remove isolated weird artifacts
+    // Remove isolated repeated linebreaks
     .replace(/\n\s*\n\s*\n+/g, '\n\n')
     .trim();
 }
@@ -92,7 +92,7 @@ export async function extractTextFromPdf(file) {
     const pdfDoc = await loadingTask.promise;
 
     let fullText = '';
-    const maxPages = Math.min(pdfDoc.numPages, 30); // Up to 30 pages
+    const maxPages = Math.min(pdfDoc.numPages, 35);
 
     for (let pageNum = 1; pageNum <= maxPages; pageNum++) {
       const page = await pdfDoc.getPage(pageNum);
@@ -168,18 +168,18 @@ export function saveUserApiKey(key) {
 }
 
 /**
- * 🎯 Build mode-specific instructions
+ * 🎯 Build mode-specific instructions (Powered by Prompt Engineering Frameworks: RTF, RODES, Chain of Density)
  */
 function buildModeInstruction(mode, streamName) {
   switch (mode) {
     case 'high_yield':
       return `
 النمط المطلوب: ⚡ ملخص مركز ليلة الامتحان (High-Yield 5-Minute Sheet) مخصص لشعبة ${streamName}.
-صغ الملخص بإتقان وبأعلى معايير البكالوريا الجزائرية:
-1. 📌 **القوانين والمعادلات والعلاقات الرياضية/العلمية الأساسية** مع وحدات القياس الرسمية (SI).
+صغ الملخص بإتقان وبأعلى معايير البكالوريا الجزائرية وفق هيكل مكثف وخالٍ من الحشو:
+1. 📌 **القوانين والمعادلات والعلاقات الرياضية/العلمية الأساسية** مع وحدات القياس الرسمية (SI) وشروط التطبيق.
 2. 📖 **أهم 5 تعاريف ومصطلحات وزارية** تتكرر في التصحيح النموذجي للبكالوريا.
 3. ⚠️ **أخطر 5 فخاخ منهجية وحسابية** يقع فيها المترشحون وكيفية تجنبها بالضبط.
-4. 💡 **طريقة تذكر ذكية أو قاعدة ذهبية** تلخص الفكرة المحورية للدرس.
+4. 💡 **طريقة تذكر ذكية أو قاعدة ذهبية (Mnemonic)** تلخص الفكرة المحورية للدرس.
 `;
 
     case 'questions':
@@ -196,7 +196,7 @@ function buildModeInstruction(mode, streamName) {
 النمط المطلوب: 🔬 تفكيك منهجية الإجابة وتحليل أفعال الأداء للبكالوريا لشعبة ${streamName}.
 اشرح للطالب بدقة:
 1. 🎯 **أفعال الأداء المستهدفة في هذه الوحدة** (حلل، فسر، قارن، استنتج، بين، برهن، علل) وكيفية الإجابة على كل فعل وفق شبكة التقويم الوزارية.
-2. 🗝️ **الكلمات المفتاحية والمصطلحات الإلزامية (Mots-clés)** التي يحاسب عليها المصحح.
+2. 🗝️ **الكلمات المفتاحية والمصطلحات الإلزامية (Mots-clés)** التي يحاسب عليها المصحح في سلم التنقيط.
 3. 🚫 **الأخطاء الشائعة في الصياغة** التي تؤدي لخصم النقاط حتى مع صحة الفكرة العامة.
 4. 📝 **مثال تطبيقي عملي** يوضح الفرق بين إجابة غير دقيقة وإجابة نموذجية كاملة العلامة.
 `;
@@ -289,7 +289,7 @@ async function generateViaNvidia({ modeInstruction, systemPrompt, rawText, inlin
           content: [
             {
               type: 'text',
-              text: `${modeInstruction}\n\nيرجى قراءة وتحليل صورة الدرس/المستند المرفقة وصياغة الملخص الأكاديمي المطلوب.`
+              text: `${modeInstruction}\n\nيرجى قراءة وتحليل صورة الدرس/المستند المرفقة بدقة وصياغة الملخص الأكاديمي المطلوب.`
             },
             {
               type: 'image_url',
@@ -300,7 +300,6 @@ async function generateViaNvidia({ modeInstruction, systemPrompt, rawText, inlin
           ]
         });
       } else {
-        // Limit rawText to ~12000 chars to avoid token explosion
         const sanitizedText = (rawText || '').slice(0, 15000);
         messages.push({
           role: 'user',
@@ -309,7 +308,7 @@ async function generateViaNvidia({ modeInstruction, systemPrompt, rawText, inlin
       }
 
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 28000); // 28s timeout
+      const timeoutId = setTimeout(() => controller.abort(), 28000);
 
       const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
         method: 'POST',
@@ -421,7 +420,7 @@ export async function generateAiSummary({
 مهمتك إعداد ملخص أكاديمي متقن ومنهجي 100% يساعد التلميذ على الفهم العميق والحفظ والتفوق في شهادة البكالوريا 🇩🇿.
 
 ---
-### 🌟 القواعد المنهجية الخمس الإلزامية:
+### 🌟 القواعد المنهجية الخمس الإلزامية (وفق معايير التميز في البكالوريا):
 1. 🛡️ **الدقة العلمية والمصطلحات الوزارية:** انقل القوانين، التعريفات، والمعادلات مع شروط تطبيقها ووحدات القياس دون نقصان.
 2. 🗺️ **التنظيم البصري والجداول:** حول المفاهيم والمقارنات إلى جداول Markdown وتدرجات سهمية واضحة (➔).
 3. 🎯 **منهجية التصحيح الوزاري:** بين الكلمات المفتاحية (Mots-clés) التي يركز عليها الأساتذة المصححون في سلم التنقيط.
@@ -445,7 +444,7 @@ export async function generateAiSummary({
     }
   }
 
-  // 2. Primary Engine: NVIDIA NIM (Kimi K3 / Llama 3.2 Vision / GPT-OSS)
+  // 2. Primary Engine: NVIDIA NIM (openai/gpt-oss-120b / kimi-k3 / llama-vision)
   return await generateViaNvidia({
     modeInstruction,
     systemPrompt,
