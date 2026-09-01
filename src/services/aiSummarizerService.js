@@ -307,35 +307,47 @@ async function generateViaNvidia({ modeInstruction, systemPrompt, rawText, inlin
         });
       }
 
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 28000);
+      const endpoints = [
+        '/api/nvidia/v1/chat/completions',
+        'https://integrate.api.nvidia.com/v1/chat/completions'
+      ];
 
-      const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${DEFAULT_NVIDIA_KEY}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          model,
-          messages,
-          temperature: 0.4,
-          max_tokens: 3500
-        }),
-        signal: controller.signal
-      });
+      for (const endpoint of endpoints) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 28000);
 
-      clearTimeout(timeoutId);
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${DEFAULT_NVIDIA_KEY}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              model,
+              messages,
+              temperature: 0.4,
+              max_tokens: 3500
+            }),
+            signal: controller.signal
+          });
 
-      if (response.ok) {
-        const data = await response.json();
-        const output = data.choices?.[0]?.message?.content?.trim();
-        if (output && output.length > 30) {
-          return output;
+          clearTimeout(timeoutId);
+
+          if (response.ok) {
+            const data = await response.json();
+            const output = data.choices?.[0]?.message?.content?.trim();
+            if (output && output.length > 30) {
+              return output;
+            }
+          } else {
+            const errData = await response.json().catch(() => ({}));
+            console.warn(`NVIDIA model ${model} at ${endpoint} HTTP ${response.status}:`, errData);
+          }
+        } catch (endpointErr) {
+          console.warn(`Endpoint ${endpoint} failed for ${model}:`, endpointErr.message);
+          lastError = endpointErr;
         }
-      } else {
-        const errData = await response.json().catch(() => ({}));
-        console.warn(`NVIDIA model ${model} HTTP ${response.status}:`, errData);
       }
     } catch (e) {
       console.warn(`NVIDIA model ${model} attempt error:`, e.message);
