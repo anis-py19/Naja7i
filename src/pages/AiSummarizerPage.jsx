@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   HiHome, 
@@ -16,14 +16,8 @@ import {
   HiVolumeUp,
   HiStop,
   HiClock,
-  HiPaperClip,
-  HiArrowUp,
-  HiRefresh,
-  HiChatAlt2,
-  HiMenuAlt3,
-  HiChevronDown
+  HiRefresh
 } from 'react-icons/hi';
-import { motion, AnimatePresence } from 'framer-motion';
 import { 
   extractTextFromPdf, 
   fileToBase64, 
@@ -55,92 +49,100 @@ const MODES_LIST = [
   { id: 'methodology', label: '🔬 تفكيك المنهجية', desc: 'أفعال الأداء والكلمات المفتاحية' }
 ];
 
-const QUICK_STARTER_PROMPTS = [
+const QUICK_TEST_TEMPLATES = [
   {
-    title: '🗺️ مخطط ذهني: الانقسام والترجمة',
+    title: 'علوم: الانقسام الخيطي والترجمة',
     streamId: 'sciences',
     mode: 'mindmap',
-    prompt: `لخص لي مراحل التعبير المورثي والترجمة (الانطلاق، الاستطالة، النهاية) مع شروط الترجمة في شكل مخطط ذهني فائق الاختصار والتركيز.`
+    text: `درس: التعبير المورثي والترجمة عند حقيقيات النواة
+تتم عملية الترجمة على مستوى الهيولى بواسطة الريبوزومات حيث يتم تحويل الرسالة النووية المشفرة في ARNm إلى متتالية من الأحماض الأمينية المشكلة للبروتين.
+المراحل الأساسية للترجمة:
+1. مرحلة الانطلاق (Début): يتثبت الـ ARNm على تحت الوحدة الصغرى للريبوزوم، ويتوضع ARNt الحامل للحمض الأميني الميثيونين (AUG) في الموقع P.
+2. مرحلة الاستطالة (Élongation): يتوضع ARNt الثاني حاملاً حمضه الأميني في الموقع A، وتتشكل الرابطة البيبتيدية بين الحمضين بفضل إنزيم بيبتيديل ترانسفيراز.
+3. مرحلة النهاية (Terminaison): يصل الريبوزوم إلى إحدى رامزات التوقف الثلاث (UAA, UAG, UGA)، فينفصل الببتيد المتشكل وتنفصل تحت وحدتي الريبوزوم.
+شروط الترجمة الأساسية: ARNm، ريبوزومات وظيفية، أحماض أمينية منشطة، طاقة بصيغة ATP، وعوامل الإطلاق والإنزيمات النوعية.`
   },
   {
-    title: '⚡ مكثف ليلة الامتحان: الأعداد المركبة',
+    title: 'رياضيات: الأعداد المركبة والتحويلات',
     streamId: 'math',
     mode: 'high_yield',
-    prompt: `قدم لي مكثف ليلة الامتحان في الأعداد المركبة والتحويلات النقطية (الشكل الجبري والمثلثي والآسي، دساتير موافر، الانسحاب، الدوران، التشابه المباشر) وأخطر 5 فخاخ في البكالوريا.`
+    text: `الوحدة: الأعداد المركبة والتحويلات النقطية في المستوي المركب
+1. الشكل الجبري: z = x + iy حيث x الجزء الحقيقي و y الجزء التخيلي، مع i² = -1.
+2. الطويلة والعمدة: |z| = √(x² + y²)، و arg(z) = θ حيث cos(θ) = x/|z| و sin(θ) = y/|z|.
+3. الشكل المثلثي والآسي: z = |z|(cos θ + i sin θ) = |z| e^(iθ).
+4. دستور موافر (Moivre): (cos θ + i sin θ)^n = cos(nθ) + i sin(nθ).
+5. التحويلات النقطية في المستوي:
+- الانسحاب ذو الشعاع u(b): z' = z + b.
+- التحاكي ذو المركز Ω(ω) والنسبة k: z' - ω = k(z - ω).
+- الدوران ذو المركز Ω(ω) والزاوية θ: z' - ω = e^(iθ)(z - ω).
+- التشابه المباشر ذو النسبة k والزاوية θ: z' - ω = k e^(iθ)(z - ω).`
   },
   {
-    title: '📑 ملخص شامل: المتابعة الزمنية',
+    title: 'فيزياء: المتابعة الزمنية لتحول كيميائي',
     streamId: 'sciences',
     mode: 'comprehensive',
-    prompt: `قم بإعداد ملخص أكاديمي شامل للوحدة 1 في الفيزياء (المتابعة الزمنية لتحول كيميائي): طرق المتابعة، العوامل الحركية، زمن نصف التفاعل t1/2 مع بطاقات مراجعة وجداول القوانين.`
+    text: `الوحدة 1: المتابعة الزمنية لتحول كيميائي في وسط مائي
+- تصنيف التحولات الكيميائية حسب المدة المستغرقة:
+  1. تحولات سريعة (لحظية).
+  2. تحولات بطيئة (تستغرق ثوانٍ إلى دقائق).
+  3. تحولات بطيئة جداً (تستغرق أياماً أو أشهراً).
+- طرق المتابعة الزمنية المعتمدة:
+  1. قياس الناقلية (Conductimétrie) في وجود شوارد.
+  2. قياس ضغط أو حجم غاز منطلق.
+  3. المعايرة اللونية (Dosage colorimétrique).
+  4. قياس الـ pH في حالة وجود شوارد الهيدرونيوم H3O+.
+- العوامل الحركية المؤثرة في سرعة التفاعل:
+  1. درجة الحرارة (كلما زادت زادت التصادمات الفعالة).
+  2. التراكيز الابتدائية للمتفاعلات.
+  3. الوساطة ومساحة سطح التلامس.
+- زمن نصف التفاعل (t1/2): هو المدة الزمنية اللازمة لبلوغ تقدم التفاعل نصف تقدمه النهائي x(t1/2) = x_final / 2.`
   },
   {
-    title: '🔬 تفكيك منهجية: السؤال الفلسفي',
+    title: 'فلسفة: السؤال العلمي والسؤال الفلسفي',
     streamId: 'lettres_philo',
     mode: 'methodology',
-    prompt: `اشرح لي منهجية المقارنة بين السؤال العلمي والسؤال الفلسفي: أوجه الاختلاف والتشابه والتداخل، والكلمات المفتاحية المطلوبة في البكالوريا لنيل العلامة الكاملة.`
+    text: `المقالة والمحور الأول: السؤال العلمي والسؤال الفلسفي (مقارنة)
+- طبيعة السؤال العلمي: مجاله عالم الظواهر الفيزيائية المحسوسة والطبيعية، يعتمد على الملاحظة والفرضية والتجربة المخبرية الاستقرائية (المنهج التجريبي)، هدفه الوصول إلى قوانين دقيقة وكمية رياضية تصاغ في لغة دقيقة.
+- طبيعة السؤال الفلسفي: مجاله عالم الماورائيات (الميتافيزيقا) والقيم والمفاهيم المجردة (الحرية، الوجود، الأخلاق، المعرفة)، يعتمد على المنهج العقلي التأملي والاستدلال النقدي والشك المنهجي، ونتائجه إشكاليات مفتوحة وتعدد في المذاهب.
+- أوجه الاختلاف: في الموضوع، المنهج، والنتائج المستهدفة.
+- أوجه التداخل والتكامل: العلم يغذي الفلسفة بالمكتشفات الواقعية، والفلسفة تقوم وتوجه العلم نقدياً وإبستيمولوجياً (فلسفة العلوم).`
   }
 ];
 
 export default function AiSummarizerPage() {
   const [selectedStreamId, setSelectedStreamId] = useState('sciences');
+  const [inputTab, setInputTab] = useState('file'); // 'file' | 'text'
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [rawText, setRawText] = useState('');
   const [summaryMode, setSummaryMode] = useState('mindmap');
-  const [inputText, setInputText] = useState('');
-  const [attachedFile, setAttachedFile] = useState(null);
-  const [isUploadingFile, setIsUploadingFile] = useState(false);
+  const [activeViewTab, setActiveViewTab] = useState('mindmap'); // 'mindmap' | 'text' | 'flashcards'
 
-  // Chat conversation state
-  const [messages, setMessages] = useState(() => {
-    try {
-      const saved = localStorage.getItem('naja7i_chat_active_messages');
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
-
-  // History & Drawer
-  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
-  const [historySessions, setHistorySessions] = useState(() => {
-    try {
-      const saved = localStorage.getItem('naja7i_chat_sessions_history');
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
-
-  // Status & Audio
-  const [isLoading, setIsLoading] = useState(false);
-  const [statusMessage, setStatusMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [playingMessageId, setPlayingMessageId] = useState(null);
-  const [copiedId, setCopiedId] = useState(null);
-
-  // API Key Modal
+  // Key & Status
   const [apiKey, setApiKey] = useState(getPlatformDefaultApiKey());
   const [isKeyModalOpen, setIsKeyModalOpen] = useState(false);
   const [inputKeyTemp, setInputKeyTemp] = useState('');
 
-  const messagesEndRef = useRef(null);
-  const fileInputRef = useRef(null);
-  const textareaRef = useRef(null);
+  // Generation State
+  const [isLoading, setIsLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState('');
+  const [summaryResult, setSummaryResult] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [copiedToast, setCopiedToast] = useState(false);
 
-  const selectedStream = STREAMS_LIST.find(s => s.id === selectedStreamId) || STREAMS_LIST[0];
+  // Audio Speech
+  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
-  // Auto-scroll to bottom of chat
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
+  // History State
+  const [history, setHistory] = useState(() => {
     try {
-      localStorage.setItem('naja7i_chat_active_messages', JSON.stringify(messages));
-    } catch (e) {
-      console.error(e);
+      const saved = localStorage.getItem('naja7i_ai_summaries_history');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
     }
-  }, [messages, isLoading]);
+  });
+
+  const selectedStreamName = STREAMS_LIST.find(s => s.id === selectedStreamId)?.name || 'علوم تجريبية';
 
   useEffect(() => {
     setApiKey(getPlatformDefaultApiKey());
@@ -151,30 +153,23 @@ export default function AiSummarizerPage() {
     };
   }, []);
 
-  // Textarea auto-resize
-  const handleTextareaChange = (e) => {
-    setInputText(e.target.value);
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 180)}px`;
-    }
-  };
-
-  // Text-To-Speech Toggle
-  const toggleSpeech = (messageId, text) => {
+  // Text to Speech Toggle
+  const toggleSpeech = () => {
     if (!('speechSynthesis' in window)) {
       alert('ميزة القراءة الصوتية غير مدعومة في متصفحك.');
       return;
     }
 
-    if (playingMessageId === messageId) {
+    if (isPlayingAudio) {
       window.speechSynthesis.cancel();
-      setPlayingMessageId(null);
+      setIsPlayingAudio(false);
       return;
     }
 
+    if (!summaryResult) return;
+
     window.speechSynthesis.cancel();
-    const cleanSpeechText = text
+    const cleanSpeechText = summaryResult
       .replace(/```json[\s\S]*?```/g, '')
       .replace(/[*#>`|]/g, '')
       .replace(/https?:\/\/\S+/g, '')
@@ -184,729 +179,702 @@ export default function AiSummarizerPage() {
     utterance.lang = 'ar-SA';
     utterance.rate = 0.95;
 
-    utterance.onend = () => setPlayingMessageId(null);
-    utterance.onerror = () => setPlayingMessageId(null);
+    utterance.onend = () => setIsPlayingAudio(false);
+    utterance.onerror = () => setIsPlayingAudio(false);
 
     window.speechSynthesis.speak(utterance);
-    setPlayingMessageId(messageId);
+    setIsPlayingAudio(true);
   };
 
-  const handleCopyMessage = (id, text) => {
-    navigator.clipboard.writeText(text);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
+  const handleSaveApiKey = () => {
+    saveUserApiKey(inputKeyTemp);
+    setApiKey(inputKeyTemp.trim());
+    setIsKeyModalOpen(false);
+    setErrorMessage(null);
   };
 
-  const handleDownloadMessage = (text, streamName) => {
-    const blob = new Blob([text], { type: 'text/markdown;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `ملخص_${streamName}_نجاحي_AI.md`;
-    a.click();
-    URL.revokeObjectURL(url);
+  const handleClearApiKey = () => {
+    saveUserApiKey('');
+    setApiKey('');
+    setInputKeyTemp('');
+    setIsKeyModalOpen(false);
   };
 
-  const handlePrint = () => {
-    window.print();
+  const handleFileDrop = (e) => {
+    e.preventDefault();
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFileSelected(e.dataTransfer.files[0]);
+    }
   };
 
-  // File Upload Handlers
-  const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
+  const handleFileSelected = (file) => {
     const validTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/webp', 'text/plain'];
     if (!validTypes.some(t => file.type.includes(t) || file.name.endsWith('.pdf') || file.name.endsWith('.txt'))) {
       setErrorMessage('يرجى اختيار ملف PDF أو صورة درس (JPG, PNG) أو ملف نصي.');
       return;
     }
-
-    setAttachedFile(file);
+    setSelectedFile(file);
     setErrorMessage(null);
   };
 
-  const handleRemoveAttachedFile = () => {
-    setAttachedFile(null);
-    if (fileInputRef.current) fileInputRef.current.value = '';
+  const handleLoadTemplate = (template) => {
+    setInputTab('text');
+    setSelectedFile(null);
+    setRawText(template.text);
+    setSelectedStreamId(template.streamId);
+    setSummaryMode(template.mode);
+    setErrorMessage(null);
   };
 
-  // Start New Chat Session
-  const handleNewChat = () => {
-    if (messages.length > 0) {
-      const sessionTitle = messages[0]?.text?.slice(0, 30) || 'محادثة سابقة';
-      const newSession = {
-        id: 'session_' + Date.now(),
-        title: sessionTitle,
-        date: new Date().toLocaleDateString('ar-DZ', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        streamName: selectedStream.name,
-        messages: messages
-      };
-      const updated = [newSession, ...historySessions.slice(0, 14)];
-      setHistorySessions(updated);
-      try {
-        localStorage.setItem('naja7i_chat_sessions_history', JSON.stringify(updated));
-      } catch (e) {
-        console.error(e);
-      }
+  const handleStartSummarize = async (forceLocal = false) => {
+    if (inputTab === 'file' && !selectedFile) {
+      setErrorMessage('يرجى اختيار أو سحب ملف للتلخيص أولاً.');
+      return;
+    }
+    if (inputTab === 'text' && !rawText.trim()) {
+      setErrorMessage('يرجى كتابة أو لصق نص الدرس أولاً.');
+      return;
     }
 
-    setMessages([]);
-    setInputText('');
-    setAttachedFile(null);
-    setErrorMessage(null);
-    if (textareaRef.current) textareaRef.current.style.height = 'auto';
-    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-    setPlayingMessageId(null);
-  };
-
-  const handleRestoreSession = (session) => {
-    setMessages(session.messages || []);
-    setIsHistoryOpen(false);
-    setErrorMessage(null);
-  };
-
-  const handleDeleteSession = (id, e) => {
-    e.stopPropagation();
-    const updated = historySessions.filter(s => s.id !== id);
-    setHistorySessions(updated);
-    try {
-      localStorage.setItem('naja7i_chat_sessions_history', JSON.stringify(updated));
-    } catch (e) {
-      console.error(e);
+    if (isPlayingAudio && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      setIsPlayingAudio(false);
     }
-  };
-
-  // Submit User Message
-  const handleSendMessage = async (customPrompt = null, forceLocal = false) => {
-    const textToSend = customPrompt || inputText.trim();
-    if (!textToSend && !attachedFile) return;
-
-    const userMessageId = 'msg_user_' + Date.now();
-    const fileSnapshot = attachedFile ? { name: attachedFile.name, size: attachedFile.size, type: attachedFile.type } : null;
-
-    const userMessage = {
-      id: userMessageId,
-      sender: 'user',
-      text: textToSend,
-      file: fileSnapshot,
-      streamName: selectedStream.name,
-      mode: summaryMode,
-      timestamp: new Date().toLocaleTimeString('ar-DZ', { hour: '2-digit', minute: '2-digit' })
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setInputText('');
-    const currentFile = attachedFile;
-    setAttachedFile(null);
-    if (fileInputRef.current) fileInputRef.current.value = '';
-    if (textareaRef.current) textareaRef.current.style.height = 'auto';
 
     setIsLoading(true);
     setErrorMessage(null);
-    setStatusMessage('جاري تحليل المحتوى وتجهيز الملخص...');
+    setSummaryResult(null);
 
     try {
       let extractedContentText = '';
       let inlineFile = null;
 
-      if (currentFile) {
-        const isPdf = currentFile.type === 'application/pdf' || currentFile.name.endsWith('.pdf');
-        const isImage = currentFile.type.startsWith('image/');
+      if (inputTab === 'file' && selectedFile) {
+        const isPdf = selectedFile.type === 'application/pdf' || selectedFile.name.endsWith('.pdf');
+        const isImage = selectedFile.type.startsWith('image/');
 
         if (isPdf) {
-          setStatusMessage('1/3: جاري قراءة ملف الـ PDF وتطهير النصوص العربية...');
-          const extracted = await extractTextFromPdf(currentFile);
+          setStatusMessage('1/3: جاري قراءة ملف الـ PDF واستخراج النصوص...');
+          const extracted = await extractTextFromPdf(selectedFile);
           extractedContentText = extracted.text;
           
           if (!extractedContentText || extractedContentText.length < 50) {
             setStatusMessage('1/3: تحويل المستند المصور للمعالجة البصرية...');
-            inlineFile = await fileToBase64(currentFile);
+            inlineFile = await fileToBase64(selectedFile);
           }
         } else if (isImage) {
           setStatusMessage('1/3: ضغط صورة الدرس وتجهيزها للتحليل البصري...');
-          inlineFile = await fileToBase64(currentFile);
+          inlineFile = await fileToBase64(selectedFile);
         } else {
-          extractedContentText = await currentFile.text();
+          extractedContentText = await selectedFile.text();
         }
+      } else {
+        extractedContentText = rawText.trim();
       }
 
-      const combinedText = [textToSend, extractedContentText].filter(Boolean).join('\n\n');
+      setStatusMessage(`2/3: صياغة ملخص أكاديمي لشعبة ${selectedStreamName}...`);
 
-      setStatusMessage(`2/3: صياغة ملخص ذكي لشعبة ${selectedStream.name}...`);
-
-      let aiResponseText = '';
+      let finalSummary = '';
 
       if (!forceLocal) {
         try {
-          aiResponseText = await generateAiSummary({
+          finalSummary = await generateAiSummary({
             apiKey,
-            streamName: selectedStream.name,
+            streamName: selectedStreamName,
             mode: summaryMode,
-            rawText: combinedText,
+            rawText: extractedContentText,
             inlineFile
           });
         } catch (aiErr) {
-          if (combinedText) {
-            console.warn('AI remote failed, falling back to local heuristic:', aiErr);
-            setErrorMessage(`${aiErr.message} (تم التلخيص بالوضع المحلي).`);
-            aiResponseText = generateLocalHeuristicSummary({
-              text: combinedText,
-              subjectName: currentFile ? currentFile.name.replace(/\.[^/.]+$/, '') : 'الدرس',
-              streamName: selectedStream.name
+          if (extractedContentText) {
+            console.warn('AI remote failed, fallback to local summarizer:', aiErr);
+            setErrorMessage(`${aiErr.message} (تم الانتقال للوضع المحلي التلقائي).`);
+            finalSummary = generateLocalHeuristicSummary({
+              text: extractedContentText,
+              subjectName: selectedFile ? selectedFile.name.replace(/\.[^/.]+$/, '') : 'الدرس',
+              streamName: selectedStreamName
             });
           } else {
             throw aiErr;
           }
         }
       } else {
-        if (combinedText) {
-          aiResponseText = generateLocalHeuristicSummary({
-            text: combinedText,
-            subjectName: currentFile ? currentFile.name.replace(/\.[^/.]+$/, '') : 'الدرس',
-            streamName: selectedStream.name
+        if (extractedContentText) {
+          finalSummary = generateLocalHeuristicSummary({
+            text: extractedContentText,
+            subjectName: selectedFile ? selectedFile.name.replace(/\.[^/.]+$/, '') : 'الدرس',
+            streamName: selectedStreamName
           });
         } else {
-          throw new Error('يرجى كتابة نص أو إرفاق ملف للتلخيص.');
+          throw new Error('يرجى إدخال نص أو صورة واضحة للمتابعة.');
         }
       }
 
-      const assistantMessage = {
-        id: 'msg_ai_' + Date.now(),
-        sender: 'assistant',
-        text: aiResponseText,
-        streamName: selectedStream.name,
-        mode: summaryMode,
-        timestamp: new Date().toLocaleTimeString('ar-DZ', { hour: '2-digit', minute: '2-digit' })
-      };
+      setStatusMessage('3/3: اكتمل التلخيص بنجاح!');
 
-      setMessages(prev => [...prev, assistantMessage]);
+      setSummaryResult(finalSummary);
+      if (summaryMode === 'mindmap') {
+        setActiveViewTab('mindmap');
+      } else {
+        setActiveViewTab('text');
+      }
+
+      // Save to history
+      const newEntry = {
+        id: 'sum_' + Date.now(),
+        date: new Date().toLocaleDateString('ar-DZ', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        title: selectedFile ? selectedFile.name : (rawText.slice(0, 35) + '...'),
+        streamName: selectedStreamName,
+        mode: summaryMode,
+        content: finalSummary
+      };
+      const updatedHistory = [newEntry, ...history.slice(0, 9)];
+      setHistory(updatedHistory);
+      try {
+        localStorage.setItem('naja7i_ai_summaries_history', JSON.stringify(updatedHistory));
+      } catch (e) {
+        console.error(e);
+      }
 
     } catch (err) {
       console.error(err);
-      setErrorMessage(err.message || 'حدث خطأ أثناء معالجة الطلب. يرجى المحاولة مجدداً.');
+      setErrorMessage(err.message || 'حدث خطأ أثناء معالجة وتلخيص الملف. يرجى المحاولة مجدداً.');
     } finally {
       setIsLoading(false);
       setStatusMessage('');
     }
   };
 
-  return (
-    <div className="flex flex-col h-[calc(100vh-3.75rem)] bg-[#F8FAFC] text-[#0F172A] font-['Cairo'] overflow-hidden" dir="rtl">
-      
-      {/* 1. Sleek Top Studio Bar */}
-      <header className="bg-white border-b border-[#E2E8F0] px-4 py-2.5 flex items-center justify-between shrink-0 z-20 shadow-2xs print:hidden">
-        
-        {/* Left / Info */}
-        <div className="flex items-center gap-3">
-          <Link 
-            to="/" 
-            className="p-1.5 rounded-xl hover:bg-slate-100 text-slate-500 hover:text-[#0F172A] transition-colors"
-            title="العودة للرئيسية"
-          >
-            <HiHome className="w-5 h-5" />
-          </Link>
+  const handleCopy = () => {
+    if (!summaryResult) return;
+    navigator.clipboard.writeText(summaryResult);
+    setCopiedToast(true);
+    setTimeout(() => setCopiedToast(false), 2500);
+  };
 
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-rose-500 to-[#E11D48] text-white flex items-center justify-center text-lg shadow-sm">
-              🤖
-            </div>
+  const handlePrint = () => {
+    window.print();
+  };
+
+  const handleDownloadTxt = () => {
+    if (!summaryResult) return;
+    const blob = new Blob([summaryResult], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ملخص_${selectedStreamName}_نجاحي_AI.md`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleDeleteHistoryItem = (id, e) => {
+    e.stopPropagation();
+    const filtered = history.filter(h => h.id !== id);
+    setHistory(filtered);
+    try {
+      localStorage.setItem('naja7i_ai_summaries_history', JSON.stringify(filtered));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const parsedMindmap = summaryResult ? parseMindmapTextToJson(summaryResult) : null;
+  const extractedFlashcards = summaryResult ? extractFlashcardsFromText(summaryResult) : [];
+
+  // Content Statistics
+  const wordCount = summaryResult ? summaryResult.trim().split(/\s+/).length : 0;
+  const estimatedReadTime = Math.max(1, Math.ceil(wordCount / 180));
+
+  return (
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-24 font-['Cairo']" dir="rtl">
+      
+      {/* 🖨️ A4 Clean Print Layout Header */}
+      <div className="hidden print:block p-4 border-b-2 border-black mb-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-black text-black">منصة نجاحي — ملخص أكاديمي ذكي للبكالوريا 🇩🇿</h1>
+            <p className="text-xs text-gray-700 font-bold mt-1">
+              الشعبة: {selectedStreamName} • المنهاج الوزاري المعتمد • تاريخ التوليد: {new Date().toLocaleDateString('ar-DZ')}
+            </p>
+          </div>
+          <div className="text-xs font-bold border border-black px-3 py-1 rounded">
+            Naja7i.com
+          </div>
+        </div>
+      </div>
+
+      {/* Top Banner Header */}
+      <div className="bg-white border-b border-[#E2E8F0] py-6 sm:py-8 print:hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 text-xs text-[#64748B] mb-3">
+            <Link to="/" className="hover:text-[#E11D48] flex items-center gap-1 transition-colors">
+              <HiHome className="w-4 h-4" />
+              <span>الرئيسية</span>
+            </Link>
+            <span>/</span>
+            <span className="text-[#0F172A] font-bold">الملخص الذكي بالذكاء الاصطناعي (AI Studio)</span>
+          </div>
+
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-black text-sm text-[#0F172A]">
-                  مستشار نجاحي الذكي
+              <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                <span className="px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 font-medium text-xs border border-rose-200/60 flex items-center gap-1">
+                  <span>محرك البكالوريا الذكي 🤖</span>
                 </span>
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-[11px] font-mono text-emerald-700 font-bold hidden sm:inline">AI Studio</span>
+                <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium text-xs border border-slate-200/60 font-mono">
+                  NVIDIA AI & Kimi K3 & Vision
+                </span>
+                <span className="text-xs text-[#64748B] hidden sm:inline">• تلخيص فوري، خرائط ذهنية، وبطاقات مراجعة</span>
               </div>
-              <p className="text-[10px] text-[#64748B]">
-                شعبة {selectedStream.name} • NVIDIA NIM & Vision 🇩🇿
+              <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A]">
+                ملخص نجاحي الذكي بالذكاء الاصطناعي ✨
+              </h1>
+              <p className="text-xs sm:text-sm text-[#475569] mt-1 max-w-2xl leading-relaxed">
+                ارفع أي ملف درس أو كراس أو الصق النص، وسيقوم الذكاء الاصطناعي بصياغة ملخص أكاديمي منهجي يبرز القوانين، التعاريف، الفخاخ المنهجية، والأسئلة الوزارية المتوقعة.
               </p>
             </div>
-          </div>
-        </div>
 
-        {/* Right / Quick Controls */}
-        <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 self-start md:self-auto">
+              <button
+                onClick={() => {
+                  setInputKeyTemp(apiKey);
+                  setIsKeyModalOpen(true);
+                }}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-colors flex items-center gap-1.5 shadow-2xs cursor-pointer ${
+                  apiKey 
+                    ? 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100'
+                    : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
+                }`}
+                title="إعدادات الذكاء الاصطناعي والمفاتيح"
+              >
+                <HiKey className={`w-4 h-4 ${apiKey ? 'text-emerald-600' : 'text-slate-500'}`} />
+                <span>{apiKey ? 'مفتاح Gemini متصل ✓' : 'المحرك السحابي نشط ⚡'}</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Main Content Workspace */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        {/* Left Column: Input & Controls (5 cols) */}
+        <div className="lg:col-span-5 space-y-5 print:hidden">
           
-          {/* Stream Selector Dropdown Pill */}
-          <div className="relative">
-            <select
-              value={selectedStreamId}
-              onChange={(e) => setSelectedStreamId(e.target.value)}
-              className="px-2.5 py-1.5 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-xs font-bold text-[#0F172A] cursor-pointer focus:outline-none focus:border-[#E11D48] appearance-none pr-7"
-            >
-              {STREAMS_LIST.map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.icon} {s.name}
-                </option>
+          {/* Stream Selector */}
+          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs space-y-2">
+            <label className="block text-xs font-bold text-[#0F172A] flex items-center justify-between">
+              <span>1. اختر الشعبة الدراسية:</span>
+              <span className="text-[#E11D48] text-[11px] font-mono">{selectedStreamName}</span>
+            </label>
+
+            <div className="grid grid-cols-3 gap-1.5">
+              {STREAMS_LIST.map((str) => (
+                <button
+                  key={str.id}
+                  type="button"
+                  onClick={() => setSelectedStreamId(str.id)}
+                  className={`p-2 rounded-xl border text-center transition-all cursor-pointer text-xs font-bold flex items-center justify-center gap-1 ${
+                    selectedStreamId === str.id
+                      ? 'bg-[#E11D48] text-white border-[#E11D48] shadow-2xs'
+                      : 'bg-[#F8FAFC] text-slate-700 border-[#E2E8F0] hover:bg-[#F1F5F9]'
+                  }`}
+                >
+                  <span>{str.icon}</span>
+                  <span className="truncate">{str.name}</span>
+                </button>
               ))}
-            </select>
-            <HiChevronDown className="w-3.5 h-3.5 text-[#64748B] absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            </div>
           </div>
 
-          {/* New Chat Button */}
-          <button
-            onClick={handleNewChat}
-            className="px-3 py-1.5 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-xs font-bold text-[#0F172A] transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
-            title="بدء محادثة وتلخيص جديد"
-          >
-            <HiRefresh className="w-3.5 h-3.5 text-[#E11D48]" />
-            <span className="hidden sm:inline">محادثة جديدة</span>
-          </button>
+          {/* Mode Selector */}
+          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs space-y-2">
+            <label className="block text-xs font-bold text-[#0F172A]">
+              2. اختر نمط التلخيص المطلوب:
+            </label>
 
-          {/* History Toggle */}
-          <button
-            onClick={() => setIsHistoryOpen(!isHistoryOpen)}
-            className="p-1.5 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-slate-700 transition-colors cursor-pointer relative"
-            title="سجل المحادثات"
-          >
-            <HiChatAlt2 className="w-5 h-5" />
-            {historySessions.length > 0 && (
-              <span className="w-2 h-2 rounded-full bg-[#E11D48] absolute top-1 right-1" />
+            <div className="grid grid-cols-2 gap-1.5">
+              {MODES_LIST.map((mode) => (
+                <button
+                  key={mode.id}
+                  type="button"
+                  onClick={() => setSummaryMode(mode.id)}
+                  className={`p-2.5 rounded-xl border text-right transition-all cursor-pointer ${
+                    summaryMode === mode.id
+                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48] shadow-2xs font-bold'
+                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:bg-[#F1F5F9]'
+                  } ${mode.id === 'methodology' ? 'col-span-2' : ''}`}
+                >
+                  <div className="text-xs font-bold">
+                    {mode.label}
+                  </div>
+                  <div className="text-[10px] text-[#64748B] mt-0.5">
+                    {mode.desc}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Input File / Text Card */}
+          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 shadow-xs space-y-4">
+            
+            {/* Input Tab Switcher */}
+            <div className="grid grid-cols-2 gap-1.5 p-1 bg-[#F1F5F9] rounded-xl">
+              <button
+                onClick={() => setInputTab('file')}
+                className={`py-2 text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
+                  inputTab === 'file' 
+                    ? 'bg-white text-[#0F172A] shadow-xs' 
+                    : 'text-[#64748B] hover:text-[#0F172A]'
+                }`}
+              >
+                <HiDocumentText className="w-4 h-4 text-[#E11D48]" />
+                <span>رفع ملف PDF / صورة</span>
+              </button>
+
+              <button
+                onClick={() => setInputTab('text')}
+                className={`py-2 text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
+                  inputTab === 'text' 
+                    ? 'bg-white text-[#0F172A] shadow-xs' 
+                    : 'text-[#64748B] hover:text-[#0F172A]'
+                }`}
+              >
+                <HiPhotograph className="w-4 h-4 text-[#E11D48]" />
+                <span>لصق نص الدرس</span>
+              </button>
+            </div>
+
+            {/* File Dropzone */}
+            {inputTab === 'file' && (
+              <div
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={handleFileDrop}
+                className="border-2 border-dashed border-[#CBD5E1] hover:border-[#E11D48] rounded-2xl p-6 text-center transition-all bg-[#F8FAFC] space-y-3 cursor-pointer group"
+                onClick={() => document.getElementById('file-upload-input').click()}
+              >
+                <input
+                  id="file-upload-input"
+                  type="file"
+                  accept=".pdf,.png,.jpg,.jpeg,.webp,.txt"
+                  className="hidden"
+                  onChange={(e) => e.target.files?.[0] && handleFileSelected(e.target.files[0])}
+                />
+
+                <div className="w-12 h-12 rounded-2xl bg-white border border-[#E2E8F0] text-[#E11D48] flex items-center justify-center text-2xl mx-auto shadow-2xs group-hover:scale-105 transition-transform">
+                  📄
+                </div>
+
+                {selectedFile ? (
+                  <div className="space-y-1">
+                    <span className="text-xs font-bold text-emerald-700 block truncate max-w-xs mx-auto">
+                      ✓ {selectedFile.name}
+                    </span>
+                    <span className="text-[11px] text-[#64748B] block font-mono">
+                      {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
+                    </span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedFile(null);
+                      }}
+                      className="text-[11px] text-rose-600 font-bold hover:underline cursor-pointer pt-1"
+                    >
+                      تغيير الملف ↺
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold text-[#0F172A]">
+                      اضغط لاختيار ملف أو اسحبه إلى هنا
+                    </p>
+                    <p className="text-[11px] text-[#64748B]">
+                      يدعم ملفات PDF، صور الكراريس والمذكرات (JPG, PNG) حتى 35 صفحة
+                    </p>
+                  </div>
+                )}
+              </div>
             )}
-          </button>
 
-          {/* API Key Modal Button */}
-          <button
-            onClick={() => {
-              setInputKeyTemp(apiKey);
-              setIsKeyModalOpen(true);
-            }}
-            className="p-1.5 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-slate-700 transition-colors cursor-pointer"
-            title="إعدادات المفاتيح والذكاء"
-          >
-            <HiKey className={`w-5 h-5 ${apiKey ? 'text-emerald-600' : 'text-slate-500'}`} />
-          </button>
-
-        </div>
-
-      </header>
-
-      {/* 2. Chat Stream & Workspace Area */}
-      <div className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 scrollbar-thin">
-        <div className="max-w-4xl mx-auto space-y-6">
-
-          {/* Empty State / Welcome Screen */}
-          {messages.length === 0 && (
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="py-8 text-center space-y-6"
-            >
-              
-              <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-rose-500 to-[#E11D48] text-white flex items-center justify-center text-3xl mx-auto shadow-lg ring-8 ring-rose-50">
-                ✨
+            {/* Raw Text Input */}
+            {inputTab === 'text' && (
+              <div>
+                <textarea
+                  rows={6}
+                  placeholder="الصق نص الدرس أو المذكرة أو العناصر التي تريد تلخيصها هنا..."
+                  value={rawText}
+                  onChange={(e) => setRawText(e.target.value)}
+                  className="w-full bg-[#F8FAFC] border border-[#CBD5E1] rounded-xl p-3 text-xs text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#E11D48] leading-relaxed"
+                />
               </div>
+            )}
 
-              <div className="space-y-1.5 max-w-lg mx-auto">
-                <h2 className="text-xl sm:text-2xl font-black text-[#0F172A]">
-                  كيف يمكنني مساعدتك في تحضير البكالوريا اليوم؟ 🇩🇿
-                </h2>
-                <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">
-                  ارفع ملف PDF أو صورة درس، أو اختر نمط التلخيص واكتب موضوعك، وسيقوم المساعد الذكي بتوليد مخطط مفاهيمي، تلخيص شامل، أو بطاقات مراجعة فورية.
-                </p>
-              </div>
-
-              {/* Quick Starter Prompt Cards Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-right">
-                {QUICK_STARTER_PROMPTS.map((starter, idx) => (
+            {/* Quick Test Lesson Templates */}
+            <div className="space-y-1.5 pt-2 border-t border-[#E2E8F0]">
+              <label className="block text-[11px] font-bold text-[#64748B]">
+                ⚡ تجربة سريعة بنقرة واحدة (دروس جاهزة):
+              </label>
+              <div className="grid grid-cols-2 gap-1.5">
+                {QUICK_TEST_TEMPLATES.map((tmpl, idx) => (
                   <button
                     key={idx}
-                    onClick={() => {
-                      setSelectedStreamId(starter.streamId);
-                      setSummaryMode(starter.mode);
-                      handleSendMessage(starter.prompt);
-                    }}
-                    className="p-4 rounded-2xl bg-white hover:bg-rose-50/40 border border-[#E2E8F0] hover:border-rose-300 text-right transition-all shadow-2xs hover:shadow-xs group cursor-pointer"
+                    type="button"
+                    onClick={() => handleLoadTemplate(tmpl)}
+                    className="p-1.5 text-right rounded-lg bg-[#F8FAFC] hover:bg-rose-50 text-[11px] text-slate-700 hover:text-[#E11D48] border border-slate-200 hover:border-rose-300 transition-colors truncate cursor-pointer"
+                    title={tmpl.title}
                   >
-                    <span className="block text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] transition-colors mb-1">
-                      {starter.title}
-                    </span>
-                    <p className="text-[11px] text-[#64748B] line-clamp-2 leading-relaxed">
-                      {starter.prompt}
-                    </p>
+                    ✦ {tmpl.title}
                   </button>
                 ))}
               </div>
-
-            </motion.div>
-          )}
-
-          {/* Messages Stream */}
-          {messages.map((msg) => {
-            const isUser = msg.sender === 'user';
-            const parsedMindmap = !isUser && msg.mode === 'mindmap' ? parseMindmapTextToJson(msg.text) : null;
-            const extractedFlashcards = !isUser ? extractFlashcardsFromText(msg.text) : [];
-
-            return (
-              <div
-                key={msg.id}
-                className={`flex gap-3 ${isUser ? 'justify-end' : 'justify-start'}`}
-              >
-                
-                {/* Assistant Avatar */}
-                {!isUser && (
-                  <div className="w-8 h-8 rounded-xl bg-[#0F172A] text-white flex items-center justify-center text-sm shrink-0 shadow-2xs mt-1">
-                    🤖
-                  </div>
-                )}
-
-                {/* Message Bubble Card */}
-                <div
-                  className={`max-w-3xl w-full rounded-2xl p-4 sm:p-5 transition-all space-y-3 ${
-                    isUser
-                      ? 'bg-rose-50/70 border border-rose-200/80 text-[#0F172A] max-w-xl'
-                      : 'bg-white border border-[#E2E8F0] text-[#0F172A] shadow-xs'
-                  }`}
-                >
-                  {/* Top Bubble Meta */}
-                  <div className="flex items-center justify-between text-[11px] text-[#64748B] border-b border-black/5 pb-2">
-                    <div className="flex items-center gap-1.5">
-                      <span className="font-bold text-[#0F172A]">
-                        {isUser ? 'أنت' : 'مستشار نجاحي الذكي'}
-                      </span>
-                      {msg.streamName && (
-                        <span className="px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 font-medium">
-                          {msg.streamName}
-                        </span>
-                      )}
-                    </div>
-                    <span className="font-mono text-[10px]">{msg.timestamp}</span>
-                  </div>
-
-                  {/* Attached File Badge if user uploaded file */}
-                  {isUser && msg.file && (
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-rose-200 text-xs font-bold text-slate-800 shadow-2xs">
-                      <HiDocumentText className="w-4 h-4 text-[#E11D48]" />
-                      <span className="truncate max-w-[200px]">{msg.file.name}</span>
-                      <span className="text-[10px] text-slate-500 font-mono">
-                        ({(msg.file.size / 1024 / 1024).toFixed(2)} MB)
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Message Content */}
-                  {isUser ? (
-                    <p className="text-xs sm:text-sm text-[#0F172A] leading-relaxed whitespace-pre-wrap">
-                      {msg.text}
-                    </p>
-                  ) : (
-                    <div className="space-y-4">
-                      {/* Mindmap Interactive Viewer inside Chat Bubble */}
-                      {msg.mode === 'mindmap' && parsedMindmap && (
-                        <div className="pt-1">
-                          <VisualMindmapViewer mindmapData={parsedMindmap} />
-                        </div>
-                      )}
-
-                      {/* Render Markdown Content */}
-                      <div className="prose prose-slate max-w-none text-xs sm:text-sm leading-relaxed">
-                        <MarkdownContentRenderer content={msg.text} />
-                      </div>
-
-                      {/* Interactive Flashcards inside Chat Bubble */}
-                      {extractedFlashcards.length > 0 && msg.mode === 'comprehensive' && (
-                        <div className="pt-2 border-t border-[#E2E8F0]">
-                          <InteractiveFlashcardsViewer flashcards={extractedFlashcards} />
-                        </div>
-                      )}
-
-                      {/* Assistant Message Actions Toolbar */}
-                      <div className="flex items-center justify-between pt-3 border-t border-[#E2E8F0] text-xs text-[#64748B] flex-wrap gap-2 print:hidden">
-                        <div className="flex items-center gap-1.5">
-                          {/* Audio TTS Button */}
-                          <button
-                            onClick={() => toggleSpeech(msg.id, msg.text)}
-                            className={`px-2.5 py-1.5 rounded-lg border font-bold flex items-center gap-1 transition-colors cursor-pointer ${
-                              playingMessageId === msg.id
-                                ? 'bg-rose-600 text-white border-rose-600 animate-pulse'
-                                : 'bg-[#F8FAFC] hover:bg-[#F1F5F9] border-[#CBD5E1] text-slate-700'
-                            }`}
-                            title="الاستماع للملخص صوتياً"
-                          >
-                            {playingMessageId === msg.id ? <HiStop className="w-3.5 h-3.5" /> : <HiVolumeUp className="w-3.5 h-3.5 text-rose-600" />}
-                            <span>{playingMessageId === msg.id ? 'إيقاف' : 'استماع 🔊'}</span>
-                          </button>
-
-                          {/* Copy Button */}
-                          <button
-                            onClick={() => handleCopyMessage(msg.id, msg.text)}
-                            className="p-1.5 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-slate-700 transition-colors cursor-pointer"
-                            title="نسخ النص"
-                          >
-                            <HiClipboardCopy className="w-3.5 h-3.5" />
-                          </button>
-
-                          {/* Download Button */}
-                          <button
-                            onClick={() => handleDownloadMessage(msg.text, msg.streamName)}
-                            className="p-1.5 rounded-lg bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-slate-700 transition-colors cursor-pointer"
-                            title="تنزيل كملف Markdown"
-                          >
-                            <HiDownload className="w-3.5 h-3.5" />
-                          </button>
-
-                          {/* Print A4 Button */}
-                          <button
-                            onClick={handlePrint}
-                            className="p-1.5 rounded-lg bg-[#0F172A] hover:bg-slate-800 text-white transition-colors cursor-pointer"
-                            title="طباعة A4"
-                          >
-                            <HiPrinter className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
-
-                        {copiedId === msg.id && (
-                          <span className="text-emerald-600 font-bold text-[11px]">
-                            تم النسخ بنجاح ✓
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                </div>
-
-                {/* User Avatar */}
-                {isUser && (
-                  <div className="w-8 h-8 rounded-xl bg-rose-600 text-white flex items-center justify-center text-sm shrink-0 shadow-2xs mt-1">
-                    👤
-                  </div>
-                )}
-
-              </div>
-            );
-          })}
-
-          {/* Loading Indicator in Chat Stream */}
-          {isLoading && (
-            <div className="flex gap-3 justify-start">
-              <div className="w-8 h-8 rounded-xl bg-[#0F172A] text-white flex items-center justify-center text-sm shrink-0 shadow-2xs mt-1">
-                🤖
-              </div>
-              <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs flex items-center gap-3 text-xs text-[#0F172A]">
-                <span className="inline-block w-4 h-4 border-2 border-[#E11D48] border-t-transparent rounded-full animate-spin"></span>
-                <span className="font-bold">{statusMessage || 'جاري التفكير والتوليد بالذكاء الاصطناعي...'}</span>
-              </div>
             </div>
-          )}
 
-          {/* Error Message */}
-          {errorMessage && (
-            <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-900 text-xs space-y-2">
-              <div className="flex items-center gap-2">
-                <span>⚠️</span>
-                <span className="font-bold">{errorMessage}</span>
+            {/* Error Message */}
+            {errorMessage && (
+              <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs space-y-2">
+                <div className="flex items-start gap-1.5">
+                  <span className="shrink-0 text-sm">⚠️</span>
+                  <span>{errorMessage}</span>
+                </div>
+                <div className="flex items-center gap-2 pt-1 border-t border-rose-200/60">
+                  <button
+                    onClick={() => handleStartSummarize(true)}
+                    className="px-2.5 py-1 bg-white hover:bg-rose-100 text-rose-900 font-bold rounded-lg border border-rose-300 transition-colors text-[11px] cursor-pointer"
+                  >
+                    ⚡ التلخيص بالوضع المحلي
+                  </button>
+                </div>
               </div>
-              <div className="flex items-center gap-2 pt-1 border-t border-rose-200">
+            )}
+
+            {/* Main Action Button */}
+            <button
+              onClick={() => handleStartSummarize(false)}
+              disabled={isLoading}
+              className="w-full py-3 px-4 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm hover:shadow-md transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading ? (
+                <>
+                  <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  <span>{statusMessage || 'جاري التلخيص بواسطة الذكاء الاصطناعي...'}</span>
+                </>
+              ) : (
+                <>
+                  <HiSparkles className="w-4 h-4" />
+                  <span>توليد الملخص والمخطط الآن ✨</span>
+                </>
+              )}
+            </button>
+
+          </div>
+
+          {/* History Panel */}
+          {history.length > 0 && (
+            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-[#0F172A]">
+                  🕒 سجل الملخصات السابقة ({history.length})
+                </span>
                 <button
-                  onClick={() => handleSendMessage(null, true)}
-                  className="px-3 py-1 bg-white hover:bg-rose-100 text-rose-900 font-bold rounded-lg border border-rose-300 transition-colors text-[11px] cursor-pointer"
+                  onClick={() => {
+                    setHistory([]);
+                    localStorage.removeItem('naja7i_ai_summaries_history');
+                  }}
+                  className="text-[10px] text-rose-600 hover:underline cursor-pointer"
                 >
-                  ⚡ إعادة التلخيص بالوضع المحلي
+                  مسح السجل
                 </button>
               </div>
-            </div>
-          )}
 
-          <div ref={messagesEndRef} />
-        </div>
-      </div>
-
-      {/* 3. Bottom Sticky Prompt Dock (ChatGPT/Claude Style) */}
-      <div className="bg-white border-t border-[#E2E8F0] p-3 sm:p-4 shrink-0 z-20 shadow-md print:hidden">
-        <div className="max-w-4xl mx-auto space-y-2.5">
-          
-          {/* Mode Selector Chips Strip */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-            <span className="text-[11px] font-bold text-[#64748B] shrink-0 ml-1">
-              النمط:
-            </span>
-            {MODES_LIST.map((mode) => (
-              <button
-                key={mode.id}
-                type="button"
-                onClick={() => setSummaryMode(mode.id)}
-                className={`px-3 py-1 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer flex items-center gap-1 ${
-                  summaryMode === mode.id
-                    ? 'bg-[#E11D48] text-white shadow-2xs'
-                    : 'bg-[#F8FAFC] text-slate-700 hover:bg-[#F1F5F9] border border-[#E2E8F0]'
-                }`}
-              >
-                <span>{mode.label}</span>
-              </button>
-            ))}
-          </div>
-
-          {/* Attached File Preview Chip */}
-          {attachedFile && (
-            <div className="flex items-center justify-between bg-rose-50 border border-rose-200 rounded-xl px-3 py-1.5 text-xs text-slate-800 animate-fadeIn">
-              <div className="flex items-center gap-2 truncate">
-                <HiDocumentText className="w-4 h-4 text-[#E11D48] shrink-0" />
-                <span className="font-bold truncate">{attachedFile.name}</span>
-                <span className="text-[10px] text-slate-500 font-mono">
-                  ({(attachedFile.size / 1024 / 1024).toFixed(2)} MB)
-                </span>
-              </div>
-              <button
-                onClick={handleRemoveAttachedFile}
-                className="text-rose-600 hover:text-rose-800 p-1 cursor-pointer"
-                title="إلغاء الملف"
-              >
-                <HiX className="w-4 h-4" />
-              </button>
-            </div>
-          )}
-
-          {/* Main Input Bar */}
-          <div className="flex items-end gap-2 bg-[#F8FAFC] border border-[#CBD5E1] focus-within:border-[#E11D48] rounded-2xl p-2 transition-all shadow-inner">
-            
-            {/* Attachment Button */}
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".pdf,.png,.jpg,.jpeg,.webp,.txt"
-              className="hidden"
-              onChange={handleFileChange}
-            />
-            <button
-              type="button"
-              onClick={() => fileInputRef.current?.click()}
-              className="p-2 rounded-xl text-slate-500 hover:text-[#E11D48] hover:bg-rose-50 transition-colors cursor-pointer shrink-0"
-              title="إرفاق ملف PDF أو صورة درس"
-            >
-              <HiPaperClip className="w-5 h-5" />
-            </button>
-
-            {/* Expanding Textarea */}
-            <textarea
-              ref={textareaRef}
-              rows={1}
-              value={inputText}
-              onChange={handleTextareaChange}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault();
-                  handleSendMessage();
-                }
-              }}
-              placeholder="اكتب سؤالك، الصق نص الدرس، أو أرفق ملفاً لتلخيصه فورياً... (Enter للإرسال)"
-              className="flex-1 bg-transparent border-0 text-xs sm:text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none resize-none py-1.5 px-1 max-h-44 leading-relaxed"
-            />
-
-            {/* Send Button */}
-            <button
-              type="button"
-              onClick={() => handleSendMessage()}
-              disabled={isLoading || (!inputText.trim() && !attachedFile)}
-              className="p-2.5 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] disabled:opacity-40 disabled:hover:bg-[#E11D48] text-white shadow-xs transition-all cursor-pointer shrink-0 disabled:cursor-not-allowed"
-              title="إرسال"
-            >
-              <HiArrowUp className="w-4 h-4" />
-            </button>
-
-          </div>
-
-          <div className="flex items-center justify-between text-[10px] text-[#94A3B8] px-1">
-            <span>مدعوم بنماذج NVIDIA NIM و Vision السريعة 🇩🇿</span>
-            <span>اضغط Shift + Enter لسطر جديد</span>
-          </div>
-
-        </div>
-      </div>
-
-      {/* 4. History Sessions Slide-Over Drawer */}
-      <AnimatePresence>
-        {isHistoryOpen && (
-          <div className="fixed inset-0 z-50 flex">
-            {/* Backdrop */}
-            <div 
-              className="fixed inset-0 bg-slate-950/50 backdrop-blur-xs transition-opacity"
-              onClick={() => setIsHistoryOpen(false)}
-            />
-
-            {/* Drawer Panel */}
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ duration: 0.25 }}
-              className="relative mr-auto w-full max-w-xs bg-white h-full shadow-2xl z-10 flex flex-col justify-between p-5 text-right"
-            >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between border-b border-[#E2E8F0] pb-3">
-                  <div className="flex items-center gap-2">
-                    <HiChatAlt2 className="w-5 h-5 text-[#E11D48]" />
-                    <h3 className="text-sm font-bold text-[#0F172A]">سجل المحادثات والملخصات</h3>
-                  </div>
-                  <button 
-                    onClick={() => setIsHistoryOpen(false)}
-                    className="text-slate-400 hover:text-slate-700 p-1 cursor-pointer"
+              <div className="space-y-1.5 max-h-48 overflow-y-auto scrollbar-thin">
+                {history.map((item) => (
+                  <div
+                    key={item.id}
+                    onClick={() => {
+                      setSummaryResult(item.content);
+                      setSummaryMode(item.mode || 'mindmap');
+                    }}
+                    className="p-2 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-xs cursor-pointer flex items-center justify-between gap-2 group transition-colors"
                   >
-                    <HiX className="w-5 h-5" />
+                    <div className="truncate min-w-0">
+                      <p className="font-bold text-[#0F172A] truncate group-hover:text-[#E11D48]">
+                        {item.title}
+                      </p>
+                      <p className="text-[10px] text-[#64748B]">
+                        {item.date} • {item.streamName || 'بكالوريا'}
+                      </p>
+                    </div>
+                    <button
+                      onClick={(e) => handleDeleteHistoryItem(item.id, e)}
+                      className="text-slate-400 hover:text-rose-600 p-1 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                    >
+                      <HiTrash className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+        </div>
+
+        {/* Right Column: Output Workspace (7 cols) */}
+        <div className="lg:col-span-7 space-y-4">
+          
+          {summaryResult ? (
+            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 shadow-xs space-y-4">
+              
+              {/* Output Tabs & Action Toolbar */}
+              <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-[#E2E8F0] print:hidden">
+                
+                {/* View Tabs */}
+                <div className="flex items-center gap-1.5 p-1 bg-[#F1F5F9] rounded-xl text-xs font-bold flex-wrap">
+                  <button
+                    onClick={() => setActiveViewTab('mindmap')}
+                    className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1 ${
+                      activeViewTab === 'mindmap'
+                        ? 'bg-white text-[#0F172A] shadow-xs'
+                        : 'text-[#64748B] hover:text-[#0F172A]'
+                    }`}
+                  >
+                    <span>🗺️</span>
+                    <span>المخطط البصري</span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveViewTab('text')}
+                    className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1 ${
+                      activeViewTab === 'text'
+                        ? 'bg-white text-[#0F172A] shadow-xs'
+                        : 'text-[#64748B] hover:text-[#0F172A]'
+                    }`}
+                  >
+                    <span>📑</span>
+                    <span>الملخص الكامل</span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveViewTab('flashcards')}
+                    className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1 ${
+                      activeViewTab === 'flashcards'
+                        ? 'bg-white text-[#0F172A] shadow-xs'
+                        : 'text-[#64748B] hover:text-[#0F172A]'
+                    }`}
+                  >
+                    <span>🎴</span>
+                    <span>بطاقات المراجعة ({extractedFlashcards.length})</span>
                   </button>
                 </div>
 
-                <button
-                  onClick={handleNewChat}
-                  className="w-full py-2.5 rounded-xl bg-[#E11D48] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-2xs hover:bg-[#BE123C] transition-colors cursor-pointer"
-                >
-                  <HiRefresh className="w-4 h-4" />
-                  <span>بدء محادثة جديدة +</span>
-                </button>
+                {/* Actions Toolbar */}
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  
+                  {/* Audio Speech Button */}
+                  <button
+                    onClick={toggleSpeech}
+                    className={`p-2 rounded-xl border text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors ${
+                      isPlayingAudio 
+                        ? 'bg-rose-600 text-white border-rose-600 animate-pulse' 
+                        : 'bg-[#F8FAFC] hover:bg-[#F1F5F9] border-[#CBD5E1] text-slate-700'
+                    }`}
+                    title="الاستماع للملخص بالصوت"
+                  >
+                    {isPlayingAudio ? <HiStop className="w-4 h-4" /> : <HiVolumeUp className="w-4 h-4 text-rose-600" />}
+                    <span>{isPlayingAudio ? 'إيقاف' : 'استماع 🔊'}</span>
+                  </button>
 
-                {/* Sessions List */}
-                <div className="space-y-2 overflow-y-auto max-h-[calc(100vh-220px)] scrollbar-thin">
-                  {historySessions.length === 0 ? (
-                    <p className="text-xs text-slate-400 text-center py-8">
-                      لا توجد محادثات سابقة محفوظة.
-                    </p>
-                  ) : (
-                    historySessions.map((session) => (
-                      <div
-                        key={session.id}
-                        onClick={() => handleRestoreSession(session)}
-                        className="p-3 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#E2E8F0] text-xs cursor-pointer flex items-center justify-between gap-2 group transition-colors"
-                      >
-                        <div className="truncate min-w-0">
-                          <p className="font-bold text-[#0F172A] truncate group-hover:text-[#E11D48]">
-                            {session.title}
-                          </p>
-                          <p className="text-[10px] text-[#64748B]">
-                            {session.date} • {session.streamName}
-                          </p>
-                        </div>
-                        <button
-                          onClick={(e) => handleDeleteSession(session.id, e)}
-                          className="text-slate-400 hover:text-rose-600 p-1 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
-                          title="حذف"
-                        >
-                          <HiTrash className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    ))
-                  )}
+                  <button
+                    onClick={handleCopy}
+                    className="p-2 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-slate-700 text-xs font-bold flex items-center gap-1 cursor-pointer"
+                    title="نسخ النص"
+                  >
+                    <HiClipboardCopy className="w-4 h-4 text-slate-500" />
+                    <span>{copiedToast ? 'تم النسخ ✓' : 'نسخ'}</span>
+                  </button>
+
+                  <button
+                    onClick={handleDownloadTxt}
+                    className="p-2 rounded-xl bg-[#F8FAFC] hover:bg-[#F1F5F9] border border-[#CBD5E1] text-slate-700 text-xs font-bold flex items-center gap-1 cursor-pointer"
+                    title="تحميل كملف Markdown"
+                  >
+                    <HiDownload className="w-4 h-4 text-slate-500" />
+                    <span>تنزيل</span>
+                  </button>
+
+                  <button
+                    onClick={handlePrint}
+                    className="p-2 rounded-xl bg-[#0F172A] hover:bg-slate-800 text-white text-xs font-bold flex items-center gap-1 cursor-pointer"
+                    title="طباعة الملخص"
+                  >
+                    <HiPrinter className="w-4 h-4" />
+                    <span>طباعة A4</span>
+                  </button>
                 </div>
+
               </div>
 
-              {historySessions.length > 0 && (
-                <button
-                  onClick={() => {
-                    setHistorySessions([]);
-                    localStorage.removeItem('naja7i_chat_sessions_history');
-                  }}
-                  className="text-xs text-rose-600 hover:underline pt-3 border-t border-[#E2E8F0] text-center block w-full cursor-pointer"
-                >
-                  مسح كامل السجل
-                </button>
-              )}
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+              {/* Stats Bar */}
+              <div className="flex items-center justify-between text-[11px] text-[#64748B] bg-slate-50 p-2 rounded-xl border border-slate-200/60 print:hidden">
+                <div className="flex items-center gap-3">
+                  <span className="flex items-center gap-1 font-mono">
+                    <HiClock className="w-3.5 h-3.5 text-slate-400" />
+                    <span>وقت القراءة: ~{estimatedReadTime} دقيقة</span>
+                  </span>
+                  <span>•</span>
+                  <span className="font-mono">{wordCount} كلمة</span>
+                </div>
+                <span className="px-2 py-0.5 rounded bg-white text-slate-700 border border-slate-200 font-medium">
+                  {selectedStreamName}
+                </span>
+              </div>
 
-      {/* 5. Custom API Key Modal */}
+              {/* View 1: Mindmap */}
+              {activeViewTab === 'mindmap' && (
+                <div>
+                  <VisualMindmapViewer mindmapData={parsedMindmap} />
+                </div>
+              )}
+
+              {/* View 2: Full Markdown Text */}
+              {activeViewTab === 'text' && (
+                <div className="prose prose-slate max-w-none text-xs sm:text-sm leading-relaxed font-['Cairo']">
+                  <MarkdownContentRenderer content={summaryResult} />
+                </div>
+              )}
+
+              {/* View 3: Interactive Flashcards */}
+              {activeViewTab === 'flashcards' && (
+                <div>
+                  <InteractiveFlashcardsViewer flashcards={extractedFlashcards} />
+                </div>
+              )}
+
+            </div>
+          ) : (
+            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-10 text-center shadow-xs space-y-4">
+              <div className="w-16 h-16 rounded-2xl bg-rose-50 text-[#E11D48] flex items-center justify-center text-3xl mx-auto shadow-2xs">
+                ✨
+              </div>
+              <div className="max-w-md mx-auto space-y-1.5">
+                <h3 className="text-base font-bold text-[#0F172A]">
+                  المستشار الأكاديمي الذكي جاهز لتلخيص دروسك
+                </h3>
+                <p className="text-xs text-[#64748B] leading-relaxed">
+                  اختر ملف PDF أو صورة درس أو الصق نصاً، أو جرب أحد الدروس الجاهزة على اليمين لتوليد مخطط مفاهيمي وأسئلة وزارية وبطاقات مراجعة فورية.
+                </p>
+              </div>
+            </div>
+          )}
+
+        </div>
+
+      </div>
+
+      {/* API Key Modal */}
       {isKeyModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
           <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4 text-right">
@@ -969,7 +937,7 @@ export default function AiSummarizerPage() {
               <button
                 type="button"
                 onClick={() => setIsKeyModalOpen(false)}
-                className="px-3 py-1.5 text-xs font-bold text-[#64748B] hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
+                className="px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
               >
                 إلغاء
               </button>
