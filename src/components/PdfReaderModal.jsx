@@ -19,7 +19,10 @@ import { getDrivePreviewUrl } from '../utils/driveUtils';
 // Configure local worker bundled by Vite
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
-export default function PdfReaderModal({ file, isOpen, onClose }) {
+export default function PdfReaderModal({ file: propFile, pdfFile, isOpen, onClose }) {
+  const file = propFile || pdfFile;
+  if (!file) return null;
+
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [useIframeFallback, setUseIframeFallback] = useState(false);
 

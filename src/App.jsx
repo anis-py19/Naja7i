@@ -423,17 +423,21 @@ function App() {
       )}
 
       {/* Interactive Global Modals */}
-      <SubjectViewer
-        subjectId={activeSubject?.id}
-        streamName={activeSubject?.streamName}
-        onClose={() => setActiveSubject(null)}
-        onOpenPdf={(file) => setActivePdf(file)}
-      />
+      {activeSubject && (
+        <SubjectViewer
+          subjectId={activeSubject.id}
+          streamName={activeSubject.streamName}
+          onClose={() => setActiveSubject(null)}
+          onOpenPdf={(file) => setActivePdf(file)}
+        />
+      )}
 
-      <PdfReaderModal
-        pdfFile={activePdf}
-        onClose={() => setActivePdf(null)}
-      />
+      {activePdf && (
+        <PdfReaderModal
+          file={activePdf}
+          onClose={() => setActivePdf(null)}
+        />
+      )}
 
       <BacCalculatorModal
         isOpen={isCalculatorOpen}

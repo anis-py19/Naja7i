@@ -17,6 +17,8 @@ import { SUBJECT_RESOURCES } from '../data/bacData';
 import { getFilesBySubject } from '../data/userFilesData';
 
 export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPdf }) {
+  if (!subjectId) return null;
+
   const [activeTab, setActiveTab] = useState('files'); // 'files', 'units', 'videos', 'bacs'
   const [unitSearch, setUnitSearch] = useState('');
   const [toastMessage, setToastMessage] = useState(null);
