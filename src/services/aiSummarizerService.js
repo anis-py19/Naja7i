@@ -270,7 +270,7 @@ function buildModeInstruction(mode, streamName) {
 async function generateViaNvidia({ modeInstruction, systemPrompt, rawText, inlineFile }) {
   const candidateModels = inlineFile 
     ? ['meta/llama-3.2-11b-vision-instruct', 'meta/llama-3.2-90b-vision-instruct']
-    : ['openai/gpt-oss-120b', 'moonshotai/kimi-k3', 'meta/llama-3.2-11b-vision-instruct'];
+    : ['meta/llama-3.2-11b-vision-instruct', 'mistralai/mistral-7b-instruct-v0.3', 'nvidia/llama-3.1-nemotron-70b-instruct', 'moonshotai/kimi-k3', 'moonshotai/kimi-k2.6'];
 
   let lastError = null;
 

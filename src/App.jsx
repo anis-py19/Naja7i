@@ -167,6 +167,7 @@ function App() {
               <HomePage
                 selectedStreamId={selectedStreamId}
                 setSelectedStreamId={setSelectedStreamId}
+                onSelectStream={handleSelectStream}
                 handleOpenSubject={handleOpenSubject}
                 setIsCalculatorOpen={setIsCalculatorOpen}
                 setActivePdf={setActivePdf}
@@ -343,6 +344,7 @@ function App() {
               <HomePage
                 selectedStreamId={selectedStreamId}
                 setSelectedStreamId={setSelectedStreamId}
+                onSelectStream={handleSelectStream}
                 handleOpenSubject={handleOpenSubject}
                 setIsCalculatorOpen={setIsCalculatorOpen}
                 setActivePdf={setActivePdf}
