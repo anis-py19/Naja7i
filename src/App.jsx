@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import SubjectViewer from './components/SubjectViewer';
@@ -8,6 +8,7 @@ import SearchModal from './components/SearchModal';
 import ContactContributionModal from './components/ContactContributionModal';
 import FloatingQuickActions from './components/FloatingQuickActions';
 import PwaInstallPrompt from './components/PwaInstallPrompt';
+import AdminMaintenanceModal from './components/AdminMaintenanceModal';
 
 // Page Views
 import HomePage from './pages/HomePage';
@@ -29,7 +30,7 @@ import MaintenancePage from './pages/MaintenancePage';
 import NotFound from './pages/NotFound';
 
 import { STREAMS } from './data/streamsData';
-import { SITE_CONFIG } from './config/siteConfig';
+import { SITE_CONFIG, getMaintenanceMode, setMaintenanceMode } from './config/siteConfig';
 
 function App() {
   const [selectedStreamId, setSelectedStreamId] = useState('sciences');
@@ -38,9 +39,13 @@ function App() {
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isAdminMaintenanceOpen, setIsAdminMaintenanceOpen] = useState(false);
 
   const location = useLocation();
   const isFocusRoom = ['/focus-room', '/focus', '/pomodoro'].includes(location.pathname);
+
+  // Dynamic Maintenance State (Tracks localStorage & siteConfig in real-time)
+  const [isMaintenanceActive, setIsMaintenanceActive] = useState(getMaintenanceMode());
 
   // Admin Bypass for Maintenance Mode
   const [bypassMaintenance, setBypassMaintenance] = useState(() => {
@@ -57,6 +62,29 @@ function App() {
     }
   });
 
+  // Listen to Maintenance State changes and Keyboard Shortcut (Ctrl+Shift+M)
+  useEffect(() => {
+    const handleMaintenanceChange = () => {
+      setIsMaintenanceActive(getMaintenanceMode());
+    };
+
+    const handleKeyDown = (e) => {
+      // Shortcut: Ctrl + Shift + M
+      if (e.ctrlKey && e.shiftKey && (e.key === 'M' || e.key === 'm')) {
+        e.preventDefault();
+        setIsAdminMaintenanceOpen(prev => !prev);
+      }
+    };
+
+    window.addEventListener('naja7i_maintenance_change', handleMaintenanceChange);
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('naja7i_maintenance_change', handleMaintenanceChange);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   const handleSelectStream = (streamId) => {
     setSelectedStreamId(streamId);
   };
@@ -69,12 +97,14 @@ function App() {
   };
 
   // If maintenance mode is activated and admin has not bypassed it, display MaintenancePage
-  if (SITE_CONFIG.isMaintenanceMode && !bypassMaintenance && location.pathname !== '/maintenance') {
+  if (isMaintenanceActive && !bypassMaintenance && location.pathname !== '/maintenance') {
     return (
       <MaintenancePage
         onBypass={() => {
           setBypassMaintenance(true);
-          localStorage.setItem('naja7i_admin_bypass', 'true');
+          try {
+            localStorage.setItem('naja7i_admin_bypass', 'true');
+          } catch {}
         }}
       />
     );
@@ -84,18 +114,32 @@ function App() {
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] selection:bg-[#E11D48] selection:text-white font-['Cairo'] antialiased flex flex-col justify-between">
 
       {/* Admin Maintenance Alert Bar (يظهر فقط للمسؤول عند تفعيل وضع الصيانة وتجاوزه للمعاينة) */}
-      {SITE_CONFIG.isMaintenanceMode && bypassMaintenance && (
-        <div className="bg-amber-500 text-slate-950 px-4 py-1.5 text-xs font-bold flex items-center justify-between z-50 print:hidden shadow-xs">
-          <span>⚠️ وضع الصيانة مفعل حالياً للزوار العاديين • أنت تتصفح المنصة كمسؤول (Admin Preview Mode)</span>
-          <button
-            onClick={() => {
-              setBypassMaintenance(false);
-              localStorage.removeItem('naja7i_admin_bypass');
-            }}
-            className="px-2 py-0.5 rounded bg-slate-900 text-white text-[11px] font-bold hover:bg-black transition-colors cursor-pointer"
-          >
-            إغلاق المعاينة ورؤية صفحة الصيانة
-          </button>
+      {isMaintenanceActive && bypassMaintenance && (
+        <div className="bg-amber-500 text-slate-950 px-4 py-1.5 text-xs font-bold flex flex-wrap items-center justify-between z-50 print:hidden shadow-xs gap-2">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-600 animate-ping"></span>
+            <span>⚠️ وضع الصيانة مفعل حالياً للزوار العاديين • أنت تتصفح المنصة كمسؤول (Admin Preview Mode)</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsAdminMaintenanceOpen(true)}
+              className="px-2.5 py-0.5 rounded bg-slate-900 hover:bg-black text-white text-[11px] font-bold transition-colors cursor-pointer flex items-center gap-1"
+            >
+              <span>⚙️ لوحة تحكم الصيانة (ON/OFF)</span>
+            </button>
+            <button
+              onClick={() => {
+                setBypassMaintenance(false);
+                try {
+                  localStorage.removeItem('naja7i_admin_bypass');
+                } catch {}
+              }}
+              className="px-2 py-0.5 rounded bg-amber-600 hover:bg-amber-700 text-slate-950 text-[11px] font-bold transition-colors cursor-pointer"
+            >
+              إغلاق المعاينة
+            </button>
+          </div>
         </div>
       )}
 
@@ -150,7 +194,7 @@ function App() {
             }
           />
 
-          {/* 4. أرشيف البكالوريا الرسمي (2008—2025) */}
+          {/* 4. أرشيف البكالوريا الرسمي (2008—2026) */}
           <Route
             path="/bac-archive"
             element={
@@ -242,7 +286,7 @@ function App() {
             }
           />
 
-          {/* 8.6 كراس الأخطاء والفخاخ الذكي (Carnet d'Erreurs) */}
+          {/* 8.8 كراس الأخطاء الذكي وفخاخ البكالوريا (Carnet d'Erreurs) */}
           <Route
             path="/mistakes-notebook"
             element={
@@ -255,14 +299,8 @@ function App() {
               <MistakesNotebookPage />
             }
           />
-          <Route
-            path="/mistakes"
-            element={
-              <MistakesNotebookPage />
-            }
-          />
 
-          {/* 9. عن المنصة ومؤسسها */}
+          {/* 9. قصة ورسالة المنصة (المؤسس أنيس ازري) */}
           <Route
             path="/about"
             element={
@@ -270,7 +308,7 @@ function App() {
             }
           />
 
-          {/* 10. تواصل ومساهمة */}
+          {/* 10. تواصل ومساهمة بملف */}
           <Route
             path="/contact"
             element={
@@ -278,64 +316,77 @@ function App() {
             }
           />
 
-          {/* 11. صفحة الصيانة المباشرة */}
+          {/* 11. صفحة الصيانة (للمعاينة المباشرة أو التحديث) */}
           <Route
             path="/maintenance"
             element={
-              <MaintenancePage />
+              <MaintenancePage
+                onBypass={() => {
+                  setBypassMaintenance(true);
+                  try {
+                    localStorage.setItem('naja7i_admin_bypass', 'true');
+                  } catch {}
+                }}
+              />
             }
           />
 
-          {/* 12. صفحة 404 */}
+          {/* 404 Not Found Page */}
           <Route
             path="*"
-            element={
-              <NotFound />
-            }
+            element={<NotFound />}
           />
         </Routes>
       </main>
 
-      {/* Global Subject Viewer Modal */}
-      {activeSubject && (
-        <SubjectViewer
-          subjectId={activeSubject.id}
-          streamName={activeSubject.streamName}
-          onClose={() => setActiveSubject(null)}
-          onOpenPdf={(file) => setActivePdf(file)}
-        />
-      )}
-
-      {/* Global PDF Viewer Modal */}
-      {activePdf && (
-        <PdfReaderModal
-          file={activePdf}
-          isOpen={!!activePdf}
-          onClose={() => setActivePdf(null)}
-        />
-      )}
-
-      {/* Global BAC Calculator Modal */}
-      <BacCalculatorModal
-        isOpen={isCalculatorOpen}
-        onClose={() => setIsCalculatorOpen(false)}
-      />
-
-      {/* Global Search Modal (Ctrl + K) */}
-      <SearchModal
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
-        onOpenSubject={(subId) => handleOpenSubject(subId)}
+      {/* Global Subject Viewer Slide-over Panel */}
+      <SubjectViewer
+        subjectId={activeSubject?.id}
+        streamName={activeSubject?.streamName}
+        onClose={() => setActiveSubject(null)}
         onOpenPdf={(file) => setActivePdf(file)}
       />
 
-      {/* Global Contact & Contribution Modal */}
+      {/* Global PDF Reader Modal (In-App Canvas + Cloud Preview) */}
+      <PdfReaderModal
+        file={activePdf}
+        onClose={() => setActivePdf(null)}
+      />
+
+      {/* Global Bac Average Calculator Modal */}
+      <BacCalculatorModal
+        isOpen={isCalculatorOpen}
+        onClose={() => setIsCalculatorOpen(false)}
+        defaultStreamId={selectedStreamId}
+      />
+
+      {/* Global Search Dialog Modal (Ctrl + K) */}
+      <SearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        onOpenPdf={(file) => setActivePdf(file)}
+        onSelectStream={handleSelectStream}
+      />
+
+      {/* Global Contact & File Contribution Modal */}
       <ContactContributionModal
         isOpen={isContactOpen}
         onClose={() => setIsContactOpen(false)}
       />
 
-      {/* Floating Action Buttons */}
+      {/* Global Admin Maintenance Modal (Ctrl + Shift + M) */}
+      <AdminMaintenanceModal
+        isOpen={isAdminMaintenanceOpen}
+        onClose={() => setIsAdminMaintenanceOpen(false)}
+        onStateChange={(isNowActive) => {
+          setIsMaintenanceActive(isNowActive);
+          if (isNowActive) {
+            setBypassMaintenance(true);
+          }
+        }}
+      />
+
+      {/* Floating Quick Action Buttons */}
       {!isFocusRoom && (
         <FloatingQuickActions
           onOpenCalculator={() => setIsCalculatorOpen(true)}
@@ -390,14 +441,22 @@ function App() {
               <Link to="/countdown" className="hover:text-[#E11D48] transition-colors">العداد</Link>
               <span>•</span>
               <Link to="/about" className="hover:text-[#E11D48] transition-colors">عن المنصة</Link>
-
               <span>•</span>
               <Link to="/contact" className="hover:text-[#E11D48] transition-colors text-[#E11D48] font-bold">تواصل ومساهمة 📥</Link>
             </div>
           </div>
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 pt-4 border-t border-[#F1F5F9] text-center text-[#94A3B8] text-[11px]">
-            جميع الحقوق محفوظة © {new Date().getFullYear()} لمنصة نجاحي التعليمية • نسألكم الدعاء بالتوفيق والبركة
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 pt-4 border-t border-[#F1F5F9] flex flex-col sm:flex-row items-center justify-between text-[#94A3B8] text-[11px] gap-2">
+            <span>جميع الحقوق محفوظة © {new Date().getFullYear()} لمنصة نجاحي التعليمية • نسألكم الدعاء بالتوفيق والبركة</span>
+            
+            {/* Discreet Admin Maintenance Trigger */}
+            <button
+              onClick={() => setIsAdminMaintenanceOpen(true)}
+              className="text-[#94A3B8] hover:text-[#E11D48] transition-colors cursor-pointer flex items-center gap-1 font-bold"
+              title="لوحة تحكم الصيانة (Ctrl + Shift + M)"
+            >
+              <span>⚙️ التحكم في وضع الصيانة</span>
+            </button>
           </div>
         </footer>
       )}
