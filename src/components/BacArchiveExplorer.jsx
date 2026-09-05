@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
   HiBookOpen, 
   HiDownload
 } from 'react-icons/hi';
 import { STREAMS } from '../data/streamsData';
 import { BAC_YEARS } from '../data/bacData';
-//hello
 
 export default function BacArchiveExplorer() {
   const [selectedYear, setSelectedYear] = useState('all');
   const [selectedStream, setSelectedStream] = useState('all');
 
-  const filteredYears = selectedYear === 'all' 
-    ? BAC_YEARS 
-    : BAC_YEARS.filter(y => y.toString() === selectedYear);
+  const filteredYears = useMemo(() => {
+    return selectedYear === 'all' 
+      ? BAC_YEARS 
+      : BAC_YEARS.filter(y => y.toString() === selectedYear);
+  }, [selectedYear]);
 
   return (
     <section id="bac-archive" className="py-14 bg-white border-b border-[#E2E8F0] font-['Cairo']">
@@ -24,7 +25,7 @@ export default function BacArchiveExplorer() {
           <div>
             <h2 className="text-xl sm:text-2xl font-black text-[#0F172A] flex items-center gap-2">
               <HiBookOpen className="w-6 h-6 text-[#E11D48]" />
-              <span>مواضيع وحلول شهادات البكالوريا السابقة (2008 — 2025)</span>
+              <span>مواضيع وحلول شهادات البكالوريا السابقة (2008 — 2026)</span>
             </h2>
             <p className="text-xs text-[#64748B] mt-1">
               مواضيع وحلول شهادة البكالوريا الرسمية لجميع الشعب مع سلم التنقيط المعتمد من وزارة التربية الوطنية.
@@ -46,7 +47,7 @@ export default function BacArchiveExplorer() {
                 onChange={(e) => setSelectedYear(e.target.value)}
                 className="w-full bg-white border border-[#CBD5E1] rounded-xl px-3 py-2 text-xs text-[#0F172A] focus:outline-none focus:border-[#E11D48] cursor-pointer"
               >
-                <option value="all">جميع السنوات (2008 — 2025)</option>
+                <option value="all">جميع السنوات (2008 — 2026)</option>
                 {BAC_YEARS.map(year => (
                   <option key={year} value={year}>بكالوريا دورة {year}</option>
                 ))}

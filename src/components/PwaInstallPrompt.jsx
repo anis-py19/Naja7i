@@ -29,26 +29,29 @@ export default function PwaInstallPrompt() {
       setShowInstallBanner(true);
     };
 
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-
-    // If app is already installed
-    window.addEventListener('appinstalled', () => {
+    const handleAppInstalled = () => {
       setShowInstallBanner(false);
       setDeferredPrompt(null);
-    });
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('appinstalled', handleAppInstalled);
 
     return () => {
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
     };
   }, []);
 
   // 2. Listen for Online / Offline Connectivity
   useEffect(() => {
+    let onlineTimer = null;
+
     const handleOnline = () => {
       setIsOffline(false);
       setShowOnlineToast(true);
-      const timer = setTimeout(() => setShowOnlineToast(false), 3500);
-      return () => clearTimeout(timer);
+      if (onlineTimer) clearTimeout(onlineTimer);
+      onlineTimer = setTimeout(() => setShowOnlineToast(false), 3500);
     };
 
     const handleOffline = () => {
@@ -60,6 +63,7 @@ export default function PwaInstallPrompt() {
     window.addEventListener('offline', handleOffline);
 
     return () => {
+      if (onlineTimer) clearTimeout(onlineTimer);
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };

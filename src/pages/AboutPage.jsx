@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   HiHeart,
   HiShare,
   HiHome,
-  HiLightBulb
+  HiLightBulb,
+  HiCheck
 } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 
 export default function AboutPage() {
+  const [copied, setCopied] = useState(false);
+
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
@@ -17,7 +20,8 @@ export default function AboutPage() {
       }).catch(() => { });
     } else {
       navigator.clipboard.writeText(window.location.origin);
-      alert('تم نسخ رابط المنصة بنجاح! شاركه مع زملائك لنيل الأجر والدعاء.');
+      setCopied(true);
+      setTimeout(() => setCopied(false), 3000);
     }
   };
 
@@ -134,11 +138,16 @@ export default function AboutPage() {
 
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
             <button
+              type="button"
               onClick={handleShare}
-              className="px-6 py-2.5 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-2xs"
+              className={`px-6 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs ${
+                copied 
+                  ? 'bg-emerald-600 text-white' 
+                  : 'bg-[#E11D48] hover:bg-[#be123c] text-white'
+              }`}
             >
-              <HiShare className="w-4 h-4" />
-              <span>مشاركة رابط المنصة الآن</span>
+              {copied ? <HiCheck className="w-4 h-4" /> : <HiShare className="w-4 h-4" />}
+              <span>{copied ? 'تم نسخ الرابط بنجاح! شكراً لك ✓' : 'مشاركة رابط المنصة الآن'}</span>
             </button>
 
             <Link

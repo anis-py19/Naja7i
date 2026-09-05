@@ -19,6 +19,7 @@ export default function QuizBankPage() {
   const [selectedSubjectId, setSelectedSubjectId] = useState('all');
   const [quizLength, setQuizLength] = useState(5); // 5 | 10 | 'all'
   const [isTimed, setIsTimed] = useState(false);
+  const [emptyWarning, setEmptyWarning] = useState(false);
 
   // Quiz State
   const [quizStarted, setQuizStarted] = useState(false);
@@ -67,7 +68,8 @@ export default function QuizBankPage() {
     }
 
     if (pool.length === 0) {
-      alert('لا توجد أسئلة متوفرة حالياً لهذا التحديد.');
+      setEmptyWarning(true);
+      setTimeout(() => setEmptyWarning(false), 3500);
       return;
     }
 
@@ -310,8 +312,14 @@ export default function QuizBankPage() {
               </div>
 
               {/* Start Quiz Action */}
-              <div className="pt-2">
+              <div className="pt-2 space-y-2">
+                {emptyWarning && (
+                  <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold text-center animate-fadeIn">
+                    ⚠️ لا توجد أسئلة متوفرة حالياً لهذا التحديد، يرجى اختيار مادة أخرى أو تغيير الشعبة.
+                  </div>
+                )}
                 <button
+                  type="button"
                   onClick={startQuiz}
                   className="w-full py-3.5 rounded-xl bg-[#E11D48] hover:bg-[#be123c] text-white font-black text-sm transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer active:scale-98"
                 >

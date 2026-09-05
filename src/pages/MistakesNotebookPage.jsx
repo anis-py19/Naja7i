@@ -70,6 +70,14 @@ export default function MistakesNotebookPage() {
     image: ''
   });
 
+  // UI Toast Message State
+  const [toastMessage, setToastMessage] = useState(null);
+
+  const showToast = (text, isError = false) => {
+    setToastMessage({ text, isError });
+    setTimeout(() => setToastMessage(null), 3000);
+  };
+
   // Save to localStorage
   const saveMistakesToStorage = (updated) => {
     setMistakes(updated);
@@ -84,7 +92,7 @@ export default function MistakesNotebookPage() {
   const handleAddMistake = (e) => {
     e.preventDefault();
     if (!formData.title.trim() || !formData.rule.trim()) {
-      alert('يرجى كتابة عنوان السؤال والقاعدة الذهبية على الأقل!');
+      showToast('يرجى كتابة عنوان السؤال والقاعدة الذهبية على الأقل!', true);
       return;
     }
 
@@ -126,7 +134,7 @@ export default function MistakesNotebookPage() {
   // Add a curated trap from library
   const handleAddCuratedTrap = (trap) => {
     if (mistakes.some((m) => m.id === trap.id || m.title === trap.title)) {
-      alert('هذا الفخ موجود بالفعل في كراسك!');
+      showToast('هذا الفخ موجود بالفعل في كراسك!', true);
       return;
     }
     const newEntry = {
@@ -136,7 +144,7 @@ export default function MistakesNotebookPage() {
       createdAt: 'دورة 2026'
     };
     saveMistakesToStorage([newEntry, ...mistakes]);
-    alert('تمت إضافة الفخ إلى كراسك بنجاح ✓');
+    showToast('تمت إضافة الفخ إلى كراسك بنجاح ✓');
   };
 
   // Toggle Mastered status
@@ -155,6 +163,7 @@ export default function MistakesNotebookPage() {
     if (window.confirm('هل أنت متأكد من حذف هذا الخطأ من كراسك؟')) {
       const updated = mistakes.filter((m) => m.id !== id);
       saveMistakesToStorage(updated);
+      showToast('تم حذف الخطأ من الكراس');
     }
   };
 
@@ -163,7 +172,7 @@ export default function MistakesNotebookPage() {
     const file = e.target.files?.[0];
     if (file) {
       if (file.size > 2 * 1024 * 1024) {
-        alert('حجم الصورة كبير جداً، يرجى اختيار صورة أقل من 2 ميغابايت.');
+        showToast('حجم الصورة كبير جداً، يرجى اختيار صورة أقل من 2 ميغابايت.', true);
         return;
       }
       const reader = new FileReader();
@@ -244,6 +253,18 @@ export default function MistakesNotebookPage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-16 font-['Cairo']">
       
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 rounded-xl shadow-lg border text-xs font-bold flex items-center gap-2 animate-fadeIn transition-all ${
+          toastMessage.isError
+            ? 'bg-rose-600 text-white border-rose-700'
+            : 'bg-emerald-600 text-white border-emerald-700'
+        }`}>
+          <span>{toastMessage.isError ? '⚠️' : '✓'}</span>
+          <span>{toastMessage.text}</span>
+        </div>
+      )}
+
       {/* ========================================================================= */}
       {/* 🖨️ A4 PRINT-ONLY LAYOUT (ملخص كراس الأخطاء ليلة البكالوريا) */}
       {/* ========================================================================= */}

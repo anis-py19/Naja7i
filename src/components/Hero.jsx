@@ -91,7 +91,7 @@ export default function Hero({ onSelectStream, onOpenCalculator }) {
             السنة الثالثة ثانوي — فضاء البكالوريا الجزائرية 🇩🇿
           </h1>
           <p className="text-sm sm:text-base text-[#475569] leading-relaxed max-w-2xl mx-auto">
-            دروس وملخصات شاملة، سلاسل تمارين محلولة بالخطوات، مواضيع البكالوريا الرسمية من 2008 إلى 2025 مع التصحيح الوزاري، وشروحات نخبة الأساتذة مرتبة لجميع الشعب.
+            دروس وملخصات شاملة، سلاسل تمارين محلولة بالخطوات، مواضيع البكالوريا الرسمية من 2008 إلى 2026 مع التصحيح الوزاري، وشروحات نخبة الأساتذة مرتبة لجميع الشعب.
           </p>
         </div>
 
@@ -157,7 +157,7 @@ export default function Hero({ onSelectStream, onOpenCalculator }) {
         <div className="mt-8 pt-6 border-t border-[#E2E8F0] grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-xs text-[#475569]">
           <div className="p-3 bg-white rounded-xl border border-[#E2E8F0] shadow-2xs">
             <span className="font-bold text-[#0F172A] block text-sm">مواضيع رسمية</span>
-            <span className="text-[#64748B]">2008 — 2025 مع الحلول</span>
+            <span className="text-[#64748B]">2008 — 2026 مع الحلول</span>
           </div>
           <div className="p-3 bg-white rounded-xl border border-[#E2E8F0] shadow-2xs">
             <span className="font-bold text-[#0F172A] block text-sm">ملخصات وتمارين</span>

@@ -151,7 +151,7 @@ export default function AiSummarizerPage() {
   // Text to Speech Toggle
   const toggleSpeech = () => {
     if (!('speechSynthesis' in window)) {
-      alert('ميزة القراءة الصوتية غير مدعومة في متصفحك.');
+      setErrorMessage('ميزة القراءة الصوتية غير مدعومة في متصفحك حالياً.');
       return;
     }
 

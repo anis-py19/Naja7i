@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import SubjectViewer from './components/SubjectViewer';
@@ -11,24 +11,40 @@ import PwaInstallPrompt from './components/PwaInstallPrompt';
 import FeatureGuard from './components/FeatureGuard';
 import AdminControlModal from './components/AdminControlModal';
 
-// Page Views
+// Immediate View for Instant Home Render
 import HomePage from './pages/HomePage';
-import StreamsPage from './pages/StreamsPage';
-import LibraryPage from './pages/LibraryPage';
-import BacArchivePage from './pages/BacArchivePage';
-import YouTubeTeachersPage from './pages/YouTubeTeachersPage';
-import StudyPlannerPage from './pages/StudyPlannerPage';
-import QuizBankPage from './pages/QuizBankPage';
-import AiSummarizerPage from './pages/AiSummarizerPage';
-import CurriculumPage from './pages/CurriculumPage';
-import CalculatorPage from './pages/CalculatorPage';
-import CountdownPage from './pages/CountdownPage';
-import FocusRoomPage from './pages/FocusRoomPage';
-import MistakesNotebookPage from './pages/MistakesNotebookPage';
-import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
-import MaintenancePage from './pages/MaintenancePage';
-import NotFound from './pages/NotFound';
+
+// Lazy Loaded Routed Views (Code-Splitting for Lightning-Fast Performance)
+const StreamsPage = lazy(() => import('./pages/StreamsPage'));
+const LibraryPage = lazy(() => import('./pages/LibraryPage'));
+const BacArchivePage = lazy(() => import('./pages/BacArchivePage'));
+const YouTubeTeachersPage = lazy(() => import('./pages/YouTubeTeachersPage'));
+const StudyPlannerPage = lazy(() => import('./pages/StudyPlannerPage'));
+const QuizBankPage = lazy(() => import('./pages/QuizBankPage'));
+const AiSummarizerPage = lazy(() => import('./pages/AiSummarizerPage'));
+const CurriculumPage = lazy(() => import('./pages/CurriculumPage'));
+const CalculatorPage = lazy(() => import('./pages/CalculatorPage'));
+const CountdownPage = lazy(() => import('./pages/CountdownPage'));
+const FocusRoomPage = lazy(() => import('./pages/FocusRoomPage'));
+const MistakesNotebookPage = lazy(() => import('./pages/MistakesNotebookPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const MaintenancePage = lazy(() => import('./pages/MaintenancePage'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+
+function PageLoadingFallback() {
+  return (
+    <div className="min-h-[50vh] flex flex-col items-center justify-center p-8 space-y-3 font-['Cairo']" dir="rtl">
+      <div className="w-10 h-10 rounded-2xl bg-rose-50 border border-rose-200/80 text-[#E11D48] flex items-center justify-center text-xl shadow-2xs animate-pulse">
+        🎓
+      </div>
+      <div className="space-y-1 text-center">
+        <p className="text-xs font-bold text-[#0F172A]">جاري تجهيز الصفحة والمحتوى...</p>
+        <p className="text-[10px] text-[#64748B]">منصة نجاحي لتحضير شهادة البكالوريا 🇩🇿</p>
+      </div>
+    </div>
+  );
+}
 
 import { STREAMS } from './data/streamsData';
 import { SITE_CONFIG, getActiveFeaturesConfig } from './config/siteConfig';
@@ -159,7 +175,8 @@ function App() {
 
       {/* Main Routed Content */}
       <main className="flex-1">
-        <Routes>
+        <Suspense fallback={<PageLoadingFallback />}>
+          <Routes>
           {/* 1. الرئيسية */}
           <Route
             path="/"
@@ -384,7 +401,8 @@ function App() {
             element={<NotFound />}
           />
         </Routes>
-      </main>
+      </Suspense>
+    </main>
 
       {/* Footer */}
       {!isFocusRoom && (
