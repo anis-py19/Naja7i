@@ -8,19 +8,31 @@ import {
   HiCalculator,
   HiCalendar,
   HiClock,
-  HiUpload
+  HiUpload,
+  HiAdjustments
 } from 'react-icons/hi';
 import { STREAMS } from '../data/streamsData';
+import { getActiveFeaturesConfig } from '../config/siteConfig';
 
-export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) {
+export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact, onOpenAdmin, isAdmin }) {
   const [isOpen, setIsOpen] = useState(false);
   const [streamDropdown, setStreamDropdown] = useState(false);
   const [toolsDropdown, setToolsDropdown] = useState(false);
+  const [featuresConfig, setFeaturesConfig] = useState(getActiveFeaturesConfig());
   
   const streamDropdownRef = useRef(null);
   const toolsDropdownRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Listen to live feature config changes
+  useEffect(() => {
+    const handleConfigChange = () => {
+      setFeaturesConfig(getActiveFeaturesConfig());
+    };
+    window.addEventListener('naja7i_features_config_changed', handleConfigChange);
+    return () => window.removeEventListener('naja7i_features_config_changed', handleConfigChange);
+  }, []);
 
   // Close dropdowns on click outside
   useEffect(() => {
@@ -109,6 +121,9 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
                 }`}
               >
                 <span>الشعب والمواد</span>
+                {featuresConfig.streams?.isMaintenance && (
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                )}
                 <HiChevronDown className={`w-3.5 h-3.5 transition-transform ${streamDropdown ? 'rotate-180' : ''}`} />
               </button>
 
@@ -153,25 +168,31 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
             {/* 3. مكتبة الملخصات */}
             <Link 
               to="/library" 
-              className={`px-3 py-1.5 rounded-lg transition-colors ${
+              className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 ${
                 isActive('/library')
                   ? 'text-white bg-[#E11D48] shadow-xs'
                   : 'text-slate-200 hover:text-white hover:bg-slate-800/80'
               }`}
             >
-              مكتبة الملخصات
+              <span>مكتبة الملخصات</span>
+              {featuresConfig.library?.isMaintenance && (
+                <span className="text-[9px] px-1 rounded bg-amber-500/30 text-amber-300">صيانة</span>
+              )}
             </Link>
 
             {/* 4. أرشيف البكالوريا */}
             <Link 
               to="/bac-archive" 
-              className={`px-3 py-1.5 rounded-lg transition-colors ${
+              className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 ${
                 isActive('/bac-archive')
                   ? 'text-white bg-[#E11D48] shadow-xs'
                   : 'text-slate-200 hover:text-white hover:bg-slate-800/80'
               }`}
             >
-              أرشيف البكالوريا
+              <span>أرشيف البكالوريا</span>
+              {featuresConfig.bac_archive?.isMaintenance && (
+                <span className="text-[9px] px-1 rounded bg-amber-500/30 text-amber-300">صيانة</span>
+              )}
             </Link>
 
             {/* 5. قنوات وأساتذة اليوتيوب */}
@@ -197,6 +218,9 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
             >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
               <span>غرفة التركيز 🎧</span>
+              {featuresConfig.focus_room?.isMaintenance && (
+                <span className="text-[9px] px-1 rounded bg-amber-500/30 text-amber-300">صيانة</span>
+              )}
             </Link>
 
             {/* 6. أدوات ومخطط المراجعة (Dropdown) */}
@@ -219,148 +243,189 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
 
               {toolsDropdown && (
                 <div className="absolute top-full right-0 mt-1.5 w-60 p-2 bg-white text-[#0F172A] rounded-xl border border-[#E2E8F0] shadow-2xl z-50 text-right space-y-1">
+                  
                   <Link
                     to="/focus-room"
                     onClick={() => setToolsDropdown(false)}
-                    className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
+                    className="flex items-center justify-between p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
                   >
-                    <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 font-bold">
-                      🎧
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 font-bold">
+                        🎧
+                      </div>
+                      <div>
+                        <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
+                          غرفة التركيز (بومودورو)
+                        </span>
+                        <span className="text-[10px] text-[#64748B]">
+                          أجواء دراسة هادئة
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
-                        غرفة التركيز (بومودورو)
-                      </span>
-                      <span className="text-[10px] text-[#64748B]">
-                        أجواء دراسة هادئة وأصوات طبيعية
-                      </span>
-                    </div>
+                    {featuresConfig.focus_room?.isMaintenance && (
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-bold">صيانة</span>
+                    )}
                   </Link>
 
                   <Link
                     to="/mistakes-notebook"
                     onClick={() => setToolsDropdown(false)}
-                    className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
+                    className="flex items-center justify-between p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
                   >
-                    <div className="w-7 h-7 rounded-lg bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 font-bold">
-                      📓
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 font-bold">
+                        📓
+                      </div>
+                      <div>
+                        <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
+                          كراس الأخطاء والفخاخ الذكي
+                        </span>
+                        <span className="text-[10px] text-[#64748B]">
+                          تدوين الفخاخ والقواعد
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
-                        كراس الأخطاء والفخاخ الذكي
-                      </span>
-                      <span className="text-[10px] text-[#64748B]">
-                        تدوين الفخاخ والقواعد الذهبية
-                      </span>
-                    </div>
+                    {featuresConfig.mistakes_notebook?.isMaintenance && (
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-bold">صيانة</span>
+                    )}
                   </Link>
 
                   <Link
                     to="/ai-summarizer"
                     onClick={() => setToolsDropdown(false)}
-                    className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
+                    className="flex items-center justify-between p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
                   >
-                    <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-[#E11D48] font-bold">
-                      🤖
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-[#E11D48] font-bold">
+                        🤖
+                      </div>
+                      <div>
+                        <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
+                          الملخص الذكي (AI)
+                        </span>
+                        <span className="text-[10px] text-[#64748B]">
+                          تلخيص PDF وصور الدروس
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
-                        الملخص الذكي (AI)
-                      </span>
-                      <span className="text-[10px] text-[#64748B]">
-                        تلخيص PDF وصور الدروس بالذكاء
-                      </span>
-                    </div>
+                    {featuresConfig.ai_summarizer?.isMaintenance && (
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-bold">صيانة</span>
+                    )}
                   </Link>
 
                   <Link
                     to="/curriculum"
                     onClick={() => setToolsDropdown(false)}
-                    className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
+                    className="flex items-center justify-between p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
                   >
-                    <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-[#E11D48] font-bold">
-                      📚
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-[#E11D48] font-bold">
+                        📚
+                      </div>
+                      <div>
+                        <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
+                          المنهاج والبرنامج الوزاري
+                        </span>
+                        <span className="text-[10px] text-[#64748B]">
+                          فهرس دروس جميع الشعب
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
-                        المنهاج والبرنامج الوزاري
-                      </span>
-                      <span className="text-[10px] text-[#64748B]">
-                        فهرس دروس ووحدات جميع الشعب
-                      </span>
-                    </div>
+                    {featuresConfig.curriculum?.isMaintenance && (
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-bold">صيانة</span>
+                    )}
                   </Link>
 
                   <Link
                     to="/study-planner"
                     onClick={() => setToolsDropdown(false)}
-                    className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
+                    className="flex items-center justify-between p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
                   >
-                    <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-[#E11D48]">
-                      <HiCalendar className="w-4 h-4" />
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-[#E11D48]">
+                        <HiCalendar className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
+                          مخطط وجداول المراجعة
+                        </span>
+                        <span className="text-[10px] text-[#64748B]">
+                          أهداف أسبوعية وطباعة A4
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
-                        مخطط وجداول المراجعة
-                      </span>
-                      <span className="text-[10px] text-[#64748B]">
-                        أهداف أسبوعية وطباعة A4
-                      </span>
-                    </div>
+                    {featuresConfig.study_planner?.isMaintenance && (
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-bold">صيانة</span>
+                    )}
                   </Link>
 
                   <Link
                     to="/quiz"
                     onClick={() => setToolsDropdown(false)}
-                    className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
+                    className="flex items-center justify-between p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
                   >
-                    <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-[#E11D48] font-bold">
-                      ⏱️
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-[#E11D48] font-bold">
+                        ⏱️
+                      </div>
+                      <div>
+                        <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
+                          بنك الأسئلة والاختبارات
+                        </span>
+                        <span className="text-[10px] text-[#64748B]">
+                          اختبارات QCM سريعة
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
-                        بنك الأسئلة والاختبارات
-                      </span>
-                      <span className="text-[10px] text-[#64748B]">
-                        اختبارات سريعة QCM وتصحيح فوري
-                      </span>
-                    </div>
+                    {featuresConfig.quiz?.isMaintenance && (
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-bold">صيانة</span>
+                    )}
                   </Link>
 
                   <Link
                     to="/calculator"
                     onClick={() => setToolsDropdown(false)}
-                    className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
+                    className="flex items-center justify-between p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
                   >
-                    <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-[#E11D48]">
-                      <HiCalculator className="w-4 h-4" />
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-[#E11D48]">
+                        <HiCalculator className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
+                          حاسبة معدل البكالوريا
+                        </span>
+                        <span className="text-[10px] text-[#64748B]">
+                          المعاملات والتخصصات
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
-                        حاسبة معدل البكالوريا
-                      </span>
-                      <span className="text-[10px] text-[#64748B]">
-                        المعاملات والتخصصات الرسمية
-                      </span>
-                    </div>
+                    {featuresConfig.calculator?.isMaintenance && (
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-bold">صيانة</span>
+                    )}
                   </Link>
 
                   <Link
                     to="/countdown"
                     onClick={() => setToolsDropdown(false)}
-                    className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
+                    className="flex items-center justify-between p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
                   >
-                    <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-[#E11D48]">
-                      <HiClock className="w-4 h-4" />
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-[#E11D48]">
+                        <HiClock className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
+                          العداد التنازلي للبكالوريا
+                        </span>
+                        <span className="text-[10px] text-[#64748B]">
+                          متابعة الأيام ورزنامة المحطات
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
-                        العداد التنازلي للبكالوريا
-                      </span>
-                      <span className="text-[10px] text-[#64748B]">
-                        متابعة الأيام ورزنامة المحطات
-                      </span>
-                    </div>
+                    {featuresConfig.countdown?.isMaintenance && (
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-bold">صيانة</span>
+                    )}
                   </Link>
                 </div>
               )}
@@ -380,9 +445,21 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
 
           </nav>
 
-          {/* Left Actions: Search + Contact Modal Trigger */}
+          {/* Left Actions: Admin + Search + Contact Modal Trigger */}
           <div className="flex items-center gap-2 shrink-0">
             
+            {/* Admin Control Center Trigger */}
+            {onOpenAdmin && (
+              <button
+                onClick={onOpenAdmin}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-rose-400 border border-rose-500/30 text-xs font-bold cursor-pointer transition-colors"
+                title="إدارة أوضاع الصيانة للميزات"
+              >
+                <HiAdjustments className="w-3.5 h-3.5 text-[#E11D48]" />
+                <span className="hidden sm:inline">أوضاع الصيانة</span>
+              </button>
+            )}
+
             {/* Search Trigger */}
             <button
               onClick={onOpenSearch}
@@ -452,6 +529,19 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
           </div>
 
           <div className="flex flex-col space-y-1 text-xs font-bold pt-2 border-t border-slate-800">
+            {onOpenAdmin && (
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  onOpenAdmin();
+                }}
+                className="px-3 py-2 rounded-lg bg-slate-800 text-rose-400 border border-rose-500/30 flex items-center justify-between text-right cursor-pointer"
+              >
+                <span>لوحة التحكم في أوضاع الصيانة ⚙️</span>
+                <span className="text-[10px] px-1.5 py-0.2 rounded bg-rose-500/20 text-rose-300 font-mono">Admin</span>
+              </button>
+            )}
+
             <Link
               to="/"
               onClick={() => setIsOpen(false)}
@@ -462,23 +552,32 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
             <Link
               to="/library"
               onClick={() => setIsOpen(false)}
-              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/library') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
+              className={`px-3 py-2 rounded-lg transition-colors flex items-center justify-between ${isActive('/library') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
-              مكتبة الملخصات والسلاسل
+              <span>مكتبة الملخصات والسلاسل</span>
+              {featuresConfig.library?.isMaintenance && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300">صيانة</span>
+              )}
             </Link>
             <Link
               to="/bac-archive"
               onClick={() => setIsOpen(false)}
-              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/bac-archive') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
+              className={`px-3 py-2 rounded-lg transition-colors flex items-center justify-between ${isActive('/bac-archive') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
-              أرشيف البكالوريا (2008—2025)
+              <span>أرشيف البكالوريا (2008—2026)</span>
+              {featuresConfig.bac_archive?.isMaintenance && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300">صيانة</span>
+              )}
             </Link>
             <Link
               to="/youtube-teachers"
               onClick={() => setIsOpen(false)}
-              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/youtube-teachers') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
+              className={`px-3 py-2 rounded-lg transition-colors flex items-center justify-between ${isActive('/youtube-teachers') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
-              قنوات وأساتذة اليوتيوب
+              <span>قنوات وأساتذة اليوتيوب</span>
+              {featuresConfig.youtube_teachers?.isMaintenance && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300">صيانة</span>
+              )}
             </Link>
             <Link
               to="/focus-room"
@@ -486,7 +585,11 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
               className={`px-3 py-2 rounded-lg transition-colors font-bold flex items-center justify-between ${isActive('/focus-room') ? 'text-white bg-indigo-600' : 'text-indigo-300 hover:text-white hover:bg-slate-800'}`}
             >
               <span>غرفة التركيز (بومودورو) 🎧</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded bg-indigo-900 text-indigo-200 font-medium">جديد</span>
+              {featuresConfig.focus_room?.isMaintenance ? (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300">صيانة</span>
+              ) : (
+                <span className="text-[10px] px-1.5 py-0.2 rounded bg-indigo-900 text-indigo-200 font-medium">جديد</span>
+              )}
             </Link>
             <Link
               to="/mistakes-notebook"
@@ -494,14 +597,21 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
               className={`px-3 py-2 rounded-lg transition-colors font-bold flex items-center justify-between ${isActive('/mistakes-notebook') ? 'text-white bg-amber-600' : 'text-amber-300 hover:text-white hover:bg-slate-800'}`}
             >
               <span>كراس الأخطاء والفخاخ الذكي 📓</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded bg-amber-900 text-amber-200 font-medium">جديد</span>
+              {featuresConfig.mistakes_notebook?.isMaintenance ? (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300">صيانة</span>
+              ) : (
+                <span className="text-[10px] px-1.5 py-0.2 rounded bg-amber-900 text-amber-200 font-medium">جديد</span>
+              )}
             </Link>
             <Link
               to="/curriculum"
               onClick={() => setIsOpen(false)}
-              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/curriculum') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
+              className={`px-3 py-2 rounded-lg transition-colors flex items-center justify-between ${isActive('/curriculum') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
-              دليل المنهاج والبرنامج الوزاري 📚
+              <span>دليل المنهاج والبرنامج الوزاري 📚</span>
+              {featuresConfig.curriculum?.isMaintenance && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300">صيانة</span>
+              )}
             </Link>
             <Link
               to="/ai-summarizer"
@@ -509,35 +619,51 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact }) 
               className={`px-3 py-2 rounded-lg transition-colors font-bold flex items-center justify-between ${isActive('/ai-summarizer') ? 'text-white bg-[#E11D48]' : 'text-rose-300 hover:text-white hover:bg-slate-800'}`}
             >
               <span>الملخص الذكي (AI) 🤖</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded bg-rose-100 text-rose-700 font-medium">جديد</span>
+              {featuresConfig.ai_summarizer?.isMaintenance ? (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300">صيانة</span>
+              ) : (
+                <span className="text-[10px] px-1.5 py-0.2 rounded bg-rose-100 text-rose-700 font-medium">جديد</span>
+              )}
             </Link>
             <Link
               to="/quiz"
               onClick={() => setIsOpen(false)}
-              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/quiz') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
+              className={`px-3 py-2 rounded-lg transition-colors flex items-center justify-between ${isActive('/quiz') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
-              بنك الأسئلة والاختبارات (Quiz & QCM) ⏱️
+              <span>بنك الأسئلة والاختبارات (Quiz & QCM) ⏱️</span>
+              {featuresConfig.quiz?.isMaintenance && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300">صيانة</span>
+              )}
             </Link>
             <Link
               to="/study-planner"
               onClick={() => setIsOpen(false)}
-              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/study-planner') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
+              className={`px-3 py-2 rounded-lg transition-colors flex items-center justify-between ${isActive('/study-planner') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
-              مخطط وجداول المراجعة الأسبوعية
+              <span>مخطط وجداول المراجعة الأسبوعية</span>
+              {featuresConfig.study_planner?.isMaintenance && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300">صيانة</span>
+              )}
             </Link>
             <Link
               to="/calculator"
               onClick={() => setIsOpen(false)}
-              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/calculator') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
+              className={`px-3 py-2 rounded-lg transition-colors flex items-center justify-between ${isActive('/calculator') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
-              حاسبة معدل البكالوريا
+              <span>حاسبة معدل البكالوريا</span>
+              {featuresConfig.calculator?.isMaintenance && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300">صيانة</span>
+              )}
             </Link>
             <Link
               to="/countdown"
               onClick={() => setIsOpen(false)}
-              className={`px-3 py-2 rounded-lg transition-colors ${isActive('/countdown') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
+              className={`px-3 py-2 rounded-lg transition-colors flex items-center justify-between ${isActive('/countdown') ? 'text-white bg-[#E11D48]' : 'text-slate-200 hover:text-white hover:bg-slate-800'}`}
             >
-              العداد التنازلي للبكالوريا
+              <span>العداد التنازلي للبكالوريا</span>
+              {featuresConfig.countdown?.isMaintenance && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300">صيانة</span>
+              )}
             </Link>
             <Link
               to="/about"

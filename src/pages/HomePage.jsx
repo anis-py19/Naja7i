@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   HiBookOpen, 
@@ -7,14 +7,25 @@ import {
   HiSparkles
 } from 'react-icons/hi';
 import { STREAMS } from '../data/streamsData';
+import { getActiveFeaturesConfig } from '../config/siteConfig';
 import FounderStorySection from '../components/FounderStorySection';
 import ContactContributionSection from '../components/ContactContributionSection';
 
 export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }) {
   const navigate = useNavigate();
+  const [featuresConfig, setFeaturesConfig] = useState(getActiveFeaturesConfig());
+
+  useEffect(() => {
+    const handleConfigChange = () => {
+      setFeaturesConfig(getActiveFeaturesConfig());
+    };
+    window.addEventListener('naja7i_features_config_changed', handleConfigChange);
+    return () => window.removeEventListener('naja7i_features_config_changed', handleConfigChange);
+  }, []);
 
   const portals = [
     {
+      featureId: 'streams',
       title: 'الشعب والمواد الدراسية',
       desc: 'مقررات وبرامج البكالوريا الرسمية لجميع الشعب الست مع تفصيل الوحدات والمعاملات.',
       path: '/streams',
@@ -22,6 +33,7 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       badge: 'المنهاج الوزاري'
     },
     {
+      featureId: 'library',
       title: 'مكتبة الملخصات والسلاسل',
       desc: 'ملخصات شاملة وسلاسل تمارين محلولة لأفضل أساتذة الجزائر مع عارض PDF فوري.',
       path: '/library',
@@ -29,6 +41,7 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       badge: 'ملخصات وتمارين'
     },
     {
+      featureId: 'bac_archive',
       title: 'أرشيف مواضيع البكالوريا',
       desc: 'مواضيع وحلول شهادة البكالوريا الرسمية من 2008 إلى 2026 مع سلالم التنقيط الوزارية.',
       path: '/bac-archive',
@@ -36,6 +49,7 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       badge: '2008 — 2026'
     },
     {
+      featureId: 'ai_summarizer',
       title: 'الملخص الذكي بالذكاء الاصطناعي ✨',
       desc: 'تلخيص فوري لملفات PDF وصور الكراريس، رسم خرائط ذهنية تفاعلية وتوليد أسئلة وزارية.',
       path: '/ai-summarizer',
@@ -43,6 +57,7 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       badge: 'مدعوم بـ AI & Vision'
     },
     {
+      featureId: 'focus_room',
       title: 'غرفة التركيز وبومودورو 🎧',
       desc: 'أجواء دراسة هادئة مع مؤقت بومودورو ذكي، أصوات محيطية عازلة للضوضاء، ونصائح متجددة.',
       path: '/focus-room',
@@ -50,6 +65,7 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       badge: 'دراسة بدون تشتت'
     },
     {
+      featureId: 'mistakes_notebook',
       title: 'كراس الأخطاء والفخاخ الذكي 📓',
       desc: 'سجل أخطاء التمارين مع القواعد الذهبية، وتوليد ورقة A4 ملخصة لمراجعتها ليلة الامتحان.',
       path: '/mistakes-notebook',
@@ -57,6 +73,7 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       badge: 'سر المتفوقين'
     },
     {
+      featureId: 'quiz',
       title: 'بنك الأسئلة والاختبارات التفاعلية',
       desc: 'اختبارات سريعة وتحديات موقوتة QCM لجميع المواد وفق المنهاج الوزاري مع التصحيح الفوري.',
       path: '/quiz',
@@ -64,6 +81,7 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       badge: 'تصحيح وشرح فوري'
     },
     {
+      featureId: 'calculator',
       title: 'حاسبة معدل البكالوريا',
       desc: 'حساب المعدل الفوري بالمعاملات الرسمية لجميع الشعب مع معرفة التخصصات الجامعية المتاحة.',
       path: '/calculator',
@@ -71,6 +89,7 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       badge: 'المعاملات الرسمية'
     },
     {
+      featureId: 'study_planner',
       title: 'مخطط وجداول المراجعة الأسبوعية',
       desc: 'جداول تفصيلية بالساعات للمتمدرسين والأحرار قابلة للطباعة A4 مع منهجية الحفظ الفعال.',
       path: '/study-planner',
@@ -78,6 +97,7 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       badge: 'جداول جاهزة للطباعة'
     },
     {
+      featureId: 'youtube_teachers',
       title: 'دليل قنوات وأساتذة اليوتيوب',
       desc: 'قائمة مرتبة لأفضل قنوات البكالوريا التعليمية في الجزائر مصنفة حسب كل مادة وشعبة.',
       path: '/youtube-teachers',
@@ -85,6 +105,7 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       badge: 'شروحات بالفيديو'
     },
     {
+      featureId: 'curriculum',
       title: 'دليل المنهاج والبرنامج الوزاري',
       desc: 'فهرس الدروس والمحاور الرسمية المقررة وزارياً لجميع الشعب والمواد مع الكفاءات المستهدفة.',
       path: '/curriculum',
@@ -92,6 +113,7 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       badge: 'المنهاج الرسمي'
     },
     {
+      featureId: 'countdown',
       title: 'العداد التنازلي والمواعيد الرسمية',
       desc: 'متابعة الأيام المتبقية حتى انطلاق امتحان البكالوريا ورزنامة المحطات الامتحانية الرسمية.',
       path: '/countdown',
@@ -197,37 +219,52 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {portals.map((item, idx) => (
-            <Link
-              key={idx}
-              to={item.path}
-              className="bg-white border border-[#E2E8F0] hover:border-[#E11D48] rounded-2xl p-6 transition-all hover:shadow-sm flex flex-col justify-between group"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-center text-2xl group-hover:bg-[#F1F5F9] transition-colors">
-                    {item.icon}
+          {portals.map((item, idx) => {
+            const isFeatMaintenance = featuresConfig[item.featureId]?.isMaintenance;
+
+            return (
+              <Link
+                key={idx}
+                to={item.path}
+                className={`bg-white border rounded-2xl p-6 transition-all hover:shadow-sm flex flex-col justify-between group ${
+                  isFeatMaintenance 
+                    ? 'border-amber-200/90 bg-amber-50/20 hover:border-amber-400' 
+                    : 'border-[#E2E8F0] hover:border-[#E11D48]'
+                }`}
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-center text-2xl group-hover:bg-[#F1F5F9] transition-colors">
+                      {item.icon}
+                    </div>
+                    {isFeatMaintenance ? (
+                      <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 text-[11px] font-bold border border-amber-200/80 flex items-center gap-1 animate-pulse">
+                        <span>🛠️</span>
+                        <span>قيد الصيانة والتحديث</span>
+                      </span>
+                    ) : (
+                      <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[11px] font-medium border border-slate-200/60">
+                        {item.badge}
+                      </span>
+                    )}
                   </div>
-                  <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[11px] font-medium border border-slate-200/60">
-                    {item.badge}
-                  </span>
+
+                  <h3 className="text-base font-bold text-[#0F172A] group-hover:text-[#E11D48] transition-colors mb-2">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-xs text-[#475569] leading-relaxed">
+                    {item.desc}
+                  </p>
                 </div>
 
-                <h3 className="text-base font-bold text-[#0F172A] group-hover:text-[#E11D48] transition-colors mb-2">
-                  {item.title}
-                </h3>
-
-                <p className="text-xs text-[#475569] leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-
-              <div className="pt-5 mt-4 border-t border-[#F1F5F9] flex items-center justify-between text-xs font-bold text-[#E11D48]">
-                <span>دخول الفضاء</span>
-                <HiChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-              </div>
-            </Link>
-          ))}
+                <div className="pt-5 mt-4 border-t border-[#F1F5F9] flex items-center justify-between text-xs font-bold text-[#E11D48]">
+                  <span>{isFeatMaintenance ? 'معاينة حالة التحديث' : 'دخول الفضاء'}</span>
+                  <HiChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </section>
 

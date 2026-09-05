@@ -56,3 +56,4 @@
 - **PDF Engine:** Dual In-App Canvas PDF.js Renderer + Google Drive Cloud Preview & Direct Offline Serving (`public/BAC_Archive/`).
 - **Direction & Language:** Arabic First (`dir="rtl"`, Cairo font), French & English technical terms supported seamlessly.
 - **Offline First:** Service Worker caching + Web App Manifest for mobile and desktop standalone installation.
+- **Media & Carousel Generation (Nano Banana Direct):** عند طلب صور (Photos)، عروض تتابعية (Carousels) أو بطاقات مرئية: يتم التوليد والتصميم مباشرة عبر Gemini / Nano Banana (`generate_image` & Markdown Carousel) دون كتابة أو تشغيل سكربتات خارجية معقدة.

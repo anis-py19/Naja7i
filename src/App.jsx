@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import SubjectViewer from './components/SubjectViewer';
 import PdfReaderModal from './components/PdfReaderModal';
@@ -8,7 +8,8 @@ import SearchModal from './components/SearchModal';
 import ContactContributionModal from './components/ContactContributionModal';
 import FloatingQuickActions from './components/FloatingQuickActions';
 import PwaInstallPrompt from './components/PwaInstallPrompt';
-import AdminMaintenanceModal from './components/AdminMaintenanceModal';
+import FeatureGuard from './components/FeatureGuard';
+import AdminControlModal from './components/AdminControlModal';
 
 // Page Views
 import HomePage from './pages/HomePage';
@@ -30,7 +31,7 @@ import MaintenancePage from './pages/MaintenancePage';
 import NotFound from './pages/NotFound';
 
 import { STREAMS } from './data/streamsData';
-import { SITE_CONFIG, getMaintenanceMode, setMaintenanceMode } from './config/siteConfig';
+import { SITE_CONFIG, getActiveFeaturesConfig } from './config/siteConfig';
 
 function App() {
   const [selectedStreamId, setSelectedStreamId] = useState('sciences');
@@ -39,20 +40,28 @@ function App() {
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const [isAdminMaintenanceOpen, setIsAdminMaintenanceOpen] = useState(false);
+  const [isAdminControlOpen, setIsAdminControlOpen] = useState(false);
+  const [featuresConfig, setFeaturesConfig] = useState(getActiveFeaturesConfig());
 
   const location = useLocation();
+  const navigate = useNavigate();
   const isFocusRoom = ['/focus-room', '/focus', '/pomodoro'].includes(location.pathname);
 
-  // Dynamic Maintenance State (Tracks localStorage & siteConfig in real-time)
-  const [isMaintenanceActive, setIsMaintenanceActive] = useState(getMaintenanceMode());
+  // Listen to live feature config changes
+  useEffect(() => {
+    const handleConfigChange = () => {
+      setFeaturesConfig(getActiveFeaturesConfig());
+    };
+    window.addEventListener('naja7i_features_config_changed', handleConfigChange);
+    return () => window.removeEventListener('naja7i_features_config_changed', handleConfigChange);
+  }, []);
 
   // Admin Bypass for Maintenance Mode
   const [bypassMaintenance, setBypassMaintenance] = useState(() => {
     try {
       const saved = localStorage.getItem('naja7i_admin_bypass');
       const params = new URLSearchParams(window.location.search);
-      if (params.get('admin') === 'true') {
+      if (params.get('admin') === 'true' || location.pathname === '/admin') {
         localStorage.setItem('naja7i_admin_bypass', 'true');
         return true;
       }
@@ -62,28 +71,14 @@ function App() {
     }
   });
 
-  // Listen to Maintenance State changes and Keyboard Shortcut (Ctrl+Shift+M)
+  // Automatically open Admin modal if visiting /admin
   useEffect(() => {
-    const handleMaintenanceChange = () => {
-      setIsMaintenanceActive(getMaintenanceMode());
-    };
-
-    const handleKeyDown = (e) => {
-      // Shortcut: Ctrl + Shift + M
-      if (e.ctrlKey && e.shiftKey && (e.key === 'M' || e.key === 'm')) {
-        e.preventDefault();
-        setIsAdminMaintenanceOpen(prev => !prev);
-      }
-    };
-
-    window.addEventListener('naja7i_maintenance_change', handleMaintenanceChange);
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('naja7i_maintenance_change', handleMaintenanceChange);
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
+    if (location.pathname === '/admin') {
+      setIsAdminControlOpen(true);
+      setBypassMaintenance(true);
+      localStorage.setItem('naja7i_admin_bypass', 'true');
+    }
+  }, [location.pathname]);
 
   const handleSelectStream = (streamId) => {
     setSelectedStreamId(streamId);
@@ -96,16 +91,18 @@ function App() {
     });
   };
 
-  // If maintenance mode is activated and admin has not bypassed it, display MaintenancePage
-  if (isMaintenanceActive && !bypassMaintenance && location.pathname !== '/maintenance') {
+  const handleBypassOn = () => {
+    setBypassMaintenance(true);
+    localStorage.setItem('naja7i_admin_bypass', 'true');
+  };
+
+  const isGlobalMaintenance = featuresConfig.global_site?.isMaintenance ?? SITE_CONFIG.isMaintenanceMode;
+
+  // If global site maintenance mode is active and admin has not bypassed it, display full MaintenancePage
+  if (isGlobalMaintenance && !bypassMaintenance && location.pathname !== '/maintenance') {
     return (
       <MaintenancePage
-        onBypass={() => {
-          setBypassMaintenance(true);
-          try {
-            localStorage.setItem('naja7i_admin_bypass', 'true');
-          } catch {}
-        }}
+        onBypass={handleBypassOn}
       />
     );
   }
@@ -113,32 +110,37 @@ function App() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] selection:bg-[#E11D48] selection:text-white font-['Cairo'] antialiased flex flex-col justify-between">
 
-      {/* Admin Maintenance Alert Bar (يظهر فقط للمسؤول عند تفعيل وضع الصيانة وتجاوزه للمعاينة) */}
-      {isMaintenanceActive && bypassMaintenance && (
-        <div className="bg-amber-500 text-slate-950 px-4 py-1.5 text-xs font-bold flex flex-wrap items-center justify-between z-50 print:hidden shadow-xs gap-2">
+      {/* Admin Alert & Feature Manager Bar */}
+      {(isGlobalMaintenance || bypassMaintenance) && (
+        <div className="bg-slate-900 text-white px-4 py-2 text-xs font-bold flex items-center justify-between z-50 print:hidden shadow-md flex-wrap gap-2 border-b border-slate-800">
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-rose-600 animate-ping"></span>
-            <span>⚠️ وضع الصيانة مفعل حالياً للزوار العاديين • أنت تتصفح المنصة كمسؤول (Admin Preview Mode)</span>
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>
+              {isGlobalMaintenance 
+                ? '⚠️ وضع الصيانة العام مفعّل للزوار العاديين • أنت تتصفح كمسؤول (Admin Preview Mode)' 
+                : '🛡️ وضع الإدارة نشط (Admin Mode Active)'}
+            </span>
           </div>
-
+          
           <div className="flex items-center gap-2">
             <button
-              onClick={() => setIsAdminMaintenanceOpen(true)}
-              className="px-2.5 py-0.5 rounded bg-slate-900 hover:bg-black text-white text-[11px] font-bold transition-colors cursor-pointer flex items-center gap-1"
+              onClick={() => setIsAdminControlOpen(true)}
+              className="px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-[11px] font-bold transition-colors cursor-pointer flex items-center gap-1 shadow-xs"
             >
-              <span>⚙️ لوحة تحكم الصيانة (ON/OFF)</span>
+              <span>⚙️ لوحة التحكم في أوضاع الصيانة</span>
             </button>
-            <button
-              onClick={() => {
-                setBypassMaintenance(false);
-                try {
+
+            {isGlobalMaintenance && (
+              <button
+                onClick={() => {
+                  setBypassMaintenance(false);
                   localStorage.removeItem('naja7i_admin_bypass');
-                } catch {}
-              }}
-              className="px-2 py-0.5 rounded bg-amber-600 hover:bg-amber-700 text-slate-950 text-[11px] font-bold transition-colors cursor-pointer"
-            >
-              إغلاق المعاينة
-            </button>
+                }}
+                className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-bold transition-colors cursor-pointer"
+              >
+                إغلاق المعاينة ورؤية صفحة الصيانة
+              </button>
+            )}
           </div>
         </div>
       )}
@@ -150,6 +152,8 @@ function App() {
           onOpenCalculator={() => setIsCalculatorOpen(true)}
           onOpenSearch={() => setIsSearchOpen(true)}
           onOpenContact={() => setIsContactOpen(true)}
+          onOpenAdmin={() => setIsAdminControlOpen(true)}
+          isAdmin={bypassMaintenance}
         />
       )}
 
@@ -176,11 +180,13 @@ function App() {
           <Route
             path="/streams"
             element={
-              <StreamsPage
-                selectedStreamId={selectedStreamId}
-                setSelectedStreamId={setSelectedStreamId}
-                onOpenSubject={handleOpenSubject}
-              />
+              <FeatureGuard featureId="streams" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <StreamsPage
+                  selectedStreamId={selectedStreamId}
+                  setSelectedStreamId={setSelectedStreamId}
+                  onOpenSubject={handleOpenSubject}
+                />
+              </FeatureGuard>
             }
           />
 
@@ -188,9 +194,11 @@ function App() {
           <Route
             path="/library"
             element={
-              <LibraryPage
-                onOpenPdf={(file) => setActivePdf(file)}
-              />
+              <FeatureGuard featureId="library" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <LibraryPage
+                  onOpenPdf={(file) => setActivePdf(file)}
+                />
+              </FeatureGuard>
             }
           />
 
@@ -198,9 +206,11 @@ function App() {
           <Route
             path="/bac-archive"
             element={
-              <BacArchivePage
-                onOpenPdf={(file) => setActivePdf(file)}
-              />
+              <FeatureGuard featureId="bac_archive" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <BacArchivePage
+                  onOpenPdf={(file) => setActivePdf(file)}
+                />
+              </FeatureGuard>
             }
           />
 
@@ -208,7 +218,9 @@ function App() {
           <Route
             path="/youtube-teachers"
             element={
-              <YouTubeTeachersPage />
+              <FeatureGuard featureId="youtube_teachers" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <YouTubeTeachersPage />
+              </FeatureGuard>
             }
           />
 
@@ -216,7 +228,9 @@ function App() {
           <Route
             path="/study-planner"
             element={
-              <StudyPlannerPage />
+              <FeatureGuard featureId="study_planner" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <StudyPlannerPage />
+              </FeatureGuard>
             }
           />
 
@@ -224,7 +238,9 @@ function App() {
           <Route
             path="/quiz"
             element={
-              <QuizBankPage />
+              <FeatureGuard featureId="quiz" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <QuizBankPage />
+              </FeatureGuard>
             }
           />
 
@@ -232,13 +248,17 @@ function App() {
           <Route
             path="/ai-summarizer"
             element={
-              <AiSummarizerPage />
+              <FeatureGuard featureId="ai_summarizer" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <AiSummarizerPage />
+              </FeatureGuard>
             }
           />
           <Route
             path="/ai-summarize"
             element={
-              <AiSummarizerPage />
+              <FeatureGuard featureId="ai_summarizer" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <AiSummarizerPage />
+              </FeatureGuard>
             }
           />
 
@@ -246,7 +266,9 @@ function App() {
           <Route
             path="/curriculum"
             element={
-              <CurriculumPage />
+              <FeatureGuard featureId="curriculum" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <CurriculumPage />
+              </FeatureGuard>
             }
           />
 
@@ -254,7 +276,9 @@ function App() {
           <Route
             path="/calculator"
             element={
-              <CalculatorPage />
+              <FeatureGuard featureId="calculator" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <CalculatorPage />
+              </FeatureGuard>
             }
           />
 
@@ -262,7 +286,9 @@ function App() {
           <Route
             path="/countdown"
             element={
-              <CountdownPage />
+              <FeatureGuard featureId="countdown" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <CountdownPage />
+              </FeatureGuard>
             }
           />
 
@@ -270,37 +296,63 @@ function App() {
           <Route
             path="/focus-room"
             element={
-              <FocusRoomPage />
+              <FeatureGuard featureId="focus_room" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <FocusRoomPage />
+              </FeatureGuard>
             }
           />
           <Route
             path="/focus"
             element={
-              <FocusRoomPage />
+              <FeatureGuard featureId="focus_room" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <FocusRoomPage />
+              </FeatureGuard>
             }
           />
           <Route
             path="/pomodoro"
             element={
-              <FocusRoomPage />
+              <FeatureGuard featureId="focus_room" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <FocusRoomPage />
+              </FeatureGuard>
             }
           />
 
-          {/* 8.8 كراس الأخطاء الذكي وفخاخ البكالوريا (Carnet d'Erreurs) */}
+          {/* 8.6 كراس الأخطاء والفخاخ الذكي (Carnet d'Erreurs) */}
           <Route
             path="/mistakes-notebook"
             element={
-              <MistakesNotebookPage />
+              <FeatureGuard featureId="mistakes_notebook" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <MistakesNotebookPage />
+              </FeatureGuard>
             }
           />
           <Route
             path="/carnet-erreurs"
             element={
-              <MistakesNotebookPage />
+              <FeatureGuard featureId="mistakes_notebook" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                <MistakesNotebookPage />
+              </FeatureGuard>
             }
           />
 
-          {/* 9. قصة ورسالة المنصة (المؤسس أنيس ازري) */}
+          {/* 8.8 مسار لوحة التحكم في الصيانة (Admin Direct URL) */}
+          <Route
+            path="/admin"
+            element={
+              <HomePage
+                selectedStreamId={selectedStreamId}
+                setSelectedStreamId={setSelectedStreamId}
+                handleOpenSubject={handleOpenSubject}
+                setIsCalculatorOpen={setIsCalculatorOpen}
+                setActivePdf={setActivePdf}
+                onOpenSearch={() => setIsSearchOpen(true)}
+                onOpenContact={() => setIsContactOpen(true)}
+              />
+            }
+          />
+
+          {/* 9. عن المنصة والمؤسس */}
           <Route
             path="/about"
             element={
@@ -308,30 +360,23 @@ function App() {
             }
           />
 
-          {/* 10. تواصل ومساهمة بملف */}
+          {/* 10. تواصل ومساهمة */}
           <Route
             path="/contact"
             element={
-              <ContactPage />
+              <ContactPage onOpenContact={() => setIsContactOpen(true)} />
             }
           />
 
-          {/* 11. صفحة الصيانة (للمعاينة المباشرة أو التحديث) */}
+          {/* 11. صفحة الصيانة العامة المستقلة */}
           <Route
             path="/maintenance"
             element={
-              <MaintenancePage
-                onBypass={() => {
-                  setBypassMaintenance(true);
-                  try {
-                    localStorage.setItem('naja7i_admin_bypass', 'true');
-                  } catch {}
-                }}
-              />
+              <MaintenancePage onBypass={handleBypassOn} />
             }
           />
 
-          {/* 404 Not Found Page */}
+          {/* 12. صفحة 404 */}
           <Route
             path="*"
             element={<NotFound />}
@@ -339,7 +384,43 @@ function App() {
         </Routes>
       </main>
 
-      {/* Global Subject Viewer Slide-over Panel */}
+      {/* Footer */}
+      {!isFocusRoom && (
+        <footer className="bg-white border-t border-[#E2E8F0] py-8 text-center text-xs text-[#64748B] font-['Cairo'] print:hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            
+            <div className="flex items-center gap-2">
+              <span className="font-black text-[#0F172A]">نجاحي Naja7i</span>
+              <span>—</span>
+              <span>فضاء تحضير شهادة البكالوريا في الجزائر 🇩🇿</span>
+            </div>
+
+            <div className="flex items-center gap-4 text-xs">
+              <Link to="/about" className="hover:text-[#E11D48] transition-colors">
+                قصة المنصة والرسالة
+              </Link>
+              <span>•</span>
+              <button
+                onClick={() => setIsContactOpen(true)}
+                className="hover:text-[#E11D48] transition-colors cursor-pointer"
+              >
+                مساهمة بملف أو ملخص
+              </button>
+              <span>•</span>
+              <button
+                onClick={() => setIsAdminControlOpen(true)}
+                className="hover:text-[#E11D48] text-slate-400 hover:text-slate-700 transition-colors cursor-pointer flex items-center gap-1 font-mono text-[11px]"
+                title="لوحة تحكم الصيانة"
+              >
+                <span>⚙️ [إدارة الصيانة]</span>
+              </button>
+            </div>
+
+          </div>
+        </footer>
+      )}
+
+      {/* Interactive Global Modals */}
       <SubjectViewer
         subjectId={activeSubject?.id}
         streamName={activeSubject?.streamName}
@@ -347,41 +428,36 @@ function App() {
         onOpenPdf={(file) => setActivePdf(file)}
       />
 
-      {/* Global PDF Reader Modal (In-App Canvas + Cloud Preview) */}
       <PdfReaderModal
-        file={activePdf}
+        pdfFile={activePdf}
         onClose={() => setActivePdf(null)}
       />
 
-      {/* Global Bac Average Calculator Modal */}
       <BacCalculatorModal
         isOpen={isCalculatorOpen}
         onClose={() => setIsCalculatorOpen(false)}
-        defaultStreamId={selectedStreamId}
+        selectedStreamId={selectedStreamId}
       />
 
-      {/* Global Search Dialog Modal (Ctrl + K) */}
       <SearchModal
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
         onOpenPdf={(file) => setActivePdf(file)}
-        onSelectStream={handleSelectStream}
+        onOpenSubject={handleOpenSubject}
       />
 
-      {/* Global Contact & File Contribution Modal */}
       <ContactContributionModal
         isOpen={isContactOpen}
         onClose={() => setIsContactOpen(false)}
       />
 
-      {/* Global Admin Maintenance Modal (Ctrl + Shift + M) */}
-      <AdminMaintenanceModal
-        isOpen={isAdminMaintenanceOpen}
-        onClose={() => setIsAdminMaintenanceOpen(false)}
-        onStateChange={(isNowActive) => {
-          setIsMaintenanceActive(isNowActive);
-          if (isNowActive) {
-            setBypassMaintenance(true);
+      {/* Admin Feature Maintenance Manager Modal */}
+      <AdminControlModal
+        isOpen={isAdminControlOpen}
+        onClose={() => {
+          setIsAdminControlOpen(false);
+          if (location.pathname === '/admin') {
+            navigate('/');
           }
         }}
       />
@@ -394,72 +470,9 @@ function App() {
         />
       )}
 
-      {/* PWA Install Prompt & Live Offline/Online Status */}
+      {/* PWA Smart Install Prompt */}
       <PwaInstallPrompt />
 
-      {/* Global Academic Footer */}
-      {!isFocusRoom && (
-        <footer className="border-t border-[#E2E8F0] bg-white py-8 text-xs text-[#64748B] mt-12 print:hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-3">
-              <img
-                src="/logo.jpg"
-                alt="منصة نجاحي"
-                className="w-10 h-10 object-contain rounded-xl border border-[#E2E8F0] shadow-xs bg-white"
-              />
-              <div>
-                <span className="font-black text-sm text-[#0F172A] block">منصة نجاحي — Naja7i BAC 3AS</span>
-                <span className="text-[#64748B]">مبادرة الطالب أنيس ازري (Anis Izri) • صدقة جارية لدعم طلبة البكالوريا 🇩🇿</span>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center gap-3.5 text-[#475569] font-medium">
-              <Link to="/" className="hover:text-[#E11D48] transition-colors">الرئيسية</Link>
-              <span>•</span>
-              <Link to="/streams" className="hover:text-[#E11D48] transition-colors">الشعب والمواد</Link>
-              <span>•</span>
-              <Link to="/library" className="hover:text-[#E11D48] transition-colors">مكتبة الملخصات</Link>
-              <span>•</span>
-              <Link to="/bac-archive" className="hover:text-[#E11D48] transition-colors">أرشيف البكالوريا</Link>
-              <span>•</span>
-              <Link to="/youtube-teachers" className="hover:text-[#E11D48] transition-colors">أساتذة اليوتيوب</Link>
-              <span>•</span>
-              <Link to="/focus-room" className="hover:text-[#E11D48] transition-colors font-bold text-indigo-600">غرفة التركيز (بومودورو) 🎧</Link>
-              <span>•</span>
-              <Link to="/mistakes-notebook" className="hover:text-[#E11D48] transition-colors font-bold text-amber-600">كراس الأخطاء الذكي 📓</Link>
-              <span>•</span>
-              <Link to="/curriculum" className="hover:text-[#E11D48] transition-colors font-bold text-[#E11D48]">المنهاج والبرنامج الوزاري 📚</Link>
-              <span>•</span>
-              <Link to="/ai-summarizer" className="hover:text-[#E11D48] transition-colors font-bold text-[#E11D48]">الملخص الذكي (AI) 🤖</Link>
-              <span>•</span>
-              <Link to="/quiz" className="hover:text-[#E11D48] transition-colors">بنك الأسئلة (Quiz)</Link>
-              <span>•</span>
-              <Link to="/study-planner" className="hover:text-[#E11D48] transition-colors">مخطط المراجعة</Link>
-              <span>•</span>
-              <Link to="/calculator" className="hover:text-[#E11D48] transition-colors">حاسبة المعدل</Link>
-              <span>•</span>
-              <Link to="/countdown" className="hover:text-[#E11D48] transition-colors">العداد</Link>
-              <span>•</span>
-              <Link to="/about" className="hover:text-[#E11D48] transition-colors">عن المنصة</Link>
-              <span>•</span>
-              <Link to="/contact" className="hover:text-[#E11D48] transition-colors text-[#E11D48] font-bold">تواصل ومساهمة 📥</Link>
-            </div>
-          </div>
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 pt-4 border-t border-[#F1F5F9] flex flex-col sm:flex-row items-center justify-between text-[#94A3B8] text-[11px] gap-2">
-            <span>جميع الحقوق محفوظة © {new Date().getFullYear()} لمنصة نجاحي التعليمية • نسألكم الدعاء بالتوفيق والبركة</span>
-            
-            {/* Discreet Admin Maintenance Trigger */}
-            <button
-              onClick={() => setIsAdminMaintenanceOpen(true)}
-              className="text-[#94A3B8] hover:text-[#E11D48] transition-colors cursor-pointer flex items-center gap-1 font-bold"
-              title="لوحة تحكم الصيانة (Ctrl + Shift + M)"
-            >
-              <span>⚙️ التحكم في وضع الصيانة</span>
-            </button>
-          </div>
-        </footer>
-      )}
     </div>
   );
 }

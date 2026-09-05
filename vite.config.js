@@ -10,17 +10,5 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom', 'framer-motion']
-  },
-  server: {
-    proxy: {
-      '/api/nvidia': {
-        target: 'https://integrate.api.nvidia.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/nvidia/, ''),
-        headers: {
-          'Origin': 'https://integrate.api.nvidia.com'
-        }
-      }
-    }
   }
 });

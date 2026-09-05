@@ -307,47 +307,35 @@ async function generateViaNvidia({ modeInstruction, systemPrompt, rawText, inlin
         });
       }
 
-      const endpoints = [
-        '/api/nvidia/v1/chat/completions',
-        'https://integrate.api.nvidia.com/v1/chat/completions'
-      ];
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 28000);
 
-      for (const endpoint of endpoints) {
-        try {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 28000);
+      const response = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${DEFAULT_NVIDIA_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model,
+          messages,
+          temperature: 0.4,
+          max_tokens: 3500
+        }),
+        signal: controller.signal
+      });
 
-          const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${DEFAULT_NVIDIA_KEY}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              model,
-              messages,
-              temperature: 0.4,
-              max_tokens: 3500
-            }),
-            signal: controller.signal
-          });
+      clearTimeout(timeoutId);
 
-          clearTimeout(timeoutId);
-
-          if (response.ok) {
-            const data = await response.json();
-            const output = data.choices?.[0]?.message?.content?.trim();
-            if (output && output.length > 30) {
-              return output;
-            }
-          } else {
-            const errData = await response.json().catch(() => ({}));
-            console.warn(`NVIDIA endpoint ${endpoint} with model ${model} HTTP ${response.status}:`, errData);
-          }
-        } catch (endpointErr) {
-          console.warn(`Endpoint ${endpoint} failed:`, endpointErr.message);
-          lastError = endpointErr;
+      if (response.ok) {
+        const data = await response.json();
+        const output = data.choices?.[0]?.message?.content?.trim();
+        if (output && output.length > 30) {
+          return output;
         }
+      } else {
+        const errData = await response.json().catch(() => ({}));
+        console.warn(`NVIDIA model ${model} HTTP ${response.status}:`, errData);
       }
     } catch (e) {
       console.warn(`NVIDIA model ${model} attempt error:`, e.message);
@@ -432,25 +420,12 @@ export async function generateAiSummary({
 مهمتك إعداد ملخص أكاديمي متقن ومنهجي 100% يساعد التلميذ على الفهم العميق والحفظ والتفوق في شهادة البكالوريا 🇩🇿.
 
 ---
-### 🔒 1. حصرية النطاق الأكاديمي للبكالوريا الجزائرية (Strict BAC Scope):
-أنت مخصص **حصرياً** لدروس ومواد ومنهاج شهادة البكالوريا الجزائرية الرسمية:
-(الرياضيات، العلوم الفيزيائية، علوم الطبيعة والحياة، التسيير المحاسبي والمالي، الاقتصاد والمناجمنت، القانون، الهندسة المدنية/الميكانيكية/الكهربائية/الطرائق، الفلسفة، اللغة العربية وآدابها، التاريخ والجغرافيا، العلوم الإسلامية، اللغات الأجنبية: الفرنسية، الإنجليزية، الإسبانية، الألمانية، الإيطالية).
-
-⚠️ **شرط إلزامي وحاسم للتحقق من المحتوى (Content Verification Guardrail):**
-قبل الشروع في التلخيص، حلل كلام المستخدم أو محتوى الملف المرفق:
-- إذا كان المحتوى **خارج نطاق الدراسة، أو غير متعلق بمواد ودروس البكالوريا الجزائرية** (مثل: دردشة عامة، مواضيع ترفيهية، ألعاب، سياسة، أخبار عامة، طبخ، أو أي موضوع ليس درساً/تمريناً مقرراً في البكالوريا):
-  **يُمنع منعاً باتاً الإجابة أو تلخيص الموضوع غير الدراسي.**
-  ويجب عليك الرد فوراً بالاعتذار اللطيف التالي:
-  «عذراً يا بطل! 🎓 أنا مساعد ومستشار مخصص حصرياً لتحضير شهادة البكالوريا ومواد المنهاج الدراسي الجزائري 🇩🇿.
-  لا يمكنني الإجابة على مواضيع خارج نطاق الدراسة والمنهاج الوزاري. يرجى كتابة سؤال أو إرسال درس/ملخص متعلق بمواد البكالوريا (رياضيات، فيزياء، علوم، تسيير، هندسة، فلسفة، لغات أو اجتماعيات) وسأكون سعيداً بمساعدتك وتلخيصه لك فوراً! ✨»
-
----
-### 🌟 2. القواعد المنهجية الخمس الإلزامية (عندما يكون المحتوى دراسياً):
-1. 🛡️ **فصل الكلمات وسلامة التعبير:** اكتب بلغة عربية فصيحة وواضحة جداً، مع **فصل جميع الكلمات بمسافات نظامية واضحة ومنع تلاصق الكلمات أو الحروف إطلاقاً**.
+### 🌟 القواعد المنهجية الخمس الإلزامية (وفق معايير التميز في البكالوريا):
+1. 🛡️ **الدقة العلمية والمصطلحات الوزارية:** انقل القوانين، التعريفات، والمعادلات مع شروط تطبيقها ووحدات القياس دون نقصان.
 2. 🗺️ **التنظيم البصري والجداول:** حول المفاهيم والمقارنات إلى جداول Markdown وتدرجات سهمية واضحة (➔).
 3. 🎯 **منهجية التصحيح الوزاري:** بين الكلمات المفتاحية (Mots-clés) التي يركز عليها الأساتذة المصححون في سلم التنقيط.
 4. ⚠️ **إبراز الفخاخ والملاحظات:** استخدم صناديق التنبيه (> 💡 ملاحظة: / > ⚠️ فخ شائع:) لحماية الطالب من الأخطاء المتكررة.
-5. 💬 **الدقة والمصطلحات المعتمدة:** انقل القوانين، التعريفات، والمعادلات مع شروط تطبيقها ووحدات القياس الدولية (SI) دون نقصان.
+5. 💬 **لغة عربية راقية وسلسة:** اكتب بلغة فصيحة ومباشرة مع إدراج المصطلح الأجنبي (الفرنسي أو اللاتيني) بين قوسين عند الحاجة.
 `;
 
   // 1. If user provided a custom Gemini key, try Gemini first

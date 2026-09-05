@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   HiHome, 
@@ -10,13 +10,16 @@ import {
   HiDownload, 
   HiTrash,
   HiKey,
+  HiExternalLink,
   HiX,
   HiCheckCircle,
+  HiInformationCircle,
   HiLightningBolt,
+  HiQuestionMarkCircle,
+  HiAcademicCap,
   HiVolumeUp,
   HiStop,
-  HiClock,
-  HiRefresh
+  HiClock
 } from 'react-icons/hi';
 import { 
   extractTextFromPdf, 
@@ -39,14 +42,6 @@ const STREAMS_LIST = [
   { id: 'gestion', name: 'تسيير واقتصاد', icon: '📊' },
   { id: 'lettres_philo', name: 'آداب وفلسفة', icon: '📖' },
   { id: 'langues', name: 'لغات أجنبية', icon: '🌍' }
-];
-
-const MODES_LIST = [
-  { id: 'mindmap', label: '🗺️ مخطط ذهني', desc: 'عقد مركزة ومختصرة' },
-  { id: 'comprehensive', label: '📑 ملخص شامل', desc: 'شرح، جداول وبطاقات' },
-  { id: 'high_yield', label: '⚡ مكثف ليلة الامتحان', desc: 'قوانين و5 فخاخ' },
-  { id: 'questions', label: '❓ بنك أسئلة QCM', desc: 'أسئلة مع سلم التنقيط' },
-  { id: 'methodology', label: '🔬 تفكيك المنهجية', desc: 'أفعال الأداء والكلمات المفتاحية' }
 ];
 
 const QUICK_TEST_TEMPLATES = [
@@ -114,22 +109,22 @@ export default function AiSummarizerPage() {
   const [inputTab, setInputTab] = useState('file'); // 'file' | 'text'
   const [selectedFile, setSelectedFile] = useState(null);
   const [rawText, setRawText] = useState('');
-  const [summaryMode, setSummaryMode] = useState('mindmap');
+  const [summaryMode, setSummaryMode] = useState('mindmap'); // 'comprehensive' | 'high_yield' | 'questions' | 'methodology' | 'mindmap'
   const [activeViewTab, setActiveViewTab] = useState('mindmap'); // 'mindmap' | 'text' | 'flashcards'
-
-  // Key & Status
+  
+  // Custom API Key Management
   const [apiKey, setApiKey] = useState(getPlatformDefaultApiKey());
   const [isKeyModalOpen, setIsKeyModalOpen] = useState(false);
   const [inputKeyTemp, setInputKeyTemp] = useState('');
 
-  // Generation State
+  // Generation & Status
   const [isLoading, setIsLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
   const [summaryResult, setSummaryResult] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [copiedToast, setCopiedToast] = useState(false);
 
-  // Audio Speech
+  // Text-To-Speech (Audio Voice Reader)
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
   // History State
@@ -175,7 +170,7 @@ export default function AiSummarizerPage() {
       .replace(/https?:\/\/\S+/g, '')
       .trim();
 
-    const utterance = new SpeechSynthesisUtterance(cleanSpeechText.slice(0, 1800));
+    const utterance = new SpeechSynthesisUtterance(cleanSpeechText.slice(0, 1500));
     utterance.lang = 'ar-SA';
     utterance.rate = 0.95;
 
@@ -254,7 +249,7 @@ export default function AiSummarizerPage() {
         const isImage = selectedFile.type.startsWith('image/');
 
         if (isPdf) {
-          setStatusMessage('1/3: جاري قراءة ملف الـ PDF واستخراج النصوص...');
+          setStatusMessage('1/3: جاري قراءة ملف الـ PDF وتطهير النصوص العربية...');
           const extracted = await extractTextFromPdf(selectedFile);
           extractedContentText = extracted.text;
           
@@ -287,7 +282,7 @@ export default function AiSummarizerPage() {
           });
         } catch (aiErr) {
           if (extractedContentText) {
-            console.warn('AI remote failed, fallback to local summarizer:', aiErr);
+            console.warn('AI failed, fallback to local summarizer:', aiErr);
             setErrorMessage(`${aiErr.message} (تم الانتقال للوضع المحلي التلقائي).`);
             finalSummary = generateLocalHeuristicSummary({
               text: extractedContentText,
@@ -386,7 +381,7 @@ export default function AiSummarizerPage() {
   const estimatedReadTime = Math.max(1, Math.ceil(wordCount / 180));
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-24 font-['Cairo']" dir="rtl">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-20 font-['Cairo']" dir="rtl">
       
       {/* 🖨️ A4 Clean Print Layout Header */}
       <div className="hidden print:block p-4 border-b-2 border-black mb-6">
@@ -403,7 +398,7 @@ export default function AiSummarizerPage() {
         </div>
       </div>
 
-      {/* Top Banner Header */}
+      {/* Top Banner */}
       <div className="bg-white border-b border-[#E2E8F0] py-6 sm:py-8 print:hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
@@ -426,7 +421,7 @@ export default function AiSummarizerPage() {
                 <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium text-xs border border-slate-200/60 font-mono">
                   NVIDIA AI & Kimi K3 & Vision
                 </span>
-                <span className="text-xs text-[#64748B] hidden sm:inline">• تلخيص فوري، خرائط ذهنية، وبطاقات مراجعة</span>
+                <span className="text-xs text-[#64748B] hidden sm:inline">• تلخيص فوري، خرائط ذهنية، وقراءة صوتية</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A]">
                 ملخص نجاحي الذكي بالذكاء الاصطناعي ✨
@@ -436,7 +431,7 @@ export default function AiSummarizerPage() {
               </p>
             </div>
 
-            <div className="flex items-center gap-2 self-start md:self-auto">
+            <div className="flex items-center gap-2">
               <button
                 onClick={() => {
                   setInputKeyTemp(apiKey);
@@ -450,7 +445,7 @@ export default function AiSummarizerPage() {
                 title="إعدادات الذكاء الاصطناعي والمفاتيح"
               >
                 <HiKey className={`w-4 h-4 ${apiKey ? 'text-emerald-600' : 'text-slate-500'}`} />
-                <span>{apiKey ? 'مفتاح Gemini متصل ✓' : 'المحرك السحابي نشط ⚡'}</span>
+                <span>{apiKey ? 'مفتاح Gemini مخصص متصل ✓' : 'المحرك الافتراضي نشط ⚡'}</span>
               </button>
             </div>
           </div>
@@ -458,16 +453,16 @@ export default function AiSummarizerPage() {
         </div>
       </div>
 
-      {/* Main Content Workspace */}
+      {/* Main Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        {/* Left Column: Input & Controls (5 cols) */}
+        {/* Left Controls & Upload Box (5 cols) */}
         <div className="lg:col-span-5 space-y-5 print:hidden">
           
           {/* Stream Selector */}
           <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs space-y-2">
             <label className="block text-xs font-bold text-[#0F172A] flex items-center justify-between">
-              <span>1. اختر الشعبة الدراسية:</span>
+              <span>1. اختر الشعبة الدراسية (لمعايرة الصياغة والمصطلحات):</span>
               <span className="text-[#E11D48] text-[11px] font-mono">{selectedStreamName}</span>
             </label>
 
@@ -490,39 +485,10 @@ export default function AiSummarizerPage() {
             </div>
           </div>
 
-          {/* Mode Selector */}
-          <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs space-y-2">
-            <label className="block text-xs font-bold text-[#0F172A]">
-              2. اختر نمط التلخيص المطلوب:
-            </label>
-
-            <div className="grid grid-cols-2 gap-1.5">
-              {MODES_LIST.map((mode) => (
-                <button
-                  key={mode.id}
-                  type="button"
-                  onClick={() => setSummaryMode(mode.id)}
-                  className={`p-2.5 rounded-xl border text-right transition-all cursor-pointer ${
-                    summaryMode === mode.id
-                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48] shadow-2xs font-bold'
-                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:bg-[#F1F5F9]'
-                  } ${mode.id === 'methodology' ? 'col-span-2' : ''}`}
-                >
-                  <div className="text-xs font-bold">
-                    {mode.label}
-                  </div>
-                  <div className="text-[10px] text-[#64748B] mt-0.5">
-                    {mode.desc}
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Input File / Text Card */}
+          {/* Input Options Card */}
           <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 shadow-xs space-y-4">
             
-            {/* Input Tab Switcher */}
+            {/* Input Mode Selector (File vs Text) */}
             <div className="grid grid-cols-2 gap-1.5 p-1 bg-[#F1F5F9] rounded-xl">
               <button
                 onClick={() => setInputTab('file')}
@@ -549,7 +515,7 @@ export default function AiSummarizerPage() {
               </button>
             </div>
 
-            {/* File Dropzone */}
+            {/* Tab 1: File Dropzone */}
             {inputTab === 'file' && (
               <div
                 onDragOver={(e) => e.preventDefault()}
@@ -600,7 +566,7 @@ export default function AiSummarizerPage() {
               </div>
             )}
 
-            {/* Raw Text Input */}
+            {/* Tab 2: Raw Text Input */}
             {inputTab === 'text' && (
               <div>
                 <textarea
@@ -612,6 +578,105 @@ export default function AiSummarizerPage() {
                 />
               </div>
             )}
+
+            {/* Summary Mode Selector (5 Modes) */}
+            <div className="space-y-1.5 pt-2 border-t border-[#E2E8F0]">
+              <label className="block text-[11px] font-bold text-[#64748B]">
+                2. اختر نمط التلخيص المطلوب:
+              </label>
+
+              <div className="grid grid-cols-2 gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => setSummaryMode('mindmap')}
+                  className={`p-2.5 rounded-xl border text-right transition-all cursor-pointer ${
+                    summaryMode === 'mindmap'
+                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48] shadow-2xs font-bold'
+                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:bg-[#F1F5F9]'
+                  }`}
+                >
+                  <div className="text-xs font-bold flex items-center gap-1">
+                    <span>🗺️</span>
+                    <span>مخطط ذهني بصري</span>
+                  </div>
+                  <div className="text-[10px] text-[#64748B] mt-0.5">
+                    عقد مركزة ومختصرة ملونة
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setSummaryMode('comprehensive')}
+                  className={`p-2.5 rounded-xl border text-right transition-all cursor-pointer ${
+                    summaryMode === 'comprehensive'
+                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48] shadow-2xs font-bold'
+                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:bg-[#F1F5F9]'
+                  }`}
+                >
+                  <div className="text-xs font-bold flex items-center gap-1">
+                    <span>📑</span>
+                    <span>ملخص أكاديمي شامل</span>
+                  </div>
+                  <div className="text-[10px] text-[#64748B] mt-0.5">
+                    مفاهيم، قوانين وبطاقات مراجعة
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setSummaryMode('high_yield')}
+                  className={`p-2.5 rounded-xl border text-right transition-all cursor-pointer ${
+                    summaryMode === 'high_yield'
+                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48] shadow-2xs font-bold'
+                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:bg-[#F1F5F9]'
+                  }`}
+                >
+                  <div className="text-xs font-bold flex items-center gap-1">
+                    <span>⚡</span>
+                    <span>مكثف ليلة الامتحان</span>
+                  </div>
+                  <div className="text-[10px] text-[#64748B] mt-0.5">
+                    أهم القوانين و5 فخاخ منهجية
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setSummaryMode('questions')}
+                  className={`p-2.5 rounded-xl border text-right transition-all cursor-pointer ${
+                    summaryMode === 'questions'
+                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48] shadow-2xs font-bold'
+                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:bg-[#F1F5F9]'
+                  }`}
+                >
+                  <div className="text-xs font-bold flex items-center gap-1">
+                    <span>❓</span>
+                    <span>بنك أسئلة وتطبيقات</span>
+                  </div>
+                  <div className="text-[10px] text-[#64748B] mt-0.5">
+                    أسئلة QCM ومسائل وزارية
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setSummaryMode('methodology')}
+                  className={`p-2.5 rounded-xl border text-right transition-all cursor-pointer col-span-2 ${
+                    summaryMode === 'methodology'
+                      ? 'bg-rose-50 border-[#E11D48] text-[#E11D48] shadow-2xs font-bold'
+                      : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#475569] hover:bg-[#F1F5F9]'
+                  }`}
+                >
+                  <div className="text-xs font-bold flex items-center gap-1">
+                    <span>🔬</span>
+                    <span>تفكيك منهجية الإجابة وأفعال الأداء (Mots-clés)</span>
+                  </div>
+                  <div className="text-[10px] text-[#64748B] mt-0.5">
+                    كيف تجيب على أفعال (حلل، فسر، قارن، استنتج) لنيل العلامة الكاملة
+                  </div>
+                </button>
+              </div>
+            </div>
 
             {/* Quick Test Lesson Templates */}
             <div className="space-y-1.5 pt-2 border-t border-[#E2E8F0]">
@@ -645,13 +710,22 @@ export default function AiSummarizerPage() {
                     onClick={() => handleStartSummarize(true)}
                     className="px-2.5 py-1 bg-white hover:bg-rose-100 text-rose-900 font-bold rounded-lg border border-rose-300 transition-colors text-[11px] cursor-pointer"
                   >
-                    ⚡ التلخيص بالوضع المحلي
+                    ⚡ التلخيص بالوضع المحلي بدون إنترنت
+                  </button>
+                  <button
+                    onClick={() => {
+                      setInputKeyTemp(apiKey);
+                      setIsKeyModalOpen(true);
+                    }}
+                    className="px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg transition-colors text-[11px] cursor-pointer"
+                  >
+                    🔑 إدخال مفتاح Gemini
                   </button>
                 </div>
               </div>
             )}
 
-            {/* Main Action Button */}
+            {/* Action Button */}
             <button
               onClick={() => handleStartSummarize(false)}
               disabled={isLoading}
@@ -674,10 +748,11 @@ export default function AiSummarizerPage() {
 
           {/* History Panel */}
           {history.length > 0 && (
-            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-4 shadow-xs space-y-3">
+            <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 shadow-xs space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#0F172A]">
-                  🕒 سجل الملخصات السابقة ({history.length})
+                <span className="text-xs font-bold text-[#0F172A] flex items-center gap-1">
+                  <span>🕒 سجل الملخصات السابقة</span>
+                  <span className="text-[10px] text-[#64748B]">({history.length})</span>
                 </span>
                 <button
                   onClick={() => {
@@ -710,7 +785,7 @@ export default function AiSummarizerPage() {
                     </div>
                     <button
                       onClick={(e) => handleDeleteHistoryItem(item.id, e)}
-                      className="text-slate-400 hover:text-rose-600 p-1 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                      className="text-slate-400 hover:text-rose-600 p-1 opacity-0 group-hover:opacity-100 transition-opacity"
                     >
                       <HiTrash className="w-3.5 h-3.5" />
                     </button>
@@ -722,13 +797,13 @@ export default function AiSummarizerPage() {
 
         </div>
 
-        {/* Right Column: Output Workspace (7 cols) */}
+        {/* Right / Result Area (7 cols) */}
         <div className="lg:col-span-7 space-y-4">
           
           {summaryResult ? (
             <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 sm:p-6 shadow-xs space-y-4">
               
-              {/* Output Tabs & Action Toolbar */}
+              {/* Header & Tabs */}
               <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-[#E2E8F0] print:hidden">
                 
                 {/* View Tabs */}
@@ -784,7 +859,7 @@ export default function AiSummarizerPage() {
                     title="الاستماع للملخص بالصوت"
                   >
                     {isPlayingAudio ? <HiStop className="w-4 h-4" /> : <HiVolumeUp className="w-4 h-4 text-rose-600" />}
-                    <span>{isPlayingAudio ? 'إيقاف' : 'استماع 🔊'}</span>
+                    <span>{isPlayingAudio ? 'إيقاف الصوت' : 'استماع 🔊'}</span>
                   </button>
 
                   <button
@@ -937,7 +1012,7 @@ export default function AiSummarizerPage() {
               <button
                 type="button"
                 onClick={() => setIsKeyModalOpen(false)}
-                className="px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
+                className="px-3 py-1.5 text-xs font-bold text-[#64748B] hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
               >
                 إلغاء
               </button>
