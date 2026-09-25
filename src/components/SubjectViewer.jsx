@@ -17,8 +17,6 @@ import { SUBJECT_RESOURCES } from '../data/bacData';
 import { getFilesBySubject } from '../data/userFilesData';
 
 export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPdf }) {
-  if (!subjectId) return null;
-
   const [activeTab, setActiveTab] = useState('files'); // 'files', 'units', 'videos', 'bacs'
   const [unitSearch, setUnitSearch] = useState('');
   const [toastMessage, setToastMessage] = useState(null);
@@ -66,6 +64,8 @@ export default function SubjectViewer({ subjectId, streamName, onClose, onOpenPd
     f.author.toLowerCase().includes(unitSearch.trim().toLowerCase()) ||
     f.category.toLowerCase().includes(unitSearch.trim().toLowerCase())
   );
+
+  if (!subjectId) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto bg-black/40 backdrop-blur-xs font-['Cairo']">

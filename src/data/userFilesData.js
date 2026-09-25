@@ -11862,7 +11862,7 @@ export function getFilesByStream(streamId) {
 export function searchUserFiles(query) {
   if (!query || !query.trim()) return [];
   const q = query.trim().toLowerCase();
-  return USER_STUDY_FILES.filter(f => 
+  return USER_STUDY_FILES.filter(f =>
     f.title.toLowerCase().includes(q) ||
     f.subjectName.toLowerCase().includes(q) ||
     (f.author && f.author.toLowerCase().includes(q)) ||

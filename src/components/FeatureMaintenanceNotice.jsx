@@ -6,9 +6,7 @@ import {
   HiClock, 
   HiMail, 
   HiShieldCheck, 
-  HiChevronLeft,
-  HiBookOpen,
-  HiSparkles
+  HiChevronLeft
 } from 'react-icons/hi';
 import { SITE_CONFIG } from '../config/siteConfig';
 

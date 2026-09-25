@@ -3,8 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { 
   HiBookOpen, 
   HiChevronLeft, 
-  HiSearch,
-  HiSparkles
+  HiSearch
 } from 'react-icons/hi';
 import { STREAMS } from '../data/streamsData';
 import { getActiveFeaturesConfig } from '../config/siteConfig';
@@ -47,14 +46,6 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
       path: '/bac-archive',
       icon: '📄',
       badge: '2008 — 2026'
-    },
-    {
-      featureId: 'ai_summarizer',
-      title: 'الملخص الذكي بالذكاء الاصطناعي ✨',
-      desc: 'تلخيص فوري لملفات PDF وصور الكراريس، رسم خرائط ذهنية تفاعلية وتوليد أسئلة وزارية.',
-      path: '/ai-summarizer',
-      icon: '🤖',
-      badge: 'مدعوم بـ AI & Vision'
     },
     {
       featureId: 'focus_room',
@@ -156,13 +147,6 @@ export default function HomePage({ onOpenSearch, onOpenContact, onSelectStream }
             >
               <HiBookOpen className="w-4 h-4" />
               <span>تصفح بنك الملخصات</span>
-            </Link>
-            <Link
-              to="/ai-summarizer"
-              className="px-5 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-[#E11D48] border border-rose-200 font-bold text-xs sm:text-sm transition-all shadow-2xs flex items-center gap-2"
-            >
-              <HiSparkles className="w-4 h-4" />
-              <span>الملخص الذكي AI</span>
             </Link>
           </div>
 

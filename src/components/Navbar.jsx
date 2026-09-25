@@ -8,13 +8,12 @@ import {
   HiCalculator,
   HiCalendar,
   HiClock,
-  HiUpload,
-  HiAdjustments
+  HiUpload
 } from 'react-icons/hi';
 import { STREAMS } from '../data/streamsData';
 import { getActiveFeaturesConfig } from '../config/siteConfig';
 
-export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact, onOpenAdmin, isAdmin }) {
+export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact, _onOpenAdmin, _isAdmin }) {
   const [isOpen, setIsOpen] = useState(false);
   const [streamDropdown, setStreamDropdown] = useState(false);
   const [toolsDropdown, setToolsDropdown] = useState(false);
@@ -290,28 +289,6 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact, on
                     )}
                   </Link>
 
-                  <Link
-                    to="/ai-summarizer"
-                    onClick={() => setToolsDropdown(false)}
-                    className="flex items-center justify-between p-2 rounded-lg hover:bg-[#F8FAFC] transition-colors group"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-7 h-7 rounded-lg bg-rose-50 border border-rose-100 flex items-center justify-center text-[#E11D48] font-bold">
-                        🤖
-                      </div>
-                      <div>
-                        <span className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] block">
-                          الملخص الذكي (AI)
-                        </span>
-                        <span className="text-[10px] text-[#64748B]">
-                          تلخيص PDF وصور الدروس
-                        </span>
-                      </div>
-                    </div>
-                    {featuresConfig.ai_summarizer?.isMaintenance && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-bold">صيانة</span>
-                    )}
-                  </Link>
 
                   <Link
                     to="/curriculum"
@@ -445,21 +422,9 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact, on
 
           </nav>
 
-          {/* Left Actions: Admin + Search + Contact Modal Trigger */}
+          {/* Left Actions: Search + Contact Modal Trigger */}
           <div className="flex items-center gap-2 shrink-0">
             
-            {/* Admin Control Center Trigger */}
-            {onOpenAdmin && (
-              <button
-                onClick={onOpenAdmin}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-rose-400 border border-rose-500/30 text-xs font-bold cursor-pointer transition-colors"
-                title="إدارة أوضاع الصيانة للميزات"
-              >
-                <HiAdjustments className="w-3.5 h-3.5 text-[#E11D48]" />
-                <span className="hidden sm:inline">أوضاع الصيانة</span>
-              </button>
-            )}
-
             {/* Search Trigger */}
             <button
               onClick={onOpenSearch}
@@ -529,18 +494,6 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact, on
           </div>
 
           <div className="flex flex-col space-y-1 text-xs font-bold pt-2 border-t border-slate-800">
-            {onOpenAdmin && (
-              <button
-                onClick={() => {
-                  setIsOpen(false);
-                  onOpenAdmin();
-                }}
-                className="px-3 py-2 rounded-lg bg-slate-800 text-rose-400 border border-rose-500/30 flex items-center justify-between text-right cursor-pointer"
-              >
-                <span>لوحة التحكم في أوضاع الصيانة ⚙️</span>
-                <span className="text-[10px] px-1.5 py-0.2 rounded bg-rose-500/20 text-rose-300 font-mono">Admin</span>
-              </button>
-            )}
 
             <Link
               to="/"
@@ -613,18 +566,7 @@ export default function Navbar({ onSelectStream, onOpenSearch, onOpenContact, on
                 <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300">صيانة</span>
               )}
             </Link>
-            <Link
-              to="/ai-summarizer"
-              onClick={() => setIsOpen(false)}
-              className={`px-3 py-2 rounded-lg transition-colors font-bold flex items-center justify-between ${isActive('/ai-summarizer') ? 'text-white bg-[#E11D48]' : 'text-rose-300 hover:text-white hover:bg-slate-800'}`}
-            >
-              <span>الملخص الذكي (AI) 🤖</span>
-              {featuresConfig.ai_summarizer?.isMaintenance ? (
-                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300">صيانة</span>
-              ) : (
-                <span className="text-[10px] px-1.5 py-0.2 rounded bg-rose-100 text-rose-700 font-medium">جديد</span>
-              )}
-            </Link>
+
             <Link
               to="/quiz"
               onClick={() => setIsOpen(false)}

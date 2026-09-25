@@ -21,7 +21,6 @@ const BacArchivePage = lazy(() => import('./pages/BacArchivePage'));
 const YouTubeTeachersPage = lazy(() => import('./pages/YouTubeTeachersPage'));
 const StudyPlannerPage = lazy(() => import('./pages/StudyPlannerPage'));
 const QuizBankPage = lazy(() => import('./pages/QuizBankPage'));
-const AiSummarizerPage = lazy(() => import('./pages/AiSummarizerPage'));
 const CurriculumPage = lazy(() => import('./pages/CurriculumPage'));
 const CalculatorPage = lazy(() => import('./pages/CalculatorPage'));
 const CountdownPage = lazy(() => import('./pages/CountdownPage'));
@@ -72,16 +71,12 @@ function App() {
     return () => window.removeEventListener('naja7i_features_config_changed', handleConfigChange);
   }, []);
 
-  // Admin Bypass for Maintenance Mode
+  // Admin Bypass for Maintenance Mode (only active if URL explicitly has ?admin=true or /admin or temporarily clicked)
   const [bypassMaintenance, setBypassMaintenance] = useState(() => {
     try {
-      const saved = localStorage.getItem('naja7i_admin_bypass');
+      localStorage.removeItem('naja7i_admin_bypass');
       const params = new URLSearchParams(window.location.search);
-      if (params.get('admin') === 'true' || location.pathname === '/admin') {
-        localStorage.setItem('naja7i_admin_bypass', 'true');
-        return true;
-      }
-      return saved === 'true';
+      return params.get('admin') === 'true';
     } catch {
       return false;
     }
@@ -90,9 +85,11 @@ function App() {
   // Automatically open Admin modal if visiting /admin
   useEffect(() => {
     if (location.pathname === '/admin') {
-      setIsAdminControlOpen(true);
-      setBypassMaintenance(true);
-      localStorage.setItem('naja7i_admin_bypass', 'true');
+      const timer = setTimeout(() => {
+        setIsAdminControlOpen(true);
+        setBypassMaintenance(true);
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [location.pathname]);
 
@@ -109,17 +106,18 @@ function App() {
 
   const handleBypassOn = () => {
     setBypassMaintenance(true);
-    localStorage.setItem('naja7i_admin_bypass', 'true');
   };
 
-  const isGlobalMaintenance = featuresConfig.global_site?.isMaintenance ?? SITE_CONFIG.isMaintenanceMode;
+  const isGlobalMaintenance = Boolean(featuresConfig.global_site?.isMaintenance || SITE_CONFIG.isMaintenanceMode);
 
   // If global site maintenance mode is active and admin has not bypassed it, display full MaintenancePage
   if (isGlobalMaintenance && !bypassMaintenance && location.pathname !== '/maintenance') {
     return (
-      <MaintenancePage
-        onBypass={handleBypassOn}
-      />
+      <Suspense fallback={<PageLoadingFallback />}>
+        <MaintenancePage
+          onBypass={handleBypassOn}
+        />
+      </Suspense>
     );
   }
 
@@ -132,12 +130,12 @@ function App() {
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span>
-              {isGlobalMaintenance 
-                ? '⚠️ وضع الصيانة العام مفعّل للزوار العاديين • أنت تتصفح كمسؤول (Admin Preview Mode)' 
+              {isGlobalMaintenance
+                ? '⚠️ وضع الصيانة العام مفعّل للزوار العاديين • أنت تتصفح كمسؤول (Admin Preview Mode)'
                 : '🛡️ وضع الإدارة نشط (Admin Mode Active)'}
             </span>
           </div>
-          
+
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsAdminControlOpen(true)}
@@ -177,238 +175,221 @@ function App() {
       <main className="flex-1">
         <Suspense fallback={<PageLoadingFallback />}>
           <Routes>
-          {/* 1. الرئيسية */}
-          <Route
-            path="/"
-            element={
-              <HomePage
-                selectedStreamId={selectedStreamId}
-                setSelectedStreamId={setSelectedStreamId}
-                onSelectStream={handleSelectStream}
-                handleOpenSubject={handleOpenSubject}
-                setIsCalculatorOpen={setIsCalculatorOpen}
-                setActivePdf={setActivePdf}
-                onOpenSearch={() => setIsSearchOpen(true)}
-                onOpenContact={() => setIsContactOpen(true)}
-              />
-            }
-          />
-
-          {/* 2. الشعب والمواد */}
-          <Route
-            path="/streams"
-            element={
-              <FeatureGuard featureId="streams" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <StreamsPage
+            {/* 1. الرئيسية */}
+            <Route
+              path="/"
+              element={
+                <HomePage
                   selectedStreamId={selectedStreamId}
                   setSelectedStreamId={setSelectedStreamId}
-                  onOpenSubject={handleOpenSubject}
+                  onSelectStream={handleSelectStream}
+                  handleOpenSubject={handleOpenSubject}
+                  setIsCalculatorOpen={setIsCalculatorOpen}
+                  setActivePdf={setActivePdf}
+                  onOpenSearch={() => setIsSearchOpen(true)}
+                  onOpenContact={() => setIsContactOpen(true)}
                 />
-              </FeatureGuard>
-            }
-          />
+              }
+            />
 
-          {/* 3. مكتبة الملخصات والسلاسل */}
-          <Route
-            path="/library"
-            element={
-              <FeatureGuard featureId="library" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <LibraryPage
-                  onOpenPdf={(file) => setActivePdf(file)}
+            {/* 2. الشعب والمواد */}
+            <Route
+              path="/streams"
+              element={
+                <FeatureGuard featureId="streams" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                  <StreamsPage
+                    selectedStreamId={selectedStreamId}
+                    setSelectedStreamId={setSelectedStreamId}
+                    onOpenSubject={handleOpenSubject}
+                  />
+                </FeatureGuard>
+              }
+            />
+
+            {/* 3. مكتبة الملخصات والسلاسل */}
+            <Route
+              path="/library"
+              element={
+                <FeatureGuard featureId="library" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                  <LibraryPage
+                    onOpenPdf={(file) => setActivePdf(file)}
+                  />
+                </FeatureGuard>
+              }
+            />
+
+            {/* 4. أرشيف البكالوريا الرسمي (2008—2026) */}
+            <Route
+              path="/bac-archive"
+              element={
+                <FeatureGuard featureId="bac_archive" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                  <BacArchivePage
+                    onOpenPdf={(file) => setActivePdf(file)}
+                  />
+                </FeatureGuard>
+              }
+            />
+
+            {/* 5. دليل أساتذة وقنوات اليوتيوب */}
+            <Route
+              path="/youtube-teachers"
+              element={
+                <FeatureGuard featureId="youtube_teachers" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                  <YouTubeTeachersPage />
+                </FeatureGuard>
+              }
+            />
+
+            {/* 6. مخطط الأهداف وجداول المراجعة الأسبوعية (A4) */}
+            <Route
+              path="/study-planner"
+              element={
+                <FeatureGuard featureId="study_planner" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                  <StudyPlannerPage />
+                </FeatureGuard>
+              }
+            />
+
+            {/* 6.5 بنك الأسئلة والاختبارات التفاعلية السريعة (Quiz & QCM) */}
+            <Route
+              path="/quiz"
+              element={
+                <FeatureGuard featureId="quiz" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                  <QuizBankPage />
+                </FeatureGuard>
+              }
+            />
+
+
+            {/* 6.8 دليل المنهاج والبرنامج الوزاري الرسمي */}
+            <Route
+              path="/curriculum"
+              element={
+                <FeatureGuard featureId="curriculum" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                  <CurriculumPage />
+                </FeatureGuard>
+              }
+            />
+
+            {/* 7. حاسبة معدل البكالوريا بالمعاملات الرسمية */}
+            <Route
+              path="/calculator"
+              element={
+                <FeatureGuard featureId="calculator" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                  <CalculatorPage />
+                </FeatureGuard>
+              }
+            />
+
+            {/* 8. العداد التنازلي للبكالوريا ورزنامة المحطات */}
+            <Route
+              path="/countdown"
+              element={
+                <FeatureGuard featureId="countdown" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                  <CountdownPage />
+                </FeatureGuard>
+              }
+            />
+
+            {/* 8.5 غرفة التركيز وبومودورو (Focus Room) */}
+            <Route
+              path="/focus-room"
+              element={
+                <FeatureGuard featureId="focus_room" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                  <FocusRoomPage />
+                </FeatureGuard>
+              }
+            />
+            <Route
+              path="/focus"
+              element={
+                <FeatureGuard featureId="focus_room" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                  <FocusRoomPage />
+                </FeatureGuard>
+              }
+            />
+            <Route
+              path="/pomodoro"
+              element={
+                <FeatureGuard featureId="focus_room" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                  <FocusRoomPage />
+                </FeatureGuard>
+              }
+            />
+
+            {/* 8.6 كراس الأخطاء والفخاخ الذكي (Carnet d'Erreurs) */}
+            <Route
+              path="/mistakes-notebook"
+              element={
+                <FeatureGuard featureId="mistakes_notebook" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                  <MistakesNotebookPage />
+                </FeatureGuard>
+              }
+            />
+            <Route
+              path="/carnet-erreurs"
+              element={
+                <FeatureGuard featureId="mistakes_notebook" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
+                  <MistakesNotebookPage />
+                </FeatureGuard>
+              }
+            />
+
+            {/* 8.8 مسار لوحة التحكم في الصيانة (Admin Direct URL) */}
+            <Route
+              path="/admin"
+              element={
+                <HomePage
+                  selectedStreamId={selectedStreamId}
+                  setSelectedStreamId={setSelectedStreamId}
+                  onSelectStream={handleSelectStream}
+                  handleOpenSubject={handleOpenSubject}
+                  setIsCalculatorOpen={setIsCalculatorOpen}
+                  setActivePdf={setActivePdf}
+                  onOpenSearch={() => setIsSearchOpen(true)}
+                  onOpenContact={() => setIsContactOpen(true)}
                 />
-              </FeatureGuard>
-            }
-          />
+              }
+            />
 
-          {/* 4. أرشيف البكالوريا الرسمي (2008—2026) */}
-          <Route
-            path="/bac-archive"
-            element={
-              <FeatureGuard featureId="bac_archive" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <BacArchivePage
-                  onOpenPdf={(file) => setActivePdf(file)}
-                />
-              </FeatureGuard>
-            }
-          />
+            {/* 9. عن المنصة والمؤسس */}
+            <Route
+              path="/about"
+              element={
+                <AboutPage />
+              }
+            />
 
-          {/* 5. دليل أساتذة وقنوات اليوتيوب */}
-          <Route
-            path="/youtube-teachers"
-            element={
-              <FeatureGuard featureId="youtube_teachers" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <YouTubeTeachersPage />
-              </FeatureGuard>
-            }
-          />
+            {/* 10. تواصل ومساهمة */}
+            <Route
+              path="/contact"
+              element={
+                <ContactPage onOpenContact={() => setIsContactOpen(true)} />
+              }
+            />
 
-          {/* 6. مخطط الأهداف وجداول المراجعة الأسبوعية (A4) */}
-          <Route
-            path="/study-planner"
-            element={
-              <FeatureGuard featureId="study_planner" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <StudyPlannerPage />
-              </FeatureGuard>
-            }
-          />
+            {/* 11. صفحة الصيانة العامة المستقلة */}
+            <Route
+              path="/maintenance"
+              element={
+                <MaintenancePage onBypass={handleBypassOn} />
+              }
+            />
 
-          {/* 6.5 بنك الأسئلة والاختبارات التفاعلية السريعة (Quiz & QCM) */}
-          <Route
-            path="/quiz"
-            element={
-              <FeatureGuard featureId="quiz" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <QuizBankPage />
-              </FeatureGuard>
-            }
-          />
-
-          {/* 6.6 الملخص الذكي بالذكاء الاصطناعي (AI Summarizer) */}
-          <Route
-            path="/ai-summarizer"
-            element={
-              <FeatureGuard featureId="ai_summarizer" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <AiSummarizerPage />
-              </FeatureGuard>
-            }
-          />
-          <Route
-            path="/ai-summarize"
-            element={
-              <FeatureGuard featureId="ai_summarizer" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <AiSummarizerPage />
-              </FeatureGuard>
-            }
-          />
-
-          {/* 6.8 دليل المنهاج والبرنامج الوزاري الرسمي */}
-          <Route
-            path="/curriculum"
-            element={
-              <FeatureGuard featureId="curriculum" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <CurriculumPage />
-              </FeatureGuard>
-            }
-          />
-
-          {/* 7. حاسبة معدل البكالوريا بالمعاملات الرسمية */}
-          <Route
-            path="/calculator"
-            element={
-              <FeatureGuard featureId="calculator" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <CalculatorPage />
-              </FeatureGuard>
-            }
-          />
-
-          {/* 8. العداد التنازلي للبكالوريا ورزنامة المحطات */}
-          <Route
-            path="/countdown"
-            element={
-              <FeatureGuard featureId="countdown" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <CountdownPage />
-              </FeatureGuard>
-            }
-          />
-
-          {/* 8.5 غرفة التركيز وبومودورو (Focus Room) */}
-          <Route
-            path="/focus-room"
-            element={
-              <FeatureGuard featureId="focus_room" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <FocusRoomPage />
-              </FeatureGuard>
-            }
-          />
-          <Route
-            path="/focus"
-            element={
-              <FeatureGuard featureId="focus_room" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <FocusRoomPage />
-              </FeatureGuard>
-            }
-          />
-          <Route
-            path="/pomodoro"
-            element={
-              <FeatureGuard featureId="focus_room" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <FocusRoomPage />
-              </FeatureGuard>
-            }
-          />
-
-          {/* 8.6 كراس الأخطاء والفخاخ الذكي (Carnet d'Erreurs) */}
-          <Route
-            path="/mistakes-notebook"
-            element={
-              <FeatureGuard featureId="mistakes_notebook" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <MistakesNotebookPage />
-              </FeatureGuard>
-            }
-          />
-          <Route
-            path="/carnet-erreurs"
-            element={
-              <FeatureGuard featureId="mistakes_notebook" bypassMaintenance={bypassMaintenance} onBypass={handleBypassOn}>
-                <MistakesNotebookPage />
-              </FeatureGuard>
-            }
-          />
-
-          {/* 8.8 مسار لوحة التحكم في الصيانة (Admin Direct URL) */}
-          <Route
-            path="/admin"
-            element={
-              <HomePage
-                selectedStreamId={selectedStreamId}
-                setSelectedStreamId={setSelectedStreamId}
-                onSelectStream={handleSelectStream}
-                handleOpenSubject={handleOpenSubject}
-                setIsCalculatorOpen={setIsCalculatorOpen}
-                setActivePdf={setActivePdf}
-                onOpenSearch={() => setIsSearchOpen(true)}
-                onOpenContact={() => setIsContactOpen(true)}
-              />
-            }
-          />
-
-          {/* 9. عن المنصة والمؤسس */}
-          <Route
-            path="/about"
-            element={
-              <AboutPage />
-            }
-          />
-
-          {/* 10. تواصل ومساهمة */}
-          <Route
-            path="/contact"
-            element={
-              <ContactPage onOpenContact={() => setIsContactOpen(true)} />
-            }
-          />
-
-          {/* 11. صفحة الصيانة العامة المستقلة */}
-          <Route
-            path="/maintenance"
-            element={
-              <MaintenancePage onBypass={handleBypassOn} />
-            }
-          />
-
-          {/* 12. صفحة 404 */}
-          <Route
-            path="*"
-            element={<NotFound />}
-          />
-        </Routes>
-      </Suspense>
-    </main>
+            {/* 12. صفحة 404 */}
+            <Route
+              path="*"
+              element={<NotFound />}
+            />
+          </Routes>
+        </Suspense>
+      </main>
 
       {/* Footer */}
       {!isFocusRoom && (
         <footer className="bg-white border-t border-[#E2E8F0] py-8 text-center text-xs text-[#64748B] font-['Cairo'] print:hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            
+
             <div className="flex items-center gap-2">
               <span className="font-black text-[#0F172A]">نجاحي Naja7i</span>
               <span>—</span>
@@ -453,6 +434,7 @@ function App() {
       {activePdf && (
         <PdfReaderModal
           file={activePdf}
+          isOpen={true}
           onClose={() => setActivePdf(null)}
         />
       )}

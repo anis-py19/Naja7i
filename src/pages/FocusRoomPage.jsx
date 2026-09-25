@@ -16,6 +16,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { BAC_FOCUS_TIPS, getRandomFocusTips } from '../data/focusTipsData';
 import { focusSoundEngine } from '../utils/focusSoundEngine';
+import Focus3dVisualizer from '../components/Focus3dVisualizer';
 
 // Minimalist Themes (Clean, Calm & Focused)
 const THEMES = [
@@ -64,6 +65,41 @@ export default function FocusRoomPage() {
   // Theme & Zen Fullscreen
   const [themeId, setThemeId] = useState('slate-dark');
   const [isZen, setIsZen] = useState(false);
+
+  // 3D & Algorithmic Visualizer Mode
+  const [visualMode, setVisualMode] = useState(() => {
+    try {
+      return localStorage.getItem('naja7i_focus_visual_mode') || 'crystal_3d';
+    } catch {
+      return 'crystal_3d';
+    }
+  });
+
+  const handleVisualModeChange = (newMode) => {
+    setVisualMode(newMode);
+    try {
+      localStorage.setItem('naja7i_focus_visual_mode', newMode);
+    } catch {}
+  };
+
+  // Box Breathing Guide (4-4-4-4)
+  const [isBreathingGuideActive, setIsBreathingGuideActive] = useState(false);
+  const [breathingStep, setBreathingStep] = useState(0);
+
+  const breathingPhases = useMemo(() => [
+    { key: 'inhale', label: 'شهيق عميق... (4 ثواني)', instruction: 'املأ رئتيك بهدوء وبطء وصفِّ ذهنك' },
+    { key: 'hold1', label: 'احبس النفس... (4 ثواني)', instruction: 'ركز على ثبات طاقتك واستقرار نبضك' },
+    { key: 'exhale', label: 'زفير هادئ... (4 ثواني)', instruction: 'أفرغ الهواء بهدوء وتخلص من توتر الامتحان' },
+    { key: 'hold2', label: 'استرخِ تماماً... (4 ثواني)', instruction: 'استمتع بالسكينـة واستعد للدورة القادمة' }
+  ], []);
+
+  useEffect(() => {
+    if (!isBreathingGuideActive) return;
+    const interval = setInterval(() => {
+      setBreathingStep((prev) => (prev + 1) % 4);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isBreathingGuideActive]);
 
   // Timer Modes: 'focus' | 'shortBreak' | 'longBreak'
   const [mode, setMode] = useState('focus');
@@ -221,12 +257,23 @@ export default function FocusRoomPage() {
   const progressPercent = ((currentDuration - timeLeft) / currentDuration) * 100;
 
   return (
-    <div className={`min-h-screen ${activeTheme.bg} text-white font-['Cairo'] flex flex-col justify-between transition-colors duration-500 selection:bg-rose-500 selection:text-white`}>
+    <div className={`relative min-h-screen ${activeTheme.bg} text-white font-['Cairo'] flex flex-col justify-between transition-colors duration-500 selection:bg-rose-500 selection:text-white overflow-hidden`}>
       
+      {/* ========================================================================= */}
+      {/* 🪐 3D & ALGORITHMIC BACKGROUND VISUALIZER */}
+      {/* ========================================================================= */}
+      <Focus3dVisualizer
+        mode={visualMode}
+        accentColor={activeTheme.accent}
+        isBreathing={isBreathingGuideActive}
+        breathingPhase={breathingPhases[breathingStep].key}
+        opacity={isZen ? 0.8 : 0.6}
+      />
+
       {/* ========================================================================= */}
       {/* 🧭 1. TOP MINIMALIST HEADER */}
       {/* ========================================================================= */}
-      <header className={`px-4 sm:px-8 py-3.5 flex items-center justify-between border-b border-white/10 transition-opacity duration-300 ${isZen ? 'opacity-10 hover:opacity-100' : 'opacity-100'}`}>
+      <header className={`relative z-10 px-4 sm:px-8 py-3.5 flex items-center justify-between border-b border-white/10 transition-opacity duration-300 backdrop-blur-xs ${isZen ? 'opacity-15 hover:opacity-100' : 'opacity-100'}`}>
         
         {/* Back Link & Title */}
         <div className="flex items-center gap-3">
@@ -287,10 +334,10 @@ export default function FocusRoomPage() {
       {/* ========================================================================= */}
       {/* ⏱️ 2. MAIN CENTER: CLEAN & MINIMALIST POMODORO */}
       {/* ========================================================================= */}
-      <main className="flex-1 flex flex-col items-center justify-center p-4 max-w-2xl mx-auto w-full my-auto">
+      <main className="relative z-10 flex-1 flex flex-col items-center justify-center p-4 max-w-2xl mx-auto w-full my-auto">
         
         {/* Simple Mode Switcher */}
-        <div className={`flex items-center gap-1.5 p-1 rounded-xl bg-white/10 border border-white/15 mb-6 transition-all ${isZen ? 'opacity-20 hover:opacity-100' : 'opacity-100'}`}>
+        <div className={`flex items-center gap-1.5 p-1 rounded-xl bg-white/10 border border-white/15 mb-4 backdrop-blur-md transition-all ${isZen ? 'opacity-20 hover:opacity-100' : 'opacity-100'}`}>
           <button
             onClick={() => handleSwitchMode('focus')}
             className={`px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-all cursor-pointer ${
@@ -325,9 +372,49 @@ export default function FocusRoomPage() {
           </button>
         </div>
 
+        {/* 🎨 3D & Visual Art Scene Switcher Bar */}
+        <div className={`flex flex-wrap items-center justify-center gap-1 p-1 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md mb-4 transition-all ${isZen ? 'opacity-20 hover:opacity-100' : 'opacity-100'}`}>
+          <span className="text-[11px] text-white/50 px-2 font-bold">المؤثر البصري:</span>
+          {[
+            { id: 'crystal_3d', label: '🪐 بلورة 3D' },
+            { id: 'flow_field', label: '🌌 تدفق كوني' },
+            { id: 'quantum_waves', label: '🌊 موجات كوانتوم' },
+            { id: 'constellations', label: '✨ كوكبة نجوم' },
+            { id: 'none', label: '⬛ سكون' }
+          ].map((vm) => (
+            <button
+              key={vm.id}
+              onClick={() => handleVisualModeChange(vm.id)}
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                visualMode === vm.id
+                  ? 'bg-white/20 text-white shadow-xs border border-white/30'
+                  : 'text-white/60 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              {vm.label}
+            </button>
+          ))}
+
+          <div className="w-px h-4 bg-white/15 mx-1 hidden sm:block" />
+
+          {/* Breathing Guide Button */}
+          <button
+            onClick={() => setIsBreathingGuideActive((prev) => !prev)}
+            className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer border ${
+              isBreathingGuideActive
+                ? 'bg-emerald-500/80 text-white border-emerald-400 shadow-xs'
+                : 'bg-white/5 text-white/70 hover:bg-white/10 border-white/10'
+            }`}
+            title="تمرين التنفس المربع (Box Breathing) لتهدئة التوتر قبل المذاكرة"
+          >
+            <span>🫁</span>
+            <span>تمرين التنفس</span>
+          </button>
+        </div>
+
         {/* Clean Goal Input Line */}
-        <div className={`w-full max-w-md mb-6 transition-all ${isZen ? 'opacity-30 hover:opacity-100' : 'opacity-100'}`}>
-          <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 focus-within:border-white/30 transition-all">
+        <div className={`w-full max-w-md mb-4 transition-all ${isZen ? 'opacity-30 hover:opacity-100' : 'opacity-100'}`}>
+          <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 focus-within:border-white/30 backdrop-blur-md transition-all">
             <button
               onClick={() => setIsGoalDone((prev) => !prev)}
               aria-label="تأشير الهدف"
@@ -355,9 +442,29 @@ export default function FocusRoomPage() {
           </div>
         </div>
 
+        {/* 🫁 Live Breathing Guide Sync Card */}
+        <AnimatePresence>
+          {isBreathingGuideActive && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: -6 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: -6 }}
+              className="mb-4 px-6 py-2.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-center space-y-0.5 shadow-lg max-w-md w-full"
+            >
+              <div className="text-xs font-black text-amber-300 flex items-center justify-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+                <span>{breathingPhases[breathingStep].label}</span>
+              </div>
+              <p className="text-[11px] text-white/80">
+                {breathingPhases[breathingStep].instruction}
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* ⏰ Large Minimalist Digital Clock */}
-        <div className="text-center my-4 space-y-2">
-          <div className="text-7xl sm:text-8xl md:text-9xl font-black font-mono tracking-tighter text-white drop-shadow-md select-none">
+        <div className="text-center my-3 space-y-2">
+          <div className="text-7xl sm:text-8xl md:text-9xl font-black font-mono tracking-tighter text-white drop-shadow-lg select-none">
             {formattedMinutes}:{formattedSeconds}
           </div>
 
@@ -371,7 +478,7 @@ export default function FocusRoomPage() {
         </div>
 
         {/* 🎮 Core Controls (Start / Pause / Reset / Skip) */}
-        <div className="flex items-center gap-3 mt-6">
+        <div className="flex items-center gap-3 mt-4">
           
           {/* Reset */}
           <button
@@ -379,7 +486,7 @@ export default function FocusRoomPage() {
               setIsRunning(false);
               setTimeLeft(currentDuration);
             }}
-            className="p-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all active:scale-95 cursor-pointer"
+            className="p-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all active:scale-95 cursor-pointer backdrop-blur-md"
             title="إعادة التعيين"
           >
             <HiRefresh className="w-5 h-5" />
@@ -410,7 +517,7 @@ export default function FocusRoomPage() {
           {/* Skip */}
           <button
             onClick={handleSessionFinished}
-            className="p-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all active:scale-95 cursor-pointer"
+            className="p-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all active:scale-95 cursor-pointer backdrop-blur-md"
             title="تخطي الجلسة"
           >
             <HiChevronLeft className="w-5 h-5" />
@@ -419,7 +526,7 @@ export default function FocusRoomPage() {
         </div>
 
         {/* ⏱️ Simple Presets Row */}
-        <div className={`flex flex-wrap items-center justify-center gap-1.5 mt-6 transition-opacity ${isZen ? 'opacity-0' : 'opacity-100'}`}>
+        <div className={`flex flex-wrap items-center justify-center gap-1.5 mt-5 transition-opacity ${isZen ? 'opacity-0' : 'opacity-100'}`}>
           {PRESETS.map((p, idx) => (
             <button
               key={idx}
@@ -452,7 +559,7 @@ export default function FocusRoomPage() {
         </div>
 
         {/* 🎧 Clean Ambient Sounds Selector */}
-        <div className={`mt-5 flex flex-wrap items-center justify-center gap-1.5 p-2 rounded-xl bg-white/5 border border-white/10 transition-all ${isZen ? 'opacity-20 hover:opacity-100' : 'opacity-100'}`}>
+        <div className={`mt-4 flex flex-wrap items-center justify-center gap-1.5 p-2 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md transition-all ${isZen ? 'opacity-20 hover:opacity-100' : 'opacity-100'}`}>
           <span className="text-xs text-white/60 flex items-center gap-1 ml-2">
             <HiVolumeUp className="w-3.5 h-3.5 text-emerald-400" />
             <span>الأصوات:</span>
@@ -499,9 +606,9 @@ export default function FocusRoomPage() {
       {/* ========================================================================= */}
       {/* 💡 3. BOTTOM: SUBTLE ROTATING BAC ADVICE (20s) */}
       {/* ========================================================================= */}
-      <footer className={`p-4 transition-all ${isZen ? 'opacity-10 hover:opacity-100' : 'opacity-100'}`}>
+      <footer className={`relative z-10 p-4 transition-all backdrop-blur-xs ${isZen ? 'opacity-10 hover:opacity-100' : 'opacity-100'}`}>
         <div className="max-w-2xl mx-auto text-center">
-          <div className="p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xs flex items-center justify-between gap-3 text-xs">
+          <div className="p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-between gap-3 text-xs">
             
             <button
               onClick={() => setTipIndex((prev) => (prev - 1 + shuffledTips.length) % shuffledTips.length)}

@@ -9,10 +9,38 @@ import {
   HiXCircle, 
   HiLightBulb,
   HiArrowRight,
-  HiFire
+  HiFire,
+  HiBookOpen,
+  HiBookmark
 } from 'react-icons/hi';
 import { QUIZ_QUESTIONS } from '../data/quizData';
 import { STREAMS } from '../data/streamsData';
+
+// Map quiz subjectId to MistakesNotebook subjectId standard
+const mapToMistakeSubjectId = (subjectId) => {
+  const map = {
+    sciences_nat: 'sciences_nat',
+    physique: 'physique',
+    math: 'math',
+    histoire_geo: 'hisgeo',
+    islamic: 'islamic',
+    philo: 'philo',
+    arabe: 'arabic',
+    francais: 'french',
+    anglais: 'english',
+    espagnol: 'english',
+    allemand: 'english',
+    italien: 'english',
+    compta: 'gestion_fin',
+    economie: 'economy',
+    droit: 'economy',
+    genie_civil: 'genie',
+    genie_mecanique: 'genie',
+    genie_electrique: 'genie',
+    genie_procedes: 'genie'
+  };
+  return map[subjectId] || subjectId;
+};
 
 export default function QuizBankPage() {
   const [selectedStreamId, setSelectedStreamId] = useState('sciences');
@@ -20,6 +48,32 @@ export default function QuizBankPage() {
   const [quizLength, setQuizLength] = useState(5); // 5 | 10 | 'all'
   const [isTimed, setIsTimed] = useState(false);
   const [emptyWarning, setEmptyWarning] = useState(false);
+
+  // Toast feedback state
+  const [toastMessage, setToastMessage] = useState(null);
+
+  // Saved mistakes set to track which quiz questions are in user's mistakes notebook
+  const [savedMistakeIds, setSavedMistakeIds] = useState(() => {
+    try {
+      const saved = localStorage.getItem('naja7i_mistakes_book');
+      if (saved) {
+        const arr = JSON.parse(saved);
+        return new Set(arr.map(item => item.quizQuestionId).filter(Boolean));
+      }
+      return new Set();
+    } catch {
+      return new Set();
+    }
+  });
+
+  // Recent quiz attempts history
+  const [quizHistory, setQuizHistory] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('naja7i_quiz_history') || '[]');
+    } catch {
+      return [];
+    }
+  });
 
   // Quiz State
   const [quizStarted, setQuizStarted] = useState(false);
@@ -33,7 +87,12 @@ export default function QuizBankPage() {
   // Timer State
   const [timeLeft, setTimeLeft] = useState(60); // 60s per question if timed
 
-  // Available subjects for selected stream
+  const showToast = (text) => {
+    setToastMessage(text);
+    setTimeout(() => setToastMessage(null), 3500);
+  };
+
+  // Available questions for selected stream
   const availableQuestionsForStream = useMemo(() => {
     return QUIZ_QUESTIONS.filter(q => q.streamIds.includes(selectedStreamId));
   }, [selectedStreamId]);
@@ -45,6 +104,10 @@ export default function QuizBankPage() {
     });
     return Array.from(subs.entries()).map(([id, name]) => ({ id, name }));
   }, [availableQuestionsForStream]);
+
+  const currentStream = useMemo(() => {
+    return STREAMS.find(s => s.id === selectedStreamId) || STREAMS[0];
+  }, [selectedStreamId]);
 
   const currentQ = currentQuestions[currentIndex];
 
@@ -106,32 +169,6 @@ export default function QuizBankPage() {
     return () => clearInterval(timer);
   }, [quizStarted, quizFinished, isTimed, hasSubmittedCurrent, handleConfirmAnswer]);
 
-  const handleNextQuestion = () => {
-    if (currentIndex + 1 < currentQuestions.length) {
-      setCurrentIndex(prev => prev + 1);
-      setSelectedOption(null);
-      setHasSubmittedCurrent(false);
-      setTimeLeft(60);
-    } else {
-      setQuizFinished(true);
-      // Save high score to localStorage
-      try {
-        const history = JSON.parse(localStorage.getItem('naja7i_quiz_history') || '[]');
-        const score = calculateScore();
-        history.unshift({
-          date: new Date().toLocaleDateString('ar-DZ'),
-          streamId: selectedStreamId,
-          score: score.mark20,
-          total: currentQuestions.length,
-          percentage: score.percent
-        });
-        localStorage.setItem('naja7i_quiz_history', JSON.stringify(history.slice(0, 10)));
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  };
-
   // Score Calculation
   const calculateScore = () => {
     let correct = 0;
@@ -146,11 +183,146 @@ export default function QuizBankPage() {
     return { correct, total, percent, mark20 };
   };
 
+  const handleNextQuestion = () => {
+    if (currentIndex + 1 < currentQuestions.length) {
+      setCurrentIndex(prev => prev + 1);
+      setSelectedOption(null);
+      setHasSubmittedCurrent(false);
+      setTimeLeft(60);
+    } else {
+      setQuizFinished(true);
+      // Save high score to localStorage
+      try {
+        const history = JSON.parse(localStorage.getItem('naja7i_quiz_history') || '[]');
+        const score = calculateScore();
+        const newRecord = {
+          date: new Date().toLocaleDateString('ar-DZ'),
+          streamId: selectedStreamId,
+          streamName: currentStream?.name || 'اختبار بكالوريا',
+          subjectName: selectedSubjectId === 'all' ? 'جميع المواد' : (availableSubjects.find(s => s.id === selectedSubjectId)?.name || 'مادة محددة'),
+          score: score.mark20,
+          total: currentQuestions.length,
+          percentage: score.percent
+        };
+        const updatedHistory = [newRecord, ...history].slice(0, 10);
+        localStorage.setItem('naja7i_quiz_history', JSON.stringify(updatedHistory));
+        setQuizHistory(updatedHistory);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  };
+
+  // Save single question to Mistakes Notebook
+  const handleSaveToMistakes = (question, userAnsIdx) => {
+    if (!question) return;
+    try {
+      const raw = localStorage.getItem('naja7i_mistakes_book');
+      const existing = raw ? JSON.parse(raw) : [];
+
+      const exists = existing.some(m => m.quizQuestionId === question.id || m.title === question.question);
+      if (exists) {
+        showToast('هذا السؤال محفوظ مسبقاً في كراس الأخطاء 📓');
+        return;
+      }
+
+      const userAnsText = userAnsIdx !== null && userAnsIdx !== undefined && userAnsIdx >= 0
+        ? question.options[userAnsIdx]
+        : 'لم يتم تحديد إجابة (انتهاء الوقت)';
+
+      const newEntry = {
+        id: `quiz-mistake-${question.id}-${Date.now()}`,
+        quizQuestionId: question.id,
+        subjectId: mapToMistakeSubjectId(question.subjectId),
+        subjectName: question.subjectName,
+        unit: question.unitName || 'عام',
+        level: 'critical',
+        levelLabel: '🔥 فخ وتطبيق بكالوريا',
+        title: question.question,
+        mistake: `إجابتك: ${userAnsText}`,
+        rule: `الإجابة النموذجية: ${question.options[question.correctIndex]}\n\nالتعليل المنهجي:\n${question.explanation}`,
+        image: '',
+        isMastered: false,
+        isPreloaded: false,
+        createdAt: `اختبار Quiz (${new Date().toLocaleDateString('ar-DZ')})`
+      };
+
+      const updated = [newEntry, ...existing];
+      localStorage.setItem('naja7i_mistakes_book', JSON.stringify(updated));
+      setSavedMistakeIds(prev => new Set(prev).add(question.id));
+      showToast(`تم حفظ "${question.subjectName} - ${question.unitName}" في كراس الأخطاء بنجاح ✓`);
+    } catch (err) {
+      console.error(err);
+      showToast('حدث خطأ أثناء الحفظ في كراس الأخطاء');
+    }
+  };
+
+  // Save all incorrect questions to Mistakes Notebook in 1 click
+  const handleSaveAllMistakes = () => {
+    const incorrectQuestions = currentQuestions.filter(q => userAnswers[q.id] !== q.correctIndex);
+    if (incorrectQuestions.length === 0) {
+      showToast('لا توجد أخطاء لحفظها! جميع إجاباتك صحيحة 👏');
+      return;
+    }
+
+    try {
+      const raw = localStorage.getItem('naja7i_mistakes_book');
+      let existing = raw ? JSON.parse(raw) : [];
+      let added = 0;
+      const nextIds = new Set(savedMistakeIds);
+
+      incorrectQuestions.forEach(q => {
+        const exists = existing.some(m => m.quizQuestionId === q.id || m.title === q.question);
+        if (!exists) {
+          const userAns = userAnswers[q.id];
+          const userAnsText = userAns !== null && userAns !== undefined && userAns >= 0
+            ? q.options[userAns]
+            : 'لم يتم تحديد إجابة';
+
+          const newEntry = {
+            id: `quiz-mistake-${q.id}-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+            quizQuestionId: q.id,
+            subjectId: mapToMistakeSubjectId(q.subjectId),
+            subjectName: q.subjectName,
+            unit: q.unitName || 'عام',
+            level: 'critical',
+            levelLabel: '🔥 فخ وتطبيق بكالوريا',
+            title: q.question,
+            mistake: `إجابتك: ${userAnsText}`,
+            rule: `الإجابة النموذجية: ${q.options[q.correctIndex]}\n\nالتعليل المنهجي:\n${q.explanation}`,
+            image: '',
+            isMastered: false,
+            isPreloaded: false,
+            createdAt: `اختبار Quiz (${new Date().toLocaleDateString('ar-DZ')})`
+          };
+          existing.unshift(newEntry);
+          nextIds.add(q.id);
+          added++;
+        }
+      });
+
+      localStorage.setItem('naja7i_mistakes_book', JSON.stringify(existing));
+      setSavedMistakeIds(nextIds);
+      showToast(`تم حفظ ${added} سؤال خاطئ في كراس الأخطاء بنجاح! 📓`);
+    } catch (err) {
+      console.error(err);
+      showToast('حدث خطأ أثناء حفظ الأخطاء');
+    }
+  };
+
   const scoreData = quizFinished ? calculateScore() : null;
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-20 font-['Cairo']">
       
+      {/* Toast Notification Banner */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 z-50 bg-[#0F172A] text-white px-4 py-3 rounded-xl shadow-lg text-xs font-bold flex items-center gap-2.5 border border-slate-700 animate-fadeIn">
+          <span className="text-base">📓</span>
+          <span>{toastMessage}</span>
+        </div>
+      )}
+
       {/* Top Banner Header */}
       <div className="bg-white border-b border-[#E2E8F0] py-5 sm:py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -167,21 +339,32 @@ export default function QuizBankPage() {
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A]">
-                بنك الأسئلة والاختبارات السريعة (Quiz & QCM) ⏱️
+              <h1 className="text-2xl sm:text-3xl font-black text-[#0F172A] flex items-center gap-2">
+                <span>بنك الأسئلة والاختبارات السريعة (Quiz & QCM)</span>
+                <span className="text-xl">⏱️</span>
               </h1>
               <p className="text-xs sm:text-sm text-[#475569] mt-1 max-w-2xl leading-relaxed">
-                اختبر معلوماتك وفهمك للوحدات في دقائق معدودة، اكتشف أخطاءك فورياً مع تعليل منهجي لكل إجابة.
+                اختبر معلوماتك وفهمك للوحدات في دقائق معدودة، اكتشف أخطاءك فورياً مع تعليل منهجي وحفظ مباشر في كراس الأخطاء.
               </p>
             </div>
 
-            <Link
-              to="/"
-              className="px-4 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] transition-colors flex items-center gap-1.5 shadow-2xs self-start md:self-auto"
-            >
-              <span>الرئيسية</span>
-              <HiChevronLeft className="w-4 h-4" />
-            </Link>
+            <div className="flex items-center gap-2 self-start md:self-auto">
+              <Link
+                to="/mistakes-notebook"
+                className="px-3.5 py-2 rounded-xl bg-rose-50 hover:bg-rose-100/80 text-[#E11D48] text-xs font-bold border border-rose-200 transition-colors flex items-center gap-1.5 shadow-2xs"
+              >
+                <HiBookOpen className="w-4 h-4" />
+                <span>كراس الأخطاء الذكي</span>
+              </Link>
+
+              <Link
+                to="/"
+                className="px-4 py-2 rounded-xl bg-white hover:bg-[#F8FAFC] text-[#0F172A] text-xs font-bold border border-[#CBD5E1] transition-colors flex items-center gap-1.5 shadow-2xs"
+              >
+                <span>الرئيسية</span>
+                <HiChevronLeft className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
 
         </div>
@@ -329,6 +512,44 @@ export default function QuizBankPage() {
               </div>
             </div>
 
+            {/* 4. Recent Attempts History (سجل الاختبارات السابقة) */}
+            {quizHistory.length > 0 && (
+              <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 shadow-xs space-y-3">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-xs font-bold text-[#0F172A] flex items-center gap-1.5">
+                    <span>📊 آخر نتائجك في الاختبارات:</span>
+                  </h4>
+                  <button
+                    onClick={() => {
+                      localStorage.removeItem('naja7i_quiz_history');
+                      setQuizHistory([]);
+                      showToast('تم مسح سجل الاختبارات السابقة');
+                    }}
+                    className="text-[11px] text-slate-400 hover:text-rose-600 font-medium cursor-pointer"
+                  >
+                    مسح السجل
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  {quizHistory.slice(0, 3).map((h, i) => (
+                    <div key={i} className="p-3 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-between text-xs">
+                      <div>
+                        <div className="font-bold text-[#0F172A] truncate max-w-[140px]">{h.streamName || 'اختبار بكالوريا'}</div>
+                        <div className="text-[10px] text-slate-500">{h.subjectName} • {h.date}</div>
+                      </div>
+                      <div className="text-left font-mono">
+                        <span className={`font-black text-sm ${h.percentage >= 80 ? 'text-emerald-600' : h.percentage >= 50 ? 'text-blue-600' : 'text-rose-600'}`}>
+                          {h.score}/20
+                        </span>
+                        <div className="text-[10px] text-slate-400 font-sans">({h.percentage}%)</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
           </div>
         )}
 
@@ -423,13 +644,38 @@ export default function QuizBankPage() {
               })}
             </div>
 
-            {/* Explanation Card (يظهر فورياً بعد تأكيد الإجابة) */}
+            {/* Explanation Card (يظهر فورياً بعد تأكيد الإجابة مع زر الحفظ في كراس الأخطاء) */}
             {hasSubmittedCurrent && (
-              <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-950 space-y-2 animate-fadeIn">
-                <div className="flex items-center gap-1.5 text-xs font-black text-amber-900">
-                  <HiLightBulb className="w-4 h-4 text-amber-600" />
-                  <span>الشرح المنهجي وفق معايير البكالوريا:</span>
+              <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-950 space-y-3 animate-fadeIn">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 text-xs font-black text-amber-900">
+                    <HiLightBulb className="w-4 h-4 text-amber-600" />
+                    <span>الشرح المنهجي وفق معايير البكالوريا:</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => handleSaveToMistakes(currentQ, selectedOption)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                      savedMistakeIds.has(currentQ.id)
+                        ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                        : 'bg-white hover:bg-amber-100/80 text-amber-900 border border-amber-300 shadow-2xs'
+                    }`}
+                  >
+                    {savedMistakeIds.has(currentQ.id) ? (
+                      <>
+                        <HiCheckCircle className="w-4 h-4 text-emerald-600" />
+                        <span>محفوظ في الكراس ✓</span>
+                      </>
+                    ) : (
+                      <>
+                        <HiBookOpen className="w-4 h-4 text-amber-600" />
+                        <span>حفظ في كراس الأخطاء 📓</span>
+                      </>
+                    )}
+                  </button>
                 </div>
+
                 <p className="text-xs leading-relaxed text-amber-900/90 font-medium">
                   {currentQ.explanation}
                 </p>
@@ -475,7 +721,7 @@ export default function QuizBankPage() {
           </div>
         )}
 
-        {/* 3. FINAL RESULTS VIEW (كشف النتيجة وتحليل الأداء) */}
+        {/* 3. FINAL RESULTS VIEW (كشف النتيجة وتحليل الأداء مع تكامل كراس الأخطاء) */}
         {quizFinished && scoreData && (
           <div className="bg-white border border-[#E2E8F0] rounded-2xl p-6 sm:p-8 shadow-xs space-y-6">
             
@@ -502,26 +748,68 @@ export default function QuizBankPage() {
               </div>
             </div>
 
+            {/* Mistakes Notebook Callout Banner */}
+            {scoreData.correct < scoreData.total && (
+              <div className="p-4 rounded-xl bg-[#0F172A] text-white flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-rose-500/20 text-rose-400 border border-rose-500/30 flex items-center justify-center text-xl shrink-0">
+                    📓
+                  </div>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-bold">كراس الأخطاء وفخاخ البكالوريا (Carnet d'Erreurs)</h4>
+                    <p className="text-[11px] text-slate-300">
+                      لديك {scoreData.total - scoreData.correct} أسئلة خاطئة، احفظها بضغطة واحدة لمراجعتها قبل يوم الامتحان.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
+                  <button
+                    type="button"
+                    onClick={handleSaveAllMistakes}
+                    className="flex-1 sm:flex-initial px-4 py-2 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white font-bold text-xs transition-all flex items-center justify-center gap-1.5 shadow-2xs cursor-pointer"
+                  >
+                    <HiBookmark className="w-4 h-4" />
+                    <span>حفظ كل الأخطاء</span>
+                  </button>
+
+                  <Link
+                    to="/mistakes-notebook"
+                    className="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition-all border border-slate-700 flex items-center gap-1"
+                  >
+                    <span>فتح الكراس</span>
+                    <HiChevronLeft className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            )}
+
             {/* Detailed Question Review */}
             <div className="space-y-4">
-              <h3 className="text-sm font-black text-[#0F172A]">
-                مراجعة إجاباتك والشروحات المنهجية:
-              </h3>
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-black text-[#0F172A]">
+                  مراجعة إجاباتك والشروحات المنهجية:
+                </h3>
+                <span className="text-xs text-[#64748B]">
+                  {scoreData.correct} صحيحة • {scoreData.total - scoreData.correct} خاطئة
+                </span>
+              </div>
 
               <div className="space-y-3">
                 {currentQuestions.map((q, idx) => {
                   const userAns = userAnswers[q.id];
                   const isCorrect = userAns === q.correctIndex;
+                  const isSaved = savedMistakeIds.has(q.id);
 
                   return (
                     <div 
                       key={idx}
-                      className={`p-4 rounded-xl border transition-all text-xs space-y-2 ${
+                      className={`p-4 rounded-xl border transition-all text-xs space-y-3 ${
                         isCorrect ? 'bg-emerald-50/40 border-emerald-200' : 'bg-rose-50/40 border-rose-200'
                       }`}
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <span className="font-bold text-[#0F172A]">
+                        <span className="font-bold text-[#0F172A] leading-relaxed">
                           {idx + 1}. {q.question}
                         </span>
                         <span className={`px-2 py-0.5 rounded text-[10px] font-black shrink-0 ${
@@ -542,8 +830,37 @@ export default function QuizBankPage() {
                         )}
                       </div>
 
-                      <div className="pt-1.5 border-t border-gray-200 text-[11px] text-[#64748B] leading-relaxed">
-                        <strong>الشرح:</strong> {q.explanation}
+                      <div className="pt-2 border-t border-slate-200 text-[11px] text-[#64748B] leading-relaxed">
+                        <strong>الشرح المنهجي:</strong> {q.explanation}
+                      </div>
+
+                      {/* Action to save this specific question */}
+                      <div className="flex items-center justify-between pt-2 border-t border-slate-200/70">
+                        <span className="text-[10px] text-slate-500">
+                          {q.subjectName} • {q.unitName}
+                        </span>
+
+                        <button
+                          type="button"
+                          onClick={() => handleSaveToMistakes(q, userAns)}
+                          className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition-all flex items-center gap-1 cursor-pointer ${
+                            isSaved
+                              ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                              : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 shadow-2xs'
+                          }`}
+                        >
+                          {isSaved ? (
+                            <>
+                              <HiCheckCircle className="w-3.5 h-3.5 text-emerald-600" />
+                              <span>محفوظ في الكراس ✓</span>
+                            </>
+                          ) : (
+                            <>
+                              <HiBookOpen className="w-3.5 h-3.5 text-slate-500" />
+                              <span>حفظ في كراس الأخطاء 📓</span>
+                            </>
+                          )}
+                        </button>
                       </div>
                     </div>
                   );
@@ -551,7 +868,7 @@ export default function QuizBankPage() {
               </div>
             </div>
 
-            {/* Actions */}
+            {/* Bottom Final Actions */}
             <div className="flex flex-col sm:flex-row items-center gap-3 pt-4 border-t border-[#E2E8F0]">
               <button
                 onClick={startQuiz}
@@ -567,6 +884,14 @@ export default function QuizBankPage() {
               >
                 <span>اختيار مادة أو شعبة أخرى</span>
               </button>
+
+              <Link
+                to="/mistakes-notebook"
+                className="w-full sm:w-auto py-3 px-5 rounded-xl bg-slate-100 hover:bg-slate-200 text-[#0F172A] font-bold text-xs border border-slate-300 flex items-center justify-center gap-1.5 transition-all"
+              >
+                <HiBookOpen className="w-4 h-4 text-[#E11D48]" />
+                <span>مراجعة كراس الأخطاء 📓</span>
+              </Link>
             </div>
 
           </div>

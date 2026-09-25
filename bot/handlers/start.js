@@ -89,7 +89,7 @@ export function setupStartHandlers(bot) {
         parse_mode: 'Markdown',
         reply_markup: getMainInlineKeyboard()
       });
-    } catch (e) {
+    } catch {
       await ctx.reply(WELCOME_MESSAGE, {
         parse_mode: 'Markdown',
         reply_markup: getMainInlineKeyboard()

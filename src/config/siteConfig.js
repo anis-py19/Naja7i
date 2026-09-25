@@ -24,16 +24,6 @@ export const DEFAULT_FEATURES_CONFIG = {
     estimatedReturn: 'سيعود الأرشيف خلال دقائق ⏱️'
   },
 
-  // 3. الملخص الذكي بالذكاء الاصطناعي
-  ai_summarizer: {
-    id: 'ai_summarizer',
-    name: 'الملخص الذكي بالذكاء الاصطناعي (AI Studio)',
-    icon: '🤖',
-    path: '/ai-summarizer',
-    isMaintenance: false,
-    notice: 'جاري تحديث خوادم الذكاء الاصطناعي (NVIDIA NIM & Vision) لتقديم أعلى دقة في التلخيص والخرائط الذهنية.',
-    estimatedReturn: 'سيعود للخدمة قريباً جداً ⏱️'
-  },
 
   // 4. غرفة التركيز وبومودورو
   focus_room: {
@@ -156,33 +146,58 @@ export const SITE_CONFIG = {
 };
 
 /**
- * 🔄 Helper: Retrieve current active features config with runtime LocalStorage overrides
+ * 🔄 Helper: Retrieve current active features config.
+ * DEFAULT_FEATURES_CONFIG & SITE_CONFIG in this file are the master source of truth.
  */
 export function getActiveFeaturesConfig() {
-  if (typeof window === 'undefined') {
-    return DEFAULT_FEATURES_CONFIG;
+  const isGlobalMaintenance = Boolean(
+    SITE_CONFIG?.isMaintenanceMode ||
+    DEFAULT_FEATURES_CONFIG?.global_site?.isMaintenance
+  );
+
+  const config = {};
+  for (const key of Object.keys(DEFAULT_FEATURES_CONFIG)) {
+    config[key] = { ...DEFAULT_FEATURES_CONFIG[key] };
   }
 
-  try {
-    const saved = localStorage.getItem('naja7i_features_config');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      return { ...DEFAULT_FEATURES_CONFIG, ...parsed };
+  if (config.global_site) {
+    config.global_site.isMaintenance = isGlobalMaintenance;
+  }
+
+  // Clear legacy localStorage cache that previously blocked direct code edits in siteConfig.js
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.removeItem('naja7i_features_config');
+      localStorage.removeItem('naja7i_admin_bypass');
+    } catch { }
+
+    // Support runtime session overrides (e.g. temporary toggles from AdminControlModal)
+    try {
+      const sessionSaved = sessionStorage.getItem('naja7i_features_config');
+      if (sessionSaved) {
+        const parsed = JSON.parse(sessionSaved);
+        Object.keys(parsed).forEach((key) => {
+          if (config[key]) {
+            config[key] = { ...config[key], ...parsed[key] };
+          }
+        });
+      }
+    } catch (e) {
+      console.warn('Failed to parse features config from sessionStorage:', e);
     }
-  } catch (e) {
-    console.warn('Failed to parse features config from localStorage:', e);
   }
 
-  return DEFAULT_FEATURES_CONFIG;
+  return config;
 }
 
 /**
- * 💾 Helper: Save updated features config to LocalStorage
+ * 💾 Helper: Save updated features config during active admin session
  */
 export function saveActiveFeaturesConfig(newConfig) {
   if (typeof window === 'undefined') return;
   try {
-    localStorage.setItem('naja7i_features_config', JSON.stringify(newConfig));
+    sessionStorage.setItem('naja7i_features_config', JSON.stringify(newConfig));
+    localStorage.removeItem('naja7i_features_config');
     // Dispatch custom event for real-time reactive sync across components
     window.dispatchEvent(new Event('naja7i_features_config_changed'));
   } catch (e) {
@@ -190,4 +205,14 @@ export function saveActiveFeaturesConfig(newConfig) {
   }
 }
 
+// ⚡ Real-time HMR Sync: instantly apply edits to true/false in siteConfig.js without needing reload
+if (import.meta.hot) {
+  import.meta.hot.accept(() => {
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('naja7i_features_config_changed'));
+    }
+  });
+}
+
 export default SITE_CONFIG;
+

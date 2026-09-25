@@ -1,4 +1,4 @@
-import { getRandomFocusTip, BAC_FOCUS_TIPS } from '../data/focus.js';
+import { getRandomFocusTip } from '../data/focus.js';
 import { InlineKeyboard } from 'grammy';
 
 export function setupFocusHandlers(bot) {

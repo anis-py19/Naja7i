@@ -263,21 +263,17 @@ export default function YouTubeTeachersPage() {
 
               </div>
 
-              {/* Action Link to Official YouTube */}
-              <div className="pt-3.5 border-t border-[#E2E8F0] flex items-center justify-between">
-                <span className="text-[11px] text-[#64748B]">
-                  محتوى تعليمي مجاني ومتاح
-                </span>
-
+              {/* Action Link to Official YouTube Channel */}
+              <div className="pt-3.5 border-t border-[#E2E8F0] flex items-center justify-end">
                 <a
                   href={teacher.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold flex items-center gap-1.5 transition-colors shadow-2xs"
+                  className="w-full sm:w-auto px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors shadow-2xs"
                 >
-                  <HiPlay className="w-4 h-4 text-rose-400" />
-                  <span>فتح القناة على YouTube</span>
-                  <HiExternalLink className="w-3.5 h-3.5 text-slate-300" />
+                  <HiPlay className="w-3.5 h-3.5 text-rose-400" />
+                  <span>فتح القناة الرسمية</span>
+                  <HiExternalLink className="w-3 h-3 text-slate-400" />
                 </a>
               </div>
 

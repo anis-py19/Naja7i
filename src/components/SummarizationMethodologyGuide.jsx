@@ -3,8 +3,7 @@ import {
   HiChevronDown, 
   HiChevronUp, 
   HiVideoCamera, 
-  HiDocumentText, 
-  HiSparkles
+  HiDocumentText
 } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -230,18 +229,18 @@ export default function SummarizationMethodologyGuide() {
               </div>
             )}
 
-            {/* Quick AI Tool Banner Link */}
+            {/* Quick Library Banner Link */}
             <div className="pt-3 border-t border-rose-100 flex items-center justify-between flex-wrap gap-3">
               <span className="text-xs text-[#64748B] flex items-center gap-1.5">
-                <HiSparkles className="w-4 h-4 text-[#E11D48]" />
-                <span>هل تملك درساً طويلاً أو كراساً وتريد تلخيصه بمخططات وشجرات فوراً؟</span>
+                <HiDocumentText className="w-4 h-4 text-[#E11D48]" />
+                <span>تريد ملخصات جاهزة ومخططات مطابقة لبرنامج البكالوريا؟</span>
               </span>
 
               <Link
-                to="/ai-summarizer"
+                to="/library"
                 className="px-4 py-2 rounded-xl bg-[#0F172A] hover:bg-black text-white text-xs font-bold flex items-center gap-2 transition-all shadow-xs"
               >
-                <span>جرب ملخص نجاحي الذكي بالذكاء الاصطناعي 🤖</span>
+                <span>تصفح مكتبة الملخصات الشاملة 📚</span>
                 <span>←</span>
               </Link>
             </div>

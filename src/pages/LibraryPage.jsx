@@ -335,7 +335,7 @@ export default function LibraryPage({ onOpenPdf }) {
 
                   {/* File Title */}
                   <h4 
-                    onClick={() => onOpenPdf(file)}
+                    onClick={() => onOpenPdf && onOpenPdf(file)}
                     className="text-xs font-bold text-[#0F172A] group-hover:text-[#E11D48] transition-colors line-clamp-2 leading-relaxed mb-2 cursor-pointer"
                   >
                     {file.title}
@@ -353,7 +353,7 @@ export default function LibraryPage({ onOpenPdf }) {
                 {/* Actions: Unified Read & Download Action */}
                 <div className="pt-3 border-t border-[#E2E8F0]">
                   <button
-                    onClick={() => onOpenPdf(file)}
+                    onClick={() => onOpenPdf && onOpenPdf(file)}
                     className="w-full py-2 px-3 rounded-lg bg-[#E11D48] hover:bg-[#be123c] text-white text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-2xs hover:shadow-xs cursor-pointer active:scale-[0.99]"
                   >
                     <HiBookOpen className="w-4 h-4" />

@@ -19,9 +19,9 @@ import { getDrivePreviewUrl } from '../utils/driveUtils';
 // Configure local worker bundled by Vite
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
-export default function PdfReaderModal({ file: propFile, pdfFile, isOpen, onClose }) {
+export default function PdfReaderModal({ file: propFile, pdfFile, isOpen = true, onClose }) {
   const file = propFile || pdfFile;
-  if (!file) return null;
+  const isModalOpen = isOpen !== undefined ? Boolean(isOpen) : Boolean(file);
 
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [useIframeFallback, setUseIframeFallback] = useState(false);
@@ -40,8 +40,23 @@ export default function PdfReaderModal({ file: propFile, pdfFile, isOpen, onClos
   const canvasRef = useRef(null);
   const renderTaskRef = useRef(null);
 
+  // Close on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && onClose) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
   const rawUrl = file?.drivePreviewUrl || file?.driveUrl || file?.fileUrl || file?.rawPath || file?.url || '';
-  const drivePreviewUrl = file?.drivePreviewUrl || getDrivePreviewUrl(rawUrl);
+  const drivePreviewUrl = 
+    file?.drivePreviewUrl || 
+    (file?.driveFileId ? `https://drive.google.com/file/d/${file.driveFileId}/preview` : null) || 
+    getDrivePreviewUrl(rawUrl) || 
+    (file?.driveFileUrl ? getDrivePreviewUrl(file.driveFileUrl) : null);
   const isGoogleDrive = Boolean(drivePreviewUrl);
 
   const safeEncodedUrl = rawUrl.startsWith('http') || rawUrl.startsWith('/') 
@@ -54,7 +69,7 @@ export default function PdfReaderModal({ file: propFile, pdfFile, isOpen, onClos
 
   // Load PDF logic for local Canvas rendering
   useEffect(() => {
-    if (!isOpen || !file || isGoogleDrive || !isPdf) return;
+    if (!isModalOpen || !file || isGoogleDrive || !isPdf) return;
 
     let isMounted = true;
     let createdBlobUrl = null;
@@ -117,11 +132,11 @@ export default function PdfReaderModal({ file: propFile, pdfFile, isOpen, onClos
         URL.revokeObjectURL(createdBlobUrl);
       }
     };
-  }, [file, isOpen, safeEncodedUrl, isPdf, isGoogleDrive]);
+  }, [file, isModalOpen, safeEncodedUrl, isPdf, isGoogleDrive]);
 
   // Render Current Page on Canvas for local files
   useEffect(() => {
-    if (!isOpen || !file || isGoogleDrive || !pdfDoc || !canvasRef.current || loading || error || useIframeFallback) return;
+    if (!isModalOpen || !file || isGoogleDrive || !pdfDoc || !canvasRef.current || loading || error || useIframeFallback) return;
 
     let isCancelled = false;
 
@@ -163,19 +178,19 @@ export default function PdfReaderModal({ file: propFile, pdfFile, isOpen, onClos
     return () => {
       isCancelled = true;
     };
-  }, [isOpen, file, pdfDoc, pageNum, scale, loading, error, useIframeFallback, isGoogleDrive]);
+  }, [isModalOpen, file, pdfDoc, pageNum, scale, loading, error, useIframeFallback, isGoogleDrive]);
 
-  if (!isOpen || !file) return null;
+  if (!isModalOpen || !file) return null;
 
   const handleDownload = (e) => {
     if (e) e.stopPropagation();
     
     // Determine direct download URL
-    let downloadUrl = file.driveDownloadUrl;
+    let downloadUrl = file?.driveDownloadUrl;
 
-    if (!downloadUrl && isGoogleDrive) {
-      const fileId = file.driveFileId || (function() {
-        const m = rawUrl.match(/(?:file\/d\/|id=)([a-zA-Z0-9_-]+)/);
+    if (!downloadUrl && (isGoogleDrive || file?.driveFileId)) {
+      const fileId = file?.driveFileId || (function() {
+        const m = (rawUrl || '').match(/(?:file\/d\/|id=)([a-zA-Z0-9_-]+)/);
         return m ? m[1] : null;
       })();
       if (fileId) {
@@ -184,6 +199,7 @@ export default function PdfReaderModal({ file: propFile, pdfFile, isOpen, onClos
     }
 
     const targetUrl = downloadUrl || blobUrl || safeEncodedUrl || rawUrl;
+    if (!targetUrl) return;
     
     // Trigger direct browser download
     const link = document.createElement('a');
@@ -209,8 +225,12 @@ export default function PdfReaderModal({ file: propFile, pdfFile, isOpen, onClos
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-1 sm:p-4 bg-slate-950/85 backdrop-blur-xs font-['Cairo']">
+      <div 
+        onClick={onClose}
+        className="fixed inset-0 z-50 flex items-center justify-center p-1 sm:p-4 bg-slate-950/85 backdrop-blur-xs font-['Cairo']"
+      >
         <motion.div
+          onClick={(e) => e.stopPropagation()}
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.98 }}
@@ -313,7 +333,7 @@ export default function PdfReaderModal({ file: propFile, pdfFile, isOpen, onClos
 
               {/* Open in new tab */}
               <a
-                href={rawUrl}
+                href={file?.driveFileUrl || drivePreviewUrl || file?.driveDownloadUrl || rawUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1"
@@ -356,7 +376,7 @@ export default function PdfReaderModal({ file: propFile, pdfFile, isOpen, onClos
               <iframe
                 src={drivePreviewUrl}
                 className="w-full h-full border-0 bg-white"
-                allow="autoplay"
+                allow="autoplay; fullscreen"
                 title={file.title || 'PDF Document Viewer'}
               />
             ) : (

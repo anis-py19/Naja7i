@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
   HiX, 
-  HiShieldCheck, 
-  HiCheck, 
-  HiRefresh, 
   HiSearch, 
-  HiAdjustments,
-  HiLightningBolt,
-  HiClock,
-  HiInformationCircle
+  HiAdjustments
 } from 'react-icons/hi';
 import { 
   DEFAULT_FEATURES_CONFIG, 
@@ -24,8 +18,11 @@ export default function AdminControlModal({ isOpen, onClose }) {
 
   useEffect(() => {
     if (isOpen) {
-      setConfig(getActiveFeaturesConfig());
-      setSavedSuccess(false);
+      const timer = setTimeout(() => {
+        setConfig(getActiveFeaturesConfig());
+        setSavedSuccess(false);
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [isOpen]);
 
@@ -64,6 +61,12 @@ export default function AdminControlModal({ isOpen, onClose }) {
   // Reset to default config
   const handleResetToDefault = () => {
     if (window.confirm('هل تريد استعادة الإعدادات الافتراضية (تشغيل جميع الميزات)؟')) {
+      if (typeof window !== 'undefined') {
+        try {
+          sessionStorage.removeItem('naja7i_features_config');
+          localStorage.removeItem('naja7i_features_config');
+        } catch {}
+      }
       setConfig(DEFAULT_FEATURES_CONFIG);
       saveActiveFeaturesConfig(DEFAULT_FEATURES_CONFIG);
       setSavedSuccess(true);

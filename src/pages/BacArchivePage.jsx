@@ -6,12 +6,9 @@ import {
   HiDownload, 
   HiEye, 
   HiSearch, 
-  HiFilter, 
   HiDocumentText, 
   HiCheckCircle, 
-  HiSparkles,
   HiExternalLink,
-  HiOutlineDocumentDownload,
   HiOutlineBookOpen
 } from 'react-icons/hi';
 import { BAC_FULL_ARCHIVE } from '../data/bacArchiveFullData';

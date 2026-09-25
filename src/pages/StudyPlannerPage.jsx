@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  HiHome, 
-  HiChevronLeft, 
-  HiPrinter, 
+import {
+  HiHome,
+  HiChevronLeft,
+  HiPrinter,
   HiRefresh
 } from 'react-icons/hi';
 import { STREAM_STUDY_PLANS, PLANNING_PRINCIPLES } from '../data/plannerData';
@@ -71,12 +71,12 @@ export default function StudyPlannerPage() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-20 font-['Cairo']">
-      
+
       {/* ========================================================================= */}
       {/* 🖨️ FULL-PAGE BALANCED SINGLE A4 PRINT LAYOUT (يملأ الورقة بالكامل بدون فراغات) */}
       {/* ========================================================================= */}
       <div className="hidden print:flex print-page-single font-['Cairo'] text-black p-0 m-0 w-full h-[98vh] flex-col justify-between">
-        
+
         {/* 1. Header (Balanced ~40mm) */}
         <div className="space-y-2">
           <div className="flex items-center justify-between pb-2 border-b-2 border-black">
@@ -211,11 +211,11 @@ export default function StudyPlannerPage() {
       {/* 📱 SCREEN-ONLY INTERACTIVE PLATFORM VIEW */}
       {/* ========================================================================= */}
       <div className="print:hidden">
-        
+
         {/* Top Header Banner */}
         <div className="bg-white border-b border-[#E2E8F0] py-5 sm:py-6">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
+
             {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-xs text-[#64748B] mb-3">
               <Link to="/" className="hover:text-[#E11D48] flex items-center gap-1 transition-colors">
@@ -261,7 +261,7 @@ export default function StudyPlannerPage() {
 
         {/* Main Interactive Controls & Cards */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 space-y-6">
-          
+
           {/* 1. Stream Selector Bar (اختيار الشعبة) */}
           <div className="bg-white border border-[#E2E8F0] rounded-2xl p-5 shadow-xs space-y-3">
             <label className="block text-xs font-bold text-[#0F172A] flex items-center gap-1.5">
@@ -274,11 +274,10 @@ export default function StudyPlannerPage() {
                 <button
                   key={st.streamId}
                   onClick={() => setSelectedStreamId(st.streamId)}
-                  className={`p-2.5 rounded-xl text-xs font-bold transition-all text-right flex items-center gap-2 cursor-pointer shadow-2xs ${
-                    selectedStreamId === st.streamId
+                  className={`p-2.5 rounded-xl text-xs font-bold transition-all text-right flex items-center gap-2 cursor-pointer shadow-2xs ${selectedStreamId === st.streamId
                       ? 'bg-[#E11D48] text-white'
                       : 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#F1F5F9] border border-[#E2E8F0]'
-                  }`}
+                    }`}
                 >
                   <span className="text-lg shrink-0">{st.icon}</span>
                   <span className="truncate">{st.streamName.replace('شعبة ', '')}</span>
@@ -292,8 +291,8 @@ export default function StudyPlannerPage() {
             <div>
               <span className="text-xs font-bold text-[#0F172A] block">2. وضعية الدراسة:</span>
               <span className="text-[11px] text-[#64748B]">
-                {studentMode === 'school' 
-                  ? 'طالب متمدرس: مادتان في اليوم (مادة أساسية + مادة ثانوية)' 
+                {studentMode === 'school'
+                  ? 'طالب متمدرس: مادتان في اليوم (مادة أساسية + مادة ثانوية)'
                   : 'مترشح حر / متفرغ: 3 مواد في اليوم (مادتان أساسيتان + مادة ثانوية)'}
               </span>
             </div>
@@ -301,22 +300,20 @@ export default function StudyPlannerPage() {
             <div className="grid grid-cols-2 gap-2 w-full sm:w-auto">
               <button
                 onClick={() => setStudentMode('school')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
-                  studentMode === 'school'
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${studentMode === 'school'
                     ? 'bg-[#0F172A] text-white shadow-2xs'
                     : 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#F1F5F9] border border-[#E2E8F0]'
-                }`}
+                  }`}
               >
                 <span>🏫 متمدرس (مادتان/يوم)</span>
               </button>
 
               <button
                 onClick={() => setStudentMode('free')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
-                  studentMode === 'free'
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${studentMode === 'free'
                     ? 'bg-[#0F172A] text-white shadow-2xs'
                     : 'bg-[#F8FAFC] text-[#0F172A] hover:bg-[#F1F5F9] border border-[#E2E8F0]'
-                }`}
+                  }`}
               >
                 <span>🏡 حر / متفرغ (3 مواد/يوم)</span>
               </button>
@@ -351,7 +348,7 @@ export default function StudyPlannerPage() {
               </div>
 
               <div className="w-full h-2.5 bg-white rounded-full overflow-hidden border border-[#E2E8F0]">
-                <div 
+                <div
                   className="h-full bg-[#E11D48] rounded-full transition-all duration-300"
                   style={{ width: `${progressPercent}%` }}
                 />
@@ -402,11 +399,10 @@ export default function StudyPlannerPage() {
                 return (
                   <div
                     key={idx}
-                    className={`p-3.5 sm:p-4 rounded-xl border transition-all ${
-                      isDayComplete 
-                        ? 'bg-emerald-50/40 border-emerald-300' 
+                    className={`p-3.5 sm:p-4 rounded-xl border transition-all ${isDayComplete
+                        ? 'bg-emerald-50/40 border-emerald-300'
                         : 'bg-white border-[#E2E8F0] hover:border-[#CBD5E1]'
-                    }`}
+                      }`}
                   >
                     {/* Day Header */}
                     <div className="flex items-center justify-between gap-2 mb-2 pb-1.5 border-b border-[#E2E8F0]">
@@ -428,22 +424,20 @@ export default function StudyPlannerPage() {
 
                     {/* Goal Cards Grid with Physical Checkbox Squares */}
                     <div className={`grid grid-cols-1 ${studentMode === 'free' ? 'md:grid-cols-3' : 'md:grid-cols-2'} gap-2.5 text-xs`}>
-                      
+
                       {/* Subject 1 */}
                       <div
                         onClick={() => toggleGoal(k1)}
-                        className={`p-3 rounded-lg border transition-all cursor-pointer flex items-start gap-2.5 ${
-                          is1Done 
-                            ? 'bg-emerald-100/60 border-emerald-300 text-emerald-950' 
+                        className={`p-3 rounded-lg border transition-all cursor-pointer flex items-start gap-2.5 ${is1Done
+                            ? 'bg-emerald-100/60 border-emerald-300 text-emerald-950'
                             : 'bg-[#F8FAFC] border-[#E2E8F0] hover:border-[#CBD5E1]'
-                        }`}
-                      >
-                        <div 
-                          className={`w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center mt-0.5 transition-colors ${
-                            is1Done 
-                              ? 'bg-emerald-600 border-emerald-600 text-white' 
-                              : 'border-[#64748B] bg-white'
                           }`}
+                      >
+                        <div
+                          className={`w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center mt-0.5 transition-colors ${is1Done
+                              ? 'bg-emerald-600 border-emerald-600 text-white'
+                              : 'border-[#64748B] bg-white'
+                            }`}
                         >
                           {is1Done ? '✓' : ''}
                         </div>
@@ -466,18 +460,16 @@ export default function StudyPlannerPage() {
                       {/* Subject 2 */}
                       <div
                         onClick={() => toggleGoal(k2)}
-                        className={`p-3 rounded-lg border transition-all cursor-pointer flex items-start gap-2.5 ${
-                          is2Done 
-                            ? 'bg-emerald-100/60 border-emerald-300 text-emerald-950' 
+                        className={`p-3 rounded-lg border transition-all cursor-pointer flex items-start gap-2.5 ${is2Done
+                            ? 'bg-emerald-100/60 border-emerald-300 text-emerald-950'
                             : 'bg-[#F8FAFC] border-[#E2E8F0] hover:border-[#CBD5E1]'
-                        }`}
-                      >
-                        <div 
-                          className={`w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center mt-0.5 transition-colors ${
-                            is2Done 
-                              ? 'bg-emerald-600 border-emerald-600 text-white' 
-                              : 'border-[#64748B] bg-white'
                           }`}
+                      >
+                        <div
+                          className={`w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center mt-0.5 transition-colors ${is2Done
+                              ? 'bg-emerald-600 border-emerald-600 text-white'
+                              : 'border-[#64748B] bg-white'
+                            }`}
                         >
                           {is2Done ? '✓' : ''}
                         </div>
@@ -501,18 +493,16 @@ export default function StudyPlannerPage() {
                       {studentMode === 'free' && dayItem.subject3 && (
                         <div
                           onClick={() => toggleGoal(k3)}
-                          className={`p-3 rounded-lg border transition-all cursor-pointer flex items-start gap-2.5 ${
-                            is3Done 
-                              ? 'bg-emerald-100/60 border-emerald-300 text-emerald-950' 
+                          className={`p-3 rounded-lg border transition-all cursor-pointer flex items-start gap-2.5 ${is3Done
+                              ? 'bg-emerald-100/60 border-emerald-300 text-emerald-950'
                               : 'bg-[#F8FAFC] border-[#E2E8F0] hover:border-[#CBD5E1]'
-                          }`}
-                        >
-                          <div 
-                            className={`w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center mt-0.5 transition-colors ${
-                              is3Done 
-                                ? 'bg-emerald-600 border-emerald-600 text-white' 
-                                : 'border-[#64748B] bg-white'
                             }`}
+                        >
+                          <div
+                            className={`w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center mt-0.5 transition-colors ${is3Done
+                                ? 'bg-emerald-600 border-emerald-600 text-white'
+                                : 'border-[#64748B] bg-white'
+                              }`}
                           >
                             {is3Done ? '✓' : ''}
                           </div>

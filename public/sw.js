@@ -95,8 +95,12 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         })
         .catch(() => {
-          // If offline and file not cached, return empty or fallback
-          return null;
+          // If offline and asset is not cached, return graceful 503 response
+          return new Response('Offline asset unavailable', {
+            status: 503,
+            statusText: 'Service Unavailable',
+            headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+          });
         });
     })
   );

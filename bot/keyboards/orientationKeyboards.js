@@ -4,7 +4,7 @@ import { UNIVERSITY_MAJORS } from '../data/orientation.js';
 export function getMajorsKeyboard() {
   const keyboard = new InlineKeyboard();
 
-  UNIVERSITY_MAJORS.forEach((major, idx) => {
+  UNIVERSITY_MAJORS.forEach((major) => {
     keyboard.text(`${major.icon} ${major.name}`, `major_view:${major.id}`);
     keyboard.row();
   });
